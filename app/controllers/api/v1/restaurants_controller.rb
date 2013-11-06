@@ -23,7 +23,7 @@ class Api::V1::RestaurantsController < ApplicationController
 
   def index
 
-    sources = Rails.cache.fetch("restaurants", expires_in: 1.day) do
+    sources = Rails.cache.fetch("restaurants", expires_in: 1.second) do
       (Restaurant.new.by_loc [45.458972,-74.155815]).to_a
     end
 
@@ -34,7 +34,20 @@ class Api::V1::RestaurantsController < ApplicationController
         :name => c.name,
         :lat => c.lat,
         :lon => c.lon,
-        :images => c.images.reject{|e| e.nil?}.collect{|f| {:url => f["local_url"], :id => f["_id"]}}
+        :images => c.images.reject do |e| 
+          if e.nil? 
+            next true
+          elsif e["face_found"] or e["text_found"]
+            Rails.logger.warn "Rejecting:\nhttp://dev.foodcloud.ca:3000/assets/sources/#{e['local_url']}\n#{e.to_s}\n---------\n"
+            next true
+          else
+            next false
+          end
+        end.collect do |f|
+          new_file = f['local_url'].scan(/(.*)\.(.+)/).first
+          new_file = new_file[0] + "_final." + new_file[1]           
+          next {:url => new_file, :id => f["_id"]}
+        end
       }
     end
     Rails.logger.warn "Outputted #{sources.size} items."
@@ -57,17 +70,22 @@ class Api::V1::RestaurantsController < ApplicationController
       render :text => {}.to_json
       return
     end
-    menu = restaurant.menu.first["sections"].collect do |section|
-      {
+    menu = restaurant.menu.first["sections"].collect.with_index do |section,top_index|
+      if top_index == 0 and section["section_name"].blank?
+        section["section_name"] = "Main"
+      end
+      next {
         :name => section["section_name"],
         :id => (unique_id restaurant),
         :subsections => section["subsections"].collect do |subsection|
           {
             :name => subsection["subsection_name"],
             :id => (unique_id restaurant),
-            :dishes => subsection["contents"].collect do |dish|
+            :dishes => subsection["contents"].collect.with_index do |dish,index|
               {
                 :name => dish["name"],
+                :index => index,
+                :price => dish["price"].to_f.round(2),
                 :id => (unique_id restaurant),
                 :description => dish["description"],
                 :options => dish["option_groups"].to_a.collect do |option|

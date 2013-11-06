@@ -7,6 +7,12 @@ Foodcloud::Application.routes.draw do
 
   resources :token_authentications, :only => [:create, :destroy]
 
+  resources :home do
+    collection do
+      get 'restaurants'
+    end
+  end
+
   namespace :api, :defaults => {:format => :json} do
     namespace :v1 do
       # match 'api/v1/restaurants/menu' => :menu
