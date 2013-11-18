@@ -32,8 +32,10 @@ class Api::V1::RestaurantsController < ApplicationController
       next {
         :id => c["_id"],
         :name => c.name,
+        :address => c.address,
         :lat => c.lat,
         :lon => c.lon,
+        :phone => c.phone,
         :images => c.images.reject do |e| 
           if e.nil? 
             next true
@@ -70,20 +72,25 @@ class Api::V1::RestaurantsController < ApplicationController
       render :text => {}.to_json
       return
     end
+    section_position = 0
     menu = restaurant.menu.first["sections"].collect.with_index do |section,top_index|
       if top_index == 0 and section["section_name"].blank?
         section["section_name"] = "Main"
       end
+      section_position += 1
       next {
-        :name => section["section_name"],
+        :name => (section["section_name"].empty? ? "-" : section["section_name"]),
+        :index => section_position,
         :id => (unique_id restaurant),
-        :subsections => section["subsections"].collect do |subsection|
-          {
+        :subsections => section["subsections"].collect.with_index do |subsection,sub_index|
+          section_position += 1
+          next {
             :name => subsection["subsection_name"],
+            :index => section_position,
             :id => (unique_id restaurant),
             :dishes => subsection["contents"].collect.with_index do |dish,index|
-              {
-                :name => dish["name"],
+              m = {
+                :name => dish["name"].to_s.gsub(/\(.*?\)/,''),
                 :index => index,
                 :price => dish["price"].to_f.round(2),
                 :id => (unique_id restaurant),
@@ -92,6 +99,7 @@ class Api::V1::RestaurantsController < ApplicationController
                   {
                     :name => option["text"],
                     :id => (unique_id restaurant),
+                    :type => option["type"],
                     :options => option["options"].collect do |op|
                       {
                         :name => op["name"],
@@ -102,12 +110,68 @@ class Api::V1::RestaurantsController < ApplicationController
                   }
                 end
               }
+              m[:options] <<  {
+                                name: "Toppings",
+                                id: (unique_id restaurant),
+                                type: "OPTION_ADD",
+                                options: [
+                                  {
+                                  name: "Green Peppers",
+                                  id: (unique_id restaurant),
+                                  price: 0
+                                  },
+                                  {
+                                  name: "Mushrooms",
+                                  id: (unique_id restaurant),
+                                  price: 1.5
+                                  },
+                                  {
+                                  name: "Purple Things",
+                                  id: (unique_id restaurant),
+                                  price: 4.4
+                                  },
+                                  {
+                                  name: "Gold",
+                                  id: (unique_id restaurant),
+                                  price: 22
+                                  }
+                                ]
+                              } 
+
+              m[:options] <<  {
+                                name: "SIZES",
+                                id: (unique_id restaurant),
+                                type: "OPTION_SELECT_ONE",
+                                options: [
+                                  {
+                                  name: "Green Peppers",
+                                  id: (unique_id restaurant),
+                                  price: 0
+                                  },
+                                  {
+                                  name: "Mushrooms",
+                                  id: (unique_id restaurant),
+                                  price: 1.5
+                                  },
+                                  {
+                                  name: "Purple Things",
+                                  id: (unique_id restaurant),
+                                  price: 4.4
+                                  },
+                                  {
+                                  name: "Gold",
+                                  id: (unique_id restaurant),
+                                  price: 22
+                                  }
+                                ]
+                              }                               
+              next m 
             end
           }
         end,
       }
     end
-    render :text => menu.to_json
+    render :text => {:menu => menu}.to_json
   end
 
 end

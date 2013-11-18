@@ -19,6 +19,27 @@ class Restaurant
     end
 	Restaurant.includes(:sources).where(:locs => { "$near" => { "$geometry" => { "type" => "Point", :coordinates => cords }, "$maxDistance" => 10000}} )
   end
+
+  def phone
+    ph = self.sources.find do |e|
+      !e.phone.blank?
+    end
+    if ph
+      return ph.phone
+    end
+    return nil
+  end
+
+  def address
+    ph = self.sources.find do |e|
+      !e.address.blank?
+    end
+    if ph
+      return ph.address
+    end
+    return nil
+  end
+
 end
 
 

@@ -21,6 +21,8 @@ Foodcloud::Application.routes.draw do
           get 'menu'
         end
       end
+      resources :tokens, :only => [:create, :destroy]
+      resources :registration, :only => [:create]
     end
   end
 end
