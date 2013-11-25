@@ -164,7 +164,31 @@ class Api::V1::RestaurantsController < ApplicationController
                                   price: 22
                                   }
                                 ]
-                              }                               
+                              }  
+
+              m[:options] <<  {
+                                name: "Blaaa",
+                                id: (unique_id restaurant),
+                                type: "OPTION_SELECT_ONE",
+                                options: [
+                                  {
+                                  name: "Green Peppers",
+                                  id: (unique_id restaurant),
+                                  price: 0
+                                  },
+                                  {
+                                  name: "Mushrooms",
+                                  id: (unique_id restaurant),
+                                  price: 1.5
+                                  },
+                                  {
+                                  name: "Purple Things",
+                                  id: (unique_id restaurant),
+                                  price: 4.4
+                                  },
+                                ]
+                              }
+
               next m 
             end
           }
