@@ -6,10 +6,12 @@ class Restaurant
   field :lat, type: Float
   field :lon, type: Float
   field :locs, type: Array
-  field :name, type: String
   field :menu, type: Hash
-  field :images, type: Array
+  # field :images, type: Array
+  field :name, type: String
   has_many :sources, :class_name => "Sources"
+  has_many :image, :class_name => "Image"
+  has_many :section, :class_name => "Section"
 
   def by_loc loc=nil
     if loc

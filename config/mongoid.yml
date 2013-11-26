@@ -11,6 +11,7 @@ development:
       hosts:
         - localhost:27017
       options:
+        identity_map_enabled: true
         # Change whether the session persists in safe mode by default.
         # (default: false)
         # safe: false
