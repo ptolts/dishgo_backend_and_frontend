@@ -12,6 +12,7 @@ class Restaurant
   has_many :sources, :class_name => "Sources"
   has_many :image, :class_name => "Image"
   has_many :section, :class_name => "Section"
+  accepts_nested_attributes_for :image, :allow_destroy => false
 
   def by_loc loc=nil
     if loc

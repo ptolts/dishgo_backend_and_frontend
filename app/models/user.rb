@@ -27,6 +27,11 @@ class User
   field :current_sign_in_ip, :type => String
   field :last_sign_in_ip,    :type => String
 
+  #FACEBOOK
+  field :providor,               :type => String
+  field :facebook_auth_token,    :type => String
+  field :facebook_user_id,       :type => String  
+
   ## Confirmable
   # field :confirmation_token,   :type => String
   # field :confirmed_at,         :type => Time
