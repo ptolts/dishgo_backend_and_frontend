@@ -7,6 +7,7 @@ gem 'role_model'
 gem 'mongoid'
 gem 'bson_ext'
 gem 'instagram'
+gem "koala", "~> 1.8.0rc1"
 gem 'activeadmin-mongoid', :git => "https://github.com/elia/activeadmin-mongoid.git", :branch => 'master'
 
 # Bundle edge Rails instead:

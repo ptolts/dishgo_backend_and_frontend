@@ -22,6 +22,7 @@ Foodcloud::Application.routes.draw do
         end
       end
       resources :tokens, :only => [:create, :destroy]
+      match 'tokens/create_from_facebook', to: 'tokens#create_from_facebook', via: [:post]
       resources :registration, :only => [:create]
     end
   end

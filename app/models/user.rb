@@ -7,7 +7,7 @@ class User
          :validatable, :token_authenticatable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :providor, :facebook_auth_token, :facebook_user_id
 
   ## Database authenticatable
   field :email,              :type => String, :default => ""
