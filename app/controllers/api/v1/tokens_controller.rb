@@ -81,7 +81,6 @@ class Api::V1::TokensController  < ApplicationController
     # end
 
     @user.ensure_authentication_token!
-    Rails.logger.warn @user.authentication_token.to_s
 
     render :json => {:facebook_name => profile["name"], :facebook_id => profile["id"], :foodcloud_token => @user.authentication_token}    
   end

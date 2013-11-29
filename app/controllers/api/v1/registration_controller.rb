@@ -5,19 +5,25 @@ class Api::V1::RegistrationController  < ApplicationController
 
   def create
 
-    if params[:email] and params[:password]
-      user = User.new({ :email => params[:email], :password => params[:password] })
-    else
-      warden.custom_failure!
-      render :json => user.errors, :status=>422
+    if params[:email].blank? or params[:password].blank?
+      render :json => {:error => "Password and Email required."}, :status=>422
+      return
     end
 
-    if user.save
-      render :json => user.as_json(:auth_token=>user.authentication_token, :email=>user.email), :status=>201
+    if User.where(:email => params[:email]).count > 0
+      render :json => {:error => "Email exists."}, :status=>422
+      return      
+    end
+    
+    @user = User.new({ :email => params[:email], :password => params[:password] })
+
+    if sign_in @user
+      @user.ensure_authentication_token!
+      render :json => {:foodcloud_token=>@user.authentication_token}, :status=>201
       return
     else
-      warden.custom_failure!
-      render :json => user.errors, :status=>422
+      render :json => {:error => "Error."}, :status=>422
+      return
     end
   end
 
