@@ -1,6 +1,5 @@
 class Api::V1::RegistrationController  < ApplicationController
 
-  skip_before_filter :verify_authenticity_token
   respond_to :json
 
   def create
@@ -18,7 +17,7 @@ class Api::V1::RegistrationController  < ApplicationController
     @user = User.new({ :email => params[:email], :password => params[:password] })
 
     if sign_in @user
-      @user.ensure_authentication_token!
+      @user.ensure_authentication_token
       render :json => {:foodcloud_token=>@user.authentication_token}, :status=>201
       return
     else

@@ -7,7 +7,26 @@ ActiveAdmin.register User do
     default_actions                   
   end                                 
 
-  filter :email        
+  filter :email
+
+  show do |user|
+    attributes_table do
+      row :email
+      row :encrypted_password
+      row :facebook_auth_token
+      row :facebook_user_id
+      row :phone_number
+      row "Addresses" do
+         ul do
+          user.addresses.each do |addy|
+            li addy.street_address
+            li addy.street_number
+            li addy.default
+          end
+         end
+      end
+    end
+  end
 
   form do |f|                         
     f.inputs "User Details" do       

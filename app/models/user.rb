@@ -1,13 +1,14 @@
 class User
   include Mongoid::Document
+  has_many :addresses, :class_name => "Address"
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, 
-         :validatable, :token_authenticatable
+         :validatable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :providor, :facebook_auth_token, :facebook_user_id
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :providor, :facebook_auth_token, :facebook_user_id, :authentication_token
 
   ## Database authenticatable
   field :email,              :type => String, :default => ""
@@ -31,6 +32,7 @@ class User
   field :providor,               :type => String
   field :facebook_auth_token,    :type => String
   field :facebook_user_id,       :type => String  
+  field :phone_number,       :type => String  
 
   ## Confirmable
   # field :confirmation_token,   :type => String
@@ -45,4 +47,20 @@ class User
 
   # Token authenticatable
   field :authentication_token, :type => String
+
+  def ensure_authentication_token
+    if authentication_token.blank?
+      self.authentication_token = generate_authentication_token
+    end
+  end
+ 
+  private
+  
+  def generate_authentication_token
+    loop do
+      token = Devise.friendly_token
+      break token unless User.where(authentication_token: token).first
+    end
+  end
+
 end

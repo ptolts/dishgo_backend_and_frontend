@@ -26,13 +26,22 @@ class Api::V1::TokensController  < ApplicationController
     end
 
     # http://rdoc.info/github/plataformatec/devise/master/Devise/Models/TokenAuthenticatable
-    @user.ensure_authentication_token!
+    @user.ensure_authentication_token
 
     if not @user.valid_password?(password)
       logger.info("User #{email} failed signin, password \"#{password}\" is invalid")
       render :status=>401, :json=>{:message=>"Invalid email or password."}
     else
-      render :status=>200, :json=>{:foodcloud_token=>@user.authentication_token}
+      reso = @user.addresses.to_a.find{|e| e.default}
+      if reso
+        reso = reso.attributes.inject({}){|res,x| res[x[0]] = x[1]; res}
+      else
+        reso = {}
+      end
+
+      reso = {:foodcloud_token=>@user.authentication_token, :phone_number => @user.phone_number, }.merge(reso)
+
+      render :status=>200, :json=> reso
     end
   end
 
@@ -70,19 +79,20 @@ class Api::V1::TokensController  < ApplicationController
       sign_in @user
     end
 
-    # # http://rdoc.info/github/plataformatec/devise/master/Devise/Models/TokenAuthenticatable
-    # @user.ensure_authentication_token!
+    @user.ensure_authentication_token
 
-    # if not @user.valid_password?(password)
-    #   logger.info("User #{email} failed signin, password \"#{password}\" is invalid")
-    #   render :status=>401, :json=>{:message=>"Invalid email or password."}
-    # else
-    #   render :status=>200, :json=>{:token=>@user.authentication_token}
-    # end
+    reso = @user.addresses.to_a.find{|e| e.default}
+    if reso
+      reso = reso.attributes.inject({}){|res,x| res[x[0]] = x[1]; res}
+    else
+      reso = {}
+    end   
 
-    @user.ensure_authentication_token!
+    reso = {:phone_number => @user.phone_number, :facebook_name => profile["name"], :facebook_id => profile["id"], :foodcloud_token => @user.authentication_token}.merge(reso) 
 
-    render :json => {:facebook_name => profile["name"], :facebook_id => profile["id"], :foodcloud_token => @user.authentication_token}    
+    Rails.logger.warn "RESULT: #{reso.to_json}"
+
+    render :json => reso
   end
 
   def destroy
@@ -91,7 +101,7 @@ class Api::V1::TokensController  < ApplicationController
       logger.info("Token not found.")
       render :status=>404, :json=>{:message=>"Invalid token."}
     else
-      @user.reset_authentication_token!
+      @user.generate_authentication_token
       render :status=>200, :json=>{:token=>params[:id]}
     end
   end
