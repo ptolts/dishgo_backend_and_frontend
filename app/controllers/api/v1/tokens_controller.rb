@@ -39,7 +39,9 @@ class Api::V1::TokensController  < ApplicationController
         reso = {}
       end
 
-      reso = {:foodcloud_token=>@user.authentication_token, :phone_number => @user.phone_number, }.merge(reso)
+      current_orders = @user.orders.collect{|e| {:confirmed => e.confirmed, :order_id => e.id.to_s} }
+
+      reso = {:current_orders => current_orders, :foodcloud_token=>@user.authentication_token, :phone_number => @user.phone_number, :last_name => @user.last_name, :first_name => @user.first_name}.merge(reso)
 
       render :status=>200, :json=> reso
     end
@@ -88,7 +90,9 @@ class Api::V1::TokensController  < ApplicationController
       reso = {}
     end   
 
-    reso = {:phone_number => @user.phone_number, :facebook_name => profile["name"], :facebook_id => profile["id"], :foodcloud_token => @user.authentication_token}.merge(reso) 
+    current_orders = @user.orders.collect{|e| {:confirmed => e.confirmed, :order_id => e.id.to_s} }
+
+    reso = {:current_orders => current_orders, :phone_number => @user.phone_number, :facebook_name => profile["name"], :facebook_id => profile["id"], :foodcloud_token => @user.authentication_token, :last_name => @user.last_name, :first_name => @user.first_name}.merge(reso) 
 
     Rails.logger.warn "RESULT: #{reso.to_json}"
 

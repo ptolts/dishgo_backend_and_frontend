@@ -7,7 +7,10 @@ class Dish
   field :description, type: String
   field :price, type: Float
   field :position, type: Integer
-  belongs_to :subsection, index: true
-  has_many :image
+  # belongs_to :subsection, index: true
+  belongs_to :section, index: true  
+  has_and_belongs_to_many :image, inverse_of: nil
   has_many :options, :class_name => 'Options'
+
+  default_scope where(:name.nin => ["", nil])
 end

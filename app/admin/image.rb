@@ -1,5 +1,5 @@
 ActiveAdmin.register Image do
-
+  permit_params :id, :restaurant_id, :rejected
   index do
     column :source
     default_actions

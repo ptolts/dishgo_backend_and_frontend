@@ -3,7 +3,6 @@ Foodcloud::Application.routes.draw do
   ActiveAdmin.routes(self)
 
   devise_for :users
-  ActiveAdmin.routes(self)
 
   resources :token_authentications, :only => [:create, :destroy]
 
@@ -21,10 +20,15 @@ Foodcloud::Application.routes.draw do
           get 'menu'
         end
       end
+      resources :restotokens, :only => [:create, :destroy]      
       resources :tokens, :only => [:create, :destroy]
       match 'tokens/create_from_facebook', to: 'tokens#create_from_facebook', via: [:post]
       resources :registration, :only => [:create]
       match 'user/add_address', to: 'user#add_address', via: [:post]
+      match 'order/submit_order', to: 'order#submit_order', via: [:post]
+      match 'order/confirm', to: 'order#confirm', via: [:post] 
+      match 'order/status', to: 'order#status', via: [:post]  
+      match 'order/fetch_orders', to: 'order#fetch_orders', via: [:post]                
     end
   end
 end

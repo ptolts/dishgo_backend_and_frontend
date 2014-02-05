@@ -1,11 +1,11 @@
 ActiveAdmin.register Restaurant do 
-
+  permit_params :id, image_attributes: [:rejected, :id]
   index do                            
     column :name                               
     default_actions                   
   end                                 
 
-  filter :name        
+  filter :name   
 
   show do |resto|
     attributes_table do

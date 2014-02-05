@@ -6,6 +6,6 @@ class Section
   field :name, type: String
   field :position, type: Integer
   belongs_to :restaurant, index: true
-  has_many :subsection
+  has_many :dish
 end
 

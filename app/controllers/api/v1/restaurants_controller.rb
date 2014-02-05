@@ -1,5 +1,13 @@
 class Api::V1::RestaurantsController < ApplicationController
   respond_to :json
+  after_filter :set_access_control_headers
+
+  def set_access_control_headers 
+    headers['Access-Control-Allow-Origin'] = '*' 
+    # headers['Access-Control-Allow-Origin'] = 'http://dev.foodcloud.ca' 
+  end
+
+
   # def index
   #   sources = Rails.cache.fetch("restaurants#{params.to_s}", expires_in: 1.day) do
   #     sources = (Sources.new.by_loc [params[:lat].to_f,params[:lon].to_f]).collect{|e| e.attributes.inject({}){|res,x| res[x[0]]=x[1]; res}}
@@ -70,7 +78,7 @@ class Api::V1::RestaurantsController < ApplicationController
 
     sources_asjson = sources.as_json(:except => [:locs], :include => {:image => {:only => [:_id,:local_file,:rejected]}})
     sources_asjson.each do |so|
-      so['image'].delete_if{|img| next img['rejected']}
+      so['image'].delete_if{|img| next ((img['rejected'].to_s == 'true') or (img['rejected'].to_s == '1'))}
     end
 
     respond_with sources_asjson
@@ -91,24 +99,25 @@ class Api::V1::RestaurantsController < ApplicationController
     restaurant = Restaurant.find(params[:id])
     # restaurant = Restaurant.includes(:section => {:subsection => {:dish => [{:options => {:option => :icon}}, :images]}}).find(params[:id])
     if restaurant.nil? or restaurant.section.empty?
-      Rails.logger.warn "Restaurant.nil? #{restaurant.nil?} or Restaurant.section.empty? #{restaurant.section.empty?} and size: #{restaurant.section.size}"
-      render :text => {}.to_json
-      return
+      # Rails.logger.warn "Restaurant.nil? #{restaurant.nil?} or Restaurant.section.empty? #{restaurant.section.empty?} and size: #{restaurant.section.size}"
+      # render :text => {}.to_json
+      # return
+      restaurant = Restaurant.where(:name => /cunningham/i).first
     end
     # THIS IS FUCKING UGLY. THERE HAS TO BE A BETTER WAY.
     respond_with ({:menu => restaurant.section.as_json(:include => {
-                                                           :subsection => { :include => {
+                                                           # :subsection => { :include => {
                                                                                 :dish => { :include => 
                                                                                                {
                                                                                                   :options => { :include => {
                                                                                                                    :individual_option => { :include => :icon }
                                                                                                                  }
                                                                                                                },
-                                                                                                  :images => {}
+                                                                                                  :image => {:only => [:_id,:local_file,:rejected]}
                                                                                                  }
                                                                                            }
-                                                                              }
-                                                                            }
+                                                                              # }
+                                                                            # }
                                                          }
                                                        )
                    })

@@ -17,5 +17,5 @@ class Image
   field :local_file_face, type: String
 
   belongs_to :restaurant, index: true
-  belongs_to :dish, index: true
+  # belongs_to :dish, index: true
 end
