@@ -113,7 +113,11 @@ class Api::V1::RestaurantsController < ApplicationController
                                                                                                                    :individual_option => { :include => :icon }
                                                                                                                  }
                                                                                                                },
-                                                                                                  :image => {:only => [:_id,:local_file,:rejected]}
+                                                                                                  :image => {:only => [:_id,:local_file,:rejected]},
+                                                                                                  :sizes => { :include => {
+                                                                                                                   :individual_option => { :include => :icon }
+                                                                                                                 }
+                                                                                                               },                                                                                                  
                                                                                                  }
                                                                                            }
                                                                               # }

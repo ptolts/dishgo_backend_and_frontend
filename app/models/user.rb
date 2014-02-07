@@ -36,7 +36,8 @@ class User
   field :facebook_user_id,       :type => String  
 
   field :phone_number,           :type => String 
-  field :last_name,              :type => String  
+  field :last_name,              :type => String 
+  field :is_admin,               :type => Boolean, :default => false   
   field :first_name,             :type => String    
 
   ## Confirmable
@@ -52,6 +53,8 @@ class User
 
   # Token authenticatable
   field :authentication_token, :type => String
+
+  index({ email:1 }, { unique: true, name:"email_index" })
 
   def ensure_authentication_token
     if authentication_token.blank?

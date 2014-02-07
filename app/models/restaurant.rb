@@ -17,6 +17,8 @@ class Restaurant
 
   accepts_nested_attributes_for :image, :allow_destroy => false
 
+  index({ name: 1 }, { name: "name_index" })
+
   def by_loc loc=nil
     if loc
       cords = [loc[1],loc[0]]

@@ -11,6 +11,6 @@ class Dish
   belongs_to :section, index: true  
   has_and_belongs_to_many :image, inverse_of: nil
   has_many :options, :class_name => 'Options'
-
+  has_one :sizes, :class_name => 'Options', inverse_of: :dish_size
   default_scope where(:name.nin => ["", nil])
 end

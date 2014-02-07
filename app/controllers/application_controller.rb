@@ -13,5 +13,13 @@ class ApplicationController < ActionController::Base
     if user && Devise.secure_compare(user.authentication_token, params[:user_token])
       sign_in user, store: false
     end
-  end  
+  end 
+
+  def admin_user!
+    unless current_user.is_admin
+      flash[:error] = "You lack the privileges to access this function."
+      redirect_to :controller => 'home', :action => 'index'
+    end
+  end
+
 end

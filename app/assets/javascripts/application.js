@@ -11,6 +11,8 @@
 // GO AFTER THE REQUIRES BELOW.
 //
 //= require jquery
-//= require jquery_ui
 //= require jquery_ujs
+//= require knockout-latest.js
+//= require underscore
+//= require underscore-ko-1.2.2.min.js
 //= require_tree .

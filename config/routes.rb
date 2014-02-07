@@ -1,16 +1,20 @@
 Foodcloud::Application.routes.draw do
-  devise_for :admin_users, ActiveAdmin::Devise.config
-  ActiveAdmin.routes(self)
 
   devise_for :users
+
+  root :to => 'home#index'
 
   resources :token_authentications, :only => [:create, :destroy]
 
   resources :home do
     collection do
       get 'restaurants'
+      get 'users'      
+      get 'search_restaurants'
     end
   end
+
+  # match 'home/search_restaurants', to: 'home#search_restaurants', via: [:get]
 
   namespace :api, :defaults => {:format => :json} do
     namespace :v1 do

@@ -4,17 +4,18 @@ gem 'rails', '4.0.0'
 gem 'devise'
 gem 'cancan'
 gem 'role_model'
+gem 'underscore-rails'
 gem 'mongoid', git: 'https://github.com/mongoid/mongoid.git' #, :tag => "4.0.0.alpha1"
 gem 'bson_ext'
 gem 'instagram'
 gem 'activeresource'
 gem "koala" #, "~> 1.8.0rc1"
-gem 'activeadmin-mongoid', :git => "https://github.com/agungyuliaji/activeadmin-mongoid.git", :branch => 'rails4'
-gem 'activeadmin', github: 'gregbell/active_admin'  
+# gem 'activeadmin-mongoid', :git => "https://github.com/agungyuliaji/activeadmin-mongoid.git", :branch => 'rails4'
+# gem 'activeadmin', github: 'gregbell/active_admin'  
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
-
+gem 'bootstrap_form'
 
 
 # Gems used only for assets and not required
