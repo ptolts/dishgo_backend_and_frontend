@@ -9,8 +9,12 @@ Foodcloud::Application.routes.draw do
   resources :home do
     collection do
       get 'restaurants'
+      get 'edit_menu'      
       get 'users'      
       get 'search_restaurants'
+      get 'search_users'
+      post 'update_user'  
+      post 'update_menu'           
     end
   end
 

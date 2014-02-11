@@ -68,6 +68,28 @@ class Restaurant
     nil    
   end
 
+  def menu_to_json
+    self.section.as_json(:include => {
+                                                               # :subsection => { :include => {
+                                                                                    :dishes => { :include => 
+                                                                                                   {
+                                                                                                      :options => { :include => {
+                                                                                                                       :individual_options => { :include => :icon }
+                                                                                                                     }
+                                                                                                                   },
+                                                                                                      :image => {:only => [:_id,:local_file,:rejected]},
+                                                                                                      :sizes => { :include => {
+                                                                                                                       :individual_options => { :include => :icon }
+                                                                                                                     }
+                                                                                                                   },                                                                                                  
+                                                                                                     }
+                                                                                               }
+                                                                                  # }
+                                                                                # }
+                                                             }
+                                                           )
+  end
+
 end
 
 
