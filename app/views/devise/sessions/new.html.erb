@@ -1,0 +1,51 @@
+<style>
+
+	.signin {
+		width: 100%;
+		display: inline-block;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	.signin .col-sm-2 {
+		margin-right: 5px;
+	}
+
+	.signin .row {
+		margin-top: 5px;
+	}
+
+	.signin .links {
+		text-align: center;
+	}
+
+</style>
+
+
+<div class="row">
+	<div class="signin">
+		<%= bootstrap_form_for(resource, :as => resource_name, :url => session_path(resource_name), style: :horizontal, left: "col-md-2", right: "col-md-10") do |f| %>
+			<div class="row">
+				<%= f.email_field :email, :autofocus => true %>
+			</div>
+			<div class="row">
+				<%= f.password_field :password %>
+			</div>
+			<% if devise_mapping.rememberable? -%>
+				<div class="row">
+					<%= f.form_group do %>
+					    <%= f.check_box :remember_me %>
+					<% end %>
+				</div>
+			<% end -%>
+			<div class="row">
+				<%= f.form_group do %>
+					<%= f.submit "Log In", class: "btn btn-info" %>
+				<% end %>
+			</div>
+		<% end %>
+		<div class="row links">
+			<%= render "devise/shared/links" %>
+		</div>
+	</div>
+</div>

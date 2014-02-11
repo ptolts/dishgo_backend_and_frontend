@@ -1,0 +1,7 @@
+<ul class="nav nav-pills nav-stacked">
+	<li class="<%= active_link('home','index') %>"><a href="/home">Home</a></li>
+	<% if admin_user? %>
+	 	<li class="<%= active_link('home','users') %>"><a href="/home/users">Users</a></li>
+		<li class="<%= active_link('home','restaurants') %>"><a href="/home/restaurants">Restaurants</a></li>
+	<% end %>
+</ul>

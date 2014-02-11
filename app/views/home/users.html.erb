@@ -1,0 +1,82 @@
+<div class="form-inline" role="form">
+    <input class="form-control" data-bind="value: email" />
+    <button class="btn btn-default" data-bind="click: search_for_users">Search</button>
+</div>
+
+<table class="col-md-8 table table-striped">
+    <thead>
+        <tr>
+            <th>Email</th>
+            <th>Admin</th>
+            <th>Restaurant</th>
+        </tr>
+    </thead>
+    <tbody data-bind="template: { name: 'user_temp', foreach: users }"></tbody>
+</table>
+
+<script id="user_temp" type="text/html">
+    <tr>
+        <td>
+            <p data-bind="text: email"></p>
+        </td>                       
+        <td>
+            <p data-bind="text: is_admin, click: toggle_is_admin"></p>
+        </td> 
+        <td>
+            <p data-bind="text: restaurant"></p>
+        </td> 
+        <td>
+            <button class="btn btn-default btn-sm" data-bind="click: save">Save</button>
+        </td>                              
+    </tr>   
+</script>
+
+<script type='text/javascript'>//<![CDATA[ 
+
+    function User(data) {
+        var self = this;
+        self.id = data._id;
+        self.email = ko.observable(data.email);
+        self.is_admin = ko.observable(data.is_admin);
+        self.restaurant = ko.observable(data.restaurant);
+
+        self.save = function(){
+            $.ajax({
+              type: "POST",
+              url: "http://dev.foodcloud.ca:3000/home/update_user",
+              data: {
+                user_id: self.id,
+                email: self.email(),
+                is_admin: self.is_admin()
+              },
+              success: function(data, textStatus, jqXHR){
+
+                },
+              dataType: "json"
+            });
+        }        
+
+        self.toggle_is_admin = function(){
+            self.is_admin(!self.is_admin());
+        }
+    }
+
+    function viewModel() {
+        var self = this;
+        self.email = ko.observable("");
+        self.users = ko.observableArray([]);
+        self.search_for_users = function() {
+            console.log("Searching!");
+            $.getJSON("http://dev.foodcloud.ca:3000/home/search_users?email=" + self.email(), function(data) { 
+                self.users($.map(data, function(item) { console.log(item); return new User(item) }));
+            }).fail( function(d, textStatus, error) {
+                console.error("getJSON failed, status: " + textStatus + ", error: "+error)
+            });
+        };
+    };
+
+    ko.applyBindings(new viewModel());
+
+
+//]]>  
+</script>

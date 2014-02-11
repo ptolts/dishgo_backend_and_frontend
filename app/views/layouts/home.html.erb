@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>DishGo</title>
+	<%= stylesheet_link_tag    "application", :media => "all" %>
+	<%= javascript_include_tag "application" %>
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">	
+	<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>	
+	<%= csrf_meta_tags %>
+</head>
+
+<style>
+	body {
+	  min-height: 2000px;
+	  padding-top: 70px;
+	}
+</style>
+
+<body>
+	<%= render 'shared/nav_bar' %>		
+	<div class="container">	
+		<div class="col-md-2">
+			<%= render 'shared/menu_bar' %>
+		</div>
+		<div class="col-md-10">
+			<%=  yield %>
+		</div><!-- /#page-wrapper -->
+	</div>
+
+</body>
+</html>

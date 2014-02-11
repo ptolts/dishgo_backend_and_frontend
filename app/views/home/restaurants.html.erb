@@ -1,0 +1,68 @@
+<div class="form-inline" role="form">
+    <input class="form-control" data-bind="value: restaurant_name" />
+    <button class="btn btn-default" data-bind="click: search_for_restaurant">Search</button>
+</div>
+
+<table class="col-md-8 table table-striped">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Lat</th>
+            <th>Lon</th>
+            <th>Edit Menu</th>
+            <th>Set User</th>
+        </tr>
+    </thead>
+    <tbody data-bind="template: { name: 'resto_temp', foreach: restaurants }"></tbody>
+</table>
+
+<script id="resto_temp" type="text/html">
+    <tr>
+        <td>
+            <p data-bind="text: name"></p>
+        </td>                       
+        <td>
+            <p data-bind="text: lat"></p>
+        </td> 
+        <td>
+            <p data-bind="text: lon"></p>
+        </td> 
+        <td>
+            <a data-bind="attr: { href: '/home/edit_menu?restaurant_id=' + id}" class="btn btn-default btn-sm">Menu</a>
+        </td>  
+        <td>
+            <button class="btn btn-default btn-sm">User</button>
+        </td>                                     
+    </tr>   
+</script>
+
+<script type='text/javascript'>//<![CDATA[ 
+
+    function Restaurant(data) {
+        console.log("New Restaurant: " + data.name);
+        var self = this;
+        self.name = ko.observable(data.name);
+        self.lat = ko.observable(data.lat);
+        self.lon = ko.observable(data.lon);
+        self.id = data._id;
+    }
+
+    function viewModel() {
+        var self = this;
+        self.restaurant_name = ko.observable("");
+        self.restaurants = ko.observableArray([]);
+        self.search_for_restaurant = function() {
+            console.log("Searching!");
+            $.getJSON("http://dev.foodcloud.ca:3000/home/search_restaurants?restaurant_name=" + self.restaurant_name(), function(data) { 
+                self.restaurants($.map(data, function(item) { console.log(item); return new Restaurant(item) }));
+            }).fail( function(d, textStatus, error) {
+                console.error("getJSON failed, status: " + textStatus + ", error: "+error)
+            });
+        };
+    };
+
+    ko.applyBindings(new viewModel());
+
+
+//]]>  
+</script>
