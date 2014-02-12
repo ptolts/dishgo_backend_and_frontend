@@ -2,6 +2,13 @@ class HomeController < ApplicationController
   before_filter :authenticate_user!
   before_filter :admin_user!, :only => [:users, :restaurants, :search_restaurants, :edit_menu, :update_user, :update_menu]
   layout 'home'
+  after_filter :set_access_control_headers
+
+  def set_access_control_headers 
+    headers['Access-Control-Allow-Origin'] = '*' 
+    # headers['Access-Control-Allow-Origin'] = 'http://dev.foodcloud.ca' 
+  end
+
   def index
 
   end
@@ -44,6 +51,7 @@ class HomeController < ApplicationController
       if Section.where(:_id => section["id"]).exists?
         section_object = Section.find(section["id"])
         if section_object.restaurant != restaurant
+          Rails.logger.warn "#{section_object.restaurant.to_json} != #{restaurant.to_json}"
           render :json => {:error => "Invalid Permissions"}.as_json
           return
         end
@@ -64,6 +72,15 @@ class HomeController < ApplicationController
     restaurant.section = menu
     restaurant.save
   	render :json => {:menu => restaurant.menu_to_json}
+  end
+
+  def upload_image
+    images = params[:files].collect do |file|
+      img = Image.create
+      img.update_attributes({:img => file})
+      img.save
+    end
+    render :text => images.to_s
   end
 
 end

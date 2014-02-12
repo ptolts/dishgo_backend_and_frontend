@@ -17,10 +17,12 @@ class Section
 	        if Dish.where(:_id => dish["id"]).exists?
 	        	dish_object = Dish.find(dish["id"])
 				if dish_object.restaurant != request_restaurant
+          			Rails.logger.warn "Dish Permission Error: #{dish_object.restaurant.to_json} != #{request_restaurant.to_json}"
 					return false
 				end	        	
 	        else
 	        	dish_object = Dish.create
+	        	dish_object.restaurant = request_restaurant
 	        end  
 
 	        if !dish_object.load_data_from_json(dish,request_restaurant)

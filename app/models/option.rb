@@ -5,6 +5,8 @@ class Option
   store_in collection: "Options", database: "osm"
   field :name, type: String
   field :type, type: String
+  field :max_selections, type: Integer
+  field :min_selections, type: Integer
   field :position, type: Integer
   belongs_to :dish_size, class_name: "Dish", inverse_of: :sizes
   belongs_to :dish, inverse_of: :options
@@ -15,6 +17,8 @@ class Option
 
 		self.name = option["name"]
 		self.type = option["type"]
+		self.max_selections = option["max_selections"]
+		self.min_selections = option["min_selections"]
 
 		#Load or Create the individual options for this option.
 		individual_options = option["individual_options"].collect do |individual_option|

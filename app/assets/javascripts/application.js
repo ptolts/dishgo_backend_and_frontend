@@ -15,4 +15,7 @@
 //= require knockout-latest.js
 //= require underscore
 //= require underscore-ko-1.2.2.min.js
+//= require jquery.iframe-transport.js
+//= require jquery.ui.widget.js
+//= require jquery.fileupload.js
 //= require_tree .

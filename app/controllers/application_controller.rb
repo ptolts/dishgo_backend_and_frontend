@@ -34,4 +34,8 @@ class ApplicationController < ActionController::Base
     end
   end 
 
+  def handle_unverified_request
+    redirect_to root_url, :error => "forgery protection"
+  end  
+
 end

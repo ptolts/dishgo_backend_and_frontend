@@ -1,5 +1,22 @@
 <style>
 
+    .file_upload_button {
+        position: relative;
+        overflow: hidden;
+    }
+
+    .file_upload_input {
+        position: absolute;
+        top: 0;
+        right: 0;
+        margin: 0;
+        opacity: 0;
+        -ms-filter: 'alpha(opacity=0)';
+        font-size: 200px;
+        direction: ltr;
+        cursor: pointer;
+    }
+
     .section_header {
         margin-top: 8px;
         margin-bottom: 8px;
@@ -215,6 +232,18 @@
                                 </div>
 
                                 <div class="col-xs-12 push_down">
+                                    <span class="btn btn-info file_upload_button">
+                                        <i class="glyphicon glyphicon-plus"></i>
+                                        <span>Select files...</span>
+                                        <!-- The file input field used as target for the file upload widget -->
+                                        <input data-bind="file_upload" id="fileupload" type="file" name="files[]" multiple="" data-url="http://dev.foodcloud.ca:3000/home/upload_image"  class="file_upload_input">
+                                    </span>  
+                                    <div class="progress">
+                                      <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>
+                                    </div>                                                                                        
+                                </div>                              
+
+                                <div class="col-xs-12 push_down">
                                     <div class="col-centered form-inline control_piece">
                                         <div class="control_piece_center">
                                           <div class="checkbox">
@@ -240,7 +269,7 @@
                     <!-- /ko -->        
             </div>              
         </div>
-    </div>
+    </div>  
 
 
     <!-- TEMPLATES -->
@@ -396,7 +425,7 @@ function Section(data) {
 
     self.dishes = ko.observableArray([]);
     if(data.dishes){
-        self.dishes = ko.observableArray($.map(data.dishes, function(item) { return new Dish(item) }));   
+        self.dishes = ko.observableArray($.map(data.dishes, function(item) { return new Dish(item) }));     
     }
 
     if(data.dom_id){
@@ -444,11 +473,11 @@ function Dish(data) {
         self.sizes_object = ko.observable(new Option(data.sizes,self));
     } else {
         self.sizes = ko.observable(false);
-        self.sizes_object = ko.observable(new Option({type:"size",name:"Sizes",individual_option:[{name:"Small",price:'0.0'},{name:"Large",price:'0.0'}]},self));
+        self.sizes_object = ko.observable(new Option({type:"size",name:"Sizes",individual_options:[{name:"Small",price:'0.0'},{name:"Large",price:'0.0'}]},self));
     }
 
     self.options = ko.observableArray([]);
-    if(data.dish){
+    if(data.options){
         self.options = ko.observableArray($.map(data.options, function(item) { return new Option(item,self) }));        
     }
 
@@ -477,7 +506,7 @@ function Dish(data) {
 
     self.addOption = function() { 
         console.log("Adding option!");
-        self.options.push(new Option({type:"generic",name:"New Option",individual_option:[{name:"First Option",price:'0.0'},{name:"Second Option",price:'0.0'}]},self));
+        self.options.push(new Option({type:"generic",name:"New Option",individual_options:[{name:"First Option",price:'0.0'},{name:"Second Option",price:'0.0'}]},self));
         updateFilters();
     };
 
@@ -487,7 +516,47 @@ function Dish(data) {
         // self.options.without_(self.sizes_to_remove);
         self.options.remove(item);
     }
+
+    self.triggerImageSelect = function(index){
+        $('#image_upload' + index).click();
+    }
+
+    self.uploadImage = function(file){
+        $.ajax({
+          type: "POST",
+          url: "http://dev.foodcloud.ca:3000/home/update_image",
+          data: {
+            restaurant_id: self.restaurant_id(),
+            menu: ko.toJSON(self.menu)
+          },
+          success: function(data, textStatus, jqXHR){
+                console.log(data);
+            },
+          dataType: "json"
+        });     
+    }   
 }
+
+ko.bindingHandlers.file_upload = {
+    init: function(element) {
+        var progress_bar = $(element).next(".progress-bar");
+        $(element).fileupload({
+            dataType: 'json',
+            done: function (e, data) {
+                $.each(data.result.files, function (index, file) {
+                    $('<p/>').text(file.name).appendTo(document.body);
+                });
+            },
+            progressall: function (e, data) {
+                var progress = parseInt(data.loaded / data.total * 100, 10);
+                $(progress_bar).css(
+                    'width',
+                    progress + '%'
+                );
+            }        
+        });
+    }
+};
 
 
 Option.prototype.toJSON = function() {
@@ -520,7 +589,10 @@ function Option(data,dish) {
         self.sizes_object_names = dish.sizes_object().individual_options;
     }
 
-    self.individual_options = ko.observableArray($.map(data.individual_option, function(item) { return new IndividualOption(item,self)})); 
+    self.individual_options = ko.observableArray([]);
+    if(data.individual_options){
+        self.individual_options = ko.observableArray($.map(data.individual_options, function(item) { return new IndividualOption(item,self)})); 
+    }
 
     self.editing_name = ko.observable(false);
     self.edit_name = function() { 
@@ -672,20 +744,20 @@ function MenuViewModel() {
 
     self.saveMenu = function() {
         console.log(ko.toJSON(self.menu));
-        $.ajax({
-          type: "POST",
-          url: "http://dev.foodcloud.ca:3000/home/update_menu",
-          data: {
-            restaurant_id: self.restaurant_id(),
-            menu: ko.toJSON(self.menu)
-          },
-          success: function(data, textStatus, jqXHR){
-            self.menu($.map(data.menu, function(item) { return new Section(item) }));
-            $(".tooltipclass").tooltip({delay: { show: 500, hide: 100 }});
-            updateFilters();
-            },
-          dataType: "json"
-        });      
+        self.save = function(){
+            $.ajax({
+              type: "POST",
+              url: "http://dev.foodcloud.ca:3000/home/update_menu",
+              data: {
+                restaurant_id: self.restaurant_id(),
+                menu: ko.toJSON(self.menu)
+              },
+              success: function(data, textStatus, jqXHR){
+                    console.log(data);
+                },
+              dataType: "json"
+            });
+        }       
     }  
 
     self.remove = function(item) {
