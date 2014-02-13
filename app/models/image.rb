@@ -3,6 +3,8 @@
 class Image
   include Mongoid::Document
   include Mongoid::Paperclip
+  include Mongoid::Timestamps
+
   store_in collection: "image", database: "osm"
   field :local_file, type: String
   field :original_url, type: String
@@ -21,7 +23,8 @@ class Image
   # belongs_to :dish, index: true
 
   has_mongoid_attached_file :img, {
-      :path           => ':id/:filename_:style.:extension',
+      :path           => ':hash_:style.png',
+      :hash_secret => "we_like_food",
       :styles => {
         :original => ['1000x1000>', :png],
         :small    => ['100x',   :png],
@@ -38,9 +41,24 @@ class Image
       },
       fog_directory: 'Images',
       fog_public: true,
-      fog_host: "https://36ec5e865094a74ec4cb-2d8ae1874a396bdb82dfc36ab7e38695.r97.cf5.rackcdn.com"
     }
+  field :img_fingerprint, type: String
+  field :manual_img_fingerprint, type: String
+  validates_attachment_content_type :img, :content_type => %w(image/jpeg image/jpg image/png), :message => 'file type is not allowed (only jpeg/png/gif images)', :on => :create     
 
-  validates_attachment_content_type :img, :content_type => %w(image/jpeg image/jpg image/png), :message => 'file type is not allowed (only jpeg/png/gif images)'      
 
+  def serializable_hash options
+    if options[:ios]
+      return super {}
+    end
+
+    if self.img_file_size
+      return {_id: self._id, local_file: self.img.url(:medium), rejected: false}
+    else
+      return {_id: self._id, local_file: self.local_file, rejected: self.rejected}
+    end
+  end
 end
+
+
+

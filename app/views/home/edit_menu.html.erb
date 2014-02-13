@@ -1,5 +1,9 @@
 <style>
 
+    .thumbnail {
+        display: inline-block;
+    }
+
     .file_upload_button {
         position: relative;
         overflow: hidden;
@@ -12,7 +16,7 @@
         margin: 0;
         opacity: 0;
         -ms-filter: 'alpha(opacity=0)';
-        font-size: 200px;
+        font-size: 50px;
         direction: ltr;
         cursor: pointer;
     }
@@ -169,8 +173,6 @@
 
     <div class="container section">
 
-
-
         <div class="row section_header">
             <div class="col-xs-7" style="margin-left: 0px">     
                 <button class="btn btn-primary" data-bind="click: saveMenu">Commit Changes</button> 
@@ -231,17 +233,19 @@
                                     <textarea rows="6" data-bind="value: description" class="description form-control tooltipclass" data-toggle="tooltip" data-placement="top" title="Type the dish description into this box."></textarea>
                                 </div>
 
+
+                                <!-- ko foreach: images -->
+                                    <div data-bind="template: { name: 'image', data: $data}"></div>  
+                                <!-- /ko -->  
+
                                 <div class="col-xs-12 push_down">
-                                    <span class="btn btn-info file_upload_button">
+                                    <span class="btn btn-info btn-sm file_upload_button col-xs-8 col-xs-offset-2">
                                         <i class="glyphicon glyphicon-plus"></i>
-                                        <span>Select files...</span>
+                                        <span>Add Image</span>
                                         <!-- The file input field used as target for the file upload widget -->
                                         <input data-bind="file_upload" id="fileupload" type="file" name="files[]" multiple="" data-url="http://dev.foodcloud.ca:3000/home/upload_image"  class="file_upload_input">
-                                    </span>  
-                                    <div class="progress">
-                                      <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>
-                                    </div>                                                                                        
-                                </div>                              
+                                    </span>                                                                                     
+                                </div>                                        
 
                                 <div class="col-xs-12 push_down">
                                     <div class="col-centered form-inline control_piece">
@@ -263,14 +267,11 @@
 
                             </div>                  
                         </div>
-                        <!-- ko if: ($index() % 2) != 0 -->
-                            <div class="clearfix"></div>
-                        <!-- /ko -->
+
                     <!-- /ko -->        
             </div>              
         </div>
     </div>  
-
 
     <!-- TEMPLATES -->
     <script id="size" type="text/html">
@@ -305,6 +306,26 @@
             </div>
         </div> 
     </script>
+
+    <script id="image" type="text/html">
+        <div class="col-xs-12 push_down">
+            <div class="uploading_image" data-bind="visible: !completed()">
+                <div class="col-xs-3">
+                    <span class="label label-default" data-bind="text: filename"></span>
+                </div>
+                <div class="col-xs-9">
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" data-bind="style: { width: progressValue() + '%'}"></div>
+                    </div>    
+                </div> 
+            </div> 
+            <div class="completed_image" data-bind="visible: completed">
+                <div class="col-xs-12 text-center">
+                    <img class="thumbnail img-rounded" data-bind="attr: {src: url}" />
+                </div> 
+            </div>  
+        </div>
+    </script> 
 
     <script id="default" type="text/html">
         <div class="col-xs-12 text-center" style="margin-top: 10px;">
@@ -401,6 +422,8 @@
 
 <script type='text/javascript'>//<![CDATA[ 
 
+var restaurant_id = "<%= params[:restaurant_id]%>";
+
 function updateFilters() {
     // Only allow prices in any price field.
     $(".price_filter").removeAttr("keypress");
@@ -443,7 +466,26 @@ function Section(data) {
     }; 
 
     self.remove = function(item) {
-        self.dishes.remove(item);
+        bootbox.dialog({
+          message: "Are you sure you want to remove the dish titled \"" + item.name() + "\"?",
+          title: "Remove Dish",
+          buttons: {
+            success: {
+              label: "No",
+              className: "btn-primary pull-left col-xs-3",
+              callback: function() {
+
+              }
+            },
+            danger: {
+              label: "Yes",
+              className: "btn-danger col-xs-3 pull-right",
+              callback: function() {
+                self.dishes.remove(item);
+              }
+            },
+          }
+        });        
     }
 
     // Operations
@@ -456,11 +498,58 @@ function Section(data) {
 
 }
 
+function Image(data) {
+    var self = this;
+    self.progressValue = ko.observable(1);
+    self.filename = ko.observable("");
+    self.id = ko.observable("");
+    self.url = ko.observable("/loader.gif");
+    self.completed = ko.observable(false);
+
+    if(data){
+        if(data.local_file){
+            self.id = data._id;
+            self.url = ko.observable(data.local_file);
+            self.completed(true);
+        }  
+    } 
+}
+
+ko.bindingHandlers.file_upload = {
+    init: function(element, valueAccessor, allBindingsAccessor, viewModel, bindingContext) {
+        var self = this;
+        self.imageModel;
+        $(element).fileupload({
+            formData: {restaurant_id: restaurant_id},
+            dataType: 'json',
+            progressInterval: 50,
+            send: function (e, data) {
+                $.each(data.files, function (index, file) {
+                    self.imageModel = viewModel.addImage();
+                    console.log(self.imageModel);
+                    self.imageModel.filename(file.name);
+                });                
+            },
+            done: function (e, data) {
+                var file = data.result.files[0];
+                self.imageModel.url(file.thumbnailUrl);
+                self.imageModel.completed(true);
+                self.imageModel.id(file.image_id);
+            },
+            progressall: function (e, data) {
+                var progress = parseInt(data.loaded / data.total * 100, 10);
+                self.imageModel.progressValue(progress);
+            }        
+        });
+    }
+};
+
 function Dish(data) {
     var self = this;
     self.name = ko.observable(data.name);  
     self.description = ko.observable(data.description);
     self.price = ko.observable(data.price);
+    self.images = ko.observableArray([]);
 
     if(data._id){
         self.id = data._id;
@@ -470,15 +559,22 @@ function Dish(data) {
 
     if(data.sizes){
         self.sizes = ko.observable(true);
+        console.log("data size:");
+        console.log(data.sizes);
         self.sizes_object = ko.observable(new Option(data.sizes,self));
     } else {
         self.sizes = ko.observable(false);
+        console.log("no data sizes");
         self.sizes_object = ko.observable(new Option({type:"size",name:"Sizes",individual_options:[{name:"Small",price:'0.0'},{name:"Large",price:'0.0'}]},self));
     }
 
     self.options = ko.observableArray([]);
     if(data.options){
         self.options = ko.observableArray($.map(data.options, function(item) { return new Option(item,self) }));        
+    }
+
+    if(data.image) {
+        self.images = ko.observableArray($.map(data.image, function(item) { return new Image(item) }));                
     }
 
     self.editing = ko.observable(false);
@@ -510,54 +606,41 @@ function Dish(data) {
         updateFilters();
     };
 
+    self.addImage = function(item) { 
+        var new_image = new Image(item);
+        self.images.push(new_image);
+        return new_image;
+    };    
+
     // Which option template to use.
     self.remove = function(item) {
-        // self.sizes_to_remove = _.find(self.options(), function(io){return (item.name() == io.name()) && (item.type == io.type) });
-        // self.options.without_(self.sizes_to_remove);
-        self.options.remove(item);
+        bootbox.dialog({
+          message: "Are you sure you want to remove the option titled \"" + item.name() + "\"?",
+          title: "Remove Option",
+          buttons: {
+            success: {
+              label: "No",
+              className: "btn-primary pull-left col-xs-3",
+              callback: function() {
+
+              }
+            },
+            danger: {
+              label: "Yes",
+              className: "btn-danger col-xs-3 pull-right",
+              callback: function() {
+                self.options.remove(item);
+              }
+            },
+          }
+        });
     }
 
     self.triggerImageSelect = function(index){
         $('#image_upload' + index).click();
     }
 
-    self.uploadImage = function(file){
-        $.ajax({
-          type: "POST",
-          url: "http://dev.foodcloud.ca:3000/home/update_image",
-          data: {
-            restaurant_id: self.restaurant_id(),
-            menu: ko.toJSON(self.menu)
-          },
-          success: function(data, textStatus, jqXHR){
-                console.log(data);
-            },
-          dataType: "json"
-        });     
-    }   
 }
-
-ko.bindingHandlers.file_upload = {
-    init: function(element) {
-        var progress_bar = $(element).next(".progress-bar");
-        $(element).fileupload({
-            dataType: 'json',
-            done: function (e, data) {
-                $.each(data.result.files, function (index, file) {
-                    $('<p/>').text(file.name).appendTo(document.body);
-                });
-            },
-            progressall: function (e, data) {
-                var progress = parseInt(data.loaded / data.total * 100, 10);
-                $(progress_bar).css(
-                    'width',
-                    progress + '%'
-                );
-            }        
-        });
-    }
-};
-
 
 Option.prototype.toJSON = function() {
     var copy = ko.toJS(this); //easy way to get a clean copy
@@ -613,8 +696,27 @@ function Option(data,dish) {
 
     // Which option template to use.
     self.remove = function(item) {
-        item.remove_size_options();     
-        self.individual_options.remove(item);
+        bootbox.dialog({
+          message: "Are you sure you want to remove the size option titled \"" + item.name() + "\"?",
+          title: "Remove Size Option",
+          buttons: {
+            success: {
+              label: "No",
+              className: "btn-primary pull-left col-xs-3",
+              callback: function() {
+
+              }
+            },
+            danger: {
+              label: "Yes",
+              className: "btn-danger col-xs-3 pull-right",
+              callback: function() {
+                item.remove_size_options();     
+                self.individual_options.remove(item);
+              }
+            },
+          }
+        });        
     }
 
     self.toggleAdvanced = function() {
@@ -628,14 +730,35 @@ function SizePrices(data) {
     self.name = data.name;  
     self.ind_opt = data.ind_opt;
     self.size_ind_opt = data.size_ind_opt;
+    self.size_ind_opt_id = data.size_ind_opt._id;
     self.price = ko.observable(data.price);
     self.e_price = ko.observable(false);  
+
     self.edit_price_size = function() { 
         self.e_price(true);     
     };  
 
     self.remove_self = function(){
-        self.ind_opt.remove_size_option(self);
+        bootbox.dialog({
+          message: "Are you sure you want to remove the suboption titled \"" + item.name() + "\"?",
+          title: "Remove Suboption",
+          buttons: {
+            success: {
+              label: "No",
+              className: "btn-primary pull-left col-xs-3",
+              callback: function() {
+
+              }
+            },
+            danger: {
+              label: "Yes",
+              className: "btn-danger col-xs-3 pull-right",
+              callback: function() {
+                self.ind_opt.remove_size_option(self);
+              }
+            },
+          }
+        });        
     }    
 }
 SizePrices.prototype.toJSON = function() {
@@ -668,7 +791,17 @@ function IndividualOption(data,option) {
     self.type = option.type;
     self.dish = option.dish;
     self.destroy_it = false;
-    self.size_prices = ko.observableArray([]);  
+    self.size_prices = ko.observableArray([]); 
+
+    if(data.size_prices && self.type != 'size'){
+        _.each(data.size_prices,function(e){
+            if(_.find(self.option.sizes_object_names(),function(i){return i.name() == e.name})){
+                var found_object = _.find(self.option.sizes_object_names(),function(i){ return i.name() == e.name});
+                var new_size_prices = new SizePrices({name:found_object.name,price:e.price,ind_opt:self,size_ind_opt:found_object});
+                self.size_prices.push(new_size_prices);
+            } 
+        });        
+    }
 
     // if this is a size version of Options, then we need to remove all SizePrices from all other options. They will be pushed to this array.
     self.size_prices_to_remove = new Array();
@@ -719,9 +852,8 @@ function MenuViewModel() {
     // Data
     var self = this;
     self.menu = ko.observableArray([]);
-    self.restaurant_id = ko.observable("<%= params[:restaurant_id]%>");
     self.newDomCounter = 0;
-    $.getJSON("http://dev.foodcloud.ca:3000/api/v1/restaurants/menu?id=" + self.restaurant_id(), function(data) { 
+    $.getJSON("http://dev.foodcloud.ca:3000/api/v1/restaurants/menu?id=" + restaurant_id, function(data) { 
         self.menu($.map(data.menu, function(item) { return new Section(item) }));
         $(".tooltipclass").tooltip({delay: { show: 500, hide: 100 }});
         updateFilters();
@@ -743,25 +875,62 @@ function MenuViewModel() {
 
 
     self.saveMenu = function() {
-        console.log(ko.toJSON(self.menu));
-        self.save = function(){
-            $.ajax({
-              type: "POST",
-              url: "http://dev.foodcloud.ca:3000/home/update_menu",
-              data: {
-                restaurant_id: self.restaurant_id(),
-                menu: ko.toJSON(self.menu)
-              },
-              success: function(data, textStatus, jqXHR){
-                    console.log(data);
-                },
-              dataType: "json"
-            });
-        }       
+        bootbox.dialog({
+          message: "Are you sure you want to commit your changes to the menu? The changes will take effect immediately.",
+          title: "Commit Changes",
+          buttons: {
+            success: {
+              label: "No, continue editing.",
+              className: "btn-primary pull-left col-xs-5",
+              callback: function() {
+
+              }
+            },
+            danger: {
+              label: "Yes, save changes.",
+              className: "btn-danger col-xs-5 pull-right",
+              callback: function() {
+                $.ajax({
+                  type: "POST",
+                  url: "http://dev.foodcloud.ca:3000/home/update_menu",
+                  data: {
+                    restaurant_id: restaurant_id,
+                    menu: ko.toJSON(self.menu)
+                  },
+                  success: function(data, textStatus, jqXHR){
+                        self.menu($.map(data.menu, function(item) { return new Section(item) }));
+                        $(".tooltipclass").tooltip({delay: { show: 500, hide: 100 }});
+                        updateFilters();
+                    },
+                  dataType: "json"
+                }); 
+              }
+            },
+          }
+        });          
     }  
 
     self.remove = function(item) {
-        self.menu.remove(item);
+        bootbox.dialog({
+          message: "Are you sure you want to remove the section titled \"" + item.name() + "\"?",
+          title: "Remove Section",
+          buttons: {
+            success: {
+              label: "No",
+              className: "btn-primary pull-left col-xs-3",
+              callback: function() {
+
+              }
+            },
+            danger: {
+              label: "Yes",
+              className: "btn-danger col-xs-3 pull-right",
+              callback: function() {
+                self.menu.remove(item);
+              }
+            },
+          }
+        });        
     } 
         
 };

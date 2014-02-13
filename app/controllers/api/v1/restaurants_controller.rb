@@ -15,7 +15,8 @@ class Api::V1::RestaurantsController < ApplicationController
 
     sources_asjson = sources.as_json(:except => [:locs], :include => {:image => {:only => [:_id,:local_file,:rejected]}})
     sources_asjson.each do |so|
-      so['image'].delete_if{|img| next ((img['rejected'].to_s == 'true') or (img['rejected'].to_s == '1'))}
+      # so['image'].delete_if{|img| Rails.logger.warn img['rejected'];next ((img['rejected'].to_s == 'true') or (img['rejected'].to_s == '1'))}
+      so['image'].delete_if{|img| Rails.logger.warn img[:rejected];next ((img[:rejected].to_s == 'true') or (img[:rejected].to_s == '1'))}
     end
 
     respond_with sources_asjson

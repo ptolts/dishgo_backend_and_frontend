@@ -76,11 +76,28 @@ class HomeController < ApplicationController
 
   def upload_image
     images = params[:files].collect do |file|
-      img = Image.create
-      img.update_attributes({:img => file})
-      img.save
+      md5_sum = Digest::MD5.hexdigest(file.read)
+      if img = Image.where(:manual_img_fingerprint => md5_sum).first and img
+        Rails.logger.warn "Duplicate file. No need to upload twice."
+        next img
+      else
+        img = Image.create
+        img.update_attributes({:img => file})
+        img.manual_img_fingerprint = md5_sum
+        img.save
+        next img
+      end
     end
-    render :text => images.to_s
+  
+    render :json => {files: images.collect{ |img|
+                      {
+                        image_id: img.id,
+                        name: img.img_file_name,
+                        size: img.img_file_size,
+                        url:  img.img.url(:original),
+                        thumbnailUrl:   img.img.url(:medium),
+                      }
+                    }}.as_json
   end
 
 end

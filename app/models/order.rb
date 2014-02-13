@@ -1,5 +1,6 @@
 class Order
   include Mongoid::Document
+  include Mongoid::Timestamps
   belongs_to :user, :class_name => "User", index: true
   belongs_to :restaurant, :class_name => "Restaurant", index: true
   has_one :billing_address, :class_name => "Address"

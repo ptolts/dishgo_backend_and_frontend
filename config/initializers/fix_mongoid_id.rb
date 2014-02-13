@@ -11,6 +11,7 @@ end
 
 module Paperclip
 	class HasAttachedFile
+    
     def add_active_record_callbacks
       name = @name
       @klass.send(:after_save) { send(name).send(:save) }
@@ -21,5 +22,11 @@ module Paperclip
         @klass.send(:after_destroy) { send(name).send(:flush_deletes) }
       end
     end
+
+    def add_required_validations
+      name = @name
+      @klass.validates_media_type_spoof_detection name, :if => ->{ send(name).dirty? }
+    end
+
 	end
 end

@@ -77,7 +77,7 @@ class Restaurant
                                                                                                                        :individual_options => { :include => :icon }
                                                                                                                      }
                                                                                                                    },
-                                                                                                      :image => {:only => [:_id,:local_file,:rejected]},
+                                                                                                      :image => {},
                                                                                                       :sizes => { :include => {
                                                                                                                        :individual_options => { :include => :icon }
                                                                                                                      }
