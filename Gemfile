@@ -7,6 +7,7 @@ gem 'role_model'
 gem 'underscore-rails'
 gem 'mongoid', git: 'https://github.com/mongoid/mongoid.git' #, :tag => "4.0.0.alpha1"
 gem 'bson_ext'
+gem 'json'
 gem 'instagram'
 gem 'activeresource'
 gem "koala" #, "~> 1.8.0rc1"

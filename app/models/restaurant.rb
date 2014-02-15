@@ -70,6 +70,7 @@ class Restaurant
   end
 
   def menu_to_json
+    require 'json/ext'
     self.section.as_json(:include => {
                                                                # :subsection => { :include => {
                                                                                     :dishes => { :include => 
