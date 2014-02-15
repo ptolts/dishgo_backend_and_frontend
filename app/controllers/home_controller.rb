@@ -48,8 +48,7 @@ class HomeController < ApplicationController
   	menu = JSON.parse(params[:menu]).collect do |section|
 
       # Load Option Object, or create a new one.
-      if Section.where(:_id => section["id"]).exists?
-        section_object = Section.find(section["id"])
+      if section_object = Section.where(:_id => section["id"]).first and section_object
         if section_object.restaurant != restaurant
           Rails.logger.warn "#{section_object.restaurant.to_json} != #{restaurant.to_json}"
           render :json => {:error => "Invalid Permissions"}.as_json

@@ -28,9 +28,8 @@ class Dish
 
     if dish["sizes"]
       sizes_object = dish["sizes_object"]
-      if Option.where(:_id => sizes_object["id"]).exists?
+      if option_object = Option.where(:_id => sizes_object["id"]).first and option_object
         Rails.logger.warn "---\nFound Sizes Object [#{sizes_object["id"]}]\n---\n"
-        option_object = Option.find(sizes_object["id"])
 
         # If it was null, theres probably been a mistake.
         if option_object.restaurant.nil?
@@ -63,9 +62,7 @@ class Dish
 
     options = dish["options"].collect do |option|
       # Load Option Object, or create a new one.
-      if Option.where(:_id => option["id"]).exists?
-        option_object = Option.find(option["id"])
-
+      if option_object = Option.where(:_id => option["id"]).first and option_object
 
         # If it was null, theres probably been a mistake.
         if option_object.restaurant.nil?

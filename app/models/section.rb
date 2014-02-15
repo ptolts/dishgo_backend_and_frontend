@@ -17,8 +17,7 @@ class Section
 
 		dishes = section["dishes"].collect do |dish|
 	        # Load Dish Object, or create a new one.
-	        if Dish.where(:_id => dish["id"]).exists?
-	        	dish_object = Dish.find(dish["id"])
+	        if dish_object = Dish.where(:_id => dish["id"]).first and dish_object
 				if dish_object.restaurant != request_restaurant
           			Rails.logger.warn "Dish Permission Error: #{dish_object.restaurant.to_json} != #{request_restaurant.to_json}"
 					return false

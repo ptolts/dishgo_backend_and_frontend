@@ -25,9 +25,8 @@ class Option
 
 		#Load or Create the individual options for this option.
 		individual_options = option["individual_options"].collect.with_index do |individual_option,index|
-			if IndividualOption.where(:_id => individual_option["id"]).exists?
+			if individual_option_object = IndividualOption.where(:_id => individual_option["id"]).first and individual_option_object
 				Rails.logger.warn "---\nLoading IndividualOption[#{individual_option["name"]}]\n---"
-				individual_option_object = IndividualOption.find(individual_option["id"])
 			  # If someone has tried to load options from another restaurant, something fishy is going on.
 			  if individual_option_object.restaurant != request_restaurant
 			  	return false
