@@ -9,10 +9,10 @@ class Restaurant
   field :menu, type: Hash
   # field :images, type: Array
   field :name, type: String
-  has_many :sources, :class_name => "Sources", index: true
-  has_many :image, :class_name => "Image", index: true
-  has_many :section, :class_name => "Section", index: true
-  has_many :orders, :class_name => "Order", index: true
+  has_many :sources, :class_name => "Sources"
+  has_many :image, :class_name => "Image"
+  has_many :section, :class_name => "Section"
+  has_many :orders, :class_name => "Order"
   belongs_to :user, :class_name => "User", index: true
 
   accepts_nested_attributes_for :image, :allow_destroy => false

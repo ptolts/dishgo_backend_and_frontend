@@ -7,7 +7,7 @@ class Section
 	field :name, type: String
 	field :position, type: Integer
 	belongs_to :restaurant, index: true
-	has_many :dishes, class_name: "Dish", index: true
+	has_many :dishes, class_name: "Dish"
 	default_scope -> {asc(:created_at)}
 	def load_data_from_json section, request_restaurant
 

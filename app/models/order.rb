@@ -3,8 +3,8 @@ class Order
   include Mongoid::Timestamps
   belongs_to :user, :class_name => "User", index: true
   belongs_to :restaurant, :class_name => "Restaurant", index: true
-  has_one :billing_address, :class_name => "Address", index: true
-  has_one :delivery_address, :class_name => "Address", index: true
+  has_one :billing_address, :class_name => "Address"
+  has_one :delivery_address, :class_name => "Address"
  
   field :first_name,             :type => String    
   field :order_created, type: Time, default: -> { Time.now }

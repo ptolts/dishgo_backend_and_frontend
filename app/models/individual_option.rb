@@ -10,7 +10,7 @@ class IndividualOption
 	field :size_ind_opt_id, type: String
 	field :position, type: Integer
 	belongs_to :options, index: true, :class_name => 'Option', index: true
-	has_one :icon, index: true
+	has_one :icon
 	belongs_to :restaurant, index: true
 	default_scope -> {asc(:created_at)}
 	def load_data_from_json individual_option, request_restaurant

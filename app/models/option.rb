@@ -13,7 +13,7 @@ class Option
   belongs_to :dish, class_name: "Dish", inverse_of: :options, index: true
   belongs_to :dish_which_uses_this_as_size_options, class_name: "Dish", inverse_of: :sizes, index: true
   belongs_to :restaurant, index: true
-  has_many :individual_options, class_name: "IndividualOption", index: true
+  has_many :individual_options, class_name: "IndividualOption"
 
   def load_data_from_json option, request_restaurant
   	Rails.logger.warn "---\n---\nWorking on Option[#{option['id']}]\n---\n#{option.to_s}\n---\n"

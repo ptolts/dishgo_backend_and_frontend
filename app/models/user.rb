@@ -1,8 +1,8 @@
 class User
   include Mongoid::Document
-  has_many :addresses, :class_name => "Address", index: true
-  has_many :orders, :class_name => "Order", index: true
-  has_many :owns_restaurants, :class_name => "Restaurant", index: true
+  has_many :addresses, :class_name => "Address"
+  has_many :orders, :class_name => "Order"
+  has_many :owns_restaurants, :class_name => "Restaurant"
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
