@@ -13,8 +13,8 @@ class User
   # attr_accessible :email, :password, :password_confirmation, :remember_me, :providor, :facebook_auth_token, :facebook_user_id, :authentication_token
 
   ## Database authenticatable
-  field :email,              :type => String, :default => ""
-  field :encrypted_password, :type => String, :default => ""
+  field :email,              :type => String
+  field :encrypted_password, :type => String
 
   ## Recoverable
   field :reset_password_token,   :type => String
@@ -55,6 +55,8 @@ class User
   field :authentication_token, :type => String
 
   index({ email:1 }, { unique: true, name:"email_index", sparse: true })
+  index({ _id:1 }, { unique: true, name:"id_index" })
+
 
   def ensure_authentication_token
     if authentication_token.blank?

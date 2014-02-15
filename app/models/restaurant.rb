@@ -18,6 +18,7 @@ class Restaurant
   accepts_nested_attributes_for :image, :allow_destroy => false
 
   index({ name: 1 }, { name: "name_index" })
+  index({ _id:1 }, { unique: true, name:"id_index" })
 
   def by_loc loc=nil
     if loc

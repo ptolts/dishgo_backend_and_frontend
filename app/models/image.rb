@@ -21,6 +21,7 @@ class Image
 
   belongs_to :restaurant, index: true
   # belongs_to :dish, index: true
+  index({ _id:1 }, { unique: true, name:"id_index" })
 
   has_mongoid_attached_file :img, {
       :path           => ':hash_:style.png',

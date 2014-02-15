@@ -18,5 +18,6 @@ class Order
 
   field :confirmed, type: Boolean, default: false
   field :order_items, type: Array
+  index({ _id:1 }, { unique: true, name:"id_index" })
 
 end

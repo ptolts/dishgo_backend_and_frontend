@@ -9,5 +9,6 @@ class Address
   field :postal_code, :type => String  
   field :province, :type => String  
   field :default, :type => Boolean  
+  index({ _id:1 }, { unique: true, name:"id_index" })
 
 end

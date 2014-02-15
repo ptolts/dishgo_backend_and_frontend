@@ -9,6 +9,8 @@ class Section
 	belongs_to :restaurant, index: true
 	has_many :dishes, class_name: "Dish"
 	default_scope -> {asc(:created_at)}
+	index({ _id:1 }, { unique: true, name:"id_index" })
+
 	def load_data_from_json section, request_restaurant
 
 		self.name = section["name"]

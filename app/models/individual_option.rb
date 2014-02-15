@@ -13,6 +13,8 @@ class IndividualOption
 	has_one :icon
 	belongs_to :restaurant, index: true
 	default_scope -> {asc(:created_at)}
+  	index({ _id:1 }, { unique: true, name:"id_index" })
+
 	def load_data_from_json individual_option, request_restaurant
 		self.name = individual_option["name"]
 		self.price = individual_option["price"].to_f

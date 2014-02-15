@@ -16,6 +16,8 @@ class Dish
   has_one :sizes, :class_name => 'Option', inverse_of: :dish_which_uses_this_as_size_options
   default_scope ->{ where(:name.nin => ["", nil]) }
 
+  index({ _id:1 }, { unique: true, name:"id_index" })
+
   def load_data_from_json dish, request_restaurant
 
     Rails.logger.warn "---\n---\nWorking on Dish[#{dish['id']}]\n---\n#{dish.to_s}\n---\n"
