@@ -1,5 +1,38 @@
 <style>
 
+    @media (max-width: 978px) {
+        .col-xs-12 {
+            margin-left: 0px;
+            margin-right 0px;
+        }
+
+        .container-fluid {
+            margin-left: 0px;
+            margin-right: 0px;
+            padding-left: 0px;
+            padding-right: 0px;
+        }
+
+        .section {
+            margin-left: 0px;
+            margin-right: 0px;            
+        }
+
+        .dish_section {
+            padding-left: 0px;
+            padding-right: 0px;
+        }
+
+        .push_down_small {
+            margin-top: 5px;
+        }
+    }
+
+   .dish div[class^=col-xs] {
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+
     .thumbnail {
         display: inline-block;
     }
@@ -19,7 +52,7 @@
         font-size: 50px;
         direction: ltr;
         cursor: pointer;
-    }
+    }    
 
     .section_header {
         margin-top: 8px;
@@ -27,11 +60,19 @@
         padding-top: 8px;
         padding-bottom: 8px;
         height: 100%;
+        min-width: 450px;
         display: block;
+        overflow:auto;
         border:1px solid #cccccc;
         background:#dddddd;
         border-radius:5px;      
     }
+
+    .menu_controller {
+        border:1px solid #cccccc;
+        background:#332F2E;
+        border-radius:5px;      
+    }    
 
     .title_and_price {
         margin-left: 10px;
@@ -42,19 +83,14 @@
         margin-top: 5px;
     }   
 
-    .dish div[class^=col-xs] {
-        padding-left: 0px;
-        padding-right: 0px;
-    }
-
     .text-middle {
         /*margin: 10px;*/
         width: 100%;
     }
 
     .section { 
-        font-family: Copperplate, "Copperplate Gothic Light", fantasy;
-        width: 1000px;
+        /*font-family: Copperplate, "Copperplate Gothic Light", fantasy;*/
+        max-width: 1000px;
     }
     .dish {
         display: inline-block;
@@ -62,6 +98,7 @@
         margin-bottom: 15px;
         padding: 15px;
         width: 450px;   
+        position: relative;
         background:#f5f5f5;
         border-radius: 10px 10px 10px 10px;
         /*overflow:hidden;  */
@@ -86,7 +123,6 @@
 
     .option {
         display: inline-block;
-        margin-top: 10px;
         padding: 10px;  
         width: 100%;    
         background:#d6dfdf;
@@ -101,7 +137,7 @@
     }
 
     .push_down {
-        margin-top: 10px;
+        margin-top: 5px;
     }
 
     .col-centered{
@@ -169,116 +205,160 @@
         /*background:url('http://cdn-sg1.pgimgs.com/images/pg/close-button.png') no-repeat center center;*/
     }   
 
+    .optionCloseButton {
+        display:block;
+        position:absolute;
+        top:3px;
+        right:-10px;
+        width:27px;
+        height:27px;
+        font-size: 24px;
+        color: red;
+        /*background:url('http://cdn-sg1.pgimgs.com/images/pg/close-button.png') no-repeat center center;*/
+    }  
+
+    .suboptionCloseButton {
+        display:block;
+        position:absolute;
+        top:3px;
+        left:-10px;
+        width:27px;
+        height:27px;
+        font-size: 24px;
+        color: red;
+        /*background:url('http://cdn-sg1.pgimgs.com/images/pg/close-button.png') no-repeat center center;*/
+    } 
+
+    #loading {
+        position: absolute;
+        top:0;
+        left:0;
+        right:0;
+        bottom:0;
+        z-index:10000;
+        width:100%;
+        height:100%;
+        display: none;
+        background: -moz-radial-gradient(center, ellipse cover,  rgba(0,0,0,0.75) 0%, rgba(0,0,0,0) 100%); /* FF3.6+ */
+        background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,rgba(0,0,0,0.75)), color-stop(100%,rgba(0,0,0,0))); /* Chrome,Safari4+ */
+        background: -webkit-radial-gradient(center, ellipse cover,  rgba(0,0,0,0.75) 0%,rgba(0,0,0,0) 100%); /* Chrome10+,Safari5.1+ */
+        background: -o-radial-gradient(center, ellipse cover,  rgba(0,0,0,0.75) 0%,rgba(0,0,0,0) 100%); /* Opera 12+ */
+        background: -ms-radial-gradient(center, ellipse cover,  rgba(0,0,0,0.75) 0%,rgba(0,0,0,0) 100%); /* IE10+ */
+        background: radial-gradient(center, ellipse cover,  rgba(0,0,0,0.75) 0%,rgba(0,0,0,0) 100%); /* W3C */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a6000000', endColorstr='#00000000',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+    }  
+
     </style>
 
-    <div class="container section">
+    <div id = "center" style="position:fixed;top:50%;left:50%;z-index:200000"></div>
+    <div id = "loading"></div>
 
-        <div class="row section_header">
-            <div class="col-xs-7" style="margin-left: 0px">     
-                <button class="btn btn-primary" data-bind="click: saveMenu">Commit Changes</button> 
-                <button class="btn btn-danger">Discard Changes</button>                         
+    <div class="container-fluid section">
+
+        <div class="section_header menu_controller">
+            <div class="col-md-7 col-xs-12" style="margin-left: 0px">     
+                <button class="btn btn-primary col-xs-6" data-bind="click: saveMenu">Commit Changes</button> 
+                <button class="btn btn-danger col-xs-5 col-xs-offset-1">Discard Changes</button>                         
             </div>
 
-            <div class="form-inline col-xs-5" style="margin-right: 0px">
+            <div class="form-inline col-md-5 col-xs-12 push_down_small" style="margin-right: 0px">
                 <div class="input-group">
                     <input class="form-control" data-bind="value: newSectionName" />
                     <span class="input-group-btn">
                         <button class="btn btn-info" type="button" data-bind="click: addSection">Add Section</button>
                     </span>
                 </div><!-- /input-group -->                                                     
-            </div>                      
+            </div>                   
         </div>  
 
 
         <div data-bind="foreach: menu">
-            <div class="col-xs-12">
+
+            <div class="clearfix"></div>
+            <div class="section_header">
+                <span class="closeButton glyphicon glyphicon-remove-circle" data-bind="click: $parent.remove"></span>
+                <div class="col-xs-12 col-md-7" style="margin-left: 0px">     
+                    <div class="input-group">
+                        <span class="input-group-addon">Section Title:</span>
+                        <input data-bind="value: name" class="col-xs-6 form-control input-group-sm tooltipclass" data-toggle="tooltip" data-placement="bottom" title="Type in this sections title into this box."/>
+                    </div>                              
+                </div>
+
+                <div class="form-inline col-md-5 col-xs-12" style="margin-right: 0px">
+                    <div class="input-group">
+                        <input class="form-control" data-bind="value: newDishName" />
+                        <span class="input-group-btn">
+                            <button class="btn btn-info" type="button" data-bind="click: addDish">Add Dish</button>
+                        </span>
+                    </div>                                                    
+                </div>                                       
+            </div>  
 
 
-                    <div class="row section_header">
-                        <span class="closeButton glyphicon glyphicon-remove-circle" data-bind="click: $parent.remove"></span>
-                        <div class="col-xs-7" style="margin-left: 0px">     
-                            <div class="input-group">
-                                <span class="input-group-addon">Section Title:</span>
-                                <input data-bind="value: name" class="col-xs-6 form-control input-group-sm tooltipclass" data-toggle="tooltip" data-placement="bottom" title="Type in this sections title into this box."/>
+            <div data-bind="foreach: dishes">
+                <div class="col-xs-12 col-md-6 dish_section">
+                    <div class="dish">
+                        <span class="dishCloseButton glyphicon glyphicon-remove-circle" data-bind="click: $parent.remove"></span>
+                        <div class="col-xs-12">
+                            <div class="col-xs-7 input-group-sm">
+                                <input data-bind="value: name" class="form-control col-xs-12 dish_name tooltipclass" data-toggle="tooltip" data-placement="top" title="Type the dish name into this box."/> 
+                            </div>
+                            <div class="col-xs-4 col-xs-offset-1">
+                                <div class="input-group input-group-sm" data-bind="visible: !sizes()">
+                                    <span class="input-group-addon">$</span>
+                                    <input type="text" class="form-control tooltipclass price_filter" data-bind="value: price" data-toggle="tooltip" data-placement="top" title="Type the dish price into this box.">
+                                </div>                                      
+                            </div>
+                        </div>
+                        <div class="col-xs-12 push_down">
+                            <textarea rows="6" data-bind="value: description" class="description form-control tooltipclass" data-toggle="tooltip" data-placement="top" title="Type the dish description into this box."></textarea>
+                        </div>
+
+
+                        <!-- ko foreach: images -->
+                        <div data-bind="template: { name: 'image', data: $data}"></div>  
+                        <!-- /ko -->  
+
+                        <div class="col-xs-12 push_down">
+                            <span class="btn btn-info btn-sm file_upload_button col-xs-8 col-xs-offset-2">
+                                <i class="glyphicon glyphicon-plus"></i>
+                                <span>Add Image</span>
+                                <!-- The file input field used as target for the file upload widget -->
+                                <input data-bind="file_upload" id="fileupload" type="file" name="files[]" multiple="" data-url="http://dev.foodcloud.ca:3000/home/upload_image"  class="file_upload_input">
+                            </span>                                                                                     
+                        </div>                                        
+
+                        <div class="col-xs-12 push_down">
+                            <div class="col-centered form-inline control_piece">
+                                <div class="control_piece_center">
+                                  <div class="checkbox">
+                                    <label>Does this dish have multiple sizes? <input data-bind="checked: sizes" type="checkbox"></label>
+                                </div>
                             </div>                              
                         </div>
+                    </div>
 
-                        <div class="form-inline col-xs-5" style="margin-right: 0px">
-                            <div class="input-group">
-                                <input class="form-control" data-bind="value: newDishName" />
-                                <span class="input-group-btn">
-                                    <button class="btn btn-info" type="button" data-bind="click: addDish">Add Dish</button>
-                                </span>
-                            </div><!-- /input-group -->                                                     
-                        </div>                      
-                    </div>  
-        
-                                    
-                    <!-- ko foreach: dishes -->
-                        <div class="col-xs-12 col-md-6">
-                            <div class="dish">
-                                <span class="dishCloseButton glyphicon glyphicon-remove-circle" data-bind="click: $parent.remove"></span>
-                                <div class="col-xs-12">
-                                    <div class="col-xs-7 input-group-sm">
-                                        <input data-bind="value: name" class="form-control col-xs-12 dish_name tooltipclass" data-toggle="tooltip" data-placement="top" title="Type the dish name into this box."/> 
-                                    </div>
-                                    <div class="col-xs-4 col-xs-offset-1">
-                                        <div class="input-group input-group-sm" data-bind="visible: !sizes()">
-                                            <span class="input-group-addon">$</span>
-                                            <input type="text" class="form-control tooltipclass price_filter" data-bind="value: price" data-toggle="tooltip" data-placement="top" title="Type the dish price into this box.">
-                                        </div>                                      
-                                    </div>
-                                </div>
-                                <div class="col-xs-12 push_down">
-                                    <textarea rows="6" data-bind="value: description" class="description form-control tooltipclass" data-toggle="tooltip" data-placement="top" title="Type the dish description into this box."></textarea>
-                                </div>
+                    <div data-bind="template: { name: 'size', data: sizes_object }, visible: sizes"></div>
 
+                    <div data-bind="template: { name: templateToUse, foreach: options }"></div>
 
-                                <!-- ko foreach: images -->
-                                    <div data-bind="template: { name: 'image', data: $data}"></div>  
-                                <!-- /ko -->  
+                    <div class="col-xs-12 text-center push_down">
+                        <button class="btn btn-sm btn-info col-xs-10 col-xs-offset-1" data-bind="click: addOption">Add Option</button>
+                    </div>
 
-                                <div class="col-xs-12 push_down">
-                                    <span class="btn btn-info btn-sm file_upload_button col-xs-8 col-xs-offset-2">
-                                        <i class="glyphicon glyphicon-plus"></i>
-                                        <span>Add Image</span>
-                                        <!-- The file input field used as target for the file upload widget -->
-                                        <input data-bind="file_upload" id="fileupload" type="file" name="files[]" multiple="" data-url="http://dev.foodcloud.ca:3000/home/upload_image"  class="file_upload_input">
-                                    </span>                                                                                     
-                                </div>                                        
+                </div>                  
+            </div>
+        </div> <!-- End of foreach dish -->        
 
-                                <div class="col-xs-12 push_down">
-                                    <div class="col-centered form-inline control_piece">
-                                        <div class="control_piece_center">
-                                          <div class="checkbox">
-                                            <label>Does this dish have multiple sizes? <input data-bind="checked: sizes" type="checkbox"></label>
-                                          </div>
-                                        </div>                              
-                                    </div>
-                                </div>
-
-                                <div data-bind="template: { name: 'size', data: sizes_object }, visible: sizes"></div>
-
-                                <div data-bind="template: { name: templateToUse, foreach: options }"></div>
-
-                                <div class="col-xs-12 text-center push_down">
-                                    <button class="btn btn-sm btn-info col-xs-10 col-xs-offset-1" data-bind="click: addOption">Add Option</button>
-                                </div>
-
-                            </div>                  
-                        </div>
-
-                    <!-- /ko -->        
-            </div>              
         </div>
     </div>  
 
     <!-- TEMPLATES -->
     <script id="size" type="text/html">
-        <div class="col-xs-12 text-center" style="margin-bottom: 5px;">
+        <div class="col-xs-12 text-center push_down">
             <div class="option">        
                 <div class="col-xs-12" style="text-align: left; font-size: 24px">
-                    <span class="label label-primary" data-bind="text: name"></span>      
+                    <span data-bind="text: name"></span>      
                 </div>      
                 <!-- ko foreach: individual_options -->
                     <div class="col-xs-12 push_down">
@@ -296,7 +376,7 @@
                                 </div>  
                             </div>
                             <!-- ko if: $index() > 1 -->
-                                <span class="closeButton glyphicon glyphicon-remove-circle" data-bind="click: $parent.remove"></span>
+                                <span class="suboptionCloseButton glyphicon glyphicon-remove-circle" data-bind="click: $parent.remove"></span>
                             <!-- /ko -->
                     </div> 
                 <!-- /ko -->
@@ -310,11 +390,8 @@
     <script id="image" type="text/html">
         <div class="col-xs-12 push_down">
             <div class="uploading_image" data-bind="visible: !completed()">
-                <div class="col-xs-3">
-                    <span class="label label-default" data-bind="text: filename"></span>
-                </div>
-                <div class="col-xs-9">
-                    <div class="progress">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <div class="progress" style="height: 10px">
                         <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" data-bind="style: { width: progressValue() + '%'}"></div>
                     </div>    
                 </div> 
@@ -327,6 +404,23 @@
         </div>
     </script> 
 
+    <script id="icon" type="text/html">
+        <div class="col-xs-12 push_down">
+            <div class="uploading_image" data-bind="visible: !completed()">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <div class="progress" style="height: 10px">
+                        <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" data-bind="style: { width: progressValue() + '%'}"></div>
+                    </div>    
+                </div> 
+            </div> 
+            <div class="completed_image" data-bind="visible: completed">
+                <div class="col-xs-12 text-center">
+                    <img class="thumbnail img-rounded" data-bind="attr: {src: url}" />
+                </div> 
+            </div>  
+        </div>
+    </script>     
+
     <script id="default" type="text/html">
         <div class="col-xs-12 text-center" style="margin-top: 10px;">
             <div class="option">
@@ -336,9 +430,20 @@
                 </div>                  
                 <!-- ko foreach: individual_options -->
                     <div class="col-xs-12 push_down">
-                        <div class="individual_option">
+                        <div class="individual_option push_down">
                             <div class="col-xs-6 input-group-sm">
                                 <input data-bind="value: name" class="form-control"/>
+
+                                <!-- ICON UPLOADER -->
+                                <!-- ko foreach: images -->
+                                    <div data-bind="template: { name: 'icon', data: $data}"></div>  
+                                <!-- /ko -->                                  
+                                <span class="push_down btn btn-info btn-sm file_upload_button col-xs-8 col-xs-offset-2">
+                                    <i class="glyphicon glyphicon-plus"></i>
+                                    <span>Add Icon</span>
+                                    <!-- The file input field used as target for the file upload widget -->
+                                    <input data-bind="file_upload_icon" id="fileupload" type="file" name="files[]" multiple="" data-url="http://dev.foodcloud.ca:3000/home/upload_icon"  class="file_upload_input">
+                                </span>                                   
                             </div>
                             <div class="col-xs-5 col-xs-offset-1" data-bind="visible: !$parent.multiple_prices()">
                                 <div class="input-group input-group-sm">
@@ -357,7 +462,7 @@
                                 <!-- /ko -->
                             </div>                          
                             <!-- ko if: $index() > 1 -->
-                                <span class="closeButton glyphicon glyphicon-remove-circle" data-bind="click: $parent.remove"></span>
+                                <span class="suboptionCloseButton glyphicon glyphicon-remove-circle" data-bind="click: $parent.remove"></span>
                             <!-- /ko -->
                         </div>
                     </div> 
@@ -421,6 +526,25 @@
 </body>
 
 <script type='text/javascript'>//<![CDATA[ 
+
+var opts = {
+  lines: 13, // The number of lines to draw
+  length: 20, // The length of each line
+  width: 10, // The line thickness
+  radius: 30, // The radius of the inner circle
+  corners: 1, // Corner roundness (0..1)
+  rotate: 0, // The rotation offset
+  direction: 1, // 1: clockwise, -1: counterclockwise
+  color: '#000', // #rgb or #rrggbb or array of colors
+  speed: 1, // Rounds per second
+  trail: 60, // Afterglow percentage
+  shadow: false, // Whether to render a shadow
+  hwaccel: false, // Whether to use hardware acceleration
+  className: 'spinner', // The CSS class to assign to the spinner
+  zIndex: 200000, // The z-index (defaults to 2000000000)
+  top: 'auto', // Top position relative to parent in px
+  left: 'auto' // Left position relative to parent in px
+};
 
 var restaurant_id = "<%= params[:restaurant_id]%>";
 
@@ -516,6 +640,35 @@ function Image(data) {
 }
 
 ko.bindingHandlers.file_upload = {
+    init: function(element, valueAccessor, allBindingsAccessor, viewModel, bindingContext) {
+        var self = this;
+        self.imageModel;
+        $(element).fileupload({
+            formData: {restaurant_id: restaurant_id},
+            dataType: 'json',
+            progressInterval: 50,
+            send: function (e, data) {
+                $.each(data.files, function (index, file) {
+                    self.imageModel = viewModel.addImage();
+                    console.log(self.imageModel);
+                    self.imageModel.filename(file.name);
+                });                
+            },
+            done: function (e, data) {
+                var file = data.result.files[0];
+                self.imageModel.url(file.thumbnailUrl);
+                self.imageModel.completed(true);
+                self.imageModel.id(file.image_id);
+            },
+            progressall: function (e, data) {
+                var progress = parseInt(data.loaded / data.total * 100, 10);
+                self.imageModel.progressValue(progress);
+            }        
+        });
+    }
+};
+
+ko.bindingHandlers.file_upload_icon = {
     init: function(element, valueAccessor, allBindingsAccessor, viewModel, bindingContext) {
         var self = this;
         self.imageModel;
@@ -791,7 +944,12 @@ function IndividualOption(data,option) {
     self.type = option.type;
     self.dish = option.dish;
     self.destroy_it = false;
+    self.images = ko.observableArray([]);
     self.size_prices = ko.observableArray([]); 
+
+    if(data.icon) {
+        self.images = ko.observableArray($.map([data.icon], function(item) { return new Image(item) }));                
+    }    
 
     if(data.size_prices && self.type != 'size'){
         _.each(data.size_prices,function(e){
@@ -845,7 +1003,13 @@ function IndividualOption(data,option) {
     self.editing_price = ko.observable(false);
     self.edit_price = function() { 
         self.editing_price(true);   
-    };     
+    }; 
+
+    self.addImage = function(item) { 
+        var new_image = new Image(item);
+        self.images.push(new_image);
+        return new_image;
+    };         
 }
 
 function MenuViewModel() {
@@ -890,6 +1054,10 @@ function MenuViewModel() {
               label: "Yes, save changes.",
               className: "btn-danger col-xs-5 pull-right",
               callback: function() {
+
+                var spinner = new Spinner(opts).spin(document.getElementById('center')); 
+                $('#loading').fadeIn();
+
                 $.ajax({
                   type: "POST",
                   url: "http://dev.foodcloud.ca:3000/home/update_menu",
@@ -901,6 +1069,14 @@ function MenuViewModel() {
                         self.menu($.map(data.menu, function(item) { return new Section(item) }));
                         $(".tooltipclass").tooltip({delay: { show: 500, hide: 100 }});
                         updateFilters();
+                        spinner.stop();
+                        $('#loading').fadeOut();
+                        bootbox.alert("Menu Saved and reloaded. Everything should look the same as before, if it doesn't please contact support!");
+                    },
+                    error: function(XMLHttpRequest, textStatus, errorThrown) { 
+                        spinner.stop();
+                        $('#loading').fadeOut();
+                        bootbox.alert("There was an error saving the menu.\n" + errorThrown);
                     },
                   dataType: "json"
                 }); 

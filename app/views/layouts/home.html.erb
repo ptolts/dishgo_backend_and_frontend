@@ -7,6 +7,7 @@
 	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">	
 	<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>	
 	<%= csrf_meta_tags %>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
 <style>
@@ -18,14 +19,6 @@
 
 <body>
 	<%= render 'shared/nav_bar' %>		
-	<div class="container" style="margin-left: 0px">	
-		<div class="col-md-2">
-			<%= render 'shared/menu_bar' %>
-		</div>
-		<div class="col-md-10">
-			<%=  yield %>
-		</div><!-- /#page-wrapper -->
-	</div>
-
+	<%=  yield %>
 </body>
 </html>

@@ -100,4 +100,30 @@ class HomeController < ApplicationController
                     }}.as_json
   end
 
+  def upload_icon
+    images = params[:files].collect do |file|
+      md5_sum = Digest::MD5.hexdigest(file.read)
+      if img = Icon.where(:manual_img_fingerprint => md5_sum).first and img
+        Rails.logger.warn "Duplicate file. No need to upload twice."
+        next img
+      else
+        img = Icon.create
+        img.update_attributes({:img => file})
+        img.manual_img_fingerprint = md5_sum
+        img.save
+        next img
+      end
+    end
+  
+    render :json => {files: images.collect{ |img|
+                      {
+                        image_id: img.id,
+                        name: img.img_file_name,
+                        size: img.img_file_size,
+                        url:  img.img.url(:original),
+                        thumbnailUrl:   img.img.url(:icon),
+                      }
+                    }}.as_json
+  end  
+
 end

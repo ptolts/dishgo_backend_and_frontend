@@ -16,6 +16,7 @@ Foodcloud::Application.routes.draw do
       post 'update_user'  
       post 'update_menu'
       post 'upload_image'           
+      post 'upload_icon'
     end
   end
 

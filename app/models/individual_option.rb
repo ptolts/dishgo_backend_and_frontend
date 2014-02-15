@@ -17,9 +17,34 @@ class IndividualOption
 		self.name = individual_option["name"]
 		self.price = individual_option["price"].to_f
 		self.restaurant = request_restaurant
+
 		if individual_option["size_prices"]
 			self.size_prices = individual_option["size_prices"]
 		end
+
+		images = individual_option["images"].collect do |image|
+			Rails.logger.warn "--\nLoading Image [#{image["id"]}]\n--"
+			next if image["id"].blank?
+			img = Icon.find(image["id"])
+			Rails.logger.warn "--\nSetting Image [#{img.to_json}]\n--"
+			next if self.icon == img
+			self.icon = img
+		end
+
 		self.save
 	end  
+
+	def test_issue
+		ind_opt = IndividualOption.create
+		icon = Icon.create
+
+		ind_opt.icon = icon
+		ind_opt.save
+		puts ind_opt.icon.to_json
+
+		ind_opt.icon = icon
+		ind_opt.save
+
+		puts ind_opt.icon.to_json
+	end
 end
