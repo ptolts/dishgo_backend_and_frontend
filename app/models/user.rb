@@ -1,8 +1,8 @@
 class User
   include Mongoid::Document
-  has_many :addresses, :class_name => "Address"
-  has_many :orders, :class_name => "Order"
-  has_many :owns_restaurants, :class_name => "Restaurant"
+  has_many :addresses, :class_name => "Address", index: true
+  has_many :orders, :class_name => "Order", index: true
+  has_many :owns_restaurants, :class_name => "Restaurant", index: true
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -54,7 +54,7 @@ class User
   # Token authenticatable
   field :authentication_token, :type => String
 
-  index({ email:1 }, { unique: true, name:"email_index" })
+  index({ email:1 }, { unique: true, name:"email_index", sparse: true })
 
   def ensure_authentication_token
     if authentication_token.blank?

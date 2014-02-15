@@ -10,10 +10,10 @@ class Option
 	field :min_selections, type: Integer
 	field :position, type: Integer
   # belongs_to :dish_size, class_name: "Dish", inverse_of: :sizes
-  belongs_to :dish, class_name: "Dish", inverse_of: :options
-  belongs_to :dish_which_uses_this_as_size_options, class_name: "Dish", inverse_of: :sizes
-  belongs_to :restaurant
-  has_many :individual_options, class_name: "IndividualOption"
+  belongs_to :dish, class_name: "Dish", inverse_of: :options, index: true
+  belongs_to :dish_which_uses_this_as_size_options, class_name: "Dish", inverse_of: :sizes, index: true
+  belongs_to :restaurant, index: true
+  has_many :individual_options, class_name: "IndividualOption", index: true
 
   def load_data_from_json option, request_restaurant
   	Rails.logger.warn "---\n---\nWorking on Option[#{option['id']}]\n---\n#{option.to_s}\n---\n"

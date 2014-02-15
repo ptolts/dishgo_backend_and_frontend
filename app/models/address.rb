@@ -1,6 +1,6 @@
 class Address
   include Mongoid::Document
-  belongs_to :user
+  belongs_to :user, index: true
 
   field :street_number, :type => String  
   field :street_address, :type => String  

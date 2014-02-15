@@ -6,7 +6,7 @@ class Icon
   store_in collection: "Icon", database: "osm"
   field :url, type: String
   belongs_to :individual_option, index: true
-  belongs_to :restaurant
+  belongs_to :restaurant, index: true
 
   has_mongoid_attached_file :img, {
       :path           => ':hash_:style.png',

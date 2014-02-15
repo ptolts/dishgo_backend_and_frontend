@@ -10,10 +10,10 @@ class Dish
   field :position, type: Integer
   # belongs_to :subsection, index: true
   belongs_to :section, index: true 
-  belongs_to :restaurant 
-  has_and_belongs_to_many :image, inverse_of: nil
-  has_many :options, :class_name => 'Option', inverse_of: :dish
-  has_one :sizes, :class_name => 'Option', inverse_of: :dish_which_uses_this_as_size_options
+  belongs_to :restaurant, index: true
+  has_and_belongs_to_many :image, inverse_of: nil, index: true
+  has_many :options, :class_name => 'Option', inverse_of: :dish, index: true
+  has_one :sizes, :class_name => 'Option', inverse_of: :dish_which_uses_this_as_size_options, index: true
   default_scope ->{ where(:name.nin => ["", nil]) }
 
   def load_data_from_json dish, request_restaurant
