@@ -2,7 +2,7 @@ class User
   include Mongoid::Document
   has_many :addresses, :class_name => "Address"
   has_many :orders, :class_name => "Order"
-  has_many :owns_restaurants, :class_name => "Restaurant"
+  has_one :owns_restaurants, :class_name => "Restaurant", inverse_of: :user
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,

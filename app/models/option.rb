@@ -9,6 +9,7 @@ class Option
 	field :max_selections, type: Integer
 	field :min_selections, type: Integer
 	field :position, type: Integer
+	field :extra_cost, type: Boolean
   # belongs_to :dish_size, class_name: "Dish", inverse_of: :sizes
   belongs_to :dish, class_name: "Dish", inverse_of: :options, index: true
   belongs_to :dish_which_uses_this_as_size_options, class_name: "Dish", inverse_of: :sizes, index: true
@@ -17,11 +18,16 @@ class Option
   index({ _id:1 }, { unique: true, name:"id_index" })
 
   def load_data_from_json option, request_restaurant
-  	Rails.logger.warn "---\n---\nWorking on Option[#{option['id']}]\n---\n#{option.to_s}\n---\n"
+
+	Rails.logger.warn "--\n"
+	Rails.logger.warn JSON.pretty_generate(option)
+	Rails.logger.warn "--\n"
+
   	self.name = option["name"]
   	self.type = option["type"]
   	self.max_selections = option["max_selections"]
   	self.min_selections = option["min_selections"]
+  	self.extra_cost = option["extra_cost"]
 
 		#Load or Create the individual options for this option.
 		individual_options = option["individual_options"].collect.with_index do |individual_option,index|
@@ -46,5 +52,15 @@ class Option
 		self.individual_options = individual_options
 		self.save
 	end 
+
+	def custom_to_hash
+		option_hash = self.as_document
+		option_hash["individual_options"] = self.individual_options.collect do |ind_opt|
+			ind_opt_hash = ind_opt.as_document
+			ind_opt_hash["icon"] = ind_opt.icon.serializable_hash({}) if ind_opt.icon
+			next ind_opt_hash
+		end
+		return option_hash
+	end
 end
 

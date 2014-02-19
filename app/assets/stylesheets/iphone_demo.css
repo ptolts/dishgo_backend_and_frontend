@@ -1,0 +1,171 @@
+  .iphone {
+    position: relative;
+    width: 375px;
+    height: 806px;
+    font-family: Copperplate, "Copperplate Gothic Light", fantasy;
+    background-image: url("iphone.png");
+}
+.iphone .iphone-content {
+    position: absolute;
+    top: 147px;
+    left: 27px;
+    width: 320px;
+    height: 548px;
+    overflow: hidden;
+    background-color: white;
+}
+
+.iphone .scrollable {
+    overflow-y: scroll; 
+    overflow-x: hidden;
+    height: 416px;
+    position: absolute;
+    top:88px;
+}
+
+.iphone .red {
+    background-color: #cf2f28;
+} 
+
+.iphone .black {
+    background-color: #000000;
+}       
+
+.iphone [class*="bar-"] {
+    height: 44px;
+}  
+
+.iphone .title {
+    color: white;
+}
+
+.iphone .dish_title {
+    text-align: left;
+    margin-left: 10px;
+}
+
+.iphone .bar-dish-title {
+    position: relative;
+}
+
+.iphone #bar-dish-add {
+    position: absolute;
+    bottom: 0px;
+    width: 320px;
+} 
+
+.iphone #top_headers {
+    position: absolute;
+    top: 0px;
+    width: 320px;
+}          
+
+.iphone .bar-title h4 {
+    text-align: center;
+    width: 100%;
+}    
+
+.iphone .bar-dish-title h4 {
+    display: inline-block;
+}
+
+.iphone .dish_price {
+    text-align: center;
+    vertical-align: middle;
+    background-color: white;
+    float: right;
+    color: #cf2f28;
+    width: 65px;
+    top: 8px;
+    line-height: 30px;
+    border-radius: 5px;
+    height: 30px;
+    right: 0px;
+    margin-right: 10px;
+}
+
+.iphone .dish_image {
+    position: relative;
+    overflow: auto;
+}
+
+.iphone .sub_content {
+    padding: 5px;
+    padding-top: 0px;
+    width: 320px;
+}
+
+.iphone .header_title {
+    height: 33px;
+    line-height: 33px;
+}
+.iphone h1, h2, h3, h4 {
+    margin: 0px;
+    position: relative;
+}
+.iphone header {
+    height: 44px;
+    line-height: 44px;
+    position: relative;
+}
+
+.iphone header h1,h2,h3,h4 {
+    line-height: 44px;
+}
+
+.uiscrollview {
+    position: relative;
+    width: 320px;
+}
+
+.uiscrollview ul {
+    height: 240px;
+    white-space:nowrap;
+    position: relative;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    overflow-x: scroll;
+}
+
+.uiscrollview li {
+    display:inline;
+    width: 320px;
+    height: 240px;
+}
+
+.uiscrollview img {
+    vertical-align: top;
+}
+
+.btn-inverse {
+    color: #fff;
+    background-color: #000;
+    border-color: #fff;
+    width: 50px;
+}
+
+.iphone .counter {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    text-align: center;
+    vertical-align: middle;
+    background-color: white;
+    float: left;
+    color: #000;
+    width: 30px;
+    line-height: 32px;
+    border-radius: 5px;
+    height: 32px;
+    margin-left: 5px;  
+}
+
+.iphone .float_option {
+    display: inline-block;
+    width: 130px;
+    margin: 5px;
+}
+
+.iphone .demo_options {
+    text-align: center;
+}

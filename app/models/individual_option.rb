@@ -9,6 +9,7 @@ class IndividualOption
 	field :size_prices, type: Array
 	field :size_ind_opt_id, type: String
 	field :position, type: Integer
+	field :price_according_to_size, type: Boolean
 	belongs_to :options, index: true, :class_name => 'Option', index: true
 	has_one :icon
 	belongs_to :restaurant, index: true
@@ -16,8 +17,14 @@ class IndividualOption
   	index({ _id:1 }, { unique: true, name:"id_index" })
 
 	def load_data_from_json individual_option, request_restaurant
+
+		# Rails.logger.warn "--\n"
+		# Rails.logger.warn JSON.pretty_generate(individual_option)
+		# Rails.logger.warn "--\n"
+
 		self.name = individual_option["name"]
 		self.price = individual_option["price"].to_f
+		self.price_according_to_size = individual_option["price_according_to_size"].to_bool
 		self.restaurant = request_restaurant
 
 		if individual_option["size_prices"]
@@ -36,17 +43,4 @@ class IndividualOption
 		self.save
 	end  
 
-	def test_issue
-		ind_opt = IndividualOption.create
-		icon = Icon.create
-
-		ind_opt.icon = icon
-		ind_opt.save
-		puts ind_opt.icon.to_json
-
-		ind_opt.icon = icon
-		ind_opt.save
-
-		puts ind_opt.icon.to_json
-	end
 end

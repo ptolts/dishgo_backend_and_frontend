@@ -20,6 +20,7 @@ gem "koala" #, "~> 1.8.0rc1"
 gem 'bootstrap_form'
 gem "mongoid-paperclip", :require => "mongoid_paperclip"
 gem 'fog'
+gem 'ruby-prof'
 
 
 # Gems used only for assets and not required

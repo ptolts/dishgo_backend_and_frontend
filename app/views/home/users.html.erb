@@ -14,6 +14,20 @@
     <tbody data-bind="template: { name: 'user_temp', foreach: users }"></tbody>
 </table>
 
+<div class="col-xs-6 col-xs-offset-3">
+    <h3>Create User:</h3>
+    <div class="form-group">
+        <label for="exampleInputEmail1">Email address</label>
+        <input type="email" class="form-control" data-bind="create_email" placeholder="Enter email">
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1">Password</label>
+        <input type="password" class="form-control" data-bind="create_password" placeholder="Password">
+    </div>
+    <button class="btn btn-sm btn-primary" data-bind="click: create">Create</button>
+</div>
+
+
 <script id="user_temp" type="text/html">
     <tr>
         <td>
@@ -24,6 +38,16 @@
         </td> 
         <td>
             <p data-bind="text: restaurant"></p>
+
+            <div class="form-inline" role="form">
+                <input class="form-control" data-bind="value: restaurant_name" />
+                <button class="btn btn-default" data-bind="click: search_for_restaurant">Search</button>
+            </div>  
+            
+            <ul data-bind="foreach: restaurants" style="list-style: none;">
+                <li><span data-bind="text: name"></span><button class="btn btn-info btn-sm" data-bind="click: $parent.set_restaurant">Save</button></li>
+            </ul>          
+
         </td> 
         <td>
             <button class="btn btn-default btn-sm" data-bind="click: save">Save</button>
@@ -39,6 +63,33 @@
         self.email = ko.observable(data.email);
         self.is_admin = ko.observable(data.is_admin);
         self.restaurant = ko.observable(data.restaurant);
+
+        self.restaurant_name = ko.observable("");
+        self.restaurants = ko.observableArray([]);
+
+        self.search_for_restaurant = function() {
+            console.log("Searching!");
+            $.getJSON("http://dev.foodcloud.ca:3000/home/search_restaurants?restaurant_name=" + self.restaurant_name(), function(data) { 
+                self.restaurants($.map(data, function(item) { console.log(item); return new Restaurant(item) }));
+            }).fail( function(d, textStatus, error) {
+                console.error("getJSON failed, status: " + textStatus + ", error: "+error)
+            });
+        };
+
+        self.set_restaurant = function(resto){
+            $.ajax({
+              type: "POST",
+              url: "http://dev.foodcloud.ca:3000/home/user_set_restaurant",
+              data: {
+                user_id: self.id,
+                restaurant_id: resto.id,
+              },
+              success: function(data, textStatus, jqXHR){
+                    bootbox.alert(data.result);
+                },
+              dataType: "json"
+            });
+        }         
 
         self.save = function(){
             $.ajax({
@@ -61,9 +112,20 @@
         }
     }
 
+    function Restaurant(data) {
+        console.log("New Restaurant: " + data.name);
+        var self = this;
+        self.name = ko.observable(data.name);
+        self.lat = ko.observable(data.lat);
+        self.lon = ko.observable(data.lon);
+        self.id = data._id;
+    }    
+
     function viewModel() {
         var self = this;
         self.email = ko.observable("");
+        self.create_email = ko.observable("");
+        self.create_password = ko.observable("");
         self.users = ko.observableArray([]);
         self.search_for_users = function() {
             console.log("Searching!");
@@ -73,6 +135,21 @@
                 console.error("getJSON failed, status: " + textStatus + ", error: "+error)
             });
         };
+
+        self.create = function(){
+            $.ajax({
+              type: "POST",
+              url: "http://dev.foodcloud.ca:3000/home/create_user",
+              data: {
+                email: self.create_email(),
+                password: self.create_password(),
+              },
+              success: function(data, textStatus, jqXHR){
+                    bootbox.alert(data.result);
+                },
+              dataType: "json"
+            });
+        }
     };
 
     ko.applyBindings(new viewModel());

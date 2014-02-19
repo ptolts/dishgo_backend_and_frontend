@@ -1,6 +1,7 @@
 class HomeController < ApplicationController
   before_filter :authenticate_user!
-  before_filter :admin_user!, :only => [:users, :restaurants, :search_restaurants, :edit_menu, :update_user, :update_menu]
+  before_filter :admin_user!, :only => [:users, :restaurants, :search_restaurants, :update_user, :add_user]
+  before_filter :admin_or_owner!, :only => [:edit_menu, :update_menu, :crop_image, :crop_icon]
   layout 'home'
   after_filter :set_access_control_headers
 
@@ -31,14 +32,36 @@ class HomeController < ApplicationController
   	render :json => result.as_json
   end  
 
+  def create_user
+    email = params[:email]
+    password = params[:password]
+    if User.where(:email => email).count > 0
+      render :json => {result: "User Exists!"}
+      return
+    end
+    user = User.create(:email => params[:email], :password => password)
+    user.save!(:validate => false)
+    render :json => {result: "Success!"}
+  end   
+
   def update_user
   	user = User.find(params[:user_id])
   	user.is_admin = params[:is_admin].to_bool
   	user.save
   	render :text => "User Saved."
+  end  
+
+  def user_set_restaurant
+    user = User.find(params[:user_id])
+    restaurant = Restaurant.find(params[:restaurant_id])
+    user.owns_restaurants = restaurant
+    user.save
+    render :text => "User Restaurant Saved."
   end   
 
   def edit_menu
+    restaurant = Restaurant.find(params[:restaurant_id])
+    @menu_data = "{ \"menu\" : #{restaurant.menu_to_json} }".as_json
   	render 'edit_menu'
   end  
 
@@ -70,48 +93,50 @@ class HomeController < ApplicationController
 
     restaurant.section = menu
     restaurant.save
-  	render :json => {:menu => restaurant.menu_to_json}
+    render :json => ("{ \"menu\" : #{restaurant.menu_to_json} }")
+
   end
 
   def upload_image
-    images = params[:files].collect do |file|
-      md5_sum = Digest::MD5.hexdigest(file.read)
-      if img = Image.where(:manual_img_fingerprint => md5_sum).first and img
-        Rails.logger.warn "Duplicate file. No need to upload twice."
-        next img
-      else
-        img = Image.create
-        img.update_attributes({:img => file})
-        img.manual_img_fingerprint = md5_sum
-        img.save
-        next img
-      end
+    file = params[:files]
+
+    md5_sum = Digest::MD5.hexdigest(file.read)
+    if img = Image.where(:manual_img_fingerprint => md5_sum).first and img
+      Rails.logger.warn "Duplicate file. No need to upload twice."
+      images = [img]
+    else
+      img = Image.create
+      img.update_attributes({:img => file})
+      img.manual_img_fingerprint = md5_sum
+      img.save
+      images = [img]
     end
+
   
     render :json => {files: images.collect{ |img|
                       {
                         image_id: img.id,
                         name: img.img_file_name,
                         size: img.img_file_size,
-                        url:  img.img.url(:original),
+                        original:  img.img_url_original,
                         thumbnailUrl:   img.img.url(:medium),
                       }
                     }}.as_json
   end
 
   def upload_icon
-    images = params[:files].collect do |file|
-      md5_sum = Digest::MD5.hexdigest(file.read)
-      if img = Icon.where(:manual_img_fingerprint => md5_sum).first and img
-        Rails.logger.warn "Duplicate file. No need to upload twice."
-        next img
-      else
-        img = Icon.create
-        img.update_attributes({:img => file})
-        img.manual_img_fingerprint = md5_sum
-        img.save
-        next img
-      end
+    file = params[:files]
+
+    md5_sum = Digest::MD5.hexdigest(file.read)
+    if img = Icon.where(:manual_img_fingerprint => md5_sum).first and img
+      Rails.logger.warn "Duplicate file. No need to upload twice."
+      images = [img]
+    else
+      img = Icon.create
+      img.update_attributes({:img => file})
+      img.manual_img_fingerprint = md5_sum
+      img.save
+      images = [img]
     end
   
     render :json => {files: images.collect{ |img|
@@ -119,10 +144,53 @@ class HomeController < ApplicationController
                         image_id: img.id,
                         name: img.img_file_name,
                         size: img.img_file_size,
-                        url:  img.img.url(:original),
-                        thumbnailUrl:   img.img.url(:icon),
+                        original:  img.img_url_original,
+                        thumbnailUrl:   img.img_url_icon,
                       }
                     }}.as_json
+  end  
+
+  def demo
+    render 'demo'
+  end
+
+ def crop_icon
+
+    if img = Icon.find(params[:image_id]) and img
+      img.set_coordinates(params[:coordinates])
+      img.reprocess_img
+      img.save(:validate=>false)
+    end
+  
+    render :json =>  {
+                        image_id: img.id,
+                        name: img.img_file_name,
+                        size: img.img_file_size,
+                        thumbnailUrl:   img.img_url_medium,
+                        original:  img.img_url_original,
+                        height: img.height,
+                        width: img.width,
+                      }.as_json    
+  end  
+
+
+  def crop_image
+
+    if img = Image.find(params[:image_id]) and img
+      img.set_coordinates(params[:coordinates])
+      img.reprocess_img
+      img.save(:validate=>false)
+    end
+  
+    render :json =>  {
+                        image_id: img.id,
+                        name: img.img_file_name,
+                        size: img.img_file_size,
+                        thumbnailUrl:   img.img_url_medium,
+                        original:  img.img_url_original,
+                        height: img.height,
+                        width: img.width,
+                      }.as_json    
   end  
 
 end

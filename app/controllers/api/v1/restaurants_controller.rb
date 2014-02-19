@@ -43,7 +43,7 @@ class Api::V1::RestaurantsController < ApplicationController
     #   restaurant = Restaurant.where(:name => /cunningham/i).first
     # end
     # THIS IS FUCKING UGLY. THERE HAS TO BE A BETTER WAY.
-    respond_with ({ :menu => restaurant.menu_to_json })
+    respond_with ("{ \"menu\" : #{restaurant.menu_to_json} }")
   end
 
   

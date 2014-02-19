@@ -13,12 +13,13 @@ class Restaurant
   has_many :image, :class_name => "Image"
   has_many :section, :class_name => "Section"
   has_many :orders, :class_name => "Order"
-  belongs_to :user, :class_name => "User", index: true
+  belongs_to :user, :class_name => "User", index: true, inverse_of: :owns_restaurants
 
   accepts_nested_attributes_for :image, :allow_destroy => false
 
   index({ name: 1 }, { name: "name_index" })
   index({ _id:1 }, { unique: true, name:"id_index" })
+  index({ locs: "2dsphere" }, { name:"location_index"})
 
   def by_loc loc=nil
     if loc
@@ -70,25 +71,50 @@ class Restaurant
   end
 
   def menu_to_json
-    self.section.as_json(:include => {
-                                                               # :subsection => { :include => {
-                                                                                    :dishes => { :include => 
-                                                                                                   {
-                                                                                                      :options => { :include => {
-                                                                                                                       :individual_options => { :include => :icon }
-                                                                                                                     }
-                                                                                                                   },
-                                                                                                      :image => {},
-                                                                                                      :sizes => { :include => {
-                                                                                                                       :individual_options => { :include => :icon }
-                                                                                                                     }
-                                                                                                                   },                                                                                                  
-                                                                                                     }
-                                                                                               }
-                                                                                  # }
-                                                                                # }
-                                                             }
-                                                           )
+    # self.section.as_json(:include => {
+    #                                                            # :subsection => { :include => {
+    #                                                                                 :dishes => { :include => 
+    #                                                                                                {
+    #                                                                                                   :options => { :include => {
+    #                                                                                                                    :individual_options => { :include => :icon }
+    #                                                                                                                  }
+    #                                                                                                                },
+    #                                                                                                   :image => {},
+    #                                                                                                   :sizes => { :include => {
+    #                                                                                                                    :individual_options => { :include => :icon }
+    #                                                                                                                  }
+    #                                                                                                                },                                                                                                  
+    #                                                                                                  }
+    #                                                                                            }
+    #                                                                               # }
+    #                                                                             # }
+    #                                                          })
+     
+
+    # result = RubyProf.profile {
+      menu = self.section.collect do |section|
+        hash = section.as_document
+        hash["dishes"] = section.dishes.collect do |dish|
+          dish_hash = dish.as_document
+          dish_hash["sizes"] = dish.sizes.custom_to_hash if dish.sizes
+          dish_hash["options"] = dish.options.collect do |option|
+            next option.custom_to_hash
+          end
+          dish_hash["image"] = dish.image.collect do |image|
+            img_hash = image.custom_to_hash
+            next img_hash
+          end
+          next dish_hash
+        end
+        next hash
+      end
+    # }
+
+    # open("callgrind.profile", "w") do |f|
+    #   RubyProf::CallTreePrinter.new(result).print(f, :min_percent => 1)
+    # end
+
+    return Oj.dump(menu)
   end
 
 end

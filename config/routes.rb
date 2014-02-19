@@ -10,13 +10,27 @@ Foodcloud::Application.routes.draw do
     collection do
       get 'restaurants'
       get 'edit_menu'      
-      get 'users'      
+      get 'users'    
       get 'search_restaurants'
       get 'search_users'
       post 'update_user'  
       post 'update_menu'
-      post 'upload_image'           
+      post 'upload_image'        
+      post 'create_user' 
+      post 'user_set_restaurant'  
       post 'upload_icon'
+      post 'crop_image'
+      post 'crop_icon'       
+    end
+  end
+
+  resources :demo do
+    collection do
+      get 'index' 
+      post 'upload_image'        
+      post 'upload_icon'
+      post 'crop_image'
+      post 'crop_icon' 
     end
   end
 

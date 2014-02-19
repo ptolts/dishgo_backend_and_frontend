@@ -1,23 +1,15 @@
 #encoding: UTF-8
 
-class Icon
+class Demoicon
   include Mongoid::Document
   include Mongoid::Paperclip
-  store_in collection: "Icon", database: "osm"
-  field :url, type: String
-  field :img_url_icon, type: String
-  field :img_url_original, type: String
-  field :height, type: Integer
-  field :width, type: Integer
-  
-  belongs_to :individual_option, index: true
-  belongs_to :restaurant, index: true
+  store_in collection: "Demoicon", database: "osm"
+
 
   has_mongoid_attached_file :img, {
       :path           => ':hash_:style.png',
       :hash_secret => "we_like_food",
       :styles => {
-        :original => ['1000x1000>', :png],
         :icon    => ['100x100>',   :png]
       },
       storage: :fog,
@@ -28,24 +20,25 @@ class Icon
         rackspace_region: :iad,
         persistent: false
       },
-      fog_directory: 'Images',
+      fog_directory: 'Demo',
       fog_public: true,
     }
+
   field :img_fingerprint, type: String
+  field :img_url_icon, type: String  
   field :manual_img_fingerprint, type: String
+  field :height, type: Integer
+  field :width, type: Integer
+
   validates_attachment_content_type :img, :content_type => %w(image/jpeg image/jpg image/png), :message => 'file type is not allowed (only jpeg/png/gif images)', :on => :create     
+  # validates_attachment_size :img, :less_than => 1.megabytes
   after_post_process :img_post_process
 
   def serializable_hash options
-    # This is for legacy images which didn't have their URL's saved.
-    if self.img_url_icon.nil?
-      img_post_process
-    end   
     return {_id: self._id, local_file: self.img_url_icon}
   end
 
   def img_post_process
-    self.img_url_original = img.url(:original)
     self.img_url_icon = img.url(:icon)
     tempfile = img.queued_for_write[:original]
     unless tempfile.nil?
@@ -53,8 +46,9 @@ class Icon
       self.img_fingerprint = Digest::MD5.hexdigest(tempfile.read)
       self.width = geometry.width.to_i
       self.height = geometry.height.to_i
-    end
+    end    
   end
+
 
   def set_coordinates coords
     @coordinates = coords
@@ -78,7 +72,7 @@ class Icon
   def reprocess_img
     img.reprocess!
     img_post_process 
-  end  
+  end    
 
 end
 
