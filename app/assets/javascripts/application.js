@@ -12,13 +12,13 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require knockout-latest.js
-//= require underscore
-//= require jquery.isotope.min.js
-//= require underscore-ko-1.2.2.min.js
-//= require jquery.iframe-transport.js
-//= require jquery.ui.widget.js
-//= require jquery.fileupload.js
-//= require bootbox.min.js
-//= require spin.min.js
+// = require knockout-latest.js
+// = require underscore
+// = require jquery.isotope.min.js
+// = require underscore-ko-1.2.2.min.js
+// = require jquery.iframe-transport.js
+// = require jquery.ui.widget.js
+// = require jquery.fileupload.js
+// = require bootbox.min.js
+// = require spin.min.js
 //= require_tree .

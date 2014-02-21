@@ -62,7 +62,7 @@ class HomeController < ApplicationController
   def edit_menu
     restaurant = Restaurant.find(params[:restaurant_id])
     @menu_data = "{ \"menu\" : #{restaurant.menu_to_json} }".as_json
-  	render 'edit_menu'
+  	render 'edit_menu2'
   end  
 
   def update_menu

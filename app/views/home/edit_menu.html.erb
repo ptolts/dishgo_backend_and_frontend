@@ -3,25 +3,23 @@
     <div id = "center" style="position:fixed;top:50%;left:50%;z-index:200000"></div>
     <div id = "loading"></div>
 
+    <div class="menu_controller">
+        <div class="col-md-7 col-xs-12" style="margin-left: 0px">     
+            <button class="btn btn-primary col-xs-6" data-bind="click: saveMenu">Commit Changes</button> 
+            <button class="btn btn-danger col-xs-5 col-xs-offset-1">Discard Changes</button>                         
+        </div>
+
+        <div class="form-inline col-md-5 col-xs-12 push_down_small" style="margin-right: 0px">
+            <div class="input-group">
+                <input class="form-control" data-bind="value: newSectionName" />
+                <span class="input-group-btn">
+                    <button class="btn btn-info" type="button" data-bind="click: addSection">Add Section</button>
+                </span>
+            </div><!-- /input-group -->                                                     
+        </div>                   
+    </div>  
+
     <div class="container-fluid section">
-
-        <div class="section_header menu_controller">
-            <div class="col-md-7 col-xs-12" style="margin-left: 0px">     
-                <button class="btn btn-primary col-xs-6" data-bind="click: saveMenu">Commit Changes</button> 
-                <button class="btn btn-danger col-xs-5 col-xs-offset-1">Discard Changes</button>                         
-            </div>
-
-            <div class="form-inline col-md-5 col-xs-12 push_down_small" style="margin-right: 0px">
-                <div class="input-group">
-                    <input class="form-control" data-bind="value: newSectionName" />
-                    <span class="input-group-btn">
-                        <button class="btn btn-info" type="button" data-bind="click: addSection">Add Section</button>
-                    </span>
-                </div><!-- /input-group -->                                                     
-            </div>                   
-        </div>  
-
-
         <div data-bind="foreach: menu">
 
             <div class="clearfix"></div>
@@ -46,289 +44,16 @@
 
 
             <div data-bind="foreach: dishes">
-                <div class="col-xs-12 col-md-6 dish_section">
-                    <div class="dish">
-                        <span class="dishCloseButton glyphicon glyphicon-remove-circle" data-bind="click: $parent.remove"></span>
-                        <div class="col-xs-12">
-                            <div class="col-xs-7 input-group-sm">
-                                <input data-bind="value: name" class="form-control col-xs-12 dish_name tooltipclass" data-toggle="tooltip" data-placement="top" title="Type the dish name into this box."/> 
-                            </div>
-                            <div class="col-xs-4 col-xs-offset-1">
-                                <div class="input-group input-group-sm" data-bind="visible: !sizes()">
-                                    <span class="input-group-addon">$</span>
-                                    <input type="text" class="form-control tooltipclass price_filter" data-bind="value: price" data-toggle="tooltip" data-placement="top" title="Type the dish price into this box.">
-                                </div>                                      
-                            </div>
-                        </div>
-                        <div class="col-xs-12 push_down">
-                            <textarea rows="6" data-bind="value: description" class="description form-control tooltipclass" data-toggle="tooltip" data-placement="top" title="Type the dish description into this box."></textarea>
-                        </div>
-
-
-                        <!-- ko foreach: images -->
-                        <div data-bind="template: { name: 'image', data: $data}"></div>  
-                        <!-- /ko -->  
-
-                        <div class="col-xs-12 push_down">
-                            <span class="btn btn-info btn-sm file_upload_button col-xs-8 col-xs-offset-2">
-                                <i class="glyphicon glyphicon-plus"></i>
-                                <span>Add Image</span>
-                                <!-- The file input field used as target for the file upload widget -->
-                                <input data-bind="file_upload" id="fileupload" type="file" name="files" data-url="http://dev.foodcloud.ca:3000/home/upload_image"  class="file_upload_input" accept="images/*" capture="camera">
-                            </span>                                                                                     
-                        </div>                                        
-
-                        <div class="col-xs-12 push_down">
-                            <div class="col-centered form-inline control_piece">
-                                <div class="control_piece_center">
-                                  <div class="checkbox">
-                                    <label><em>Does this dish have multiple sizes? </em><input data-bind="checked: sizes" type="checkbox"></label>
-                                </div>
-                            </div>                              
-                        </div>
-                    </div>
-
-                    <div data-bind="template: { name: 'size', data: sizes_object }, visible: sizes"></div>
-
-                    <div data-bind="template: { name: templateToUse, foreach: options }"></div>
-
-                    <div class="col-xs-12 text-center push_down">
-                        <button class="btn btn-sm btn-info col-xs-10 col-xs-offset-1" data-bind="click: addOption">Add Option</button>
-                    </div>
-
-                </div>                  
+                <div class="col-xs-12 col-md-6">
+                    <%= render 'menu_content' %>
+                </div>  
             </div>
         </div> <!-- End of foreach dish -->        
 
         </div>
     </div>  
 
-    <!-- TEMPLATES -->
-    <script id="size" type="text/html">
-        <div class="col-xs-12 text-center push_down">
-            <div class="option">        
-                <div class="col-xs-12" style="text-align: left; font-size: 18px">
-                    <span data-bind="text: name"></span>      
-                </div>      
-                <!-- ko foreach: individual_options -->
-                    <div class="col-xs-12 push_down">
-                        <div class="individual_option">                 
-                                <div class="col-xs-6">
-                                    <div class="col-xs-10 input-group-sm">
-                                        <input data-bind="value: name" class="form-control"/>   
-                                    </div>              
-                                </div>
-                                <div class="col-xs-6">              
-                                    <div class="input-group input-group-sm">
-                                        <span class="input-group-addon">$</span>
-                                        <input type="text" class="form-control price_filter" data-bind="value: price">
-                                    </div>  
-                                </div>  
-                            </div>
-                            <!-- ko if: $index() > 1 -->
-                                <span class="suboptionCloseButton glyphicon glyphicon-remove-circle" data-bind="click: $parent.remove"></span>
-                            <!-- /ko -->
-                    </div> 
-                <!-- /ko -->
-                <div class="col-xs-12 push_down">
-                    <button class="btn btn-sm btn-info col-xs-offset-7" data-bind="click: addSize">Add Size</button>
-                </div>
-            </div>
-        </div> 
-    </script>
-
-    <script id="image" type="text/html">
-        <div class="col-xs-12 push_down">
-            <div class="uploading_image" data-bind="visible: !completed()">
-                <div class="col-xs-10 col-xs-offset-1">
-                    <div class="progress" style="height: 10px">
-                        <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" data-bind="style: { width: progressValue() + '%'}"></div>
-                    </div>    
-                </div> 
-            </div> 
-            <div class="completed_image" data-bind="visible: completed">
-                <div class="col-xs-12 text-center">
-                    <div class="thumbnail">
-                        <img class="img-rounded" data-bind="attr: {src: url}" />
-                        <div class="caption">
-                            <div class="pull-left">
-                                <span class="btn btn-info btn-sm" data-bind="click: $root.showModal">
-                                    <i class="glyphicon glyphicon-edit"></i>
-                                </span>                     
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>  
-        </div>
-        <div data-bind="template: { name: 'edit_image', data: $data}"></div>      
-    </script> 
-
-    <script id="edit_image" type="text/html">
-        <div class="modal fade" data-bind="attr{id:id}">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">Crop Image</h4>
-              </div>
-              <div class="modal-body text-center">
-                <div style="display: inline-block">
-                    <img data-bind="jcrop:{src:original,height:image_height,width:image_width}"/>                 
-                </div>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-primary pull-left" data-bind="click: crop">Crop</button>
-                <button type="button" class="btn btn-warning" data-dismiss="modal">Cancel</button>
-              </div>
-            </div><!-- /.modal-content -->
-          </div><!-- /.modal-dialog -->
-        </div><!-- /.modal -->
-    </script>  
-
-    <script id="icon" type="text/html">
-        <div class="col-xs-12 push_down">
-            <div class="uploading_image" data-bind="visible: !completed()">
-                <div class="col-xs-10 col-xs-offset-1">
-                    <div class="progress" style="height: 10px">
-                        <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" data-bind="style: { width: progressValue() + '%'}"></div>
-                    </div>    
-                </div> 
-            </div> 
-            <div class="completed_image" data-bind="visible: completed">
-                <div class="col-xs-12 text-center">
-                    <img class="thumbnail img-rounded" data-bind="attr: {src: url}" />
-                </div> 
-            </div>  
-        </div>
-    </script>     
-
-    <script id="default" type="text/html">
-        <div class="col-xs-12 text-center" style="margin-top: 10px;">
-            <div class="option">
-                <span class="closeButton glyphicon glyphicon-remove-circle" data-bind="click: $parent.remove"></span>   
-                <div class="col-xs-12 input-group-sm">
-                    <span><strong class="label_left col-xs-3">Title: </strong><input class="col-xs-9" data-bind="value: name"/><span>
-                </div>  
-                <div class="col-xs-12 push_down">
-                    <div class="col-centered form-inline control_piece">
-                        <div class="control_piece_center">
-                          <div class="checkbox">
-                            <label><em>Do these options cost extra? </em><input data-bind="checked: extra_cost" type="checkbox"></label>
-                        </div>
-                    </div>                              
-                </div>                                
-                <div data-bind="foreach: individual_options">
-                    <div class="col-xs-12 push_down individual_option_container">
-                        <div class="individual_option push_down">
-                            <div class="col-xs-12 input-group-sm" style="padding-right: 10px">
-                                <span><strong class="label_left col-xs-3">Option: </strong><input class="col-xs-9" data-bind="value: name"/><span>
-                            </div>  
-                            <div data-bind="visible: $parent.extra_cost()">
-                                <div class="col-xs-10 col-xs-offset-1" data-bind="visible: !price_according_to_size()">
-                                    <div class="col-xs-12 push_down">
-                                        <strong class="price_option_label col-xs-6">Price: </strong>
-                                        <div class="input-group input-group-sm col-xs-4 col-xs-offset-2">
-                                            <span class="input-group-addon">$</span>
-                                            <input type="text" class="form-control price_filter" data-bind="value: price">
-                                        </div>   
-                                    </div>                                       
-                                </div>
-                                <div class="col-xs-10 col-xs-offset-1" data-bind="visible: price_according_to_size">             
-                                    <!-- ko foreach: size_prices -->
-                                        <div class="col-xs-12 push_down">
-                                                <strong class="price_option_label col-xs-6" data-bind="text: name"></strong>
-                                                <div class="input-group input-group-sm col-xs-4 col-xs-offset-2">
-                                                    <span class="input-group-addon">$</span>
-                                                    <input type="text" class="form-control price_filter" data-bind="value: price">
-                                                </div>                                                                                
-                                        </div>
-                                    <!-- /ko -->
-                                </div>
-                                <div class="col-xs-12 push_down"  data-bind="visible: $parent.multiple_prices">
-                                    <div class="col-centered form-inline control_piece">
-                                        <div class="control_piece_center">
-                                            <div class="checkbox">
-                                                <label><em>Does the price depend on the dish size? </em><input data-bind="checked: price_according_to_size" type="checkbox"></label>
-                                            </div>
-                                        </div>
-                                    </div>                              
-                                </div>                                  
-                            </div> 
-
-                            <div class="col-xs-10 col-xs-offset-1">
-                                <!-- ICON UPLOADER -->
-                                <!-- ko with: icon -->
-                                    <div data-bind="template: { name: 'icon', data: $data}"></div>  
-                                <!-- /ko -->                                  
-                                <span class="push_down btn btn-info btn-sm file_upload_button col-xs-10 col-xs-offset-1">
-                                    <i class="glyphicon glyphicon-plus"></i>
-                                    <span>Add Icon</span>
-                                    <!-- The file input field used as target for the file upload widget -->
-                                    <input data-bind="file_upload_icon" id="fileupload" type="file" accept="images/*" capture="camera" name="files" data-url="http://dev.foodcloud.ca:3000/home/upload_icon"  class="file_upload_input">
-                                </span> 
-                            </div>                                                     
-                        </div>
-                        <!-- ko if: $index() > 1 -->
-                            <span class="suboptionCloseButton glyphicon glyphicon-remove-circle" data-bind="click: $parent.remove"></span>
-                        <!-- /ko -->                        
-                    </div> 
-                </div>
-
-                <div class="col-xs-12 push_down">
-                    <div class="col-centered form-inline control_piece">
-                        <div class="control_piece_center">
-                          <div class="checkbox">
-                            <label><em>Show advanced options? </em><input data-bind="checked: advanced" type="checkbox"></label>
-                          </div>
-                        </div>                              
-                    </div>
-                </div>              
-
-                <div data-bind="visible: advanced">
-                    <div class="col-xs-12 push_down">
-                        <div class="col-xs-6" style="text-align: right">
-                            <span class="selection_constraint_label">Minimum selection:</span>
-                        </div>
-                        <div class="col-xs-3 col-xs-offset-1">
-                            <select class="form-control" data-bind="value: min_selections">
-                                <!-- ko foreach: individual_options -->
-                                    <!-- ko ifnot: ($index() + 1) == $parent.individual_options().length -->
-                                    <option data-bind="text: ($index() + 1)" selected="selected"></option>
-                                    <!-- /ko -->
-                                    <!-- ko if: ($index() + 1) == $parent.individual_options().length -->
-                                    <option data-bind="text: ($index() + 1)"></option>
-                                    <!-- /ko -->                            
-                                <!-- /ko -->
-                            </select>   
-                        </div>  
-                    </div>      
-
-                    <div class="col-xs-12 push_down">
-                        <div class="col-xs-6" style="text-align: right">
-                            <span class="selection_constraint_label">Max selection:</span>
-                        </div>
-                        <div class="col-xs-3 col-xs-offset-1">
-                            <select class="form-control" data-bind="value: max_selections">
-                                <!-- ko foreach: individual_options -->
-                                    <!-- ko if: ($index() + 1) == $parent.individual_options().length -->
-                                    <option data-bind="text: ($index() + 1)" selected="selected"></option>
-                                    <!-- /ko -->
-                                    <!-- ko ifnot: ($index() + 1) == $parent.individual_options().length -->
-                                    <option data-bind="text: ($index() + 1)"></option>
-                                    <!-- /ko -->                            
-                                <!-- /ko -->
-                            </select>   
-                        </div>  
-                    </div>
-                </div>                              
-
-                <div class="col-xs-12 push_down">
-                    <button class="btn btn-sm btn-info col-xs-10 col-xs-offset-1" data-bind="click: addOption">Add Suboption</button>
-                </div>              
-            </div>
-        </div> 
-    </script>
+    <%= render 'menu_templates' %>
 
     <%= javascript_include_tag "menu_editor" %>
 
@@ -336,6 +61,8 @@
         var restaurant_id = "<%= params[:restaurant_id]%>";
         var menu_data = <%= raw(@menu_data) %>;
         var image_crop_url = "/home/crop_image";
+        var icon_upload_url = "/home/upload_icon"
+        var image_upload_url = "/home/upload_image"        
         ko.applyBindings(new MenuViewModel());
     </script>   
 

@@ -9,7 +9,7 @@ class Icon
   field :img_url_original, type: String
   field :height, type: Integer
   field :width, type: Integer
-  
+
   belongs_to :individual_option, index: true
   belongs_to :restaurant, index: true
 
@@ -45,14 +45,15 @@ class Icon
   end
 
   def img_post_process
-    self.img_url_original = img.url(:original)
-    self.img_url_icon = img.url(:icon)
+    self.img_url_icon = img.url(:icon) 
+    self.img_url_original = img.url(:original) 
     tempfile = img.queued_for_write[:original]
     unless tempfile.nil?
       geometry = Paperclip::Geometry.from_file(tempfile)
-      self.img_fingerprint = Digest::MD5.hexdigest(tempfile.read)
+      self.manual_img_fingerprint = Digest::MD5.hexdigest(File.open(tempfile.path).read)
       self.width = geometry.width.to_i
       self.height = geometry.height.to_i
+      self.img_file_size = tempfile.size
     end
   end
 

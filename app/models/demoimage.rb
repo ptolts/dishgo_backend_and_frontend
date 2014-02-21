@@ -17,7 +17,7 @@ class Demoimage
       :hash_secret => "we_like_food",
       :styles => {
         :medium   => ['320x',    :png],
-        :original => ['1000x',  :png],
+        :original => ['1000x1000>',  :png],
       },
       :processors => [:cropper],
       storage: :fog,
@@ -36,7 +36,7 @@ class Demoimage
   validates_attachment_content_type :img, :content_type => %w(image/jpeg image/jpg image/png), :message => 'file type is not allowed (only jpeg/png/gif images)'    
   # validates_attachment_size :img, :less_than => 1.megabytes
   after_post_process :img_post_process
-  # before_save :reprocess_img, :if => :cropping?
+  # before_save :img_post_process
 
 
   def custom_to_hash
@@ -53,9 +53,10 @@ class Demoimage
     tempfile = img.queued_for_write[:original]
     unless tempfile.nil?
       geometry = Paperclip::Geometry.from_file(tempfile)
-      self.img_fingerprint = Digest::MD5.hexdigest(tempfile.read)
+      self.manual_img_fingerprint = Digest::MD5.hexdigest(File.open(tempfile.path).read)
       self.width = geometry.width.to_i
       self.height = geometry.height.to_i
+      self.img_file_size = tempfile.size
     end
   end
 

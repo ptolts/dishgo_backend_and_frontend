@@ -5,12 +5,15 @@ class Demoicon
   include Mongoid::Paperclip
   store_in collection: "Demoicon", database: "osm"
 
+  field :img_url_icon, type: String
+  field :img_url_original, type: String
 
   has_mongoid_attached_file :img, {
       :path           => ':hash_:style.png',
       :hash_secret => "we_like_food",
       :styles => {
-        :icon    => ['100x100>',   :png]
+        :icon    => ['100x100>',   :png],
+        :original    => ['500x500>',   :png],
       },
       storage: :fog,
       fog_credentials: {
@@ -25,7 +28,6 @@ class Demoicon
     }
 
   field :img_fingerprint, type: String
-  field :img_url_icon, type: String  
   field :manual_img_fingerprint, type: String
   field :height, type: Integer
   field :width, type: Integer
@@ -39,14 +41,16 @@ class Demoicon
   end
 
   def img_post_process
-    self.img_url_icon = img.url(:icon)
+    self.img_url_icon = img.url(:icon) 
+    self.img_url_original = img.url(:original) 
     tempfile = img.queued_for_write[:original]
     unless tempfile.nil?
       geometry = Paperclip::Geometry.from_file(tempfile)
-      self.img_fingerprint = Digest::MD5.hexdigest(tempfile.read)
+      self.manual_img_fingerprint = Digest::MD5.hexdigest(File.open(tempfile.path).read)
       self.width = geometry.width.to_i
       self.height = geometry.height.to_i
-    end    
+      self.img_file_size = tempfile.size
+    end
   end
 
 

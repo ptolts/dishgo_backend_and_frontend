@@ -52,6 +52,14 @@ function Section(data) {
         self.dom_id = "";
     } 
 
+    self.title_image = ko.computed(function() {
+        // if(self.images().length > 0){
+        //     return self.images()[0].url
+        // } else {
+            return "/assets/icon@2x.png"
+        // }
+    }, self);        
+
     self.editing_name = ko.observable(false);
     // Behaviors
     self.edit_name = function() { 
@@ -103,7 +111,7 @@ function Image(data) {
     self.completed = ko.observable(false);
     self.image_width = ko.observable(0);
     self.image_height = ko.observable(0);
-    self.coordinates = ko.observable();
+    self.coordinates = [];
 
     if(data){
         if(data.local_file){
@@ -122,7 +130,7 @@ function Image(data) {
               url: image_crop_url,
               data: {
                 image_id: self.id(),
-                coordinates: self.coordinates(),
+                coordinates: self.coordinates,
             },
             success: function(data, textStatus, jqXHR){
                 self.update_info(data);
@@ -150,6 +158,7 @@ ko.bindingHandlers.file_upload = {
         self.imageModel;
         $(element).fileupload({
             formData: {restaurant_id: restaurant_id},
+            url: image_upload_url,
             dataType: 'json',
             progressInterval: 50,
             send: function (e, data) {
@@ -177,6 +186,7 @@ ko.bindingHandlers.file_upload_icon = {
         self.imageModel;
         $(element).fileupload({
             formData: {restaurant_id: restaurant_id},
+            url: icon_upload_url,
             dataType: 'json',
             progressInterval: 50,
             send: function (e, data) {
@@ -252,6 +262,14 @@ function Dish(data) {
         cost = cost * self.quantity();
         return parseFloat(cost).toFixed(2);
     }, self);
+
+    self.title_image = ko.computed(function() {
+        if(self.images().length > 0){
+            return self.images()[0].url();
+        } else {
+            return "/assets/icon@2x.png";
+        }
+    }, self);    
 
     self.addQuantity = function(){
         if(self.quantity() == 12){
@@ -593,10 +611,37 @@ function MenuViewModel() {
     var self = this;
     self.menu = ko.observableArray([]);
     self.newDomCounter = 0;
+    self.preview = ko.observable(true);
+
+    self.togglePreview = function(){
+        self.preview(!self.preview());
+    }
+
+    self.previewText = ko.computed(function(){
+        if(self.preview()){
+            return "Web Preview"
+        } else {
+            return "iPhone Preview"
+        }
+    });
 
     self.menu($.map(menu_data.menu, function(item) { return new Section(item) }));
     $(".tooltipclass").tooltip({delay: { show: 500, hide: 100 }});
     updateFilters();
+
+    self.current_dish = ko.observable();
+
+    self.set_dish = function(dish) {
+        self.current_dish(dish);
+    };
+
+    self.current_dish_check = function(dish) {    
+        if(dish == self.current_dish()){
+            return true;
+        } else {
+            return false;
+        }
+    } 
 
     // Operations
     self.newSectionName = ko.observable();
@@ -699,8 +744,8 @@ ko.bindingHandlers.jcrop = {
         console.log(valueUnwrapped);
 
         var update_cords = function update_crop(coords) {
-            viewModel.coordinates([coords.x,coords.y,coords.w,coords.h]);
-            console.log(viewModel.coordinates());
+            viewModel.coordinates = [coords.x,coords.y,coords.w,coords.h];
+            console.log(viewModel.coordinates);
         }
 
         $(element).attr("src",valueUnwrapped.src());

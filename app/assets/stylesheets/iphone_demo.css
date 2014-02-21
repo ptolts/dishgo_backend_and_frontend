@@ -1,4 +1,5 @@
-  .iphone {
+.iphone {
+    display: inline-block;
     position: relative;
     width: 375px;
     height: 806px;
@@ -99,8 +100,9 @@
     height: 33px;
     line-height: 33px;
 }
-.iphone h1, h2, h3, h4 {
+.iphone h1, .iphone h2, .iphone h3, .iphone h4 {
     margin: 0px;
+    line-height: 44px;
     position: relative;
 }
 .iphone header {
@@ -109,13 +111,13 @@
     position: relative;
 }
 
-.iphone header h1,h2,h3,h4 {
-    line-height: 44px;
-}
-
 .uiscrollview {
     position: relative;
     width: 320px;
+}
+
+.description_text {
+    text-align: left;
 }
 
 .uiscrollview ul {
@@ -126,6 +128,7 @@
     margin: 0;
     padding: 0;
     overflow-x: scroll;
+    overflow-y: hidden;
 }
 
 .uiscrollview li {
