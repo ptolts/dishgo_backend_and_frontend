@@ -2,11 +2,15 @@ Foodcloud::Application.routes.draw do
 
   devise_for :users
 
-  root :to => 'home#index'
+  constraints(Subdomain) do
+    get '/' => 'menu#index'
+  end
+
+  root :to => 'administration#index'
 
   resources :token_authentications, :only => [:create, :destroy]
 
-  resources :home do
+  resources :administration do
     collection do
       get 'restaurants'
       get 'edit_menu'      
@@ -34,7 +38,7 @@ Foodcloud::Application.routes.draw do
     end
   end
 
-  # match 'home/search_restaurants', to: 'home#search_restaurants', via: [:get]
+  # match 'administration/search_restaurants', to: 'administration#search_restaurants', via: [:get]
 
   namespace :api, :defaults => {:format => :json} do
     namespace :v1 do

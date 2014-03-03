@@ -5,7 +5,7 @@ class Demoimage
   include Mongoid::Paperclip
   include Mongoid::Timestamps
 
-  store_in collection: "demoimage", database: "osm"
+  store_in collection: "demoimage", database: "demo"
 
   field :img_url_medium, type: String
   field :img_url_original, type: String

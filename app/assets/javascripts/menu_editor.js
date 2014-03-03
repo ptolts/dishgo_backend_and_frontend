@@ -269,7 +269,15 @@ function Dish(data) {
         } else {
             return "/assets/icon@2x.png";
         }
-    }, self);    
+    }, self);  
+
+    self.large_title_image = ko.computed(function() {
+        if(self.images().length > 0){
+            return self.images()[0].original();
+        } else {
+            return "/assets/icon@2x.png";
+        }
+    }, self);  
 
     self.addQuantity = function(){
         if(self.quantity() == 12){
@@ -606,12 +614,31 @@ function IndividualOption(data,option) {
     };         
 }
 
+function Restaurant(data) {
+    var self = this;
+    self.name = ko.observable(data.name);
+    self.lat = ko.observable(data.lat);
+    self.lon = ko.observable(data.lon);
+    self.id = data._id;
+    self.phone = ko.observable("450-458-0123");
+    self.address = ko.observable("45 Creme Brule");
+
+    self.image = ko.observable(new Image({local_file:"/assets/help.jpg"}));
+
+    if(data.images && data.images[0]) {
+        console.log(data.images[0]);
+        self.image(new Image(data.images[0]));                
+    }    
+}
+
 function MenuViewModel() {
     // Data
     var self = this;
     self.menu = ko.observableArray([]);
     self.newDomCounter = 0;
     self.preview = ko.observable(true);
+
+    self.restaurant = ko.observable(new Restaurant(resto_data));
 
     self.togglePreview = function(){
         self.preview(!self.preview());
@@ -682,7 +709,7 @@ function MenuViewModel() {
 
                 $.ajax({
                   type: "POST",
-                  url: "http://dev.foodcloud.ca:3000/home/update_menu",
+                  url: "http://dev.foodcloud.ca:3000/administration/update_menu",
                   data: {
                     restaurant_id: restaurant_id,
                     menu: ko.toJSON(self.menu)

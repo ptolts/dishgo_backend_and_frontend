@@ -1,28 +1,27 @@
 <!DOCTYPE html>
-<html>
-<head>
-	<title>DishGo</title>
-	<%= stylesheet_link_tag    "application", :media => "all" %>
-	<%= javascript_include_tag "application" %>
-	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">	
-	<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>	
-	<%= csrf_meta_tags %>
-</head>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="description" content="Find the best dishes in town! Browse beautiful menus from the hottest local restaurants. Download DishGo today and get access to discounts &amp deals.">
+		<title>Search Menus From The Best Local Restaurants in Town | Download DishGo!</title>
 
-<style>
-	body {
-	  min-height: 2000px;
-	  padding-top: 70px;
-	}
-</style>
+		<%= stylesheet_link_tag    "application", :media => "all" %>
+		<%= javascript_include_tag "application" %>
+		<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">	
+		<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>	
+		<link href="/app/public/css/font-awesome.min.css" rel="stylesheet">
+	    <link href="/app/public/css/style.css" rel="stylesheet">
+	    <link href="/app/public/css/signin.css" rel="stylesheet">
+	    <%= csrf_meta_tags %>
 
-<body>
-	<%= render 'shared/nav_bar' %>		
-	<div class="container">	
-		<div class="col-md-6 col-md-offset-3">
-			<%=  yield %>
-		</div><!-- /#page-wrapper -->
-	</div>
-
-</body>
+	</head>
+	<body>
+		<span class="fa fa-arrow-circle-left" style="position: fixed;top:20px;left: 20px; font-size: 30px"></span>
+		<div class="section-signup">
+			<div class="container_small">
+				<%= yield %>
+			</div>
+		</div>
+	</body>
 </html>

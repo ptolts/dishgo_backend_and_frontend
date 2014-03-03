@@ -131,6 +131,17 @@
     height: 100%;
 }
 
+.option_default {
+    margin-top: 10px;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.no_pad {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
 .push_down {
     margin-top: 8px;
 }
@@ -279,7 +290,7 @@ input {
 
 .dish_top .option_title {
     position: absolute;
-    left: 30px;
+    left: 35px;
     top: 0px;
     height: 30px;
     line-height: 30px;
@@ -321,7 +332,6 @@ input {
 
 body {
     margin-bottom: 50px;
-    min-width: 1500px;
     padding-top: 50px;
 }
 
@@ -364,12 +374,13 @@ body {
 
 .sidebar-nav {
   position: absolute;
-  top: 0;
+  top: 75px;
   width: 250px;
   list-style: none;
   margin: 0;
   padding: 8px;
   padding-right: 10px;
+  padding-bottom: 150px;
 }
 
 .sidebar-nav li {
@@ -420,6 +431,11 @@ body {
   text-decoration: none;
 }
 
+.add_section {
+    position: absolute;
+    top: 0;
+}
+
 .content-header {
   height: 65px;
   line-height: 65px;
@@ -455,11 +471,15 @@ body {
     -ms-transform: scaleX(-1);
 }
 
-@media (max-width:767px) {
+@media (max-width:1300px) {
 
     .dish_section {
         max-width: 450px;   
     }
+
+}
+
+@media (max-width:767px) {
 
     #wrapper {
       padding-left: 0;

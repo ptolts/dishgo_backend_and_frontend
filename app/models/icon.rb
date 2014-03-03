@@ -3,7 +3,7 @@
 class Icon
   include Mongoid::Document
   include Mongoid::Paperclip
-  store_in collection: "Icon", database: "osm"
+  store_in collection: "Icon", database: "dishgo"
   field :url, type: String
   field :img_url_icon, type: String
   field :img_url_original, type: String

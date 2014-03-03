@@ -20,7 +20,7 @@ class ApplicationController < ActionController::Base
   def admin_user!
     unless current_user.is_admin
       flash[:error] = "You lack the privileges to access this function."
-      redirect_to :controller => 'home', :action => 'index'
+      redirect_to :controller => 'administration', :action => 'index'
     end
   end
 
@@ -28,7 +28,7 @@ class ApplicationController < ActionController::Base
     return if current_user.is_admin
     if current_user.owns_restaurants.nil? or current_user.owns_restaurants.id.blank? or (current_user.owns_restaurants.id.to_s != params[:restaurant_id].to_s)
       flash[:error] = "You lack the privileges to access this function."
-      redirect_to :controller => 'home', :action => 'index'
+      redirect_to :controller => 'administration', :action => 'index'
     end
   end
 

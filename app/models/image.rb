@@ -5,7 +5,7 @@ class Image
   include Mongoid::Paperclip
   include Mongoid::Timestamps
 
-  store_in collection: "image", database: "osm"
+  store_in collection: "image", database: "dishgo"
   field :local_file, type: String
   field :original_url, type: String
   field :tags, type: Array

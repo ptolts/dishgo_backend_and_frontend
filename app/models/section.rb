@@ -3,7 +3,7 @@
 class Section
 	include Mongoid::Document
 	include Mongoid::Timestamps
-	store_in collection: "Section", database: "osm"
+	store_in collection: "Section", database: "dishgo"
 	field :name, type: String
 	field :position, type: Integer
 	belongs_to :restaurant, index: true

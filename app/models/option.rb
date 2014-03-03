@@ -3,7 +3,7 @@
 class Option
 	include Mongoid::Document
 	include Mongoid::Timestamps
-	store_in collection: "Options", database: "osm"
+	store_in collection: "Options", database: "dishgo"
 	field :name, type: String
 	field :type, type: String
 	field :max_selections, type: Integer

@@ -2,9 +2,10 @@
 
 class Restaurant
   include Mongoid::Document
-  store_in collection: "restaurants", database: "osm"
+  store_in collection: "restaurants", database: "dishgo"
   field :lat, type: Float
   field :lon, type: Float
+  field :subdomain, type: String
   field :locs, type: Array
   field :menu, type: Hash
   # field :images, type: Array

@@ -3,7 +3,7 @@
 class IndividualOption
 	include Mongoid::Document
 	include Mongoid::Timestamps
-	store_in collection: "IndividualOption", database: "osm"
+	store_in collection: "IndividualOption", database: "dishgo"
 	field :name, type: String
 	field :price, type: Float
 	field :size_prices, type: Array

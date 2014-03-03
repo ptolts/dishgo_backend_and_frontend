@@ -1,11 +1,21 @@
-<h2>Forgot your password?</h2>
+	<h2>Forgot your password?</h2>
+	<form class="form-horizontal" role="form" id="sign-up-form" method="post" action="<%= password_path(resource_name) %>">
+		<%= devise_error_messages! %>
+		<input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>" />
+		<div class="form-group">
+			<div class="col-sm-offset-1 col-sm-10">
+				<input type="email" class="form-control" id="user_email" name="user[email]" placeholder="Email">
+			</div>
+		</div>
 
-<%= bootstrap_form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f| %>
-  <%= devise_error_messages! %>
-
-  <%= f.email_field :email, :autofocus => true %></div>
-
-  <div><%= f.submit "Send me reset password instructions" %></div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+		<div class="form-group">
+			<div class="col-sm-offset-5 col-sm-4">
+				<button class="btn btn-success" type="submit">Send me reset password instructions<i class="fa fa-chevron-right" style="margin-left: 20px; font-size: 12px;"></i></button>
+			</div>
+			<div class="col-xs-12">
+				<div class="secured">
+					<i class="fa fa-lock"></i> Your information is secure with DishGo
+				</div>
+			</div>
+		</div>
+	</form>

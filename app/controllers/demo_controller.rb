@@ -1,6 +1,6 @@
 class DemoController < ApplicationController
 
-  layout 'home'
+  layout 'administration'
   after_filter :set_access_control_headers
 
   def set_access_control_headers 

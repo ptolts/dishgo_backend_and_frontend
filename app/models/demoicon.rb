@@ -3,7 +3,7 @@
 class Demoicon
   include Mongoid::Document
   include Mongoid::Paperclip
-  store_in collection: "Demoicon", database: "osm"
+  store_in collection: "Demoicon", database: "demo"
 
   field :img_url_icon, type: String
   field :img_url_original, type: String

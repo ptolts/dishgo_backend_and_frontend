@@ -1,0 +1,29 @@
+@import url('http://getbootstrap.com/dist/css/bootstrap.css');
+
+@font-face {
+    font-family: 'breeserif_regular_macroman';
+    src: url('fonts/breeserif_regular_macroman/BreeSerif-Regular-webfont.eot');
+    src: url('fonts/breeserif_regular_macroman/BreeSerif-Regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/breeserif_regular_macroman/BreeSerif-Regular-webfont.woff') format('woff'),
+         url('fonts/breeserif_regular_macroman/BreeSerif-Regular-webfont.ttf') format('truetype'),
+         url('fonts/breeserif_regular_macroman/BreeSerif-Regular-webfont.svg#open_sansregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+
+/* Global Styles */
+
+
+*{
+  outline: 0!important;
+}
+
+html, body {
+  height:100%;
+  font-family: 'breeserif_regular_macroman';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

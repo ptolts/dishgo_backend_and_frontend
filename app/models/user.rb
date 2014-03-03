@@ -7,14 +7,14 @@ class User
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, 
-         :validatable
+         :validatable, :confirmable 
 
   # Setup accessible (or protected) attributes for your model
   # attr_accessible :email, :password, :password_confirmation, :remember_me, :providor, :facebook_auth_token, :facebook_user_id, :authentication_token
 
   ## Database authenticatable
-  field :email,              :type => String
-  field :encrypted_password, :type => String
+  field :email,               :type => String
+  field :encrypted_password,  :type => String
 
   ## Recoverable
   field :reset_password_token,   :type => String
@@ -40,11 +40,11 @@ class User
   field :is_admin,               :type => Boolean, :default => false   
   field :first_name,             :type => String    
 
-  ## Confirmable
-  # field :confirmation_token,   :type => String
-  # field :confirmed_at,         :type => Time
-  # field :confirmation_sent_at, :type => Time
-  # field :unconfirmed_email,    :type => String # Only if using reconfirmable
+  # Confirmable
+  field :confirmation_token,   :type => String
+  field :confirmed_at,         :type => Time
+  field :confirmation_sent_at, :type => Time
+  field :unconfirmed_email,    :type => String # Only if using reconfirmable
 
   ## Lockable
   # field :failed_attempts, :type => Integer, :default => 0 # Only if lock strategy is :failed_attempts
@@ -66,12 +66,20 @@ class User
   end
  
   private
-  
   def generate_authentication_token
     loop do
       token = Devise.friendly_token
       break token unless User.where(authentication_token: token).first
     end
   end
+
+  protected
+  def confirmation_required?
+    if self.email.blank?
+      return false
+    else
+      return true
+    end
+  end  
 
 end

@@ -1,0 +1,57 @@
+                <div class="dish_section">
+                    <div class="dish_top">
+                        <img src="/assets/icon@2x.png" width="25" class="icon" />
+                        <div class="option_title">
+                            <span>Dish Builder</span>      
+                        </div>                          
+                        <span class="dish_close_icon glyphicon glyphicon glyphicon-remove" data-bind="click: $parent.remove"></span>                        
+                    </div>                        
+                    <div class="dish">
+                        <div class="col-xs-12 push_down">
+                            <div class="col-xs-7 ">
+                                <input data-bind="value: name, valueUpdate: 'afterkeydown'" class="form-control col-xs-12 dish_name tooltipclass" data-toggle="tooltip" data-placement="top" title="Type the dish name into this box."/> 
+                            </div>
+                            <div class="col-xs-4 col-xs-offset-1">
+                                <div class="input-group " data-bind="visible: !sizes()">
+                                    <span class="input-group-addon">$</span>
+                                    <input type="text" class="form-control tooltipclass price_filter" data-bind="value: price, valueUpdate: 'afterkeydown'" data-toggle="tooltip" data-placement="top" title="Type the dish price into this box.">
+                                </div>                                      
+                            </div>
+                        </div>
+                        <div class="col-xs-12 push_down">
+                            <textarea rows="6" data-bind="value: description, valueUpdate: 'afterkeydown'" class="description form-control tooltipclass" data-toggle="tooltip" data-placement="top" title="Type the dish description into this box."></textarea>
+                        </div>
+
+
+                        <!-- ko foreach: images -->
+                        <div data-bind="template: { name: 'image', data: $data}"></div>  
+                        <!-- /ko -->  
+
+                        <div class="col-xs-12 push_down">
+                            <span class="btn btn-success btn-sm file_upload_button col-xs-8 col-xs-offset-2">
+                                <i class="glyphicon glyphicon-plus"></i>
+                                <span>Add Image</span>
+                                <!-- The file input field used as target for the file upload widget -->
+                                <input data-bind="file_upload" id="fileupload" type="file" name="files"  class="file_upload_input" accept="images/*" capture="camera">
+                            </span>                                                                                     
+                        </div>                                        
+
+                        <div class="col-xs-12 push_down">
+                            <div class="col-centered form-inline control_piece">
+                                <div class="control_piece_center">
+                                    <div class="checkbox">
+                                        <label><em>Does this dish have multiple sizes? </em><input data-bind="checked: sizes" type="checkbox"></label>
+                                    </div>
+                                </div>
+                            </div>                              
+                        </div>
+                    </div>
+
+                    <div data-bind="template: { name: 'size', data: sizes_object }, visible: sizes"></div>
+
+                    <div data-bind="template: { name: templateToUse, foreach: options }"></div>
+
+                    <div class="col-xs-12 text-center push_down">
+                        <button class="btn btn-sm btn-primary col-xs-10 col-xs-offset-1" data-bind="click: addOption">Add Option</button>
+                    </div>                 
+                </div>

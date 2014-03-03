@@ -3,7 +3,7 @@
 class Dish
   include Mongoid::Document
   include Mongoid::Timestamps
-  store_in collection: "Dish", database: "osm"
+  store_in collection: "Dish", database: "dishgo"
   field :name, type: String
   field :description, type: String
   field :price, type: Float

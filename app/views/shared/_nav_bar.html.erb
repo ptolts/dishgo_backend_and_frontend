@@ -8,19 +8,19 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a style="line-height: 50px" href="/home"><%= image_tag "logo.png", height:"30"%></a>
+          <a style="line-height: 50px" href="/administration"><%= image_tag "logo.png", height:"30"%></a>
         </div>
 
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
             <% if user_signed_in? %>
-            <li class="<%= active_link('home','index') %>"><a href="/home">Home</a></li>
+            <li class="<%= active_link('administration','index') %>"><a href="/app/administration">Home</a></li>
               <% if current_user.owns_restaurants %>
-                <li class="<%= active_link('home','edit_menu') %>"><a href="/home/edit_menu?restaurant_id=<%= current_user.owns_restaurants.id %>">Edit Menu</a></li>
+                <li class="<%= active_link('administration','edit_menu') %>"><a href="/app/administration/edit_menu?restaurant_id=<%= current_user.owns_restaurants.id %>">Edit Menu</a></li>
               <% end %>
               <% if admin_user? %>
-                <li class="<%= active_link('home','users') %>"><a href="/home/users">Users</a></li>
-                <li class="<%= active_link('home','restaurants') %>"><a href="/home/restaurants">Restaurants</a></li>
+                <li class="<%= active_link('administration','users') %>"><a href="/app/administration/users">Users</a></li>
+                <li class="<%= active_link('administration','restaurants') %>"><a href="/app/administration/restaurants">Restaurants</a></li>
               <% end %>
             <% end %>
           </ul>

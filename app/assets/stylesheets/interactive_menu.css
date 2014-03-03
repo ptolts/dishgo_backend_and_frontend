@@ -1,0 +1,54 @@
+.mock-dish {
+
+}
+.dish-title {
+    font-size: 20px;
+    color: #1a1a1a;
+    padding-top: 20px;
+    
+}
+.dish-price {
+    text-align: center;
+    color: #cf2f28;
+    font-size: 20px
+}
+.dish-section-title hr {
+width: auto;
+border-top: 1px solid #cf2f28;
+border-bottom: 2px solid #cf2f28;
+margin-top: 40px;
+}
+.dish-picture {
+    padding-top: 20px;
+    padding-bottom: 20px;
+
+}
+.dish-description {
+    padding-top: 20px;
+    font-size: 16px;
+    color: gray;
+}
+.dish-options {
+    text-align: center;
+    font-size: 18px;
+
+}
+hr {
+    width: auto;
+    border-top: 1px solid gray;
+    border-bottom: 1px solid gray;
+}
+.resto-name {
+    font-size: 40px;
+    text-align: center;
+    text-transform: uppercase;
+
+}
+.resto-contact {
+    font-size: 20px;
+    text-align: center;
+}
+.resto-contact strong {
+    font-size: 40px;
+    text-transform: uppercase;
+}
