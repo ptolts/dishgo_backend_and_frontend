@@ -1,68 +1,109 @@
-<div class="form-inline" role="form">
-    <input class="form-control" data-bind="value: restaurant_name" />
-    <button class="btn btn-default" data-bind="click: search_for_restaurant">Search</button>
-</div>
+<div class="container">
 
-<table class="col-md-8 table table-striped">
-    <thead>
+    <div class="row">
+        <div class="form-inline" role="form">
+            <input class="form-control" data-bind="value: restaurant_name" />
+            <button class="btn btn-default" data-bind="click: search_for_restaurant">Search</button>
+        </div>
+    </div>
+
+    <div class="row">
+        <table class="col-md-8 table table-striped">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Lat</th>
+                    <th>Lon</th>
+                    <th>Edit Menu</th>
+                    <th>Edit Restaurant</th>
+                </tr>
+            </thead>
+            <tbody data-bind="template: { name: 'resto_temp', foreach: restaurants }"></tbody>
+        </table>
+    </div>
+
+    <div class="row" data-bind="with: current_restaurant">
+        <div class="col-xs-12 col-md-6">
+            <div data-bind="template: { name: 'restaurant_template', data: $parent.current_restaurant }"></div>
+        </div>
+    </div>
+
+    <script id="resto_temp" type="text/html">
         <tr>
-            <th>Name</th>
-            <th>Lat</th>
-            <th>Lon</th>
-            <th>Edit Menu</th>
-            <th>Set User</th>
-        </tr>
-    </thead>
-    <tbody data-bind="template: { name: 'resto_temp', foreach: restaurants }"></tbody>
-</table>
+            <td>
+                <p data-bind="text: name"></p>
+            </td>                       
+            <td>
+                <p data-bind="text: lat"></p>
+            </td> 
+            <td>
+                <p data-bind="text: lon"></p>
+            </td> 
+            <td>
+                <a data-bind="attr: { href: '/app/administration/edit_menu?restaurant_id=' + id}" class="btn btn-default btn-sm">Menu</a>
+            </td>  
+            <td>
+                <button class="btn btn-default btn-sm" data-bind="click: $root.set_restaurant">Edit</button>
+            </td>                                     
+        </tr>   
+    </script>
 
-<script id="resto_temp" type="text/html">
-    <tr>
-        <td>
-            <p data-bind="text: name"></p>
-        </td>                       
-        <td>
-            <p data-bind="text: lat"></p>
-        </td> 
-        <td>
-            <p data-bind="text: lon"></p>
-        </td> 
-        <td>
-            <a data-bind="attr: { href: '/administration/edit_menu?restaurant_id=' + id}" class="btn btn-default btn-sm">Menu</a>
-        </td>  
-        <td>
-            <button class="btn btn-default btn-sm">User</button>
-        </td>                                     
-    </tr>   
-</script>
+    <%= render 'restaurant_template' %>
 
-<script type='text/javascript'>//<![CDATA[ 
+    <script type='text/javascript'>//<![CDATA[ 
 
-    function Restaurant(data) {
-        console.log("New Restaurant: " + data.name);
-        var self = this;
-        self.name = ko.observable(data.name);
-        self.lat = ko.observable(data.lat);
-        self.lon = ko.observable(data.lon);
-        self.id = data._id;
-    }
+        function Restaurant(data) {
+            console.log("New Restaurant: " + data.name);
+            var self = this;
+            self.name = ko.observable(data.name ? data.name : "");
+            self.lat = ko.observable(data.lat ? data.lat : "");
+            self.lon = ko.observable(data.lon ? data.lon : "");
+            self.website = ko.observable(data.website ? data.website : "");
+            self.phone = ko.observable(data.phone ? data.phone : "");
+            self.address_line_1 = ko.observable(data.address_line_1 ? data.address_line_1 : "");
+            self.address_line_2 = ko.observable(data.address_line_2 ? data.address_line_2 : "");
+            self.city = ko.observable(data.city ? data.city : "");
+            self.province = ko.observable(data.province ? data.province : "");
+            self.postal_code = ko.observable(data.postal_code ? data.postal_code : "");
+            self.id = data._id;
+        }
 
-    function viewModel() {
-        var self = this;
-        self.restaurant_name = ko.observable("");
-        self.restaurants = ko.observableArray([]);
-        self.search_for_restaurant = function() {
-            console.log("Searching!");
-            $.getJSON("/app/administration/search_restaurants?restaurant_name=" + self.restaurant_name(), function(data) { 
-                self.restaurants($.map(data, function(item) { console.log(item); return new Restaurant(item) }));
-            }).fail( function(d, textStatus, error) {
-                console.error("getJSON failed, status: " + textStatus + ", error: "+error)
-            });
+        function viewModel() {
+            var self = this;
+            self.restaurant_name = ko.observable("");
+            self.restaurants = ko.observableArray([]);
+            self.current_restaurant = ko.observable();
+            self.search_for_restaurant = function() {
+                console.log("Searching!");
+                $.getJSON("/app/administration/search_restaurants?restaurant_name=" + self.restaurant_name(), function(data) { 
+                    self.restaurants($.map(data, function(item) { console.log(item); return new Restaurant(item) }));
+                }).fail( function(d, textStatus, error) {
+                    console.error("getJSON failed, status: " + textStatus + ", error: "+error)
+                });
+            };
+
+            self.set_restaurant = function(resto) {
+                self.current_restaurant(resto);
+            };
+
+            self.new_restaurant = function(){
+                self.current_restaurant(new Restaurant({
+                                                        name:"New Restaurant",
+                                                        lat:0.0,
+                                                        lon:0.0,
+                                                        _id:null,
+                                                        address_line_2:"",
+                                                        address_line_1:"",
+                                                        phone:"",
+                                                        city:"",
+                                                        province:""
+                                                    }))
+            }        
         };
-    };
 
-    ko.applyBindings(new viewModel());
+        ko.applyBindings(new viewModel());
 
 
-//]]>  
-</script>
+    //]]>  
+    </script>
+</div>

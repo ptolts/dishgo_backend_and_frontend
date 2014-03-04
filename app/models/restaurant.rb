@@ -10,6 +10,14 @@ class Restaurant
   field :menu, type: Hash
   # field :images, type: Array
   field :name, type: String
+  field :city, type: String
+  field :address_line_1, type: String
+  field :address_line_2, type: String
+  field :province, type: String
+  field :postal_code, type: String
+  field :phone, type: String
+  field :website, type: String
+
   has_many :sources, :class_name => "Sources"
   has_many :image, :class_name => "Image"
   has_many :section, :class_name => "Section"
