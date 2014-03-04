@@ -1,8 +1,5 @@
 Foodcloud::Application.configure do
-
-  config.relative_url_root = "/app"
-  ENV['RAILS_RELATIVE_URL_ROOT'] = "/app"
-
+  
   # Settings specified here will take precedence over those in config/application.rb
 
   # Code is not reloaded between requests
