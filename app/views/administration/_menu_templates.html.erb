@@ -1,6 +1,6 @@
  <!-- TEMPLATES -->
     <script id="size" type="text/html">
-        <div class="col-xs-12 text-center push_down">
+        <div class="col-xs-12 text-center push_down" id="no_padding">
             <div class="option"> 
                 <div class="dish_top">
                     <img src="/assets/icon@2x.png" width="25" class="icon">
@@ -8,14 +8,14 @@
                         <span data-bind="text: name"></span>      
                     </div>                       
                 </div>              
-                <div class="option_section">          
+                <div class="option_section" id="no_padding">
+                <div class="col-xs-12 text-center"></div>
+                    <em id="white_uppercase">Add all dish sizes and prices.</em>         
                     <!-- ko foreach: individual_options -->
                         <div class="col-xs-12 push_down">
                             <div class="individual_option">                 
                                     <div class="col-xs-6">
-                                        <div class="col-xs-10 ">
-                                            <input data-bind="value: name, valueUpdate: 'afterkeydown'" class="form-control"/>   
-                                        </div>              
+                                            <input data-bind="value: name, valueUpdate: 'afterkeydown'" class="form-control"/>                
                                     </div>
                                     <div class="col-xs-6">              
                                         <div class="input-group ">
@@ -29,8 +29,8 @@
                                 <!-- /ko -->
                         </div> 
                     <!-- /ko -->
-                    <div class="col-xs-12 push_down">
-                        <button class="btn btn-sm btn-info col-xs-offset-7" data-bind="click: addSize">Add Size</button>
+                    <div class="col-xs-12 push_down text-left" id="extra_padding">
+                        <button class="btn btn-section btn-block" data-bind="click: addSize">+ Add Size</button>
                     </div>
                 </div>
             </div>
@@ -52,7 +52,7 @@
                         <img class="img-rounded" data-bind="attr: {src: url}" />
                         <div class="caption">
                             <div class="pull-left">
-                                <span class="btn btn-info btn-sm" data-bind="click: $root.showModal">
+                                <span class="btn btn-dish" data-bind="click: $root.showModal">
                                     <i class="glyphicon glyphicon-edit"></i>
                                 </span>                     
                             </div>
@@ -106,7 +106,7 @@
     <script id="default" type="text/html">
         <div class="col-xs-12 form-horizontal option_default">
             <div class="option">
-                <div class="option_section no_pad">          
+                <div class="more_options">          
                     <div class="dish_top">
                         <img src="/assets/icon@2x.png" width="25" class="icon">
                         <div class="option_title">
@@ -115,75 +115,70 @@
                         <span class="dish_close_icon glyphicon glyphicon-remove" data-bind="click: $parent.remove"></span>               
                     </div>  
 
-                    <div class="form-group">
-                        <label class="col-xs-2 control-label ">Title:</label>
-                        <div class="col-xs-10">
+                    <div class="form-group" style="margin-bottom: 0px;">
+                        <div class="col-xs-12">
+                        <em id="white_uppercase"  data-bind="text: option_title">Add option title. EG. SIDES or TOPPINGS</em>
+                        </div>
+                        <div class="col-xs-12 push_down">
                             <input class="form-control " data-bind="value: name, valueUpdate: 'afterkeydown'"/>
                         </div>
                     </div>   
 
-                    <div class="col-xs-12">
-                        <div class="col-centered form-inline control_piece">
-                            <div class="control_piece_center">
+                    <div class="col-xs-12" id="no_padding">
+                        <div class="form-inline control_piece text-left">
                                 <div class="checkbox">
-                                    <label><em>Do these options cost extra? </em><input data-bind="checked: extra_cost" type="checkbox"></label>
+                                    <label><input data-bind="checked: extra_cost" type="checkbox"><em id="white_uppercase"> Do these options cost extra? </em></label>
                                 </div>
-                            </div>
                         </div>                              
                     </div>                                
                     <div data-bind="foreach: individual_options">
-                        <div class="col-xs-11 col-xs-offset-1 push_down individual_option_container">
+                        <div class="col-xs-12 push_down individual_option_container">
 
                             <div class="individual_option push_down">
-
-                                <div class="form-group">
-                                    <label class="col-xs-3 control-label ">Option Title:</label>
-                                    <div class="col-xs-9">
+                                <div class="col-xs-12">
+                                    <em id="uppercase">Add individual options. E.G. FRIES, PEPPERONI</em>
+                                </div>
+                                <div class="form-group" style="margin-bottom: 0px;">
+                                    <div class="col-xs-8 push_down">
                                         <input class="form-control " data-bind="value: name, valueUpdate: 'afterkeydown'"/>
-                                    </div>
-                                </div>   
-
+                                    </div> 
 
                                 <div data-bind="visible: $parent.extra_cost()">
-                                    <div class="col-xs-10 col-xs-offset-1" data-bind="visible: !price_according_to_size()">
-                                        <div class="col-xs-12 push_down">
-                                            <strong class="price_option_label col-xs-6">Price: </strong>
-                                            <div class="input-group  col-xs-4 col-xs-offset-2">
+                                    <div class="col-xs-4 push_down"style="padding-left: 0px;" data-bind="visible: !price_according_to_size()">
+                                            <div class="input-group">
                                                 <span class="input-group-addon">$</span>
                                                 <input type="text" class="form-control price_filter" data-bind="value: price, valueUpdate: 'afterkeydown'">
                                             </div>   
                                         </div>                                       
                                     </div>
-                                    <div class="col-xs-10 col-xs-offset-1" data-bind="visible: price_according_to_size">             
+                                    <div class="col-xs-12"  data-bind="visible: $parent.multiple_prices">
+                                        <div class="form-inline control_piece text-left">
+                                                <div class="checkbox">
+                                                    <label><input data-bind="checked: price_according_to_size" type="checkbox"><em id="uppercase"> Does the price depend on the dish size?</em></label>
+                                                </div>
+                                        </div>                              
+                                    </div>
+                                    <div class="col-xs-12" data-bind="visible: price_according_to_size">             
                                         <!-- ko foreach: size_prices -->
                                             <div class="col-xs-12 push_down">
-                                                    <strong class="price_option_label col-xs-6" data-bind="text: name"></strong>
-                                                    <div class="input-group  col-xs-4 col-xs-offset-2">
+                                                    <strong class="price_option_label col-xs-7" data-bind="text: name"></strong>
+                                                    <div class="input-group col-xs-5">
                                                         <span class="input-group-addon">$</span>
                                                         <input type="text" class="form-control price_filter" data-bind="value: price, valueUpdate: 'afterkeydown'">
                                                     </div>                                                                                
                                             </div>
                                         <!-- /ko -->
-                                    </div>
-                                    <div class="col-xs-12 push_down"  data-bind="visible: $parent.multiple_prices">
-                                        <div class="col-centered form-inline control_piece">
-                                            <div class="control_piece_center">
-                                                <div class="checkbox">
-                                                    <label><em>Does the price depend on the dish size? </em><input data-bind="checked: price_according_to_size" type="checkbox"></label>
-                                                </div>
-                                            </div>
-                                        </div>                              
                                     </div>                                  
                                 </div> 
 
-                                <div class="col-xs-12">
+                                <div class="col-xs-5" id="no_padding">
                                     <!-- ICON UPLOADER -->
                                     <!-- ko with: icon -->
                                         <div data-bind="template: { name: 'icon', data: $data}"></div>  
                                     <!-- /ko -->                                  
-                                    <span class="push_down btn btn-success btn-sm file_upload_button col-xs-10 col-xs-offset-1">
-                                        <i class="glyphicon glyphicon-plus"></i>
-                                        <span>Add Icon</span>
+                                    <span class="push_down btn btn-dish btn-block file_upload_button">
+                                        <i class="glyphicon glyphicon-picture"></i>
+                                        <span>Option Icon</span>
                                         <!-- The file input field used as target for the file upload widget -->
                                         <input data-bind="file_upload_icon" id="fileupload" type="file" accept="images/*" capture="camera" name="files"  class="file_upload_input">
                                     </span> 
@@ -195,11 +190,11 @@
                         </div> 
                     </div>
 
-                    <div class="col-xs-12 push_down">
-                        <div class="col-centered form-inline control_piece">
+                    <div class="col-xs-12 push_down" id="no_padding">
+                        <div class="form-inline control_piece text-left">
                             <div class="control_piece_center">
                               <div class="checkbox">
-                                <label><em>Show advanced options? </em><input data-bind="checked: advanced" type="checkbox"></label>
+                                <label><input data-bind="checked: advanced" type="checkbox"><em id="white_uppercase"> Show advanced options?</em></label>
                               </div>
                             </div>                              
                         </div>
@@ -207,10 +202,10 @@
 
                     <div data-bind="visible: advanced">
                         <div class="col-xs-12 push_down">
-                            <div class="col-xs-6" style="text-align: right">
+                            <div class="col-xs-7" id="white" style="text-align: right">
                                 <span class="selection_constraint_label">Minimum selection:</span>
                             </div>
-                            <div class="col-xs-3 col-xs-offset-1">
+                            <div class="col-xs-5">
                                 <select class="form-control" data-bind="value: min_selections">
                                     <!-- ko foreach: individual_options -->
                                         <!-- ko ifnot: ($index() + 1) == $parent.individual_options().length -->
@@ -225,10 +220,10 @@
                         </div>      
 
                         <div class="col-xs-12 push_down">
-                            <div class="col-xs-6" style="text-align: right">
-                                <span class="selection_constraint_label">Max selection:</span>
+                            <div class="col-xs-7" id="white" style="text-align: right">
+                                <span class="selection_constraint_label">Maximum selection:</span>
                             </div>
-                            <div class="col-xs-3 col-xs-offset-1">
+                            <div class="col-xs-5">
                                 <select class="form-control" data-bind="value: max_selections">
                                     <!-- ko foreach: individual_options -->
                                         <!-- ko if: ($index() + 1) == $parent.individual_options().length -->
@@ -243,8 +238,8 @@
                         </div>
                     </div>                              
 
-                    <div class="col-xs-12 push_down">
-                        <button class="btn btn-sm btn-info col-xs-10 col-xs-offset-1" data-bind="click: addOption">Add Suboption</button>
+                    <div class="col-xs-12 push_down" id="no_padding">
+                        <button class="btn btn btn-dish btn-block" data-bind="click: addOption">+ Add Suboption</button>
                     </div>
                 </div>              
             </div>

@@ -412,6 +412,10 @@ function Option(data,dish) {
         return cost;
     });
 
+    self.option_title = ko.computed(function(){
+        return "Add an option to " + self.dish.name() + ".";
+    });    
+
     self.editing_name = ko.observable(false);
     self.edit_name = function() { 
         self.editing_name(true);    
