@@ -10,8 +10,8 @@
 // WARNING: THE FIRST BLANK LINE MARKS THE END OF WHAT'S TO BE PROCESSED, ANY BLANK LINE SHOULD
 // GO AFTER THE REQUIRES BELOW.
 //
-//= require jquery
-//= require jquery_ujs
+// = require jquery
+// = require jquery_ujs
 // = require knockout-latest.js
 // = require underscore
 // = require jquery.isotope.min.js
@@ -21,5 +21,6 @@
 // = require jquery.fileupload.js
 // = require bootbox.min.js
 // = require spin.min.js
+// = bootstrap.min.js
 
 
