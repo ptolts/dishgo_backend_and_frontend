@@ -21,4 +21,5 @@
 // = require jquery.fileupload.js
 // = require bootbox.min.js
 // = require spin.min.js
-//= require_tree .
+
+
