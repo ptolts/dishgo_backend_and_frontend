@@ -20,6 +20,6 @@
 // = require jquery.fileupload.js
 // = require bootbox.min.js
 // = require spin.min.js
-// = bootstrap.min.js
+// = require bootstrap.min.js
 
 
