@@ -78,13 +78,17 @@
     <%= javascript_include_tag "menu_editor" %>
 
     <script type='text/javascript'>
+
         var restaurant_id = "<%= params[:restaurant_id]%>";
         var menu_data = <%= raw(@menu_data) %>;
         var resto_data = <%= raw(@resto_data.to_json) %>;
         var image_crop_url = "/app/administration/crop_image";
         var icon_upload_url = "/app/administration/upload_icon"
-        var image_upload_url = "/app/administration/upload_image"        
-        ko.applyBindings(new MenuViewModel());
+        var image_upload_url = "/app/administration/upload_image"
+
+        $(function(){        
+            ko.applyBindings(new MenuViewModel());
+        });
 
         $("#menu-toggle").click(function(e) {
             e.preventDefault();
