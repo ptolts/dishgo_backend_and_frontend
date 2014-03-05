@@ -59,6 +59,14 @@ function Section(data,topmodel) {
         self.dom_id = "";
     } 
 
+    self.computed_title = ko.computed(function(){
+        if(self.name() == ""){
+            return "New Section";
+        } else {
+            return self.name();
+        }
+    })
+
     self.title_image = ko.computed(function() {
         // if(self.images().length > 0){
         //     return self.images()[0].url
@@ -705,7 +713,7 @@ function MenuViewModel() {
     self.addSection = function() {
         console.log("Adding Section");
         self.newDomCounter++;
-        var new_section = new Section({name:" ",subsection:[],dom_id:self.newDomCounter},self);
+        var new_section = new Section({name:"",subsection:[],dom_id:self.newDomCounter},self);
         self.menu.push(new_section);
         self.current_section(new_section);
         self.current_dish(null);

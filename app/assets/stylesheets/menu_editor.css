@@ -492,6 +492,23 @@ input {
     box-shadow: 2px 2px 3px -2px rgba(26,26,26,1);;
 }
 
+.section_section {
+    position: relative;
+    display: inline-block;
+    min-height: 100px;
+    margin-bottom: 15px;
+    padding: 15px;
+    padding-top: 30px; 
+    max-width: 600px;  
+    width: 100%;
+    background-color: #f7f7f7;
+    border: 1px solid #dae3e9;
+    border-radius: 5px 5px 5px 5px;
+    -webkit-box-shadow: 3px 3px 3px -2px rgba(26,26,26,1);
+    -moz-box-shadow: 3px 3px 3px -2px rgba(26,26,26,1);
+    box-shadow: 2px 2px 3px -2px rgba(26,26,26,1);;
+}
+
 .dish {
     /*overflow:hidden;  */
     vertical-align: top;

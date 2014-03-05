@@ -16,12 +16,12 @@
             <ul class="sidebar-nav" data-bind="foreach: menu">
                 <li class="section_title_menu">
                     <span class="glyphicon glyphicon-play pull-right icon-flipped" data-bind="visible: $root.current_section_check($data)" id="icon_play"></span>                    
-                    <div class="media push_down"> 
+                    <div class="media push_down" data-bind="click: $root.set_section"> 
                         <a class="pull-left">
                             <img class="media-object" height="25" data-bind="attr:{src:title_image}">
                         </a>
                         <div class="media-body">
-                            <h4 class="media-heading" data-bind="text: name" id="uppercase"></h4><button class="btn btn-dish btn-xs pull-left" type="button" data-bind="click: addDish" id="add_dish_button">+ Add Dish</button> 
+                            <h4 class="media-heading" data-bind="text: computed_name" id="uppercase"></h4><button class="btn btn-dish btn-xs pull-left" type="button" data-bind="click: addDish" id="add_dish_button">+ Add Dish</button> 
                         </div>                          
                     </div>
                 </li>
@@ -44,11 +44,14 @@
             <!-- Keep all page content within the page-content inset div! -->
             <div class="page-content inset">
                 <div class="row">
+
                     <a id="menu-toggle" href="#" class="btn btn-default"><i class="glyphicon glyphicon-th-list"></i></a>
 
-                    <div class="col-md-6 col-xs-12 text-center" data-bind="with: current_section">
-                        <%= render 'section_content' %>
-                    </div>
+                    <!-- ko with: current_section -->
+                        <div class="col-md-6 col-xs-12 text-center">
+                            <%= render 'section_content' %>
+                        </div>
+                    <!-- /ko -->
 
                     <div class="col-md-6 col-xs-12 text-center" data-bind="with: current_dish">
                         <%= render 'menu_content' %>
@@ -57,6 +60,7 @@
                     <div class="col-md-6 col-xs-12" data-bind="with: current_dish">
                         <%= render 'demo_code' %>
                     </div> 
+
                 </div>
             </div>
         </div>
