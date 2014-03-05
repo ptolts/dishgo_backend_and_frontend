@@ -234,6 +234,14 @@ function Dish(data) {
     self.images = ko.observableArray([]);
     self.sizeSelectedOptionValue = ko.observable();
 
+    self.computed_name = ko.computed(function(){
+        if(self.name() == ""){
+            return "New Dish";
+        } else {
+            return self.name();
+        }
+    })
+
     if(data._id){
         self.id = data._id;
     } else {
