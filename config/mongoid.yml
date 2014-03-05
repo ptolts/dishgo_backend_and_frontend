@@ -3,17 +3,16 @@ development:
   sessions:
     # Defines the default session. (required)
     default:
-      # Defines the name of the default database that Mongoid can connect to.
-      # (required).
-      database: foodcloud_development
-      # Provides the hosts the default session can connect to. Must be an array
-      # of host:port pairs. (required)
       hosts:
-        - localhost:27017
+        - database1.dishgo.io:27017
+        - database2.dishgo.io:27017
+        - database3.dishgo.io:27017
+      database: dishgo_dev        
+      username: phil
+      password: 0ud1Vi7u
       options:
-        # Change whether the session persists in safe mode by default.
-  options:
-    # Configuration for whether or not to allow access to fields that do
+        ssl: true
+        read: :primary_preferred     
 
 
 production:

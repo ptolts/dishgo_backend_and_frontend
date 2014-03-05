@@ -56,7 +56,7 @@ function Section(data) {
         // if(self.images().length > 0){
         //     return self.images()[0].url
         // } else {
-            return "/assets/icon@2x.png"
+            return "/app/public/icon@2x.png"
         // }
     }, self);        
 
@@ -267,7 +267,7 @@ function Dish(data) {
         if(self.images().length > 0){
             return self.images()[0].url();
         } else {
-            return "/assets/icon@2x.png";
+            return "/app/public/icon@2x.png";
         }
     }, self);  
 
@@ -275,7 +275,7 @@ function Dish(data) {
         if(self.images().length > 0){
             return self.images()[0].original();
         } else {
-            return "/assets/icon@2x.png";
+            return "/app/public/icon@2x.png";
         }
     }, self);  
 
