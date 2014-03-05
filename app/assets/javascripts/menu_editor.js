@@ -112,7 +112,7 @@ function Section(data,topmodel) {
         // console.log("Adding Dish");
         var new_dish = new Dish({name:self.newDishName(),});
         self.dishes.unshift(new_dish);
-        self.topmodel.set_section(null);
+        self.topmodel.current_section(null);
         self.topmodel.set_dish(new_dish);
         updateFilters();
     }   
