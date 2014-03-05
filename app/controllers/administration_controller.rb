@@ -1,6 +1,6 @@
 class AdministrationController < ApplicationController
   before_filter :authenticate_user!
-  before_filter :admin_user!, :only => [:users, :restaurants, :search_restaurants, :update_user, :add_user]
+  before_filter :admin_user!, :only => [:users, :restaurants, :search_restaurants, :update_user, :add_user, :user_destroy]
   before_filter :admin_or_owner!, :only => [:edit_menu, :update_menu, :crop_image, :crop_icon]
   layout 'administration'
   after_filter :set_access_control_headers
@@ -49,7 +49,13 @@ class AdministrationController < ApplicationController
   	user.is_admin = params[:is_admin].to_bool
   	user.save
   	render :text => "User Saved."
-  end  
+  end 
+
+  def destroy_user
+    user = User.find(params[:user_id])
+    user.destroy
+    render :text => "User Destroyed!"
+  end 
 
   def user_set_restaurant
     user = User.find(params[:user_id])

@@ -82,4 +82,12 @@ class User
     end
   end  
 
+  def email_required?
+    if self.facebook_auth_token.blank?
+      return true
+    else
+      return false
+    end
+  end
+
 end

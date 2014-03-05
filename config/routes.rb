@@ -18,6 +18,7 @@ Foodcloud::Application.routes.draw do
       get 'search_restaurants'
       get 'search_users'
       post 'update_user'  
+      post 'destroy_user'  
       post 'update_menu'
       post 'upload_image'        
       post 'create_user' 
