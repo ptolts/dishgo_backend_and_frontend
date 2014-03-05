@@ -26,13 +26,17 @@
           </ul>
 
           <% if current_page?(controller: "administration", action: "edit_menu") %>
-            <div class="">
-              <button class="btn btn-success btn-sm navbar-btn" data-bind="click: saveMenu"><i class="glyphicon glyphicon-ok"></i> Commit Changes</button>
-
-              <button class="btn btn-danger btn-sm navbar-btn"><i class="glyphicon glyphicon-remove"></i> Discard Changes</button>
-
-              <button class="btn btn-primary btn-sm navbar-btn" data-bind="click: togglePreview, text: previewText, visible: current_dish"></button>  
-            </div>                            
+            <ul class="nav navbar-nav navbar-right">
+              <li>
+                <button class="btn btn-success btn-sm navbar-btn" data-bind="click: saveMenu"><i class="glyphicon glyphicon-ok"></i> Commit Changes</button>
+              </li>
+              <li>
+                <button class="btn btn-danger btn-sm navbar-btn"><i class="glyphicon glyphicon-remove"></i> Discard Changes</button>
+              </li>
+              <li>
+                <button class="btn btn-primary btn-sm navbar-btn" data-bind="click: togglePreview, text: previewText, visible: current_dish"></button>  
+              </li>
+            </ul>                          
           <% end %>
 
           <ul class="nav navbar-nav navbar-right">
