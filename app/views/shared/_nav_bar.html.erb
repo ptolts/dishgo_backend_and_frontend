@@ -25,6 +25,14 @@
             <% end %>
           </ul>
 
+          <% if current_page?(controller: "administration", action: "edit_menu") %>
+            <button class="btn btn-success navbar-btn" data-bind="click: saveMenu"><i class="glyphicon glyphicon-ok"></i> Commit Changes</button>
+
+            <button class="btn btn-danger navbar-btn"><i class="glyphicon glyphicon-remove"></i> Discard Changes</button>
+
+            <button class="btn btn-primary navbar-btn" data-bind="click: togglePreview, text: previewText, visible: current_dish"></button>                    
+          <% end %>
+
           <ul class="nav navbar-nav navbar-right">
             <% if user_signed_in? %>
             <li>
