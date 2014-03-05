@@ -104,8 +104,8 @@ function Section(data,topmodel) {
         // console.log("Adding Dish");
         var new_dish = new Dish({name:self.newDishName(),});
         self.dishes.unshift(new_dish);
-        topmodel.set_section(null);
-        topmodel.set_dish(new_dish);
+        self.topmodel.set_section(null);
+        self.topmodel.set_dish(new_dish);
         updateFilters();
     }   
 
@@ -705,7 +705,7 @@ function MenuViewModel() {
     self.addSection = function() {
         console.log("Adding Section");
         self.newDomCounter++;
-        var new_section = new Section({name:"",subsection:[],dom_id:self.newDomCounter});
+        var new_section = new Section({name:" ",subsection:[],dom_id:self.newDomCounter});
         self.menu.push(new_section);
         self.current_section(new_section);
         self.current_dish(null);
