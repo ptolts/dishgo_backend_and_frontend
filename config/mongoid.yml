@@ -9,7 +9,7 @@ development:
         - database3.dishgo.io:27017
       database: dishgo_dev        
       username: phil
-      password: 0ud1Vi7u
+      password: 0ud1Vi7udev
       options:
         ssl: true
         read: :primary_preferred     
