@@ -6,7 +6,7 @@ Foodcloud::Application.routes.draw do
     get '/' => 'menu#index'
   end
 
-  root :to => 'users#sign_in'
+  root :to => 'administration#index'
 
   resources :token_authentications, :only => [:create, :destroy]
 
