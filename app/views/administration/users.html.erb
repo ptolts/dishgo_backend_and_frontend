@@ -44,7 +44,7 @@
                 <button class="btn btn-default btn-sm" data-bind="click: $root.set_user">Edit</button>
             </td>   
             <td>
-                <button class="btn btn-default btn-sm" data-bind="click: set_user">Edit</button>
+                <button class="btn btn-default btn-sm" data-bind="click: $root.remove">Destroy</button>
             </td>   
         </tr>   
     </script>
@@ -126,7 +126,8 @@
             self.users = ko.observableArray([]);
             self.search_for_users = function() {
                 console.log("Searching!");
-                $.getJSON("/app/administration/search_users?email=" + self.email(), function(data) { 
+                $.getJSON("/app/administration/search_users?email=" + self.email(), function(data) {
+                    self.users([]); 
                     self.users($.map(data, function(item) { console.log(item); return new User(item) }));
                 }).fail( function(d, textStatus, error) {
                     console.error("getJSON failed, status: " + textStatus + ", error: "+error)
