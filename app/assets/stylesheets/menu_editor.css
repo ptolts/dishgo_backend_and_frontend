@@ -14,7 +14,7 @@ body {
     color: #29323a;
 }
 .admin_logo {
-  background-image: url("logo_white_nav.png");
+  background-image: url("/app/public/logo_white_nav.png");
 }
 .navbar {
   max-height: 50px;
