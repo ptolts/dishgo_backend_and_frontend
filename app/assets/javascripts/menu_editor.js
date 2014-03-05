@@ -59,7 +59,7 @@ function Section(data,topmodel) {
         self.dom_id = "";
     } 
 
-    self.computed_title = ko.computed(function(){
+    self.computed_name = ko.computed(function(){
         if(self.name() == ""){
             return "New Section";
         } else {
