@@ -11,4 +11,5 @@
  *= require_self
  *= require bootstrap.min.css
  *= require_tree .
+ *= require admin_nav.css
  */
