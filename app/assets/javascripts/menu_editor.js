@@ -110,7 +110,7 @@ function Section(data,topmodel) {
     self.newDishName = ko.observable();
     self.addDish = function() {
         // console.log("Adding Dish");
-        var new_dish = new Dish({name:self.newDishName(),});
+        var new_dish = new Dish({name:self.newDishName()});
         self.dishes.unshift(new_dish);
         self.topmodel.current_section(null);
         self.topmodel.current_dish(new_dish);
