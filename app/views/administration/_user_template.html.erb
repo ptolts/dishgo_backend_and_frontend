@@ -6,17 +6,17 @@
                 <div class="form-group">
                     <label>Email</label>
                     <div class="controls">
-                        <input id="email" name="email" type="text" placeholder="Email" data-bind="value: name" class="form-control">
+                        <input id="email" name="email" type="text" placeholder="Email" data-bind="value: email" class="form-control">
                         <p class="help-block"></p>
                     </div>
                 </div>
                 <div class="row">
-                    <p>Admin:</p>
-                    <p data-bind="text: is_admin, click: toggle_is_admin"></p>
+                    <p>Admin: <span data-bind="text: is_admin, click: toggle_is_admin"></span></p>
                 </div> 
                 <div class="row">
-                    <p data-bind="text: restaurant"></p>
+                    <p>Restaurant: <span data-bind="text: restaurant"></span></p>
 
+                    <p>Set Restaurant:</p>
                     <div class="form-inline" role="form">
                         <input class="form-control" data-bind="value: restaurant_name" />
                         <button class="btn btn-default" data-bind="click: search_for_restaurant">Search</button>
