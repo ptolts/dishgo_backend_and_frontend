@@ -15,6 +15,7 @@
             </div>               
             <ul class="sidebar-nav" data-bind="foreach: menu">
                 <li class="section_title_menu">
+                    <span class="glyphicon glyphicon-play pull-right icon-flipped" data-bind="visible: $root.current_section_check($data)" id="icon_play"></span>                    
                     <div class="media push_down"> 
                         <a class="pull-left">
                             <img class="media-object" height="25" data-bind="attr:{src:title_image}">
@@ -44,6 +45,11 @@
             <div class="page-content inset">
                 <div class="row">
                     <a id="menu-toggle" href="#" class="btn btn-default"><i class="glyphicon glyphicon-th-list"></i></a>
+
+                    <div class="col-md-6 col-xs-12 text-center" data-bind="with: current_section">
+                        <%= render 'section_content' %>
+                    </div>
+
                     <div class="col-md-6 col-xs-12 text-center" data-bind="with: current_dish">
                         <%= render 'menu_content' %>
                     </div> 

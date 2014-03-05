@@ -27,12 +27,19 @@ function updateFilters() {
            eve.preventDefault();
        }
     });         
-}   
+} 
 
-function Section(data) {
+
+Section.prototype.toJSON = function() {
+    var copy = ko.toJS(this); //easy way to get a clean copy
+    delete copy.topmodel;
+    return copy; //return the copy to be serialized
+};  
+
+function Section(data,topmodel) {
 
     var self = this;
-
+    self.topmodel = topmodel;
     if(data._id){
         self.id = data._id;
     } else {
@@ -94,8 +101,11 @@ function Section(data) {
     // Operations
     self.newDishName = ko.observable();
     self.addDish = function() {
-        console.log("Adding Dish");
-        self.dishes.unshift(new Dish({name:self.newDishName(),}));
+        // console.log("Adding Dish");
+        var new_dish = new Dish({name:self.newDishName(),});
+        self.dishes.unshift(new_dish);
+        topmodel.set_section(null);
+        topmodel.set_dish(new_dish);
         updateFilters();
     }   
 
@@ -367,6 +377,7 @@ Option.prototype.toJSON = function() {
     delete copy.sizes_object_names; 
     return copy; //return the copy to be serialized
 };
+
 function Option(data,dish) {
 
     var self = this;
@@ -656,15 +667,22 @@ function MenuViewModel() {
         }
     });
 
-    self.menu($.map(menu_data.menu, function(item) { return new Section(item) }));
+    self.menu($.map(menu_data.menu, function(item) { return new Section(item,self) }));
     $(".tooltipclass").tooltip({delay: { show: 500, hide: 100 }});
     updateFilters();
 
     self.current_dish = ko.observable();
+    self.current_section = ko.observable();
 
     self.set_dish = function(dish) {
+        self.current_section(null);
         self.current_dish(dish);
     };
+
+    self.set_section = function(section) {
+        self.current_dish(null);
+        self.current_section(section);
+    };    
 
     self.current_dish_check = function(dish) {    
         if(dish == self.current_dish()){
@@ -674,16 +692,27 @@ function MenuViewModel() {
         }
     } 
 
+    self.current_section_check = function(section) {    
+        if(section == self.current_section()){
+            return true;
+        } else {
+            return false;
+        }
+    }     
+
     // Operations
     self.newSectionName = ko.observable();
     self.addSection = function() {
         console.log("Adding Section");
         self.newDomCounter++;
-        self.menu.push(new Section({name:self.newSectionName(),subsection:[],dom_id:self.newDomCounter}));
-        var target = "#"+self.newDomCounter;
-        $('html').animate({
-            scrollTop: $(target).offset().top
-        }, 500);
+        var new_section = new Section({name:"",subsection:[],dom_id:self.newDomCounter});
+        self.menu.push(new_section);
+        self.current_section(new_section);
+        self.current_dish(null);
+        // var target = "#"+self.newDomCounter;
+        // $('html').animate({
+        //     scrollTop: $(target).offset().top
+        // }, 500);
     } 
 
     self.showModal = function(image) {
