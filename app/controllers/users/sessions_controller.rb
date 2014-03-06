@@ -1,4 +1,4 @@
-class SessionsController < Devise::SessionsController
+class Users::SessionsController < Devise::SessionsController
   def create
     @user = User.where(:email => params[:user][:email]).first
     if !@user or @user.confirmed?
