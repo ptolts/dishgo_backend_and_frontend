@@ -1,6 +1,6 @@
 Foodcloud::Application.routes.draw do
 
-  devise_for :users, :controllers => { :registrations => "registration" }
+  devise_for :users, :controllers => { :registrations => "registration", :sessions => "sessions" }
 
   constraints(Subdomain) do
     get '/' => 'menu#index'
