@@ -2,6 +2,10 @@ Foodcloud::Application.routes.draw do
 
   devise_for :users, :controllers => { :registrations => "users/registration", :sessions => "users/sessions" }
 
+  devise_scope :user do
+    get "users/registration/confirm" => "users/registration#confirm"
+  end
+
   constraints(Subdomain) do
     get '/' => 'menu#index'
   end
