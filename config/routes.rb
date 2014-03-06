@@ -17,8 +17,7 @@ Foodcloud::Application.routes.draw do
   end
 
   devise_scope :users do
-    get "/app/registration/confirm" => "registration#confirm"
-    get "/registration/confirm" => "registration#confirm"
+    get '/app/registration/confirm' => 'registration#confirm'
   end  
 
   resources :administration do

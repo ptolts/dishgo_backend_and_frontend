@@ -1,4 +1,5 @@
 class RegistrationController < Devise::RegistrationsController
+	
 	def confirm
 		Rails.logger.warn "rendering the fucking registration page."
 		render 'confirm'
