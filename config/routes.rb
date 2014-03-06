@@ -10,12 +10,6 @@ Foodcloud::Application.routes.draw do
 
   resources :token_authentications, :only => [:create, :destroy]
 
-  resources :registration do
-    collection do
-      get 'confirm'     
-    end
-  end
-
   devise_scope :user do
     get '/registration/confirm' => 'registration#confirm'
     get '/app/registration/confirm' => 'registration#confirm'
