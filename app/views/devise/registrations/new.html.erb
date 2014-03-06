@@ -10,6 +10,7 @@
 	</div>
 	<form class="form-horizontal" role="form" id="sign-up-form" method="post" action="<%= registration_path(resource_name) %>">
 		<%= render 'shared/error_messages' %>
+		<%= devise_error_messages! %>
 		<input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>" />
 		<div class="form-group">
 			<div class="col-sm-offset-1 col-sm-10">
