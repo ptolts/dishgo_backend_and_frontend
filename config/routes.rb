@@ -10,6 +10,12 @@ Foodcloud::Application.routes.draw do
 
   resources :token_authentications, :only => [:create, :destroy]
 
+  resources :registration do
+    collection do
+      get 'confirm'     
+    end
+  end
+
   resources :administration do
     collection do
       get 'restaurants'

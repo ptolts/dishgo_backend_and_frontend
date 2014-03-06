@@ -1,4 +1,8 @@
 class RegistrationController < Devise::RegistrationsController
+	def confirm
+		render 'confirm'
+	end
+
 	protected
 
 	# def after_sign_up_path_for(resource)
