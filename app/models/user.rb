@@ -65,7 +65,7 @@ class User
     end
   end
  
-  private
+  # private
   def generate_authentication_token
     loop do
       token = Devise.friendly_token
@@ -73,7 +73,7 @@ class User
     end
   end
 
-  protected
+  # protected
   def confirmation_required?
     if self.email.blank?
       return false
