@@ -1,6 +1,6 @@
 Foodcloud::Application.routes.draw do
 
-  devise_for :users, :controllers => { :registrations => "registration", :sessions => "sessions" }
+  devise_for :users, :controllers => { :registrations => "/users/registration", :sessions => "/users/sessions" }
 
   constraints(Subdomain) do
     get '/' => 'menu#index'
@@ -9,12 +9,6 @@ Foodcloud::Application.routes.draw do
   root :to => 'administration#index'
 
   resources :token_authentications, :only => [:create, :destroy]
-
-  devise_scope :users do
-    get '/registration/confirm' => 'registration#confirm'
-    get '/app/registration/confirm' => 'registration#confirm'
-    match '/app/registration/confirm' => 'registration#confirm', :via => :get
-  end  
 
   resources :administration do
     collection do
