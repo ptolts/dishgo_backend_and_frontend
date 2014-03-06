@@ -256,3 +256,11 @@ Devise.setup do |config|
   # so you need to do it manually. For the users scope, it would be:
   # config.omniauth_path_prefix = '/my_engine/users/auth'
 end
+
+module DeviseHelper
+  def devise_error_messages!
+    return '' if resource.errors.empty?
+    flash.now[:error] = flash[:error].to_a.concat resource.errors.full_messages
+    flash.now[:error].uniq!    
+  end
+end
