@@ -10,6 +10,6 @@ class RegistrationController < Devise::RegistrationsController
 	# end
 
 	def after_inactive_sign_up_path_for(resource)
-		'/app/registration/confirm'
+		'/registration/confirm'
 	end  
 end
