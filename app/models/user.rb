@@ -76,20 +76,16 @@ class User
   protected
   def confirmation_required?
     if self.email.blank?
-      Rails.logger.warn "email is blank, so no confirmation"
       return false
     else
-      Rails.logger.warn "email isnt blank, so confirmation"
       return true
     end
   end  
 
   def email_required?
     if self.facebook_auth_token.blank?
-      Rails.logger.warn "facebook is blank, so email is req"
       return true
     else
-      Rails.logger.warn "facebook isnt blank, so no eamil"
       return false
     end
   end

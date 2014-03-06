@@ -29,7 +29,7 @@ class AdministrationController < ApplicationController
 
   def search_users
   	result = User.where(:email => /#{params[:email]}/i).limit(25)
-  	render :json => result.as_json
+  	render :json => result.as_json(:include => :owns_restaurants)
   end  
 
   def create_user
