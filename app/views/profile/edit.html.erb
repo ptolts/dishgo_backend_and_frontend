@@ -14,7 +14,7 @@
 
 
     <%= render 'shared/restaurant_template' %>
-    
+    <%= render 'shared/user_template' %>
     <%= render 'shared/restaurant_javascript' %>
 
     <script type='text/javascript'>//<![CDATA[ 
@@ -28,8 +28,8 @@
 
         function viewModel() {
             var self = this;
-            self.restaurant = ko.observable(new Restaurant("<%= current_user.owns_restaurants.as_json %>");
-            self.user = ko.observable(new User("<%= current_user.as_json %>"))     
+            self.restaurant = ko.observable(new Restaurant("<%= raw(current_user.owns_restaurants.as_json.to_json) %>");
+            self.user = ko.observable(new User("<%= raw(current_user.as_json.to_json) %>"))     
         };
 
         ko.applyBindings(new viewModel());
