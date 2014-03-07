@@ -48,25 +48,10 @@
         </tr>   
     </script>
 
-    <%= render 'restaurant_template' %>
+    <%= render 'shared/restaurant_template' %>
+    <%= render 'shared/restaurant_javascript' %>
 
     <script type='text/javascript'>//<![CDATA[ 
-
-        function Restaurant(data) {
-            console.log("New Restaurant: " + data.name);
-            var self = this;
-            self.name = ko.observable(data.name ? data.name : "");
-            self.lat = ko.observable(data.lat ? data.lat : "");
-            self.lon = ko.observable(data.lon ? data.lon : "");
-            self.website = ko.observable(data.website ? data.website : "");
-            self.phone = ko.observable(data.phone ? data.phone : "");
-            self.address_line_1 = ko.observable(data.address_line_1 ? data.address_line_1 : "");
-            self.address_line_2 = ko.observable(data.address_line_2 ? data.address_line_2 : "");
-            self.city = ko.observable(data.city ? data.city : "");
-            self.province = ko.observable(data.province ? data.province : "");
-            self.postal_code = ko.observable(data.postal_code ? data.postal_code : "");
-            self.id = data._id;
-        }
 
         function viewModel() {
             var self = this;
@@ -105,5 +90,6 @@
 
 
     //]]>  
-    </script>
+    </script>    
+
 </div>
