@@ -5,8 +5,12 @@
 				</div>
 			</div>
 			<form class="form-horizontal" role="form" id="sign-up-form" method="post" action="<%= session_path(resource_name) %>">
-				<%= render 'shared/error_messages' %>
-				<input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>" />
+				<div class="row" style="margin-bottom: 0px;">
+					<div class="col-sm-10 col-sm-offset-2">
+						<%= render 'shared/error_messages' %>
+						<input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>" />
+					</div>
+				</div>
 				<div class="form-group">
 					<label for="user_email" class="col-sm-2 control-label">Email</label>
 					<div class="col-sm-10">
@@ -32,10 +36,10 @@
 
 				</div>
 				<div class="form-group">
-					<div class="col-sm-offset-7 col-sm-4">
+					<div class="col-sm-10 col-sm-offset-2 text-left">
 						<button class="btn btn-success" type="submit">Sign In<i class="fa fa-chevron-right" style="margin-left: 20px; font-size: 12px;"></i></button>
 					</div>
-					<div class="col-xs-12" style="text-align: right">
+					<div class="col-xs-12" style="text-align: right" id="shared_links">
 						<%= render "devise/shared/links" %>
 					</div>
 					<div class="col-xs-12">
