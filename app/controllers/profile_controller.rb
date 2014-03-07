@@ -3,8 +3,8 @@ class ProfileController < ApplicationController
 
   layout 'administration'
 
-  def profile
-    render 'profile'
+  def edit
+    render 'edit'
   end
 
 end

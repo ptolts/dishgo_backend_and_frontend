@@ -19,6 +19,9 @@
 
     <div class="col-md-6 col-xs-12" data-bind="with: current_user">
         <div data-bind="template: { name: 'user_template', data: $parent.current_user }"></div>
+        <div class="row">
+            <button class="btn btn-default btn-sm" data-bind="click: save">Save</button>
+        </div>         
     </div>    
 
     <div class="col-xs-6">
@@ -49,7 +52,7 @@
         </tr>   
     </script>
 
-    <%= render 'user_template' %>
+    <%= render 'shared/user_template' %>
 
     <script type='text/javascript'>//<![CDATA[ 
 
