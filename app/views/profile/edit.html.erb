@@ -1,16 +1,16 @@
 <div class="container">
 
-    <div class="row" data-bind="with: user">
+    <!-- ko with: user -->
         <div class="col-xs-12 col-md-6">
             <div data-bind="template: { name: 'user_template', data: $parent.user }"></div>
         </div>
-    </div>    
+    <!-- /ko -->    
 
-    <div class="row" data-bind="with: restaurant">
+    <!-- ko with: restaurant -->
         <div class="col-xs-12 col-md-6">
             <div data-bind="template: { name: 'restaurant_template', data: $parent.restaurant }"></div>
         </div>
-    </div>
+    <!-- /ko -->    
 
 
     <%= render 'shared/restaurant_template' %>
