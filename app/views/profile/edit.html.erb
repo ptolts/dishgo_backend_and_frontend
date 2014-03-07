@@ -19,6 +19,9 @@
 
     <script type='text/javascript'>//<![CDATA[ 
 
+        var resto_data = <%= raw(current_user.owns_restaurants.as_json.to_json) %>;
+        var user_data = <%= raw(current_user.as_json.to_json) %>;
+
         function User(data) {
             var self = this;
             self.id = data._id;
@@ -28,8 +31,8 @@
 
         function viewModel() {
             var self = this;
-            self.restaurant = ko.observable(new Restaurant(<%= raw(current_user.owns_restaurants.as_json.to_json) %>);
-            self.user = ko.observable(new User(<%= raw(current_user.as_json.to_json) %>))     
+            self.restaurant = ko.observable(new Restaurant(resto_data));
+            self.user = ko.observable(new User(user_data))     
         };
 
         ko.applyBindings(new viewModel());
