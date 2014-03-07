@@ -28,8 +28,8 @@
 
         function viewModel() {
             var self = this;
-            self.restaurant = ko.observable(new Restaurant("<%= raw(current_user.owns_restaurants.as_json.to_json) %>");
-            self.user = ko.observable(new User("<%= raw(current_user.as_json.to_json) %>"))     
+            self.restaurant = ko.observable(new Restaurant(<%= raw(current_user.owns_restaurants.as_json.to_json) %>);
+            self.user = ko.observable(new User(<%= raw(current_user.as_json.to_json) %>))     
         };
 
         ko.applyBindings(new viewModel());
