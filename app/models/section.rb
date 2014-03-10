@@ -52,8 +52,6 @@ class Section
 		draft[:name] = section["name"]
 
 		dishes = section["dishes"].collect do |dish|
-			Rails.logger.warn dish.to_s
-			Rails.logger.warn "--------------------"
 	        # Load Dish Object, or create a new one.
 	        if dish_object = Dish.where(:_id => dish["id"]).first and dish_object
 				if dish_object.restaurant != request_restaurant
