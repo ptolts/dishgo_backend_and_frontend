@@ -9,6 +9,7 @@ class Dish
   field :price, type: Float
   field :position, type: Integer
   field :published, type: Boolean
+  field :draft, type: Hash
   # belongs_to :subsection, index: true
   belongs_to :restaurant, index: true
 
