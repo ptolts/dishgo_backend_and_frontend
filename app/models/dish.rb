@@ -25,7 +25,7 @@ class Dish
   has_one :sizes, :class_name => 'Option', inverse_of: :dish_which_uses_this_as_size_options
   has_one :draft_sizes, :class_name => 'Option', inverse_of: :draft_dish_which_uses_this_as_size_options
 
-  default_scope ->{ where(:name.nin => ["", nil]) }
+  # default_scope ->{ where(:name.nin => ["", nil]) }
 
   index({ _id:1 }, { unique: true, name:"id_index" })
 
