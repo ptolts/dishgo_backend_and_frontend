@@ -1,3 +1,7 @@
+/*
+*= require jquery.Jcrop.min.js
+*/
+
 //<![CDATA[ 
 
 var opts = {
