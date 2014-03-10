@@ -769,7 +769,7 @@ function MenuViewModel() {
 
                 $.ajax({
                   type: "POST",
-                  url: "http://dev.foodcloud.ca:3000/administration/update_menu",
+                  url: "/app/administration/update_menu",
                   data: {
                     restaurant_id: restaurant_id,
                     menu: ko.toJSON(self.menu)
