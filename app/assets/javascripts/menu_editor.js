@@ -134,6 +134,7 @@ function Image(data) {
     self.image_width = ko.observable(0);
     self.image_height = ko.observable(0);
     self.coordinates = [];
+    self.failed = ko.observable(false);
 
     if(data){
         if(data.local_file){
@@ -197,7 +198,10 @@ ko.bindingHandlers.file_upload = {
             progressall: function (e, data) {
                 var progress = parseInt(data.loaded / data.total * 100, 10);
                 self.imageModel.progressValue(progress);
-            }        
+            },
+            fail: function (e, data) {
+                self.imageModel.failed(true);
+            },      
         });
     }
 };
@@ -225,7 +229,10 @@ ko.bindingHandlers.file_upload_icon = {
             progressall: function (e, data) {
                 var progress = parseInt(data.loaded / data.total * 100, 10);
                 self.imageModel.progressValue(progress);
-            }        
+            },
+            fail: function (e, data) {
+                self.imageModel.failed(true);
+            },                       
         });
     }
 };
