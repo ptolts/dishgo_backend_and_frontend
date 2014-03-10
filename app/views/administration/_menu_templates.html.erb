@@ -39,7 +39,7 @@
 
     <script id="image" type="text/html">
         <div class="col-xs-12 push_down">
-            <!-- ko visible: !failed() -->
+            <div data-bind="visible: !failed()">
                 <div class="uploading_image" data-bind="visible: !completed()">
                     <div class="col-xs-10 col-xs-offset-1">
                         <div class="progress" style="height: 10px">
@@ -61,13 +61,13 @@
                         </div>
                     </div>
                 </div> 
-            <!-- /ko -->
-            <!-- ko visible: failed() -->
+            </div>
+            <div data-bind="visible: failed()">
                 <div class="alert alert-warning alert-dismissable text-center">
                   <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                   <strong>Warning!</strong> There was a problem processing your image. Please contact support.
                 </div>                
-            <!-- /ko --> 
+            </div>
         </div>
         <div data-bind="template: { name: 'edit_image', data: $data}"></div>      
     </script> 
