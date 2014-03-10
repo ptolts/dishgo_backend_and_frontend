@@ -106,6 +106,7 @@ class Restaurant
     # result = RubyProf.profile {
       menu = self.draft_menu.collect do |section|
         hash = section.as_document
+        hash.merge!(section.draft)
         hash["dishes"] = section.draft_dishes.collect do |dish|
           dish.custom_to_hash_draft
         end
