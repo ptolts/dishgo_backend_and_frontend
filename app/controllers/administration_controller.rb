@@ -101,7 +101,7 @@ class AdministrationController < ApplicationController
       next section_object
   	end
 
-    restaurant.section = menu
+    restaurant.draft_section = menu
     restaurant.save
     render :json => ("{ \"menu\" : #{restaurant.menu_to_json} }")
 
