@@ -10,7 +10,9 @@ class Section
 	field :published, type: Boolean
 
 	belongs_to :restaurant, class_name: "Restaurant", inverse_of: :section, index: true
-	belongs_to :draft_restaurant, class_name: "Restaurant", inverse_of: :draft_section, index: true
+
+	belongs_to :draft_restaurant, class_name: "Restaurant", inverse_of: :draft_menu, index: true
+	belongs_to :published_restaurant, class_name: "Restaurant", inverse_of: :published_menu, index: true
 
 	has_many :dishes, class_name: "Dish", inverse_of: :section
 	has_many :draft_dishes, class_name: "Dish", inverse_of: :draft_section

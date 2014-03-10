@@ -22,7 +22,9 @@ class Restaurant
   has_many :image, :class_name => "Image"
 
   has_many :section, :class_name => "Section", inverse_of: :restaurant
-  has_many :draft_section, :class_name => "Section", inverse_of: :draft_restaurant
+
+  has_many :draft_menu, :class_name => "Section", inverse_of: :draft_restaurant
+  has_many :published_menu, :class_name => "Section", inverse_of: :published_restaurant
 
   has_many :orders, :class_name => "Order"
   belongs_to :user, :class_name => "User", index: true, inverse_of: :owns_restaurants
@@ -102,7 +104,7 @@ class Restaurant
 
   def draft_menu_to_json
     # result = RubyProf.profile {
-      menu = self.draft_section.collect do |section|
+      menu = self.draft_menu.collect do |section|
         hash = section.as_document
         hash["dishes"] = section.draft_dishes.collect do |dish|
           dish.custom_to_hash_draft
