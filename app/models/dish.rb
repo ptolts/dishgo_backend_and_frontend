@@ -13,7 +13,7 @@ class Dish
   belongs_to :restaurant, index: true
 
   has_and_belongs_to_many :image, inverse_of: nil, index: true
-  has_and_belongs_to_many :draft_image, class_name: "Images", inverse_of: nil, index: true
+  has_and_belongs_to_many :draft_image, class_name: "Image", inverse_of: nil, index: true
 
   belongs_to :section, class_name: "Section", index: true, inverse_of: :draft_dishes
   belongs_to :draft_section, class_name: "Section", index: true, inverse_of: :draft_dishes
