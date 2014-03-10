@@ -88,6 +88,7 @@ class AdministrationController < ApplicationController
         end
       else
         section_object = Section.create
+        section_object.published = false
         section_object.restaurant = restaurant
       end  
 
