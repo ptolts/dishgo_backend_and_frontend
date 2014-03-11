@@ -7,7 +7,10 @@ class IndividualOption
 	field :name, type: String
 	field :price, type: Float
 	field :published, type: Boolean	
+
 	field :size_prices, type: Array
+	field :draft_size_prices, type: Array
+
 	field :size_ind_opt_id, type: String
 	field :position, type: Integer
 	field :price_according_to_size, type: Boolean
@@ -25,9 +28,11 @@ class IndividualOption
 	index({ _id:1 }, { unique: true, name:"id_index" })
 
 	def load_data_from_json individual_option, request_restaurant
+
 		draft = {}
+
 		if individual_option["size_prices"]
-			self.size_prices = individual_option["size_prices"]
+			self.draft_size_prices = individual_option["size_prices"]
 		end
 
 		icon = individual_option["icon"]
@@ -47,6 +52,7 @@ class IndividualOption
 	def publish_menu
 		self.name = self.draft["name"]
 		self.price = self.draft["price"]
+		self.size_prices = self.draft_size_prices
 		self.price_according_to_size = self.draft["price_according_to_size"]
 		self.icon = self.draft_icon
 		self.save
