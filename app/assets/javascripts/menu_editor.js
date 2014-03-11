@@ -821,6 +821,7 @@ function MenuViewModel() {
     // Auto Saving
     self.auto_save_previous = ko.toJSON(self.menu);
     self.auto_save = function(){
+        console.log("Automatically saving menu.");
         var auto_save_now = ko.toJSON(self.menu);
         if(self.auto_save_previous != auto_save_now){
             $.ajax({
@@ -849,7 +850,7 @@ function MenuViewModel() {
         }
     }
 
-    setInterval(self.auto_save(),15000);     
+    setInterval(self.auto_save,15000);     
 };
 
 
