@@ -128,7 +128,7 @@ class Dish
     dish_hash = self.as_document
     dish_hash[:id] = self.id
     dish_hash.merge!(self.draft)
-    dish_hash["sizes"] = self.draft_sizes.custom_to_hash if self.draft_sizes
+    dish_hash["sizes"] = self.draft_sizes.custom_to_hash
     dish_hash["options"] = self.draft_options.collect do |option|
       next option.custom_to_hash_draft
     end
@@ -142,7 +142,7 @@ class Dish
   def custom_to_hash
     dish_hash = self.as_document
     dish_hash[:id] = self.id
-    dish_hash["sizes"] = self.sizes.custom_to_hash if self.sizes
+    dish_hash["sizes"] = self.sizes.custom_to_hash
     dish_hash["options"] = self.options.collect do |option|
       next option.custom_to_hash
     end
