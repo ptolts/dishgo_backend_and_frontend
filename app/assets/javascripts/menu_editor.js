@@ -302,6 +302,9 @@ function Dish(data) {
         self.sizes_object = ko.observable(new Option({type:"size",name:"Sizes",individual_options:[{name:"Small",price:'0.0'},{name:"Large",price:'0.0'}]},self));
     }
 
+    self.sizeSelectedOptionValue = ko.observable(self.sizes_object().individual_options()[0]);
+    console.log("Hey guy: " + ko.toJSON(self.sizeSelectedOptionValue()));    
+
     self.options = ko.observableArray([]);
     if(data.options){
         self.options = ko.observableArray($.map(data.options, function(item) { return new Option(item,self) }));        
@@ -312,9 +315,6 @@ function Dish(data) {
     }
 
     self.quantity = ko.observable(1);
-
-    self.sizeSelectedOptionValue = ko.observable(self.sizes_object().individual_options()[0]);
-    console.log("Hey guy: " + ko.toJSON(self.sizeSelectedOptionValue()));
 
     self.computed_price = ko.computed(function() {
         var cost;
