@@ -30,12 +30,10 @@ class IndividualOption
 			self.size_prices = individual_option["size_prices"]
 		end
 
-		images = individual_option["images"].collect do |image|
-			Rails.logger.warn "--\nLoading Image [#{image["id"]}]\n--"
-			next if image["id"].blank?
+		icon = individual_option["icon"]
+
+		if !icon["id"].blank?
 			img = Icon.find(image["id"])
-			Rails.logger.warn "--\nSetting Image [#{img.to_json}]\n--"
-			next if self.draft_icon == img
 			self.draft_icon = img
 		end
 

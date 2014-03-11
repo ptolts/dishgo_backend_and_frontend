@@ -389,7 +389,7 @@ function Dish(data) {
 
     self.addOption = function() { 
         console.log("Adding option!");
-        self.options.push(new Option({type:"generic",placeholder:"Type the option ground title here.",individual_options:[{placeholder:"Type the first option title here.",price:'0.0'},{placeholder:"Type the second option title here.",price:'0.0'}]},self));
+        self.options.push(new Option({type:"generic",placeholder:"Type the option group title here.",individual_options:[{placeholder:"Type the first option title here.",price:'0.0'},{placeholder:"Type the second option title here.",price:'0.0'}]},self));
         updateFilters();
     };
 
