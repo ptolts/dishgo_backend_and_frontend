@@ -83,7 +83,8 @@
         var resto_data = <%= raw(@resto_data.to_json) %>;
         var image_crop_url = "/administration/crop_image";
         var icon_upload_url = "/administration/upload_icon"
-        var image_upload_url = "/administration/upload_image"        
+        var image_upload_url = "/administration/upload_image"    
+        editing_mode = false;    
         ko.applyBindings(new MenuViewModel());
 
         $("#menu-toggle").click(function(e) {

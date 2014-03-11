@@ -79,8 +79,10 @@ class Option
 
 	def custom_to_hash
 		option_hash = self.as_document
+		option_hash[:id] = self.id
 		option_hash["individual_options"] = self.individual_options.collect do |ind_opt|
 			ind_opt_hash = ind_opt.as_document
+			ind_opt_hash[:id] = ind_opt.id
 			ind_opt_hash["icon"] = ind_opt.icon.serializable_hash({}) if ind_opt.icon
 			next ind_opt_hash
 		end
@@ -89,9 +91,11 @@ class Option
 
 	def custom_to_hash_draft
 		option_hash = self.as_document
+		option_hash[:id] = self.id
 		option_hash.merge!(self.draft)
 		option_hash["individual_options"] = self.draft_individual_options.collect do |ind_opt|
 			ind_opt_hash = ind_opt.as_document
+			ind_opt_hash[:id] = ind_opt.id
 			ind_opt_hash.merge!(ind_opt.draft)
 			ind_opt_hash["icon"] = ind_opt.draft_icon.serializable_hash({}) if ind_opt.icon
 			next ind_opt_hash

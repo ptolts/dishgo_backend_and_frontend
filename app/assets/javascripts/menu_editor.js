@@ -47,21 +47,23 @@ function Section(data,topmodel) {
     if(data._id){
         self.id = data._id;
     } else {
-        $.ajax({
-          type: "POST",
-          url: "/app/menucrud/create_section",
-          data: {
-            restaurant_id: restaurant_id,
-          },
-          success: function(data, textStatus, jqXHR){
-                console.log("Section Saved.");
-                self.id = data.id;          
-            },
-            error: function(XMLHttpRequest, textStatus, errorThrown) { 
-                console.log("There was an error saving the section " + errorThrown);
-            },
-            dataType: "json"
-        });
+        if(editing_mode){
+            $.ajax({
+              type: "POST",
+              url: "/app/menucrud/create_section",
+              data: {
+                restaurant_id: restaurant_id,
+              },
+              success: function(data, textStatus, jqXHR){
+                    console.log("Section Saved.");
+                    self.id = data.id;          
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown) { 
+                    console.log("There was an error saving the section " + errorThrown);
+                },
+                dataType: "json"
+            });
+        }
     }
     self.name = ko.observable(data.name);
     // self.subsections = ko.observableArray($.map(data.subsection, function(item) { return new Subsection(item) }));
@@ -270,21 +272,23 @@ function Dish(data) {
     if(data._id){
         self.id = data._id;
     } else {
-        $.ajax({
-          type: "POST",
-          url: "/app/menucrud/create_dish",
-          data: {
-            restaurant_id: restaurant_id,
-          },
-          success: function(data, textStatus, jqXHR){
-                console.log("Section Saved.");
-                self.id = data.id;          
-            },
-            error: function(XMLHttpRequest, textStatus, errorThrown) { 
-                console.log("There was an error saving the section " + errorThrown);
-            },
-            dataType: "json"
-        });
+        if(editing_mode){
+            $.ajax({
+              type: "POST",
+              url: "/app/menucrud/create_dish",
+              data: {
+                restaurant_id: restaurant_id,
+              },
+              success: function(data, textStatus, jqXHR){
+                    console.log("Section Saved.");
+                    self.id = data.id;          
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown) { 
+                    console.log("There was an error saving the section " + errorThrown);
+                },
+                dataType: "json"
+            });
+        }
     }
 
     if(data.sizes){
@@ -447,21 +451,23 @@ function Option(data,dish) {
             self.extra_cost(data.extra_cost);
         }
     } else {
-        $.ajax({
-          type: "POST",
-          url: "/app/menucrud/create_option",
-          data: {
-            restaurant_id: restaurant_id,
-          },
-          success: function(data, textStatus, jqXHR){
-                console.log("Option Saved.");
-                self.id = data.id;          
-            },
-            error: function(XMLHttpRequest, textStatus, errorThrown) { 
-                console.log("There was an error saving the option " + errorThrown);
-            },
-            dataType: "json"
-        });
+        if(editing_mode){
+            $.ajax({
+              type: "POST",
+              url: "/app/menucrud/create_option",
+              data: {
+                restaurant_id: restaurant_id,
+              },
+              success: function(data, textStatus, jqXHR){
+                    console.log("Option Saved.");
+                    self.id = data.id;          
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown) { 
+                    console.log("There was an error saving the option " + errorThrown);
+                },
+                dataType: "json"
+            });
+        }
     }
 
     self.type = data.type; 
@@ -602,21 +608,23 @@ function IndividualOption(data,option) {
     if(data._id){
         self.id = data._id;
     } else {
-        $.ajax({
-          type: "POST",
-          url: "/app/menucrud/create_individual_option",
-          data: {
-            restaurant_id: restaurant_id,
-          },
-          success: function(data, textStatus, jqXHR){
-                console.log("Individual Option Saved.");
-                self.id = data.id;          
-            },
-            error: function(XMLHttpRequest, textStatus, errorThrown) { 
-                console.log("There was an error saving the individual option " + errorThrown);
-            },
-            dataType: "json"
-        });
+        if(editing_mode){
+            $.ajax({
+              type: "POST",
+              url: "/app/menucrud/create_individual_option",
+              data: {
+                restaurant_id: restaurant_id,
+              },
+              success: function(data, textStatus, jqXHR){
+                    console.log("Individual Option Saved.");
+                    self.id = data.id;          
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown) { 
+                    console.log("There was an error saving the individual option " + errorThrown);
+                },
+                dataType: "json"
+            });
+        }
     }
     self.option = option;
     self.name = ko.observable(data.name);
@@ -728,6 +736,8 @@ function Restaurant(data) {
         self.image(new Image(data.images[0]));                
     }    
 }
+
+var editing_mode = true;
 
 function MenuViewModel() {
     // Data
