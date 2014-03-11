@@ -28,42 +28,6 @@ class Option
 
 	index({ _id:1 }, { unique: true, name:"id_index" })
 
-	# def load_data_from_json option, request_restaurant
-
-	# 	Rails.logger.warn "--\n"
-	# 	Rails.logger.warn JSON.pretty_generate(option)
-	# 	Rails.logger.warn "--\n"
-
-	# 	self.name = option["name"]
-	# 	self.type = option["type"]
-	# 	self.max_selections = option["max_selections"]
-	# 	self.min_selections = option["min_selections"]
-	# 	self.extra_cost = option["extra_cost"]
-
-	# 	#Load or Create the individual options for this option.
-	# 	individual_options = option["individual_options"].collect.with_index do |individual_option,index|
-	# 		if individual_option_object = IndividualOption.where(:_id => individual_option["id"]).first and individual_option_object
-	# 			Rails.logger.warn "---\nLoading IndividualOption[#{individual_option["name"]}]\n---"
-	# 		  # If someone has tried to load options from another restaurant, something fishy is going on.
-	# 		  if individual_option_object.restaurant != request_restaurant
-	# 		  	return false
-	# 		  end
-	# 		else
-	# 			individual_option_object = IndividualOption.create
-	# 			individual_option_object.published = false
-	# 			individual_option_object.restaurant = request_restaurant
-	# 		end
-
-	# 		if !individual_option_object.load_data_from_json(individual_option,request_restaurant)
-	# 			return false
-	# 		end
-
-	# 		next individual_option_object
-	# 	end
-
-	# 	self.individual_options = individual_options
-	# 	self.save
-	# end 
 
 	def load_data_from_json option, request_restaurant
 
@@ -97,6 +61,19 @@ class Option
 
 		self.draft = draft
 		self.draft_individual_options = individual_options
+		self.save
+	end	
+
+	def publish_menu
+		self.name = self.draft[:name]
+		self.type = self.draft[:type]
+		self.max_selections = self.draft[:max_selections]
+		self.min_selections = self.draft[:min_selections]
+		self.extra_cost = self.draft[:extra_cost]
+		self.individual_options = self.draft_individual_options
+		self.individual_options.each do |individual_option|
+			individual_option.publish_menu
+		end
 		self.save
 	end	
 

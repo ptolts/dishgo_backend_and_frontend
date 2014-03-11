@@ -1,7 +1,7 @@
 class AdministrationController < ApplicationController
   before_filter :authenticate_user!
   before_filter :admin_user!, :only => [:users, :restaurants, :search_restaurants, :update_user, :add_user, :user_destroy]
-  before_filter :admin_or_owner!, :only => [:edit_menu, :update_menu, :crop_image, :crop_icon]
+  before_filter :admin_or_owner!, :only => [:edit_menu, :update_menu, :crop_image, :crop_icon. :publish_menu]
   layout 'administration'
   after_filter :set_access_control_headers
 
@@ -105,6 +105,16 @@ class AdministrationController < ApplicationController
     restaurant.save
     render :json => ("{ \"menu\" : #{restaurant.draft_menu_to_json} }")
 
+  end
+
+  def publish_menu
+    restaurant = Restaurant.find(params[:restaurant_id])
+    restaurant.published_menu = restaurant.draft_menu
+    restaurant.published_menu.each do |section|
+      section.publish_menu
+    end
+    restaurant.save
+    render :text => "{\"success\":\"true\"}"
   end
 
   def upload_image

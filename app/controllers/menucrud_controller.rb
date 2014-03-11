@@ -1,6 +1,6 @@
 class MenucrudController < ApplicationController
   before_filter :authenticate_user!
-  before_filter :admin_or_owner!, :only => [:edit_menu, :update_menu, :crop_image, :crop_icon]
+  before_filter :admin_or_owner!, :only => [:create_section,:create_dish,:create_option,:create_individual_option]
   
   def create_section
     restaurant = Restaurant.find(params[:restaurant_id])

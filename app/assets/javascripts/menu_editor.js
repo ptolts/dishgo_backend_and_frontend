@@ -805,8 +805,8 @@ function MenuViewModel() {
 
     self.saveMenu = function() {
         bootbox.dialog({
-          message: "Are you sure you want to commit your changes to the menu? The changes will take effect immediately.",
-          title: "Commit Changes",
+          message: "Are you sure you want to publish your changes to the menu? The changes will be immediately visible to the world.",
+          title: "Publish Menu",
           buttons: {
             success: {
               label: "No, continue editing.",
@@ -816,7 +816,7 @@ function MenuViewModel() {
               }
             },
             danger: {
-              label: "Yes, save changes.",
+              label: "Yes, publish changes.",
               className: "btn-danger col-xs-5 pull-right",
               callback: function() {
 
@@ -825,23 +825,23 @@ function MenuViewModel() {
 
                 $.ajax({
                   type: "POST",
-                  url: "/app/administration/update_menu",
+                  url: "/app/administration/publish_menu",
                   data: {
                     restaurant_id: restaurant_id,
                     menu: ko.toJSON(self.menu)
                   },
                   success: function(data, textStatus, jqXHR){
-                        self.menu($.map(data.menu, function(item) { return new Section(item) }));
-                        $(".tooltipclass").tooltip({delay: { show: 500, hide: 100 }});
-                        updateFilters();
+                        // self.menu($.map(data.menu, function(item) { return new Section(item) }));
+                        // $(".tooltipclass").tooltip({delay: { show: 500, hide: 100 }});
+                        // updateFilters();
                         spinner.stop();
                         $('#loading').fadeOut();
-                        bootbox.alert("Menu Saved and reloaded. Everything should look the same as before, if it doesn't please contact support!");
+                        bootbox.alert("Menu Publish!");
                     },
                     error: function(XMLHttpRequest, textStatus, errorThrown) { 
                         spinner.stop();
                         $('#loading').fadeOut();
-                        bootbox.alert("There was an error saving the menu.\n" + errorThrown);
+                        bootbox.alert("There was an error publishing the menu.\n" + errorThrown);
                     },
                   dataType: "json"
                 }); 

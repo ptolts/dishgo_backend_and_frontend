@@ -86,7 +86,7 @@ class Restaurant
 
   def menu_to_json
     # result = RubyProf.profile {
-      menu = self.section.collect do |section|
+      menu = self.published_menu.collect do |section|
         hash = section.as_document
         hash["dishes"] = section.dishes.collect do |dish|
           dish.custom_to_hash
