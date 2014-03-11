@@ -8,7 +8,7 @@ class MenucrudController < ApplicationController
     section.published = false
     section.restaurant = restaurant
     section.save
-    render :text => "{id:'#{section.id}'}"
+    render :text => "{'id':'#{section.id}'}"
   end
 
   def create_dish
@@ -17,7 +17,7 @@ class MenucrudController < ApplicationController
     dish.published = false
     dish.restaurant = restaurant
     dish.save
-    render :text => "{id:'#{dish.id}'}"
+    render :text => "{'id':'#{dish.id}'}"
   end
 
   def create_option
@@ -26,7 +26,7 @@ class MenucrudController < ApplicationController
     option.published = false
     option.restaurant = restaurant
     option.save
-    render :text => "{id:'#{option.id}'}"
+    render :text => "{'id':'#{option.id}'}"
   end
 
   def create_individual_option
@@ -35,6 +35,6 @@ class MenucrudController < ApplicationController
     individual_option.published = false
     individual_option.restaurant = restaurant
     individual_option.save
-    render :text => "{id:'#{individual_option.id}'}"
+    render :text => "{'id':'#{individual_option.id}'}"
   end
 end
