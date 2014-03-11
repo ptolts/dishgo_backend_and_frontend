@@ -900,9 +900,16 @@ function MenuViewModel() {
     }
 
     // Auto Saving
-    self.auto_save_previous = ko.toJSON(self.menu);
+    self.auto_save_previous;
     self.auto_save = function(){
+        
         console.log("Automatically saving menu.");
+
+        if(self.auto_save_previous == null){
+            self.auto_save_previous = ko.toJSON(self.menu);
+            return
+        }
+
         if(self.ajax_counter != 0){
             console.log("Waiting until all ajax calls are processed before saving.");
             return;
