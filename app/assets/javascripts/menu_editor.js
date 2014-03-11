@@ -299,7 +299,11 @@ function Dish(data) {
     } else {
         self.sizes = ko.observable(false);
         console.log("no data sizes");
-        self.sizes_object = ko.observable(new Option({type:"size",name:"Sizes",individual_options:[{name:"Small",price:'0.0'},{name:"Large",price:'0.0'}]},self));
+        if(data.sizes){
+            self.sizes_object = ko.observable(new Option(data.sizes,self));
+        } else {
+            self.sizes_object = ko.observable(new Option({type:"size",name:"Sizes",individual_options:[{name:"Small",price:'0.0'},{name:"Large",price:'0.0'}]},self));            
+        }
     }
 
     self.sizeSelectedOptionValue = ko.observable(self.sizes_object().individual_options()[0]);
