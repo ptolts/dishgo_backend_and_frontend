@@ -47,9 +47,9 @@ class IndividualOption
 	end 
 
 	def publish_menu
-		self.name = self.draft[:name]
-		self.price = self.draft[:price]
-		self.price_according_to_size = self.draft[:price_according_to_size]
+		self.name = self.draft["name"]
+		self.price = self.draft["price"]
+		self.price_according_to_size = self.draft["price_according_to_size"]
 		self.icon = self.draft_icon
 		self.save
 	end	

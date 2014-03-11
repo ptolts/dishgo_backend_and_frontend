@@ -65,11 +65,11 @@ class Option
 	end	
 
 	def publish_menu
-		self.name = self.draft[:name]
-		self.type = self.draft[:type]
-		self.max_selections = self.draft[:max_selections]
-		self.min_selections = self.draft[:min_selections]
-		self.extra_cost = self.draft[:extra_cost]
+		self.name = self.draft["name"]
+		self.type = self.draft["type"]
+		self.max_selections = self.draft["max_selections"]
+		self.min_selections = self.draft["min_selections"]
+		self.extra_cost = self.draft["extra_cost"]
 		self.individual_options = self.draft_individual_options
 		self.individual_options.each do |individual_option|
 			individual_option.publish_menu

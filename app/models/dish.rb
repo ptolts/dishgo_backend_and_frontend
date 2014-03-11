@@ -107,9 +107,9 @@ class Dish
   end  
 
   def publish_menu
-    self.name = self.draft[:name]
-    self.description = self.draft[:description]
-    self.price = self.draft[:price]
+    self.name = self.draft["name"]
+    self.description = self.draft["description"]
+    self.price = self.draft["price"]
     self.options = self.draft_options
     self.image = self.draft_image
     self.sizes = self.draft_sizes
