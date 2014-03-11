@@ -913,11 +913,11 @@ function MenuViewModel() {
     self.ajax_counter = 0;
 
     $(document).ajaxStart(function(){
-        counter++;
+        self.counter++;
     });
 
     $(document).ajaxStop(function(){
-        counter--;
+        self.counter--;
     });    
 
     setInterval(self.auto_save,15000);     
