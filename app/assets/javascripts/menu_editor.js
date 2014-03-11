@@ -930,7 +930,9 @@ function MenuViewModel() {
         self.counter--;
     });    
 
-    setInterval(self.auto_save,15000);     
+    if(editing_mode){
+        setInterval(self.auto_save,15000);             
+    }
 };
 
 
