@@ -314,7 +314,7 @@ function Dish(data) {
     self.quantity = ko.observable(1);
 
     self.sizeSelectedOptionValue = ko.observable(self.sizes_object().individual_options()[0]);
-    console.log("Hey guy: " + ko.toJSON(self.sizeSelectedOptionValue());
+    console.log("Hey guy: " + ko.toJSON(self.sizeSelectedOptionValue()));
 
     self.computed_price = ko.computed(function() {
         var cost;
