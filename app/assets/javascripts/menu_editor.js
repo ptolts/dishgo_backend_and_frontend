@@ -389,7 +389,7 @@ function Dish(data) {
 
     self.addOption = function() { 
         console.log("Adding option!");
-        self.options.push(new Option({type:"generic",name:"New Option",individual_options:[{name:"First Option",price:'0.0'},{name:"Second Option",price:'0.0'}]},self));
+        self.options.push(new Option({type:"generic",placeholder:"Type the option ground title here.",individual_options:[{placeholder:"Type the first option title here.",price:'0.0'},{placeholder:"Type the second option title here.",price:'0.0'}]},self));
         updateFilters();
     };
 
@@ -444,6 +444,11 @@ function Option(data,dish) {
     self.dish = dish;
     self.advanced = ko.observable(false);  
     self.extra_cost = ko.observable(false); 
+    self.placeholder = ko.observable("Type the option title here.");
+
+    if(data.placeholder){
+        self.placeholder(data.placeholder);
+    }
 
     if(data._id){
         self.id = data._id;
@@ -635,6 +640,11 @@ function IndividualOption(data,option) {
     self.icon = ko.observable();
     self.size_prices = ko.observableArray([]); 
     self.price_according_to_size = ko.observable(false); 
+    self.placeholder = ko.observable("Type the option here.");
+
+    if(data.placeholder){
+        self.placeholder(data.placeholder);
+    }    
 
     if(data.icon) {
         self.icon(new Image(item));               
@@ -931,7 +941,10 @@ function MenuViewModel() {
     });    
 
     if(editing_mode){
-        setInterval(self.auto_save,15000);             
+        setInterval(self.auto_save,15000);  
+        // window.onbeforeunload = function (){
+        //   self.auto_save;
+        // }                   
     }
 };
 
