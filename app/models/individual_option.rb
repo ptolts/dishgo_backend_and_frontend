@@ -39,7 +39,7 @@ class IndividualOption
 
 		if icon and !icon["id"].blank?
 			img = Icon.find(icon["id"])
-			self.draft_icon = img
+			self.draft_icon = img unless self.draft_icon == img
 		end
 
 		draft[:name] = individual_option["name"]
