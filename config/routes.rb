@@ -49,6 +49,15 @@ Foodcloud::Application.routes.draw do
     end
   end
 
+  resources :menucrud do
+    collection do
+      post 'create_individual_option'
+      post 'create_option'
+      post 'create_dish'
+      post 'create_section'
+    end
+  end  
+
   # match 'administration/search_restaurants', to: 'administration#search_restaurants', via: [:get]
 
   namespace :api, :defaults => {:format => :json} do
