@@ -291,7 +291,7 @@ function Dish(data) {
         }
     }
 
-    if(data.sizes){
+    if(data.has_multiple_sizes){
         self.sizes = ko.observable(true);
         console.log("data size:");
         console.log(data.sizes);
@@ -647,7 +647,7 @@ function IndividualOption(data,option) {
     }    
 
     if(data.icon) {
-        self.icon(new Image(item));               
+        self.icon(new Image(data.icon));               
     }  
 
     if(data.price_according_to_size){

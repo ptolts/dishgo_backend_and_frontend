@@ -9,6 +9,7 @@ class Dish
   field :price, type: Float
   field :position, type: Integer
   field :published, type: Boolean
+  field :has_multiple_sizes, type: Boolean
   field :draft, type: Hash
   # belongs_to :subsection, index: true
   belongs_to :restaurant, index: true
@@ -33,38 +34,34 @@ class Dish
 
     draft = {}
 
-    if dish["sizes"]
-      sizes_object = dish["sizes_object"]
-      if option_object = Option.where(:_id => sizes_object["id"]).first and option_object
-        # If it was null, theres probably been a mistake.
-        if option_object.restaurant.nil?
-          option_object.restaurant = request_restaurant
-        end
-
-        if option_object.restaurant != request_restaurant
-          return false
-        end     
-
-        option_object.draft_dish_which_uses_this_as_size_options = self
-
-      else
-        option_object = Option.create
-        option_object.published = false
-        option_object.draft_dish_which_uses_this_as_size_options = self
-        option_object.restaurant = request_restaurant
-        option_object.save
+    sizes_object = dish["sizes_object"]
+    if size_option_object = Option.where(:_id => sizes_object["id"]).first and size_option_object
+      # If it was null, theres probably been a mistake.
+      if size_option_object.restaurant.nil?
+        size_option_object.restaurant = request_restaurant
       end
 
-      if !option_object.load_data_from_json(sizes_object,request_restaurant)
+      if size_option_object.restaurant != request_restaurant
         return false
-      end  
+      end     
 
-      option_object.save
-      # Rails.logger.warn "--\nFUCK\n--\n#{option_object.to_json}\n--\n#{self.sizes.to_json}\n---\n---\n#{Option.new.to_json}\n---\n#{self.class}\n---"
-      # self.sizes = option_object                  
+      size_option_object.draft_dish_which_uses_this_as_size_options = self
+
     else
-      self.draft_sizes = nil
-    end    
+      size_option_object = Option.create
+      size_option_object.published = false
+      size_option_object.draft_dish_which_uses_this_as_size_options = self
+      size_option_object.restaurant = request_restaurant
+      size_option_object.save
+    end
+
+    if !size_option_object.load_data_from_json(sizes_object,request_restaurant)
+      return false
+    end  
+
+    size_option_object.save
+
+
 
     options = dish["options"].collect do |option|
       # Load Option Object, or create a new one.
@@ -101,6 +98,12 @@ class Dish
     draft[:description] = dish["description"]
     draft[:price] = dish["price"].to_f
 
+    if dish["sizes"]
+      draft[:has_multiple_sizes] = true
+    else
+      draft[:has_multiple_sizes] = false
+    end 
+
     self.draft = draft
     self.draft_options = options
     self.save
@@ -110,12 +113,11 @@ class Dish
     self.name = self.draft["name"]
     self.description = self.draft["description"]
     self.price = self.draft["price"]
+    self.has_multiple_sizes = self.draft["has_multiple_sizes"]
     self.options = self.draft_options
     self.image = self.draft_image
     self.sizes = self.draft_sizes
-    if self.sizes
-      self.sizes.publish_menu
-    end
+    self.sizes.publish_menu
     self.options.each do |option|
       option.publish_menu
     end
