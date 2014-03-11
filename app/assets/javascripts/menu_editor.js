@@ -912,13 +912,13 @@ function MenuViewModel() {
 
     self.ajax_counter = 0;
 
-    $(document).ajaxStart(
+    $(document).ajaxStart(function(){
         counter++;
-    );
+    });
 
-    $(document).ajaxStop(
+    $(document).ajaxStop(function(){
         counter--;
-    );    
+    });    
 
     setInterval(self.auto_save,15000);     
 };
