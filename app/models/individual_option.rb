@@ -32,7 +32,7 @@ class IndividualOption
 
 		icon = individual_option["icon"]
 
-		if !icon["id"].blank?
+		if icon and !icon["id"].blank?
 			img = Icon.find(image["id"])
 			self.draft_icon = img
 		end
