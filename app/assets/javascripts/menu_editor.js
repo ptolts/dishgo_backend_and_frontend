@@ -816,8 +816,40 @@ function MenuViewModel() {
             },
           }
         });        
-    } 
-        
+    }
+
+    // Auto Saving
+    self.auto_save_previous = ko.toJSON(self.menu);
+    self.auto_save = function(){
+        var auto_save_now = ko.toJSON(self.menu);
+        if(self.auto_save_previous != auto_save_now){
+            $.ajax({
+              type: "POST",
+              url: "/app/administration/update_menu",
+              data: {
+                restaurant_id: restaurant_id,
+                menu: ko.toJSON(self.menu)
+              },
+              success: function(data, textStatus, jqXHR){
+                    // self.menu($.map(data.menu, function(item) { return new Section(item) }));
+                    // $(".tooltipclass").tooltip({delay: { show: 500, hide: 100 }});
+                    // updateFilters();
+                    // spinner.stop();
+                    // $('#loading').fadeOut();
+                    console.log("Menu Saved.");
+                    self.auto_save_previous = auto_save_now;          
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown) { 
+                    // spinner.stop();
+                    // $('#loading').fadeOut();
+                    console.log("There was an error saving the menu: " + errorThrown);
+                },
+                dataType: "json"
+            });
+        }
+    }
+
+    setInterval(self.auto_save(),15000);     
 };
 
 
