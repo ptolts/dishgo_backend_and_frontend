@@ -6,6 +6,6 @@ class Design
   field :css, type: String
   field :name, type: String
 
-  has_many :restaurant, index: true
+  has_many :restaurant
   index({ _id:1 }, { unique: true, name:"id_index" })
 end

@@ -29,6 +29,8 @@ class Restaurant
   has_many :orders, :class_name => "Order"
   belongs_to :user, :class_name => "User", index: true, inverse_of: :owns_restaurants
 
+  belongs_to :design, index: true
+
   accepts_nested_attributes_for :image, :allow_destroy => false
 
   index({ name: 1 }, { name: "name_index" })
