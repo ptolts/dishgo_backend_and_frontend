@@ -519,13 +519,13 @@ function Option(data,dish) {
 
     // Which option template to use.
     self.addSize = function() {
-        self.individual_options.push(new IndividualOption({name:"New Size",price:'0.0'},self));
+        self.individual_options.push(new IndividualOption({name:"",placeholder:"Type new size title here.",price:'0.0'},self));
         updateFilters();        
     }
 
     // Which option template to use.
     self.addOption = function() {
-        self.individual_options.push(new IndividualOption({name:"New Option",price:'0.0'},self));
+        self.individual_options.push(new IndividualOption({name:"",placeholder:"Type new option title here.",price:'0.0'},self));
         updateFilters();
     }   
 
@@ -785,11 +785,13 @@ function MenuViewModel() {
     self.set_dish = function(dish) {
         self.current_section(null);
         self.current_dish(dish);
+        $("body").animate({scrollTop:0}, '100', 'swing');
     };
 
     self.set_section = function(section) {
         self.current_dish(null);
         self.current_section(section);
+        $("body").animate({scrollTop:0}, '100', 'swing');
     };    
 
     self.current_dish_check = function(dish) {    
@@ -902,7 +904,7 @@ function MenuViewModel() {
     // Auto Saving
     self.auto_save_previous;
     self.auto_save = function(){
-        
+
         console.log("Automatically saving menu.");
 
         if(self.auto_save_previous == null){
