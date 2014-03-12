@@ -1,6 +1,7 @@
 GIT
   remote: https://github.com/mongoid/mongoid.git
-  revision: bde8ac1b0f16aaad7e343073ce8c5b5b9c9ffc5b
+  revision: 574ca4f67745dbdf8a0925e14736dc453397bda7
+  tag: v4.0.0.beta1
   specs:
     mongoid (4.0.0.beta1)
       activemodel (>= 4.0.0)
@@ -115,7 +116,7 @@ GEM
       bson (~> 2.2)
       connection_pool (~> 1.2)
       optionable (~> 0.2.0)
-    multi_json (1.8.4)
+    multi_json (1.9.0)
     multipart-post (1.2.0)
     net-scp (1.1.2)
       net-ssh (>= 2.6.5)
@@ -154,7 +155,7 @@ GEM
     rake (10.1.1)
     role_model (0.8.1)
     ruby-prof (0.14.2)
-    sass (3.2.14)
+    sass (3.3.2)
     sass-rails (4.0.1)
       railties (>= 4.0.0, < 5.0)
       sass (>= 3.1.10)
@@ -175,7 +176,7 @@ GEM
     treetop (1.4.15)
       polyglot
       polyglot (>= 0.3.1)
-    tzinfo (0.3.38)
+    tzinfo (0.3.39)
     uglifier (2.4.0)
       execjs (>= 0.3.0)
       json (>= 1.8.0)

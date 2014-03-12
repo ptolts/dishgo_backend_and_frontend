@@ -5,7 +5,7 @@ gem 'devise'
 gem 'cancan'
 gem 'role_model'
 gem 'underscore-rails'
-gem 'mongoid', git: 'https://github.com/mongoid/mongoid.git' #, :tag => "4.0.0.alpha1"
+gem 'mongoid', git: 'https://github.com/mongoid/mongoid.git', :tag => "v4.0.0.beta1"
 gem 'bson_ext'
 gem 'oj', '~> 2.0.14'
 gem 'oj_mimic_json'
