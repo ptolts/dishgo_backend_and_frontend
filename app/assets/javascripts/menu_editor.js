@@ -196,6 +196,7 @@ ko.bindingHandlers.file_upload = {
         var self = this;
         self.imageModel;
         $(element).fileupload({
+            dropZone: $(element),
             formData: {restaurant_id: restaurant_id},
             url: image_upload_url,
             dataType: 'json',
@@ -227,6 +228,7 @@ ko.bindingHandlers.file_upload_icon = {
         var self = this;
         self.imageModel;
         $(element).fileupload({
+            dropZone: $(element),
             formData: {restaurant_id: restaurant_id},
             url: icon_upload_url,
             dataType: 'json',

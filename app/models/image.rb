@@ -28,7 +28,7 @@ class Image
 
   belongs_to :restaurant, index: true
 
-  belongs_to :dish, index: true, index: true
+  belongs_to :dish, index: true
   
   index({ _id:1 }, { unique: true, name:"id_index" })
 

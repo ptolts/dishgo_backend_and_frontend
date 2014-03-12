@@ -20,6 +20,13 @@ Foodcloud::Application.routes.draw do
     end
   end
 
+  resources :design do
+    collection do
+      get 'list'
+      get 'create'
+    end
+  end  
+
   resources :administration do
     collection do
       get 'restaurants'

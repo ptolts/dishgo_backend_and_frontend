@@ -1,0 +1,11 @@
+    <script type='text/javascript'>//<![CDATA[ 
+
+        function Design(data) {
+            var self = this;
+            self.id = ko.observable(data._id ? data._id : "")
+            self.name = ko.observable(data.name ? data.name : "");
+            self.css = ko.observable(data.css ? data.css : "")
+        }
+
+    //]]>  
+    </script>
