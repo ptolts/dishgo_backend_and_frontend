@@ -38,19 +38,19 @@
             <ul class="nav navbar-nav navbar-right">
 
               <li data-bind="click: togglePreview, visible: current_dish" id="togglePreview">
-                <span data-bind="text: previewText"></span>  
+                <a data-bind="text: previewText"></a>  
               </li>
 
               <li data-bind="click: saveDraft" id="saveDraft">
-                <span><i class="glyphicon glyphicon-ok"></i>Save Draft</span>
+                <a><i class="glyphicon glyphicon-ok"></i> Save Draft</a>
               </li>    
 
               <li data-bind="click: discardDraft" id="discardDraft">
-                <span><i class="glyphicon glyphicon-remove"></i>Discard Draft</span>
+                <a><i class="glyphicon glyphicon-remove"></i> Discard Draft</a>
               </li>
 
               <li data-bind="click: publishMenu" id="saveMenu">
-                <span><i class="glyphicon glyphicon-ok"></i>Publish Menu</span>
+                <a><i class="glyphicon glyphicon-ok"></i> Publish Menu</a>
               </li>              
 
             </ul>                          

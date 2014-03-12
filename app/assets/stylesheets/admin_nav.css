@@ -116,3 +116,19 @@ margin: 0px 15px;
 #discardDraft {
   background-color: #BC030E;
 }
+
+#togglePreview:hover {
+  background-color: #FFF;
+}
+
+#saveMenu:hover {
+  background-color: #FFF;
+}
+
+#saveDraft:hover {
+  background-color: #FFF;
+}
+
+#discardDraft:hover {
+  background-color: #FFF;
+}
