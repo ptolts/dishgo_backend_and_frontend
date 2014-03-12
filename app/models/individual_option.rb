@@ -58,4 +58,15 @@ class IndividualOption
 		self.save
 	end	
 
+	def reset_draft_menu
+		draft = {}
+		draft["name"] = self.name
+		draft["price"] = self.price
+		draft["price_according_to_size"] = self.price_according_to_size
+		self.draft = draft
+		self.draft_size_prices = self.size_prices
+		self.draft_icon = self.icon
+		self.save
+	end		
+
 end

@@ -77,6 +77,21 @@ class Option
 		self.save
 	end	
 
+	def reset_draft_menu
+		draft = {}
+		draft[:name] = self.name
+		draft[:type] = self.type
+		draft[:max_selections] = self.max_selections
+		draft[:min_selections] = self.min_selections
+		draft[:extra_cost] = self.extra_cost
+		self.draft = draft
+		self.draft_individual_options = self.individual_options
+		self.draft_individual_options.each do |individual_option|
+			individual_option.reset_draft_menu
+		end
+		self.save		
+	end
+
 	def custom_to_hash
 		option_hash = self.as_document
 		option_hash[:id] = self.id

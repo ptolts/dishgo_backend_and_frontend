@@ -23,23 +23,6 @@
                 <li class="<%= active_link('administration','restaurants') %>"><a href="/app/administration/restaurants">Restaurants</a></li>
               <% end %>
             <% end %>
-          </ul>
-
-          <% if current_page?(controller: "administration", action: "edit_menu") %>
-            <ul class="nav navbar-nav text-center">
-              <li>
-                <button class="btn btn-success btn-xs navbar-btn" style="margin-left: 5px" data-bind="click: saveMenu"><i class="glyphicon glyphicon-ok"></i> Commit Changes</button>
-              </li>
-              <li>
-                <button class="btn btn-danger btn-xs navbar-btn" style="margin-left: 5px"><i class="glyphicon glyphicon-remove"></i> Discard Changes</button>
-              </li>
-              <li>
-                <button class="btn btn-primary btn-xs navbar-btn" style="margin-left: 5px" data-bind="click: togglePreview, text: previewText, visible: current_dish"></button>  
-              </li>
-            </ul>                          
-          <% end %>
-
-          <ul class="nav navbar-nav navbar-right">
             <% if user_signed_in? %>
             <li>
               <%= link_to('Logout', destroy_user_session_path, :method => :delete) %>        
@@ -48,8 +31,30 @@
             <li>
               <%= link_to('Login', new_user_session_path)  %>  
             </li>
-            <% end %>
+            <% end %>            
           </ul>
+
+          <% if current_page?(controller: "administration", action: "edit_menu") %>
+            <ul class="nav navbar-nav navbar-right">
+
+              <li data-bind="click: togglePreview, visible: current_dish" id="togglePreview">
+                <span data-bind="text: previewText"></span>  
+              </li>
+
+              <li data-bind="click: saveDraft" id="saveDraft">
+                <span><i class="glyphicon glyphicon-ok"></i>Save Draft</span>
+              </li>    
+
+              <li data-bind="click: discardDraft" id="discardDraft">
+                <span><i class="glyphicon glyphicon-remove"></i>Discard Draft</span>
+              </li>
+
+              <li data-bind="click: publishMenu" id="saveMenu">
+                <span><i class="glyphicon glyphicon-ok"></i>Publish Menu</span>
+              </li>              
+
+            </ul>                          
+          <% end %>
 
         </div> <!-- collapse -->
 

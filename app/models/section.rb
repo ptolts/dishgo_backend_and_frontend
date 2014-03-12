@@ -29,6 +29,17 @@ class Section
 		self.save
 	end
 
+	def reset_draft_menu
+		draft = {}
+		draft[:name] = self.name
+		self.draft = draft
+		self.draft_dishes = self.dishes
+		self.dishes.each do |dish|
+			dish.reset_draft_menu
+		end
+		self.save
+	end	
+
 	def load_data_from_json section, request_restaurant
 
 		draft = {}

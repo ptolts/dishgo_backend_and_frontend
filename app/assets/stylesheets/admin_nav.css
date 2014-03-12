@@ -96,8 +96,23 @@ margin: 0px 15px;
 
 /* Extra small devices Phones */
 @media (max-width: 767px) {
-
   .navbar-nav {
-margin: 0px -15px;
+    margin: 0px -15px;
+  }
 }
+
+#togglePreview {
+  background-color: #64A156;
+}
+
+#saveMenu {
+  background-color: #10479B;
+}
+
+#saveDraft {
+  background-color: #F4950E;
+}
+
+#discardDraft {
+  background-color: #BC030E;
 }

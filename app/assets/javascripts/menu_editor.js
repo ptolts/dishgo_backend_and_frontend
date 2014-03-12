@@ -830,7 +830,7 @@ function MenuViewModel() {
         $("#"+image.id()).modal("show");
     };      
 
-    self.saveMenu = function() {
+    self.publishMenu = function() {
         bootbox.dialog({
           message: "Are you sure you want to publish your changes to the menu? The changes will be immediately visible to the world.",
           title: "Publish Menu",
@@ -876,7 +876,55 @@ function MenuViewModel() {
             },
           }
         });          
-    }  
+    } 
+
+    self.discardDraft = function() {
+        bootbox.dialog({
+          message: "Are you sure you want to discard all your changes? Everything will revert to the way your menu is currently published.",
+          title: "Discard Draft",
+          buttons: {
+            success: {
+              label: "No, continue editing.",
+              className: "btn-primary pull-left col-xs-5",
+              callback: function() {
+
+              }
+            },
+            danger: {
+              label: "Yes, discard draft.",
+              className: "btn-danger col-xs-5 pull-right",
+              callback: function() {
+
+                var spinner = new Spinner(opts).spin(document.getElementById('center')); 
+                $('#loading').fadeIn();
+
+                $.ajax({
+                  type: "POST",
+                  url: "/app/administration/reset_draft_menu",
+                  data: {
+                    restaurant_id: restaurant_id,
+                    menu: ko.toJSON(self.menu)
+                  },
+                  success: function(data, textStatus, jqXHR){
+                        // self.menu($.map(data.menu, function(item) { return new Section(item) }));
+                        // $(".tooltipclass").tooltip({delay: { show: 500, hide: 100 }});
+                        // updateFilters();
+                        spinner.stop();
+                        $('#loading').fadeOut();
+                        location.reload();
+                    },
+                    error: function(XMLHttpRequest, textStatus, errorThrown) { 
+                        spinner.stop();
+                        $('#loading').fadeOut();
+                        bootbox.alert("There was an error publishing the menu.\n" + errorThrown);
+                    },
+                  dataType: "json"
+                }); 
+              }
+            },
+          }
+        });          
+    }       
 
     self.remove = function(item) {
         bootbox.dialog({
@@ -902,21 +950,21 @@ function MenuViewModel() {
     }
 
     // Auto Saving
-    self.auto_save_previous;
-    self.auto_save = function(){
+    // self.auto_save_previous;
+    self.saveDraft = function(){
 
-        console.log("Automatically saving menu.");
+        // console.log("Automatically saving menu.");
 
-        if(self.auto_save_previous == null){
-            self.auto_save_previous = ko.toJSON(self.menu);
-            return
-        }
+        // if(self.auto_save_previous == null){
+        //     self.auto_save_previous = ko.toJSON(self.menu);
+        //     return
+        // }
 
-        if(self.ajax_counter != 0){
-            console.log("Waiting until all ajax calls are processed before saving.");
-            return;
-        }
-        var auto_save_now = ko.toJSON(self.menu);
+        // if(self.ajax_counter != 0){
+        //     console.log("Waiting until all ajax calls are processed before saving.");
+        //     return;
+        // }
+        // var auto_save_now = ko.toJSON(self.menu);
         if(self.auto_save_previous != auto_save_now){
             $.ajax({
               type: "POST",
@@ -944,22 +992,22 @@ function MenuViewModel() {
         }
     }
 
-    self.ajax_counter = 0;
+    // self.ajax_counter = 0;
 
-    $(document).ajaxStart(function(){
-        self.counter++;
-    });
+    // $(document).ajaxStart(function(){
+    //     self.counter++;
+    // });
 
-    $(document).ajaxStop(function(){
-        self.counter--;
-    });    
+    // $(document).ajaxStop(function(){
+    //     self.counter--;
+    // });    
 
-    if(editing_mode){
-        setInterval(self.auto_save,15000);  
-        // window.onbeforeunload = function (){
-        //   self.auto_save;
-        // }                   
-    }
+    // if(editing_mode){
+    //     setInterval(self.auto_save,15000);  
+    //     // window.onbeforeunload = function (){
+    //     //   self.auto_save;
+    //     // }                   
+    // }
 };
 
 

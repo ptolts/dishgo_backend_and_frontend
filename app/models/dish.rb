@@ -122,7 +122,24 @@ class Dish
       option.publish_menu
     end
     self.save
-  end  
+  end 
+
+  def reset_draft_menu
+    draft = {}
+    draft["name"] = self.name
+    draft["description"] = self.description
+    draft["price"] = self.price
+    draft["has_multiple_sizes"] = self.has_multiple_sizes
+    self.draft = draft
+    self.draft_options = self.options
+    self.draft_image = self.image
+    self.draft_sizes = self.sizes
+    self.draft_sizes.reset_draft_menu
+    self.draft_options.each do |option|
+      option.reset_draft_menu
+    end
+    self.save
+  end     
 
   def custom_to_hash_draft
     dish_hash = self.as_document

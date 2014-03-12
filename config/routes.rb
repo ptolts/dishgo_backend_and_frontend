@@ -30,6 +30,7 @@ Foodcloud::Application.routes.draw do
       post 'update_user'  
       post 'destroy_user'  
       post 'publish_menu'
+      post 'reset_draft_menu'
       post 'update_menu'
       post 'upload_image'        
       post 'create_user' 
