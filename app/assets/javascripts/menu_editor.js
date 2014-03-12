@@ -192,7 +192,7 @@ function Image(data) {
 }
 
 ko.bindingHandlers.file_upload = {
-    init: function(element, valueAccessor, allBindingsAccessor, viewModel, bindingContext) {
+    update: function(element, valueAccessor, allBindingsAccessor, viewModel, bindingContext) {
         var self = this;
         self.imageModel;
         $(element).fileupload({
@@ -224,7 +224,7 @@ ko.bindingHandlers.file_upload = {
 };
 
 ko.bindingHandlers.file_upload_icon = {
-    init: function(element, valueAccessor, allBindingsAccessor, viewModel, bindingContext) {
+    update: function(element, valueAccessor, allBindingsAccessor, viewModel, bindingContext) {
         var self = this;
         self.imageModel;
         $(element).fileupload({
