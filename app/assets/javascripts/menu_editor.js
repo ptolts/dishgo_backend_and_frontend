@@ -965,7 +965,7 @@ function MenuViewModel() {
         //     return;
         // }
         // var auto_save_now = ko.toJSON(self.menu);
-        if(self.auto_save_previous != auto_save_now){
+        // if(self.auto_save_previous != auto_save_now){
             $.ajax({
               type: "POST",
               url: "/app/administration/update_menu",
@@ -989,7 +989,7 @@ function MenuViewModel() {
                 },
                 dataType: "json"
             });
-        }
+        // }
     }
 
     // self.ajax_counter = 0;
