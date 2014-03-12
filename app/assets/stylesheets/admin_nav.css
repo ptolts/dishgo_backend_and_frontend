@@ -101,6 +101,10 @@ margin: 0px 15px;
   }
 }
 
+.navbar {
+  min-height: 40px;
+}
+
 .navbar-brand,
 .navbar-nav li a {
     line-height: 40px;
