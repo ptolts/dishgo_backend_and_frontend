@@ -116,7 +116,7 @@ class Dish
     self.has_multiple_sizes = self.draft["has_multiple_sizes"]
     self.options = self.draft_options
     self.image = self.draft_image
-    self.sizes = self.draft_sizes
+    self.sizes = self.draft_sizes unless self.sizes == self.draft_sizes
     self.sizes.publish_menu
     self.options.each do |option|
       option.publish_menu
@@ -133,7 +133,7 @@ class Dish
     self.draft = draft
     self.draft_options = self.options
     self.draft_image = self.image
-    self.draft_sizes = self.sizes
+    self.draft_sizes = self.sizes unless self.sizes == self.draft_sizes
     self.draft_sizes.reset_draft_menu
     self.draft_options.each do |option|
       option.reset_draft_menu
