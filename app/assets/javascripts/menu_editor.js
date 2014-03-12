@@ -194,7 +194,7 @@ function Image(data) {
 ko.bindingHandlers.file_upload = {
     update: function(element, valueAccessor, allBindingsAccessor, viewModel, bindingContext) {
         var self = this;
-        self.imageModel;
+        viewModel.imageModel;
         $(element).fileupload({
             dropZone: $(element),
             formData: {restaurant_id: restaurant_id},
@@ -203,21 +203,21 @@ ko.bindingHandlers.file_upload = {
             progressInterval: 50,
             send: function (e, data) {
                 $.each(data.files, function (index, file) {
-                    self.imageModel = viewModel.addImage();
-                    console.log(self.imageModel);
-                    self.imageModel.filename(file.name);
+                    viewModel.imageModel = viewModel.addImage();
+                    console.log(viewModel.imageModel);
+                    viewModel.imageModel.filename(file.name);
                 });                
             },
             done: function (e, data) {
                 var file = data.result.files[0];
-                self.imageModel.update_info(file);                
+                viewModel.imageModel.update_info(file);                
             },
             progressall: function (e, data) {
                 var progress = parseInt(data.loaded / data.total * 100, 10);
-                self.imageModel.progressValue(progress);
+                viewModel.imageModel.progressValue(progress);
             },
             fail: function (e, data) {
-                self.imageModel.failed(true);
+                viewModel.imageModel.failed(true);
             },      
         });
     }
@@ -226,7 +226,7 @@ ko.bindingHandlers.file_upload = {
 ko.bindingHandlers.file_upload_icon = {
     update: function(element, valueAccessor, allBindingsAccessor, viewModel, bindingContext) {
         var self = this;
-        self.imageModel;
+        viewModel.imageModel;
         $(element).fileupload({
             dropZone: $(element),
             formData: {restaurant_id: restaurant_id},
@@ -235,21 +235,21 @@ ko.bindingHandlers.file_upload_icon = {
             progressInterval: 50,
             send: function (e, data) {
                 $.each(data.files, function (index, file) {
-                    self.imageModel = viewModel.addImage();
-                    console.log(self.imageModel);
-                    self.imageModel.filename(file.name);
+                    viewModel.imageModel = viewModel.addImage();
+                    console.log(viewModel.imageModel);
+                    viewModel.imageModel.filename(file.name);
                 });                
             },
             done: function (e, data) {
                 var file = data.result.files[0];
-                self.imageModel.update_info(file);                               
+                viewModel.imageModel.update_info(file);                               
             },
             progressall: function (e, data) {
                 var progress = parseInt(data.loaded / data.total * 100, 10);
-                self.imageModel.progressValue(progress);
+                viewModel.imageModel.progressValue(progress);
             },
             fail: function (e, data) {
-                self.imageModel.failed(true);
+                viewModel.imageModel.failed(true);
             },                       
         });
     }
