@@ -112,6 +112,10 @@ margin: 0px 15px;
     padding-top: 0;
 }
 
+.navbar-fixed-top{
+  border: 0px;
+}
+
 #togglePreview {
   background-color: #64A156;
 }
@@ -128,18 +132,18 @@ margin: 0px 15px;
   background-color: #BC030E;
 }
 
-#togglePreview:hover {
+#togglePreview:focus {
   background-color: #FFF;
 }
 
-#saveMenu:hover {
+#saveMenu:focus {
   background-color: #FFF;
 }
 
-#saveDraft:hover {
+#saveDraft:focus {
   background-color: #FFF;
 }
 
-#discardDraft:hover {
+#discardDraft:focus {
   background-color: #FFF;
 }
