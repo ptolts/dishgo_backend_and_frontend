@@ -980,7 +980,7 @@ function MenuViewModel() {
                     // spinner.stop();
                     // $('#loading').fadeOut();
                     console.log("Menu Saved.");
-                    self.auto_save_previous = auto_save_now;          
+                    // self.auto_save_previous = auto_save_now;          
                 },
                 error: function(XMLHttpRequest, textStatus, errorThrown) { 
                     // spinner.stop();
