@@ -21,7 +21,7 @@ class Section
 	index({ _id:1 }, { unique: true, name:"id_index" })
 
 	def publish_menu
-		self.name = self.draft["name"]
+		self.name_translations = self.draft["name"]
 		self.dishes = self.draft_dishes
 		self.dishes.each do |dish|
 			dish.publish_menu
@@ -31,7 +31,7 @@ class Section
 
 	def reset_draft_menu
 		draft = {}
-		draft[:name] = self.name
+		draft[:name] = self.name_translations
 		self.draft = draft
 		self.draft_dishes = self.dishes
 		self.dishes.each do |dish|

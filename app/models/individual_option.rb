@@ -50,7 +50,7 @@ class IndividualOption
 	end 
 
 	def publish_menu
-		self.name = self.draft["name"]
+		self.name_translations = self.draft["name"]
 		self.price = self.draft["price"]
 		self.size_prices = self.draft_size_prices
 		self.price_according_to_size = self.draft["price_according_to_size"]

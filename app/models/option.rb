@@ -65,7 +65,7 @@ class Option
 	end	
 
 	def publish_menu
-		self.name = self.draft["name"]
+		self.name_translations = self.draft["name"]
 		self.type = self.draft["type"]
 		self.max_selections = self.draft["max_selections"]
 		self.min_selections = self.draft["min_selections"]
@@ -79,7 +79,7 @@ class Option
 
 	def reset_draft_menu
 		draft = {}
-		draft[:name] = self.name
+		draft[:name] = self.name_translations
 		draft[:type] = self.type
 		draft[:max_selections] = self.max_selections
 		draft[:min_selections] = self.min_selections

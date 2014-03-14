@@ -110,8 +110,8 @@ class Dish
   end  
 
   def publish_menu
-    self.name = self.draft["name"]
-    self.description = self.draft["description"]
+    self.name_translations = self.draft["name"]
+    self.description_translations = self.draft["description"]
     self.price = self.draft["price"]
     self.has_multiple_sizes = self.draft["has_multiple_sizes"]
     self.options = self.draft_options
@@ -126,8 +126,8 @@ class Dish
 
   def reset_draft_menu
     draft = {}
-    draft["name"] = self.name
-    draft["description"] = self.description
+    draft["name"] = self.name_translations
+    draft["description"] = self.description_translations
     draft["price"] = self.price
     draft["has_multiple_sizes"] = self.has_multiple_sizes
     self.draft = draft
