@@ -14,6 +14,13 @@ Foodcloud::Application.routes.draw do
 
   resources :token_authentications, :only => [:create, :destroy]
 
+  resources :menu do
+    collection do
+      get 'index'
+      get 'preview/:id', to: "menu#preview"
+    end
+  end
+
   resources :profile do
     collection do
       get 'edit'

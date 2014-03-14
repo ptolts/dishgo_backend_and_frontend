@@ -4,6 +4,13 @@
 
 //<![CDATA[ 
 
+function currentLangName(observable){
+    return {
+                'en' : observable()['en'],
+                'reso' : observable()[lang()]
+            }
+}
+
 var opts = {
   lines: 13, // The number of lines to draw
   length: 20, // The length of each line
@@ -22,6 +29,31 @@ var opts = {
   top: 'auto', // Top position relative to parent in px
   left: 'auto' // Left position relative to parent in px
 };
+
+var fullLanguageName = {
+    'en' : 'English',
+    'fr' : 'French'
+};
+
+var default_language_hash = {
+    en: '',
+    fr: '',
+}
+
+var default_sizes_hash = {
+    en: 'Sizes',
+    fr: 'Tailles',
+}
+
+var default_sizes_hash_small = {
+    en: 'Small',
+    fr: 'Petit',
+}
+
+var default_sizes_hash_large = {
+    en: 'Large',
+    fr: 'Grand',
+}
 
 function updateFilters() {
     // Only allow prices in any price field.
@@ -73,6 +105,10 @@ function Section(data,topmodel) {
         self.dishes = ko.observableArray($.map(data.dishes, function(item) { return new Dish(item) }));     
     }
 
+    self.printJson = function(){
+        console.log(ko.toJSON(self));
+    }    
+
     if(data.dom_id){
         self.dom_id = data.dom_id;
     } else {
@@ -80,12 +116,17 @@ function Section(data,topmodel) {
     } 
 
     self.computed_name = ko.computed(function(){
-        if(self.name() == ""){
-            return "New Section";
+        var reso = currentLangName(self.name);
+        if(reso['reso'] == ""){
+            if(reso['en'] == ""){
+                return "New Section";                
+            } else {
+                return reso['en'];
+            }
         } else {
-            return self.name();
+            return reso['reso'];
         }
-    })
+    });
 
     self.title_image = ko.computed(function() {
         // if(self.images().length > 0){
@@ -130,7 +171,7 @@ function Section(data,topmodel) {
     self.newDishName = ko.observable();
     self.addDish = function() {
         // console.log("Adding Dish");
-        var new_dish = new Dish({name:""});
+        var new_dish = new Dish({name:JSON.parse(JSON.stringify(default_language_hash)), description:JSON.parse(JSON.stringify(default_language_hash))});
         self.dishes.unshift(new_dish);
         self.topmodel.current_section(null);
         self.topmodel.current_dish(new_dish);
@@ -263,13 +304,22 @@ function Dish(data) {
     self.images = ko.observableArray([]);
     self.sizeSelectedOptionValue = ko.observable();
 
+    self.printJson = function(){
+        console.log(ko.toJSON(self));
+    }
+
     self.computed_name = ko.computed(function(){
-        if(self.name() == ""){
-            return "New Dish";
+        var reso = currentLangName(self.name);
+        if(reso['reso'] == ""){
+            if(reso['en'] == ""){
+                return "New Dish";                
+            } else {
+                return reso['en'];
+            }
         } else {
-            return self.name();
+            return reso['reso'];
         }
-    })
+    });
 
     if(data._id){
         self.id = data._id;
@@ -304,12 +354,11 @@ function Dish(data) {
         if(data.sizes){
             self.sizes_object = ko.observable(new Option(data.sizes,self));
         } else {
-            self.sizes_object = ko.observable(new Option({type:"size",name:"Sizes",individual_options:[{name:"Small",price:'0.0'},{name:"Large",price:'0.0'}]},self));            
+            self.sizes_object = ko.observable(new Option({type:"size",name:JSON.parse(JSON.stringify(default_sizes_hash)),individual_options:[{name:JSON.parse(JSON.stringify(default_sizes_hash_small)),price:'0.0'},{name:JSON.parse(JSON.stringify(default_sizes_hash_large)),price:'0.0'}]},self));            
         }
     }
 
-    self.sizeSelectedOptionValue = ko.observable(self.sizes_object().individual_options()[0]);
-    console.log("Hey guy: " + ko.toJSON(self.sizeSelectedOptionValue()));    
+    self.sizeSelectedOptionValue = ko.observable(self.sizes_object().individual_options()[0]);  
 
     self.options = ko.observableArray([]);
     if(data.options){
@@ -396,7 +445,7 @@ function Dish(data) {
 
     self.addOption = function() { 
         console.log("Adding option!");
-        self.options.push(new Option({type:"generic",placeholder:"Type the option group title here.",individual_options:[{placeholder:"Type the first option title here.",price:'0.0'},{placeholder:"Type the second option title here.",price:'0.0'}]},self));
+        self.options.push(new Option({name:JSON.parse(JSON.stringify(default_language_hash)), type:"generic",placeholder:"Type the option group title here.",individual_options:[{placeholder:"Type the first option title here.",price:'0.0',name:JSON.parse(JSON.stringify(default_language_hash))},{placeholder:"Type the second option title here.",price:'0.0', name: JSON.parse(JSON.stringify(default_language_hash))}]},self));
         updateFilters();
     };
 
@@ -521,13 +570,13 @@ function Option(data,dish) {
 
     // Which option template to use.
     self.addSize = function() {
-        self.individual_options.push(new IndividualOption({name:"",placeholder:"Type new size title here.",price:'0.0'},self));
+        self.individual_options.push(new IndividualOption({name:JSON.parse(JSON.stringify(default_language_hash)),placeholder:"Type new size title here.",price:'0.0'},self));
         updateFilters();        
     }
 
     // Which option template to use.
     self.addOption = function() {
-        self.individual_options.push(new IndividualOption({name:"",placeholder:"Type new option title here.",price:'0.0'},self));
+        self.individual_options.push(new IndividualOption({name:JSON.parse(JSON.stringify(default_language_hash)),placeholder:"Type new option title here.",price:'0.0'},self));
         updateFilters();
     }   
 
@@ -663,9 +712,9 @@ function IndividualOption(data,option) {
 
     if(data.size_prices && self.type != 'size'){
         _.each(data.size_prices,function(e){
-            if(_.find(self.option.sizes_object_names(),function(i){return i.name() == e.name})){
-                var found_object = _.find(self.option.sizes_object_names(),function(i){ return i.name() == e.name});
-                var new_size_prices = new SizePrices({name:found_object.name,price:e.price,ind_opt:self,size_ind_opt:found_object});
+            var found_object = _.find(self.option.sizes_object_names(),function(i){ return i.id() == e.size_id()});
+            if(found_object){
+                var new_size_prices = new SizePrices({name:found_object.name,size_id:found_object.id,price:e.price,ind_opt:self,size_ind_opt:found_object});
                 self.size_prices.push(new_size_prices);
             } 
         });        
@@ -679,7 +728,13 @@ function IndividualOption(data,option) {
         // self.option.size_object is the size version of the options model. It lists the IndividualOptions of each size.
         _.each(self.option.sizes_object_names(),function(e){
             if(_.find(self.size_prices(),function(i){ return i.size_ind_opt == e})===undefined){
-                self.new_size_prices = new SizePrices({name:e.name,price:0.0,ind_opt:self,size_ind_opt:e});
+                self.new_size_prices = new SizePrices({
+                                                        name:e.name,
+                                                        size_id:e.id,
+                                                        price:0.0,
+                                                        ind_opt:self,
+                                                        size_ind_opt:e
+                                                    });
                 self.size_prices.push(self.new_size_prices);
                 e.size_prices_to_remove.push(self.new_size_prices);
             } 
@@ -688,7 +743,13 @@ function IndividualOption(data,option) {
         self.option.sizes_object_names.subscribe(function (newValue) {
                 _.each(self.option.sizes_object_names(),function(e){
                     if(_.find(self.size_prices(),function(i){ return i.size_ind_opt == e}) === undefined){
-                        self.new_size_prices = new SizePrices({name:e.name,price:0.0,ind_opt:self,size_ind_opt:e});
+                        self.new_size_prices = new SizePrices({
+                                                                name:e.name,
+                                                                size_id:e.id,
+                                                                price:0.0,
+                                                                ind_opt:self,
+                                                                size_ind_opt:e
+                                                            });
                         self.size_prices.push(self.new_size_prices);
                         e.size_prices_to_remove.push(self.new_size_prices);
                     } 
@@ -755,13 +816,16 @@ function Restaurant(data) {
 }
 
 var editing_mode = true;
-
+var lang;
 function MenuViewModel() {
     // Data
     var self = this;
     self.menu = ko.observableArray([]);
     self.newDomCounter = 0;
     self.preview = ko.observable(true);
+    self.languages = ko.observableArray(['en','fr']);
+    self.lang = ko.observable('en');
+    lang = self.lang;
 
     self.restaurant = ko.observable(new Restaurant(resto_data));
 
@@ -810,14 +874,19 @@ function MenuViewModel() {
         } else {
             return false;
         }
-    }     
+    } 
+
+    self.sectionNames = {
+        en: '',
+        fr: '',
+    }    
 
     // Operations
     self.newSectionName = ko.observable();
     self.addSection = function() {
         console.log("Adding Section");
         self.newDomCounter++;
-        var new_section = new Section({name:"",subsection:[],dom_id:self.newDomCounter},self);
+        var new_section = new Section({name:self.sectionNames,subsection:[],dom_id:self.newDomCounter},self);
         self.menu.push(new_section);
         self.current_section(new_section);
         self.current_dish(null);
@@ -982,7 +1051,7 @@ function MenuViewModel() {
                     // spinner.stop();
                     // $('#loading').fadeOut();
                     console.log("Menu Saved.");
-                    bootbox.alert("Draft Saved!");
+                    bootbox.alert("Draft Saved!\nPreview at <a href='" + data.preview_token + "'>here.</a>");
                     // self.auto_save_previous = auto_save_now;          
                 },
                 error: function(XMLHttpRequest, textStatus, errorThrown) { 
@@ -1051,6 +1120,46 @@ ko.bindingHandlers.jcrop = {
             }
         );
 
+    }
+};
+
+ko.bindingHandlers.lValue = {
+    init: function (element, valueAccessor, allBindingsAccessor) {
+    var underlyingObservable = valueAccessor();
+    var interceptor = ko.computed({
+        read: function () {
+            return underlyingObservable()[viewmodel.lang()];
+        },
+
+        write: function (newValue) {
+            var current = underlyingObservable();
+            current[viewmodel.lang()] = newValue;
+            underlyingObservable(current);
+        },
+    });
+
+    var default_value;
+
+    var placeholder = ko.computed(function(){
+        if(default_value == null){
+            default_value = $(element).attr("placeholder");
+        }
+        if(viewmodel.lang() != 'en'){
+            return fullLanguageName[viewmodel.lang()] + " translation for '" + underlyingObservable()['en'] + "'";
+        }
+        return default_value;
+    });    
+
+    ko.applyBindingsToNode(element, { value: interceptor, valueUpdate: 'afterkeydown'});
+    ko.applyBindingsToNode(element, { attr: {placeholder:placeholder} });
+  }
+};
+
+ko.bindingHandlers.lText = {
+    update: function (element, valueAccessor) {
+        var value = valueAccessor();
+        var result = ko.observable(value()[viewmodel.lang()]);
+        ko.bindingHandlers.text.update(element, result);
     }
 };   
 

@@ -2,14 +2,14 @@
                     <div class="dish_top">
                         <img src="/app/public/icon@2x.png" width="25" class="icon">
                         <div class="option_title">
-                            <span>Dish Builder</span>      
+                            <span data-bind="click: printJson">Dish Builder</span>      
                         </div>                          
                         <span class="dish_close_icon glyphicon glyphicon glyphicon-remove" data-bind="click: $parent.remove"></span>                        
                     </div>                        
                     <div class="dish">
                         <div class="col-xs-12 push_down">
                             <div class="col-xs-7 ">
-                                <input data-bind="value: name, valueUpdate: 'afterkeydown'" class="form-control col-xs-12 dish_name tooltipclass" data-toggle="tooltip" data-placement="top" title="Type the dish name into this box." placeholder="Add Dish Title"> 
+                                <input data-bind="lValue: name, valueUpdate: 'afterkeydown'" class="form-control col-xs-12 dish_name tooltipclass" data-toggle="tooltip" data-placement="top" title="Type the dish name into this box." placeholder="Add Dish Title"> 
                             </div>
                             <div class="col-xs-4 col-xs-offset-1">
                                 <div class="input-group " data-bind="visible: !sizes()">
@@ -19,7 +19,7 @@
                             </div>
                         </div>
                         <div class="col-xs-12 push_down">
-                            <textarea rows="6" data-bind="value: description, valueUpdate: 'afterkeydown'" class="description form-control tooltipclass" data-toggle="tooltip" data-placement="top" title="Type the dish description into this box." placeholder="Add Dish Description"></textarea>
+                            <textarea rows="6" data-bind="lValue: description, valueUpdate: 'afterkeydown'" class="description form-control tooltipclass" data-toggle="tooltip" data-placement="top" title="Type the dish description into this box." placeholder="Add Dish Description"></textarea>
                         </div>
 
 

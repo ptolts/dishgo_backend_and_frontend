@@ -4,7 +4,7 @@ class IndividualOption
 	include Mongoid::Document
 	include Mongoid::Timestamps
 	store_in collection: "IndividualOption", database: "dishgo"
-	field :name, type: String
+	field :name, localize: true
 	field :price, type: Float
 	field :published, type: Boolean	
 

@@ -4,7 +4,7 @@ class Section
 	include Mongoid::Document
 	include Mongoid::Timestamps
 	store_in collection: "Section", database: "dishgo"
-	field :name, type: String
+	field :name, localize: true
 	field :position, type: Integer
 	field :draft, type: Hash
 	field :published, type: Boolean

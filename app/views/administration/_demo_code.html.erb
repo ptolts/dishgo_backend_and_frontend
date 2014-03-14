@@ -8,14 +8,14 @@
                       <h4 class="title">DishGo</h4>
                     </header>
                     <header class="bar-dish-title black">
-                      <h4 class="dish_title title" data-bind="text: name"></h4>
+                      <h4 class="dish_title title" data-bind="lText: name"></h4>
                       <h4 class="title dish_price" data-bind="text: computed_price"></h4>
                     </header>
                   </div> 
 
                   <div id="bar-dish-add" class="black">
                     <header class="">
-                      <span class="counter" data-bind="text: quantity"></span>
+                      <span class="counter" data-bind="lText: quantity"></span>
                       <div class="btn-group pull-left" style="margin-left: 10px;margin-top: 5px">
                         <button type="button" class="btn btn-inverse" data-bind="click: subQuantity">-</button>
                         <button type="button" class="btn btn-inverse" data-bind="click: addQuantity">+</button>
@@ -36,22 +36,21 @@
                       <div class="header_title">
                         <h4 style="text-decoration: underline;">Description</h4>
                       </div>
-                      <p class="description_text" data-bind="text: description">
+                      <p class="description_text" data-bind="lText: description">
                       </p>
                       <div data-bind="visible: sizes, with: sizes_object" class="demo_options">
                         <strong><h4 style="text-decoration: underline;">Sizes</h4></strong>
                         <div data-bind="foreach: individual_options">
-                          <label class="btn btn-info float_option" data-bind="css: {'active': $parents[1].sizeSelectedOptionValue() === $data}"><input name="sizes_radio" type="radio" data-bind="checkedValue: $data, checked: $parents[1].sizeSelectedOptionValue" style="opacity: 0; width: 0px"/><!-- ko text: name --><!-- /ko --></label>                         
+                          <label class="btn btn-info float_option" data-bind="css: {'active': $parents[1].sizeSelectedOptionValue() === $data}"><input name="sizes_radio" type="radio" data-bind="checkedValue: $data, checked: $parents[1].sizeSelectedOptionValue" style="opacity: 0; width: 0px"/><span data-bind="lText: name"></span></label>                         
                         </div>
                       </div>
                       <!-- ko foreach: options -->
                       <div class="demo_options">
-                        <strong><h4 style="text-decoration: underline;" data-bind="text: name"></h4></strong>
+                        <strong><h4 style="text-decoration: underline;" data-bind="lText: name"></h4></strong>
                         <div data-bind="foreach: individual_options">
                           <label class="btn btn-info float_option" data-bind="css: {'active': $parent.selectedOptionValue().indexOf($data) >= 0}">
                             <input name="sizes_radio" type="checkbox" data-bind="checkedValue: $data, checked: $parent.selectedOptionValue" style="opacity: 0; width: 0px"/>
-                            <!-- ko text: name -->
-                            <!-- /ko -->
+                            <span data-bind="lText: name"></span>
                             <!-- ko if: $data.icon -->
                             <img class="col-xs-12 thumbnail" data-bind="attr: {src: icon().url()}" />
                             <!-- /ko -->
@@ -81,7 +80,7 @@
                   </div>
                   <div class="row">
                     <div class="dish-title" id="white">
-                      <div class="col-md-9 col-xs-9" data-bind="text: name">
+                      <div class="col-md-9 col-xs-9" data-bind="lText: name">
                       </div>
                     </div>
                     <div class="col-md-3 col-xs-3">
@@ -93,7 +92,7 @@
                   <div class="row">
                     <div class="dish-description" id="white">
                       <div class="col-md-12">
-                        <p data-bind="text: description"></p>
+                        <p data-bind="lText: description"></p>
                       </div>
                     </div>
                   </div>

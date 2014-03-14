@@ -4,7 +4,7 @@ class Option
 	include Mongoid::Document
 	include Mongoid::Timestamps
 	store_in collection: "Options", database: "dishgo"
-	field :name, type: String
+	field :name, localize: true
 	field :type, type: String
 	field :max_selections, type: Integer
 	field :published, type: Boolean	

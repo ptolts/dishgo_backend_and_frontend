@@ -9,6 +9,7 @@
                 <div class="row">
                     <h3 data-bind="text: name" id="restaurant_name"></h3>
                 </div>
+                <select data-bind="options: $root.languages, value: $root.lang"></select>                
                 <div class="row" id="add_section_button">
                     <button class="btn btn-section btn-xs" type="button" data-bind="click: $root.addSection">+ Add Section</button>  
                 </div>                                                
@@ -79,9 +80,11 @@
         var image_crop_url = "/app/administration/crop_image";
         var icon_upload_url = "/app/administration/upload_icon"
         var image_upload_url = "/app/administration/upload_image"
+        var viewmodel;
 
-        $(document).ready(function () {     
-            ko.applyBindings(new MenuViewModel());
+        $(document).ready(function () {  
+            viewmodel = new MenuViewModel();   
+            ko.applyBindings(viewmodel);
         });
 
         $("#menu-toggle").click(function(e) {

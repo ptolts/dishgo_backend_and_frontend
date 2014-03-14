@@ -4,15 +4,8 @@ development:
     # Defines the default session. (required)
     default:
       hosts:
-        - database1.dishgo.io:27017
-        - database2.dishgo.io:27017
-        - database3.dishgo.io:27017
-      database: dishgo_dev        
-      username: phil
-      password: 0ud1Vi7udev
-      options:
-        ssl: true
-        read: :primary_preferred     
+        - 127.0.0.1:27017
+      database: dishgo_dev          
 
 
 production:

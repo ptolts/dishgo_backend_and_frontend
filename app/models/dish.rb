@@ -4,8 +4,8 @@ class Dish
   include Mongoid::Document
   include Mongoid::Timestamps
   store_in collection: "Dish", database: "dishgo"
-  field :name, type: String
-  field :description, type: String
+  field :name, localize: true
+  field :description, localize: true
   field :price, type: Float
   field :position, type: Integer
   field :published, type: Boolean

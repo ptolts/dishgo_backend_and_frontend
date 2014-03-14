@@ -101,10 +101,15 @@ class AdministrationController < ApplicationController
       next section_object
   	end
 
+    restaurant.preview_token = loop do
+      token = SecureRandom.urlsafe_base64
+      break token unless Restaurant.where(preview_token: token).count > 0
+    end    
+
     restaurant.draft_menu = menu
     restaurant.save
     # render :json => ("{ \"menu\" : #{restaurant.draft_menu_to_json} }")
-    render :json => ("{ \"success\" : \"true\" }")
+    render :json => ("{ \"preview_token\" : \"/app/menu/preview/#{restaurant.preview_token}\" }")
 
   end
 
