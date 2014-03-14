@@ -627,6 +627,7 @@ function SizePrices(data) {
     self.size_ind_opt_id = data.size_ind_opt._id;
     self.price = ko.observable(data.price);
     self.e_price = ko.observable(false);  
+    self.size_id = ko.observable(data.size_id);
 
     self.edit_price_size = function() { 
         self.e_price(true);     
@@ -721,7 +722,7 @@ function IndividualOption(data,option) {
 
     if(data.size_prices && self.type != 'size'){
         _.each(data.size_prices,function(e){
-            var found_object = _.find(self.option.sizes_object_names(),function(i){ return i.id() == e.size_id()});
+            var found_object = _.find(self.option.sizes_object_names(),function(i){ return i.id() == e.size_id});
             if(found_object){
                 var new_size_prices = new SizePrices({name:found_object.name,size_id:found_object.id,price:e.price,ind_opt:self,size_ind_opt:found_object});
                 self.size_prices.push(new_size_prices);
@@ -1060,7 +1061,7 @@ function MenuViewModel() {
                     // spinner.stop();
                     // $('#loading').fadeOut();
                     console.log("Menu Saved.");
-                    bootbox.alert("Draft Saved!\nPreview at <a href='" + data.preview_token + "'>here.</a>");
+                    bootbox.alert("Draft Saved!\nPreview at <a href=\"" + data.preview_token + "\" target=\"_blank\">here.</a>");
                     // self.auto_save_previous = auto_save_now;          
                 },
                 error: function(XMLHttpRequest, textStatus, errorThrown) { 
