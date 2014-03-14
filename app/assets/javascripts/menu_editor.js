@@ -380,11 +380,14 @@ function Dish(data) {
         }
         _.each(self.options(),function(e){
             var plus_price = parseFloat(e.computed_price());
-            console.log("dish object -> " + plus_price + "\n" + cost + "\n---");
+            // console.log("dish object -> " + plus_price + "\n" + cost + "\n---");
             cost = cost + plus_price;
-            console.log("new price: " + cost);
+            // console.log("new price: " + cost);
         });
         cost = cost * self.quantity();
+        if(isNaN(cost)){
+            return (0).toFixed(2);
+        }
         return parseFloat(cost).toFixed(2);
     }, self);
 
@@ -666,8 +669,9 @@ IndividualOption.prototype.toJSON = function() {
 function IndividualOption(data,option) {
 
     var self = this;
+    self.id = ko.observable();
     if(data._id){
-        self.id = data._id;
+        self.id(data._id);
     } else {
         if(editing_mode){
             $.ajax({
@@ -678,7 +682,7 @@ function IndividualOption(data,option) {
               },
               success: function(data, textStatus, jqXHR){
                     console.log("Individual Option Saved.");
-                    self.id = data.id;          
+                    self.id(data.id);
                 },
                 error: function(XMLHttpRequest, textStatus, errorThrown) { 
                     console.log("There was an error saving the individual option " + errorThrown);

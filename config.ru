@@ -2,7 +2,7 @@
 
 require ::File.expand_path('../config/environment',  __FILE__)
 
-if ENV['RAKE_ENV'].to_s.eql?('development')
+if ENV['RAILS_ENV'].to_s.eql?('development')
 
 	require 'rack/rewrite'
 
