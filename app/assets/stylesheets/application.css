@@ -10,5 +10,9 @@
  *
  *= require_self
  *= require bootstrap.min.css
- *= require_tree .
+ *= require admin_nav.css
+ *= require iphone_demo.css
+ *= require jquery.Jcrop.min.css
+ *= require main.css
+ *= require menu_editor.css
  */

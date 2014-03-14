@@ -9,6 +9,13 @@ class MenuController < ApplicationController
       redirect_to "http://dishgo.io"
       return
     end
+
+    if restaurant.design
+      @design_css = restaurant.design.css
+    else
+      @design_css = Design.first.css
+    end
+
     @resto_data = restaurant.as_document
     @resto_data[:images] = restaurant.image.reject{|e| e.img_url_medium.blank?}.collect{|e| e.serializable_hash({})}
     @resto_data = @resto_data.as_json    
@@ -22,6 +29,13 @@ class MenuController < ApplicationController
       redirect_to "http://dishgo.io"
       return
     end
+
+    if restaurant.design
+      @design_css = restaurant.design.css
+    else
+      @design_css = Design.first.css
+    end
+    
     @resto_data = restaurant.as_document
     @resto_data[:images] = restaurant.image.reject{|e| e.img_url_medium.blank?}.collect{|e| e.serializable_hash({})}
     @resto_data = @resto_data.as_json    

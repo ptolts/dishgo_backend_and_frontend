@@ -5,5 +5,8 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
-User.create(email:"mrtolton@gmail.com",password:"planting",is_admin:true,confirmed_at:DateTime.now)
-Restaurant.create(name:"Phils Place of Horror")
+if ENV['RAILS_ENV'].to_s.eql?('development')
+	User.create(email:"mrtolton@gmail.com",password:"planting",is_admin:true,confirmed_at:DateTime.now)
+	r = Restaurant.create(name:"Phils Place of Horror")
+	User.create(email:"phil@dishgo.io",password:"planting",is_admin:false,confirmed_at:DateTime.now,owns_restaurants:r)
+end

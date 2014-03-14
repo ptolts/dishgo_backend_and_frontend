@@ -1,0 +1,98 @@
+<div class="container">
+
+    <div class="col-xs-12 col-md-6" data-bind="foreach: designs">
+      <div data-bind="template: { name: 'design_template', data: $data}"></div>  
+    </div>
+
+    <div data-bind="template: { name: 'create_design_template', data: new_design}"></div>      
+
+    <%= render 'shared/design_template' %>
+    <%= render 'shared/design_javascript' %>
+
+    <script type='text/javascript'>//<![CDATA[   
+
+        var design_data = <%= raw(@designs.to_json) %>;
+
+        function viewModel() {
+            var self = this;
+            self.designs = ko.observableArray([]);
+            self.new_design = new Design({});
+            self.designs($.map(design_data, function(item) { return new Design(item) }));
+
+            self.set_user = function(user) {
+                // self.current_user(user);
+            };            
+
+            self.createDesign = function(){
+                $.ajax({
+                  type: "POST",
+                  url: "/app/design/create",
+                  data: {
+                    name: self.new_design.name(),
+                    css: self.new_design.css(),
+                  },
+                  success: function(data, textStatus, jqXHR){
+                        bootbox.alert(data.result);
+                    },
+                  dataType: "json"
+                });
+            }
+
+            self.updateDesign = function(item){
+                $.ajax({
+                  type: "POST",
+                  url: "/app/design/update",
+                  data: {
+                    name: item.name(),
+                    css: item.css(),
+                    id: item.id(),
+                  },
+                  success: function(data, textStatus, jqXHR){
+                        bootbox.alert(data.result);
+                    },
+                  dataType: "json"
+                });
+            }            
+
+            self.remove = function(item) {
+                // bootbox.dialog({
+                //   message: "Destroy user \"" + item.email() + "\"?",
+                //   title: "Remove User",
+                //   buttons: {
+                //     success: {
+                //       label: "No",
+                //       className: "btn-primary pull-left col-xs-3",
+                //       callback: function() {
+
+                //       }
+                //     },
+                //     danger: {
+                //       label: "Yes",
+                //       className: "btn-danger col-xs-3 pull-right",
+                //       callback: function() {
+                //         $.ajax({
+                //           type: "POST",
+                //           url: "/app/administration/destroy_user",
+                //           data: {
+                //             user_id: item.id,
+                //           },
+                //           success: function(data, textStatus, jqXHR){
+                //                 self.users.remove(item);
+                //             },
+                //           dataType: "json"
+                //         });                        
+                //       }
+                //     },
+                //   }
+                // });        
+            } 
+
+
+        };
+
+        ko.applyBindings(new viewModel());
+
+
+    //]]>  
+    </script>
+</div>

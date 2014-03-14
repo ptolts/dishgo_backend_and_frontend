@@ -1,13 +1,15 @@
 <script id="design_template" type="text/html">
-    <div class="col-xs-12 col-md-6">
+    <div class="col-xs-6 jumbotron">
         <h4 data-bind="text: name"></h4>
         <textarea rows="6" data-bind="value: css" placeholder="Design Specific CSS."></textarea>
     </div>
 </script>
 
 <script id="create_design_template" type="text/html">
-    <div class="col-xs-12 col-md-6">
+    <div class="col-xs-12 col-md-6 jumbotron">
+    	<h4>Create a new design</h4>
         <input class="form-control" data-bind="value: name" />
-        <textarea rows="6" data-bind="value: css" placeholder="Design Specific CSS."></textarea>
+        <textarea rows="15" data-bind="value: css" placeholder="Design Specific CSS." style="width: 100%"></textarea>
+        <button class="btn btn-primary" data-bind="click: $root.createDesign">Create</div>
     </div>
 </script>

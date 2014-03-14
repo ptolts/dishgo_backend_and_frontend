@@ -30,7 +30,8 @@ Foodcloud::Application.routes.draw do
   resources :design do
     collection do
       get 'list'
-      get 'create'
+      post 'create'
+      post 'update'
     end
   end  
 

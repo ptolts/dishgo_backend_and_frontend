@@ -21,6 +21,7 @@
               <% if admin_user? %>
                 <li class="<%= active_link('administration','users') %>"><a href="/app/administration/users">Users</a></li>
                 <li class="<%= active_link('administration','restaurants') %>"><a href="/app/administration/restaurants">Restaurants</a></li>
+                <li class="<%= active_link('design','list') %>"><a href="/app/design/list">Designs</a></li>
               <% end %>
             <% end %>
             <% if user_signed_in? %>
