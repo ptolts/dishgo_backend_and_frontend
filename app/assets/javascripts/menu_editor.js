@@ -76,8 +76,9 @@ function Section(data,topmodel) {
 
     var self = this;
     self.topmodel = topmodel;
+    self.id = ko.observable()
     if(data._id){
-        self.id = data._id;
+        self.id(data._id);
     } else {
         if(editing_mode){
             $.ajax({
@@ -88,7 +89,7 @@ function Section(data,topmodel) {
               },
               success: function(data, textStatus, jqXHR){
                     console.log("Section Saved.");
-                    self.id = data.id;          
+                    self.id(data.id);          
                 },
                 error: function(XMLHttpRequest, textStatus, errorThrown) { 
                     console.log("There was an error saving the section " + errorThrown);
@@ -321,8 +322,10 @@ function Dish(data) {
         }
     });
 
+    self.id = ko.observable();
+
     if(data._id){
-        self.id = data._id;
+        self.id(data._id);
     } else {
         if(editing_mode){
             $.ajax({
@@ -333,7 +336,7 @@ function Dish(data) {
               },
               success: function(data, textStatus, jqXHR){
                     console.log("Section Saved.");
-                    self.id = data.id;          
+                    self.id(data.id);
                 },
                 error: function(XMLHttpRequest, textStatus, errorThrown) { 
                     console.log("There was an error saving the section " + errorThrown);
@@ -509,8 +512,10 @@ function Option(data,dish) {
         self.placeholder(data.placeholder);
     }
 
+    self.id = ko.observable();
+
     if(data._id){
-        self.id = data._id;
+        self.id(data._id);
         if(data.extra_cost){
             self.extra_cost(data.extra_cost);
         }
@@ -524,7 +529,7 @@ function Option(data,dish) {
               },
               success: function(data, textStatus, jqXHR){
                     console.log("Option Saved.");
-                    self.id = data.id;          
+                    self.id(data.id);
                 },
                 error: function(XMLHttpRequest, textStatus, errorThrown) { 
                     console.log("There was an error saving the option " + errorThrown);
