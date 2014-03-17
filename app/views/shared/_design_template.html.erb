@@ -1,15 +1,37 @@
-<script id="design_template" type="text/html">
+<script id="pick_design_template" type="text/html">
     <div class="col-xs-6 jumbotron">
-        <h4 data-bind="text: name"></h4>
-        <textarea rows="6" data-bind="value: css" placeholder="Design Specific CSS."></textarea>
+        <h4>Design:</h4>
+        <p class="col-xs-12">
+            <select class="form-control" data-bind="
+                                options: $root.designs, 
+                                optionsText: 'name',
+                                value: design,
+                                optionsCaption: 'Choose...'
+                                "></select>  
+        </p>   
+        <!-- ko with: design --> 
+            <h4>Current: <span data-bind="text: name"></span></h4>
+        <!-- /ko -->
+        <p>
+            <button class="btn" data-bind="click: saveDesign">Set Design</button>
+        </p>
     </div>
 </script>
 
 <script id="create_design_template" type="text/html">
-    <div class="col-xs-12 col-md-6 jumbotron">
-    	<h4>Create a new design</h4>
-        <input class="form-control" data-bind="value: name" />
-        <textarea rows="15" data-bind="value: css" placeholder="Design Specific CSS." style="width: 100%"></textarea>
-        <button class="btn btn-primary" data-bind="click: $root.createDesign">Create</div>
+    <div class="col-xs-12 jumbotron">
+    	<h3 data-bind="text: $root.designFormTitle"></h3>
+        <p>
+            <input class="form-control" data-bind="value: name" />
+        </p>
+
+        <h4>CSS:</h4>
+
+        <textarea rows="50" data-bind="value: css, codemirror: { lineNumbers: true, matchBrackets: true, mode: 'text/css', theme:'lesser-dark', value:css }" placeholder="Design Specific CSS." style="width: 100%"></textarea>
+
+        <p></p>
+        <p>
+            <button class="btn btn-primary" data-bind="click: $root.updateDesign, text: $root.createNewDesignButton">Create</div>
+        </p>
     </div>
 </script>

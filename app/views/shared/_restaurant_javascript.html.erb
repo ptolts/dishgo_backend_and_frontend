@@ -14,7 +14,26 @@
             self.city = ko.observable(data.city ? data.city : "");
             self.province = ko.observable(data.province ? data.province : "");
             self.postal_code = ko.observable(data.postal_code ? data.postal_code : "");
+            self.design = ko.observable(data.design === undefined ? null : new Design(data.design));
             self.id = data._id;
+
+            self.saveDesign = function(){
+                $.ajax({
+                  type: "POST",
+                  url: "/app/administration/update_restaurant",
+                  data: {
+                    params:ko.toJSON(self),
+                  },
+                  success: function(data, textStatus, jqXHR){
+                        console.log("Saved!")      
+                    },
+                    error: function(XMLHttpRequest, textStatus, errorThrown) { 
+                        console.log("There was an error saving the section " + errorThrown);
+                    },
+                    dataType: "json"
+                });                
+            }
+
         }
 
     //]]>  

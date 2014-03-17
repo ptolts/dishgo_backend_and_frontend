@@ -38,6 +38,13 @@ class Demoimage
   after_post_process :img_post_process
   # before_save :img_post_process
 
+  def img_url_medium
+    return super.to_s.gsub(/http:\/\//,'https://').gsub(/\.r.{2}\./,'.ssl.')
+  end
+
+  def img_url_original
+    return super.to_s.gsub(/http:\/\//,'https://').gsub(/\.r.{2}\./,'.ssl.')
+  end
 
   def custom_to_hash
     return {_id: self._id, local_file: self.img_url_medium, original: self.img_url_original}

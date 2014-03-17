@@ -25,6 +25,7 @@
     <div class="row" data-bind="with: current_restaurant">
         <div class="col-xs-12 col-md-6">
             <div data-bind="template: { name: 'restaurant_template', data: $parent.current_restaurant }"></div>
+            <div data-bind="template: { name: 'pick_design_template', data: $parent.current_restaurant }"></div>
         </div>
     </div>
 
@@ -49,14 +50,19 @@
     </script>
 
     <%= render 'shared/restaurant_template' %>
+    <%= render 'shared/design_template' %>
+    <%= render 'shared/design_javascript' %>
     <%= render 'shared/restaurant_javascript' %>
 
     <script type='text/javascript'>//<![CDATA[ 
+
+        var design_data = <%= raw(@designs.to_json) %>;
 
         function viewModel() {
             var self = this;
             self.restaurant_name = ko.observable("");
             self.restaurants = ko.observableArray([]);
+            self.designs = ko.observable(($.map(design_data, function(item) { return new Design(item) })));
             self.current_restaurant = ko.observable();
             self.search_for_restaurant = function() {
                 console.log("Searching!");
@@ -86,7 +92,8 @@
             }        
         };
 
-        ko.applyBindings(new viewModel());
+        var viewmodel = new viewModel();
+        ko.applyBindings(viewmodel);
 
 
     //]]>  

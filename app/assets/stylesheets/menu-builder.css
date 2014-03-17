@@ -68,13 +68,7 @@ hr {
     font-size: 40px;
     text-transform: uppercase;
 }
-h1, h2, h3, .h1, .h2, .h3 {
-  font-family: 'breeserif_regular_macroman';
-}
 
-h4, h5, h6, .h4, .h5, .h6{
-  font-family: 'breeserif_regular_macroman';
-}
 .btn {
   margin-bottom: 2px;
 }

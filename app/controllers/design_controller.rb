@@ -15,15 +15,20 @@ class DesignController < ApplicationController
   end
 
   def list
+    Rails.logger.warn request.protocol
+    Rails.logger.warn "********"
     @designs = Design.all.as_json
     render 'list' 
   end
 
   def update
-    design = Design.find(params[:id])
+    design = Design.where(id:params[:id]).first
+    unless design
+      design = Design.new
+    end
     design.css = params[:css]
     design.name = params[:name]
     design.save
-    render :text => "Updated #{name}"
+    render :text => "Updated #{design.name}"
   end
 end

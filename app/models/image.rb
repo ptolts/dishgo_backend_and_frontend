@@ -59,6 +59,18 @@ class Image
   validates_attachment_content_type :img, :content_type => %w(image/jpeg image/jpg image/png), :message => 'file type is not allowed (only jpeg/png/gif images)'    
   after_post_process :img_post_process
 
+  def img_url_medium
+    return super.to_s.gsub(/http:\/\//,'https://').gsub(/\.r.{2}\./,'.ssl.')
+  end
+
+  def img_url_original
+    return super.to_s.gsub(/http:\/\//,'https://').gsub(/\.r.{2}\./,'.ssl.')
+  end
+
+  def img_url_small
+    return super.to_s.gsub(/http:\/\//,'https://').gsub(/\.r.{2}\./,'.ssl.')
+  end    
+
   def custom_to_hash
     if img_file_size
       # This is for legacy images which didn't have their URL's saved.

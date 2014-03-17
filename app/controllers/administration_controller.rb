@@ -15,6 +15,7 @@ class AdministrationController < ApplicationController
   end
 
   def restaurants
+    @designs = Design.all.as_json
   	render 'restaurants'
   end
 
@@ -24,7 +25,7 @@ class AdministrationController < ApplicationController
 
   def search_restaurants
   	result = Restaurant.where(:name => /#{params[:restaurant_name]}/i).limit(25)
-  	render :json => result.as_json
+  	render :json => result.as_json(:include => :design)
   end
 
   def search_users
@@ -229,6 +230,16 @@ class AdministrationController < ApplicationController
                         height: img.height,
                         width: img.width,
                       }.as_json    
-  end  
+  end
+
+  def update_restaurant
+    settings = JSON.parse(params[:params])
+    Rails.logger.warn settings.to_s
+    restaurant = Restaurant.find(settings["id"])
+    design = Design.find(settings["design"]["id"])
+    restaurant.design = design
+    restaurant.save
+    render :text => restaurant.as_json
+  end    
 
 end

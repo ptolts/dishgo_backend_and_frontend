@@ -76,7 +76,8 @@ function Section(data,topmodel) {
 
     var self = this;
     self.topmodel = topmodel;
-    self.id = ko.observable()
+    self.id = ko.observable() 
+
     if(data._id){
         self.id(data._id);
     } else {
@@ -1092,6 +1093,31 @@ function MenuViewModel() {
     // }
 };
 
+function PublicMenuModel() {
+
+    var self = this;
+    self.menu = ko.observableArray([]);
+    self.newDomCounter = 0;
+    self.preview = ko.observable(true);
+    self.languages = ko.observableArray(['en','fr']);
+    self.lang = ko.observable('en');
+    lang = self.lang;
+
+    self.restaurant = ko.observable(new Restaurant(resto_data));
+
+    self.showDetails(false);
+    self.toggleDetails =  function(){
+    self.button1Visible(!self.button1Visible());
+    }   
+
+    self.menu($.map(menu_data.menu, function(item) { return new Section(item,self) }));
+
+    self.sectionNames = {
+        en: '',
+        fr: '',
+    }    
+
+};
 
 ko.bindingHandlers.jcrop = {
     update: function(element, valueAccessor, allBindings, viewModel, bindingContext){

@@ -1,10 +1,18 @@
+<%= javascript_include_tag "codemirror" %> 
+<%= stylesheet_link_tag    "codemirror" %>
+
 <div class="container">
 
-    <div class="col-xs-12 col-md-6" data-bind="foreach: designs">
-      <div data-bind="template: { name: 'design_template', data: $data}"></div>  
-    </div>
+    <p class="col-xs-12">
+        <select class="form-control" data-bind="
+                            options: designs, 
+                            optionsText: 'name',
+                            value: selectedDesign,
 
-    <div data-bind="template: { name: 'create_design_template', data: new_design}"></div>      
+                            "></select>  
+    </p>
+
+    <div data-bind="template: { name: 'create_design_template', data: selectedDesign}"></div>      
 
     <%= render 'shared/design_template' %>
     <%= render 'shared/design_javascript' %>
@@ -13,30 +21,71 @@
 
         var design_data = <%= raw(@designs.to_json) %>;
 
+        ko.bindingHandlers.codemirror = {
+            init: function(element, valueAccessor, allBindingsAccessor, viewModel) {
+                var options = ko.toJS(valueAccessor());
+                options.value = options.value || '';
+                var editor = CodeMirror.fromTextArea(element, options);
+                editor.on('change', function (cm) {
+                    var value = ko.unwrap(valueAccessor()).value;
+                    if (ko.isObservable(value)) {
+                        value(cm.getValue());
+                    } else {
+                        ko.unwrap(valueAccessor()).value = cm.getValue();
+                    }
+                });
+                editor.setValue(allBindingsAccessor().value());
+                editor.refresh();
+                var wrapperElement = $(editor.getWrapperElement()); 
+
+                ko.utils.domNodeDisposal.addDisposeCallback(element, function() {
+                    wrapperElement.remove();
+                });
+            }
+        };        
+
         function viewModel() {
             var self = this;
             self.designs = ko.observableArray([]);
             self.new_design = new Design({});
+            self.selectedDesign = ko.observable(self.new_design);            
             self.designs($.map(design_data, function(item) { return new Design(item) }));
+            self.designs.push(self.new_design);
 
             self.set_user = function(user) {
                 // self.current_user(user);
-            };            
+            };        
 
-            self.createDesign = function(){
-                $.ajax({
-                  type: "POST",
-                  url: "/app/design/create",
-                  data: {
-                    name: self.new_design.name(),
-                    css: self.new_design.css(),
-                  },
-                  success: function(data, textStatus, jqXHR){
-                        bootbox.alert(data.result);
-                    },
-                  dataType: "json"
-                });
-            }
+            self.createNewDesignButton = ko.computed(function(){
+                if(self.selectedDesign().id() == "") {
+                    return "Create";
+                } else {
+                    return "Save";
+                }
+            });  
+
+            self.designFormTitle = ko.computed(function(){
+                if(self.selectedDesign().id() == "") {
+                    return "Create a New Design:";
+                } else {
+                    return "Edit Design:";
+                }
+            });                
+
+            // self.createDesign = function(){
+            //     $.ajax({
+            //       type: "POST",
+            //       url: "/app/design/create",
+            //       data: {
+            //         name: self.new_design.name(),
+            //         css: self.new_design.css(),
+            //       },
+            //       success: function(data, textStatus, jqXHR){
+            //             bootbox.alert(data.result);
+            //         },
+            //       dataType: "json"
+            //     });
+            // }
 
             self.updateDesign = function(item){
                 $.ajax({
@@ -90,7 +139,8 @@
 
         };
 
-        ko.applyBindings(new viewModel());
+        var viewmodel = new viewModel();
+        ko.applyBindings(viewmodel);
 
 
     //]]>  
