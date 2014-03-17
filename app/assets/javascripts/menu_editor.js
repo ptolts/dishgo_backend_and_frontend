@@ -1103,11 +1103,21 @@ function PublicMenuModel() {
     self.lang = ko.observable('en');
     lang = self.lang;
 
+    self.contact_tr = ko.observable({
+        'en':'Contact',
+        'fr':'Contact'
+    });
+
+    self.menu_tr = ko.observable({
+        'en':'Menu',
+        'fr':'la Carte'
+    });    
+
     self.restaurant = ko.observable(new Restaurant(resto_data));
 
-    self.showDetails(false);
+    self.showDetails = ko.observable(false);
     self.toggleDetails =  function(){
-    self.button1Visible(!self.button1Visible());
+        self.showDetails(!self.showDetails());
     }   
 
     self.menu($.map(menu_data.menu, function(item) { return new Section(item,self) }));

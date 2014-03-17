@@ -7,6 +7,19 @@
             </address>
         </div>
 
+        <div class="language_selector">
+            <select data-bind="options: $root.languages, optionsText: function(item){ return fullLanguageName[item];}, value: $root.lang"></select>          
+        </div>
+
+        <div class="menu_style_selector">
+            <div class="btn-toolbar" role="toolbar">
+              <div class="btn-group">
+                <button type="button" class="btn btn-default" data-bind="css:{'active':showDetails()}, click: function(){showDetails(true);}"><span class="glyphicon glyphicon-film"></span></button>
+                <button type="button" class="btn btn-default" data-bind="css:{'active':!showDetails()}, click: function(){showDetails(false);}"><span class="glyphicon glyphicon-th-list"></span></button>
+              </div>
+            </div>          
+        </div>
+
         <!-- ko foreach: menu -->
                 <div class="row">
                     <div class="dish-section-title">
@@ -22,52 +35,76 @@
                     </div>
                 </div>
                 <div class="row">
-                    <!-- ko foreach: dishes -->
-                        <div class="col-md-4">                
-                            <div class="row">
-                                <div class="dish-picture">
+
+                    <!-- THIS IS THE DETAILED DISH OUTPUT. -->
+
+                    <!-- ko if: $root.showDetails -->
+                        <!-- ko foreach: dishes -->
+                            <div class="col-md-4">                
+                                <div class="row">
+                                    <div class="dish-picture">
+                                        <div class="col-md-12">
+                                            <img src="/assets/logo.png" class="img-responsive" data-bind="attr:{src:large_title_image}">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="dish-title">
+                                        <div class="col-md-9 col-xs-9" data-bind="lText: name">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 col-xs-3">
+                                        <div class="dish-price">
+                                            <i data-bind="text: computed_price"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="dish-description">
+                                        <div class="col-md-12">
+                                            <p data-bind="lText: description"></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="dish-options">
+                                        <div class="col-md-12">
+                                            <a href="#" class="btn btn-success" id="create">Options</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
                                     <div class="col-md-12">
-                                        <img src="/assets/logo.png" class="img-responsive" data-bind="attr:{src:large_title_image}">
+                                        <hr>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="sizes">
+                                        <div class="col-md-9">
+                                        </div>
+                                    </div>  
+                                </div>
+                            </div>
+                        <!-- /ko -->
+                    <!-- /ko -->
+
+                    <!-- THIS IS THE NO DETAIL DISH OUTPUT -->                    
+                    <!-- ko if: !$root.showDetails() -->
+                        <!-- ko foreach: dishes -->
+                            <div class="col-md-3">                
+                                <div class="row">
+                                    <div class="dish-title">
+                                        <div class="col-md-9 col-xs-9" data-bind="lText: name">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 col-xs-3">
+                                        <div class="dish-price">
+                                            <i data-bind="text: computed_price"></i>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="dish-title">
-                                    <div class="col-md-9 col-xs-9" data-bind="lText: name">
-                                    </div>
-                                </div>
-                                <div class="col-md-3 col-xs-3">
-                                    <div class="dish-price">
-                                        <i data-bind="text: computed_price"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="dish-description">
-                                    <div class="col-md-12">
-                                        <p data-bind="lText: description"></p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="dish-options">
-                                    <div class="col-md-12">
-                                        <a href="#" class="btn btn-success" id="create">Options</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <hr>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="sizes">
-                                    <div class="col-md-9">
-                                    </div>
-                                </div>  
-                            </div>
-                        </div>
+                        <!-- /ko -->                        
                     <!-- /ko -->
                 </div>
         <!-- /ko -->
