@@ -20,7 +20,7 @@ class MenuController < ApplicationController
       @design_menu_css = Design.first.menu_css
     end
 
-    @design_data = design.as_json(includes: :global_images)
+    @design_data = design.as_json(include: :global_images)
     @resto_data = restaurant.as_document
     @resto_data[:images] = restaurant.image.reject{|e| e.img_url_medium.blank?}.collect{|e| e.serializable_hash({})}
     @resto_data = @resto_data.as_json    
