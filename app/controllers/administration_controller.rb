@@ -254,7 +254,7 @@ class AdministrationController < ApplicationController
     end
 
     restaurant.save
-    render :text => restaurant.as_json
+    render :json => restaurant.as_json
   end    
 
 end
