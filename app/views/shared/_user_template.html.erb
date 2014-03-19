@@ -1,35 +1,33 @@
 <script id="user_template" type="text/html">
     <div class="col-xs-12">
-        <form class="form-horizontal">
-            <fieldset>
-                <!-- Address form -->
-                <h2>User Profile</h2>
-                <div class="form-group">
-                    <label>Email</label>
-                    <div class="controls">
-                        <input id="email" name="email" type="text" placeholder="Email" data-bind="value: email" class="form-control">
-                        <p class="help-block"></p>
+        <div class="user_form_wrapper">
+            <form class="form-horizontal">
+                <fieldset>
+                    <!-- Address form -->
+                    <h2 class="text-center">User Profile</h2>
+                    <hr>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <div class="controls">
+                            <input id="email" name="email" type="text" placeholder="Email" data-bind="value: email" class="form-control">
+                            <p class="help-block"></p>
+                        </div>
                     </div>
-                </div>
-                <% if current_user.is_admin %>
-                    <div class="row">
+                    <% if current_user.is_admin %>
                         <p>Admin: <span data-bind="text: is_admin, click: toggle_is_admin"></span></p>
-                    </div> 
-                    <div class="row">
                         <p>Restaurant: <!-- ko with: restaurant --><span data-bind="text: name"></span><!-- /ko --></p>
-
                         <p>Set Restaurant:</p>
                         <div class="form-inline" role="form">
                             <input class="form-control" data-bind="value: restaurant_name" />
                             <button class="btn btn-default" data-bind="click: search_for_restaurant">Search</button>
-                        </div>  
-                        
+                        </div>                             
                         <ul data-bind="foreach: restaurants" style="list-style: none;">
-                            <li><span data-bind="text: name"></span><button class="btn btn-info btn-sm" data-bind="click: $parent.set_restaurant">Save</button></li>
+                            <li><span data-bind="text: name"></span><button class="btn btn-info" data-bind="click: $parent.set_restaurant">Save</button>
+                            </li>
                         </ul>          
-                    </div> 
-                <% end %>  
-            </fieldset>
-        </form>
+                    <% end %>  
+                </fieldset>
+            </form>
+        </div>
     </div>
 </script>
