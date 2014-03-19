@@ -1,28 +1,144 @@
 <!DOCTYPE html>
-<html>
-<head>
-	<title>DishGo</title>
-	<%= stylesheet_link_tag    "application", :media => "all" %>
-	<%= stylesheet_link_tag    "menu-builder" %>
-	<%= javascript_include_tag "application" %>
-	<link href='http://fonts.googleapis.com/css?family=Bree+Serif' rel='stylesheet' type='text/css'>
-	<%= csrf_meta_tags %>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+	    <title></title>
+		<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">    
+		<link href='http://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>   
 
-<style>
-	body {
-	  min-height: 2000px;
-	  padding-top: 30px;
-	}
+		<!-- Latest compiled and minified JavaScript -->
+		<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>	
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+		<!-- Optional theme -->
+		<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
+		<!-- Latest compiled and minified JavaScript -->
+		<script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>	
 
-	<%= raw(@design_css) %>
+		<%= javascript_include_tag "application" %>
+		
+		<script src="http://cdnjs.cloudflare.com/ajax/libs/knockout/3.1.0/knockout-min.js"></script>
+		<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDmVdO0hER_qFFNZN5C9Du28_-sSblng0Y&sensor=true"></script>	
+		<!--[if lt IE 9]>
+			<script src="http://css3-mediaqueries-js.googlecode.com/files/css3-mediaqueries.js"></script>
+			<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]-->	
+		<meta name="viewport" content="width=device-width">
+	</head>
 
-</style>
+	<style>
 
-<body>	
-	<div class="container">	
-		<%=  yield %>
-	</div>
-</body>
+		<%= raw(@design_css) %>
+		<%= raw(@design_menu_css) %>
+
+	</style>
+
+    <body>
+		<div class="overlay"></div>  
+		<nav id="navigation_small" class="nav">
+			<ul>
+				<li class="icon" data-bind="click: display_menu_toggle"><i class="fa fa-bars"></i></li>
+				<!-- ko if: display_menu -->
+					<li><a data-bind="page-href: 'start'">Home</a></li>
+					<li><a data-bind="page-href: 'menu'">Menu</a></li>
+					<li><a data-bind="page-href: 'contact'">Contact</a></li>
+				<!-- /ko -->
+			</ul>
+		</nav>			  	
+		<div id="left_menu">
+			<h3 class="restaurant_name">Tuckshop</h3>
+			<nav id="navigation" class="nav">
+				<ul>
+					<li><a data-bind="page-href: 'start'">Home</a></li>
+					<li><a data-bind="page-href: 'menu'">Menu</a></li>
+					<li><a data-bind="page-href: 'contact'">Contact</a></li>
+				</ul>
+			</nav>	
+		</div>
+		<div id="left_menu_background"></div>
+
+
+		<div data-bind="page: {id: 'start', title: 'Tuckshop'}">
+			<div id="content_wrapper">
+				<div id="content">					
+					<%= render 'start' %>
+				</div>			
+			</div>							
+		</div>	
+		<div data-bind="page: {id: 'contact', title: 'Contact Tuckshop'}">
+			<div id="content_wrapper">
+				<div id="content">					
+					<%= render 'contact' %>
+				</div>			
+			</div>														
+		</div>
+
+
+		<div data-bind="page: {id: 'menu', title: 'Menu'}">
+			<%= yield %>
+		</div>	
+
+    	<%= javascript_include_tag "menu_editor" %>
+
+		<%= render 'shared/design_javascript' %>
+
+		<script type="text/javascript">
+
+			$(function(){
+			        $.mbBgndGallery.buildGallery({
+			                containment:"body",
+			                timer:4000,
+			                effTimer:2000,
+			                grayScale:false,
+			                images:[
+			                 	"img/IMG_1.JPG",
+			                 	"img/IMG_2.JPG",
+			                 	"img/IMG_3.JPG",
+			                 ],
+
+			                onStart:function(){},
+			                onPause:function(){},
+			                onPlay:function(opt){},
+			                onChange:function(idx){}, //idx=the zero based index of the displayed photo
+			                onNext:function(opt){},   //opt=the options relatives to this component instance
+			                onPrev:function(opt){}   //opt=the options relatives to this component instance
+			        });
+			})
+
+	        var restaurant_id = "<%= params[:restaurant_id]%>";
+	        var menu_data = <%= raw(@menu_data) %>;
+	        var design_data = <%= raw(@design_data.to_json) %>;
+	        var resto_data = <%= raw(@resto_data.to_json) %>;
+
+	        editing_mode = false;    
+	        var viewmodel = new PublicMenuModel();
+
+	        $("#menu-toggle").click(function(e) {
+	            e.preventDefault();
+	            $("#wrapper").toggleClass("active");
+	        });			
+
+        	$(function(){	
+				pager.extendWithPage(viewmodel);
+	        	ko.applyBindings(viewmodel);        			
+				pager.start();			
+			});
+
+			function initialize() {
+				var myLatlng = new google.maps.LatLng(-25.363882,131.044922);
+				var mapOptions = {
+					center: myLatlng,
+					zoom: 12
+				};			
+				var map = new google.maps.Map(document.getElementById("map-canvas"),mapOptions);
+				var marker = new google.maps.Marker({
+					position: myLatlng,
+					map: map,
+					title: 'Hello World!'
+				});					
+			}
+			google.maps.event.addDomListener(window, 'load', initialize);
+
+        </script>
+
+    </body>
 </html>

@@ -12,6 +12,10 @@
                             "></select>  
     </p>
 
+    <p class="col-xs-12">
+        <button class="btn btn-primary" data-bind="click: createDesign">Create Design</button>
+    </p>    
+
     <div data-bind="template: { name: 'create_design_template', data: selectedDesign}"></div>      
 
     <%= render 'shared/design_template' %>
@@ -47,17 +51,15 @@
         function viewModel() {
             var self = this;
             self.designs = ko.observableArray([]);
-            self.new_design = new Design({});
-            self.selectedDesign = ko.observable(self.new_design);            
+            self.selectedDesign = ko.observable();            
             self.designs($.map(design_data, function(item) { return new Design(item) }));
-            self.designs.push(self.new_design);
 
             self.set_user = function(user) {
                 // self.current_user(user);
             };        
 
             self.createNewDesignButton = ko.computed(function(){
-                if(self.selectedDesign().id() == "") {
+                if(self.selectedDesign() && self.selectedDesign().id() == "") {
                     return "Create";
                 } else {
                     return "Save";
@@ -65,75 +67,80 @@
             });  
 
             self.designFormTitle = ko.computed(function(){
-                if(self.selectedDesign().id() == "") {
+                if(self.selectedDesign() && self.selectedDesign().id() == "") {
                     return "Create a New Design:";
                 } else {
                     return "Edit Design:";
                 }
             });                
 
-            // self.createDesign = function(){
-            //     $.ajax({
-            //       type: "POST",
-            //       url: "/app/design/create",
-            //       data: {
-            //         name: self.new_design.name(),
-            //         css: self.new_design.css(),
-            //       },
-            //       success: function(data, textStatus, jqXHR){
-            //             bootbox.alert(data.result);
-            //         },
-            //       dataType: "json"
-            //     });
-            // }
+            self.createDesign = function(){
+                $.ajax({
+                  type: "POST",
+                  url: "/app/design/create",
+                  data: {
+                    test:'hi',
+                  },
+                  success: function(data, textStatus, jqXHR){
+                        var des = new Design(data);
+                        self.designs.push(des);
+                        self.selectedDesign(des);
+                        console.log(des);
+                        console.log("HI");
+                    },
+                  dataType: "json"
+                });
+            }
 
             self.updateDesign = function(item){
                 $.ajax({
                   type: "POST",
                   url: "/app/design/update",
                   data: {
-                    name: item.name(),
-                    css: item.css(),
-                    id: item.id(),
+                    // name: item.name(),
+                    // css: item.css(),
+                    // menu_css: item.menu_css(),
+                    // id: item.id(),
+                    data: ko.toJSON(item)
                   },
                   success: function(data, textStatus, jqXHR){
-                        bootbox.alert(data.result);
+                        bootbox.alert("Success");
                     },
                   dataType: "json"
                 });
             }            
 
-            self.remove = function(item) {
-                // bootbox.dialog({
-                //   message: "Destroy user \"" + item.email() + "\"?",
-                //   title: "Remove User",
-                //   buttons: {
-                //     success: {
-                //       label: "No",
-                //       className: "btn-primary pull-left col-xs-3",
-                //       callback: function() {
+            self.destroyDesign = function(item) {
+                bootbox.dialog({
+                  message: "Destroy design \"" + item.name() + "\"?",
+                  title: "Remove Design",
+                  buttons: {
+                    success: {
+                      label: "No",
+                      className: "btn-primary pull-left col-xs-3",
+                      callback: function() {
 
-                //       }
-                //     },
-                //     danger: {
-                //       label: "Yes",
-                //       className: "btn-danger col-xs-3 pull-right",
-                //       callback: function() {
-                //         $.ajax({
-                //           type: "POST",
-                //           url: "/app/administration/destroy_user",
-                //           data: {
-                //             user_id: item.id,
-                //           },
-                //           success: function(data, textStatus, jqXHR){
-                //                 self.users.remove(item);
-                //             },
-                //           dataType: "json"
-                //         });                        
-                //       }
-                //     },
-                //   }
-                // });        
+                      }
+                    },
+                    danger: {
+                      label: "Yes",
+                      className: "btn-danger col-xs-3 pull-right",
+                      callback: function() {
+                        $.ajax({
+                          type: "POST",
+                          url: "/app/design/destroy",
+                          data: {
+                            id: item.id,
+                          },
+                          success: function(data, textStatus, jqXHR){
+                                self.designs.remove(item);
+                            },
+                          dataType: "json"
+                        });                        
+                      }
+                    },
+                  }
+                });        
             } 
 
 

@@ -1,11 +1,108 @@
     <script type='text/javascript'>//<![CDATA[ 
 
+        function EasyImage(data) {
+            var self = this;
+            self.name = ko.observable(data[0] || "");
+            self.url = ko.observable(data[1] || "");
+        }
+
         function Design(data) {
             var self = this;
             self.id = ko.observable(data._id ? data._id : "")
             self.name = ko.observable(data.name ? data.name : "New Design");
             self.css = ko.observable(data.css ? data.css : "")
+            self.menu_css = ko.observable(data.menu_css ? data.menu_css : "")
+
+            self.global_images = ko.observableArray([]);
+
+      //       if(data.images){
+		    //     _.each(_.pairs(data.images),function(e){
+	     //    		var new_images = new EasyImage(e);
+	     //    		self.images.push(new_images);
+		    //     	if(self[new_images.name()] === undefined && new_images.name() != ""){
+		    //     		self[new_images.name()] = ko.observable(new_images);
+		    //     	}
+		    //     });
+		    // }
+
+	        _.each(data.global_images,function(e){
+        		var new_images = new GlobalImage(e);
+        		new_images.design_id(self.id());
+        		self.global_images.push(new_images);
+	        	if(self[new_images.name()] === undefined && new_images.name() != ""){
+	        		self[new_images.name()] = new_images.url;
+	        	}        		
+	        }); 	                 
+
+            self.new_design = ko.computed(function(){
+            	return self.id() != "";
+            });
+
+            self.addImage = function(){
+            	self.global_images.push(new GlobalImage({design_id:self.id()}));
+            }
+          
         }
+
+	function GlobalImage(data) {
+	    var self = this;
+	    self.progressValue = ko.observable(1);
+	    self.id = ko.observable("");
+	    self.name = ko.observable("");
+	    self.url = ko.observable("/loader.gif");
+	    self.fresh = ko.observable(true);
+	    self.failed = ko.observable(false);
+	    self.design_id = ko.observable(data.design_id);
+        self.completed = ko.observable(false);
+
+	    if(data){
+	        if(data.url){
+	            self.id(data._id);
+	            self.name(data.name);
+	            self.url = ko.observable(data.url);
+	            self.completed(true);
+	            self.fresh(false);          
+	        }  
+	    }
+
+	    self.update_info = function(item){
+	        self.url(item.url);
+	        self.completed(true);
+	        self.id(item.image_id);
+	    }
+	}   
+
+	ko.bindingHandlers.file_upload_global = {
+	    update: function(element, valueAccessor, allBindingsAccessor, viewModel, bindingContext) {
+	        var self = this;
+	        viewModel.imageModel;
+	        $(element).fileupload({
+	            dropZone: $(element),
+	            formData: {
+	            	design_id: viewModel.design_id(), 
+	            	name: viewModel.name(),
+	            	id: viewModel.id()
+	            },
+	            url: "/app/design/upload_image",
+	            dataType: 'json',
+	            progressInterval: 50,
+	            send: function (e, data) {
+              		viewModel.fresh(false);
+	            },
+	            done: function (e, data) {
+	                var file = data.result.files[0];
+	                viewModel.update_info(file);                               
+	            },
+	            progressall: function (e, data) {
+	                var progress = parseInt(data.loaded / data.total * 100, 10);
+	                viewModel.progressValue(progress);
+	            },
+	            fail: function (e, data) {
+	                viewModel.failed(true);
+	            },                       
+	        });
+	    }
+	};	     
 
     //]]>  
     </script>

@@ -32,6 +32,8 @@ Foodcloud::Application.routes.draw do
       get 'list'
       post 'create'
       post 'update'
+      post 'destroy'
+      post 'upload_image'
     end
   end  
 

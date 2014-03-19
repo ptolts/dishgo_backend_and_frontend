@@ -1,7 +1,7 @@
 class AdministrationController < ApplicationController
   before_filter :authenticate_user!
   before_filter :admin_user!, :only => [:users, :restaurants, :search_restaurants, :update_user, :add_user, :user_destroy]
-  before_filter :admin_or_owner!, :only => [:edit_menu, :update_menu, :crop_image, :crop_icon, :publish_menu, :reset_draft_menu]
+  before_filter :admin_or_owner!, :only => [:edit_menu, :update_menu, :crop_image, :crop_icon, :publish_menu, :reset_draft_menu, :update_restaurant]
   layout 'administration'
   after_filter :set_access_control_headers
 
@@ -236,8 +236,23 @@ class AdministrationController < ApplicationController
     settings = JSON.parse(params[:params])
     Rails.logger.warn settings.to_s
     restaurant = Restaurant.find(settings["id"])
-    design = Design.find(settings["design"]["id"])
-    restaurant.design = design
+    restaurant.name = settings["name"]
+    restaurant.phone = settings["phone"]
+
+    if sub = Restaurant.where(subdomain:settings["subdomain"]).first and sub != restaurant
+      render :text => "Bad Subdomain"
+    end
+    restaurant.subdomain = settings["subdomain"]
+    restaurant.address_line_1 = settings["address_line_1"]
+    restaurant.address_line_2 = settings["address_line_2"]
+    restaurant.city = settings["city"]
+    restaurant.postal_code = settings["postal_code"]
+
+    if settings["design"] and !settings["design"]["id"].blank?
+      design = Design.find(settings["design"]["id"])
+      restaurant.design = design
+    end
+
     restaurant.save
     render :text => restaurant.as_json
   end    

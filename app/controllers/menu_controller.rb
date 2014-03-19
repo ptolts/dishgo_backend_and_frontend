@@ -11,16 +11,21 @@ class MenuController < ApplicationController
     end
 
     if restaurant.design
+      design = restaurant.design
       @design_css = restaurant.design.css
+      @design_menu_css = restaurant.design.menu_css            
     else
+      design = Design.first
       @design_css = Design.first.css
+      @design_menu_css = Design.first.menu_css
     end
 
+    @design_data = design.as_json(includes: :global_images)
     @resto_data = restaurant.as_document
     @resto_data[:images] = restaurant.image.reject{|e| e.img_url_medium.blank?}.collect{|e| e.serializable_hash({})}
     @resto_data = @resto_data.as_json    
     @menu_data = "{ \"menu\" : #{restaurant.menu_to_json} }".as_json
-    render 'interactive'
+    render 'menu'
   end
 
   def preview
@@ -31,16 +36,21 @@ class MenuController < ApplicationController
     end
 
     if restaurant.design
+      design = restaurant.design
       @design_css = restaurant.design.css
+      @design_menu_css = restaurant.design.menu_css      
     else
+      design = Design.first
       @design_css = Design.first.css
+      @design_menu_css = Design.first.menu_css
     end
     
+    @design_data = design.as_json(include: :global_images)
     @resto_data = restaurant.as_document
     @resto_data[:images] = restaurant.image.reject{|e| e.img_url_medium.blank?}.collect{|e| e.serializable_hash({})}
     @resto_data = @resto_data.as_json    
     @menu_data = "{ \"menu\" : #{restaurant.draft_menu_to_json} }".as_json
-    render 'interactive'
+    render 'menu'
   end  
 
 end

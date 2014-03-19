@@ -1,5 +1,8 @@
 /*
 *= require jquery.Jcrop.min.js
+*= require pager.js
+*= require mb.bgndGallery.js
+*= require mb.bgndGallery.effects.js
 */
 
 //<![CDATA[ 
@@ -1093,6 +1096,19 @@ function MenuViewModel() {
     // }
 };
 
+ko.bindingHandlers.fadeVisible = {
+    init: function(element, valueAccessor) {
+        // Initially set the element to be instantly visible/hidden depending on the value
+        var value = valueAccessor();
+        $(element).toggle(ko.unwrap(value)); // Use "unwrapObservable" so we can handle values that may or may not be observable
+    },
+    update: function(element, valueAccessor) {
+        // Whenever the value subsequently changes, slowly fade the element in or out
+        var value = valueAccessor();
+        ko.unwrap(value) ? $(element).fadeIn() : $(element).fadeOut();
+    }
+};
+
 function PublicMenuModel() {
 
     var self = this;
@@ -1102,6 +1118,13 @@ function PublicMenuModel() {
     self.languages = ko.observableArray(['en','fr']);
     self.lang = ko.observable('en');
     lang = self.lang;
+
+    self.display_menu = ko.observable(false);
+    self.display_menu_toggle = function(){
+        self.display_menu(!self.display_menu());
+    } 
+
+    self.design = new Design(design_data);
 
     self.contact_tr = ko.observable({
         'en':'Contact',

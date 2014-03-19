@@ -17,7 +17,7 @@
             self.design = ko.observable(data.design === undefined ? null : new Design(data.design));
             self.id = data._id;
 
-            self.saveDesign = function(){
+            self.save = function(){
                 $.ajax({
                   type: "POST",
                   url: "/app/administration/update_restaurant",

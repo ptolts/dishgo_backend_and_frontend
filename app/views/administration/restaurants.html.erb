@@ -1,33 +1,40 @@
 <div class="container">
 
-    <div class="row">
-        <div class="form-inline" role="form">
-            <input class="form-control" data-bind="value: restaurant_name" />
-            <button class="btn btn-default" data-bind="click: search_for_restaurant">Search</button>
+    <div class="col-xs-12 col-md-4">
+
+        <div class="row">
+            <div class="form-inline" role="form">
+                <input class="form-control" data-bind="value: restaurant_name" />
+                <button class="btn btn-default" data-bind="click: search_for_restaurant">Search</button>
+            </div>
         </div>
+
+        <div class="row">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Edit Restaurant</th>
+                        <th>Edit Menu</th>
+                    </tr>
+                </thead>
+                <tbody data-bind="template: { name: 'resto_temp', foreach: restaurants }"></tbody>
+            </table>
+        </div>
+
     </div>
 
-    <div class="row">
-        <table class="col-md-8 table table-striped">
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Lat</th>
-                    <th>Lon</th>
-                    <th>Edit Menu</th>
-                    <th>Edit Restaurant</th>
-                </tr>
-            </thead>
-            <tbody data-bind="template: { name: 'resto_temp', foreach: restaurants }"></tbody>
-        </table>
-    </div>
 
-    <div class="row" data-bind="with: current_restaurant">
-        <div class="col-xs-12 col-md-6">
+    <div class="col-md-8" data-bind="with: current_restaurant">
+        <div>
             <div data-bind="template: { name: 'restaurant_template', data: $parent.current_restaurant }"></div>
+            <p>
+                <button class="btn" data-bind="click: save">Save</button>
+            </p>            
             <div data-bind="template: { name: 'pick_design_template', data: $parent.current_restaurant }"></div>
         </div>
     </div>
+
 
     <script id="resto_temp" type="text/html">
         <tr>
@@ -35,17 +42,11 @@
                 <p data-bind="text: name"></p>
             </td>                       
             <td>
-                <p data-bind="text: lat"></p>
-            </td> 
-            <td>
-                <p data-bind="text: lon"></p>
+                <button class="btn btn-default btn-sm" data-bind="click: $root.set_restaurant">Edit</button>
             </td> 
             <td>
                 <a data-bind="attr: { href: '/app/administration/edit_menu?restaurant_id=' + id}" class="btn btn-default btn-sm">Menu</a>
-            </td>  
-            <td>
-                <button class="btn btn-default btn-sm" data-bind="click: $root.set_restaurant">Edit</button>
-            </td>                                     
+            </td>                                                  
         </tr>   
     </script>
 
