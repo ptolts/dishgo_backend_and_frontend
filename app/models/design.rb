@@ -7,6 +7,7 @@ class Design
   field :menu_css, type: String
   field :name, type: String
   field :images, type: Hash
+  field :carousel, type: Boolean
 
   has_many :restaurant
   has_many :global_images, class_name: "GlobalImage"

@@ -14,6 +14,7 @@
             self.menu_css = ko.observable(data.menu_css ? data.menu_css : "")
 
             self.global_images = ko.observableArray([]);
+            self.carousel = ko.observableArray([]);
 
       //       if(data.images){
 		    //     _.each(_.pairs(data.images),function(e){
@@ -24,13 +25,17 @@
 		    //     	}
 		    //     });
 		    // }
-
+    		self.imgs = {};
 	        _.each(data.global_images,function(e){
         		var new_images = new GlobalImage(e);
         		new_images.design_id(self.id());
-        		self.global_images.push(new_images);
-	        	if(self[new_images.name()] === undefined && new_images.name() != ""){
-	        		self[new_images.name()] = new_images.url;
+        		if(e.carousel){
+        			self.carousel.push(new_images);
+        		} else {
+        			self.global_images.push(new_images);        			
+        		}
+	        	if(self.imgs[new_images.name()] === undefined && new_images.name() != ""){
+	        		self.imgs[new_images.name()] = new_images.url;
 	        	}        		
 	        }); 	                 
 
@@ -41,6 +46,10 @@
             self.addImage = function(){
             	self.global_images.push(new GlobalImage({design_id:self.id()}));
             }
+
+            self.addCarousel = function(){
+            	self.carousel.push(new GlobalImage({design_id:self.id(),carousel:true}));
+            }            
           
         }
 
@@ -49,20 +58,26 @@
 	    self.progressValue = ko.observable(1);
 	    self.id = ko.observable("");
 	    self.name = ko.observable("");
+	    self.description = ko.observable("");
 	    self.url = ko.observable("/loader.gif");
 	    self.fresh = ko.observable(true);
+	    self.customizable = ko.observable();
 	    self.failed = ko.observable(false);
 	    self.design_id = ko.observable(data.design_id);
         self.completed = ko.observable(false);
+        self.carousel = ko.observable(data.carousel);
 
 	    if(data){
-	        if(data.url){
-	            self.id(data._id);
-	            self.name(data.name);
-	            self.url = ko.observable(data.url);
+            self.id(data._id);
+            self.name(data.name);
+            self.description(data.description);
+            self.customizable(data.customizable);
+            self.carousel(data.carousel);
+            if(data.url){
 	            self.completed(true);
-	            self.fresh(false);          
-	        }  
+	            self.url = ko.observable(data.url);
+	            self.fresh(false);  
+            }         
 	    }
 
 	    self.update_info = function(item){
@@ -103,6 +118,39 @@
 	        });
 	    }
 	};	     
+
+	ko.bindingHandlers.file_upload_global_customize = {
+	    update: function(element, valueAccessor, allBindingsAccessor, viewModel, bindingContext) {
+	        var self = this;
+	        viewModel.imageModel;
+	        $(element).fileupload({
+	            dropZone: $(element),
+	            formData: {
+	            	design_id: viewModel.design_id(), 
+	            	restaurant_id: restaurant_id,
+	            	name: viewModel.name(),
+	            	id: viewModel.id()
+	            },
+	            url: "/app/website/upload_image",
+	            dataType: 'json',
+	            progressInterval: 50,
+	            send: function (e, data) {
+              		viewModel.fresh(false);
+	            },
+	            done: function (e, data) {
+	                var file = data.result.files[0];
+	                viewModel.update_info(file);                               
+	            },
+	            progressall: function (e, data) {
+	                var progress = parseInt(data.loaded / data.total * 100, 10);
+	                viewModel.progressValue(progress);
+	            },
+	            fail: function (e, data) {
+	                viewModel.failed(true);
+	            },                       
+	        });
+	    }
+	};	 
 
     //]]>  
     </script>

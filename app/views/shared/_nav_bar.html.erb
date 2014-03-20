@@ -17,6 +17,7 @@
               <li class="<%= active_link('profile','edit') %>"><a href="/app/profile/edit">Profile</a></li>            
               <% if current_user.owns_restaurants %>
                 <li class="<%= active_link('administration','edit_menu') %>"><a href="/app/administration/edit_menu?restaurant_id=<%= current_user.owns_restaurants.id %>">Edit Menu</a></li>
+                <li class="<%= active_link('website','index') %>"><a href="/app/website/index">Edit Website</a></li>
               <% end %>
               <% if admin_user? %>
                 <li class="<%= active_link('administration','users') %>"><a href="/app/administration/users">Users</a></li>

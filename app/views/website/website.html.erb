@@ -1,0 +1,56 @@
+<div class="container">
+
+    <div class="col-xs-12 col-md-4">
+        <h3>Select a design: </h3>
+        <div data-bind="template: { name: 'pick_design_template', foreach: designs }"></div>
+    </div>
+
+    <div class="col-xs-12 col-md-8" data-bind="with: current_design">
+        <div data-bind="template: { name: 'customize_design_template', data: $root.current_design }"></div>
+    </div>
+
+    <%= render 'shared/restaurant_template' %>
+    <%= render 'shared/design_template' %>
+    <%= render 'shared/design_javascript' %>
+    <%= render 'shared/restaurant_javascript' %>
+
+    <script type='text/javascript'>//<![CDATA[ 
+
+        var design_data = <%= raw(@designs.to_json) %>;
+        var restaurant_id = "<%= current_user.owns_restaurants.id %>";
+        function viewModel() {
+            var self = this;
+            self.designs = ko.observable(($.map(design_data, function(item) { return new Design(item) })));
+            self.current_design = ko.observable();
+
+            self.setDesign = function(item){
+                self.current_design(item);
+            }
+
+            self.submitDesign = function(){
+                $.ajax({
+                  type: "POST",
+                  url: "/app/website/submit_design",
+                  data: {
+                    restaurant_id: restaurant_id,
+                    data: ko.toJSON(self.current_design)
+                  },
+                  success: function(data, textStatus, jqXHR){
+                        bootbox.alert("Design set!");     
+                    },
+                    error: function(XMLHttpRequest, textStatus, errorThrown) { 
+                        console.log("There was an error setting design: " + errorThrown);
+                    },
+                    dataType: "json"
+                });
+            }            
+        };
+
+        var viewmodel = new viewModel();
+        ko.applyBindings(viewmodel);
+
+
+    //]]>  
+    </script>    
+
+</div>

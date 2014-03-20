@@ -27,6 +27,14 @@ Foodcloud::Application.routes.draw do
     end
   end
 
+  resources :website do
+    collection do
+      get 'index'
+      post 'submit_design'
+      post 'upload_image'
+    end
+  end
+
   resources :design do
     collection do
       get 'list'

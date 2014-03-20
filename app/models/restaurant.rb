@@ -19,6 +19,8 @@ class Restaurant
   field :phone, type: String
   field :website, type: String
 
+  has_many :global_images, class_name: "GlobalImage"
+
   has_many :sources, :class_name => "Sources"
   has_many :image, :class_name => "Image"
 

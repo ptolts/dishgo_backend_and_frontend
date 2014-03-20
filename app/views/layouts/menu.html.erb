@@ -83,17 +83,19 @@
 
 		<script type="text/javascript">
 
+	        var restaurant_id = "<%= params[:restaurant_id]%>";
+	        var menu_data = <%= raw(@menu_data) %>;
+	        var design_data = <%= raw(@design_data.to_json) %>;
+	        var resto_data = <%= raw(@resto_data.to_json) %>;	
+	        var background_images = <%= raw(@carousel.to_json) %>;
+
 			$(function(){
 			        $.mbBgndGallery.buildGallery({
 			                containment:"body",
 			                timer:4000,
 			                effTimer:2000,
 			                grayScale:false,
-			                images:[
-			                 	"img/IMG_1.JPG",
-			                 	"img/IMG_2.JPG",
-			                 	"img/IMG_3.JPG",
-			                 ],
+			                images: background_images,
 
 			                onStart:function(){},
 			                onPause:function(){},
@@ -103,11 +105,6 @@
 			                onPrev:function(opt){}   //opt=the options relatives to this component instance
 			        });
 			})
-
-	        var restaurant_id = "<%= params[:restaurant_id]%>";
-	        var menu_data = <%= raw(@menu_data) %>;
-	        var design_data = <%= raw(@design_data.to_json) %>;
-	        var resto_data = <%= raw(@resto_data.to_json) %>;
 
 	        editing_mode = false;    
 	        var viewmodel = new PublicMenuModel();

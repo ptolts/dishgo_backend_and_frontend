@@ -1,21 +1,21 @@
 			<div class="container menu_container">
 			        <div class="row">
 			            <div class="dark_header">
-			                <img data-bind="attr:{src:$root.design.simple_header_1}" class="img-responsive">
+			                <img data-bind="attr:{src:$root.design.imgs.simple_header_1}" class="img-responsive">
 			            </div>
-			                <div class="resto_logo">
-			                    <img data-bind="attr:{src:$root.design.title}" class="img-responsive">
-			                </div>
+		                <div class="resto_logo">
+		                    <img data-bind="attr:{src:$root.design.imgs.title}" class="img-responsive">
+		                </div>
 			        </div>    
 			            <div class="row">
 			                <div class="each_dish">
         						<!-- ko foreach: menu -->
 				                    <!-- new section -->
 				                    <div class="col-md-4">
-				                        <img data-bind="attr:{src:$root.design.simple_divider}" class="img-responsive center-block">
+				                        <img data-bind="attr:{src:$root.design.imgs.simple_divider}" class="img-responsive center-block">
 				                        <div class="section_title">
 				                            <h1 data-bind="lText: name">Deserts</h1>
-				                            <img data-bind="attr:{src:$root.design.section_line}" class="img-responsive center-block">
+				                            <img data-bind="attr:{src:$root.design.imgs.section_line}" class="img-responsive center-block">
 				                        </div>
                         				<!-- ko foreach: dishes -->
 					                        <div class="dish_title">
@@ -26,10 +26,10 @@
 					                        </div>
 					                        <div class="dish_price">
 					                            <i data-bind="text: computed_price">$34.00</i>
-					                            <button class="btn btn-sm btn-dish" data-toggle="modal" data-target="#myModal"><img data-bind="attr:{src:$root.design.logo_white_nav}" class="dishgo_icon"></button>
+					                            <button class="btn btn-sm btn-dish" data-toggle="modal" data-target="#myModal"><img data-bind="attr:{src:$root.design.imgs.logo_white_nav}" class="dishgo_icon"></button>
 					                        </div>
 				                      	<!-- /ko -->
-				                        <img data-bind="attr:{src:$root.design.simple_divider_bottom}" class="img-responsive center-block">
+				                        <img data-bind="attr:{src:$root.design.imgs.simple_divider_bottom}" class="img-responsive center-block">
 				                    </div>
 				                    <!-- /new section -->
 				                <!-- /ko -->
@@ -37,7 +37,7 @@
 			            </div>
 			            <div class="col-xs-12">
 			                <div class="bottom_logo">
-			                    <img data-bind="attr:{src:$root.design.menu_tuck_dark}" class="img-responsive center-block">
+			                    <img data-bind="attr:{src:$root.design.imgs.menu_tuck_dark}" class="img-responsive center-block">
 			                </div>
 			            </div>
 			    </div>

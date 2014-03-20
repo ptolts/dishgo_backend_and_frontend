@@ -2,9 +2,11 @@
     <div class="col-xs-12 push_down">
         <div class="col-xs-6">
             <input class="form-control" data-bind="value: name" />
+            <p>Customizable: <input type="checkbox" data-bind="checked: customizable" /></p>
+            <p>Description: <input class="form-control" data-bind="value: description" /></p>
         </div>
         <div class="col-xs-6"> 
-            <span class="btn btn-block btn-section file_upload_button">
+            <span class="btn btn-block btn-section file_upload_button col-xs-6">
                 <i class="glyphicon glyphicon-picture"></i>
                 <span>Upload Image</span>
                 <!-- The file input field used as target for the file upload widget -->
@@ -35,28 +37,106 @@
                 </div>
             <!-- /ko --> 
         </div>
+        <hr class="col-xs-12">  
+    </div>
+</script> 
+
+
+<script id="carousel_image" type="text/html">
+    <div class="col-xs-12 push_down">
+        <div class="col-xs-6">
+            <input class="form-control" data-bind="value: name" />
+            <p>Description: <input class="form-control" data-bind="value: description" /></p>
+        </div>
+        <div class="col-xs-6"> 
+            <span class="btn btn-block btn-section file_upload_button col-xs-6">
+                <i class="glyphicon glyphicon-picture"></i>
+                <span>Upload Image</span>
+                <!-- The file input field used as target for the file upload widget -->
+                <input data-bind="file_upload_global" id="fileupload" type="file" name="files"  class="file_upload_input" accept="images/*" capture="camera">
+            </span>                                                                                     
+            <!-- ko if: !fresh() -->        
+                <div data-bind="visible: !failed()">
+                    <div class="uploading_image" data-bind="visible: !completed()">
+                        <div class="col-xs-10 col-xs-offset-1">
+                            <div class="progress" style="height: 10px">
+                                <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" data-bind="style: { width: progressValue() + '%'}"></div>
+                            </div>    
+                        </div> 
+                    </div> 
+                    <div class="completed_image" data-bind="visible: completed">
+                        <div class="col-xs-12 text-center">
+                            <div class="thumbnail">
+                                <img class="img-rounded" data-bind="attr: {src: url}" />
+                            </div>
+                        </div>
+                    </div> 
+                </div>
+                <div data-bind="visible: failed()">
+                    <div class="alert alert-warning alert-dismissable text-center">
+                      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                      <strong>Warning!</strong> There was a problem processing your image. Please contact support.
+                    </div>                
+                </div>
+            <!-- /ko --> 
+        </div>
+        <hr class="col-xs-12">  
+    </div>
+</script> 
+
+<script id="customize_design_image" type="text/html">
+    <div class="col-xs-6 push_down">                                                                 
+        <!-- ko if: !fresh() -->        
+            <div data-bind="visible: !failed()">
+                <div class="uploading_image" data-bind="visible: !completed()">
+                    <div class="col-xs-10 col-xs-offset-1">
+                        <div class="progress" style="height: 10px">
+                            <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" data-bind="style: { width: progressValue() + '%'}"></div>
+                        </div>    
+                    </div> 
+                </div> 
+                <div class="completed_image" data-bind="visible: completed">
+                    <div class="col-xs-12 text-center">
+                        <div class="thumbnail">
+                            <img class="img-rounded" data-bind="attr: {src: url}" />
+                        </div>
+                    </div>
+                </div> 
+            </div>
+            <div data-bind="visible: failed()">
+                <div class="alert alert-warning alert-dismissable text-center">
+                  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                  <strong>Warning!</strong> There was a problem processing your image. Please contact support.
+                </div>                
+            </div>
+        <!-- /ko --> 
+        <span class="btn btn-block btn-section file_upload_button col-xs-6">
+            <i class="glyphicon glyphicon-picture"></i>
+            <span>Upload Image</span>
+            <!-- The file input field used as target for the file upload widget -->
+            <input data-bind="file_upload_global_customize" id="fileupload" type="file" name="files"  class="file_upload_input" accept="images/*" capture="camera">
+        </span>          
     </div>    
 </script> 
 
 <script id="pick_design_template" type="text/html">
-    <div class="col-md-6 col-xs-12">
-        <div class="design_form_wrapper">
-            <h2 class="text-center">Menu Design:</h2>
-            <hr>
-            <!-- ko with: design --> 
-                <h4>Current Design: <span data-bind="text: name"></span></h4>
-            <!-- /ko -->
-            <div class="form-group">
-                <label>Select Your Design</label>
-                <select class="form-control" data-bind="
-                                    options: $root.designs, 
-                                    optionsText: 'name',
-                                    value: design,
-                                    optionsCaption: 'Choose...'
-                                    "></select>  
-                <button class="btn btn-primary" data-bind="click: saveDesign">Set Design</button>
-            </div>
-        </div>
+    <div class="design_box">
+        <h4 data-bind="text: name"></h4>
+        <a href="#" target="_blank" class="btn btn-info">Demo</a>
+        <button data-bind="click: $root.setDesign"  class="btn btn-primary">Choose Design</button>
+    </div>
+</script>
+
+<script id="customize_design_template" type="text/html">
+    <h3 data-bind="text: name"></h3>
+
+    <div class="row">
+        <div data-bind="template: { name: 'customize_design_image', foreach: global_images}"></div>
+    </div>
+
+    <hr>
+    <div class="row">
+        <button class="btn btn-primary pull-right" data-bind="click: $root.submitDesign">Set Design</button>
     </div>
 </script>
 
@@ -78,12 +158,20 @@
         <textarea rows="50" data-bind="value: menu_css, codemirror: { lineNumbers: true, matchBrackets: true, mode: 'text/css', theme:'lesser-dark', value:menu_css }" placeholder="Menu Specific CSS." style="width: 100%"></textarea>
 
         <p></p>
+        <h4>Static Images</h4>
 
         <div data-bind="template: { name: 'design_image', foreach: global_images}"></div>
 
         <button class="btn btn-info" data-bind="click: addImage">Upload Image</button>  
 
         <hr><p></p>
+        <h4>Carousel Images</h4>
+
+        <div data-bind="template: { name: 'carousel_image', foreach: carousel}"></div>
+
+        <button class="btn btn-info" data-bind="click: addCarousel">Upload Image</button>  
+
+        <hr><p></p>        
 
 
         <button class="btn btn-warning pull-left" data-bind="visible: new_design,click: $root.destroyDesign">Destroy</button>

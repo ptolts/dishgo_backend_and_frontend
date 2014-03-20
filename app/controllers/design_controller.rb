@@ -10,8 +10,6 @@ class DesignController < ApplicationController
   end
 
   def list
-    Rails.logger.warn request.protocol
-    Rails.logger.warn "********"
     @designs = Design.all.as_json({include: :global_images})
     render 'list' 
   end
@@ -33,10 +31,12 @@ class DesignController < ApplicationController
     #   res
     # }
 
-    data["global_images"].each do |gi|
+    (data["global_images"] + data["carousel"]).each do |gi|
       Rails.logger.warn "Saving #{gi.to_s}"
       g = GlobalImage.find(gi["id"])
       g.name = gi["name"]
+      g.customizable = gi["customizable"]
+      g.carousel = gi["carousel"]
       g.save
     end
 

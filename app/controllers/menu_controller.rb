@@ -20,13 +20,31 @@ class MenuController < ApplicationController
       @design_menu_css = Design.first.menu_css
     end
 
-    @design_data = design.as_json(include: :global_images)
+    if carousel = restaurant.global_images.find_all{|e| e.carousel} and carousel.size > 0
+      @carousel = carousel.collect{|e| e.img_url_original}
+    else
+      @carousel = design.global_images.find_all{|e| e.carousel}.collect{|e| e.img_url_original}
+    end    
+
+    @design_data = design_as_json(design,restaurant)
     @resto_data = restaurant.as_document
     @resto_data[:images] = restaurant.image.reject{|e| e.img_url_medium.blank?}.collect{|e| e.serializable_hash({})}
     @resto_data = @resto_data.as_json    
     @menu_data = "{ \"menu\" : #{restaurant.menu_to_json} }".as_json
     render 'menu'
   end
+
+  def design_as_json des, restaurant
+    custom_images = restaurant.global_images
+    des_json = des.as_json
+    allowed_images = des.global_images
+    allowed_images_names = allowed_images.collect{|e| e.name}
+    custom_imgs = custom_images.reject{|e| !allowed_images_names.include?(e.name)}
+    allowed_images_names = custom_imgs.collect{|e| e.name}
+    custom_imgs = custom_imgs + allowed_images.reject{|e| allowed_images_names.include?(e.name)}
+    des_json[:global_images] = custom_imgs.as_json
+    des_json
+  end  
 
   def preview
     restaurant = Restaurant.where(preview_token:params[:id]).first
@@ -44,8 +62,14 @@ class MenuController < ApplicationController
       @design_css = Design.first.css
       @design_menu_css = Design.first.menu_css
     end
+
+    if carousel = restaurant.global_images.find_all{|e| e.carousel} and carousel.size > 0
+      @carousel = carousel.collect{|e| e.img_url_original}
+    else
+      @carousel = design.global_images.find_all{|e| e.carousel}.collect{|e| e.img_url_original}
+    end
     
-    @design_data = design.as_json(include: :global_images)
+    @design_data = design_as_json(design,restaurant)
     @resto_data = restaurant.as_document
     @resto_data[:images] = restaurant.image.reject{|e| e.img_url_medium.blank?}.collect{|e| e.serializable_hash({})}
     @resto_data = @resto_data.as_json    

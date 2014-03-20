@@ -9,8 +9,12 @@ class GlobalImage
   field :name, type: String
 
   field :img_url_original, type: String 
+  field :customizable, type: Boolean
+  field :carousel, type: Boolean
+  field :description, localize: true
 
   belongs_to :design, index: true
+  belongs_to :restaurant, index: true
   
   index({ _id:1 }, { unique: true, name:"id_index" })
 
@@ -50,11 +54,11 @@ class GlobalImage
   end
 
   def serializable_hash options
-    if options[:ios]
-      return super {}
-    else
-      return {_id: self._id, id: self._id, url: self.img_url_original, name: self.name}
-    end
+    start = super {}
+    start[:id] = self._id
+    start[:_id] = self._id
+    start[:url] = self.img_url_original
+    start
   end
 
   def img_post_process
