@@ -52,7 +52,7 @@ class WebsiteController < ApplicationController
 		restaurant.save
 		restaurant.design = Design.find(data["id"])
 		restaurant.save
-		render :json => {succes:"Success!"}.as_json
+		render :json => {preview:"/app/menu/preview/#{restaurant.preview_token.to_s}"}.as_json
 	end
 
 	def upload_image

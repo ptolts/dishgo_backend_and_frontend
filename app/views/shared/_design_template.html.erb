@@ -42,20 +42,17 @@
     </div>
 </script> 
 
-
 <script id="carousel_image" type="text/html">
     <div class="col-xs-12 push_down">
-        <div class="col-xs-6">
-            <input class="form-control" data-bind="value: name" />
-            <p>Description: <input class="form-control" data-bind="value: description" /></p>
-        </div>
         <div class="col-xs-6"> 
-            <span class="btn btn-block btn-section file_upload_button col-xs-6">
-                <i class="glyphicon glyphicon-picture"></i>
-                <span>Upload Image</span>
-                <!-- The file input field used as target for the file upload widget -->
-                <input data-bind="file_upload_global" id="fileupload" type="file" name="files"  class="file_upload_input" accept="images/*" capture="camera">
-            </span>                                                                                     
+            <!-- ko if: fresh() -->        
+                <span class="btn btn-block btn-section file_upload_button col-xs-6">
+                    <i class="glyphicon glyphicon-picture"></i>
+                    <span>Upload Image</span>
+                    <!-- The file input field used as target for the file upload widget -->
+                    <input data-bind="file_upload_global" id="fileupload" type="file" name="files"  class="file_upload_input" accept="images/*" capture="camera">
+                </span>                                                                                     
+            <!-- /ko --> 
             <!-- ko if: !fresh() -->        
                 <div data-bind="visible: !failed()">
                     <div class="uploading_image" data-bind="visible: !completed()">

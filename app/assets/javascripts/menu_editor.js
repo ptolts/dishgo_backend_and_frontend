@@ -1134,7 +1134,7 @@ function PublicMenuModel() {
     self.menu_tr = ko.observable({
         'en':'Menu',
         'fr':'la Carte'
-    });    
+    });  
 
     self.restaurant = ko.observable(new Restaurant(resto_data));
 
@@ -1148,7 +1148,16 @@ function PublicMenuModel() {
     self.sectionNames = {
         en: '',
         fr: '',
-    }    
+    }
+
+    self.computeImage = function(image){
+        console.log(image);
+        if(self.design.imgs[image]){
+            return "url(" + self.design.imgs[image]() + ")";
+        } else {
+            return "";
+        }
+    };        
 
 };
 

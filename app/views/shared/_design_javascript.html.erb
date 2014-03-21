@@ -44,13 +44,14 @@
             });
 
             self.addImage = function(){
-            	var img = new GlobalImage({design_id:self.id(),parent:self});
+            	var img = new GlobalImage({design_id:self.id(),parent:self,parent_id:self.id});
             	self.global_images.push(img);
             	img.get_id();
             }
 
             self.addCarousel = function(){
-            	self.carousel.push(new GlobalImage({design_id:self.id(),carousel:true,parent:self}));
+            	var img = new GlobalImage({design_id:self.id(),carousel:true,parent:self,parent_id:self.id});
+            	self.carousel.push(img);
             } 
 
             self.initialized = false;
@@ -168,6 +169,7 @@
 	        $(element).fileupload({
 	            dropZone: $(element),
 	            formData: {
+	            	carousel: viewModel.carousel(),
 	            	design_id: viewModel.design_id(), 
 	            	name: viewModel.name(),
 	            	parent_id: viewModel.parent_id()
@@ -183,8 +185,12 @@
 	            },
 	            done: function (e, data) {
 	                var file = data.result.files[0];
-	                viewModel.update_info(file);                               
-	                viewModel.parent.addImage();                              
+	                viewModel.update_info(file); 
+	                if(viewModel.carousel()){
+		                viewModel.parent.addCarousel();
+	                }  else {
+	                	viewModel.parent.addImage();                              	                	
+	                }	                                              
 	            },
 	            progressall: function (e, data) {
 	                var progress = parseInt(data.loaded / data.total * 100, 10);
@@ -218,8 +224,10 @@
 	            },
 	            done: function (e, data) {
 	                var file = data.result.files[0];
-	                viewModel.update_info(file); 
-	                viewModel.parent.addCarousel();
+	                viewModel.update_info(file);
+	                if(viewModel.carousel()){
+		                viewModel.parent.addCarousel();
+	                } 
 	            },
 	            progressall: function (e, data) {
 	                var progress = parseInt(data.loaded / data.total * 100, 10);
