@@ -57,7 +57,7 @@ class DesignController < ApplicationController
     end
 
     design.save
-    render :text => "Updated #{design.name}"
+    render :json => {success:"Updated #{design.name}"}.as_json
   end
 
   def destroy

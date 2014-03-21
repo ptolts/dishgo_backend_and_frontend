@@ -239,10 +239,10 @@ class AdministrationController < ApplicationController
     restaurant.name = settings["name"]
     restaurant.phone = settings["phone"]
 
-    if sub = Restaurant.where(subdomain:settings["subdomain"]).first and sub != restaurant
+    if sub = Restaurant.where(subdomain:settings["subdomain"].downcase).first and sub != restaurant
       render :text => "Bad Subdomain"
     end
-    restaurant.subdomain = settings["subdomain"]
+    restaurant.subdomain = settings["subdomain"].downcase
     restaurant.address_line_1 = settings["address_line_1"]
     restaurant.address_line_2 = settings["address_line_2"]
     restaurant.city = settings["city"]
