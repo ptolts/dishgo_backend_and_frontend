@@ -1,0 +1,32 @@
+.image_dropdown {
+	position: relative;	
+}
+
+.image_dropdown_div ul {
+	position: absolute;	
+	top: 0px;
+	z-index: 900;
+	list-style: none;
+	background: white;
+	padding: 5px;
+	border-radius: 5px;
+	border: 1px solid #20BFDD;
+}
+
+.image_dropdown li {
+	border: 2px solid white;
+	-webkit-transition: all 0.5s ease;
+	-moz-transition: all 0.5s ease;
+	-o-transition: all 0.5s ease;
+}
+
+.image_dropdown li:hover {
+	border: 2px solid #20BFDD;
+}
+
+.image_dropdown img {
+	height: 100px;
+}
+
+.image_dropdown img:hover {
+}

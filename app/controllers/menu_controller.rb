@@ -42,7 +42,22 @@ class MenuController < ApplicationController
     custom_imgs = custom_images.reject{|e| !allowed_images_names.include?(e.name)}
     allowed_images_names = custom_imgs.collect{|e| e.name}
     custom_imgs = custom_imgs + allowed_images.reject{|e| allowed_images_names.include?(e.name)}
-    des_json[:global_images] = custom_imgs.as_json
+
+    image_objects_to_be_used = []
+    custom_imgs = custom_imgs.as_json
+    settings = restaurant.website_settings || {}
+    
+    custom_imgs.each do |img|
+      if settings[img["name"]] and default = img[:global_images].select{|e| e["_id"].to_s == settings[img["name"]]} and default = default.first
+        image_objects_to_be_used << default
+      else
+        if default = img[:global_images].select{|e| e["default_image"]} and default = default.first
+          image_objects_to_be_used << default 
+        end
+      end
+    end
+
+    des_json[:global_images] = image_objects_to_be_used
     des_json
   end  
 

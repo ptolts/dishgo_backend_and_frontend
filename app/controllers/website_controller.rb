@@ -11,7 +11,9 @@ class WebsiteController < ApplicationController
 
 	def all_designs
 		designs = Design.all
-		custom_images = current_user.owns_restaurants.global_images
+		restaurant = current_user.owns_restaurants
+		custom_images = restaurant.global_images
+		settings = restaurant.website_settings || {}
 		hash_designs = designs.collect do |des|
 			des_json = des.as_json
 			# Replace default images which are allowed to be customized with already customized images.
@@ -20,7 +22,20 @@ class WebsiteController < ApplicationController
 			custom_imgs = custom_images.reject{|e| !allowed_images_names.include?(e.name)}
 			allowed_images_names = custom_imgs.collect{|e| e.name}
 			custom_imgs = custom_imgs + allowed_images.reject{|e| allowed_images_names.include?(e.name)}
-			des_json[:global_images] = custom_imgs.as_json
+			custom_imgs = custom_imgs.as_json
+			custom_imgs.each do |img|
+				if settings[img["name"]]
+					# img[:global_images].select{|e| Rails.logger.warn "#{e["_id"].to_s} == #{settings[img["name"]]}"}
+					if default = img[:global_images].select{|e| e["_id"].to_s == settings[img["name"]]} and default = default.first
+						img[:global_images].each{|e| e["default_image"] = false}
+						Rails.logger.warn img[:global_images].to_s
+						default["default_image"] = true
+						Rails.logger.warn img[:global_images].to_s						
+					end
+				end
+			end
+			#Add all images which are actually carousels. 
+			des_json[:global_images] = custom_imgs + restaurant.global_images.select{|e| e.carousel}.as_json
 			des_json
 		end
 		hash_designs
@@ -29,12 +44,19 @@ class WebsiteController < ApplicationController
 	def submit_design
 		restaurant = Restaurant.find(params[:restaurant_id])
 		data = JSON.parse(params[:data])
+		settings = restaurant.website_settings || {}
+		data["global_images"].each do |image|
+			settings[image["defaultImage"]["name"]] = image["defaultImage"]["id"]
+		end
+		restaurant.website_settings = settings
+		restaurant.save
 		restaurant.design = Design.find(data["id"])
 		restaurant.save
-		render :text => "Success!"
+		render :json => {succes:"Success!"}.as_json
 	end
 
 	def upload_image
+		data = JSON.parse(params[:data])
 		file = params[:files]
 		img = GlobalImage.where(id:params[:id]).first
 		if img and img.design
@@ -42,6 +64,7 @@ class WebsiteController < ApplicationController
 		end
 		img = GlobalImage.create unless img
 		img.name = params[:name]
+		img.carousel = data["carousel"]
 		img.restaurant = Restaurant.find(params[:restaurant_id])
 		img.update_attributes({:img => file})
 		img.save
