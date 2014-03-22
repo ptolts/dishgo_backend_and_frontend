@@ -16,7 +16,9 @@
         <button class="btn btn-primary" data-bind="click: createDesign">Create Design</button>
     </p>    
 
-    <div data-bind="template: { name: 'create_design_template', data: selectedDesign}"></div>      
+    <!-- ko with: selectedDesign -->
+      <div data-bind="template: { name: 'create_design_template', data: $root.selectedDesign}"></div>
+    <!-- /ko -->
 
     <%= render 'shared/design_template' %>
     <%= render 'shared/design_javascript' %>
