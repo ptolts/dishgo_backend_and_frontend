@@ -1,0 +1,78 @@
+/*user form*/
+
+.user_form_wrapper {
+	background:rgb(0,0,0);
+    background: transparent\9;
+    background:rgba(0,0,0,0.8);
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#b2000000,endColorstr=#b2000000);
+    zoom: 1;
+    border-radius: 5px;
+    color: #fff;
+    padding: 15px;
+    margin-top: 15px;
+
+}
+.user_form_wrapper .form-horizontal .form-group {
+	margin-right: 0px;
+	margin-left: 0px;
+}
+.user_form_wrapper .form-horizontal h2 {
+	margin-top: 0px;
+}
+.user_form_wrapper .form-horizontal .form-group .help-block {
+	color: #fff;
+}
+.user_form_wrapper .form-horizontal .btn {
+	margin-top: 10px;
+}
+.user_form_wrapper .form-horizontal .btn-default {
+    margin-top: 0px;
+}
+.user_form_wrapper .form-horizontal ul {
+	padding-left: 0px;
+}
+/*/user form*/
+
+/*profile form*/ 
+
+.profile_form_wrapper {
+	background:rgb(0,0,0);
+    background: transparent\9;
+    background:rgba(0,0,0,0.8);
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#b2000000,endColorstr=#b2000000);
+    zoom: 1;
+    border-radius: 5px;
+    color: #fff;
+    padding: 15px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+
+}
+.profile_form_wrapper .form-horizontal .form-group {
+	margin-right: 0px;
+	margin-left: 0px;
+}
+.profile_form_wrapper .form-horizontal h2 {
+	margin-top: 0px;
+}
+.profile_form_wrapper .form-horizontal .form-group .help-block {
+	color: #fff;
+}
+/*/profile form*/
+
+/*design form*/
+.design_form_wrapper {
+	background:rgb(0,0,0);
+    background: transparent\9;
+    background:rgba(0,0,0,0.8);
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#b2000000,endColorstr=#b2000000);
+    zoom: 1;
+    border-radius: 5px;
+    color: #fff;
+    padding: 15px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+.design_form_wrapper .form-group .btn {
+	margin-top: 10px;
+}
