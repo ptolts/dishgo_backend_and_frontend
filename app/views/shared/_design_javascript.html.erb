@@ -37,27 +37,44 @@
 	        	if(self.imgs[new_images.name()] === undefined && new_images.name() != ""){
 	        		self.imgs[new_images.name()] = new_images.url;
 	        	}        		
-	        }); 	                 
+	        }); 
 
             self.new_design = ko.computed(function(){
             	return self.id() != "";
             });
 
             self.addImage = function(){
-            	self.global_images.push(new GlobalImage({design_id:self.id()}));
+            	var img = new GlobalImage({design_id:self.id(),parent:self,parent_id:self.id});
+            	self.global_images.push(img);
+            	img.get_id();
             }
 
             self.addCarousel = function(){
-            	self.carousel.push(new GlobalImage({design_id:self.id(),carousel:true}));
-            }            
-          
+            	var img = new GlobalImage({design_id:self.id(),carousel:true,parent:self,parent_id:self.id});
+            	self.carousel.push(img);
+            } 
+
+            self.initialized = false;
+	        if(self.initialized == false){
+	        	self.addCarousel();
+	        	self.initialized = true;
+	        }                                 
+
         }
+
+	GlobalImage.prototype.toJSON = function() {
+	    var copy = ko.toJS(this); //easy way to get a clean copy
+	    delete copy.parent;
+	    delete copy.parent_id;
+	    return copy; //return the copy to be serialized
+	};  
+
 
 	function GlobalImage(data) {
 	    var self = this;
 	    self.progressValue = ko.observable(1);
 	    self.id = ko.observable("");
-	    self.name = ko.observable("");
+	    self.name = ko.observable(data.name || "");
 	    self.description = ko.observable("");
 	    self.url = ko.observable("/loader.gif");
 	    self.fresh = ko.observable(true);
@@ -65,7 +82,16 @@
 	    self.failed = ko.observable(false);
 	    self.design_id = ko.observable(data.design_id);
         self.completed = ko.observable(false);
+        self.default_image = ko.observable(false);
+        self.defaultImage = ko.observable();
+        self.selectedImage = ko.observable(false);
+        self.parent_id = data.parent_id;
+        self.parent = data.parent;
         self.carousel = ko.observable(data.carousel);
+        self.global_images = ko.observableArray([]);
+
+		self.dropdowning = ko.observable(false);  
+	    self.drop = function() { self.dropdowning(true) }
 
 	    if(data){
             self.id(data._id);
@@ -73,40 +99,98 @@
             self.description(data.description);
             self.customizable(data.customizable);
             self.carousel(data.carousel);
+
+	        _.each(data.global_images,function(e){
+        		var new_images = new GlobalImage(e);
+        		new_images.parent = self;
+        		new_images.parent_id = self.id;
+        		if(new_images.default_image()){
+        			self.defaultImage(new_images);
+        		}
+        		self.global_images.push(new_images);       		
+	        }); 
+
             if(data.url){
 	            self.completed(true);
+	            self.default_image(data.default_image);
 	            self.url = ko.observable(data.url);
 	            self.fresh(false);  
             }         
 	    }
 
+	    self.background = ko.computed(function(){
+	    	return "url(" + self.url() + ")";
+	    })
+
+	    self.setDefault = function(data){
+	    	self.dropdowning(false);
+	    	self.defaultImage(data);
+	    }
+
 	    self.update_info = function(item){
 	        self.url(item.url);
 	        self.completed(true);
-	        self.id(item.image_id);
+	        if(item.image_id){
+	        	self.id(item.image_id);
+	        } else {
+	        	self.id(item.id);
+	        }
 	    }
+
+	    self.get_id = function(){
+            $.ajax({
+              type: "POST",
+              url: "/app/design/create_image",
+              data: {
+                design_id:self.design_id(),
+              },
+              success: function(data, textStatus, jqXHR){
+              		self.update_info(data);
+              		self.addImage();
+                },
+              dataType: "json"
+            });
+	    }
+
+        self.addImage = function(){
+        	var img = new GlobalImage({parent_id:self.id,name:self.name(),design_id:self.design_id(),parent:self});
+        	if(self.global_images().length == 0){
+        		img.default_image = true;
+        	}
+        	self.global_images.push(img);
+        }
+
+      	self.apply = function(){}
 	}   
 
 	ko.bindingHandlers.file_upload_global = {
 	    update: function(element, valueAccessor, allBindingsAccessor, viewModel, bindingContext) {
 	        var self = this;
-	        viewModel.imageModel;
 	        $(element).fileupload({
 	            dropZone: $(element),
 	            formData: {
+	            	carousel: viewModel.carousel(),
 	            	design_id: viewModel.design_id(), 
 	            	name: viewModel.name(),
-	            	id: viewModel.id()
-	            },
+	            	parent_id: viewModel.parent_id()
+	            },           
 	            url: "/app/design/upload_image",
 	            dataType: 'json',
 	            progressInterval: 50,
+	            submit: function(e, data){
+	            	console.log(data);
+	            },
 	            send: function (e, data) {
               		viewModel.fresh(false);
 	            },
 	            done: function (e, data) {
 	                var file = data.result.files[0];
-	                viewModel.update_info(file);                               
+	                viewModel.update_info(file); 
+	                if(viewModel.carousel()){
+		                viewModel.parent.addCarousel();
+	                }  else {
+	                	viewModel.parent.addImage();                              	                	
+	                }	                                              
 	            },
 	            progressall: function (e, data) {
 	                var progress = parseInt(data.loaded / data.total * 100, 10);
@@ -126,6 +210,7 @@
 	        $(element).fileupload({
 	            dropZone: $(element),
 	            formData: {
+	            	data: ko.toJSON(viewModel),
 	            	design_id: viewModel.design_id(), 
 	            	restaurant_id: restaurant_id,
 	            	name: viewModel.name(),
@@ -139,7 +224,10 @@
 	            },
 	            done: function (e, data) {
 	                var file = data.result.files[0];
-	                viewModel.update_info(file);                               
+	                viewModel.update_info(file);
+	                if(viewModel.carousel()){
+		                viewModel.parent.addCarousel();
+	                } 
 	            },
 	            progressall: function (e, data) {
 	                var progress = parseInt(data.loaded / data.total * 100, 10);

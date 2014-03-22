@@ -11,10 +11,14 @@ class GlobalImage
   field :img_url_original, type: String 
   field :customizable, type: Boolean
   field :carousel, type: Boolean
+  field :default_image, type: Boolean
   field :description, localize: true
 
   belongs_to :design, index: true
   belongs_to :restaurant, index: true
+
+  has_many :global_images, class_name: "GlobalImage"
+  belongs_to :global_image, index: true
   
   index({ _id:1 }, { unique: true, name:"id_index" })
 
@@ -58,6 +62,7 @@ class GlobalImage
     start[:id] = self._id
     start[:_id] = self._id
     start[:url] = self.img_url_original
+    start[:global_images] = self.global_images.collect{|e| e.serializable_hash({})}
     start
   end
 

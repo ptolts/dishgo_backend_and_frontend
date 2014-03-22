@@ -20,6 +20,7 @@ class Restaurant
   field :website, type: String
 
   has_many :global_images, class_name: "GlobalImage"
+  field :website_settings, type: Hash
 
   has_many :sources, :class_name => "Sources"
   has_many :image, :class_name => "Image"
