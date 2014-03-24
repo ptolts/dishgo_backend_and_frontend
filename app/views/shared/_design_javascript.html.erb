@@ -170,7 +170,7 @@
 	            dropZone: $(element),
 	            formData: {
 	            	carousel: viewModel.carousel(),
-	            	design_id: viewModel.design_id(), 
+	            	design_id: viewModel.design_id, 
 	            	name: viewModel.name(),
 	            	parent_id: viewModel.parent_id()
 	            },           
@@ -211,7 +211,7 @@
 	            dropZone: $(element),
 	            formData: {
 	            	data: ko.toJSON(viewModel),
-	            	design_id: viewModel.design_id(), 
+	            	design_id: viewModel.design_id, 
 	            	restaurant_id: restaurant_id,
 	            	name: viewModel.name(),
 	            	id: viewModel.id()
