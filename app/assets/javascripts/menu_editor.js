@@ -14,6 +14,27 @@ function currentLangName(observable){
             }
 }
 
+var localizedMessages = {
+    'delete_section' : {
+        'en':"Are you sure you want to remove the section titled \"MESSAGE\"?",
+        'fr':"",
+    },
+    'remove_image' : {
+        'en':"Are you sure you want to remove this image?",
+        'fr':"",
+    },    
+}
+
+function localizeMessage(title, message){
+    var lang = "en";
+    var msg = localizedMessages[message][lang];
+    if(title){
+        var message_localized = title[lang];
+        msg = msg.replace("MESSAGE",message_localized);
+    }
+    return msg;
+}
+
 var opts = {
   lines: 13, // The number of lines to draw
   length: 20, // The length of each line
@@ -472,7 +493,30 @@ function Dish(data) {
         var new_image = new Image(item);
         self.images.unshift(new_image);
         return new_image;
-    };    
+    };  
+
+    self.removeImage = function(item) { 
+        bootbox.dialog({
+          message: localizeMessage(null,"remove_image"),
+          title: "Remove Image",
+          buttons: {
+            success: {
+              label: "No",
+              className: "btn-primary pull-left col-xs-3",
+              callback: function() {
+
+              }
+            },
+            danger: {
+              label: "Yes",
+              className: "btn-danger col-xs-3 pull-right",
+              callback: function() {
+                self.images.remove(item);
+              }
+            },
+          }
+        });        
+    };      
 
     // Which option template to use.
     self.remove = function(item) {
@@ -1017,7 +1061,7 @@ function MenuViewModel() {
 
     self.remove = function(item) {
         bootbox.dialog({
-          message: "Are you sure you want to remove the section titled \"" + item.name() + "\"?",
+          message: localizeMessage(item.name(),"delete_section"),
           title: "Remove Section",
           buttons: {
             success: {
@@ -1032,6 +1076,7 @@ function MenuViewModel() {
               className: "btn-danger col-xs-3 pull-right",
               callback: function() {
                 self.menu.remove(item);
+                self.current_section(self.menu()[0]);
               }
             },
           }

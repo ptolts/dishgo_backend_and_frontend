@@ -22,10 +22,8 @@
                             <textarea rows="6" data-bind="lValue: description, valueUpdate: 'afterkeydown'" class="description form-control tooltipclass" data-toggle="tooltip" data-placement="top" title="Type the dish description into this box." placeholder="Add Dish Description"></textarea>
                         </div>
 
+                        <div data-bind="template: { name: 'image', foreach: images}"></div>  
 
-                        <!-- ko foreach: images -->
-                        <div data-bind="template: { name: 'image', data: $data}"></div>  
-                        <!-- /ko -->
                     </div>  
                         <div class="dish_button">
                             <div class="col-xs-12 push_down">
