@@ -11,6 +11,7 @@ class GlobalImage
   field :img_url_original, type: String 
   field :customizable, type: Boolean
   field :carousel, type: Boolean
+  field :custom, type: Boolean
   field :default_image, type: Boolean
   field :description, localize: true
 

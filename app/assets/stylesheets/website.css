@@ -1,5 +1,20 @@
 .image_dropdown {
 	position: relative;	
+	margin-bottom: 10px;
+	width: 162px;
+	margin-right: auto;
+	margin-left: auto;
+	border: 1px solid rgb(159, 159, 168);
+	padding: 5px;
+	border-radius: 5px;	
+}
+
+.icon_dropdown {
+	position: absolute;
+	right: 0px;
+	bottom: 0px;
+	top: initial;
+	font-size: 20px;
 }
 
 .image_dropdown_div ul {
@@ -11,6 +26,10 @@
 	padding: 5px;
 	border-radius: 5px;
 	border: 1px solid #20BFDD;
+}
+
+.image_dropdown_div ul img {
+	width: 136px;
 }
 
 .image_dropdown li {
@@ -25,7 +44,7 @@
 }
 
 .image_dropdown img {
-	height: 100px;
+	width: 150px;
 }
 
 .image_dropdown img:hover {

@@ -2,6 +2,7 @@ class DesignController < ApplicationController
   before_filter :authenticate_user!
   before_filter :admin_user!, :only => [:create, :update, :destroy, :upload_image, :create_image]
   before_filter :admin_or_owner!, :only => [:set_design]
+  before_filter :admin_or_image_owner!, :only => [:destroy_image]
   layout 'administration'
 
   def create
@@ -45,6 +46,11 @@ class DesignController < ApplicationController
       sub_imgs = gi["global_images"].collect do |sgi|
         next if sgi["id"].blank?
         sg = GlobalImage.find(sgi["id"])
+        if sg.img_url_original.blank?
+          sg.destroy
+          next
+        end
+        Rails.logger.warn "----------\n#{sg.img_url_original}\n-------"
         sg.name = gi["name"]
         sg.customizable = sgi["customizable"]
         sg.default_image = sgi["default_image"]
@@ -110,5 +116,11 @@ class DesignController < ApplicationController
     img.save
     render :json => img.as_json
   end
+
+  def destroy_image
+    image = GlobalImage.find(params[:image_id])
+    image.destroy
+    render :json => {"Success"=>true}.as_json
+  end  
 
 end

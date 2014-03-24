@@ -41,6 +41,7 @@ Foodcloud::Application.routes.draw do
       post 'create'
       post 'update'
       post 'destroy'
+      post 'destroy_image'
       post 'upload_image'
       post 'create_image'
     end

@@ -48,7 +48,11 @@ class MenuController < ApplicationController
     settings = restaurant.website_settings || {}
     
     custom_imgs.each do |img|
-      if settings[img["name"]] and default = img[:global_images].select{|e| e["_id"].to_s == settings[img["name"]]} and default = default.first
+      # Match the id of the image the user has selected which is stored in the restaurant object
+      # to the id of the image files loaded. This seems ridiculously complex. Should really be cleaned up.  
+      if settings[img["name"]] == img["_id"].to_s
+        image_objects_to_be_used << img
+      elsif settings[img["name"]] and default = img[:global_images].select{|e| e["_id"].to_s == settings[img["name"]]} and default = default.first
         image_objects_to_be_used << default
       else
         if default = img[:global_images].select{|e| e["default_image"]} and default = default.first

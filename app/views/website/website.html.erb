@@ -10,7 +10,7 @@
     </div>
 
     <%= render 'shared/restaurant_template' %>
-    <%= render 'shared/design_template' %>
+    <%= render 'shared/custom_design_template' %>
     <%= render 'shared/design_javascript' %>
     <%= render 'shared/restaurant_javascript' %>
 
@@ -18,10 +18,20 @@
 
         var design_data = <%= raw(@designs.to_json) %>;
         var restaurant_id = "<%= current_user.owns_restaurants.id %>";
+        var current_design_id = "<%= current_user.owns_restaurants.design.id %>";
+
         function viewModel() {
             var self = this;
-            self.designs = ko.observable(($.map(design_data, function(item) { return new Design(item) })));
+            self.designs = ko.observableArray([]);
             self.current_design = ko.observable();
+
+            _.each(design_data, function(item) { 
+              var des = new Design(item);
+              if(des.id() == current_design_id){
+                self.current_design(des);
+              }
+              self.designs.push(des);
+            });            
 
             self.setDesign = function(item){
                 self.current_design(item);

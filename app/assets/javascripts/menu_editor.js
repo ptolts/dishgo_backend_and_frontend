@@ -33,6 +33,10 @@ var opts = {
   left: 'auto' // Left position relative to parent in px
 };
 
+function copyDefaultHash(hash) {
+    return JSON.parse(JSON.stringify(hash));
+}
+
 var fullLanguageName = {
     'en' : 'English',
     'fr' : 'French'
@@ -57,6 +61,11 @@ var default_sizes_hash_large = {
     en: 'Large',
     fr: 'Grand',
 }
+
+var sectionNames = {
+    en: '',
+    fr: '',
+}  
 
 function updateFilters() {
     // Only allow prices in any price field.
@@ -176,7 +185,7 @@ function Section(data,topmodel) {
     self.newDishName = ko.observable();
     self.addDish = function() {
         // console.log("Adding Dish");
-        var new_dish = new Dish({name:JSON.parse(JSON.stringify(default_language_hash)), description:JSON.parse(JSON.stringify(default_language_hash))});
+        var new_dish = new Dish({name:copyDefaultHash(default_language_hash), description:copyDefaultHash(default_language_hash)});
         self.dishes.unshift(new_dish);
         self.topmodel.current_section(null);
         self.topmodel.current_dish(new_dish);
@@ -361,7 +370,7 @@ function Dish(data) {
         if(data.sizes){
             self.sizes_object = ko.observable(new Option(data.sizes,self));
         } else {
-            self.sizes_object = ko.observable(new Option({type:"size",name:JSON.parse(JSON.stringify(default_sizes_hash)),individual_options:[{name:JSON.parse(JSON.stringify(default_sizes_hash_small)),price:'0.0'},{name:JSON.parse(JSON.stringify(default_sizes_hash_large)),price:'0.0'}]},self));            
+            self.sizes_object = ko.observable(new Option({type:"size",name:copyDefaultHash(default_sizes_hash),individual_options:[{name:copyDefaultHash(default_sizes_hash_small),price:'0.0'},{name:copyDefaultHash(default_sizes_hash_large),price:'0.0'}]},self));            
         }
     }
 
@@ -455,7 +464,7 @@ function Dish(data) {
 
     self.addOption = function() { 
         console.log("Adding option!");
-        self.options.push(new Option({name:JSON.parse(JSON.stringify(default_language_hash)), type:"generic",placeholder:"Type the option group title here.",individual_options:[{placeholder:"Type the first option title here.",price:'0.0',name:JSON.parse(JSON.stringify(default_language_hash))},{placeholder:"Type the second option title here.",price:'0.0', name: JSON.parse(JSON.stringify(default_language_hash))}]},self));
+        self.options.push(new Option({name:copyDefaultHash(default_language_hash), type:"generic",placeholder:"Type the option group title here.",individual_options:[{placeholder:"Type the first option title here.",price:'0.0',name:copyDefaultHash(default_language_hash)},{placeholder:"Type the second option title here.",price:'0.0', name: copyDefaultHash(default_language_hash)}]},self));
         updateFilters();
     };
 
@@ -582,13 +591,13 @@ function Option(data,dish) {
 
     // Which option template to use.
     self.addSize = function() {
-        self.individual_options.push(new IndividualOption({name:JSON.parse(JSON.stringify(default_language_hash)),placeholder:"Type new size title here.",price:'0.0'},self));
+        self.individual_options.push(new IndividualOption({name:copyDefaultHash(default_language_hash),placeholder:"Type new size title here.",price:'0.0'},self));
         updateFilters();        
     }
 
     // Which option template to use.
     self.addOption = function() {
-        self.individual_options.push(new IndividualOption({name:JSON.parse(JSON.stringify(default_language_hash)),placeholder:"Type new option title here.",price:'0.0'},self));
+        self.individual_options.push(new IndividualOption({name:copyDefaultHash(default_language_hash),placeholder:"Type new option title here.",price:'0.0'},self));
         updateFilters();
     }   
 
@@ -888,19 +897,14 @@ function MenuViewModel() {
         } else {
             return false;
         }
-    } 
-
-    self.sectionNames = {
-        en: '',
-        fr: '',
-    }    
+    }   
 
     // Operations
     self.newSectionName = ko.observable();
     self.addSection = function() {
         console.log("Adding Section");
         self.newDomCounter++;
-        var new_section = new Section({name:self.sectionNames,subsection:[],dom_id:self.newDomCounter},self);
+        var new_section = new Section({name:copyDefaultHash(sectionNames),subsection:[],dom_id:self.newDomCounter},self);
         self.menu.push(new_section);
         self.current_section(new_section);
         self.current_dish(null);

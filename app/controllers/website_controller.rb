@@ -1,7 +1,7 @@
 class WebsiteController < ApplicationController
 	before_filter :authenticate_user!
 	before_filter :admin_user!, :only => []
-	before_filter :admin_or_owner!, :only => [:submit_design]
+	before_filter :admin_or_owner!, :only => [:submit_design,:destroy_image]
 	layout 'administration'
 
 	def index
@@ -46,8 +46,14 @@ class WebsiteController < ApplicationController
 		data = JSON.parse(params[:data])
 		settings = restaurant.website_settings || {}
 		data["global_images"].each do |image|
-			settings[image["defaultImage"]["name"]] = image["defaultImage"]["id"]
+			Rails.logger.warn "------\n#{image}\n-----"
+			if image["custom"]
+				settings[image["name"]] = image["id"]
+			else
+				settings[image["defaultImage"]["name"]] = image["defaultImage"]["id"]
+			end
 		end
+		Rails.logger.warn "--++++-\n#{settings}\n--+++++--"
 		restaurant.website_settings = settings
 		restaurant.save
 		restaurant.design = Design.find(data["id"])
@@ -64,6 +70,7 @@ class WebsiteController < ApplicationController
 		end
 		img = GlobalImage.create unless img
 		img.name = params[:name]
+		img.custom = true
 		img.carousel = data["carousel"]
 		img.restaurant = Restaurant.find(params[:restaurant_id])
 		img.update_attributes({:img => file})
@@ -73,8 +80,15 @@ class WebsiteController < ApplicationController
 		                    image_id: img.id,
 		                    name: img.name,
 		                    url:  img.img_url_original,
+		                    custom: true,
 		                  }]
 		                }.as_json
-	end  
+	end
+
+	def destroy_image
+		image = GlobalImage.find(params[:image_id])
+		image.destroy
+		render :json => {"Success"=>true}.as_json
+	end
 
 end
