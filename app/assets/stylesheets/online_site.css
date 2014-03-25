@@ -8,6 +8,15 @@
 	color: #000;
 }
 
+.image_roll {
+	list-style: none;
+	padding: 0;
+}
+
+.image_roll img{
+	margin: auto;
+}
+
 /* Float Shadow */
 
 .float-shadow {

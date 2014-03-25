@@ -56,7 +56,7 @@
 
 										    					<div class="col-xs-12">
 										    						<div class="web_preview_uiscrollview">
-											                            <ul data-bind="foreach: images">
+											                            <ul class="image_roll" data-bind="foreach: images">
 											                            	<li><img data-bind="attr:{src:url}" alt="" class="img-responsive"></li>
 											                            </ul>
 										    						</div>
@@ -71,9 +71,7 @@
 										    						<div data-bind="visible: sizes, with: sizes_object" class="demo_options">
 										    							<strong><h4 style="text-decoration: underline;">Sizes</h4></strong>
 										    							<div data-bind="foreach: individual_options">
-										    								<label class="btn btn-section float_option_size" data-bind="css: {'active': $parents[1].sizeSelectedOptionValue() === $data}"><input name="sizes_radio" type="radio" data-bind="checkedValue: $data, checked: $parents[1].sizeSelectedOptionValue" style="opacity: 0; width: 0px"/><!-- ko text: name --><!-- /ko -->Small</label>                         
-										    								<label class="btn btn-section float_option_size" data-bind="css: {'active': $parents[1].sizeSelectedOptionValue() === $data}"><input name="sizes_radio" type="radio" data-bind="checkedValue: $data, checked: $parents[1].sizeSelectedOptionValue" style="opacity: 0; width: 0px"/><!-- ko text: name --><!-- /ko -->Medium</label>
-										    								<label class="btn btn-section float_option_size" data-bind="css: {'active': $parents[1].sizeSelectedOptionValue() === $data}"><input name="sizes_radio" type="radio" data-bind="checkedValue: $data, checked: $parents[1].sizeSelectedOptionValue" style="opacity: 0; width: 0px"/><!-- ko text: name --><!-- /ko -->Large than Life</label>                         
+										    								<label class="btn btn-section float_option_size" data-bind="css: {'active': $parents[1].sizeSelectedOptionValue() === $data}"><input name="sizes_radio" type="radio" data-bind="checkedValue: $data, checked: $parents[1].sizeSelectedOptionValue" style="opacity: 0; width: 0px"/><!-- ko lText: name --><!-- /ko -->Small</label>                                               
 										    							</div>
 										    						</div>
 										    					</div>
@@ -84,7 +82,7 @@
 											    							<div data-bind="foreach: individual_options">
 											    								<label class="btn btn-dish float_option" data-bind="css: {'active': $parent.selectedOptionValue().indexOf($data) >= 0}">
 											    									<input name="sizes_radio" type="checkbox" data-bind="checkedValue: $data, checked: $parent.selectedOptionValue" style="opacity: 0; width: 0px">
-											    									<!-- ko text: name -->
+											    									<!-- ko lText: name -->
 
 											    									<!-- /ko -->
 											    									<!-- ko if: $data.icon -->
