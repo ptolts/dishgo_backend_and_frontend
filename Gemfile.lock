@@ -133,6 +133,7 @@ GEM
       activesupport (>= 3.0.0)
       cocaine (~> 0.5.3)
       mime-types
+    phantomjs (1.9.7.0)
     polyglot (0.3.4)
     rack (1.5.2)
     rack-rewrite (1.2.1)
@@ -204,6 +205,7 @@ DEPENDENCIES
   mongoid-paperclip
   oj (~> 2.0.14)
   oj_mimic_json
+  phantomjs
   rack-rewrite (~> 1.2.1)
   rails (= 4.0.3)
   role_model

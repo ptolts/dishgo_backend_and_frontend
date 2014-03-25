@@ -1,5 +1,5 @@
 class MenuController < ApplicationController
-
+  after_filter :phantom
   layout 'menu'
   
   def index
@@ -95,5 +95,14 @@ class MenuController < ApplicationController
     @menu_data = "{ \"menu\" : #{restaurant.draft_menu_to_json} }".as_json
     render 'menu'
   end  
+
+  private
+  def phantom
+    if request.user_agent =~ /facebook/i
+      Phantomjs.run("#{Rails.root}/lib/phantom.js",response.body.to_s,"#{request.scheme}://#{request.host}#{request.path}")
+    end
+  end
+
+#"GET /app/menu/preview/jT29p3Jgbq9_4o7g0FO16g HTTP/1.1" 200 27337 "-" "facebookexternalhit/1.1 (+http://www.facebook.com/externalhit_uatext.php)"
 
 end

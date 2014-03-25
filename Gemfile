@@ -21,6 +21,7 @@ gem 'bootstrap_form'
 gem "mongoid-paperclip", :require => "mongoid_paperclip"
 gem 'fog'
 gem 'ruby-prof'
+gem 'phantomjs'
 
 
 # Gems used only for assets and not required
