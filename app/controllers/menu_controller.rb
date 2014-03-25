@@ -99,7 +99,7 @@ class MenuController < ApplicationController
   private
   def phantom
     if request.user_agent =~ /facebook/i
-      response.body = Phantomjs.run("#{Rails.root}/lib/phantom.js",response.body.to_s,"#{request.scheme}://#{request.host}#{request.path}")
+      # response.body = Phantomjs.run("#{Rails.root}/lib/phantom.js",response.body.to_s,"#{request.scheme}://#{request.host}#{request.path}")
     end
   end
 

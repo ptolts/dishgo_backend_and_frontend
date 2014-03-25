@@ -1,31 +1,55 @@
 <div class="container">
-
-    <!-- ko with: user -->
-        <div class="col-xs-12 col-md-6">
-            <div data-bind="template: { name: 'user_template', data: $parent.user }"></div>
-        </div>
-    <!-- /ko -->    
-
+  
     <!-- ko with: restaurant -->
         <div class="col-xs-12 col-md-6">
             <div data-bind="template: { name: 'restaurant_template', data: $parent.restaurant }"></div>
         </div>
     <!-- /ko -->    
 
+    <!-- ko with: user -->
+        <div class="col-xs-12 col-md-6">
+            <div data-bind="template: { name: 'user_template', data: $parent.user }"></div>
+        </div>
+    <!-- /ko -->  
+
+    <!-- ko with: restaurant -->
+        <div class="col-xs-12 col-md-6">
+            <div data-bind="template: { name: 'socialmedia_template', data: $parent.restaurant }"></div>
+        </div>
+    <!-- /ko -->       
+
 
     <%= render 'shared/restaurant_template' %>
+    <%= render 'shared/socialmedia_template' %>
     <%= render 'shared/user_template' %>
     <%= render 'shared/restaurant_javascript' %>
 
     <script type='text/javascript'>//<![CDATA[ 
 
-        var resto_data = <%= raw(current_user.owns_restaurants.as_json.to_json) %>;
-        var user_data = <%= raw(current_user.as_json.to_json) %>;
+        var resto_data = <%= raw(current_user.owns_restaurants.as_json(include: :user).to_json) %>;
+        var user_data = <%= raw(current_user.as_json(include: :owns_restaurants).to_json) %>;
 
         function User(data) {
             var self = this;
             self.id = data._id;
             self.email = ko.observable(data.email);
+
+            self.save = function(){
+                $.ajax({
+                  type: "POST",
+                  url: "/app/administration/update_user",
+                  data: {
+                    params:ko.toJSON(self),
+                  },
+                  success: function(data, textStatus, jqXHR){
+                        console.log("Saved!")      
+                    },
+                    error: function(XMLHttpRequest, textStatus, errorThrown) { 
+                        console.log("There was an error saving the section " + errorThrown);
+                    },
+                    dataType: "json"
+                });                
+            }
 
         }    
 
@@ -37,7 +61,8 @@
             self.user = ko.observable(new User(user_data))     
         };
 
-        ko.applyBindings(new viewModel());
+        var viewmodel = new viewModel();
+        ko.applyBindings(viewmodel);
 
 
     //]]>  

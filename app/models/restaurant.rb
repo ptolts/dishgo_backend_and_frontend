@@ -18,6 +18,9 @@ class Restaurant
   field :postal_code, type: String
   field :phone, type: String
   field :website, type: String
+  field :facebook, type: String
+  field :foursquare, type: String
+  field :instagram, type: String
 
   has_many :global_images, class_name: "GlobalImage"
   field :website_settings, type: Hash

@@ -13,7 +13,7 @@
                             <p class="help-block"></p>
                         </div>
                     </div>
-                    <% if current_user.is_admin %>
+                    <% if current_user.is_admin && active_link('administration','users') %>
                         <p>Admin: <span data-bind="text: is_admin, click: toggle_is_admin"></span></p>
                         <p>Restaurant: <!-- ko with: restaurant --><span data-bind="text: name"></span><!-- /ko --></p>
                         <p>Set Restaurant:</p>
@@ -28,6 +28,11 @@
                     <% end %>  
                 </fieldset>
             </form>
+            <div class="row">
+                <div class="col-xs-12">
+                    <button class="btn btn-primary pull-right" data-bind="click: save">Save</button>
+                </div>
+            </div>
         </div>
     </div>
 </script>
