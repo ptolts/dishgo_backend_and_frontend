@@ -1167,6 +1167,11 @@ function PublicMenuModel() {
     self.languages = ko.observableArray(['en','fr']);
     self.lang = ko.observable('en');
     lang = self.lang;
+    self.selected_dish = ko.observable();
+
+    self.set_dish = function(dish) {
+        self.selected_dish(dish);
+    };    
 
     self.display_menu = ko.observable(false);
     self.display_menu_toggle = function(){

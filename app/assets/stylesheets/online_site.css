@@ -1,4 +1,9 @@
 /*
 *= require bootstrap.min
 *= require font-awesome
+*= require_self
 */
+
+.modal {
+	color: #000;
+}
