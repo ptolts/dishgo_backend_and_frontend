@@ -1178,6 +1178,11 @@ function PublicMenuModel() {
         self.display_menu(!self.display_menu());
     } 
 
+    self.goto_and_kill_menu = function(location){
+        pager.goTo(location);
+        self.display_menu(false);        
+    }     
+
     self.design = new Design(design_data);
 
     self.contact_tr = ko.observable({
@@ -1293,7 +1298,9 @@ ko.bindingHandlers.lText = {
         var result = ko.observable(value()[viewmodel.lang()]);
         ko.bindingHandlers.text.update(element, result);
     }
-};   
+};  
+
+ko.virtualElements.allowedBindings.lText = true; 
 
 function DemoViewModel() {
     // Data

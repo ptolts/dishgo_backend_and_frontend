@@ -29,9 +29,9 @@
 			<ul>
 				<li class="icon" data-bind="click: display_menu_toggle"><i class="fa fa-bars"></i></li>
 				<!-- ko if: display_menu -->
-					<li><a data-bind="page-href: 'start'">Home</a></li>
-					<li><a data-bind="page-href: 'menu'">Menu</a></li>
-					<li><a data-bind="page-href: 'contact'">Contact</a></li>
+					<li><a data-bind="click: function() { goto_and_kill_menu('start') }">Home</a></li>
+					<li><a data-bind="click: function() { goto_and_kill_menu('menu') }">Menu</a></li>
+					<li><a data-bind="click: function() { goto_and_kill_menu('contact') }">Contact</a></li>
 				<!-- /ko -->
 			</ul>
 		</nav>			  	
