@@ -20,6 +20,7 @@ class Restaurant
   field :website, type: String
   field :facebook, type: String
   field :foursquare, type: String
+  field :twitter, type: String
   field :instagram, type: String
 
   has_many :global_images, class_name: "GlobalImage"

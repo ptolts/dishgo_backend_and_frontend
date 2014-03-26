@@ -1,8 +1,24 @@
 /*
 *= require bootstrap.min
 *= require font-awesome
+*= require menu_base
+*= require layout_base
 *= require_self
 */
+
+.pages {
+  position: relative;
+  height: 100%;
+  pointer-events:none;
+}
+
+#content_wrapper {
+  pointer-events:all;
+}
+
+.container {
+  pointer-events:all;
+}
 
 .modal {
 	color: #000;

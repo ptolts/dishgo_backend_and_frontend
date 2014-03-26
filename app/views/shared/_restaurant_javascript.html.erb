@@ -11,6 +11,7 @@
             self.facebook = ko.observable(data.facebook ? data.facebook : "");
             self.foursquare = ko.observable(data.foursquare ? data.foursquare : "");
             self.instagram = ko.observable(data.instagram ? data.instagram : "");
+            self.twitter = ko.observable(data.twitter ? data.twitter : "");
             self.phone = ko.observable(data.phone ? data.phone : "");
             self.address_line_1 = ko.observable(data.address_line_1 ? data.address_line_1 : "");
             self.address_line_2 = ko.observable(data.address_line_2 ? data.address_line_2 : "");
@@ -19,6 +20,11 @@
             self.postal_code = ko.observable(data.postal_code ? data.postal_code : "");
             self.design = ko.observable(data.design === undefined ? null : new Design(data.design));
             self.id = data._id;
+
+
+            self.socialVisible = function(type){
+                
+            }            
 
             self.save = function(){
                 $.ajax({

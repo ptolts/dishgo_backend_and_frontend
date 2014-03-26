@@ -44,27 +44,32 @@
 					<li><a data-bind="page-href: 'contact'">Contact</a></li>
 				</ul>
 			</nav>	
-			<div class="social_media">
-				<i data-bind="" class="fa fa-facebook-square"></i>
-				<i class="fa fa-twitter-square"></i> 				
-				<i class="fa fa-instagram"></i>
+			<div id="social_media" class="social_media" data-bind="with: restaurant">
+				<a data-bind="visible: socialVisible('facebook'), attr:{href: facebook}"><i class="fa fa-facebook-square"></i></a>
+				<a data-bind="visible: socialVisible('twitter'), attr:{href: twitter}"><i class="fa fa-twitter-square"></i></a>			
+				<a data-bind="visible: socialVisible('instagram'), attr:{href: instagram}"><i class="fa fa-instagram"></i></a>
 			</div>			
 		</div>
 		<div data-bind="style:{backgroundImage: $root.computeImage('header_background_pattern')}" id="left_menu_background"></div>
 
 		<div id="footer">
-	
+			<div id="social_media_footer" class="social_media" data-bind="with: restaurant">
+				<a data-bind="visible: socialVisible('facebook'), attr:{href: facebook}"><i class="fa fa-facebook-square"></i></a>
+				<a data-bind="visible: socialVisible('twitter'), attr:{href: twitter}"><i class="fa fa-twitter-square"></i></a>			
+				<a data-bind="visible: socialVisible('instagram'), attr:{href: instagram}"><i class="fa fa-instagram"></i></a>
+			</div>	
 		</div>
+
 		<div data-bind="style:{backgroundImage: $root.computeImage('header_background_pattern')}" id="footer_background"></div>	
 
-		<div data-bind="page: {id: 'start', title: 'Tuckshop'}">
+		<div data-bind="page: {id: 'start', title: 'Tuckshop'}" class="pages">
 			<div id="content_wrapper">
 				<div id="content">					
 					<%= render 'start' %>
 				</div>			
 			</div>							
 		</div>	
-		<div data-bind="page: {id: 'contact', title: 'Contact Tuckshop'}">
+		<div data-bind="page: {id: 'contact', title: 'Contact Tuckshop'}" class="pages">
 			<div id="content_wrapper">
 				<div id="content">					
 					<%= render 'contact' %>
@@ -73,13 +78,14 @@
 		</div>
 
 
-		<div data-bind="page: {id: 'menu', title: 'Menu'}">
+		<div data-bind="page: {id: 'menu', title: 'Menu'}" class="pages">
 			<%= yield %>
 		</div>	
 
     	<%= javascript_include_tag "menu_editor" %>
 
 		<%= render 'shared/design_javascript' %>
+		<%= render 'shared/restaurant_javascript' %>
 
 		<script type="text/javascript">
 

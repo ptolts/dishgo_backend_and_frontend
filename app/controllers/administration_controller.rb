@@ -238,9 +238,14 @@ class AdministrationController < ApplicationController
     restaurant = Restaurant.find(settings["id"])
     restaurant.name = settings["name"]
     restaurant.phone = settings["phone"]
+    restaurant.facebook = settings["facebook"]
+    restaurant.twitter = settings["twitter"]
+    restaurant.foursquare = settings["foursquare"]
+    restaurant.instagram = settings["instagram"]
 
     if sub = Restaurant.where(subdomain:settings["subdomain"].downcase).first and sub != restaurant
       render :text => "Bad Subdomain"
+      return
     end
     restaurant.subdomain = settings["subdomain"].downcase
     restaurant.address_line_1 = settings["address_line_1"]

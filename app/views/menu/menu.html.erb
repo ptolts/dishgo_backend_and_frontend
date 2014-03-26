@@ -1,5 +1,5 @@
 			<div class="container menu_container">
-			        <div class="row">
+			        <div class="row menu_head">
 			            <div class="menu_header">
 			                <img data-bind="attr:{src:$root.design.imgs.simple_header_1}" class="img-responsive">
 			            </div>
@@ -7,7 +7,7 @@
 		                    <img data-bind="attr:{src:$root.design.imgs.title}" class="resto_img">
 		                </div>
 				        <div class="language_selector">
-				            <select data-bind="options: $root.languages, optionsText: function(item){ return fullLanguageName[item];}, value: $root.lang"></select>          
+				            <select class="form-control input-sm" data-bind="options: $root.languages, optionsText: function(item){ return fullLanguageName[item];}, value: $root.lang"></select>          
 				        </div>
 
 				        <div class="menu_style_selector">
