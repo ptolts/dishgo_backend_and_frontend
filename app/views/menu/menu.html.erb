@@ -1,10 +1,10 @@
 			<div class="container menu_container">
 			        <div class="row">
-			            <div class="dark_header">
+			            <div class="menu_header">
 			                <img data-bind="attr:{src:$root.design.imgs.simple_header_1}" class="img-responsive">
 			            </div>
 		                <div class="resto_logo">
-		                    <img data-bind="attr:{src:$root.design.imgs.title}" class="img-responsive">
+		                    <img data-bind="attr:{src:$root.design.imgs.title}" class="resto_img">
 		                </div>
 				        <div class="language_selector">
 				            <select data-bind="options: $root.languages, optionsText: function(item){ return fullLanguageName[item];}, value: $root.lang"></select>          
@@ -23,10 +23,10 @@
 			                <div class="each_dish">
         						<!-- ko foreach: menu -->
 				                    <div class="col-xs-12">
-				                        <img data-bind="attr:{src:$root.design.imgs.simple_divider}" class="img-responsive center-block">
+				                        <img data-bind="attr:{src:$root.design.imgs.simple_divider}" class="section_img_header center-block">
 				                        <div class="section_title">
 				                            <h1 data-bind="lText: name">Deserts</h1>
-				                            <img data-bind="attr:{src:$root.design.imgs.section_line}" class="img-responsive center-block">
+				                            <img data-bind="attr:{src:$root.design.imgs.section_line}" class="section_img_divider center-block">
 				                        </div>
                         				<div data-bind="foreach: dishes">
 
@@ -152,14 +152,14 @@
 											</div>
 					                        <!-- dish modal -->
 				                      	</div>
-				                        <img data-bind="attr:{src:$root.design.imgs.simple_divider_bottom}" class="img-responsive center-block">
+				                        <img data-bind="attr:{src:$root.design.imgs.simple_divider_bottom}" class="section_img_divider center-block">
 				                    </div>
 				                <!-- /ko -->
 			                </div>
 			            </div>
 			            <div class="col-xs-12">
 			                <div class="bottom_logo">
-			                    <img data-bind="attr:{src:$root.design.imgs.menu_tuck_dark}" class="img-responsive center-block">
+			                    <img data-bind="attr:{src:$root.design.imgs.menu_tuck_dark}" class="resto_img_logo_bottom center-block">
 			                </div>
 			            </div>
 			    </div>
