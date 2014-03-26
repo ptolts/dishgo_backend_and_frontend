@@ -1,0 +1,157 @@
+body {
+	color: #fff;
+}
+
+body a:active, a:visited, a {
+	color: #fff;
+}
+
+#social_media {
+	position: absolute;
+	bottom: 15px;
+	text-align: center;
+	width: 100%;
+	left: 0px;
+	display: block;
+}
+
+#left_menu {
+	font-family: 'Fjalla One', sans-serif;	
+	color: white;
+	font-size: 18px;
+	font-weight: bold;
+	width: 200px;
+	height: 100%;
+	position: fixed;
+	top: 0px;
+	padding-left: 20px;
+	left: 0px;
+	display: block;
+}
+
+#left_menu i {
+	font-size: 38px;
+	color: #fff;
+}
+
+#left_menu_background {
+	width: 215px;
+	min-height: 100%;
+	opacity: 0.75;
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	z-index: -5;
+	display: block;
+	background-color: black;	
+}
+
+#content_wrapper {
+	position: absolute;
+	width: 600px;
+	height: 500px;
+	background-color: rgba(0, 0, 0, 0.85);
+	padding: 15px;
+	color: #fff;
+	border-radius: 5px;
+	top: 50%;
+	left: 50%;
+	margin-left: -300px;
+	margin-top: -250px;
+/*	border-style: solid;
+	border-width: 10px;
+	-moz-border-image: url(choppyborder.jpg) 14 15 15 14;
+	-webkit-border-image: url(choppyborder.jpg) 14 15 15 14;
+	-o-border-image: url(choppyborder.jpg) 14 15 15 14;
+	border-image: url(choppyborder.jpg) 14 15 15 14;*/	
+}
+
+.restaurant_name {
+	border: 4px solid #fff;
+	border-left: 0px;
+	border-right: 0px;
+	width: 130px;
+	text-transform:uppercase;
+	padding: 4px;
+}
+
+#navigation_small {
+
+}
+
+.nav li {
+	display: block;
+}
+
+.nav a:hover {
+	color: #000;
+}
+
+@media screen and (max-width: 850px) {
+
+	#content_wrapper {
+		position: absolute;
+		width: 100%;
+		height: 500px;
+		top: 0px;
+		left: initial;
+		margin: 0;
+		border-radius: 0px;	
+	}
+
+	.nav ul {
+		border: solid 1px #fff;
+		background: #000;
+	}
+
+	#navigation_small {
+		display:block;
+	}	
+
+	#left_menu_background {
+		display: none;
+	}
+
+	#left_menu {
+		display: none;
+	}
+
+	.nav {
+		position: relative;
+		min-height: 40px;
+		z-index: 500;
+	}	
+	.nav ul {
+		padding: 5px;
+		position: absolute;
+		top: 0;
+		left: 0;
+		border-radius: 5px;
+	}
+
+	.nav .icon {
+		display: block; /* show only current <li> item */
+		font-size: 28px;
+		padding-left: 10px;
+		padding-right: 10px;
+		margin: 0;
+	}
+	.nav a {
+		display: block;
+		padding: 5px 5px 5px 32px;
+		text-align: left;
+	}
+
+	/* right nav */
+	.nav.right ul {
+		left: auto;
+		right: 0;
+	}
+
+	/* center nav */
+	.nav.center ul {
+		left: 50%;
+		margin-left: -90px;
+	}	
+	
+}
