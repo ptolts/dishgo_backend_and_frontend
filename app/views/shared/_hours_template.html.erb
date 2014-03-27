@@ -1,0 +1,56 @@
+<script id="hours_template" type="text/html">
+<div class="col-xs-12">
+  <div class="profile_form_wrapper">
+
+        <h1 style="margin-top: 0px;">Restaurant Hours</h1>
+        <hr>
+        <div class="row">
+          <div class="col-xs-3">
+            <p class="text-center"><strong>Day</strong></p>
+          </div>        
+          <div class="col-xs-3">
+            <p class="text-center"><strong>Opened/Closed</strong></p>
+          </div>        
+          <div class="col-xs-3">
+            <p class="text-center"><strong>Opening hours</strong></p>
+          </div>
+          <div class="col-xs-3">
+            <p class="text-center"><strong>Closing hours</strong></p>
+          </div>
+        </div>
+
+        <form class="form-horizontal" role="form" id="business-hours-form">
+          <!-- ko foreach: hours -->
+            <div class="row">
+              <label class="col-xs-3 control-label"><i class="fa fa-clocl"></i> <!-- ko text: name --><!-- /ko --></label>
+
+              <div class="col-xs-3 text-center">
+                <button class="btn" data-bind="css:{ 'btn-success':!closed(), 'btn-danger': closed }, click: toggleClosed, text: buttonText"></button>
+              </div>
+
+              <div data-bind="visible: !closed()">
+                <div class="col-xs-3">
+                  <div class="controls">
+                    <select class="form-control" data-bind="options: times, value: open_1, optionsCaption: 'Opened at...'"></select>
+                  </div>
+                </div>
+
+                <div class="col-xs-3">
+                  <div class="controls">
+                    <select class="form-control" data-bind="options: times, value: close_1, optionsCaption: 'Closed at...'"></select>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          <!-- /ko -->
+        </form>
+
+        <div class="row">
+          <div class="col-xs-12">
+            <button class="btn btn-primary pull-right col-md-2" data-bind="click: function(){ console.log(ko.toJSON($data)); save(); }">Save</div>
+          </div>
+        </div>
+  </div>
+</div>
+</script>

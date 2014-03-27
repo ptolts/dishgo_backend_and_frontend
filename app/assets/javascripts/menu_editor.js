@@ -1,8 +1,8 @@
 /*
 *= require jquery.Jcrop.min.js
-*= require pager.js
 *= require mb.bgndGallery.js
 *= require mb.bgndGallery.effects.js
+*= require jquery.hashchange.min.js
 */
 
 //<![CDATA[ 

@@ -23,6 +23,9 @@ class Restaurant
   field :twitter, type: String
   field :instagram, type: String
 
+  field :welcome_text, localize: true
+  field :hours, type: Hash 
+
   has_many :global_images, class_name: "GlobalImage"
   field :website_settings, type: Hash
 

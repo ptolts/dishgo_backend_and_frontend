@@ -1,5 +1,41 @@
     <script type='text/javascript'>//<![CDATA[ 
 
+        Day.prototype.toJSON = function() {
+            var copy = ko.toJS(this); //easy way to get a clean copy
+            delete copy.times;
+            delete copy.buttonText;
+            return copy; //return the copy to be serialized
+        };  
+
+        function Day(name,data){
+            var self = this;
+            self.name = name;
+            self.closed = ko.observable(true);
+            self.open_1 = ko.observable(data.open_1);
+            self.close_1 = ko.observable(data.close_1);
+            self.open_2 = ko.observable(data.open_2);
+            self.close_2 = ko.observable(data.close_2);
+
+            self.times = ["00:00", "00:30", "1:00", "1:30", "2:00", "2:30", "3:00", "3:30", "4:00", "4:30", "5:00", "5:30", "6:00", "6:30", "7:00", "7:30", "8:00", "8:30", "9:00", "9:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30", "13:00", "13:30", "14:00", "14:30", "15:00", "15:30", "16:00", "16:30", "17:00", "17:30", "18:00", "18:30", "19:00", "19:30", "20:00", "20:30", "21:00", "21:30", "22:00", "22:30", "23:00"];
+
+
+            if(data.closed == false){
+                self.closed(data.closed);
+            }
+
+            self.toggleClosed = function(){
+                self.closed(!self.closed());
+            }
+            
+            self.buttonText = ko.computed(function(){
+                if(!self.closed()){
+                    return "Open";
+                } else {
+                    return "Closed";
+                }
+            });
+        }
+
         function Restaurant(data) {
             console.log("New Restaurant: " + data.name);
             var self = this;
@@ -21,6 +57,98 @@
             self.design = ko.observable(data.design === undefined ? null : new Design(data.design));
             self.id = data._id;
 
+            self.hours = ko.observableArray([]);
+
+            var hours_list = {
+                monday: {
+                    open_1: null,
+                    close_1: null,
+                    open_2: null,
+                    close_2: null,
+                },
+                tuesday: {
+                    open_1: null,
+                    close_1: null,
+                    open_2: null,
+                    close_2: null,
+                },
+                wednesday: {
+                    open_1: null,
+                    close_1: null,
+                    open_2: null,
+                    close_2: null,
+                },   
+                thusrday: {
+                    open_1: null,
+                    close_1: null,
+                    open_2: null,
+                    close_2: null,
+                },   
+                friday: {
+                    open_1: null,
+                    close_1: null,
+                    open_2: null,
+                    close_2: null,
+                },   
+                saturday: {
+                    open_1: null,
+                    close_1: null,
+                    open_2: null,
+                    close_2: null,
+                },    
+                sunday: {
+                    open_1: null,
+                    close_1: null,
+                    open_2: null,
+                    close_2: null,
+                },                                               
+            }
+
+            if(data.hours){
+                hours_list = data.hours;
+            }
+
+            self.available_hours = ko.observable(false);
+            if(_.find(_.pairs(hours_list), function(day){ return day[1].closed == false })){
+                self.available_hours(true);
+            }
+
+            _.each(_.pairs(hours_list), function(day){
+                var day = new Day(day[0],day[1]);
+                self.hours.push(day);
+            });
+
+            // hours: {
+            //     mon_1_open: "",
+            //     mon_1_close: "",
+            //     tue_1_open: "",
+            //     tue_1_close: "",
+            //     wed_1_open: "",
+            //     wed_1_close: "",
+            //     thu_1_open: "",
+            //     thu_1_close: "",
+            //     fri_1_open: "",
+            //     fri_1_close: "",
+            //     sat_1_open: "",
+            //     sat_1_close: "",
+            //     sun_1_open: "",
+            //     sun_1_close: "",
+
+            //     mon_2_open: "",
+            //     mon_2_close: "",
+            //     tue_2_open: "",
+            //     tue_2_close: "",
+            //     wed_2_open: "",
+            //     wed_2_close: "",
+            //     thu_2_open: "",
+            //     thu_2_close: "",
+            //     fri_2_open: "",
+            //     fri_2_close: "",
+            //     sat_2_open: "",
+            //     sat_2_close: "",
+            //     sun_2_open: "",
+            //     sun_2_close: "",
+            // },
 
             self.socialVisible = function(type){
                 

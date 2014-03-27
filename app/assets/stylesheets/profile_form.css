@@ -88,3 +88,8 @@
 .design_form_wrapper .form-group .btn {
 	margin-top: 10px;
 }
+
+.profile_form_wrapper select {
+    margin: auto;
+    display: block;
+}

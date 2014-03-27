@@ -1,27 +1,31 @@
 <div class="container">
-  
-    <!-- ko with: restaurant -->
-        <div class="col-xs-12 col-md-6">
-            <div data-bind="template: { name: 'restaurant_template', data: $parent.restaurant }"></div>
-        </div>
-    <!-- /ko -->    
 
-    <!-- ko with: user -->
-        <div class="col-xs-12 col-md-6">
-            <div data-bind="template: { name: 'user_template', data: $parent.user }"></div>
-        </div>
-    <!-- /ko -->  
+    <div>
+        <ul class="nav nav-pills" data-bind="foreach: $__page__.children">
+            <li data-bind="css: {active: isVisible}"><a data-bind="text: $data.val('title'), page-href: $data"></a></li>
+        </ul>
+    </div>
 
-    <!-- ko with: restaurant -->
-        <div class="col-xs-12 col-md-6">
-            <div data-bind="template: { name: 'socialmedia_template', data: $parent.restaurant }"></div>
-        </div>
-    <!-- /ko -->       
+    <div data-bind="page: {id: 'start', title: 'Restaurant Profile', with: restaurant}" class="pages">
+        <div data-bind="template: { name: 'restaurant_template', data: $parent.restaurant }"></div>
+    </div>
+   
+    <div data-bind="page: {id: 'user', title: 'User Profile', with: user}" class="pages">
+        <div data-bind="template: { name: 'user_template', data: $parent.user }"></div>
+    </div>
 
+    <div data-bind="page: {id: 'social_media', title: 'Restaurant Social Media Links', with: restaurant}" class="pages">
+        <div data-bind="template: { name: 'socialmedia_template', data: $parent.restaurant }"></div>
+    </div>
+
+    <div data-bind="page: {id: 'hours', title: 'Restaurant Hours', with: restaurant}" class="pages">
+        <div data-bind="template: { name: 'hours_template', data: $parent.restaurant }"></div>
+    </div>
 
     <%= render 'shared/restaurant_template' %>
     <%= render 'shared/socialmedia_template' %>
     <%= render 'shared/user_template' %>
+    <%= render 'shared/hours_template' %>
     <%= render 'shared/restaurant_javascript' %>
 
     <script type='text/javascript'>//<![CDATA[ 
@@ -58,12 +62,27 @@
             if(resto_data){
                 self.restaurant = ko.observable(new Restaurant(resto_data));
             }
-            self.user = ko.observable(new User(user_data))     
+            self.user = ko.observable(new User(user_data))
+
+            // self.times = [];
+            // var time = ko.observable(new Date('1/1/2010 00:00:00'));
+          
+            // while(time().getHours() != 23){
+            //    time = ko.observable(new Date(time().getTime() + (30 * 60 * 1000)));
+            //    if
+            //    self.times.push(time);
+            // }
+
+
         };
 
-        var viewmodel = new viewModel();
-        ko.applyBindings(viewmodel);
-
+        $(function(){   
+            var viewmodel = new viewModel();            
+            pager.Href.hash = '#!/';
+            pager.extendWithPage(viewmodel);
+            ko.applyBindings(viewmodel);                    
+            pager.start();        
+        });
 
     //]]>  
     </script>    

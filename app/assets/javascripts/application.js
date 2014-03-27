@@ -12,7 +12,7 @@
 //
 // = require jquery
 // = require jquery_ujs
-// = require knockout-latest.js
+// = require knockout-3.1.0.js
 // = require underscore
 // = require underscore-ko-1.2.2.min.js
 // = require jquery.iframe-transport.js
@@ -21,5 +21,7 @@
 // = require bootbox.min.js
 // = require spin.min.js
 // = require bootstrap.min.js
+// = require pager.js
+
 
 

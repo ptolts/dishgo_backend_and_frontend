@@ -253,6 +253,11 @@ class AdministrationController < ApplicationController
     restaurant.city = settings["city"]
     restaurant.postal_code = settings["postal_code"]
 
+    restaurant.hours = settings["hours"].inject({}) do |res,day|
+      res[day["name"]] = day
+      next res
+    end
+
     if settings["design"] and !settings["design"]["id"].blank?
       design = Design.find(settings["design"]["id"])
       restaurant.design = design
