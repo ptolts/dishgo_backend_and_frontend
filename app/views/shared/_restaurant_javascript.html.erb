@@ -118,6 +118,44 @@
                 self.hours.push(day);
             });
 
+            var convert_day = {
+                0:6,
+                1:0,
+                2:1,
+                3:2,
+                4:3,
+                5:4,
+                6:5,
+            }
+
+            self.areWeOpened = ko.computed(function(){
+                var d = convert_day[(new Date()).getDay()];
+                var current_day = self.hours()[d];
+                if(current_day.closed()){
+                    return false;
+                }
+                var start = current_day.open_1();
+                start = start.split(":");
+                start = new Date(2012,6,start[0],start[1]).getTime();
+                console.log(start);                
+                var now = new Date(2012,6,new Date().getHours(),new Date().getMinutes()).getTime();
+                var end = current_day.close_1();
+                end = end.split(":");
+                end = new Date(2012,6,end[0],end[1]).getTime();
+                console.log(end);
+
+                if( (start < now ) && (now < end )) {
+                    return true;
+                    console.log("opened");
+                }
+                else {
+                    return false;
+                    console.log("closed");
+                }                
+            });
+
+            self.areWeOpenedText = ko.computed(function(){ return self.areWeOpened() ? 'opened' : 'closed'});        
+
             // hours: {
             //     mon_1_open: "",
             //     mon_1_close: "",

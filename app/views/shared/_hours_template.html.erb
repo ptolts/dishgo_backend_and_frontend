@@ -22,7 +22,7 @@
         <form class="form-horizontal" role="form" id="business-hours-form">
           <!-- ko foreach: hours -->
             <div class="row">
-              <label class="col-xs-3 control-label"><i class="fa fa-clocl"></i> <!-- ko text: name --><!-- /ko --></label>
+              <label class="col-xs-3 control-label"><i class="glyphicon glyphicon-time"></i> <!-- ko text: name --><!-- /ko --></label>
 
               <div class="col-xs-3 text-center">
                 <button class="btn" data-bind="css:{ 'btn-success':!closed(), 'btn-danger': closed }, click: toggleClosed, text: buttonText"></button>
@@ -48,7 +48,7 @@
 
         <div class="row">
           <div class="col-xs-12">
-            <button class="btn btn-primary pull-right col-md-2" data-bind="click: function(){ console.log(ko.toJSON($data)); save(); }">Save</div>
+            <button class="btn btn-primary pull-right col-md-2" data-bind="click: save">Save</div>
           </div>
         </div>
   </div>

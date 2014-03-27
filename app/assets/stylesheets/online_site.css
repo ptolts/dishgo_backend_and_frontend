@@ -33,6 +33,12 @@
 	margin: auto;
 }
 
+.hours {
+  position: absolute;
+  right: 15px;
+  bottom: 15px;
+}
+
 /* Float Shadow */
 
 .float-shadow {

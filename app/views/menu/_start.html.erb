@@ -1,4 +1,37 @@
 <!-- ko with: restaurant -->
-<h3>Welcome to <!-- ko text: name --><!-- /ko --></h3>
+<h3><!-- ko text: name --><!-- /ko --> is currently <span class="label" data-bind="css:{'label-success':areWeOpened(),'label-danger':!areWeOpened()}, text: areWeOpenedText"></span>.</h3>
 <p>Lara ipsum bla di rae fala isipnum. Lara ipsum bla di rae fala isipnum. Lara ipsum bla di rae fala isipnum. Lara ipsum bla di rae fala isipnum.<p>
+	<div class="col-md-6 hours">
+		<div class="row">
+			<div class="col-xs-3 col-xs-offset-6">
+				<p>Opens</p>
+			</div>
+
+			<div class="col-xs-3">
+				<p>Closes</p>
+			</div>
+		</div>
+		<div class="row" data-bind="foreach: hours">
+			<div class="row">
+				<p class="col-xs-6"><i class="glyphicon glyphicon-time"></i> <!-- ko text: name --><!-- /ko --></p>
+
+				<div data-bind="visible: !closed()">
+					<div class="col-xs-3">
+						<p data-bind="text: open_1"></p>
+					</div>
+
+					<div class="col-xs-3">
+						<p data-bind="text: close_1"></p>
+					</div>
+				</div>
+
+				<div data-bind="visible: closed()">
+					<div class="col-xs-6">
+						<span class="label label-danger">Closed</span>
+					</div>
+				</div>				
+
+			</div>
+		</div>
+	</div>
 <!-- /ko -->
