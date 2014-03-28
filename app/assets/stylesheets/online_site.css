@@ -3,6 +3,7 @@
 *= require font-awesome
 *= require menu_base
 *= require layout_base
+*= require hours
 *= require_self
 */
 
@@ -31,12 +32,6 @@
 
 .image_roll img{
 	margin: auto;
-}
-
-.hours {
-  position: absolute;
-  right: 15px;
-  bottom: 15px;
 }
 
 /* Float Shadow */

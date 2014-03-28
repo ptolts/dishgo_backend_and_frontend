@@ -109,11 +109,14 @@
             }
 
             self.available_hours = ko.observable(false);
-            if(_.find(_.pairs(hours_list), function(day){ return day[1].closed == false })){
-                self.available_hours(true);
-            }
+            // if(_.find(_.pairs(hours_list), function(day){ return day[1].closed == false })){
+            //     self.available_hours(true);
+            // }
 
             _.each(_.pairs(hours_list), function(day){
+                if(day[1].closed == false) {
+                    self.available_hours(true);
+                }
                 var day = new Day(day[0],day[1]);
                 self.hours.push(day);
             });
@@ -131,7 +134,7 @@
             self.areWeOpened = ko.computed(function(){
                 var d = convert_day[(new Date()).getDay()];
                 var current_day = self.hours()[d];
-                if(current_day.closed()){
+                if(current_day.closed() || current_day.open_1() === undefined){
                     return false;
                 }
                 var start = current_day.open_1();
