@@ -25,6 +25,7 @@ class DesignController < ApplicationController
     end
     design.css = data["css"]
     design.menu_css = data["menu_css"]
+    design.fonts = data["fonts"]
     design.name = data["name"]
 
     # design.images = data["images"].inject({}){|res,x|
@@ -37,6 +38,7 @@ class DesignController < ApplicationController
       g = GlobalImage.where(id:gi["id"]).first
       next unless g
       g.name = gi["name"]
+      g.css = gi["css"]
       g.customizable = gi["customizable"]
       g.carousel = gi["carousel"]
       if !gi["carousel"] and gi["global_images"].size == 0

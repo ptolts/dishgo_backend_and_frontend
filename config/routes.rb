@@ -53,6 +53,7 @@ Foodcloud::Application.routes.draw do
       get 'edit_menu'      
       get 'users'    
       get 'search_restaurants'
+      get 'restaurant_setup'
       get 'search_users'
       post 'update_user'  
       post 'update_restaurant'  

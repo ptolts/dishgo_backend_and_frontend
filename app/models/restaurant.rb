@@ -21,7 +21,10 @@ class Restaurant
   field :facebook, type: String
   field :foursquare, type: String
   field :twitter, type: String
+  field :urbanspoon, type: String
   field :instagram, type: String
+
+  field :category, type: Array
 
   field :welcome_text, localize: true
   field :hours, type: Hash 

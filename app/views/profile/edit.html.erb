@@ -59,8 +59,9 @@
 
         function viewModel() {
             var self = this;
+            self.restaurant = ko.observable();
             if(resto_data){
-                self.restaurant = ko.observable(new Restaurant(resto_data));
+                self.restaurant(new Restaurant(resto_data));
             }
             self.user = ko.observable(new User(user_data))
 

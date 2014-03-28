@@ -9,6 +9,12 @@ class ApplicationController < ActionController::Base
   def after_sign_out_path_for(resource_or_scope)
     "/app/users/sign_in"
   end  
+
+  def admin_or_user_with_resto!
+    if !current_user.is_admin and !current_user.owns_restaurants
+      redirect_to :controller => 'administration', :action => 'restaurant_setup'
+    end
+  end
   
   def authenticate_user_from_token!
     user_email = params[:email].presence

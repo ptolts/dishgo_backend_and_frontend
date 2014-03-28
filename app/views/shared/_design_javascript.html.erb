@@ -8,11 +8,11 @@
 
         function Design(data) {
             var self = this;
-            self.id = ko.observable(data._id ? data._id : "")
+            self.id = ko.observable(data._id ? data._id : "");
             self.name = ko.observable(data.name ? data.name : "New Design");
-            self.css = ko.observable(data.css ? data.css : "")
-            self.menu_css = ko.observable(data.menu_css ? data.menu_css : "")
-
+            self.css = ko.observable(data.css ? data.css : "");
+            self.menu_css = ko.observable(data.menu_css ? data.menu_css : "");
+            self.fonts = ko.observable(data.fonts ? data.fonts : "");
             self.global_images = ko.observableArray([]);
             self.carousel = ko.observableArray([]);
 
@@ -92,6 +92,7 @@
 	    self.progressValue = ko.observable(1);
 	    self.id = ko.observable("");
 	    self.name = ko.observable(data.name || "");
+	    self.css = ko.observable(data.css || "");
 	    self.description = ko.observable("");
 	    self.url = ko.observable("/loader.gif");
 	    self.custom = ko.observable(false);

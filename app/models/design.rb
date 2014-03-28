@@ -5,6 +5,7 @@ class Design
 
   field :css, type: String
   field :menu_css, type: String
+  field :fonts, type: String
   field :name, type: String
   field :images, type: Hash
   field :carousel, type: Boolean

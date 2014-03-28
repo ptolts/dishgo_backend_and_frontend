@@ -1,16 +1,32 @@
 <script id="design_image" type="text/html">
     <div class="col-xs-12 push_down">
-        <div class="col-xs-12 form">
-            <div class="form-group">
-                <label>Name: </label><input class="form-control" data-bind="value: name" />
-            </div>
-            <div class="form-group">
-                <label>Customizable: </label><input type="checkbox" data-bind="checked: customizable" />
-            </div>
-            <div class="form-group">
-                <label>Description: </label><input class="form-control" data-bind="value: description" />
+
+        <div class="col-md-6 form">
+            <div class="row">
+                <div class="col-xs-12">
+                    <h4>Image Properties:</h4>
+                    <div class="form-group">
+                        <label>Name: </label><input class="form-control" data-bind="value: name" />
+                    </div>
+                    <div class="form-group">
+                        <label>Customizable: </label><input type="checkbox" data-bind="checked: customizable" />
+                    </div>
+                    <div class="form-group">
+                        <label>Description: </label><input class="form-control" data-bind="value: description" />
+                    </div>
+                </div>
             </div>
         </div> 
+
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-xs-12">
+                    <h4>CSS With Image:</h4>
+                    <textarea rows="10" data-bind="value: css, codemirror: { lineNumbers: true, matchBrackets: true, mode: 'text/css', theme:'lesser-dark', value:css }" placeholder="Image Specific CSS." style="width: 100%"></textarea>
+                </div>
+            </div>  
+        </div> 
+
         <!-- ko foreach: global_images -->
             <div class="col-md-4 col-xs-12">
                 <div class="thumbnail col-xs-12">
@@ -49,6 +65,7 @@
             </div>               
         <!-- /ko --> 
     </div>
+    <hr class="col-xs-12">
 </script> 
 
 <script id="carousel_image" type="text/html">
@@ -104,11 +121,15 @@
             <textarea rows="50" data-bind="value: css, codemirror: { lineNumbers: true, matchBrackets: true, mode: 'text/css', theme:'lesser-dark', value:css }" placeholder="Design Specific CSS." style="width: 100%"></textarea>
         </div>
 
-
         <div class="row">
             <h4>Menu CSS:</h4>
             <textarea rows="50" data-bind="value: menu_css, codemirror: { lineNumbers: true, matchBrackets: true, mode: 'text/css', theme:'lesser-dark', value:menu_css }" placeholder="Menu Specific CSS." style="width: 100%"></textarea>
         </div>
+
+        <div class="row">
+            <h4>Fonts:</h4>
+            <textarea rows="50" data-bind="value: fonts, codemirror: { lineNumbers: true, matchBrackets: true, mode: 'text/css', theme:'lesser-dark', value:fonts }" placeholder="Menu Specific Fonts." style="width: 100%"></textarea>
+        </div>        
 
         <div class="row">
             <h4>Static Images</h4>

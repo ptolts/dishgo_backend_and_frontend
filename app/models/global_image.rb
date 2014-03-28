@@ -9,6 +9,7 @@ class GlobalImage
   field :name, type: String
 
   field :img_url_original, type: String 
+  field :css, type: String 
   field :customizable, type: Boolean
   field :carousel, type: Boolean
   field :custom, type: Boolean

@@ -1,6 +1,7 @@
 class AdministrationController < ApplicationController
   before_filter :authenticate_user!
-  before_filter :admin_user!, :only => [:users, :restaurants, :search_restaurants, :update_user, :add_user, :user_destroy]
+  before_filter :admin_or_user_with_resto!, :except => [:restaurant_setup, :search_restaurants]
+  before_filter :admin_user!, :only => [:users, :restaurants, :update_user, :add_user, :user_destroy]
   before_filter :admin_or_owner!, :only => [:edit_menu, :update_menu, :crop_image, :crop_icon, :publish_menu, :reset_draft_menu, :update_restaurant]
   layout 'administration'
   after_filter :set_access_control_headers
@@ -14,6 +15,10 @@ class AdministrationController < ApplicationController
 
   end
 
+  def restaurant_setup
+    render 'restaurant_setup'
+  end
+
   def restaurants
     @designs = Design.all.as_json
   	render 'restaurants'
@@ -24,7 +29,13 @@ class AdministrationController < ApplicationController
   end  
 
   def search_restaurants
-  	result = Restaurant.where(:name => /#{params[:restaurant_name]}/i).limit(25)
+    if params[:lat].to_s != "0"
+      result = Restaurant.where(:locs => { "$near" => { "$geometry" => { "type" => "Point", :coordinates => [params[:lon].to_f,params[:lat].to_f] }, "$maxDistance" => 25000}})
+    else
+      result = Restaurant.where(:name => /#{params[:restaurant_name]}/i).limit(25)
+      Rails.logger.warn result.to_json
+      Rails.logger.warn "result.to_json"
+    end
   	render :json => result.as_json(:include => :design)
   end
 
