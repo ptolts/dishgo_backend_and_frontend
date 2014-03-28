@@ -1,6 +1,6 @@
-class MenuController < ApplicationController
+class OnlinesiteController < ApplicationController
   after_filter :phantom
-  layout 'menu'
+  layout 'online_site'
   
   def index
     resto_name = request.subdomain.split(".").first

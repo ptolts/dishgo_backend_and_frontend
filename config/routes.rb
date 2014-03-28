@@ -7,17 +7,17 @@ Foodcloud::Application.routes.draw do
   end
 
   constraints(Subdomain) do
-    get '/' => 'menu#index'
+    get '/' => 'onlinesite#index'
   end
 
   root :to => 'administration#index'
 
   resources :token_authentications, :only => [:create, :destroy]
 
-  resources :menu do
+  resources :onlinesite do
     collection do
       get 'index'
-      get 'preview/:id', to: "menu#preview"
+      get 'preview/:id', to: "onlinesite#preview"
     end
   end
 

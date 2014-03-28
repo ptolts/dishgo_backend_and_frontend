@@ -129,7 +129,7 @@
 
 		if ("geolocation" in navigator) {
             self.searching(true);            
-			navigator.geolocation.getCurrentPosition(success_handler, error_handler);
+			navigator.geolocation.getCurrentPosition(success_handler, error_handler, {maximumAge: 10000, enableHighAccuracy: true, timeout: 30000});
 		}
 		else {
 

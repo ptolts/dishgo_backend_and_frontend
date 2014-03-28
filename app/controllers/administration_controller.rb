@@ -121,7 +121,7 @@ class AdministrationController < ApplicationController
     restaurant.draft_menu = menu
     restaurant.save
     # render :json => ("{ \"menu\" : #{restaurant.draft_menu_to_json} }")
-    render :json => ("{ \"preview_token\" : \"/app/menu/preview/#{restaurant.preview_token}\" }")
+    render :json => ("{ \"preview_token\" : \"/app/onlinesite/preview/#{restaurant.preview_token}\" }")
 
   end
 
