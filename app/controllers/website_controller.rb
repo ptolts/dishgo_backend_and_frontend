@@ -5,6 +5,9 @@ class WebsiteController < ApplicationController
 	layout 'administration'
 
 	def index
+		unless current_user.owns_restaurants.design
+			current_user.owns_restaurants.design = Design.first
+		end
 		@designs = all_designs
 		render 'website'
 	end
