@@ -1,5 +1,30 @@
+.open_status {
+	position: absolute;
+	right: 15px;
+	top: 15px;
+}
 .hours {
   position: absolute;
   right: 15px;
   bottom: 15px;
+  width: 50%
+}
+.hours h4 {
+	margin-bottom: 5px;
+}
+.hours .day_padding {
+	padding-left: 20px;
+}
+.hours .label {
+	padding: .3em .6em .3em;
+	letter-spacing: .5px;
+}
+/*extra small screens */
+@media (max-width: 560px){
+	.hours {
+		width: 100%
+	}
+	.hours .day_padding {
+	padding-left: 40px;
+	}
 }

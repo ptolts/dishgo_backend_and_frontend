@@ -40,7 +40,7 @@ body {
 	background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAGCAYAAADgzO9IAAAAHUlEQVQIW2NkYGD4D8SM6DRIAAQwJDFUwhRRUQcALRkSBISGlPAAAAAASUVORK5CYII=") repeat top left;
 	content: "";
 	display: block;
-	position: absolute;
+	position: fixed;
 	top: 0;
 	bottom: 0;
 	z-index: -5;

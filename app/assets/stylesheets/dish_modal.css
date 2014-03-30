@@ -1,0 +1,37 @@
+.modal .each-dish {
+	text-align: none;
+}
+.modal-dialog .modal-title {
+	font-size: 24px;
+	padding-top: 10px;
+}
+.modal-dialog .dish-price {
+	padding-top: 0px;
+	font-size: 24px;
+	color: #cf2f28;
+	padding-top: 10px;
+}
+.modal-dialog .close {
+	color: #000;
+	opacity: .4;
+	filter:alpha(opacity=40)
+}
+.modal-dialog .dish-description p{
+	margin-top: 20px;
+	font-size: 18px;
+	font-weight: 300;
+}
+.modal .btn-default {
+color: #333333;
+background-color: #ffffff;
+border-color: #cccccc;
+}
+.modal .btn-default:hover,
+.modal .btn-default:focus,
+.modal .btn-default:active,
+.modal .btn-default.active,
+.modal .open .dropdown-toggle.btn-default {
+  color: #333333;
+  background-color: #ebebeb;
+  border-color: #adadad;
+}

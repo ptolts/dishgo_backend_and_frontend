@@ -27,33 +27,43 @@ h4, h5, h6, .h4, .h5, .h6{
   top: 65px;
 }
 
-.menu_style_selector .glyphicon{
-  font-size: 28px;
+.menu_style_selector .fa{
+  font-size: 18px;
 }
-
-.each_dish {
+.menu_style_selector .btn-default {
+  padding: 3px 6px;
+}
+.menu_style_selector .btn-default:hover, .btn-default:focus, .btn-default:active, .btn-default.active, .open .dropdown-toggle.btn-default {
+color: #333;
+background-color: #adadad;
+border-color: #6D6D6D;
+}
+.menu_container .each_dish {
 	text-align: center;
+  padding-top: 40px;
+  position: relative;
 }
-.section_title {
+.menu_container .section_title {
 	text-transform: uppercase;
 	margin-bottom: 25px;
 	color: #000000;
 }
-.dish_title {
+.menu_container .dish_title {
 	color: #000000;
 }
-.dish_description {
+.menu_container .dish_description {
 	color: #5B5B5B;
 	font-style: italic;
 	margin-bottom: 0px;
 }
-.dish_price {
+.menu_container .dish_price {
 	margin-bottom: 25px;
 }
-.dish_price i {
+.menu_container .dish_price i {
 	display: block;
+  color: #000000;
 }
-.dishgo_icon {
+.menu_container .dishgo_icon {
     width: 20px;
 
 }
@@ -67,18 +77,23 @@ h2 {
 p {
 	margin-bottom: 0px;
 }
-.menu_header {
+.menu_container .menu_header {
 	position: absolute;
 }
-.resto_logo {
+.menu_container .resto_logo {
 	position: relative;
 }
-.resto_logo img {
+.menu_container .resto_logo img {
     margin: 0 auto;
     padding: 20px;
     display: block;
+    min-height: 120px;
 }
-.bottom_logo {
+.menu_container .section_img_header {
+  max-height: 25px;
+  margin-top: 10px;
+}
+.menu_container .bottom_logo {
 	margin-top: 20px;
 	margin-bottom: 10px;
 }
@@ -90,75 +105,74 @@ p {
 	box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.75);
 	margin-bottom: 20px;
 	padding-bottom: 20px;
-	z-index: 99999;
+	z-index: 5000;
 }
-.each_dish {
-	padding-top: 40px;
-	position: relative;
-}
-.btn {
+.menu_container .btn-dish {
 	padding-top: 2px;
 	padding-left: 2px;
 	padding-right: 2px;
 	padding-bottom: 2px;
 }
-.btn-dish {
+.menu_container .btn-dish {
   color: #fff;
   background: #cf2f28;
 }
-.btn-dish:hover, .btn-dish:focus, .btn-dish:active, .btn-dish.active, .open .dropdown-toggle.btn-dish{
+.menu_container .btn-dish:hover, .btn-dish:focus, .btn-dish:active, .btn-dish.active, .open .dropdown-toggle.btn-dish{
   opacity: 0.80;
   color: #fff;
 }
 @media (min-width: 560px) {
-  .each_dish {
+  .menu_container .each_dish {
   	padding-top: 90px;
   }
-  .resto_logo {
+  .menu_container .resto_logo {
   	padding-top: 25px;
   }
 }
 @media (min-width: 768px) {
-  .dark_header {
+  .menu_container .dark_header {
     width: 750px;
   }
-  .each_dish {
+  .menu_container .each_dish {
   	padding-top: 80px;
   }
-  .resto_logo {
+  .menu_container .resto_logo {
   	padding-top: 40px;
   }
   .container {
-  	margin-top: 40px;
+  	margin-top: 60px;
+  }
+  .menu_style_selector .btn-default {
+    padding: 6px 12px;
+  }
+  .menu_style_selector .fa{
+  font-size: 24px;
   }
 }
 
 @media (min-width: 992px) {
-  .dark_header {
+  .menu_container .dark_header {
     width: 970px;
   }
-  .each_dish {
+  .menu_container .each_dish {
   	padding-top: 140px;
   }
-  .resto_logo {
+  .menu_container .resto_logo {
   	padding-top: 60px;
-  }
-  .container {
-  	margin-top: 40px;
   }
 }
 
 @media (min-width: 1200px) {
-  .dark_header {
+  .menu_container .dark_header {
     width: 1170px;
   }
-  .each_dish {
+  .menu_container .each_dish {
   	padding-top: 205px;
   }
-  .resto_logo {
+  .menu_container .resto_logo {
   	padding-top: 60px;
   }
   .container {
-  	margin-top: 40px;
+  	margin-top: 65px;
   }
 }
