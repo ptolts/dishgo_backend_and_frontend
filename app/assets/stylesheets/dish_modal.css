@@ -16,8 +16,10 @@
 	color: #000;
 }
 
-.custom_modal {
-	overflow: initial;
+@media (max-width: 600px) {
+	.custom_modal {
+		width: 100%;
+	}
 }
 
 .custom_modal-dialog {
