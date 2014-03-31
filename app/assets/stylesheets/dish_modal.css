@@ -1,6 +1,17 @@
-.modal-dialog {
-	height: 100%;
+.modal {
+	overflow: initial;
+	overflow-y: scroll;
 }
+
+.modal-dialog {
+	min-height: 100%;
+	overflow: visible;
+}
+
+.modal-content {
+	min-height: 100%;
+}
+
 
 .modal .each-dish {
 	text-align: none;

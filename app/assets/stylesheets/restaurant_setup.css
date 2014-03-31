@@ -19,10 +19,13 @@
     padding-right: 10px;
     padding-top: 5px;
     padding-bottom: 5px;
-    margin-bottom: 5px;
     -webkit-transition: all 0.4s ease-in-out;
     -moz-transition: all 0.4s ease-in-out;
     -o-transition: all 0.4s ease-in-out;    
+}
+
+.restaurant_list li :not(:last-child) {
+    margin-bottom: 5px;
 }
 
 .restaurant_list li:hover {
