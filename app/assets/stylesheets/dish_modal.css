@@ -1,50 +1,67 @@
-.modal {
+.custom_modal {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	-webkit-transform:	translate(-50%, -50%);
+	-moz-transform:		translate(-50%, -50%);
+	-ms-transform:		translate(-50%, -50%);
+	-o-transform:		translate(-50%, -50%);  
+	transform:			translate(-50%, -50%);
+	width: 600px;
+	background-color: #fff;
+	border-radius: 5px;
+	z-index: 999999;
+	border: 1px solid #000;
+	padding: 15px;
+	color: #000;
+}
+
+.custom_modal {
 	overflow: initial;
 }
 
-.modal-dialog {
+.custom_modal-dialog {
 	min-height: 100%;
 	overflow: visible;
 }
 
-.modal-content {
+.custom_modal-content {
 	min-height: 100%;
 }
 
-
-.modal .each-dish {
+.custom_modal .each-dish {
 	text-align: none;
 }
-.modal-dialog .modal-title {
+.custom_modal-dialog .custom_modal-title {
 	font-size: 24px;
 	padding-top: 10px;
 }
-.modal-dialog .dish-price {
+.custom_modal-dialog .dish-price {
 	padding-top: 0px;
 	font-size: 24px;
 	color: #cf2f28;
 	padding-top: 10px;
 }
-.modal-dialog .close {
+.custom_modal-dialog .close {
 	color: #000;
 	opacity: .4;
 	filter:alpha(opacity=40)
 }
-.modal-dialog .dish-description p{
+.custom_modal-dialog .dish-description p{
 	margin-top: 20px;
 	font-size: 18px;
 	font-weight: 300;
 }
-.modal .btn-default {
+.custom_modal .btn-default {
 color: #333333;
 background-color: #ffffff;
 border-color: #cccccc;
 }
-.modal .btn-default:hover,
-.modal .btn-default:focus,
-.modal .btn-default:active,
-.modal .btn-default.active,
-.modal .open .dropdown-toggle.btn-default {
+.custom_modal .btn-default:hover,
+.custom_modal .btn-default:focus,
+.custom_modal .btn-default:active,
+.custom_modal .btn-default.active,
+.custom_modal .open .dropdown-toggle.btn-default {
   color: #333333;
   background-color: #ebebeb;
   border-color: #adadad;

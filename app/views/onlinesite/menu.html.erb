@@ -81,16 +81,16 @@
 						                        </div>
 						                    </div>
 
-					                        <!-- dish modal -->
-											<div data-bind="page: {id: $data.id(), showElement: showModal, hideElement: hideModal}" class="modal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="false">
-											    <!-- MODAL -->
-										    	<div class="modal-dialog">
-										    		<div class="modal-content">
-										    			<div class="modal-header">
-										    				<a class="close" data-bind="page-href: '../'" aria-hidden="true">&times;</a>
+					                        <!-- garbage dish modal -->
+											<div data-bind="page: {id: $data.id()}" class="custom_modal">
+											    <!-- custom_modal -->
+										    	<div class="custom_modal-dialog">
+										    		<div class="custom_modal-content">
+										    			<div class="custom_modal-header">
+										    				<a class="close" data-bind="page-href: '../'">&times;</a>
 										    				<div class="row">
 										    					<div class="col-sm-9 col-xs-8">
-										    						<h4 class="modal-title text-left" id="myModalLabel" data-bind="lText: name">Mac &amp Cheese</h4>
+										    						<h4 class="custom_modal-title text-left" data-bind="lText: name">Mac &amp Cheese</h4>
 										    					</div>
 										    					<div class="col-xs-2">
 										    						<div class="dish-price">
@@ -99,7 +99,7 @@
 										    					</div>
 										    				</div>
 										    			</div>
-										    			<div class="modal-body">
+										    			<div class="custom_modal-body">
 										    				<div class="row" id="body-section">
 
 										    					<div class="col-xs-12">
@@ -119,7 +119,7 @@
 										    						<div data-bind="visible: sizes, with: sizes_object" class="demo_options">
 										    							<strong><h4 style="text-decoration: underline;">Sizes</h4></strong>
 										    							<div data-bind="foreach: individual_options">
-										    								<label class="btn btn-section float_option_size" data-bind="css: {'active': $parents[1].sizeSelectedOptionValue() === $data}"><input name="sizes_radio" type="radio" data-bind="checkedValue: $data, checked: $parents[1].sizeSelectedOptionValue" style="opacity: 0; width: 0px"/><!-- ko lText: name --><!-- /ko --></label>                                               
+										    								<button class="btn btn-section float_option_size" data-bind="css: {'active': $parents[1].sizeSelectedOptionValue() === $data}"><input name="sizes_radio" type="radio" data-bind="checkedValue: $data, checked: $parents[1].sizeSelectedOptionValue" style="opacity: 0; width: 0px"/><!-- ko lText: name --><!-- /ko --></button>                                               
 										    							</div>
 										    						</div>
 										    					</div>
@@ -128,7 +128,7 @@
 											    						<div class="demo_options">
 											    							<strong><h4 style="text-decoration: underline;" data-bind="lText: name">Toppings</h4></strong>
 											    							<div data-bind="foreach: individual_options">
-											    								<label class="btn btn-dish float_option" data-bind="css: {'active': $parent.selectedOptionValue().indexOf($data) >= 0}">
+											    								<button class="btn btn-dish float_option" data-bind="css: {'active': $parent.selectedOptionValue().indexOf($data) >= 0}">
 											    									<input name="sizes_radio" type="checkbox" data-bind="checkedValue: $data, checked: $parent.selectedOptionValue" style="opacity: 0; width: 0px">
 											    									<!-- ko lText: name -->
 
@@ -136,20 +136,20 @@
 											    									<!-- ko if: $data.icon -->
 											    										<img class="col-xs-12 thumbnail" data-bind="attr: {src: icon().url()}"/>
 											    									<!-- /ko -->
-											    								</label>                        
+											    								</button>                        
 											    							</div>
 											    						</div>
 											    					<!-- /ko -->
 										    					</div>
 										    				</div>
 										    			</div>
-										    			<div class="modal-footer">
+										    			<div class="custom_modal-footer">
 										    				<a class="btn btn-default" data-bind="page-href: '../'">Close</a>
 										    			</div>
 										    		</div>
 										    	</div>
 											</div>
-					                        <!-- dish modal -->
+					                        <!-- dish custom_modal -->
 				                      	</div>
 				                        <img data-bind="attr:{src:$root.design.imgs.simple_divider_bottom}" class="section_img_divider center-block">
 				                    </div>
