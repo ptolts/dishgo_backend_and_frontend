@@ -14,7 +14,7 @@
   pointer-events:none;
 }
 
-#content_wrapper {
+.content_wrapper {
   pointer-events:all;
 }
 
