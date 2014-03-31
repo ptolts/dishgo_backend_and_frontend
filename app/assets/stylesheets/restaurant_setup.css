@@ -24,7 +24,7 @@
     -o-transition: all 0.4s ease-in-out;    
 }
 
-.restaurant_list li :not(:last-child) {
+.restaurant_list li:not(:last-child) {
     margin-bottom: 5px;
 }
 
