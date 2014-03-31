@@ -38,12 +38,16 @@ Foodcloud::Application.routes.draw do
   resources :design do
     collection do
       get 'list'
+      get 'fonts'
       post 'create'
       post 'update'
       post 'destroy'
       post 'destroy_image'
       post 'upload_image'
       post 'create_image'
+      post 'create_font'
+      post 'destroy_font'
+      post 'update_font'
     end
   end  
 

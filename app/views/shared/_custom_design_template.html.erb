@@ -120,6 +120,21 @@
         <div data-bind="template: { name: 'custom_carousel_image', foreach: carousel}"></div>
     </div>
 
+
+    <div class="row">
+        <h4>Fonts</h4>
+        <div class="col-md-4">
+            <select class="form-control" data-bind="
+                                options: $root.fonts, 
+                                optionsText: 'name',
+                                value: $root.current_font,
+                                "></select>  
+        </div>
+        <div class="col-md-8">
+            <iframe class="font_demo" data-bind="iFrame: $root.current_font"></iframe>
+        </div>
+    </div>    
+
     <div class="row">
         <button class="btn btn-primary pull-right" data-bind="click: $root.submitDesign">Set Design</button>
     </div>

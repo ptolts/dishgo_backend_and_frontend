@@ -82,6 +82,16 @@ class OnlinesiteController < ApplicationController
       @design_menu_css = Design.first.menu_css
     end
 
+    if restaurant.font
+      font = restaurant.font
+      @font_css = restaurant.font.css
+      @font_link_data = restaurant.font.link      
+    else
+      font = Font.first
+      @font_css = Font.first.css
+      @font_link_data = Font.first.link
+    end
+
     if carousel = restaurant.global_images.find_all{|e| e.carousel} and carousel.size > 0
       @carousel = carousel.collect{|e| e.img_url_original}
     else

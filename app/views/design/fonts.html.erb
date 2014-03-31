@@ -5,27 +5,27 @@
 
     <p class="col-xs-12">
         <select class="form-control" data-bind="
-                            options: designs, 
+                            options: fonts, 
                             optionsText: 'name',
-                            value: selectedDesign,
+                            value: selectedFont,
 
                             "></select>  
     </p>
 
     <p class="col-xs-12">
-        <button class="btn btn-primary" data-bind="click: createDesign">Create Design</button>
+        <button class="btn btn-primary" data-bind="click: createFont">Create Font</button>
     </p>    
 
-    <!-- ko with: selectedDesign -->
-      <div data-bind="template: { name: 'create_design_template', data: $root.selectedDesign}"></div>
+    <!-- ko with: selectedFont -->
+      <div data-bind="template: { name: 'create_font_template', data: $root.selectedFont}"></div>
     <!-- /ko -->
 
-    <%= render 'shared/design_template' %>
-    <%= render 'shared/design_javascript' %>
+    <%= render 'shared/font_template' %>
+    <%= render 'shared/font_javascript' %>
 
     <script type='text/javascript'>//<![CDATA[   
 
-        var design_data = <%= raw(@designs.to_json) %>;
+        var font_data = <%= raw(@fonts.to_json) %>;
 
         ko.bindingHandlers.codemirror = {
             init: function(element, valueAccessor, allBindingsAccessor, viewModel) {
@@ -48,45 +48,41 @@
                     wrapperElement.remove();
                 });
             }
-        };    
+        };        
 
         function viewModel() {
             var self = this;
-            self.designs = ko.observableArray([]);
-            self.selectedDesign = ko.observable();            
-            self.designs($.map(design_data, function(item) { return new Design(item) }));
+            self.fonts = ko.observableArray([]);
+            self.selectedFont = ko.observable();            
+            self.fonts($.map(font_data, function(item) { return new Font(item) }));    
 
-            self.set_user = function(user) {
-                // self.current_user(user);
-            };        
-
-            self.createNewDesignButton = ko.computed(function(){
-                if(self.selectedDesign() && self.selectedDesign().id() == "") {
+            self.createNewFontButton = ko.computed(function(){
+                if(self.selectedFont() && self.selectedFont().id() == "") {
                     return "Create";
                 } else {
                     return "Save";
                 }
             });  
 
-            self.designFormTitle = ko.computed(function(){
-                if(self.selectedDesign() && self.selectedDesign().id() == "") {
+            self.fontFormTitle = ko.computed(function(){
+                if(self.selectedFont() && self.selectedFont().id() == "") {
                     return "Create a New Design:";
                 } else {
                     return "Edit Design:";
                 }
-            });         
+            });                
 
-            self.createDesign = function(){
+            self.createFont = function(){
                 $.ajax({
                   type: "POST",
-                  url: "/app/design/create",
+                  url: "/app/design/create_font",
                   data: {
                     test:'hi',
                   },
                   success: function(data, textStatus, jqXHR){
-                        var des = new Design(data);
-                        self.designs.push(des);
-                        self.selectedDesign(des);
+                        var des = new Font(data);
+                        self.fonts.push(des);
+                        self.selectedFont(des);
                         console.log(des);
                         console.log("HI");
                     },
@@ -94,10 +90,10 @@
                 });
             }
 
-            self.updateDesign = function(item){
+            self.updateFont = function(item){
                 $.ajax({
                   type: "POST",
-                  url: "/app/design/update",
+                  url: "/app/design/update_font",
                   data: {
                     // name: item.name(),
                     // css: item.css(),
@@ -112,10 +108,10 @@
                 });
             }            
 
-            self.destroyDesign = function(item) {
+            self.destroyFont = function(item) {
                 bootbox.dialog({
-                  message: "Destroy design \"" + item.name() + "\"?",
-                  title: "Remove Design",
+                  message: "Destroy font \"" + item.name() + "\"?",
+                  title: "Remove Font",
                   buttons: {
                     success: {
                       label: "No",
@@ -130,12 +126,12 @@
                       callback: function() {
                         $.ajax({
                           type: "POST",
-                          url: "/app/design/destroy",
+                          url: "/app/design/destroy_font",
                           data: {
                             id: item.id,
                           },
                           success: function(data, textStatus, jqXHR){
-                                self.designs.remove(item);
+                                self.fonts.remove(item);
                             },
                           dataType: "json"
                         });                        
@@ -148,9 +144,10 @@
 
         };
 
-        var viewmodel = new viewModel();
-        ko.applyBindings(viewmodel);
-
+        $(function(){ 
+          var viewmodel = new viewModel();
+          ko.applyBindings(viewmodel);
+        });
 
     //]]>  
     </script>

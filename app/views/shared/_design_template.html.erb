@@ -127,11 +127,6 @@
         </div>
 
         <div class="row">
-            <h4>Fonts:</h4>
-            <textarea rows="50" data-bind="value: fonts, codemirror: { lineNumbers: true, matchBrackets: true, mode: 'text/css', theme:'lesser-dark', value:fonts }" placeholder="Menu Specific Fonts." style="width: 100%"></textarea>
-        </div>        
-
-        <div class="row">
             <h4>Static Images</h4>
             <div data-bind="template: { name: 'design_image', foreach: global_images}"></div>
             <button class="btn btn-info col-xs-12" data-bind="click: addImage">Create New Image Class Image</button>

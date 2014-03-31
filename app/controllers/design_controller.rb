@@ -15,6 +15,11 @@ class DesignController < ApplicationController
     render 'list' 
   end
 
+  def fonts
+    @fonts = Font.all.as_json
+    render 'fonts' 
+  end
+
   def update
     data = JSON.parse(params[:data])
     # render :json => data.to_json
@@ -124,5 +129,27 @@ class DesignController < ApplicationController
     image.destroy
     render :json => {"Success"=>true}.as_json
   end  
+
+  def update_font
+    data = JSON.parse(params[:data])    
+    font = Font.find(data["id"])
+    font.link = data["link_data"]
+    font.name = data["name"]
+    font.css = data["css"]
+    font.save
+    render :json => {"success" => true}.as_json
+  end
+
+  def create_font
+    font = Font.create
+    render :json => font.as_json
+  end  
+
+  def destroy_font 
+    data = JSON.parse(params[:data])
+    font = Font.find(data["id"])
+    font.destroy
+    render :json => {"success" => true}.as_json
+  end
 
 end

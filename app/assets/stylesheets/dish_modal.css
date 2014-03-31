@@ -1,3 +1,7 @@
+.modal-dialog {
+	height: 100%;
+}
+
 .modal .each-dish {
 	text-align: none;
 }

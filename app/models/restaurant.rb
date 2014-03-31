@@ -29,6 +29,7 @@ class Restaurant
   field :welcome_text, localize: true
   field :hours, type: Hash 
 
+  belongs_to :font, class_name: "Font", index: true
   has_many :global_images, class_name: "GlobalImage"
   field :website_settings, type: Hash
 

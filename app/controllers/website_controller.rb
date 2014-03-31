@@ -8,7 +8,11 @@ class WebsiteController < ApplicationController
 		unless current_user.owns_restaurants.design
 			current_user.owns_restaurants.design = Design.first
 		end
+		unless current_user.owns_restaurants.font
+			current_user.owns_restaurants.font = Font.first
+		end		
 		@designs = all_designs
+		@fonts = Font.all.as_json
 		render 'website'
 	end
 
@@ -60,7 +64,8 @@ class WebsiteController < ApplicationController
 		restaurant.website_settings = settings
 		restaurant.save
 		restaurant.design = Design.find(data["id"])
-		restaurant.save
+		restaurant.font = Font.find(params["font_id"])		
+		restaurant.save		
 		render :json => {preview:"/app/onlinesite/preview/#{restaurant.preview_token.to_s}"}.as_json
 	end
 
