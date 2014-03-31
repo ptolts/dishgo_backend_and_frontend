@@ -18,7 +18,12 @@
                         <div class="restaurant_list">
                             <ul>
                                 <!-- ko foreach: restaurants -->
-                                    <li data-bind="click: function(){ $root.current_restaurant($data)}"><h4 data-bind="text: name"></h4><h4 data-bind="text: address_line_1"></h4></li>
+                                    <li data-bind="click: function(){ $root.current_restaurant($data)}">
+                                        <div class="row">
+                                            <h4 class="col-xs-6" data-bind="text: name"></h4>
+                                            <h4 class="col-xs-6" data-bind="text: address_line_1"></h4>
+                                        </div>
+                                    </li>
                                 <!-- /ko -->
                                 <!-- ko if: none_or_searching -->
                                     <li><h4 data-bind="text: none_or_searching_text"></h4></li>
