@@ -1,13 +1,66 @@
 <div class="container">
 
-    <div class="col-xs-12 col-md-4">
-        <h3>Select a design: </h3>
-        <div data-bind="template: { name: 'pick_design_template', foreach: designs }"></div>
+    <div class="row">
+        <ul class="nav nav-pills" data-bind="foreach: $__page__.children">
+            <li data-bind="css: {active: isVisible}"><a data-bind="text: $data.val('title'), page-href: $data"></a></li>
+        </ul>
+    </div>    
+
+    <div data-bind="page: {id: 'start', title: 'Choose Design'}" class="pages">
+        <div class="col-xs-12">
+            <h3>Select a design: </h3>
+            <div data-bind="template: { name: 'pick_design_template', foreach: designs }"></div>
+            <div class="row">
+                <hr class="col-xs-8 col-xs-offset-2">
+                <div class="col-xs-12">
+                        <button class="btn btn-primary pull-left col-xs-4" data-bind="click: function(){ $root.previousPage($page) }"><span class="glyphicon glyphicon-chevron-left"></span> Previous</button>
+                    <button class="btn btn-primary pull-right col-xs-4" data-bind="click: function(){ $root.nextPage($page) }">Next <span class="glyphicon glyphicon-chevron-right"></span></button>
+                </div>
+            </div>              
+        </div>
     </div>
 
-    <div class="col-xs-12 col-md-8" data-bind="with: current_design">
-        <div data-bind="template: { name: 'customize_design_template', data: $root.current_design }"></div>
-    </div>
+    <!-- ko if: current_design -->
+        <div data-bind="page: {id: 'image_page', title: 'Customize Images', with: current_design}" class="pages">
+            <div class="col-xs-12">
+                <div data-bind="template: { name: 'customize_design_template', data: $root.current_design }"></div>
+                <div class="row">
+                    <hr class="col-xs-8 col-xs-offset-2">
+                    <div class="col-xs-12">
+                        <button class="btn btn-primary pull-left col-xs-4" data-bind="click: function(){ $root.previousPage($page) }"><span class="glyphicon glyphicon-chevron-left"></span> Previous</button>    
+                        <button class="btn btn-primary pull-right col-xs-4" data-bind="click: function(){ $root.nextPage($page) }">Next <span class="glyphicon glyphicon-chevron-right"></span></button>
+                    </div>
+                </div>                  
+            </div>
+        </div>
+
+        <div data-bind="page: {id: 'font', title: 'Customize Font', with: $root}" class="pages">
+            <div class="col-xs-12">
+                <div data-bind="template: { name: 'customize_font_template', data: $root }"></div>
+                <div class="row">
+                    <hr class="col-xs-8 col-xs-offset-2">
+                    <div class="col-xs-12">
+                        <button class="btn btn-primary pull-left col-xs-4" data-bind="click: function(){ $root.previousPage($page) }"><span class="glyphicon glyphicon-chevron-left"></span> Previous</button>    
+                        <button class="btn btn-primary pull-right col-xs-4" data-bind="click: function(){ $root.nextPage($page) }">Next <span class="glyphicon glyphicon-chevron-right"></span></button>
+                    </div>
+                </div>                  
+            </div>
+        </div>
+
+        <div data-bind="page: {id: 'carousel', title: 'Customize Carousel', with: current_design}" class="pages">
+            <div class="col-xs-12">
+                <div data-bind="template: { name: 'customize_carousel_template', data: $root.current_design }"></div>
+                <div class="row">
+                    <hr class="col-xs-8 col-xs-offset-2">
+                    <div class="col-xs-12">
+                        <button class="btn btn-primary pull-left col-xs-4" data-bind="click: function(){ $root.previousPage($page) }"><span class="glyphicon glyphicon-chevron-left"></span> Previous</button>    
+                        <button class="btn btn-primary pull-right col-xs-4" data-bind="click: function(){ $root.nextPage($page) }">Next <span class="glyphicon glyphicon-chevron-right"></span></button>
+                    </div>
+                </div>                  
+            </div>
+        </div>
+    <!-- /ko -->
+      
 
     <%= render 'shared/restaurant_template' %>
     <%= render 'shared/custom_design_template' %>
@@ -15,13 +68,13 @@
     <%= render 'shared/font_javascript' %>
     <%= render 'shared/restaurant_javascript' %>
 
-    <script type='text/javascript'>//<![CDATA[ 
+<script type='text/javascript'>//<![CDATA[ 
 
-        var design_data = <%= raw(@designs.to_json) %>;
-        var font_data = <%= raw(@fonts.to_json) %>;
-        var restaurant_id = "<%= current_user.owns_restaurants.id %>";
-        var current_design_id = "<%= current_user.owns_restaurants.design.id %>";
-        var current_font_id = "<%= current_user.owns_restaurants.font.id %>";
+    var design_data = <%= raw(@designs.to_json) %>;
+    var font_data = <%= raw(@fonts.to_json) %>;
+    var restaurant_id = "<%= current_user.owns_restaurants.id %>";
+    var current_design_id = "<%= @design_id %>";
+    var current_font_id = "<%= @font_id %>";
 
     ko.bindingHandlers.iFrame = {
         update: function (element, valueAccessor) {
@@ -34,61 +87,78 @@
 
             $(element).contents().find("html").html(html_result);
         }
-    };           
+    };              
 
-        function viewModel() {
-            var self = this;
-            self.designs = ko.observableArray([]);
-            self.fonts = ko.observableArray([]);
-            self.current_design = ko.observable();
-            self.current_font = ko.observable();
+    function viewModel() {
+        var self = this;
+        self.designs = ko.observableArray([]);
+        self.fonts = ko.observableArray([]);
+        self.current_design = ko.observable();
+        self.current_font = ko.observable();
 
-            _.each(design_data, function(item) { 
-              var des = new Design(item);
-              if(des.id() == current_design_id){
-                self.current_design(des);
-              }
-              self.designs.push(des);
-            });  
+        _.each(design_data, function(item) { 
+          var des = new Design(item);
+          if(des.id() == current_design_id){
+            self.current_design(des);
+          }
+          self.designs.push(des);
+        });  
 
-            _.each(font_data, function(item) { 
-              var font = new Font(item);
-              if(font.id() == self.current_font_id){
-                self.current_font(font);
-              }
-              self.fonts.push(font);
-            });                                         
+        _.each(font_data, function(item) { 
+          var font = new Font(item);
+          if(font.id() == self.current_font_id){
+            self.current_font(font);
+          }
+          self.fonts.push(font);
+        });                                         
 
-            self.setDesign = function(item){
-                self.current_design(item);
-            }
+        self.setDesign = function(item){
+            self.current_design(item);
+        }
 
-            self.submitDesign = function(){
-                $.ajax({
-                  type: "POST",
-                  url: "/app/website/submit_design",
-                  data: {
-                    restaurant_id: restaurant_id,
-                    font_id: self.current_font().id(),
-                    data: ko.toJSON(self.current_design)
-                  },
-                    success: function(data, textStatus, jqXHR){
-                        console.log(data);
-                        bootbox.alert("Design set! Preview <a href=\"" + data.preview + "\" target=\"_blank\">here</a>");     
-                    },
-                    error: function(XMLHttpRequest, textStatus, errorThrown) { 
-                        console.log("There was an error setting design: " + errorThrown);
-                    },
-                    dataType: "json"
-                });
-            }            
+        self.indexOfCurrentPage = function(page) {
+           return page.parentPage.children.indexOf(page);
         };
 
-        var viewmodel = new viewModel();
-        ko.applyBindings(viewmodel);
+        self.nextPage = function(page) {      
+            pager.goTo(page.parentPage.children()[self.indexOfCurrentPage(page) + 1].path());
+        };
+
+        self.previousPage = function(page) {      
+            pager.goTo(page.parentPage.children()[self.indexOfCurrentPage(page) - 1].path());
+        };                
+
+        self.submitDesign = function(){
+            $.ajax({
+              type: "POST",
+              url: "/app/website/submit_design",
+              data: {
+                restaurant_id: restaurant_id,
+                font_id: self.current_font().id(),
+                data: ko.toJSON(self.current_design)
+              },
+                success: function(data, textStatus, jqXHR){
+                    console.log(data);
+                    bootbox.alert("Design set! Preview <a href=\"" + data.preview + "\" target=\"_blank\">here</a>");     
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown) { 
+                    console.log("There was an error setting design: " + errorThrown);
+                },
+                dataType: "json"
+            });
+        }            
+    };
+
+    $(function(){   
+        var viewmodel = new viewModel();            
+        pager.Href.hash = '#!/';
+        pager.extendWithPage(viewmodel);
+        ko.applyBindings(viewmodel);                    
+        pager.start();        
+    });
 
 
-    //]]>  
-    </script>    
+//]]>  
+</script>    
 
 </div>

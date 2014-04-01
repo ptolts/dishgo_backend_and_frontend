@@ -99,6 +99,24 @@
             self.current_restaurant(resto);
         };
 
+        self.setRestaurant = function(){
+            $.ajax({
+              type: "POST",
+              url: "/app/administration/set_restaurant",
+              data: {
+                data: ko.toJSON(self.current_restaurant),
+              },
+                success: function(data, textStatus, jqXHR){
+                    console.log("success");
+                    window.location.href = "/app";
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown) { 
+                    console.log("error: " + errorThrown);
+                },
+                dataType: "json"
+            });             
+        }
+
         self.new_restaurant = function(){
             self.current_restaurant(new Restaurant({
                                                     name:"New Restaurant",

@@ -5,12 +5,16 @@ class WebsiteController < ApplicationController
 	layout 'administration'
 
 	def index
-		unless current_user.owns_restaurants.design
-			current_user.owns_restaurants.design = Design.first
-		end
-		unless current_user.owns_restaurants.font
-			current_user.owns_restaurants.font = Font.first
-		end		
+		# unless current_user.owns_restaurants.design
+		# 	current_user.owns_restaurants.design = Design.first
+		# end
+		# unless current_user.owns_restaurants.font
+		# 	current_user.owns_restaurants.font = Font.first
+		# end
+		@design_id = ""
+		@design_id = current_user.owns_restaurants.design.id if current_user.owns_restaurants.design	
+		@font_id = ""
+		@font_id = current_user.owns_restaurants.font.id if current_user.owns_restaurants.font					
 		@designs = all_designs
 		@fonts = Font.all.as_json
 		render 'website'
