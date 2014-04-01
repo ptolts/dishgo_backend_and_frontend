@@ -99,12 +99,9 @@ border-color: #6D6D6D;
 	position: relative;
 }
 .menu_container .resto_logo {
-	height: 90%;
-  width: 50%;
-  overflow: auto;
-  margin: auto;
+	margin: auto;
   position: absolute;
-  top: 0;
+  top: 20px;
   left: 0;
   bottom: 0;
   right: 0;
@@ -128,6 +125,7 @@ border-color: #6D6D6D;
 	/*margin-bottom: 20px;*/
 	padding-bottom: 20px;
 	z-index: 5000;
+  position: relative;
 }
 .menu_container .btn-dish {
 	padding-top: 2px;
@@ -145,12 +143,12 @@ border-color: #6D6D6D;
 }
 @media (min-width: 560px) {
   .menu_container .resto_logo {
-  	height: 80%;;
+  	top: 40px;
   }
 }
 @media (min-width: 768px) {
   .menu_container .resto_logo {
-  	height: 70%;
+  	top: 60px;
   }
   .container {
   	margin-top: 60px;
@@ -165,13 +163,13 @@ border-color: #6D6D6D;
 
 @media (min-width: 992px) {
   .menu_container .resto_logo {
-  	height: 60%;
+  	top: 75px;
   }
 }
 
 @media (min-width: 1200px) {
   .menu_container .resto_logo {
-    height: 50%;
+    top: 105px;
   }
   .container {
   	margin-top: 65px;
