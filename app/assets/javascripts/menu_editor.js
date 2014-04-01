@@ -7,6 +7,15 @@
 
 //<![CDATA[ 
 
+ko.bindingHandlers.fitText = {
+    update: function(element, valueAccessor, allBindingsAccessor, viewModel, bindingContext) {
+        var self = this;
+        viewModel.imageModel;
+        $(element).fitText();
+    }
+};
+
+
 function currentLangName(observable){
     return {
                 'en' : observable()['en'],

@@ -55,6 +55,7 @@ class WebsiteController < ApplicationController
 	def submit_design
 		restaurant = Restaurant.find(params[:restaurant_id])
 		data = JSON.parse(params[:data])
+		restaurant_data = JSON.parse(params[:restaurant_data])
 		settings = restaurant.website_settings || {}
 		data["global_images"].each do |image|
 			Rails.logger.warn "------\n#{image}\n-----"
@@ -68,7 +69,8 @@ class WebsiteController < ApplicationController
 		restaurant.website_settings = settings
 		restaurant.save
 		restaurant.design = Design.find(data["id"])
-		restaurant.font = Font.find(params["font_id"])		
+		restaurant.font = Font.find(params["font_id"])
+		restaurant.about_text_translations = restaurant_data["about_text"]
 		restaurant.save		
 		render :json => {preview:"/app/onlinesite/preview/#{restaurant.preview_token.to_s}"}.as_json
 	end

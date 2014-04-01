@@ -57,6 +57,8 @@
             self.design = ko.observable(data.design === undefined ? null : new Design(data.design));
             self.id = data._id;
 
+
+            self.about_text = ko.observable(data.about_text ? data.about_text : copyDefaultHash(default_language_hash));
             self.hours = ko.observableArray([]);
 
             var hours_list = {
@@ -200,6 +202,7 @@
                   type: "POST",
                   url: "/app/administration/update_restaurant",
                   data: {
+                    restaurant_id: self.id,
                     params:ko.toJSON(self),
                   },
                   success: function(data, textStatus, jqXHR){

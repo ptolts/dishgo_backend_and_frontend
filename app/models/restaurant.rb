@@ -26,7 +26,8 @@ class Restaurant
 
   field :category, type: Array
 
-  field :welcome_text, localize: true
+  field :about_text, localize: true
+
   field :hours, type: Hash 
 
   belongs_to :font, class_name: "Font", index: true

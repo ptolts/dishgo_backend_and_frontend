@@ -5,6 +5,7 @@
 *= require layout_base
 *= require hours
 *= require dish_modal
+*= require menu_logo
 *= require_self
 */
 

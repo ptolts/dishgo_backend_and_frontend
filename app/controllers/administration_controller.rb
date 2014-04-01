@@ -1,7 +1,7 @@
 class AdministrationController < ApplicationController
   before_filter :authenticate_user!
   before_filter :admin_or_user_with_resto!, :except => [:restaurant_setup, :search_restaurants, :set_restaurant]
-  before_filter :admin_user!, :only => [:users, :restaurants, :update_user, :add_user, :user_destroy]
+  before_filter :admin_user!, :only => [:users, :restaurants, :add_user, :user_destroy, :update_user]
   before_filter :admin_or_owner!, :only => [:edit_menu, :update_menu, :crop_image, :crop_icon, :publish_menu, :reset_draft_menu, :update_restaurant]
   layout 'administration'
   after_filter :set_access_control_headers
@@ -268,7 +268,7 @@ class AdministrationController < ApplicationController
     restaurant.instagram = settings["instagram"]
 
     if sub = Restaurant.where(subdomain:settings["subdomain"].downcase).first and sub != restaurant
-      render :text => "Bad Subdomain"
+      render :json => "Bad Subdomain".as_json
       return
     end
     restaurant.subdomain = settings["subdomain"].downcase

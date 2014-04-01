@@ -100,39 +100,51 @@
     </div>    
 </script> 
 
+<script id="text_content_template" type="text/html">
+    <div class="col-xs-12">
+        <div class="row">
+            <h2 class="col-xs-8">Text:</h2>
+            <div class="language_selector col-xs-4">
+                <select class="form-control input-sm" data-bind="options: $root.languages, optionsText: function(item){ return fullLanguageName[item];}, value: $root.lang"></select>          
+            </div>            
+        </div>
+        <div class="col-xs-12">
+            <h4>Main Page Text:</h4>
+            <textarea rows="10" data-bind="lValue: about_text" placeholder="A little introduction to your restaurant." style="width: 100%"></textarea>
+        </div> 
+    </div>
+</script>
+
 <script id="pick_design_template" type="text/html">
-    <div class="design_box">
-        <h4 data-bind="text: name"></h4>
-        <a href="#" target="_blank" class="btn btn-info">Demo</a>
-        <button data-bind="click: $root.setDesign"  class="btn btn-primary">Choose Design</button>
+    <div class="col-xs-12">
+        <div class="design_box">
+            <h4 data-bind="text: name"></h4>
+            <a href="#" target="_blank" class="btn btn-info">Demo</a>
+            <button data-bind="click: $root.setDesign"  class="btn btn-primary">Choose Design</button>
+        </div>
     </div>
 </script>
 
 <script id="customize_font_template" type="text/html">
-    <div class="row">
-        <h4>Fonts</h4>
-        <div class="col-md-4">
-            <select class="form-control" data-bind="
-                                options: fonts, 
-                                optionsText: 'name',
-                                value: current_font,
-                                "></select>  
-        </div>
-        <div class="col-md-8">
-            <iframe class="font_demo" data-bind="iFrame: current_font"></iframe>
+    <div class="col-xs-12">
+        <h2>Fonts:</h2>
+        <div class="fonts" data-bind="foreach: fonts">
+            <div class="col-md-5 select_object" data-bind="css:{selected: $data === $root.current_font()}, click: $root.setFont">
+                <iframe class="font_demo" data-bind="iFrame: $data"></iframe>
+            </div>
         </div>
     </div>  
 </script>
 
 <script id="customize_carousel_template" type="text/html">
-    <div class="row">
-        <h4>Carousel Images</h4>
+    <div class="col-xs-12">
+        <h2>Carousel Images: </h2>
         <div data-bind="template: { name: 'custom_carousel_image', foreach: carousel}"></div>
     </div>  
 </script>
 
 <script id="customize_design_template" type="text/html">
-    <div class="row">
+    <div class="col-xs-12">
         <div data-bind="template: { name: 'customize_design_image', foreach: global_images}"></div>
     </div>
 </script>

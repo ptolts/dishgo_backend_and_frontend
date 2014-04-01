@@ -22,6 +22,7 @@
 // = require spin.min.js
 // = require bootstrap.min.js
 // = require pager.js
+// = require jquery.fittext.js
 
 
 
