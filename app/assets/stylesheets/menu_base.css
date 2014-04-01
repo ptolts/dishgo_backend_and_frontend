@@ -1,16 +1,49 @@
-
-body {
-	font-family: 'Lusitana', serif;
-	/*background: url(006.png) repeat;*/
+h1,h2, h3, .h1, .h2, .h3 {
+  margin-top: 15px;
+  margin-bottom: 5px;
 }
-h2, h3, .h1, .h2, .h3 {
-  font-family: 'Lusitana', serif;
+h2 {
+    font-family: 'EB Garamond', serif;
+    font-weight: normal;
+    text-transform: uppercase;
+    font-size: 20px;
+    line-height: 23px;
+    letter-spacing: 1px;
+    }
+p {
+    font-family: 'EB Garamond', serif;
+    font-size: 18px;
+    line-height: 23px;
+    letter-spacing: .5px;
+    }
+h1 {
+    font-family: 'Dancing Script', cursive;
+    font-weight: 700;
+    line-height: 46px;
+    font-size: 42px;
+    position: relative;  
+    overflow: hidden;
+}
+h1:after, h1:before {
+    position: absolute;
+    top: 51%;
+    overflow: hidden;
+    width: 45%;
+    height: 1px;
+    margin-right: 15%;    
+    content: '\a0';
+    background-color: #000;
 }
 
-h4, h5, h6, .h4, .h5, .h6{
-  font-family: 'Lusitana', serif;
+h1:after {
+    margin-left: 5%;
+    text-align: right;
 }
 
+h1:before {
+    margin-left: -50%;
+    text-align: right;
+}
 .dish_container {
   overflow: visible;
 }
@@ -44,12 +77,11 @@ border-color: #6D6D6D;
 }
 .menu_container .each_dish {
 	text-align: center;
-  padding-top: 40px;
+  top: 30px;
   position: relative;
 }
 .menu_container .section_title {
 	text-transform: uppercase;
-	margin-bottom: 25px;
 	color: #000000;
 }
 .menu_container .dish_title {
@@ -61,7 +93,7 @@ border-color: #6D6D6D;
 	margin-bottom: 0px;
 }
 .menu_container .dish_price {
-	margin-bottom: 25px;
+	margin-bottom: 20px;
 }
 .menu_container .dish_price i {
 	display: block;
@@ -69,17 +101,6 @@ border-color: #6D6D6D;
 }
 .menu_container .dishgo_icon {
     width: 20px;
-
-}
-h1 {
-	font-size: 24px;
-	font-family: 'Fanwood Text', serif;
-}
-h2 {
-	font-size: 18px;
-}
-p {
-	margin-bottom: 0px;
 }
 .menu_container .menu_header {
 	position: absolute;
@@ -96,7 +117,8 @@ p {
 }
 .menu_container .section_img_header {
   max-height: 25px;
-  margin-top: 10px;
+  margin-top: 15px;
+  margin-bottom: 20px;
 }
 .menu_container .bottom_logo {
 	margin-top: 20px;
@@ -128,7 +150,7 @@ p {
 }
 @media (min-width: 560px) {
   .menu_container .each_dish {
-  	padding-top: 90px;
+  	top: 70px;
   }
   .menu_container .resto_logo {
   	padding-top: 25px;
@@ -142,7 +164,7 @@ p {
     width: 750px;
   }
   .menu_container .each_dish {
-  	padding-top: 80px;
+  	top: 85px;
   }
   .menu_container .resto_logo {
   	padding-top: 40px;
@@ -163,7 +185,7 @@ p {
     width: 970px;
   }
   .menu_container .each_dish {
-  	padding-top: 140px;
+  	top: 130px;
   }
   .menu_container .resto_logo {
   	padding-top: 60px;
@@ -175,7 +197,7 @@ p {
     width: 1170px;
   }
   .menu_container .each_dish {
-  	padding-top: 205px;
+  	top: 205px;
   }
   .container {
   	margin-top: 65px;
