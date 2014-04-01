@@ -10,7 +10,7 @@
 ko.bindingHandlers.fitText = {
     update: function(element, valueAccessor, allBindingsAccessor, viewModel, bindingContext) {
         var self = this;
-        $(element).fitText(1, { minFontSize: '8px', maxFontSize: '80px' });
+        $(element).fitText(1);
     }
 };
 
