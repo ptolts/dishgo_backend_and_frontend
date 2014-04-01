@@ -1,10 +1,11 @@
 			<div class="container menu_container">
-			        <div class="row menu_head">
+			        <div class="row">
 			            <div class="menu_header">
 			                <img data-bind="attr:{src:$root.design.imgs.simple_header_1}" class="img-responsive">
 			            </div>
 		                <div class="resto_logo">
-		                    <img data-bind="attr:{src:$root.design.imgs.title}" class="resto_img">
+		                	<h2 class="text-center">FUCK YOU</h2>
+		                    <!-- <img data-bind="attr:{src:$root.design.imgs.title}" class="resto_img"> -->
 		                </div>
 				        <div class="language_selector">
 				            <select class="form-control input-sm" data-bind="options: $root.languages, optionsText: function(item){ return fullLanguageName[item];}, value: $root.lang"></select>          
@@ -22,9 +23,8 @@
 			            <div class="row">
 			                <div class="each_dish">
         						<!-- ko foreach: menu -->
-        							<div class="row">
 					                    <div class="col-xs-12">
-					                        <img data-bind="attr:{src:$root.design.imgs.simple_divider}" class="section_img_header center-block">
+<!-- 					                        <img data-bind="attr:{src:$root.design.imgs.simple_divider}" class="section_img_header center-block"> -->
 					                        <div class="section_title">
 					                            <h1 data-bind="lText: name">Deserts</h1>
 					                            <!-- <img data-bind="attr:{src:$root.design.imgs.section_line}" class="section_img_divider center-block"> -->
@@ -154,7 +154,6 @@
 					                      	</div>
 					                        <img data-bind="attr:{src:$root.design.imgs.simple_divider_bottom}" class="section_img_divider center-block">
 					                    </div>
-					                </div>
 				                <!-- /ko -->
 			                </div>
 			            </div>

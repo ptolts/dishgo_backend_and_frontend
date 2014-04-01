@@ -47,11 +47,6 @@ h1:before {
 .dish_container {
   overflow: visible;
 }
-
-.menu_head {
-  position: relative;
-}
-
 .language_selector {
   position: absolute;
   right: 15px;
@@ -77,8 +72,6 @@ border-color: #6D6D6D;
 }
 .menu_container .each_dish {
 	text-align: center;
-  top: 30px;
-  position: relative;
 }
 .menu_container .section_title {
 	text-transform: uppercase;
@@ -103,17 +96,18 @@ border-color: #6D6D6D;
     width: 20px;
 }
 .menu_container .menu_header {
-	position: absolute;
-}
-.menu_container .resto_logo {
 	position: relative;
 }
-.menu_container .resto_logo img {
-    margin: 0 auto;
-    padding: 20px;
-    display: block;
-    max-height: 120px;
-    width: 100%;
+.menu_container .resto_logo {
+	height: 90%;
+  width: 50%;
+  overflow: auto;
+  margin: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
 }
 .menu_container .section_img_header {
   max-height: 25px;
@@ -127,6 +121,7 @@ border-color: #6D6D6D;
 .container {
 	background-color: #fff;
 	margin-top: 20px;
+  margin-bottom: 20px;
 	-webkit-box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.75);
 	-moz-box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.75);
 	box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.75);
@@ -149,25 +144,13 @@ border-color: #6D6D6D;
   color: #fff;
 }
 @media (min-width: 560px) {
-  .menu_container .each_dish {
-  	top: 70px;
-  }
   .menu_container .resto_logo {
-  	padding-top: 25px;
+  	height: 80%;;
   }
-  .menu_container .resto_logo img {
-    width: auto;
-}
 }
 @media (min-width: 768px) {
-  .menu_container .dark_header {
-    width: 750px;
-  }
-  .menu_container .each_dish {
-  	top: 85px;
-  }
   .menu_container .resto_logo {
-  	padding-top: 40px;
+  	height: 70%;
   }
   .container {
   	margin-top: 60px;
@@ -181,23 +164,14 @@ border-color: #6D6D6D;
 }
 
 @media (min-width: 992px) {
-  .menu_container .dark_header {
-    width: 970px;
-  }
-  .menu_container .each_dish {
-  	top: 130px;
-  }
   .menu_container .resto_logo {
-  	padding-top: 60px;
+  	height: 60%;
   }
 }
 
 @media (min-width: 1200px) {
-  .menu_container .dark_header {
-    width: 1170px;
-  }
-  .menu_container .each_dish {
-  	top: 205px;
+  .menu_container .resto_logo {
+    height: 50%;
   }
   .container {
   	margin-top: 65px;
