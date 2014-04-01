@@ -91,7 +91,8 @@ p {
     margin: 0 auto;
     padding: 20px;
     display: block;
-    min-height: 120px;
+    max-height: 120px;
+    width: 100%;
 }
 .menu_container .section_img_header {
   max-height: 25px;
@@ -132,6 +133,9 @@ p {
   .menu_container .resto_logo {
   	padding-top: 25px;
   }
+  .menu_container .resto_logo img {
+    width: auto;
+}
 }
 @media (min-width: 768px) {
   .menu_container .dark_header {
@@ -172,9 +176,6 @@ p {
   }
   .menu_container .each_dish {
   	padding-top: 205px;
-  }
-  .menu_container .resto_logo {
-  	padding-top: 60px;
   }
   .container {
   	margin-top: 65px;
