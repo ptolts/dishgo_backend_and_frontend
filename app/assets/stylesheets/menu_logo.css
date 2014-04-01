@@ -1,0 +1,80 @@
+@font-face {
+  font-family: 'Rancho';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Rancho'), url(http://themes.googleusercontent.com/static/fonts/rancho/v4/EJt_7DbHYj8a5HS0_pTrl-vvDin1pK8aKteLpeZ5c0A.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Mr Dafoe';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Mr Dafoe Regular'), local('MrDafoe-Regular'), url(http://themes.googleusercontent.com/static/fonts/mrdafoe/v3/F1AgEicuA-Vh7KAhE4UhjXYhjbSpvc47ee6xR_80Hnw.woff) format('woff');
+}
+
+.font-effect-shadow-multiple {
+  text-shadow: .04em .04em 0 #fff,.08em .08em 0 #aaa;
+  -webkit-text-shadow: .04em .04em 0 #fff, .08em .08em 0 #aaa;
+}
+.font-effect-stonewash {
+  -webkit-mask-image: url(//themes.googleusercontent.com/static/patterns/stonewash.png);
+  color: #fff;
+}
+
+.resto_logo .center {
+    text-align: center;
+}
+
+.menu_logo {
+  display: inline-block;
+  width: 50%;
+}
+
+.menu_logo h1, h2, h3, h4 {
+  display:inline-block;
+  line-height: initial;
+}
+
+.menu_logo h1 {
+    font-family: 'Rancho', normal;
+    font-size: 58px;
+    text-transform:uppercase;    
+}
+
+.menu_logo h4,h3 {
+    margin-top: 10px;
+    margin-bottom: 5px;      
+    font-size: 18px;
+    font-family: 'Mr Dafoe', normal;
+}
+
+.menu_logo h1 {
+    position: relative;
+    z-index: 1;
+    margin-top: 10px;
+    margin-bottom: 10px;    
+    overflow: hidden;
+}
+.menu_logo h1:after, .menu_logo h1:before {
+    position: absolute;
+    top: 51%;
+    overflow: hidden;
+    width: 45%;
+    height: 1px;
+    margin-right: 15%;    
+    content: '\a0';
+    background-color: #fff;
+}
+
+.menu_logo h1:after {
+    margin-left: 5%;
+    text-align: right;
+}
+
+.menu_logo h1:before {
+    margin-left: -50%;
+    text-align: right;
+}
+.menu_logo .color {
+    background-color: #fff;
+}

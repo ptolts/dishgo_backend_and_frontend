@@ -103,7 +103,6 @@ border-color: #6D6D6D;
   position: absolute;
   top: 20px;
   left: 0;
-  bottom: 0;
   right: 0;
 }
 .menu_container .section_img_header {
@@ -142,14 +141,14 @@ border-color: #6D6D6D;
   color: #fff;
 }
 @media (min-width: 560px) {
-  .menu_container .resto_logo {
+/*  .menu_container .resto_logo {
   	top: 40px;
-  }
+  }*/
 }
 @media (min-width: 768px) {
-  .menu_container .resto_logo {
+/*  .menu_container .resto_logo {
   	top: 60px;
-  }
+  }*/
   .container {
   	margin-top: 60px;
   }
@@ -162,15 +161,15 @@ border-color: #6D6D6D;
 }
 
 @media (min-width: 992px) {
-  .menu_container .resto_logo {
+/*  .menu_container .resto_logo {
   	top: 75px;
-  }
+  }*/
 }
 
 @media (min-width: 1200px) {
-  .menu_container .resto_logo {
+/*  .menu_container .resto_logo {
     top: 105px;
-  }
+  }*/
   .container {
   	margin-top: 65px;
   }
