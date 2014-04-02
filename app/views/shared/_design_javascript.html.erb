@@ -12,6 +12,7 @@
             self.name = ko.observable(data.name ? data.name : "New Design");
             self.css = ko.observable(data.css ? data.css : "");
             self.menu_css = ko.observable(data.menu_css ? data.menu_css : "");
+            self.template_location = ko.observable(data.template_location ? data.template_location : "");
             self.fonts = ko.observable(data.fonts ? data.fonts : "");
             self.global_images = ko.observableArray([]);
             self.carousel = ko.observableArray([]);

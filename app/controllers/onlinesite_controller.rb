@@ -12,12 +12,12 @@ class OnlinesiteController < ApplicationController
 
     if restaurant.design
       design = restaurant.design
-      @design_css = restaurant.design.css
-      @design_menu_css = restaurant.design.menu_css            
+      @design_css = restaurant.design.template_base_css
+      @design_menu_css = restaurant.design.template_menu_css            
     else
       design = Design.first
-      @design_css = Design.first.css
-      @design_menu_css = Design.first.menu_css
+      @design_css = Design.first.template_base_css
+      @design_menu_css = Design.first.template_menu_css
     end
 
     if carousel = restaurant.global_images.find_all{|e| e.carousel} and carousel.size > 0
@@ -74,12 +74,12 @@ class OnlinesiteController < ApplicationController
 
     if restaurant.design
       design = restaurant.design
-      @design_css = restaurant.design.css
-      @design_menu_css = restaurant.design.menu_css      
+      @design_css = restaurant.design.template_base_css
+      @design_menu_css = restaurant.design.template_menu_css      
     else
       design = Design.first
-      @design_css = Design.first.css
-      @design_menu_css = Design.first.menu_css
+      @design_css = Design.first.template_base_css
+      @design_menu_css = Design.first.template_menu_css
     end
 
     if restaurant.font

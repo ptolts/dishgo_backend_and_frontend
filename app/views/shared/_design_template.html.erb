@@ -117,6 +117,11 @@
         </p>
 
         <div class="row">
+            <h4>CSS Template:</h4>
+            <select class="form-control" data-bind="options: $root.templates, value: template_location"></select>
+        </div>        
+
+        <div class="row">
             <h4>CSS:</h4>
             <textarea rows="50" data-bind="value: css, codemirror: { lineNumbers: true, matchBrackets: true, mode: 'text/css', theme:'lesser-dark', value:css }" placeholder="Design Specific CSS." style="width: 100%"></textarea>
         </div>

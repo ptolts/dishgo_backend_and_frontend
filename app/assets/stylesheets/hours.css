@@ -8,16 +8,6 @@
 	text-align: left;
 }
 
-.hours h4 {
-	margin-bottom: 5px;
-}
-.hours .day_padding {
-	padding-left: 20px;
-}
-.hours .label {
-	padding: .3em .6em .3em;
-	letter-spacing: .5px;
-}
 
 @media (max-width: 560px){
 

@@ -94,6 +94,7 @@ content: '';
 .wrapper_corner_inner {
 position: absolute;
 bottom: 0;
+opacity: 0.6;
 right: 0;
 width: 145px;
 height: 145px;

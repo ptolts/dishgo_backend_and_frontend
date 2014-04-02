@@ -11,6 +11,7 @@ class DesignController < ApplicationController
   end
 
   def list
+    @templates = Dir.glob("#{Rails.root}/custom_templates/*").reject{|e| !File.directory?(e)}
     @designs = Design.all.as_json({include: {global_images: {include: :global_images}}})
     render 'list' 
   end
@@ -32,6 +33,7 @@ class DesignController < ApplicationController
     design.menu_css = data["menu_css"]
     design.fonts = data["fonts"]
     design.name = data["name"]
+    design.template_location = data["template_location"]
 
     # design.images = data["images"].inject({}){|res,x|
     #   res[x["name"]] = x["url"]["url"]
