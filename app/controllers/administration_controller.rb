@@ -29,7 +29,7 @@ class AdministrationController < ApplicationController
   end  
 
   def search_restaurants
-    if params[:lat].to_s != "0"
+    if params[:lat].to_i != 0
       result = Restaurant.where(:locs => { "$near" => { "$geometry" => { "type" => "Point", :coordinates => [params[:lon].to_f,params[:lat].to_f] }, "$maxDistance" => 25000}})
     else
       result = Restaurant.where(:name => /#{params[:restaurant_name]}/i).limit(25)

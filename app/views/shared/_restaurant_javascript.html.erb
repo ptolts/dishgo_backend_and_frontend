@@ -1,5 +1,14 @@
     <script type='text/javascript'>//<![CDATA[ 
 
+        var default_language_hash = {
+            en: '',
+            fr: '',
+        }
+
+        function copyDefaultHash(hash) {
+            return JSON.parse(JSON.stringify(hash));
+        }        
+
         Day.prototype.toJSON = function() {
             var copy = ko.toJS(this); //easy way to get a clean copy
             delete copy.times;
