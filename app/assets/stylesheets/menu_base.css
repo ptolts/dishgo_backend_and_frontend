@@ -1,49 +1,30 @@
-h1,h2, h3, .h1, .h2, .h3 {
+.menu_container h1,.menu_container h2, .menu_container h3, .menu_container .h1, .menu_container .h2, .menu_container .h3 {
   margin-top: 15px;
   margin-bottom: 5px;
+  position: relative
 }
-h2 {
-    font-family: 'EB Garamond', serif;
-    font-weight: normal;
-    text-transform: uppercase;
-    font-size: 20px;
-    line-height: 23px;
-    letter-spacing: 1px;
-    }
-p {
-    font-family: 'EB Garamond', serif;
-    font-size: 18px;
-    line-height: 23px;
-    letter-spacing: .5px;
-    }
-h1 {
-    font-family: 'Dancing Script', cursive;
-    font-weight: 700;
-    line-height: 46px;
-    font-size: 42px;
-    position: relative;  
-    overflow: hidden;
-}
-h1:after, h1:before {
+
+.menu_container h1:after, .menu_container h1:before {
     position: absolute;
     top: 51%;
     overflow: hidden;
-    width: 45%;
+    width: 30%;
     height: 1px;
-    margin-right: 15%;    
+    /*margin-right: 15%;    */
     content: '\a0';
     background-color: #000;
 }
 
-h1:after {
+.menu_container h1:after {
     margin-left: 5%;
     text-align: right;
 }
 
-h1:before {
-    margin-left: -50%;
+.menu_container h1:before {
+    margin-left: -35%;
     text-align: right;
 }
+
 .dish_container {
   overflow: visible;
 }

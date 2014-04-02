@@ -103,8 +103,12 @@ body a:active, a:visited, a {
 	margin-top: 30px;
 }
 
+.nav *, .nav a:visited, .nav a:active, .nav a:focus, .nav a:hover {
+	color: #000;
+}
+
 .nav a:hover {
-	color: #dcdcdc;
+	text-decoration: underline;
 }
 
 @media screen and (max-width: 850px) {
@@ -119,7 +123,7 @@ body a:active, a:visited, a {
 		font-weight: bold;
 		text-transform:uppercase;
 		padding: 4px;
-		display: inline-block;
+		display: block;
 		margin-left: auto;
 		margin-right: auto;
 	}	
