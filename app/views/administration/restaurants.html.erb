@@ -26,8 +26,11 @@
 
 
     <div class="col-md-8" data-bind="with: current_restaurant">
-        <div>
+        <div class="col-xs-12">
             <div data-bind="template: { name: 'restaurant_template', data: $parent.current_restaurant }"></div>          
+        </div>
+        <div class="col-xs-12">
+            <div data-bind="template: { name: 'admin_set_design_template', data: $parent.current_restaurant }"></div>          
         </div>
     </div>
 
@@ -47,7 +50,7 @@
     </script>
 
     <%= render 'shared/restaurant_template' %>
-    <%= render 'shared/design_template' %>
+    <%= render 'shared/admin_set_design_template' %>
     <%= render 'shared/design_javascript' %>
     <%= render 'shared/restaurant_javascript' %>
 
