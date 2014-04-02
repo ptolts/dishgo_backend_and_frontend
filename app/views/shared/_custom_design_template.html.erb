@@ -130,7 +130,7 @@
         <h2>Fonts:</h2>
         <div class="fonts" data-bind="foreach: fonts">
             <div class="col-md-5 select_object" data-bind="css:{selected: $data === $root.current_font()}, click: $root.setFont">
-                <iframe class="font_demo" data-bind="iFrame: $data"></iframe>
+                <iframe class="col-xs-12 col-md-5 font_demo" data-bind="iFrame: $data"></iframe>
             </div>
         </div>
     </div>  

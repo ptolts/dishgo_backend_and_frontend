@@ -5,6 +5,11 @@ body {
 	min-height: 100%;
 	margin: 0;
 }
+
+.main_page_language_selector {
+	position: absolute;
+}
+
 #left_menu i {
 	font-size: 38px;
 	-webkit-transition: all 0.5s ease;
@@ -46,9 +51,17 @@ body {
 #footer {
 	display: none;
 }
-#footer_background {
-	display: none;
+
+.pattern_background {
+	display: block;
+	position: absolute;
+	top: 0px;
+	bottom: 0px;
+	right: 0px;
+	left: 0px;
+	z-index: -5;
 }
+
 #social_media_footer {
 	display: none;
 }
@@ -65,10 +78,6 @@ body {
 	z-index: 9999;
 }
 #left_menu {
-	display: none;
-}
-
-#left_menu_background {
 	display: none;
 }
 

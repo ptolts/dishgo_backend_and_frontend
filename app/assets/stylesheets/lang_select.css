@@ -1,0 +1,32 @@
+.language_select {
+  list-style: none;
+  margin: 0;
+}
+
+.language_select li {
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;  
+    display: inline-block;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    color: black;
+    border-radius: 5px;
+}
+
+.language_select li.selected {
+  text-decoration: underline;
+}
+
+.language_select li:hover {
+  background-color: black;
+  color: white;
+}
+
+@media screen and (max-width: 850px) {
+  .language_select li.selected {
+    display: none;
+  }
+}

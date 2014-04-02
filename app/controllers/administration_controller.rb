@@ -129,7 +129,7 @@ class AdministrationController < ApplicationController
     restaurant.preview_token = loop do
       token = SecureRandom.urlsafe_base64
       break token unless Restaurant.where(preview_token: token).count > 0
-    end    
+    end if restaurant.preview_token.blank?
 
     restaurant.draft_menu = menu
     restaurant.save

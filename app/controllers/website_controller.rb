@@ -70,6 +70,7 @@ class WebsiteController < ApplicationController
 		restaurant.save
 		restaurant.design = Design.find(data["id"])
 		restaurant.font = Font.find(params["font_id"])
+		Rails.logger.warn restaurant_data
 		restaurant.about_text_translations = restaurant_data["about_text"]
 		restaurant.save		
 		render :json => {preview:"/app/onlinesite/preview/#{restaurant.preview_token.to_s}"}.as_json

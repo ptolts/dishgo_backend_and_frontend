@@ -104,7 +104,7 @@
         var restaurant_id = "<%= current_user.owns_restaurants.id %>";
         var current_design_id = "<%= @design_id %>";
         var current_font_id = "<%= @font_id %>";     
-        var resto_data = <%= raw(current_user.owns_restaurants.as_json.to_json) %>;
+        var resto_data = <%= raw(current_user.owns_restaurants.as_document.to_json) %>;
 
 
         ko.bindingHandlers.iFrame = {
@@ -140,7 +140,7 @@
 
             _.each(font_data, function(item) { 
               var font = new Font(item);
-              if(font.id() == self.current_font_id){
+              if(font.id() == self.restaurant().font_id){
                 self.current_font(font);
               }
               self.fonts.push(font);

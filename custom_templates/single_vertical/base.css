@@ -73,6 +73,7 @@ body a:active, a:visited, a {
 	width: 130px;
 	text-transform:uppercase;
 	padding: 4px;
+	text-align: center;
 }
 
 #navigation_small {

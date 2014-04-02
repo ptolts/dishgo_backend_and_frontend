@@ -13,7 +13,9 @@
 							</div>
 		                </div>
 				        <div class="language_selector">
-				            <select class="form-control input-sm" data-bind="options: $root.languages, optionsText: function(item){ return fullLanguageName[item];}, value: $root.lang"></select>          
+							<ul class="language_select" data-bind="foreach: $root.languages">
+							  <li data-bind="css:{selected: $data === $root.lang()}, click: function(){ $root.lang($data) }"><span data-bind="text: $root.getFullLangName($data)"></span>
+							</ul>				        	      
 				        </div>
 
 				        <div class="menu_style_selector">

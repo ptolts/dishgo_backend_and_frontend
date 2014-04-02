@@ -6,6 +6,7 @@
 *= require hours
 *= require dish_modal
 *= require menu_logo
+*= require lang_select
 *= require_self
 */
 

@@ -1177,9 +1177,18 @@ function PublicMenuModel() {
     lang = self.lang;
     self.selected_dish = ko.observable();
 
+    self.languages_full = {
+      'en'  : 'English',
+      'fr'  : 'Français',
+    }    
+
     self.set_dish = function(dish) {
         self.selected_dish(dish);
-    };    
+    };  
+
+    self.getFullLangName = function(l){ 
+      return ko.observable(self.languages_full[l]) 
+    }      
 
     self.display_menu = ko.observable(false);
     self.display_menu_toggle = function(){

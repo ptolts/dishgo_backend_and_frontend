@@ -47,9 +47,14 @@
 				<a data-bind="visible: socialVisible('facebook'), attr:{href: facebook}"><i class="fa fa-facebook-square"></i></a>
 				<a data-bind="visible: socialVisible('twitter'), attr:{href: twitter}"><i class="fa fa-twitter-square"></i></a>			
 				<a data-bind="visible: socialVisible('instagram'), attr:{href: instagram}"><i class="fa fa-instagram"></i></a>
-			</div>			
+			</div>
+			<div class="main_page_language_selector">
+				<ul class="language_select" data-bind="foreach: languages">
+				  <li data-bind="css:{selected: $data === $root.lang()}, click: function(){ $root.lang($data) }"><span data-bind="text: $root.getFullLangName($data)"></span>
+				</ul>
+			</div>	
+			<div data-bind="style:{backgroundImage: $root.computeImage('header_background_pattern')}" class="pattern_background"></div>					
 		</div>
-		<div data-bind="style:{backgroundImage: $root.computeImage('header_background_pattern')}" id="left_menu_background"></div>
 
 		<div id="footer">
 			<div id="social_media_footer" class="social_media" data-bind="with: restaurant">
@@ -57,9 +62,9 @@
 				<a data-bind="visible: socialVisible('twitter'), attr:{href: twitter}"><i class="fa fa-twitter-square"></i></a>			
 				<a data-bind="visible: socialVisible('instagram'), attr:{href: instagram}"><i class="fa fa-instagram"></i></a>
 			</div>	
+			<div data-bind="style:{backgroundImage: $root.computeImage('header_background_pattern')}" class="pattern_background"></div>				
 		</div>
 
-		<div data-bind="style:{backgroundImage: $root.computeImage('header_background_pattern')}" id="footer_background"></div>	
 
 		<div data-bind="page: {id: 'start', title: 'Tuckshop'}" class="pages">
 			<div class="content_wrapper">

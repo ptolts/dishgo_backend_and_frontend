@@ -1,9 +1,13 @@
-.hours {
-  position: absolute;
-  right: 15px;
-  bottom: 15px;
-  width: 50%
+.hours_container {
+	width: 100%;
+	text-align: center;
+	display:block;
 }
+
+.hours {
+	text-align: left;
+}
+
 .hours h4 {
 	margin-bottom: 5px;
 }
@@ -14,12 +18,7 @@
 	padding: .3em .6em .3em;
 	letter-spacing: .5px;
 }
-/*extra small screens */
+
 @media (max-width: 560px){
-	.hours {
-		width: 100%
-	}
-	.hours .day_padding {
-	padding-left: 40px;
-	}
+
 }
