@@ -22,12 +22,22 @@
 		width: 100%;
 	}
 }
-
+.custom_modal-header {
+	border-bottom: 1px solid #e5e5e5;
+	margin-bottom: 10px;
+}
 .custom_modal-dialog {
 	min-height: 100%;
 	overflow: visible;
 }
-
+.custom_modal-footer {
+	border-top: 1px solid #e5e5e5;
+	margin-top: 10px;
+	padding-top: 10px;
+}
+.custom_modal-footer a {
+	float: right!important;
+}
 .custom_modal-content {
 	min-height: 100%;
 }
@@ -38,6 +48,7 @@
 .custom_modal-dialog .custom_modal-title {
 	font-size: 24px;
 	padding-top: 10px;
+	margin: 0;
 }
 .custom_modal-dialog .dish-price {
 	padding-top: 0px;
@@ -56,9 +67,9 @@
 	font-weight: 300;
 }
 .custom_modal .btn-default {
-color: #333333;
-background-color: #ffffff;
-border-color: #cccccc;
+	color: #333333;
+	background-color: #ffffff;
+	border-color: #cccccc;
 }
 .custom_modal .btn-default:hover,
 .custom_modal .btn-default:focus,
@@ -68,4 +79,17 @@ border-color: #cccccc;
   color: #333333;
   background-color: #ebebeb;
   border-color: #adadad;
+}
+.custom_modal .btn-section {
+  color: #fff;
+  background-color: #343e4b;
+  border: 1px solid #232A33;
+}
+.custom_modal .btn-section:hover,
+.custom_modal .btn-section:focus,
+.custom_modal .btn-section:active, 
+.custom_modal.btn-section.active, 
+.custom_modal .open .dropdown-toggle.btn-section{
+  opacity: 0.8;
+  color: #fff;
 }
