@@ -26,6 +26,7 @@
     <script type='text/javascript'>//<![CDATA[   
 
         var font_data = <%= raw(@fonts.to_json) %>;
+        var templates = <%= raw(@templates.to_json) %>
 
         ko.bindingHandlers.codemirror = {
             init: function(element, valueAccessor, allBindingsAccessor, viewModel) {
@@ -55,6 +56,7 @@
             self.fonts = ko.observableArray([]);
             self.selectedFont = ko.observable();            
             self.fonts($.map(font_data, function(item) { return new Font(item) }));    
+            self.templates = templates;
 
             self.createNewFontButton = ko.computed(function(){
                 if(self.selectedFont() && self.selectedFont().id() == "") {
@@ -144,8 +146,8 @@
 
         };
 
+        var viewmodel = new viewModel();
         $(function(){ 
-          var viewmodel = new viewModel();
           ko.applyBindings(viewmodel);
         });
 

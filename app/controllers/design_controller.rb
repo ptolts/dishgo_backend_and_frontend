@@ -17,6 +17,7 @@ class DesignController < ApplicationController
   end
 
   def fonts
+    @templates = Dir.glob("#{Rails.root}/custom_fonts/*").reject{|e| !File.directory?(e)}    
     @fonts = Font.all.as_json
     render 'fonts' 
   end
@@ -136,6 +137,7 @@ class DesignController < ApplicationController
     data = JSON.parse(params[:data])    
     font = Font.find(data["id"])
     font.link = data["link_data"]
+    font.template_location = data["template_location"]
     font.name = data["name"]
     font.css = data["css"]
     font.save
@@ -148,8 +150,9 @@ class DesignController < ApplicationController
   end  
 
   def destroy_font 
-    data = JSON.parse(params[:data])
-    font = Font.find(data["id"])
+    # data = JSON.parse(params[:data])
+    # data = params[:data]
+    font = Font.find(params["id"])
     font.destroy
     render :json => {"success" => true}.as_json
   end

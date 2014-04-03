@@ -84,10 +84,6 @@ body a:active, a:visited, a {
 	display: block;
 }
 
-.nav a:hover {
-	color: #000;
-}
-
 @media screen and (max-width: 850px) {
 
 	.content_wrapper {

@@ -17,7 +17,7 @@
 }
 
 .language_select li.selected {
-  text-decoration: underline;
+    display: none;
 }
 
 .language_select li:hover {

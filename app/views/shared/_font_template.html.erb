@@ -5,13 +5,19 @@
             <input class="form-control" data-bind="value: name" />
         </p>
         <div class="row">
+            <h4>CSS Template:</h4>
+            <select class="form-control" data-bind="options: $root.templates, value: template_location"></select>
+        </div> 
+        <!--          
+        <div class="row">
             <h4>Font Link:</h4>
             <textarea rows="50" data-bind="value: link_data, codemirror: { lineNumbers: true, matchBrackets: true, mode: 'text/css', theme:'lesser-dark', value:link_data }" placeholder="Font Link." style="width: 100%"></textarea>
-        </div>
+        </div>        
         <div class="row">
             <h4>Font CSS:</h4>
             <textarea rows="50" data-bind="value: css, codemirror: { lineNumbers: true, matchBrackets: true, mode: 'text/css', theme:'lesser-dark', value:css }" placeholder="Font Link." style="width: 100%"></textarea>
         </div>
+        -->
        <div class="row">
             <button class="btn btn-warning pull-left" data-bind="visible: new_font,click: $root.destroyFont">Destroy</button>
             <button class="btn btn-primary pull-right" data-bind="click: $root.updateFont, text: $root.createNewFontButton">Create</button>

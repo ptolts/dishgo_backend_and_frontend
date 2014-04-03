@@ -35,12 +35,14 @@
 			</ul>
 		</nav>			  	
 		<div id="left_menu">
-			<h3 class="restaurant_name">Tuckshop</h3>
+			<div class="restaurant_name" data-bind="with: restaurant">
+			  <div class="logo" data-bind="text: name"></div>
+			</div>
 			<nav id="navigation" class="nav">
 				<ul>
-					<li><a data-bind="page-href: 'start'">Home</a></li>
-					<li><a data-bind="page-href: 'menu'">Menu</a></li>
-					<li><a data-bind="page-href: 'contact'">Contact</a></li>
+					<li><a data-bind="page-href: 'start', lText: about_tr">Home</a></li>
+					<li><a data-bind="page-href: 'menu', lText: menu_tr">Menu</a></li>
+					<li><a data-bind="page-href: 'contact', lText: contact_tr">Contact</a></li>
 				</ul>
 			</nav>	
 			<div id="social_media" class="social_media" data-bind="with: restaurant">

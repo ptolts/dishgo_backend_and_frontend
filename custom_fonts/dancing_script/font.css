@@ -1,0 +1,10 @@
+h1 {
+    font-family: 'Dancing Script', cursive;
+}
+h2,h3,h4 {
+    font-family: 'EB Garamond', serif;
+    text-transform: uppercase;
+}
+* {
+    font-family: 'EB Garamond', serif;
+}

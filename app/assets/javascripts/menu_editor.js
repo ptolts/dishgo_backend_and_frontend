@@ -1210,7 +1210,12 @@ function PublicMenuModel() {
     self.menu_tr = ko.observable({
         'en':'Menu',
         'fr':'la Carte'
-    });  
+    }); 
+
+    self.about_tr = ko.observable({
+        'en':'About',
+        'fr':'Sur'
+    });       
 
     self.restaurant = ko.observable(new Restaurant(resto_data));
 
@@ -1313,7 +1318,10 @@ ko.bindingHandlers.lText = {
     update: function (element, valueAccessor) {
         var value = valueAccessor();
         var result = ko.observable(value()[viewmodel.lang()]);
-        ko.bindingHandlers.text.update(element, result);
+        $(element).fadeOut(250, function() {
+            ko.bindingHandlers.text.update(element, result);
+            $(element).fadeIn(250);
+        });        
     }
 };  
 

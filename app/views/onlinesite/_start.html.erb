@@ -1,5 +1,5 @@
 <!-- ko with: restaurant -->
-<h4 class="fancybox"><!-- ko text: name --><!-- /ko --> is currently <span class="label" data-bind="css:{'label-success':areWeOpened(),'label-danger':!areWeOpened()}, text: areWeOpenedText"></span></h4>
+<h4 class="fancybox"><!-- ko text: name --><!-- /ko --> is currently <span class="currently_open" data-bind="css:{'hours_opened':areWeOpened(),'hours_closed':!areWeOpened()}, text: areWeOpenedText"></span></h4>
 <p data-bind="lText: about_text"></p>
 
 <div class="hours_container">

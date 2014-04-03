@@ -5,6 +5,8 @@
             self.id = ko.observable(data._id ? data._id : "");
             self.name = ko.observable(data.name ? data.name : "New Font");
             self.css = ko.observable(data.css ? data.css : "");
+            self.template_location = ko.observable(data.template_location ? data.template_location : "");
+            self.css = ko.observable(data.css ? data.css : "");
             self.link_data = ko.observable(data.link ? data.link : "");
 
             self.new_font = ko.computed(function(){
