@@ -1,6 +1,6 @@
 <!-- ko with: restaurant -->
 <h4 class="fancybox"><!-- ko text: name --><!-- /ko --> is currently <span class="currently_open" data-bind="css:{'hours_opened':areWeOpened(),'hours_closed':!areWeOpened()}, text: areWeOpenedText"></span></h4>
-<p data-bind="lText: about_text"></p>
+<p data-bind="lHtml: about_text"></p>
 
 <div class="hours_container">
 	<div class="hours col-xs-12 col-md-6 col-md-offset-3">

@@ -1318,12 +1318,27 @@ ko.bindingHandlers.lText = {
     update: function (element, valueAccessor) {
         var value = valueAccessor();
         var result = ko.observable(value()[viewmodel.lang()]);
-        $(element).fadeOut(250, function() {
-            ko.bindingHandlers.text.update(element, result);
-            $(element).fadeIn(250);
-        });        
+        ko.bindingHandlers.text.update(element, result);
+        
+        // $(element).fadeOut(250, function() {
+        //     ko.bindingHandlers.text.update(element, result);
+        //     $(element).fadeIn(250);
+        // });        
     }
-};  
+}; 
+
+ko.bindingHandlers.lHtml = {
+    update: function (element, valueAccessor) {
+        var value = valueAccessor();
+        var result = ko.observable(value()[viewmodel.lang()]);
+        ko.utils.setHtml(element, result);
+        
+        // $(element).fadeOut(250, function() {
+        //     ko.bindingHandlers.text.update(element, result);
+        //     $(element).fadeIn(250);
+        // });        
+    }
+};   
 
 ko.virtualElements.allowedBindings.lText = true; 
 
