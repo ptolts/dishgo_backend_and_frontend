@@ -19,7 +19,7 @@
 }
 
 .hours_closed {
-  text-shadow: 0 0 0.1em #38DB38, 0 0 0.2em #38DB38, 0 0 0.3em #38DB38, 0 0 0.4em #38DB38,0 0 0.6em #1BE944, 0 0 0.8em #00C200, 0 0 1.0em #00C200, 0 0 1.2em #00C200;
+  text-shadow: 0 0 0.1em #FF0000, 0 0 0.2em #FF0000, 0 0 0.3em #FF0000, 0 0 0.4em #FF0000,0 0 0.6em #E82C0C, 0 0 0.8em #FF0000, 0 0 1.0em #FF0000, 0 0 1.2em #FF0000;
   color: #38DB38;	
 }
 

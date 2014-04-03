@@ -19,15 +19,7 @@ body {
 	margin-left: 3px;
 	margin-right: 3px;
 }
-.social_media .fa-instagram:hover {
-	color: #b75412;
-}
-.social_media .fa-facebook-square:hover {
-	color: #0072bc;
-}
-.social_media .fa-twitter-square:hover {
-	color: #0ef7ef;
-}
+
 #map-canvas { 
 	height: 300px;
 	width: 90%;

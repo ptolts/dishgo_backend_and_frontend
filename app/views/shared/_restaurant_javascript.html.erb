@@ -203,7 +203,13 @@
             // },
 
             self.socialVisible = function(type){
-                
+                return ko.computed(function(){
+                    if(self[type]() != null){
+                        return true;
+                    } else {
+                        return false;
+                    }
+                })                
             }            
 
             self.save = function(){
