@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.0.3' 
+gem 'rails'
 gem 'devise'
 gem 'cancan'
 gem 'role_model'
