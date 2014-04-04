@@ -59,7 +59,7 @@ class OnlinesiteController < ApplicationController
     settings = restaurant.website_settings || {}
     
     custom_imgs.each do |img|
-      Rails.logger.warn img
+      Rails.logger.warn "img --> #{img}"
       # Match the id of the image the user has selected which is stored in the restaurant object
       # to the id of the image files loaded. This seems ridiculously complex. Should really be cleaned up.  
       if settings[img["name"]] == img["_id"].to_s
