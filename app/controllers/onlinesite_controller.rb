@@ -47,15 +47,23 @@ class OnlinesiteController < ApplicationController
   def design_as_json des, restaurant
     Rails.logger.warn "design_as_json starts"
     custom_images = restaurant.global_images
+    Rails.logger.warn "custom_images = restaurant.global_images"
     des_json = des.as_json
+    Rails.logger.warn "des_json = des.as_json"
     allowed_images = des.global_images
+    Rails.logger.warn "allowed_images = des.global_images"
     allowed_images_names = allowed_images.collect{|e| e.name}
+    Rails.logger.warn "allowed_images_names = allowed_images.collect{|e| e.name}"
     custom_imgs = custom_images.reject{|e| !allowed_images_names.include?(e.name)}
+    Rails.logger.warn "custom_imgs = custom_images.reject{|e| !allowed_images_names.include?(e.name)}"
     allowed_images_names = custom_imgs.collect{|e| e.name}
+    Rails.logger.warn "allowed_images_names = custom_imgs.collect{|e| e.name}"
     custom_imgs = custom_imgs + allowed_images.reject{|e| allowed_images_names.include?(e.name)}
+    Rails.logger.warn "custom_imgs = custom_imgs + allowed_images.reject{|e| allowed_images_names.include?(e.name)}"
 
     image_objects_to_be_used = []
     custom_imgs = custom_imgs.as_json
+    Rails.logger.warn ""
     settings = restaurant.website_settings || {}
     
     custom_imgs.each do |img|
