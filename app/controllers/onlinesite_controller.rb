@@ -63,9 +63,10 @@ class OnlinesiteController < ApplicationController
 
     image_objects_to_be_used = []
     custom_imgs = custom_imgs.as_json
-    Rails.logger.warn ""
+    Rails.logger.warn "custom_imgs = custom_imgs.as_json"
     settings = restaurant.website_settings || {}
     
+    Rails.logger.warn "custom imgs.each starting"
     custom_imgs.each do |img|
       Rails.logger.warn "img --> #{img}"
       # Match the id of the image the user has selected which is stored in the restaurant object
@@ -80,7 +81,8 @@ class OnlinesiteController < ApplicationController
         end
       end
     end
-
+    
+    Rails.logger.warn "des_json[:global_images] = image_objects_to_be_used starting"
     des_json[:global_images] = image_objects_to_be_used
     Rails.logger.warn "design_as_json stops"
     des_json
