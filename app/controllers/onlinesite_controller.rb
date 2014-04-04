@@ -45,6 +45,7 @@ class OnlinesiteController < ApplicationController
   end
 
   def design_as_json des, restaurant
+    Rails.logger.warn "design_as_json starts"
     custom_images = restaurant.global_images
     des_json = des.as_json
     allowed_images = des.global_images
@@ -72,6 +73,7 @@ class OnlinesiteController < ApplicationController
     end
 
     des_json[:global_images] = image_objects_to_be_used
+    Rails.logger.warn "design_as_json stops"
     des_json
   end  
 

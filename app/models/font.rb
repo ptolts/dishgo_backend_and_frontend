@@ -19,5 +19,14 @@ class Font
 
   def template_font_link
     File.read("#{self.template_location}/link.txt")
-  end    
+  end 
+
+  def serializable_hash options
+    hash = super {}
+    if !self.template_location.blank?
+      hash[:css] = self.template_font_css
+    end
+    return hash
+  end
+
 end

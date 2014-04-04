@@ -116,9 +116,9 @@
             <input class="form-control" data-bind="value: name" />
         </p>
 
-        <div class="row">
+        <div class="row" data-bind="css: {'has-error':!template_location()}">
             <h4>CSS Template:</h4>
-            <select class="form-control" data-bind="options: $root.templates, value: template_location"></select>
+            <select class="form-control" data-bind="options: $root.templates, value: template_location, optionsCaption: 'Choose Folder'"></select>
         </div>        
 
         <div class="row">

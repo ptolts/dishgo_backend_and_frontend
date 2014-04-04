@@ -17,15 +17,7 @@
             self.global_images = ko.observableArray([]);
             self.carousel = ko.observableArray([]);
 
-      //       if(data.images){
-		    //     _.each(_.pairs(data.images),function(e){
-	     //    		var new_images = new EasyImage(e);
-	     //    		self.images.push(new_images);
-		    //     	if(self[new_images.name()] === undefined && new_images.name() != ""){
-		    //     		self[new_images.name()] = ko.observable(new_images);
-		    //     	}
-		    //     });
-		    // }
+
     		self.imgs = {};
 	        _.each(data.global_images,function(e){
         		var new_images = new GlobalImage(e);
@@ -130,6 +122,7 @@
         		new_images.parent_id = self.id;
         		if(new_images.default_image()){
         			self.defaultImage(new_images);
+        			self.url(new_images.url());
         		}
         		self.global_images.push(new_images);       		
 	        }); 
@@ -148,6 +141,7 @@
 
 	    self.setDefault = function(data){
 	    	self.dropdowning(false);
+	    	self.url(data.url());
 	    	self.defaultImage(data);
 	    }
 

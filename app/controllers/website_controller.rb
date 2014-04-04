@@ -2,7 +2,7 @@ class WebsiteController < ApplicationController
 	before_filter :authenticate_user!
 	before_filter :admin_user!, :only => []
 	before_filter :admin_or_owner!, :only => [:submit_design,:destroy_image]
-	layout 'administration'
+	layout 'build_online_site'
 
 	def index
 		# unless current_user.owns_restaurants.design

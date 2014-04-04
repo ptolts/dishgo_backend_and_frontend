@@ -8,6 +8,7 @@
             self.template_location = ko.observable(data.template_location ? data.template_location : "");
             self.css = ko.observable(data.css ? data.css : "");
             self.link_data = ko.observable(data.link ? data.link : "");
+            self.link_data_clean = ko.observable(data.link ? data.link.match(/href=\"[^\"]*/)[0].match(/http.*/)[0] : "");
 
             self.new_font = ko.computed(function(){
             	return self.id() != "";

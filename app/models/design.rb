@@ -21,5 +21,15 @@ class Design
 
   def template_menu_css
     File.read("#{self.template_location}/menu.css")
-  end  
+  end 
+
+  def serializable_hash options
+    hash = super {}
+    if !self.template_location.blank?
+      hash[:css] = self.template_base_css
+      hash[:menu_css] = self.template_menu_css
+    end
+    return hash
+  end
+
 end
