@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+	    <title></title>
+ 
+	    <%= raw(@font_link_data) %>
+
+		<%= stylesheet_link_tag    "online_site" %>
+		<%= stylesheet_link_tag    "website" %>
+		<%= javascript_include_tag "application" %>
+
+		<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDmVdO0hER_qFFNZN5C9Du28_-sSblng0Y&sensor=true"></script>	
+		<!--[if lt IE 9]>
+			<script src="https://css3-mediaqueries-js.googlecode.com/files/css3-mediaqueries.js"></script>
+			<script src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]-->	
+		<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, maximum-scale=1.0, minimal-ui" />		
+	</head>
+    <body>
+
+		<div data-bind="with: current_design">
+			<style data-bind="html: css"></style>		  	
+			<style data-bind="html: menu_css"></style>
+		</div>
+
+		<div data-bind="with: current_font">
+			<link data-bind="attr:{href:link_data_clean}" rel="stylesheet" type="text/css" />
+			<style data-bind="html: css"></style>
+		</div>
+
+		<div class="overlay"></div>  
+		<nav id="navigation_small" class="nav">
+
+		</nav>			  	
+		<div id="left_menu">
+			<div class="restaurant_name" data-bind="with: restaurant">
+			  <div class="logo" data-bind="text: name"></div>
+			</div>
+			<nav id="navigation" class="nav">
+
+			</nav>	
+			<div id="social_media" class="social_media" data-bind="with: restaurant">
+				<a data-bind="visible: socialVisible('facebook'), attr:{href: facebook}"><i class="fa fa-facebook-square"></i></a>
+				<a data-bind="visible: socialVisible('twitter'), attr:{href: twitter}"><i class="fa fa-twitter-square"></i></a>			
+				<a data-bind="visible: socialVisible('instagram'), attr:{href: instagram}"><i class="fa fa-instagram"></i></a>
+			</div>
+			<div class="main_page_language_selector">
+				<ul class="language_select" data-bind="foreach: languages">
+				  <li data-bind="css:{selected: $data === $root.lang()}, click: function(){ $root.lang($data) }"><span data-bind="text: $root.getFullLangName($data)"></span>
+				</ul>
+			</div>	
+			<div data-bind="style:{backgroundImage: $root.computeImage('header_background_pattern')}" class="pattern_background"></div>					
+		</div>
+
+		<div id="footer">
+			<div id="social_media_footer" class="social_media" data-bind="with: restaurant">
+				<a data-bind="visible: socialVisible('facebook'), attr:{href: facebook}"><i class="fa fa-facebook-square"></i></a>
+				<a data-bind="visible: socialVisible('twitter'), attr:{href: twitter}"><i class="fa fa-twitter-square"></i></a>			
+				<a data-bind="visible: socialVisible('instagram'), attr:{href: instagram}"><i class="fa fa-instagram"></i></a>
+			</div>	
+			<div data-bind="style:{backgroundImage: $root.computeImage('header_background_pattern')}" class="pattern_background"></div>				
+		</div>
+
+
+		<%= yield %>
+
+
+    </body>
+</html>
