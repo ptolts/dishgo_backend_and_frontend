@@ -61,7 +61,16 @@ body {
 #social_media {
 	display: none;
 }
-
+.powered_by_dishgo {
+	font-size: 14px;
+	text-align: center;
+	line-height: 18px;
+	margin: 25px 0;
+}
+#dishgo_logo {
+	margin-top: -5px;
+	height: 25px;
+}
 #navigation_small {
 	display:none;
 	position: fixed;
