@@ -155,34 +155,34 @@
                                 <div class="form-group" style="margin-bottom: 0px;">
                                     <div class="col-xs-8 push_down">
                                         <input class="form-control " data-bind="lValue: name, valueUpdate: 'afterkeydown', attr:{placeholder:placeholder}"/>
-                                    </div> 
-                                </div>
-                                <div data-bind="visible: $parent.extra_cost()">
-                                    <div class="col-xs-4 push_down"style="padding-left: 0px;" data-bind="visible: !price_according_to_size()">
-                                        <div class="input-group">
-                                            <span class="input-group-addon">$</span>
-                                            <input type="text" class="form-control price_filter" data-bind="value: price, valueUpdate: 'afterkeydown'">
-                                        </div>                                        
-                                    </div>
-                                    <div class="col-xs-12"  data-bind="visible: $parent.multiple_prices">
-                                        <div class="form-inline control_piece text-left">
-                                                <div class="checkbox">
-                                                    <label><input data-bind="checked: price_according_to_size" type="checkbox"><em id="uppercase"> Does the price depend on the dish size?</em></label>
+                                    </div>               
+                                    <div data-bind="visible: $parent.extra_cost()">
+                                        <div class="col-xs-4 push_down"style="padding-left: 0px;" data-bind="visible: !price_according_to_size()">
+                                            <div class="input-group">
+                                                <span class="input-group-addon">$</span>
+                                                <input type="text" class="form-control price_filter" data-bind="value: price, valueUpdate: 'afterkeydown'">
+                                            </div>                                        
+                                        </div>
+                                        <div class="col-xs-12"  data-bind="visible: $parent.multiple_prices">
+                                            <div class="form-inline control_piece text-left">
+                                                    <div class="checkbox">
+                                                        <label><input data-bind="checked: price_according_to_size" type="checkbox"><em id="uppercase"> Does the price depend on the dish size?</em></label>
+                                                    </div>
+                                            </div>                              
+                                        </div>
+                                        <div class="col-xs-12" data-bind="visible: price_according_to_size">             
+                                            <!-- ko foreach: size_prices -->
+                                                <div class="col-xs-12 push_down">
+                                                        <strong class="price_option_label col-xs-7" data-bind="lText: name"></strong>
+                                                        <div class="input-group col-xs-5">
+                                                            <span class="input-group-addon">$</span>
+                                                            <input type="text" class="form-control price_filter" data-bind="value: price, valueUpdate: 'afterkeydown'">
+                                                        </div>                                                                                
                                                 </div>
-                                        </div>                              
+                                            <!-- /ko -->
+                                        </div>                                  
                                     </div>
-                                    <div class="col-xs-12" data-bind="visible: price_according_to_size">             
-                                        <!-- ko foreach: size_prices -->
-                                            <div class="col-xs-12 push_down">
-                                                    <strong class="price_option_label col-xs-7" data-bind="lText: name"></strong>
-                                                    <div class="input-group col-xs-5">
-                                                        <span class="input-group-addon">$</span>
-                                                        <input type="text" class="form-control price_filter" data-bind="value: price, valueUpdate: 'afterkeydown'">
-                                                    </div>                                                                                
-                                            </div>
-                                        <!-- /ko -->
-                                    </div>                                  
-                                </div> 
+                                </div>     
 
                                 <div class="col-xs-5" id="no_padding">
                                     <!-- ICON UPLOADER -->
