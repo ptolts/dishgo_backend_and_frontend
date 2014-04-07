@@ -63,7 +63,6 @@
 #footer a {
 	color: #000;
 }
-
 .content_wrapper {
 	width: 600px;
 	max-height: 500px;
@@ -188,6 +187,8 @@
 	.nav.center ul {
 		left: 50%;
 		margin-left: -90px;
+	}
+	#dishgo_logo {
+		display: none;
 	}	
-	
 }
