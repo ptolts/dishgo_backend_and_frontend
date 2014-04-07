@@ -69,10 +69,7 @@
 				<a data-bind="visible: socialVisible('instagram'), attr:{href: instagram}"><i class="fa fa-instagram"></i></a>
 			</div>	
 			<div data-bind="style:{backgroundImage: $root.computeImage('header_background_pattern')}" class="pattern_background"></div>
-			<div class="powered_by_dishgo">Powered by <a href="https://dishgo.io"><img src="/app/public/logo.png" id="dishgo_logo"></a></div>
-			<!-- ko with: restaurant -->
-			<h4 class="open_status"><!-- ko text: name --><!-- /ko --> is <span class="currently_open" data-bind="css:{'hours_opened':areWeOpened(),'hours_closed':!areWeOpened()}, text: areWeOpenedText"></span></h4>
-			<!-- /ko -->				
+			<div class="powered_by_dishgo">Powered by <a href="https://dishgo.io"><img src="/app/public/logo.png" id="dishgo_logo"></a></div>			
 		</div>
 
 		<div id="opened_or_closed" data-bind="with: restaurant">

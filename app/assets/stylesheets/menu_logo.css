@@ -2,14 +2,14 @@
   font-family: 'Rancho';
   font-style: normal;
   font-weight: 400;
-  src: local('Rancho'), url(http://themes.googleusercontent.com/static/fonts/rancho/v4/EJt_7DbHYj8a5HS0_pTrl-vvDin1pK8aKteLpeZ5c0A.woff) format('woff');
+  src: local('Rancho'), url(https://themes.googleusercontent.com/static/fonts/rancho/v4/EJt_7DbHYj8a5HS0_pTrl-vvDin1pK8aKteLpeZ5c0A.woff) format('woff');
 }
 
 @font-face {
   font-family: 'Mr Dafoe';
   font-style: normal;
   font-weight: 400;
-  src: local('Mr Dafoe Regular'), local('MrDafoe-Regular'), url(http://themes.googleusercontent.com/static/fonts/mrdafoe/v3/F1AgEicuA-Vh7KAhE4UhjXYhjbSpvc47ee6xR_80Hnw.woff) format('woff');
+  src: local('Mr Dafoe Regular'), local('MrDafoe-Regular'), url(https://themes.googleusercontent.com/static/fonts/mrdafoe/v3/F1AgEicuA-Vh7KAhE4UhjXYhjbSpvc47ee6xR_80Hnw.woff) format('woff');
 }
 
 .font-effect-shadow-multiple {

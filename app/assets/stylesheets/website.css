@@ -4,13 +4,13 @@
 
 .note-toolbar {
 	position: absolute;
-	top: -20px;
+	top: -40px;
 	left: -10px;
 }
 
 .editor_language_selector {
 	position: absolute;
-	top: -15px;
+	top: -35px;
 	right: 5px;
 }
 
@@ -32,7 +32,7 @@
 }
 
 .content_wrapper_editor {
-	padding-top: 25px !important;
+	padding-top: 45px !important;
 }
 
 .note-editor {
