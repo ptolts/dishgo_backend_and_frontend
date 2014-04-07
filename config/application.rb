@@ -66,7 +66,15 @@ module Foodcloud
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
 
-    config.assets.precompile += ['menu_editor.js','menu-builder.css','codemirror.js','codemirror.css','online_site.css','picker.js','wysiwyg.js']
+    config.assets.precompile += [   'menu_editor.js',
+                                    'menu-builder.css',
+                                    'codemirror.js',
+                                    'codemirror.css',
+                                    'online_site.css',
+                                    'website.css',
+                                    'picker.js',
+                                    'wysiwyg.js'
+                                ]
 
   end
 end
