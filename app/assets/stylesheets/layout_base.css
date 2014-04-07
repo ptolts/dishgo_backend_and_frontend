@@ -6,6 +6,14 @@ body {
 	margin: 0;
 }
 
+#opened_or_closed {
+	display: none;
+}
+
+#opened_or_closed_footer {
+	display: none;
+}
+
 .main_page_language_selector {
 	position: absolute;
 }
@@ -20,12 +28,22 @@ body {
 	margin-right: 3px;
 }
 
-#map-canvas { 
-	height: 300px;
+#map-canvas{ 
+	height: 200px;
 	width: 90%;
 	margin-left: auto;
 	margin-right: auto;
 }
+
+#map-canvas label{
+	width:auto !important;
+	display:inline !important;
+}
+
+#map-canvas img{
+	max-width:none !important;
+}
+
 .overlay:after {
 	background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAGCAYAAADgzO9IAAAAHUlEQVQIW2NkYGD4D8SM6DRIAAQwJDFUwhRRUQcALRkSBISGlPAAAAAASUVORK5CYII=") repeat top left;
 	content: "";

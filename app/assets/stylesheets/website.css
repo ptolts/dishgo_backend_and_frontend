@@ -1,6 +1,69 @@
+/*
+*= require bootstrap_wysihtml
+*/
+
+.note-toolbar {
+	position: absolute;
+	top: -20px;
+	left: -10px;
+}
+
+.editor_language_selector {
+	position: absolute;
+	top: -15px;
+	right: 5px;
+}
+
+.file_upload_button {
+    position: relative;
+    overflow: hidden;
+}
+
+.file_upload_input {
+	position: absolute;
+	top: 0;
+	right: 0;
+	margin: 0;
+	opacity: 0;
+	-ms-filter: 'alpha(opacity=0)';
+	font-size: 50px;
+	direction: ltr;
+	cursor: pointer;
+}
+
+.content_wrapper_editor {
+	padding-top: 25px !important;
+}
+
+.note-editor {
+	border: none;
+}
+
 .website_pages {
 	border-radius: 5px;
 	background-color: #dcdcdc;
+}
+
+.layout_controls {
+	position: absolute;
+	left: 50%;
+	top: 100px;
+	-webkit-transform:	translateX(-50%);
+	-moz-transform:		translateX(-50%);
+	-ms-transform:		translateX(-50%);
+	-o-transform:		translateX(-50%);  
+	transform:			translateX(-50%);
+	-webkit-backface-visibility: hidden;	
+	width: 1000px;
+	overflow-y: scroll;	
+	background-color: #fff;
+	border-radius: 5px;
+	padding: 15px;
+	color: #000;
+	border: 1px solid rgba(0, 0, 0, 0.2);
+	border-radius: 6px;
+	-webkit-box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+	box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);	
 }
 
 .website_pages .pull-left {
@@ -102,4 +165,10 @@
 }
 
 .image_dropdown img:hover {
+}
+
+.save_website_button {
+	position: fixed;
+	top: 15px;
+	right: 15px;
 }

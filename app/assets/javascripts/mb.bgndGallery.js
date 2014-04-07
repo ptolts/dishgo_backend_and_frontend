@@ -366,10 +366,10 @@ jQuery.fn.CSSAnimate=function(a,f,k,m,e){return this.each(function(){var b=jQuer
 				image.attr("src", el.opt.placeHolder);
 			})
 
-			if(el.opt.grayScale){
-				image.greyScale(el);
+			// if(el.opt.grayScale){
+			// 	image.greyScale(el);
 
-			}
+			// }
 
 			var counter=$(el.opt.controls).find(".counter");
 			counter.html(el.opt.imageCounter+1+" / "+el.opt.images.length);
@@ -740,18 +740,18 @@ jQuery.fn.CSSAnimate=function(a,f,k,m,e){return this.each(function(){var b=jQuer
 		return arr;
 	};
 
-	$.fn.greyScale = function(el) {
-		return this.each(function() {
-			if ($.browser.msie && $.browser.version<9) {
-				this.style.filter = "progid:DXImageTransform.Microsoft.BasicImage(grayScale=1)";
-			} else if($.browser.webkit){
-				el.opt.gallery.css("-webkit-filter", "grayscale(1) sepia(.4)");
-			} else {
-				this.src = grayScaleImage(this);
-			}
+	// $.fn.greyScale = function(el) {
+	// 	return this.each(function() {
+	// 		if ($.browser.msie && $.browser.version<9) {
+	// 			this.style.filter = "progid:DXImageTransform.Microsoft.BasicImage(grayScale=1)";
+	// 		} else if($.browser.webkit){
+	// 			el.opt.gallery.css("-webkit-filter", "grayscale(1) sepia(.4)");
+	// 		} else {
+	// 			this.src = grayScaleImage(this);
+	// 		}
 
-		})
-	};
+	// 	})
+	// };
 
 	$.shuffle = function(arr) {
 		var newArray = arr.slice();
@@ -766,30 +766,30 @@ jQuery.fn.CSSAnimate=function(a,f,k,m,e){return this.each(function(){var b=jQuer
 		return newArray;
 	};
 
-	function grayScaleImage(imgObj){
-		var canvas = document.createElement('canvas');
-		var canvasContext = canvas.getContext('2d');
+	// function grayScaleImage(imgObj){
+	// 	var canvas = document.createElement('canvas');
+	// 	var canvasContext = canvas.getContext('2d');
 
-		var imgW = imgObj.width;
-		var imgH = imgObj.height;
-		canvas.width = imgW;
-		canvas.height = imgH;
+	// 	var imgW = imgObj.width;
+	// 	var imgH = imgObj.height;
+	// 	canvas.width = imgW;
+	// 	canvas.height = imgH;
 
-		canvasContext.drawImage(imgObj, 0, 0);
-		var imgPixels = canvasContext.getImageData(0, 0, imgW, imgH);
+	// 	canvasContext.drawImage(imgObj, 0, 0);
+	// 	var imgPixels = canvasContext.getImageData(0, 0, imgW, imgH);
 
-		for(var y = 0; y < imgPixels.height; y++){
-			for(var x = 0; x < imgPixels.width; x++){
-				var i = (y * 4) * imgPixels.width + x * 4;
-				var avg = (imgPixels.data[i] + imgPixels.data[i + 1] + imgPixels.data[i + 2]) / 3;
-				imgPixels.data[i] = avg;
-				imgPixels.data[i + 1] = avg;
-				imgPixels.data[i + 2] = avg;
-			}
-		}
-		canvasContext.putImageData(imgPixels, 0, 0, 0, 0, imgPixels.width, imgPixels.height);
-		return canvas.toDataURL();
-	}
+	// 	for(var y = 0; y < imgPixels.height; y++){
+	// 		for(var x = 0; x < imgPixels.width; x++){
+	// 			var i = (y * 4) * imgPixels.width + x * 4;
+	// 			var avg = (imgPixels.data[i] + imgPixels.data[i + 1] + imgPixels.data[i + 2]) / 3;
+	// 			imgPixels.data[i] = avg;
+	// 			imgPixels.data[i + 1] = avg;
+	// 			imgPixels.data[i + 2] = avg;
+	// 		}
+	// 	}
+	// 	canvasContext.putImageData(imgPixels, 0, 0, 0, 0, imgPixels.width, imgPixels.height);
+	// 	return canvas.toDataURL();
+	// }
 
 
 

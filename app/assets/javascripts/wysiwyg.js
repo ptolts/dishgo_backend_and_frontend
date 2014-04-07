@@ -6,6 +6,7 @@
 
 	ko.bindingHandlers['wysiwyg'] = {
 		init: function (element, valueAccessor, allBindingsAccessor) {
+        	console.log("DEBUG: wysiwyg firing on: " + element);
 			var underlyingObservable = valueAccessor();
 			var interceptor = ko.computed({
 			    read: function () {
@@ -23,12 +24,24 @@
             	onkeyup: function (cm) {
 	                interceptor($(element).code());
 				},
+				toolbar: [
+				    //['style', ['style']], // no style button
+				    ['style', ['bold', 'italic', 'underline', 'clear']],
+				    ['fontsize', ['fontsize']],
+				    ['color', ['color']],
+				    ['para', ['paragraph']],
+				    // ['height', ['height']],
+				    //['insert', ['picture', 'link']], // no insert buttons
+				    //['table', ['table']], // no table button
+				    //['help', ['help']] //no help button
+				  ],			
             });
 
             $(element).code(interceptor());
           
         },
         update: function (element, valueAccessor, allBindingsAccessor) {
+        	console.log("DEBUG: wysiwyg firing on: " + element);
 			var underlyingObservable = valueAccessor();
 			var interceptor = ko.computed({
 			    read: function () {

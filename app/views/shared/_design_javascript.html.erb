@@ -117,6 +117,7 @@
 
 	        _.each(data.global_images,function(e){
         		var new_images = new GlobalImage(e);
+        		console.log("new global image: "+new_images.id());
         		new_images.design_id(self.design_id());
         		new_images.parent = self;
         		new_images.parent_id = self.id;
@@ -199,7 +200,8 @@
 	            	carousel: viewModel.carousel(),
 	            	design_id: viewModel.design_id(), 
 	            	name: viewModel.name(),
-	            	parent_id: viewModel.parent_id()
+	            	parent_id: viewModel.parent_id(),
+	            	data: ko.toJSON(viewModel)
 	            },           
 	            url: "/app/design/upload_image",
 	            dataType: 'json',
@@ -212,12 +214,14 @@
 	            },
 	            done: function (e, data) {
 	                var file = data.result.files[0];
-	                viewModel.update_info(file); 
 	                if(viewModel.carousel()){
 		                viewModel.parent.addCarousel();
 	                }  else {
-	                	viewModel.parent.addImage();                              	                	
-	                }	                                              
+	                	if(viewModel.id() == ""){
+	                		viewModel.parent.addImage();
+	                	}
+	                }		                
+	                viewModel.update_info(file);                                               
 	            },
 	            progressall: function (e, data) {
 	                var progress = parseInt(data.loaded / data.total * 100, 10);

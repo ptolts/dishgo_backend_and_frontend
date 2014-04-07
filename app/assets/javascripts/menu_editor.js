@@ -10,6 +10,7 @@
 ko.bindingHandlers.fitText = {
     update: function(element, valueAccessor, allBindingsAccessor, viewModel, bindingContext) {
         var self = this;
+        console.log("DEBUG: fitText firing on: " + element);
         $(element).fitText(1);
     }
 };
@@ -1284,6 +1285,7 @@ ko.bindingHandlers.jcrop = {
 
 ko.bindingHandlers.lValue = {
     init: function (element, valueAccessor, allBindingsAccessor) {
+    console.log("DEBUG: lValue firing on: " + element);
     var underlyingObservable = valueAccessor();
     var interceptor = ko.computed({
         read: function () {
@@ -1316,6 +1318,7 @@ ko.bindingHandlers.lValue = {
 
 ko.bindingHandlers.lText = {
     update: function (element, valueAccessor) {
+        console.log("DEBUG: lText firing on: " + element);        
         var value = valueAccessor();
         var result = ko.observable(value()[viewmodel.lang()]);
         ko.bindingHandlers.text.update(element, result);
@@ -1329,6 +1332,7 @@ ko.bindingHandlers.lText = {
 
 ko.bindingHandlers.lHtml = {
     update: function (element, valueAccessor) {
+        console.log("DEBUG: lHtml firing on: " + element);
         var value = valueAccessor();
         var result = ko.observable(value()[viewmodel.lang()]);
         ko.utils.setHtml(element, result);

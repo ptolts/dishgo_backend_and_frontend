@@ -1,13 +1,10 @@
-<div class="container">
+<div class="layout_controls">
 
     <div class="row">
         <div class="col-md-8">
-        <ul class="nav nav-pills" data-bind="foreach: $__page__.children">
-            <li data-bind="css: {active: isVisible}"><a data-bind="text: $data.val('title'), page-href: $data"></a></li>
-        </ul>
-        </div>
-        <div class="col-md-4">
-            <button class="btn btn-success btn-lg col-xs-12" data-bind="click: $root.submitDesign">Save <span class="glyphicon glyphicon-floppy-disk"></span></button>
+            <ul class="nav nav-pills" data-bind="foreach: $page.children">
+                <li data-bind="css: {active: isVisible}"><a data-bind="text: $data.val('title'), page-href: $data"></a></li>
+            </ul>
         </div>
     </div>    
 
@@ -73,31 +70,6 @@
             </div>
         </div>
 
-        <div data-bind="page: {id: 'content', title: 'Text Content'}" class="website_pages">
-            <div class="row">
-                <div class="col-xs-12">
-                    <div data-bind="template: { name: 'text_content_template', data: $root.restaurant }"></div>
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <hr class="website_line">
-                            <button class="btn btn-primary pull-left col-xs-4" data-bind="click: function(){ $root.previousPage($page) }, visible: $root.visiblePrevious($page)"><span class="glyphicon glyphicon-chevron-left"></span> Previous</button>    
-                            <button class="btn btn-primary pull-right col-xs-4" data-bind="click: function(){ $root.nextPage($page) }, visible: $root.visibleNext($page)">Next <span class="glyphicon glyphicon-chevron-right"></span></button>
-                        </div>
-                    </div>                  
-                </div>
-            </div>
-        </div>
-
     <!-- /ko -->
-      
-    <%= javascript_include_tag "menu_editor" %>
-    <%= javascript_include_tag "wysiwyg" %>
-    <%= render 'shared/restaurant_template' %>
-    <%= render 'shared/custom_design_template' %>
-    <%= render 'shared/design_javascript' %>
-    <%= render 'shared/font_javascript' %>
-    <%= render 'shared/restaurant_javascript' %>
-
-    <%= render 'website_javascript_ignition' %>
 
 </div>

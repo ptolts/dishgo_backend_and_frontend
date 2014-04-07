@@ -2,18 +2,19 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 	    <title></title>
+		<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, maximum-scale=1.0, minimal-ui" />		
  
 	    <%= raw(@font_link_data) %>
 
 		<%= stylesheet_link_tag    "online_site" %>
 		<%= javascript_include_tag "application" %>
 
-		<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDmVdO0hER_qFFNZN5C9Du28_-sSblng0Y&sensor=true"></script>	
+		<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDmVdO0hER_qFFNZN5C9Du28_-sSblng0Y&sensor=false"></script>	
+
 		<!--[if lt IE 9]>
 			<script src="https://css3-mediaqueries-js.googlecode.com/files/css3-mediaqueries.js"></script>
 			<script src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->	
-		<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, maximum-scale=1.0, minimal-ui" />		
 	</head>
     <body>
 		<style>
@@ -58,7 +59,10 @@
 			<div data-bind="style:{backgroundImage: $root.computeImage('header_background_pattern')}" class="pattern_background"></div>					
 		</div>
 
-		<div id="footer">
+		<div id="footer">	
+			<div id="opened_or_closed_footer" data-bind="with: restaurant">
+				<h4><span class="currently_open_tag">currently </span><span class="currently_open" data-bind="css:{'hours_opened':areWeOpened(),'hours_closed':!areWeOpened()}, text: areWeOpenedText"></span></h4>
+			</div>				
 			<div id="social_media_footer" class="social_media" data-bind="with: restaurant">
 				<a data-bind="visible: socialVisible('facebook'), attr:{href: facebook}"><i class="fa fa-facebook-square"></i></a>
 				<a data-bind="visible: socialVisible('twitter'), attr:{href: twitter}"><i class="fa fa-twitter-square"></i></a>			
@@ -67,27 +71,18 @@
 			<div data-bind="style:{backgroundImage: $root.computeImage('header_background_pattern')}" class="pattern_background"></div>				
 		</div>
 
+		<div id="opened_or_closed" data-bind="with: restaurant">
+			<h4><span class="currently_open_tag">currently </span><span class="currently_open" data-bind="css:{'hours_opened':areWeOpened(),'hours_closed':!areWeOpened()}, text: areWeOpenedText"></span></h4>
+		</div>	
 
 		<div data-bind="page: {id: 'start', title: 'Tuckshop'}" class="pages">
 			<div class="content_wrapper">
-<!-- 				<div class="wrapper_corner">
-	      			<div class="wrapper_corner_inner" data-bind="style:{backgroundImage: $root.computeImage('header_background_pattern')}"></div>
-	  			</div>
-	  			<div class="wrapper_corner top_left">
-	      			<div class="wrapper_corner_inner" data-bind="style:{backgroundImage: $root.computeImage('header_background_pattern')}"></div>
- 				</div>
-	   			<div class="wrapper_corner bottom_left">
-	      			<div class="wrapper_corner_inner" data-bind="style:{backgroundImage: $root.computeImage('header_background_pattern')}"></div>
-				</div>
-	   			<div class="wrapper_corner bottom_right">
-	      			<div class="wrapper_corner_inner" data-bind="style:{backgroundImage: $root.computeImage('header_background_pattern')}"></div>
-				</div> -->
 				<div id="content">					
 					<%= render 'start' %>
 				</div>			
 			</div>							
 		</div>	
-		<div data-bind="page: {id: 'contact', title: 'Contact Tuckshop'}" class="pages">
+		<div data-bind="page: {id: 'contact', title: 'Contact Tuckshop', afterShow: showMap}" class="pages">
 			<div class="content_wrapper">
 				<div id="content">					
 					<%= render 'contact' %>

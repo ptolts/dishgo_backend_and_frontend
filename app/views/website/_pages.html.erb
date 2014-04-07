@@ -1,0 +1,22 @@
+<!-- <div class="layout_controls">
+    <div class="row">
+        <div class="col-md-8">
+            <ul class="nav nav-pills" data-bind="foreach: $page.children">
+                <li data-bind="css: {active: isVisible}"><a data-bind="text: $data.val('title'), page-href: $data"></a></li>
+            </ul>
+        </div>
+    </div>   
+</div>   --> 
+
+
+
+<!-- ko if: current_design -->
+
+    <div data-bind="page: {id: 'start', title: 'About Page Content'}" class="content_wrapper content_wrapper_editor">
+        <div class="row">
+            <div data-bind="template: { name: 'text_content_template', data: $root.restaurant }"></div>                 
+        </div>
+    </div>
+
+<!-- /ko -->
+      

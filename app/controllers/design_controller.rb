@@ -92,7 +92,7 @@ class DesignController < ApplicationController
 
     img.name = params[:name]
 
-    if params[:carousel]
+    if !params[:carousel].blank?
       img.design = Design.find(params[:design_id])
       img.update_attributes({:img => file})
       img.save
@@ -104,11 +104,18 @@ class DesignController < ApplicationController
                       }.as_json 
       return     
     else
-      sub_img = GlobalImage.create
+      data = JSON.parse(params[:data])
+      Rails.logger.warn data.to_s
+      Rails.logger.warn "-----------------------"
+      if g_id = data["id"] and !g_id.blank?
+        sub_img = GlobalImage.find(g_id)
+      else
+        sub_img = GlobalImage.create
+        img.global_images << sub_img        
+      end
       sub_img.name = params[:name]
       sub_img.update_attributes({:img => file})
       sub_img.save
-      img.global_images << sub_img
       img.save
       render :json => {files:[{
                           image_id: sub_img.id,

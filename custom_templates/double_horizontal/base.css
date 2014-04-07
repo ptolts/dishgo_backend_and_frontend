@@ -5,6 +5,13 @@
 	top: 20px;
 }
 
+#opened_or_closed_footer {
+	position: absolute;
+	left: 15px;
+	line-height: 75px;
+	display: block;
+}
+
 #social_media_footer {
 	position: absolute;
 	right: 15px;
@@ -58,17 +65,21 @@
 }
 
 .content_wrapper {
-	position: absolute;
 	width: 600px;
-	height: 500px;
+	max-height: 500px;
+	min-height: 200px;
 	background-color: rgba(0, 0, 0, 0.85);
 	padding: 15px;
+	padding-top: 20px;
+	padding-bottom: 20px;
 	color: #fff;
 	border-radius: 5px;
+	position: absolute;
 	top: 50%;
 	left: 50%;
-	margin-left: -300px;
-	margin-top: -250px;
+	-webkit-transform: translate(-50%,-50%);
+	-ms-transform: translate(-50%,-50%);
+	transform: translate(-50%,-50%);	
 /*	border-style: solid;
 	border-width: 10px;
 	-moz-border-image: url(choppyborder.jpg) 14 15 15 14;
@@ -98,6 +109,10 @@
 
 @media screen and (max-width: 850px) {
 
+	.currently_open_tag {
+		display: none;
+	}
+
 	.restaurant_name {
 
 	}	
@@ -113,6 +128,9 @@
 		margin: 0;
 		border-radius: 0px;	
 		margin-bottom: 85px;
+		-webkit-transform: translate(0%,0%);
+		-ms-transform: translate(0%,0%);
+		transform: translate(0%,0%);		
 	}
 
 	.nav ul {

@@ -121,12 +121,12 @@
             <select class="form-control" data-bind="options: $root.templates, value: template_location, optionsCaption: 'Choose Folder'"></select>
         </div>        
 
-        <div class="row">
+        <div class="row" style="display:none">
             <h4>CSS:</h4>
             <textarea rows="50" data-bind="value: css, codemirror: { lineNumbers: true, matchBrackets: true, mode: 'text/css', theme:'lesser-dark', value:css }" placeholder="Design Specific CSS." style="width: 100%"></textarea>
         </div>
 
-        <div class="row">
+        <div class="row" style="display:none">
             <h4>Menu CSS:</h4>
             <textarea rows="50" data-bind="value: menu_css, codemirror: { lineNumbers: true, matchBrackets: true, mode: 'text/css', theme:'lesser-dark', value:menu_css }" placeholder="Menu Specific CSS." style="width: 100%"></textarea>
         </div>

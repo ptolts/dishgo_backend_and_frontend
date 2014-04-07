@@ -8,7 +8,8 @@
 		<%= stylesheet_link_tag    "online_site" %>
 		<%= stylesheet_link_tag    "website" %>
 		<%= javascript_include_tag "application" %>
-
+		<%= csrf_meta_tags %>
+		
 		<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDmVdO0hER_qFFNZN5C9Du28_-sSblng0Y&sensor=true"></script>	
 		<!--[if lt IE 9]>
 			<script src="https://css3-mediaqueries-js.googlecode.com/files/css3-mediaqueries.js"></script>
@@ -37,7 +38,10 @@
 			  <div class="logo" data-bind="text: name"></div>
 			</div>
 			<nav id="navigation" class="nav">
-
+				<ul>
+					<li><a data-bind="page-href: 'start', lText: layout_tr">Layout</a></li>
+					<li><a data-bind="page-href: 'pages', lText: pages_tr">Text</a></li>
+				</ul>
 			</nav>	
 			<div id="social_media" class="social_media" data-bind="with: restaurant">
 				<a data-bind="visible: socialVisible('facebook'), attr:{href: facebook}"><i class="fa fa-facebook-square"></i></a>
@@ -45,10 +49,8 @@
 				<a data-bind="visible: socialVisible('instagram'), attr:{href: instagram}"><i class="fa fa-instagram"></i></a>
 			</div>
 			<div class="main_page_language_selector">
-				<ul class="language_select" data-bind="foreach: languages">
-				  <li data-bind="css:{selected: $data === $root.lang()}, click: function(){ $root.lang($data) }"><span data-bind="text: $root.getFullLangName($data)"></span>
-				</ul>
-			</div>	
+
+			</div>
 			<div data-bind="style:{backgroundImage: $root.computeImage('header_background_pattern')}" class="pattern_background"></div>					
 		</div>
 
@@ -61,9 +63,28 @@
 			<div data-bind="style:{backgroundImage: $root.computeImage('header_background_pattern')}" class="pattern_background"></div>				
 		</div>
 
+		<div class="save_website_button col-md-4">
+		    <button class="btn btn-success btn-lg col-xs-12" data-bind="click: $root.submitDesign">Save <span class="glyphicon glyphicon-floppy-disk"></span></button>
+		</div>
 
-		<%= yield %>
+		<div data-bind="page: {id: 'start', title: 'Layout'}">
+			<%= yield %>
+		</div>	
 
+		<div data-bind="page: {id: 'pages', title: 'Text Editor'}">
+			<%= render 'pages' %>
+		</div>	
+
+	    <%= javascript_include_tag "menu_editor" %>
+	    <%= javascript_include_tag "wysiwyg" %>
+	    <%= render 'shared/restaurant_template' %>
+	    <%= render 'shared/custom_design_template' %>
+	    <%= render 'shared/design_javascript' %>
+	    <%= render 'shared/font_javascript' %>
+	    <%= render 'shared/restaurant_javascript' %>
+
+	    <%= render 'website_javascript_ignition' %>
 
     </body>
+
 </html>

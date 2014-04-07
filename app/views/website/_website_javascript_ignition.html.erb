@@ -8,8 +8,22 @@
         var resto_data = <%= raw(current_user.owns_restaurants.as_document.to_json) %>;
 
 
+        ko.bindingHandlers.logger = {
+            update: function(element, valueAccessor, allBindings) {
+                //store a counter with this element
+                var count = ko.utils.domData.get(element, "_ko_logger") || 0
+
+                ko.utils.domData.set(element, "_ko_logger", ++count);
+
+                if (window.console && console.log) {
+                    console.log(count, element);
+                }
+            }
+        };
+
         ko.bindingHandlers.iFrame = {
             update: function (element, valueAccessor) {
+                console.log("DEBUG: iFrame firing on: " + element);
                 var value = valueAccessor();
 
                 var html = "<!DOCTYPE html>\n<html>\n<head>\nFONT_LINK_DATA\n<style>html{ overflow: hidden; }</style></head>\n<body>\n<style>\nCSS_DATA_HERE\n</style>\n<h1>Example Header</h1>\n<h3>Sub Header</h3>\n<p>Paragraph style example. This is how the main text would always look throughout your site.</p>\n</body>\n</html>";
@@ -35,6 +49,16 @@
 		      'en'  : 'English',
 		      'fr'  : 'Français',
 		    }  
+
+            self.layout_tr = ko.observable({
+                'en':'Layout',
+                'fr':'Disposition'
+            }); 
+
+            self.pages_tr = ko.observable({
+                'en':'Pages',
+                'fr':'Pages'
+            });                          
 
 		    self.getFullLangName = function(l){ 
 		      return ko.observable(self.languages_full[l]) 
