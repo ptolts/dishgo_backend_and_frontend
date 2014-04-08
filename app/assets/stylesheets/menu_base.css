@@ -2,6 +2,10 @@
   display: none;
 }
 
+.dish_min_height {
+  min-height: 150px;
+}
+
 .grow {
   display: inline-block;
   -webkit-transition-duration: 0.3s;

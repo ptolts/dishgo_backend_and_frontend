@@ -12,7 +12,9 @@ class Design
   field :template_location, type: String
 
   has_many :restaurant
-  has_many :global_images, class_name: "GlobalImage"
+  has_many :global_images, class_name: "GlobalImage", inverse_of: :design
+  has_one :example_image, class_name: "GlobalImage", inverse_of: :design_demo
+
   index({ _id:1 }, { unique: true, name:"id_index" })
 
   def template_base_css
@@ -28,6 +30,9 @@ class Design
     if !self.template_location.blank?
       hash[:css] = self.template_base_css
       hash[:menu_css] = self.template_menu_css
+    end
+    if self.example_image
+      hash[:example_image] = self.example_image.as_json
     end
     return hash
   end

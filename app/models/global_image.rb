@@ -12,12 +12,14 @@ class GlobalImage
   field :template_location, type: String 
   # field :css, type: String 
   field :customizable, type: Boolean
+  field :example_image, type: Boolean
   field :carousel, type: Boolean
   field :custom, type: Boolean
   field :default_image, type: Boolean
   field :description, localize: true
 
-  belongs_to :design, index: true
+  belongs_to :design, class_name: "Design", index: true, inverse_of: :global_images
+  belongs_to :design_demo, class_name: "Design", index: true, inverse_of: :exmaple_image
   belongs_to :restaurant, index: true
 
   has_many :global_images, class_name: "GlobalImage"
@@ -61,8 +63,8 @@ class GlobalImage
   end
 
   def template_image_css
-    return nil unless self.template_location
-    File.read("#{self.template_location}/base.css")
+    return nil unless !self.template_location.blank?
+    return File.read("#{self.template_location}/base.css")
   end
 
   def serializable_hash options
@@ -71,9 +73,7 @@ class GlobalImage
     start[:_id] = self._id
     start[:url] = self.img_url_original
     start[:global_images] = self.global_images.reject{|q| next q == self}.collect{|e| e.serializable_hash({})}
-    # if !self.template_location.blank?
-      start[:css] = self.template_image_css
-    # end    
+    start[:css] = self.template_image_css
     start
   end
 

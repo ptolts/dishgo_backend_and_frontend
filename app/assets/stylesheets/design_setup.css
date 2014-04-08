@@ -1,0 +1,27 @@
+.design_setup .thumbnail img {
+	max-width: 150px;
+	max-height: 150px;
+
+}
+
+.design_setup .actual_image {
+	min-height: 185px;
+}
+
+.design_setup .thumbnail {
+}
+
+.save_button_float {
+	position: fixed;
+	bottom: 15px;
+	right: 25px;
+}
+
+.save_button_float .btn{
+	width: 200px;
+}
+
+.design_image_box {
+	border: 1px solid black;
+	border-radius: 5px;
+}

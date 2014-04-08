@@ -1,19 +1,25 @@
 <script id="design_image" type="text/html">
-    <div class="col-xs-12 push_down">
-
-        <div class="col-md-6 form">
+    <div class="col-xs-12 push_down design_image_box">
+        <div class="col-md-12 form">
             <div class="row">
-                <div class="col-xs-12">
-                    <h4>Image Properties:</h4>
-                    <div class="form-group">
-                        <label>Name: </label><input class="form-control" data-bind="value: name" />
-                    </div>
-                    <div class="form-group">
-                        <label>Customizable: </label><input type="checkbox" data-bind="checked: customizable" />
-                    </div>
-                    <div class="form-group">
-                        <label>Description: </label><input class="form-control" data-bind="value: description" />
-                    </div>
+                <h3>Image Properties: [<span data-bind="text: id"></span>]</h3>
+                <div class="col-xs-6">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <label>Name: </label><input class="form-control" data-bind="value: name" />
+                        </div>                                
+                    </div>                                
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <label>Description: </label><input class="form-control" data-bind="value: description" />
+                        </div>                       
+                    </div> 
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <button class="btn btn-warning" data-bind="click: $parent.destroyImage">Destroy</button>
+                            <label>Customizable: </label><input type="checkbox" data-bind="checked: customizable" />
+                        </div>                       
+                    </div>                       
                 </div>
             </div>
         </div> 
@@ -31,7 +37,7 @@
                                 </div> 
                             </div> 
                             <div class="completed_image" data-bind="visible: completed">
-                                <div class="col-xs-12 text-center">
+                                <div class="col-xs-12 text-center actual_image">
                                     <div class="thumbnail">
                                         <img class="img-rounded" data-bind="attr: {src: url}" />
                                     </div>
@@ -47,22 +53,68 @@
                     <!-- /ko -->
                     <div class="caption">
                         <div class="row">
-                            <span class="btn btn-block btn-section file_upload_button col-xs-6">
-                                <i class="glyphicon glyphicon-picture"></i>
-                                <span data-bind="text: computedImageUpload">Upload Image</span>
-                                <input data-bind="file_upload_global" id="fileupload" type="file" name="files"  class="file_upload_input" accept="images/*" capture="camera">
-                            </span>
-                        </div>
-                        <div class="row" data-bind="css: {'has-error':!template_location()}">
-                            <h4>CSS Template:</h4>
-                            <select class="form-control" data-bind="options: $root.image_templates, value: template_location, optionsCaption: 'Choose Folder'"></select>
+                            <div class="col-xs-6">
+                                <span class="btn btn-block btn-section file_upload_button col-xs-6">
+                                    <span data-bind="text: computedImageUpload">Upload Image</span>
+                                    <input data-bind="file_upload_global" id="fileupload" type="file" name="files"  class="file_upload_input" accept="images/*" capture="camera">
+                                </span>
+                            </div>   
+                            <div class="col-xs-6" data-bind="visible: completed">
+                                <button class="btn btn-warning pull-right" data-bind="click: $parent.destroyImage">Destroy Image</button>
+                            </div>   
+                        </div>                        
+                        <div class="row">
+                            <div class="col-xs-12" data-bind="css: {'has-error':!template_location()}">
+                                <h4>CSS Template:</h4>
+                                <select class="form-control" data-bind="options: $root.image_templates, value: template_location, optionsCaption: 'Choose Folder'"></select>
+                            </div>   
                         </div>   
                     </div>                   
                 </div>               
             </div>               
         <!-- /ko --> 
     </div>
-    <hr class="col-xs-12">
+</script> 
+
+<script id="example_image" type="text/html">
+    <div class="col-xs-12 col-md-4"> 
+        <div class="thumbnail col-xs-12">
+            <!-- ko if: !fresh() -->        
+                <div data-bind="visible: !failed()">
+                    <div class="uploading_image" data-bind="visible: !completed()">
+                        <div class="col-xs-10 col-xs-offset-1">
+                            <div class="progress" style="height: 10px">
+                                <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" data-bind="style: { width: progressValue() + '%'}"></div>
+                            </div>    
+                        </div> 
+                    </div> 
+                    <div class="completed_image" data-bind="visible: completed">
+                        <div class="col-xs-12 text-center">
+                            <div class="thumbnail">
+                                <img class="img-rounded" data-bind="attr: {src: url}" />
+                            </div>
+                        </div>
+                    </div> 
+                </div>
+                <div data-bind="visible: failed()">
+                    <div class="alert alert-warning alert-dismissable text-center">
+                      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                      <strong>Warning!</strong> There was a problem processing your image. Please contact support.
+                    </div>                
+                </div>
+            <!-- /ko -->
+            <div class="caption">
+                <!-- ko if: fresh() -->        
+                    <span class="btn btn-block btn-section file_upload_button col-xs-6">
+                        <i class="glyphicon glyphicon-picture"></i>
+                        <span>Upload Image</span>
+                        <!-- The file input field used as target for the file upload widget -->
+                        <input data-bind="file_upload_global" id="fileupload" type="file" name="files"  class="file_upload_input" accept="images/*" capture="camera">
+                    </span>                                                                                     
+                <!-- /ko --> 
+            </div>            
+        </div>
+    </div>
 </script> 
 
 <script id="carousel_image" type="text/html">
@@ -108,30 +160,34 @@
 
 <script id="create_design_template" type="text/html">
     <div class="col-xs-12 jumbotron">
-    	<h3 data-bind="text: $root.designFormTitle"></h3>
-        <p>
-            <input class="form-control" data-bind="value: name" />
-        </p>
-
-        <div class="row" data-bind="css: {'has-error':!template_location()}">
-            <h4>CSS Template:</h4>
-            <select class="form-control" data-bind="options: $root.templates, value: template_location, optionsCaption: 'Choose Folder'"></select>
-        </div>        
-
-        <div class="row" style="display:none">
-            <h4>CSS:</h4>
-            <textarea rows="50" data-bind="value: css, codemirror: { lineNumbers: true, matchBrackets: true, mode: 'text/css', theme:'lesser-dark', value:css }" placeholder="Design Specific CSS." style="width: 100%"></textarea>
-        </div>
-
-        <div class="row" style="display:none">
-            <h4>Menu CSS:</h4>
-            <textarea rows="50" data-bind="value: menu_css, codemirror: { lineNumbers: true, matchBrackets: true, mode: 'text/css', theme:'lesser-dark', value:menu_css }" placeholder="Menu Specific CSS." style="width: 100%"></textarea>
-        </div>
 
         <div class="row">
-            <h4>Static Images</h4>
-            <div data-bind="template: { name: 'design_image', foreach: global_images}"></div>
-            <button class="btn btn-info col-xs-12" data-bind="click: addImage">Create New Image Class Image</button>
+            <div class="col-md-6">
+                <div class="col-xs-12">
+                	<h3 data-bind="text: $root.designFormTitle"></h3>
+                    <p>
+                        <input class="form-control" data-bind="value: name" />
+                    </p>
+                </div>
+
+                <div class="col-xs-12" data-bind="css: {'has-error':!template_location()}">
+                    <h3>CSS Template:</h3>
+                    <select class="form-control" data-bind="options: $root.templates, value: template_location, optionsCaption: 'Choose Folder'"></select>
+                </div>  
+            </div>  
+
+            <div class="col-xs-6" data-bind="with: example_image">
+                <h3>Demo Image:</h3>
+                <div data-bind="template: { name: 'example_image', data: $parent.example_image}"></div> 
+            </div>                  
+        </div>        
+
+        <div class="row">
+            <div class="col-md-12">
+                <h3>Static Images:</h3>
+                <div data-bind="template: { name: 'design_image', foreach: global_images}"></div>
+                <button class="btn btn-info col-xs-12" data-bind="click: addImage">Create New Image Class Image</button>
+            </div>        
         </div>  
 
         <div class="row">
@@ -141,6 +197,10 @@
 
        <div class="row">
             <button class="btn btn-warning pull-left" data-bind="visible: new_design,click: $root.destroyDesign">Destroy</button>
+            <button class="btn btn-primary pull-right" data-bind="click: $root.updateDesign, text: $root.createNewDesignButton">Create</button>
+        </div>
+
+        <div class="save_button_float">
             <button class="btn btn-primary pull-right" data-bind="click: $root.updateDesign, text: $root.createNewDesignButton">Create</button>
         </div>
     </div>

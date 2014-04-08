@@ -84,25 +84,13 @@
                     </div>
                     <i class="glyphicon glyphicon-collapse-down icon_dropdown"></i>
                 </div>
-            <!-- /ko -->                
-                <div class="caption">
-                    <span class="btn btn-block btn-primary btn-section file_upload_button col-xs-6">
-                        <i class="glyphicon glyphicon-picture"></i>
-                        <span data-bind="text: computedImageUpload">Upload Custom Image</span>
-                        <!-- The file input field used as target for the file upload widget -->
-                        <input data-bind="file_upload_global_customize" id="fileupload" type="file" name="files"  class="file_upload_input" accept="images/*" capture="camera">
-                    </span> 
-                    <!-- ko if: custom() -->        
-                        <button data-bind="click:$parent.destroyImage" class="btn btn-warning col-xs-12">Remove Image</button>
-                    <!-- /ko -->                          
-                </div>              
+            <!-- /ko -->                            
         </div>      
     </div>    
 </script> 
 
 <script id="text_content_template" type="text/html">
     <div class="col-xs-12">
-
         <div class="editor_language_selector">
             <select class="form-control input-sm" data-bind="options: $root.languages, optionsText: function(item){ return fullLanguageName[item];}, value: $root.lang"></select>
         </div>   
@@ -114,18 +102,13 @@
 </script>
 
 <script id="pick_design_template" type="text/html">
-    <div class="col-xs-12">
-        <div class="design_box">
-            <h4 data-bind="text: name"></h4>
-            <a href="#" target="_blank" class="btn btn-info">Demo</a>
-            <button data-bind="click: $root.setDesign"  class="btn btn-primary">Choose Design</button>
-        </div>
+    <div class="col-xs-12 col-md-5 design_box" data-bind="css:{selected: $data === $root.current_design()}, click: $root.setDesign">
+        <img data-bind="attr:{src: $data.example_image().url()}" />
     </div>
 </script>
 
 <script id="customize_font_template" type="text/html">
     <div class="col-xs-12">
-        <h2>Fonts:</h2>
         <div class="fonts" data-bind="foreach: fonts">
             <div class="col-md-5 select_object" data-bind="css:{selected: $data === $root.current_font()}, click: $root.setFont">
                 <iframe class="col-xs-12 col-md-5 font_demo" data-bind="iFrame: $data"></iframe>

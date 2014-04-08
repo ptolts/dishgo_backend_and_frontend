@@ -24,6 +24,7 @@
 			<style data-bind="html: menu_css"></style>
 			<!-- ko foreach: global_images -->
 				<div data-bind="with: defaultImage">
+					<div data-bind="text: id" style="display:none"></div>
 					<style data-bind="html: css"></style>
 				</div>
 			<!-- /ko -->			

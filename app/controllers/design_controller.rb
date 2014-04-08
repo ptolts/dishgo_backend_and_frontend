@@ -85,17 +85,41 @@ class DesignController < ApplicationController
   end
 
   def upload_image
+    data = JSON.parse(params[:data])
     file = params[:files]
-    img = GlobalImage.where(id:params[:parent_id]).first
 
+    if !data["example_image"].blank?
+      img = GlobalImage.where(id:data["id"]).first
+      if !img
+        img = GlobalImage.create
+      end
+      img.update_attributes({:img => file})
+      img.example_image = true
+      img.save
+      des = Design.find(params[:design_id])
+      des.example_image = img unless des.example_image == img
+      des.save
+      Rails.logger.warn "UPLOADING DEMO IMAGE"
+      render :json => {files:[{
+                    image_id: img.id,
+                    name: img.name,
+                    url:  img.img_url_original,
+                  }]
+                }.as_json 
+      return
+    end
+
+    img = GlobalImage.where(id:params[:parent_id]).first
     if !img
       img = GlobalImage.create
+    end
+    if !img.design
+      img.design = Design.find(params[:design_id])
     end
 
     img.name = params[:name]
 
-    if !params[:carousel].blank?
-      img.design = Design.find(params[:design_id])
+    if carous = params[:carousel] and !carous.blank? and !['undefined','null','false'].any?{|e| e == carous.to_s }
       img.update_attributes({:img => file})
       img.save
       render :json => {files:[{
@@ -106,9 +130,6 @@ class DesignController < ApplicationController
                       }.as_json 
       return     
     else
-      data = JSON.parse(params[:data])
-      Rails.logger.warn data.to_s
-      Rails.logger.warn "-----------------------"
       if g_id = data["id"] and !g_id.blank?
         sub_img = GlobalImage.find(g_id)
       else
@@ -131,13 +152,16 @@ class DesignController < ApplicationController
 
   def create_image
     img = GlobalImage.create
-    img.design = Design.find(params[:design_id])
+    # img.design = Design.find(params[:design_id])
     img.save
     render :json => img.as_json
   end
 
   def destroy_image
     image = GlobalImage.find(params[:image_id])
+    image.global_images.each do |img|
+      img.destroy
+    end
     image.destroy
     render :json => {"Success"=>true}.as_json
   end  
