@@ -39,13 +39,14 @@ class WebsiteController < ApplicationController
 					# img[:global_images].select{|e| Rails.logger.warn "#{e["_id"].to_s} == #{settings[img["name"]]}"}
 					if default = img[:global_images].select{|e| e["_id"].to_s == settings[img["name"]]} and default = default.first
 						img[:global_images].each{|e| e["default_image"] = false}
-						Rails.logger.warn img[:global_images].to_s
+						# Rails.logger.warn img[:global_images].to_s
 						default["default_image"] = true
-						Rails.logger.warn img[:global_images].to_s						
+						# Rails.logger.warn img[:global_images].to_s						
 					end
 				end
 			end
-			#Add all images which are actually carousels. 
+			#Add all images which are actually carousels.
+			Rails.logger.warn "---\n#{custom_imgs.to_s}\n-----" 
 			des_json[:global_images] = custom_imgs + restaurant.global_images.select{|e| e.carousel}.as_json
 			des_json
 		end

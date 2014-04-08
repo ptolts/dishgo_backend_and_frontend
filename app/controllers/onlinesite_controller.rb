@@ -45,30 +45,30 @@ class OnlinesiteController < ApplicationController
   end
 
   def design_as_json des, restaurant
-    Rails.logger.warn "design_as_json starts"
+    #Rails.logger.warn "design_as_json starts"
     custom_images = restaurant.global_images
-    Rails.logger.warn "custom_images = restaurant.global_images"
+    #Rails.logger.warn "custom_images = restaurant.global_images"
     des_json = des.as_json
-    Rails.logger.warn "des_json = des.as_json"
+    #Rails.logger.warn "des_json = des.as_json"
     allowed_images = des.global_images
-    Rails.logger.warn "allowed_images = des.global_images"
+    #Rails.logger.warn "allowed_images = des.global_images"
     allowed_images_names = allowed_images.collect{|e| e.name}
-    Rails.logger.warn "allowed_images_names = allowed_images.collect{|e| e.name}"
+    #Rails.logger.warn "allowed_images_names = allowed_images.collect{|e| e.name}"
     custom_imgs = custom_images.reject{|e| !allowed_images_names.include?(e.name)}
-    Rails.logger.warn "custom_imgs = custom_images.reject{|e| !allowed_images_names.include?(e.name)}"
+    #Rails.logger.warn "custom_imgs = custom_images.reject{|e| !allowed_images_names.include?(e.name)}"
     allowed_images_names = custom_imgs.collect{|e| e.name}
-    Rails.logger.warn "allowed_images_names = custom_imgs.collect{|e| e.name}"
+    #Rails.logger.warn "allowed_images_names = custom_imgs.collect{|e| e.name}"
     custom_imgs = custom_imgs + allowed_images.reject{|e| allowed_images_names.include?(e.name)}
-    Rails.logger.warn "custom_imgs = custom_imgs + allowed_images.reject{|e| allowed_images_names.include?(e.name)}"
+    #Rails.logger.warn "custom_imgs = custom_imgs + allowed_images.reject{|e| allowed_images_names.include?(e.name)}"
 
     image_objects_to_be_used = []
     custom_imgs = custom_imgs.as_json
-    Rails.logger.warn "custom_imgs = custom_imgs.as_json"
+    #Rails.logger.warn "custom_imgs = custom_imgs.as_json"
     settings = restaurant.website_settings || {}
     
-    Rails.logger.warn "custom imgs.each starting"
+    #Rails.logger.warn "custom imgs.each starting"
     custom_imgs.each do |img|
-      Rails.logger.warn "img --> #{img}"
+      #Rails.logger.warn "img --> #{img}"
       # Match the id of the image the user has selected which is stored in the restaurant object
       # to the id of the image files loaded. This seems ridiculously complex. Should really be cleaned up.  
       if settings[img["name"]] == img["_id"].to_s
@@ -82,9 +82,9 @@ class OnlinesiteController < ApplicationController
       end
     end
     
-    Rails.logger.warn "des_json[:global_images] = image_objects_to_be_used starting"
+    #Rails.logger.warn "des_json[:global_images] = image_objects_to_be_used starting"
     des_json[:global_images] = image_objects_to_be_used
-    Rails.logger.warn "design_as_json stops"
+    #Rails.logger.warn "design_as_json stops"
     des_json
   end  
 

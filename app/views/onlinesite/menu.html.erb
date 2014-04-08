@@ -67,7 +67,7 @@
 						                                        </div>
 						                                    </div>
 						                                </div>
-						                                <div class="row">
+						                                <div class="row dish_button_for_phone">
 							                            	<a class="btn btn-sm btn-dish" data-bind="page-href: $data.id()"><img data-bind="attr:{src:$root.design.imgs.logo_white_nav}" class="dishgo_icon"></a>
 						                                </div>
 					                                </div>
@@ -75,7 +75,7 @@
 
 
 	                        					<!-- dish on screen -->
-	                        					<div class="col-md-4" data-bind="fadeVisible: !$root.showDetails()">
+	                        					<div class="col-md-4 grow" data-bind="fadeVisible: !$root.showDetails(), click: function(){ pager.navigate($page.path() + '/' + $data.id()) }">
 							                        <div class="dish_title">
 							                            <h2 data-bind="lText: name">Powdered Duck Breast</h2>
 							                        </div>
@@ -84,8 +84,10 @@
 							                        </div>
 							                        <div class="dish_price">
 							                            <i data-bind="text: computed_price">$34.00</i>
-							                            <a class="btn btn-sm btn-dish" data-bind="page-href: $data.id()"><img data-bind="attr:{src:$root.design.imgs.logo_white_nav}" class="dishgo_icon"></a>
 							                            <!-- <button class="btn btn-sm btn-dish" data-toggle="modal" data-target="#myModal" data-bind="click: $root.set_dish($data)"><img data-bind="attr:{src:$root.design.imgs.logo_white_nav}" class="dishgo_icon"></button> -->
+							                        </div>
+							                        <div class="dish_button_for_phone">
+						                            	<a class="btn btn-sm btn-dish" data-bind="page-href: $data.id()"><img data-bind="attr:{src:$root.design.imgs.logo_white_nav}" class="dishgo_icon"></a>
 							                        </div>
 							                    </div>
 

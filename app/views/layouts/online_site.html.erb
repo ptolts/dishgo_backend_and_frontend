@@ -24,6 +24,11 @@
 			<%= raw(@font_css) %>
 
 		</style>    	
+		<div data-bind="with: design">
+			<!-- ko foreach: global_images -->
+				<style data-bind="html: css"></style>
+			<!-- /ko -->		  	
+		</div>
 		<div class="overlay"></div>  
 		<nav id="navigation_small" class="nav">
 			<ul>

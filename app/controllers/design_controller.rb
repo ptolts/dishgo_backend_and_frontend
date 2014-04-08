@@ -12,6 +12,7 @@ class DesignController < ApplicationController
 
   def list
     @templates = Dir.glob("#{Rails.root}/custom_templates/*").reject{|e| !File.directory?(e)}
+    @image_templates = Dir.glob("#{Rails.root}/custom_image_css/*").reject{|e| !File.directory?(e)}
     @designs = Design.all.as_json({include: {global_images: {include: :global_images}}})
     render 'list' 
   end
@@ -46,7 +47,7 @@ class DesignController < ApplicationController
       g = GlobalImage.where(id:gi["id"]).first
       next unless g
       g.name = gi["name"]
-      g.css = gi["css"]
+      # g.css = gi["css"]
       g.customizable = gi["customizable"]
       g.carousel = gi["carousel"]
       if !gi["carousel"] and gi["global_images"].size == 0
@@ -62,6 +63,7 @@ class DesignController < ApplicationController
         end
         Rails.logger.warn "----------\n#{sg.img_url_original}\n-------"
         sg.name = gi["name"]
+        sg.template_location = sgi["template_location"]
         sg.customizable = sgi["customizable"]
         sg.default_image = sgi["default_image"]
         sg.carousel = sgi["carousel"]

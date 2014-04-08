@@ -27,6 +27,7 @@
 
         var design_data = <%= raw(@designs.to_json) %>;
         var templates = <%= raw(@templates.to_json) %>
+        var image_templates = <%= raw(@image_templates.to_json) %>
 
         ko.bindingHandlers.codemirror = {
             init: function(element, valueAccessor, allBindingsAccessor, viewModel) {
@@ -55,6 +56,7 @@
             var self = this;
             self.designs = ko.observableArray([]);
             self.templates = templates;
+            self.image_templates = image_templates;
             self.selectedDesign = ko.observable();            
             self.designs($.map(design_data, function(item) { return new Design(item) }));
 

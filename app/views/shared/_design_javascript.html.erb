@@ -91,6 +91,8 @@
 	    self.custom = ko.observable(false);
 	    self.fresh = ko.observable(true);
 	    self.customizable = ko.observable();
+	    self.css = ko.observable(data.css ? data.css : "");
+        self.template_location = ko.observable(data.template_location ? data.template_location : "");
 	    self.failed = ko.observable(false);
 	    self.design_id = ko.observable(data.design_id);
         self.completed = ko.observable(false);
@@ -108,6 +110,7 @@
 	    if(data){
             self.id(data._id);
             self.name(data.name);
+            self.css(data.css);
             self.description(data.description);
             self.customizable(data.customizable);
             if(data.custom){
