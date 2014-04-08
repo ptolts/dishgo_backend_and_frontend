@@ -59,9 +59,11 @@ class WebsiteController < ApplicationController
 		settings = restaurant.website_settings || {}
 		data["global_images"].each do |image|
 			Rails.logger.warn "------\n#{image}\n-----"
-			if image["custom"]
+			if image["custom"].to_bool
 				settings[image["name"]] = image["id"]
 			else
+				Rails.logger.warn "--\n'#{image}'\n---"
+				Rails.logger.warn settings
 				settings[image["defaultImage"]["name"]] = image["defaultImage"]["id"]
 			end
 		end

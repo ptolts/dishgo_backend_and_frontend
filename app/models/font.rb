@@ -14,10 +14,14 @@ class Font
 
 
   def template_font_css
+    return "" if self.template_location.blank?
+    return "" if !File.exists?(self.template_location)
     File.read("#{self.template_location}/font.css")
   end
 
   def template_font_link
+    return "" if self.template_location.blank?    
+    return "" if !File.exists?(self.template_location)
     File.read("#{self.template_location}/link.txt")
   end 
 
