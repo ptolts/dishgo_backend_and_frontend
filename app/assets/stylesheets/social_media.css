@@ -26,3 +26,9 @@
   -ms-transform: scale(1.1);
   transform: scale(1.1);
 }
+
+@media screen and (max-width: 850px) {
+  .social_media a {
+    font-size: 38px;
+  }
+}
