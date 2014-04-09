@@ -1,15 +1,15 @@
 <div class="container">
 
-    <div class="col-xs-12 col-md-4">
+    <div class="col-xs-12 col-md-4 restaurant_admin_list">
 
-        <div class="row">
+        <div class="col-xs-12">
             <div class="form-inline" role="form">
                 <input class="form-control" data-bind="value: restaurant_name" />
                 <button class="btn btn-default" data-bind="click: search_for_restaurant">Search</button>
             </div>
         </div>
 
-        <div class="row">
+        <div class="col-xs-12">
             <table class="table table-striped">
                 <thead>
                     <tr>
@@ -22,6 +22,9 @@
             </table>
         </div>
 
+        <div class="col-xs-12">
+            <button class="btn btn-info" data-bind="click: new_restaurant">Create Restaurant</button>
+        </div>
     </div>
 
 

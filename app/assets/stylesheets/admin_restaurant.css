@@ -1,0 +1,10 @@
+.restaurant_admin_list {
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.has-error input{
+  background-color: #FF9EA2;
+  color: black;
+}

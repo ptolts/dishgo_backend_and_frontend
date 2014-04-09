@@ -213,6 +213,18 @@
             }            
 
             self.save = function(){
+                if(!self.validateSubdomain()){
+                    bootbox.dialog({
+                      message: "The subdomain you've chosen is either invalid or unavailable.",
+                      title: "Invalid Subdomain",
+                      buttons: {
+                        success: {
+                          label: "Ok",
+                          className: "btn-primary pull-right col-xs-3",
+                        },
+                      }
+                    });                     
+                }
                 $.ajax({
                   type: "POST",
                   url: "/app/administration/update_restaurant",
@@ -221,7 +233,16 @@
                     params:ko.toJSON(self),
                   },
                   success: function(data, textStatus, jqXHR){
-                        console.log("Saved!")      
+                        bootbox.dialog({
+                          message: "Saved!",
+                          title: "Saved!",
+                          buttons: {
+                            success: {
+                              label: "Ok",
+                              className: "btn-primary pull-right col-xs-3",
+                            },
+                          }
+                        });      
                     },
                     error: function(XMLHttpRequest, textStatus, errorThrown) { 
                         console.log("There was an error saving the section " + errorThrown);
@@ -230,7 +251,36 @@
                 });                
             }
 
-        }
+            self.subdomain.extend({ rateLimit: 700 });
+            self.validateSubdomain = ko.observable(true);
+
+            self.subdomain.subscribe(function(newvalue){
+                if(newvalue == ""){
+                    self.validateSubdomain(false);
+                }
+                $.ajax({
+                  type: "POST",
+                  url: "/app/administration/validate_subdomain",
+                  data: {
+                    restaurant_id: self.id,
+                    subdomain: newvalue,
+                  },
+                  success: function(data, textStatus, jqXHR){
+                        if(data.valid){
+                            self.validateSubdomain(true);
+                        } else {
+                            self.validateSubdomain(false);
+                        }
+                    },
+                    error: function(XMLHttpRequest, textStatus, errorThrown) { 
+                        console.log("There was an error saving the section " + errorThrown);
+                        self.validateSubdomain(false);
+                    },
+                    dataType: "json"
+                });
+            });
+
+        }        
 
     //]]>  
     </script>

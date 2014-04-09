@@ -259,7 +259,13 @@ class AdministrationController < ApplicationController
   def update_restaurant
     settings = JSON.parse(params[:params])
     Rails.logger.warn settings.to_s
-    restaurant = Restaurant.find(settings["id"])
+    if settings["id"].blank?
+      restaurant = Restaurant.create
+      current_user.owns_restaurants = restaurant
+      current_user.save
+    else
+      restaurant = Restaurant.find(settings["id"])
+    end
     restaurant.name = settings["name"]
     restaurant.phone = settings["phone"]
     restaurant.facebook = settings["facebook"]
@@ -268,9 +274,10 @@ class AdministrationController < ApplicationController
     restaurant.instagram = settings["instagram"]
 
     if sub = Restaurant.where(subdomain:settings["subdomain"].downcase).first and sub != restaurant
-      render :json => "Bad Subdomain".as_json
+      render :json => {error:"Bad Subdomain"}.as_json
       return
     end
+
     restaurant.subdomain = settings["subdomain"].downcase
     restaurant.address_line_1 = settings["address_line_1"]
     restaurant.address_line_2 = settings["address_line_2"]
@@ -289,6 +296,24 @@ class AdministrationController < ApplicationController
 
     restaurant.save
     render :json => restaurant.as_json
-  end    
+  end  
+
+  def validate_subdomain
+    if params[:subdomain].blank?
+      render json: {valid:false}.as_json 
+      return
+    end
+    restaurant = Restaurant.where(id:params[:restaurant_id]).first
+    current_restaurant = Restaurant.where(subdomain:params[:subdomain]).first
+    if current_restaurant.nil? 
+      render json: {valid:true}.as_json
+      return
+    end
+    if restaurant == current_restaurant
+      render json: {valid:true}.as_json
+      return
+    end
+    render json: {valid:false}.as_json 
+  end  
 
 end

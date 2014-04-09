@@ -26,8 +26,8 @@
                         <!-- dishgo subdomain input-->
                         <div class="form-group">
                             <label>DishGo Subdomain</label>
-                            <div class="controls">
-                                <input id="subdomain" name="subdomain" type="text" placeholder="your_restaurant.dishgo.io" data-bind="value: subdomain" class="form-control">
+                            <div class="controls" data-bind="css:{'has-error':!validateSubdomain()}">
+                                <input id="subdomain" name="subdomain" type="text" placeholder="your_restaurant.dishgo.io" data-bind="value: subdomain, valueUpdate: 'afterkeydown'" class="form-control">
                                 <p class="help-block">This is the subdomain your customers will use to access your dishgo site. Usually your restaurant name will suffice.</p>
                             </div>
                         </div> 
