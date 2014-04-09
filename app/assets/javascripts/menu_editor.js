@@ -10,7 +10,7 @@
 ko.bindingHandlers.fitText = {
     update: function(element, valueAccessor, allBindingsAccessor, viewModel, bindingContext) {
         var self = this;
-        console.log("DEBUG: fitText firing on: " + element);
+        //console.log("DEBUG: fitText firing on: " + element);
         $(element).fitText(1);
     }
 };
@@ -183,9 +183,9 @@ function Section(data,topmodel) {
     self.editing_name = ko.observable(false);
     // Behaviors
     self.edit_name = function() { 
-        console.log("Section Editing! " + self.editing_name());
+        //console.log("Section Editing! " + self.editing_name());
         self.editing_name(true);
-        console.log("Section Editing! " + self.editing_name());     
+        //console.log("Section Editing! " + self.editing_name());     
     }; 
 
     self.remove = function(item) {
@@ -289,7 +289,7 @@ ko.bindingHandlers.file_upload = {
             send: function (e, data) {
                 $.each(data.files, function (index, file) {
                     viewModel.imageModel = viewModel.addImage();
-                    console.log(viewModel.imageModel);
+                    //console.log(viewModel.imageModel);
                     viewModel.imageModel.filename(file.name);
                 });                
             },
@@ -321,7 +321,7 @@ ko.bindingHandlers.file_upload_icon = {
             send: function (e, data) {
                 $.each(data.files, function (index, file) {
                     viewModel.imageModel = viewModel.addImage();
-                    console.log(viewModel.imageModel);
+                    //console.log(viewModel.imageModel);
                     viewModel.imageModel.filename(file.name);
                 });                
             },
@@ -833,14 +833,14 @@ function IndividualOption(data,option) {
         }, self);
 
         self.computed_price = ko.computed(function(){
-            console.log("self.computed_price -> " + self.dish.sizes());
+            // console.log("self.computed_price -> " + self.dish.sizes());
             if(self.dish.sizes()){
                 if(self.price_according_to_size()){
                     var p = _.find(self.size_prices(),function(i){ return i.name() == self.dish.sizeSelectedOptionValue().name()});
-                    console.log(p);   
+                    //console.log(p);   
                     return p.price();
                 } else {
-                    console.log(self.name() + " <--");
+                    //console.log(self.name() + " <--");
                     return self.price();
                 }
             }
@@ -886,7 +886,7 @@ function Restaurant(data) {
     self.image = ko.observable(new Image({local_file:"/assets/help.jpg"}));
 
     if(data.images && data.images[0]) {
-        console.log(data.images[0]);
+        //console.log(data.images[0]);
         self.image(new Image(data.images[0]));                
     }    
 }
@@ -1250,7 +1250,7 @@ function PublicMenuModel() {
     }
 
     self.computeImage = function(image){
-        console.log(image);
+        //console.log(image);
         if(self.design.imgs[image]){
             return "url(" + self.design.imgs[image]() + ")";
         } else {
@@ -1266,12 +1266,12 @@ ko.bindingHandlers.jcrop = {
         var value = valueAccessor();
         var valueUnwrapped = ko.unwrap(value);
 
-        console.log(value);
-        console.log(valueUnwrapped);
+        //console.log(value);
+        //console.log(valueUnwrapped);
 
         var update_cords = function update_crop(coords) {
             viewModel.coordinates = [coords.x,coords.y,coords.w,coords.h];
-            console.log(viewModel.coordinates);
+           //console.log(viewModel.coordinates);
         }
 
         $(element).attr("src",valueUnwrapped.src());
@@ -1302,7 +1302,7 @@ ko.bindingHandlers.jcrop = {
 
 ko.bindingHandlers.lValue = {
     init: function (element, valueAccessor, allBindingsAccessor) {
-    console.log("DEBUG: lValue firing on: " + element);
+    //console.log("DEBUG: lValue firing on: " + element);
     var underlyingObservable = valueAccessor();
     var interceptor = ko.computed({
         read: function () {
@@ -1335,7 +1335,7 @@ ko.bindingHandlers.lValue = {
 
 ko.bindingHandlers.lText = {
     update: function (element, valueAccessor) {
-        console.log("DEBUG: lText firing on: " + element);        
+        //console.log("DEBUG: lText firing on: " + element);        
         var value = valueAccessor();
         var result = ko.observable(value()[viewmodel.lang()]);
         ko.bindingHandlers.text.update(element, result);
@@ -1349,7 +1349,7 @@ ko.bindingHandlers.lText = {
 
 ko.bindingHandlers.lHtml = {
     update: function (element, valueAccessor) {
-        console.log("DEBUG: lHtml firing on: " + element);
+        //console.log("DEBUG: lHtml firing on: " + element);
         var value = valueAccessor();
         var result = ko.observable(value()[viewmodel.lang()]);
         ko.utils.setHtml(element, result);
@@ -1368,7 +1368,7 @@ function DemoViewModel() {
     var self = this;
     self.dish = new Dish(dish_demo_json);
     self.showModal = function(image) {
-        console.log("#"+image.id());
+        //console.log("#"+image.id());
         $("#"+image.id()).modal("show");
     };     
 }
