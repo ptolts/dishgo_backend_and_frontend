@@ -449,7 +449,7 @@ function Dish(data) {
         if(self.images().length > 0){
             return self.images()[0].original();
         } else {
-            return "/app/public/icon@2x.png";
+            return false;
         }
     }, self);  
 
