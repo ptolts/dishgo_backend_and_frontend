@@ -81,14 +81,14 @@
 			<h4><span class="currently_open_tag">currently </span><span class="currently_open" data-bind="css:{'hours_opened':areWeOpened(),'hours_closed':!areWeOpened()}, text: areWeOpenedText"></span></h4>
 		</div>	
 
-		<div data-bind="page: {id: 'start', title: 'Tuckshop'}" class="pages">
+		<div data-bind="page: {id: 'start', title: $root.restaurant().name()}" class="pages">
 			<div class="content_wrapper">
 				<div id="content">					
 					<%= render 'start' %>
 				</div>			
 			</div>							
 		</div>	
-		<div data-bind="page: {id: 'contact', title: 'Contact Tuckshop', afterShow: showMap}" class="pages">
+		<div data-bind="page: {id: 'contact', title: 'Contact', afterShow: showMap}" class="pages">
 			<div class="content_wrapper">
 				<div id="content">					
 					<%= render 'contact' %>
