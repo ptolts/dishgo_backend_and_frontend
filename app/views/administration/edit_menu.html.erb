@@ -9,7 +9,9 @@
                 <div class="row">
                     <h3 data-bind="text: name" id="restaurant_name"></h3>
                 </div>
-                <select data-bind="options: $root.languages, value: $root.lang"></select>                
+                <div class="row" id="no_bottom_margin">
+                    <select class="menu_editor_language" data-bind="options: $root.languages, value: $root.lang"></select>                
+                </div>
                 <div class="row" id="add_section_button">
                     <button class="btn btn-section btn-xs" type="button" data-bind="click: $root.addSection">+ Add Section</button>  
                 </div>                                                

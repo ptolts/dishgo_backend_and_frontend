@@ -120,19 +120,19 @@ margin: 0px 15px;
 }
 
 #togglePreview {
-  background-color: #64A156;
+  background-color: #64A156 !important;
 }
 
 #saveMenu {
-  background-color: #10479B;
+  background-color: #10479B !important;
 }
 
 #saveDraft {
-  background-color: #F4950E;
+  background-color: #F4950E !important;
 }
 
 #discardDraft {
-  background-color: #BC030E;
+  background-color: #BC030E !important;
 }
 
 /*#togglePreview:focus {
