@@ -2,8 +2,6 @@ h1,
 .restaurant_name {
     font-family: 'Oswald', sans-serif;
     font-weight: 700;
-    line-height: 51px;
-    font-size: 36px;
     text-transform: uppercase;
 }
 h2,
@@ -11,15 +9,15 @@ h3,
 h4,
 h5,
 h6,
-.hours,.main_page_language_selector,
+p,
+.main_page_language_selector,
 .nav li,
 #footer .powered_by_dishgo,
 .menu_container .language_selector,
 address {
+    font-family: 'Droid Serif', serif;
     font-weight: 400;
     font-style: italic;
-    font-size: 20px;
-    line-height: 23px;
 }
 #footer #opened_or_closed_footer {
 	text-transform: uppercase;
@@ -35,7 +33,8 @@ address {
     line-height: 23px;
     letter-spacing: 2px;
 }
-.menu_container p {
+.menu_container p,
+.menu_container .dish_price i {
 	font-family: 'Droid Serif', serif;
 	font-size: 16px;
     line-height: 23px;
@@ -45,8 +44,10 @@ address {
     line-height: 23px;
     letter-spacing: 2px;
 }
-.hours p {
+.hours {
 	font-family: 'Droid Serif', serif;
-	font-size: 16px;
-	line-height: 23px;
+}
+.hours p {
+    font-size: 16px;
+    line-height: 23px;
 }

@@ -1,12 +1,14 @@
 h1,
 .restaurant_name {
     font-family: 'Dancing Script', cursive;
+    font-size: 46px;
 }
 h2,
 h3,
 h4,
 h5,
 h6,
+p,
 .hours,.main_page_language_selector,
 .nav li,
 #footer .powered_by_dishgo,
@@ -18,17 +20,19 @@ address {
 	text-transform: uppercase;
 }
 .menu_container h1 {
-    font-size: 36px;
+    font-size: 46px;
 }
 .menu_container h2 {
     font-weight: normal;
     text-transform: uppercase;
-    font-size: 18px;
+    font-size: 20px;
     line-height: 23px;
     letter-spacing: 2px;
 }
-.menu_container p {
-	font-size: 16px;
+.menu_container p,
+.menu_container .dish_price i {
+	font-family: 'EB Garamond', serif;
+    font-size: 16px;
     line-height: 23px;
 }
 address {
@@ -37,5 +41,5 @@ address {
     letter-spacing: 2px;
 }
 .hours p {
-	font-size: 16px;
+	font-size: 18px;
 }

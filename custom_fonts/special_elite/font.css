@@ -1,0 +1,51 @@
+h1,
+.restaurant_name {
+    font-family: 'Special Elite';
+    font-weight: normal;
+    text-transform: uppercase;
+}
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+.hours,.main_page_language_selector,
+.nav li,
+#footer .powered_by_dishgo,
+.menu_container .language_selector,
+address {
+    font-family: 'Special Elite';
+}
+#footer #opened_or_closed_footer {
+    text-transform: uppercase;
+}
+.menu_container h1 {
+    line-height: 46px;
+    font-size: 43px;
+}
+.menu_container h2 {
+    font-size: 20px;
+    line-height: 23px;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-style: italic;
+}
+.menu_container p,
+.menu_container .dish_price i {
+    font-family: 'Josefin Slab';
+    font-size: 17px;
+    line-height: 23px;
+    font-weight: normal;
+    font-style: normal;
+}
+address {
+    font-size: 17px;
+    line-height: 23px;
+}
+.hours p {
+    font-size: 17px;
+    line-height: 23px;
+    font-weight: normal;
+    font-style: normal;
+}
