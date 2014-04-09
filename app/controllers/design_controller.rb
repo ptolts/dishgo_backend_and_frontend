@@ -80,6 +80,7 @@ class DesignController < ApplicationController
 
   def destroy
     design = Design.where(id:params[:id]).first
+    design.global_images.destroy_all
     design.destroy
     render :text => "Destroyed"
   end

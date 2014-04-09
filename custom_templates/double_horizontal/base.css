@@ -91,6 +91,34 @@
 	border-image: url(choppyborder.jpg) 14 15 15 14;*/	
 }
 
+.contact_page_wrapper {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	-webkit-transform: translate(-50%,-50%);
+	-ms-transform: translate(-50%,-50%);
+	transform: translate(-50%,-50%);		
+}
+
+.mini_content_wrapper {
+	background-color: rgba(0, 0, 0, 0.85);
+	padding: 15px;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	color: #fff;
+	border-radius: 5px;
+/*	border-style: solid;
+	border-width: 10px;
+	-moz-border-image: url(choppyborder.jpg) 14 15 15 14;
+	-webkit-border-image: url(choppyborder.jpg) 14 15 15 14;
+	-o-border-image: url(choppyborder.jpg) 14 15 15 14;
+	border-image: url(choppyborder.jpg) 14 15 15 14;*/	
+}
+
+.hours_wrapper {
+
+}
+
 #navigation_small {
 
 }

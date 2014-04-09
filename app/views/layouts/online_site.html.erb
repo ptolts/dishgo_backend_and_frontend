@@ -4,6 +4,18 @@
 	    <title></title>
 		<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, maximum-scale=1.0, minimal-ui" />		
  
+		<script type="text/javascript"> 
+			var $buoop = {}; 
+			$buoop.ol = window.onload; 
+			window.onload=function(){ 
+				try {if ($buoop.ol) $buoop.ol();}catch (e) {} 
+				var e = document.createElement("script"); 
+				e.setAttribute("type", "text/javascript"); 
+				e.setAttribute("src", "//browser-update.org/update.js"); 
+				document.body.appendChild(e); 
+			} 
+		</script> 
+
 	    <%= raw(@font_link_data) %>
 
 		<%= stylesheet_link_tag    "online_site" %>
@@ -92,11 +104,9 @@
 			</div>							
 		</div>	
 		<div data-bind="page: {id: 'contact', title: 'Contact', afterShow: showMap}" class="pages">
-			<div class="content_wrapper">
-				<div id="content">					
-					<%= render 'contact' %>
-				</div>			
-			</div>														
+			<div id="content">					
+				<%= render 'contact' %>
+			</div>																
 		</div>
 
 
