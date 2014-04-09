@@ -25,9 +25,9 @@
 	                interceptor($(element).code());
 				},
 				toolbar: [
-				    //['style', ['style']], // no style button
+				    ['style', ['style']], // no style button
 				    ['style', ['bold', 'italic', 'underline', 'clear']],
-				    ['fontsize', ['fontsize']],
+				    // ['fontsize', ['fontsize']],
 				    ['color', ['color']],
 				    ['para', ['paragraph']],
 				    // ['height', ['height']],

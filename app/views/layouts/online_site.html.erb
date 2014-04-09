@@ -42,7 +42,7 @@
 		</nav>			  	
 		<div id="left_menu">
 			<div class="restaurant_name" data-bind="with: restaurant">
-			  <div class="logo" data-bind="text: name"></div>
+			  <div class="logo" data-bind="text: name, fitText"></div>
 			</div>
 			<nav id="navigation" class="nav">
 				<ul>
@@ -74,7 +74,7 @@
 				<a data-bind="visible: socialVisible('instagram'), attr:{href: instagram}"><i class="fa fa-instagram"></i></a>
 			</div>	
 			<div data-bind="style:{backgroundImage: $root.computeImage('header_background_pattern')}" class="pattern_background"></div>
-			<div class="powered_by_dishgo">Powered by <a href="https://dishgo.io"><img src="logo.png" id="dishgo_logo"></a></div>			
+			<div class="powered_by_dishgo"><a href="https://dishgo.io"><img src="logo.png" id="dishgo_logo"></a></div>			
 		</div>
 
 		<div id="opened_or_closed" data-bind="with: restaurant">

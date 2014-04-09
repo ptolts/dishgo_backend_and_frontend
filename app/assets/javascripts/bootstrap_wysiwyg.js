@@ -2706,17 +2706,13 @@
                  '</ul>';
       },
       style: function (lang) {
-        return '<button type="button" class="btn btn-default btn-sm btn-small dropdown-toggle" title="' + lang.style.style + '" data-toggle="dropdown" tabindex="-1"><i class="fa fa-magic icon-magic"></i> <span class="caret"></span></button>' +
+        return '<button type="button" class="btn btn-default btn-sm btn-small dropdown-toggle" title="' + lang.style.style + '" data-toggle="dropdown" tabindex="-1"><i class="fa fa-text-height"></i> <span class="caret"></span></button>' +
                '<ul class="dropdown-menu">' +
-                 '<li><a data-event="formatBlock" data-value="p">' + lang.style.normal + '</a></li>' +
-                 '<li><a data-event="formatBlock" data-value="blockquote"><blockquote>' + lang.style.blockquote + '</blockquote></a></li>' +
-                 '<li><a data-event="formatBlock" data-value="pre">' + lang.style.pre + '</a></li>' +
                  '<li><a data-event="formatBlock" data-value="h1"><h1>' + lang.style.h1 + '</h1></a></li>' +
                  '<li><a data-event="formatBlock" data-value="h2"><h2>' + lang.style.h2 + '</h2></a></li>' +
                  '<li><a data-event="formatBlock" data-value="h3"><h3>' + lang.style.h3 + '</h3></a></li>' +
                  '<li><a data-event="formatBlock" data-value="h4"><h4>' + lang.style.h4 + '</h4></a></li>' +
-                 '<li><a data-event="formatBlock" data-value="h5"><h5>' + lang.style.h5 + '</h5></a></li>' +
-                 '<li><a data-event="formatBlock" data-value="h6"><h6>' + lang.style.h6 + '</h6></a></li>' +
+                 '<li><a data-event="formatBlock" data-value="p">' + lang.style.normal + '</a></li>' +
                '</ul>';
       },
       fontname: function(lang) {
@@ -2756,11 +2752,11 @@
                '</button>' +
                '<ul class="dropdown-menu">' +
                  '<li>' +
-                   '<div class="btn-group">' +
-                     '<div class="note-palette-title">' + lang.color.background + '</div>' +
-                     '<div class="note-color-reset" data-event="backColor" data-value="inherit" title="' + lang.color.transparent + '">' + lang.color.setTransparent + '</div>' +
-                     '<div class="note-color-palette" data-target-event="backColor"></div>' +
-                   '</div>' +
+                   // '<div class="btn-group">' +
+                   //   '<div class="note-palette-title">' + lang.color.background + '</div>' +
+                   //   '<div class="note-color-reset" data-event="backColor" data-value="inherit" title="' + lang.color.transparent + '">' + lang.color.setTransparent + '</div>' +
+                   //   '<div class="note-color-palette" data-target-event="backColor"></div>' +
+                   // '</div>' +
                    '<div class="btn-group">' +
                      '<div class="note-palette-title">' + lang.color.foreground + '</div>' +
                      '<div class="note-color-reset" data-event="foreColor" data-value="inherit" title="' + lang.color.reset + '">' + lang.color.resetToDefault + '</div>' +
