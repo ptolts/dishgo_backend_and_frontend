@@ -1216,7 +1216,24 @@ function PublicMenuModel() {
     self.about_tr = ko.observable({
         'en':'About',
         'fr':'Sur'
-    });       
+    });
+
+    var keep_scrolling_updates = true;
+    self.atTop = ko.observable(false);
+    if($(window).width() > 600){
+        keep_scrolling_updates = false;
+    }
+    if(keep_scrolling_updates){
+        $(window).scroll(function(e){
+            console.log("scrolling");
+            if($("body").scrollTop() <= 30){
+                self.atTop(false);
+            } else {
+                self.atTop(true);
+            }           
+         });        
+    }
+         
 
     self.restaurant = ko.observable(new Restaurant(resto_data));
 

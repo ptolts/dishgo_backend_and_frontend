@@ -17,7 +17,7 @@
   -webkit-text-shadow: .04em .04em 0 #fff, .08em .08em 0 #aaa;
 }
 .font-effect-stonewash {
-  -webkit-mask-image: url(//themes.googleusercontent.com/static/patterns/stonewash.png);
+  /*-webkit-mask-image: url(//themes.googleusercontent.com/static/patterns/stonewash.png);*/
   color: #fff;
 }
 
@@ -30,9 +30,10 @@
   width: 50%;
 }
 
-.menu_logo h1, h2, h3, h4 {
+.menu_logo h1, .menu_logo h2, .menu_logo h3, .menu_logo h4 {
   display:inline-block;
   line-height: initial;
+  color: #fff;
 }
 
 .menu_logo h1 {
@@ -41,7 +42,7 @@
     text-transform:uppercase;    
 }
 
-.menu_logo h4,h3 {
+.menu_logo h4, .menu_logo h3 {
     margin-top: 10px;
     margin-bottom: 5px;      
     font-size: 18px;
@@ -77,4 +78,10 @@
 }
 .menu_logo .color {
     background-color: #fff;
+}
+
+@media (max-width: 600px) {
+  .menu_logo {
+    display: none;
+  }
 }

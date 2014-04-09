@@ -149,3 +149,9 @@ body {
 	-moz-transition: all 0.5s ease;
 	-o-transition: all 0.5s ease;		
 }
+
+@media (max-width: 600px) {
+	.main_page_language_selector {
+		display: none;
+	}
+}

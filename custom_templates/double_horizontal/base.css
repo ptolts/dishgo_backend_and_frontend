@@ -12,6 +12,10 @@
 	display: block;
 }
 
+#opened_or_closed_footer h4{
+	display: inline;
+}
+
 #social_media_footer {
 	position: absolute;
 	right: 15px;
@@ -121,15 +125,20 @@
 	.content_wrapper {
 		position: absolute;
 		width: 100%;
-		height: auto;
-		top: 85px;
+		height: 100%;
+		top: 70px;
+		padding-bottom: 70px;
 		left: initial;
 		margin: 0;
 		border-radius: 0px;	
 		margin-bottom: 85px;
-		-webkit-transform: translate(0%,0%);
-		-ms-transform: translate(0%,0%);
-		transform: translate(0%,0%);		
+		-webkit-transform: none;
+		-ms-transform: none;
+		transform: none;	
+	}
+
+	#footer {
+		z-index: 99999;
 	}
 
 	.nav ul {

@@ -16,12 +16,12 @@
 
 @media (max-width: 560px){
 	.logo {
-		width: 200px;
+		width: 300px;
 	}
 }
 
 @media (max-width: 340px){
 	.logo {
-		width: 180px;
+		width: 250px;
 	}
 }

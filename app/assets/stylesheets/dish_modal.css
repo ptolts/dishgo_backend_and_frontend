@@ -7,11 +7,6 @@
 	z-index: 10000;
 }
 
-@media (max-width: 600px) {
-	.custom_modal-dialog {
-		width: 100%;
-	}
-}
 .custom_modal-header {
 	border-bottom: 1px solid #e5e5e5;
 	margin-bottom: 10px;
@@ -101,4 +96,11 @@
 .custom_modal .open .dropdown-toggle.btn-section{
   opacity: 0.8;
   color: #fff;
+}
+
+@media (max-width: 600px) {
+	.custom_modal-dialog {
+		width: 100%;
+		min-width: 0;
+	}
 }

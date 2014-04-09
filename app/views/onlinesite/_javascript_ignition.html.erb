@@ -7,6 +7,7 @@
 	        var background_images = <%= raw(@carousel.to_json) %>;
 
 			$(function(){
+				if($(window).width() > 600){
 			        $.mbBgndGallery.buildGallery({
 			                containment:"body",
 			                timer:4000,
@@ -21,6 +22,7 @@
 			                onNext:function(opt){},   //opt=the options relatives to this component instance
 			                onPrev:function(opt){}   //opt=the options relatives to this component instance
 			        });
+				}
 			})
 
 	        editing_mode = false;    

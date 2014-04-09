@@ -27,6 +27,10 @@
   box-shadow: 0 0 1px rgba(0, 0, 0, 0);
 }
 
+#navigation_small .language_select li {
+  padding: 0;
+}
+
 .language_select li.selected {
   display: none;
 }
@@ -41,4 +45,7 @@
   .language_select li.selected {
     display: none;
   }
+  .menu_container .language_select li{
+    display: none;
+  }  
 }

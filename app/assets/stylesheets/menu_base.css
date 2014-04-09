@@ -14,6 +14,7 @@
   transition-property: transform;
   -webkit-transform: translateZ(0);
   transform: translateZ(0);
+  -webkit-backface-visibility: hidden;  
   box-shadow: 0 0 1px rgba(0, 0, 0, 0);
 }
 .grow:hover, .grow:focus, .grow:active {
@@ -64,8 +65,21 @@
   top: 65px;
 }
 
+.menu_container { 
+  margin-top: 65px;
+  background-color: #fff;
+  margin-bottom: 20px;
+  -webkit-box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.75);
+  -moz-box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.75);
+  box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.75);
+  /*margin-bottom: 20px;*/
+  padding-bottom: 20px;
+  z-index: 5000;
+  position: relative;  
+}
+
 .menu_style_selector .fa{
-  font-size: 18px;
+  font-size: 28px;
 }
 .menu_style_selector .btn-default {
   padding: 3px 6px;
@@ -85,6 +99,15 @@ border-color: #6D6D6D;
 .menu_container .dish_title {
 	color: #000000;
 }
+
+.menu_container .image_section .dish_title {
+  text-align: left;
+}
+
+.menu_container .image_section .dish_price {
+  text-align: right;
+}
+
 .menu_container .dish_description {
 	color: #5B5B5B;
 	font-style: italic;
@@ -95,7 +118,7 @@ border-color: #6D6D6D;
 }
 .menu_container .dish_price i {
 	display: block;
-  color: #000000;
+  color: #cf2f28;
 }
 .menu_container .dishgo_icon {
     width: 20px;
@@ -119,18 +142,7 @@ border-color: #6D6D6D;
 	margin-top: 20px;
 	margin-bottom: 10px;
 }
-.container {
-	background-color: #fff;
-	margin-top: 20px;
-  margin-bottom: 20px;
-	-webkit-box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.75);
-	-moz-box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.75);
-	box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.75);
-	/*margin-bottom: 20px;*/
-	padding-bottom: 20px;
-	z-index: 5000;
-  position: relative;
-}
+
 .menu_container .btn-dish {
 	padding-top: 2px;
 	padding-left: 2px;
@@ -145,40 +157,51 @@ border-color: #6D6D6D;
   opacity: 0.80;
   color: #fff;
 }
-@media (min-width: 560px) {
+@media (max-width: 560px) {
 /*  .menu_container .resto_logo {
   	top: 40px;
   }*/
 }
-@media (min-width: 768px) {
+@media (max-width: 768px) {
 /*  .menu_container .resto_logo {
   	top: 60px;
   }*/
-  .container {
+/*  .container {
   	margin-top: 60px;
-  }
+  }*/
   .menu_style_selector .btn-default {
     padding: 6px 12px;
   }
   .menu_style_selector .fa{
-  font-size: 24px;
+    font-size: 24px;
   }
 }
 
-@media (min-width: 992px) {
-/*  .menu_container .resto_logo {
-  	top: 75px;
-  }*/
+@media (max-width: 992px) {
+  .menu_container .resto_logo {
+    display: none;
+  }
   .dish_button_for_phone {
     display: visible;
   }
+
+  .grow:hover, .grow:focus, .grow:active {
+    -webkit-transform: none;
+    transform: none;
+  }
+
+  .menu_style_selector {
+    position: absolute;
+    right: 15px;
+    top: 15px;
+  }  
 }
 
-@media (min-width: 1200px) {
+@media (max-width: 1200px) {
 /*  .menu_container .resto_logo {
     top: 105px;
   }*/
-  .container {
+/*  .container {
   	margin-top: 65px;
-  }
+  }*/
 }

@@ -40,42 +40,32 @@
 
 	                    						<!-- THIS IS THE DETAILED DISH OUTPUT. -->
 
-						                    	<div data-bind="fadeVisible: $root.showDetails">
-						                            <div class="col-md-4">                
-						                                <div class="row">
-						                                    <div class="dish_picture">
-						                                        <div class="col-md-12">
-						                                            <img src="/assets/logo.png" class="img-responsive" data-bind="visible: large_title_image, attr:{src:large_title_image}">
-						                                        </div>
-						                                    </div>
-						                                </div>
-						                                <div class="row">
-						                                    <div class="dish_title">
-						                                        <div class="col-md-9 col-xs-9" data-bind="lText: name">
-						                                        </div>
-						                                    </div>
-						                                    <div class="col-md-3 col-xs-3">
-						                                        <div class="dish_price">
-						                                            <i data-bind="text: computed_price"></i>
-						                                        </div>
-						                                    </div>
-						                                </div>
-						                                <div class="row">
-						                                    <div class="dish_description">
-						                                        <div class="col-md-12">
-						                                            <p data-bind="lText: description"></p>
-						                                        </div>
-						                                    </div>
-						                                </div>
-						                                <div class="row dish_button_for_phone">
-							                            	<a class="btn btn-sm btn-dish" data-bind="page-href: $data.id()"><img data-bind="attr:{src:$root.design.imgs.logo_white_nav}" class="dishgo_icon"></a>
-						                                </div>
+						                    	<div class="col-md-4 col-xs-12 image_section" data-bind="fadeVisible: $root.showDetails, click: function(){ pager.navigate($page.path() + '/' + $data.id()) }">
+					                                <div class="row">
+					                                    <div class="dish_title col-md-9 col-xs-9">
+					                                        <h2 data-bind="lText: name"></h2>
+					                                    </div>
+					                                    <div class="col-md-3 col-xs-3">
+					                                        <div class="dish_price">
+					                                            <h2 data-bind="text: computed_price"></h2>
+					                                        </div>
+					                                    </div>					                                   					                                    
+					                                </div>
+					                                <div class="row">
+					                                    <div class="dish_picture">
+					                                        <div class="col-md-12">
+					                                            <img src="/assets/logo.png" class="img-responsive" data-bind="visible: large_title_image, attr:{src:large_title_image}">
+					                                        </div>
+					                                    </div>
+					                                </div>						                                
+					                                <div class="row dish_button_for_phone">
+						                            	<a class="btn btn-sm btn-dish" data-bind="page-href: $data.id()"><img data-bind="attr:{src:$root.design.imgs.logo_white_nav}" class="dishgo_icon"></a>
 					                                </div>
 						                   		</div>
 
 
 	                        					<!-- dish on screen -->
-	                        					<div class="col-md-4 grow dish_min_height" data-bind="fadeVisible: !$root.showDetails(), click: function(){ pager.navigate($page.path() + '/' + $data.id()) }">
+	                        					<div class="col-xs-12 col-md-4 grow dish_min_height" data-bind="fadeVisible: !$root.showDetails(), click: function(){ pager.navigate($page.path() + '/' + $data.id()) }">
 							                        <div class="dish_title">
 							                            <h2 data-bind="lText: name">Powdered Duck Breast</h2>
 							                        </div>
