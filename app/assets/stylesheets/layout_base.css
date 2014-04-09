@@ -6,8 +6,9 @@ body {
 	margin: 0;
 }
 
-.disable-hover {
-  pointer-events: none;
+.disable-hover,
+.disable-hover * {
+  pointer-events: none !important;
 }
 
 #opened_or_closed {
