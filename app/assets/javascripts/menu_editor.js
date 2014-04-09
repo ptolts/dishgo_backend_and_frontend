@@ -391,12 +391,12 @@ function Dish(data) {
 
     if(data.has_multiple_sizes){
         self.sizes = ko.observable(true);
-        console.log("data size:");
-        console.log(data.sizes);
+        //console.log("data size:");
+        //console.log(data.sizes);
         self.sizes_object = ko.observable(new Option(data.sizes,self));
     } else {
         self.sizes = ko.observable(false);
-        console.log("no data sizes");
+        //console.log("no data sizes");
         if(data.sizes){
             self.sizes_object = ko.observable(new Option(data.sizes,self));
         } else {
@@ -1233,6 +1233,21 @@ function PublicMenuModel() {
             }           
          });        
     }
+
+
+    var body = document.body,
+        timer;
+
+    window.addEventListener('scroll', function() {
+      clearTimeout(timer);
+      if(!body.classList.contains('disable-hover')) {
+        body.classList.add('disable-hover')
+      }
+      
+      timer = setTimeout(function(){
+        body.classList.remove('disable-hover')
+      },500);
+    }, false);    
          
 
     self.restaurant = ko.observable(new Restaurant(resto_data));

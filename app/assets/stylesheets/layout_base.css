@@ -6,6 +6,10 @@ body {
 	margin: 0;
 }
 
+.disable-hover {
+  pointer-events: none;
+}
+
 #opened_or_closed {
 	display: none;
 }
