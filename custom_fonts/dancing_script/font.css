@@ -16,7 +16,7 @@ p,
 address {
     font-family: 'EB Garamond', serif;
 }
-#footer #opened_or_closed_footer {
+#footer #opened_or_closed_footer, .main_page_language_selector {
 	text-transform: uppercase;
 }
 .menu_container h1 {
