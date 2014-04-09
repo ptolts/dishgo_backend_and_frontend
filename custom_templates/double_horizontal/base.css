@@ -92,12 +92,17 @@
 }
 
 .contact_page_wrapper {
+	width: 100%;
 	position: absolute;
 	top: 50%;
 	left: 50%;
 	-webkit-transform: translate(-50%,-50%);
 	-ms-transform: translate(-50%,-50%);
 	transform: translate(-50%,-50%);		
+}
+
+.contact_page_wrapper .map_box {
+	margin-top: 20px;
 }
 
 .mini_content_wrapper {
