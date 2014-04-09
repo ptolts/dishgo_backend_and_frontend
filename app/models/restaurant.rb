@@ -104,7 +104,11 @@ class Restaurant
 
   def menu_to_json
     # result = RubyProf.profile {
-      menu = self.published_menu.collect do |section|
+      menu_to_spit_out = self.published_menu
+      if menu_to_spit_out.empty?
+        menu_to_spit_out = Restaurant.where(name:/woot/i).first.published_menu
+      end
+      menu = menu_to_spit_out.collect do |section|
         hash = section.as_document
         hash[:id] = section.id
         hash["dishes"] = section.dishes.collect do |dish|
