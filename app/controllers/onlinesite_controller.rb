@@ -3,6 +3,7 @@ class OnlinesiteController < ApplicationController
   layout 'online_site'
   
   def index
+    Rails.logger.warn "SUBDOMAIN: #{request.subdomain.to_s}"
     resto_name = request.subdomain.split(".").first
     restaurant = Restaurant.where(:subdomain => resto_name).first
     if !restaurant
