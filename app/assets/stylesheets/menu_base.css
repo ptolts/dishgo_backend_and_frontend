@@ -66,8 +66,13 @@
 }
 
 .menu_container { 
-  margin-top: 65px;
   background-color: #fff;
+    background-image: -webkit-linear-gradient(hsla(0,0%,0%,.05), hsla(0,0%,100%,.05));
+    background-image:    -moz-linear-gradient(hsla(0,0%,0%,.05), hsla(0,0%,100%,.05));
+    background-image:     -ms-linear-gradient(hsla(0,0%,0%,.05), hsla(0,0%,100%,.05));
+    background-image:      -o-linear-gradient(hsla(0,0%,0%,.05), hsla(0,0%,100%,.05));
+    background-image:         linear-gradient(hsla(0,0%,0%,.05), hsla(0,0%,100%,.05));
+  margin-top: 65px;
   margin-bottom: 20px;
   -webkit-box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.75);
   -moz-box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.75);
