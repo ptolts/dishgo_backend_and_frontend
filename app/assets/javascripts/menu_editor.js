@@ -453,6 +453,14 @@ function Dish(data) {
         }
     }, self);  
 
+    self.lazyLoadImage = ko.computed(function(){
+        if(self.images().length > 0){
+            return self.images()[0].original();
+        } else {
+            return "";
+        }
+    });
+
     self.addQuantity = function(){
         if(self.quantity() == 12){
             return;
@@ -556,6 +564,21 @@ function Dish(data) {
     }
 
 }
+
+ko.bindingHandlers.menuImage = {
+    update: function (element, valueAccessor) {
+        console.log("menuImaged");
+        if(ko['menuVisible'] === undefined){
+            ko['menuVisible'] = ko.observable(false);
+        }
+        var underlyingObservable = valueAccessor();
+        if(ko.menuVisible()){
+            element.setAttribute('src', underlyingObservable());
+        } else {
+            element.setAttribute('src', "");
+        }
+    }
+}; 
 
 Option.prototype.toJSON = function() {
     var copy = ko.toJS(this); //easy way to get a clean copy

@@ -9,18 +9,18 @@ module BSON
   end
 end
 
-module Moped
-	class Connection
-		def connect
-			Rails.logger.warn "host: #{host.to_s} port: #{port.to_s} timeout: #{timeout.to_s}\noptions: #{options.to_s}"
-			@sock = if !!options[:ssl]
-		        Socket::SSL.connect(host, port, timeout)
-		    else
-		        Socket::TCP.connect(host, port, timeout)
-		    end
-    	end
-    end
-end
+# module Moped
+# 	class Connection
+# 		def connect
+# 			Rails.logger.warn "host: #{host.to_s} port: #{port.to_s} timeout: #{timeout.to_s}\noptions: #{options.to_s}"
+# 			@sock = if !!options[:ssl]
+# 		        Socket::SSL.connect(host, port, timeout)
+# 		    else
+# 		        Socket::TCP.connect(host, port, timeout)
+# 		    end
+#     	end
+#     end
+# end
 
 # module Paperclip
 #   class Attachment

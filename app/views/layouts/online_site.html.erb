@@ -18,7 +18,7 @@
 
 	    <%= raw(@font_link_data) %>
 
-		<%= stylesheet_link_tag    "online_site" %>
+		<%= stylesheet_link_tag "online_site", type: 'text/css'%>
 		<%= javascript_include_tag "application" %>
 
 		<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDmVdO0hER_qFFNZN5C9Du28_-sSblng0Y&sensor=false"></script>	
@@ -108,7 +108,7 @@
 		</div>
 
 
-		<div data-bind="page: {id: 'menu', title: 'Menu'}" class="pages">
+		<div data-bind="page: {id: 'menu', title: 'Menu', afterShow: function(){ ko['menuVisible'](true) }, afterHide: function(){ ko['menuVisible'](false) }}" class="pages">
 			<%= yield %>
 		</div>	
 
