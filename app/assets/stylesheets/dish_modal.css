@@ -70,32 +70,100 @@
 	font-size: 18px;
 	font-weight: 300;
 }
-.custom_modal .btn-default {
-	color: #333333;
-	background-color: #ffffff;
-	border-color: #cccccc;
+.custom_modal .button {
+    background-color: #999;
+    background-image: -webkit-linear-gradient(hsla(0,0%,100%,.05), hsla(0,0%,0%,.1));
+    background-image:    -moz-linear-gradient(hsla(0,0%,100%,.05), hsla(0,0%,0%,.1));
+    background-image:     -ms-linear-gradient(hsla(0,0%,100%,.05), hsla(0,0%,0%,.1));
+    background-image:      -o-linear-gradient(hsla(0,0%,100%,.05), hsla(0,0%,0%,.1));
+    background-image:         linear-gradient(hsla(0,0%,100%,.05), hsla(0,0%,0%,.1));
+    border: none;
+    border-radius: .5em;
+    box-shadow: inset 0 0 0 1px hsla(0,0%,0%,.2),
+                inset 0 2px 0 hsla(0,0%,100%,.1),
+                inset 0 1.2em 0 hsla(0,0%,100%,0.1),
+                inset 0 -.2em 0 hsla(0,0%,100%,.1),
+                inset 0 -.25em 0 hsla(0,0%,0%,.25),
+                0 .25em .25em hsla(0,0%,0%,.05);
+    color: #444;
+    cursor: pointer;
+    display: inline-block;
+    font-family: sans-serif;
+    font-size: 1em;
+    font-weight: bold;
+    line-height: 1.5;
+    margin: 0 .5em 1em;
+    padding: .5em 1.5em .75em;
+    position: relative;
+    text-decoration: none;
+    text-shadow: 0 1px 1px hsla(0,0%,100%,.25);
+    vertical-align: middle;
 }
-.custom_modal .btn-default:hover,
-.custom_modal .btn-default:focus,
-.custom_modal .btn-default:active,
-.custom_modal .btn-default.active,
-.custom_modal .open .dropdown-toggle.btn-default {
-  color: #333333;
-  background-color: #ebebeb;
-  border-color: #adadad;
+.custom_modal .button:hover {
+    outline: none;
 }
-.custom_modal .btn-section {
-  color: #fff;
-  background-color: #343e4b;
-  border: 1px solid #232A33;
+.custom_modal .button:hover,
+.custom_modal .button:focus {
+    box-shadow: inset 0 0 0 1px hsla(0,0%,0%,.2),
+                inset 0 2px 0 hsla(0,0%,100%,.1),
+                inset 0 1.2em 0 hsla(0,0%,100%,.1),
+                inset 0 -.2em 0 hsla(0,0%,100%,.1),
+                inset 0 -.25em 0 hsla(0,0%,0%,.25),
+                inset 0 0 0 3em hsla(0,0%,100%,.2),
+                0 .25em .25em hsla(0,0%,0%,.05);
 }
-.custom_modal .btn-section:hover,
-.custom_modal .btn-section:focus,
-.custom_modal .btn-section:active, 
-.custom_modal.btn-section.active, 
-.custom_modal .open .dropdown-toggle.btn-section{
-  opacity: 0.8;
-  color: #fff;
+.custom_modal .button:active {
+    box-shadow: inset 0 0 0 1px hsla(0,0%,0%,.2),
+                inset 0 2px 0 hsla(0,0%,100%,.1),
+                inset 0 1.2em 0 hsla(0,0%,100%,.1),
+                inset 0 0 0 3em hsla(0,0%,100%,.2),
+                inset 0 .25em .5em hsla(0,0%,0%,.05),
+                0 -1px 1px hsla(0,0%,0%,.1),
+                0 1px 1px hsla(0,0%,100%,.25);
+    margin-top: .25em;
+    outline: none;
+    padding-bottom: .5em;
+}
+
+/* Light Text */
+
+.custom_modal .lightText {
+    box-shadow: inset 0 0 0 1px hsla(0,0%,0%,.25),
+                inset 0 2px 0 hsla(0,0%,100%,.1),
+                inset 0 1.2em 0 hsla(0,0%,100%,.05),
+                inset 0 -.2em 0 hsla(0,0%,100%,.1),
+                inset 0 -.25em 0 hsla(0,0%,0%,.5),
+                0 .25em .25em hsla(0,0%,0%,.1);
+    color: #fff;
+    text-shadow: 0 -1px 1px hsla(0,0%,0%,.25);
+}
+.custom_modal .lightText:hover,
+.custom_modal .lightText:focus {
+    box-shadow: inset 0 0 0 1px hsla(0,0%,0%,.25),
+                inset 0 2px 0 hsla(0,0%,100%,.1),
+                inset 0 1.2em 0 hsla(0,0%,100%,.05),
+                inset 0 -.2em 0 hsla(0,0%,100%,.1),
+                inset 0 -.25em 0 hsla(0,0%,0%,.5),
+                inset 0 0 0 3em hsla(0,0%,100%,.2),
+                0 .25em .25em hsla(0,0%,0%,.1);
+}
+.custom_modal .lightText:active {
+    box-shadow: inset 0 0 0 1px hsla(0,0%,0%,.25),
+                inset 0 2px 0 hsla(0,0%,100%,.1),
+                inset 0 1.2em 0 hsla(0,0%,100%,.05),
+                inset 0 0 0 3em hsla(0,0%,100%,.2),
+                inset 0 .25em .5em hsla(0,0%,0%,.05),
+                0 -1px 1px hsla(0,0%,0%,.1),
+                0 1px 1px hsla(0,0%,100%,.25);
+}
+.custom_modal .square {
+    border-radius: .25em;
+}
+.custom_modal .grey {
+    background-color: #999;
+}
+.custom_modal .red {
+    background-color: #cf2f28;
 }
 
 @media (max-width: 600px) {

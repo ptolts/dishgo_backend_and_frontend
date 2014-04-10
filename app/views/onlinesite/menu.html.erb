@@ -119,7 +119,7 @@
 											    						<div data-bind="visible: sizes, with: sizes_object" class="demo_options">
 											    							<h4>Select Size</h4>
 											    							<div data-bind="foreach: individual_options">
-											    								<label class="btn btn-section float_option_size" data-bind="css: {'active': $parents[1].sizeSelectedOptionValue() === $data}"><input name="sizes_radio" type="radio" data-bind="checkedValue: $data, checked: $parents[1].sizeSelectedOptionValue" style="opacity: 0; width: 0px"/><!-- ko lText: name --><!-- /ko --></label>                                               
+											    								<label class="button lightText square grey float_option_size" data-bind="css: {'active': $parents[1].sizeSelectedOptionValue() === $data}"><input name="sizes_radio" type="radio" data-bind="checkedValue: $data, checked: $parents[1].sizeSelectedOptionValue" style="opacity: 0; width: 0px"/><!-- ko lText: name --><!-- /ko --></label>                                               
 											    							</div>
 											    						</div>
 											    					</div>
@@ -128,7 +128,7 @@
 												    						<div class="demo_options">
 												    							<h4 data-bind="lText: name"></h4>
 												    							<div data-bind="foreach: individual_options">
-												    								<label class="btn btn-dish float_option" data-bind="css: {'active': $parent.selectedOptionValue().indexOf($data) >= 0}">
+												    								<label class="button lightText square red float_option" data-bind="css: {'active': $parent.selectedOptionValue().indexOf($data) >= 0}">
 												    									<input name="sizes_radio" type="checkbox" data-bind="checkedValue: $data, checked: $parent.selectedOptionValue" style="opacity: 0; width: 0px">
 												    									<!-- ko lText: name -->
 
