@@ -1,0 +1,72 @@
+.layout_controls .nav {
+	color: #000;
+	text-align: center;
+	width: 100%;
+}
+
+.layout_controls .nav li {
+	float: none;
+  display: inline-block;
+}
+
+.layout_controls .nav a {
+	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif !important;
+	font-size: 16px !important;
+}
+
+.layout_controls .nav-pills>li.active>a, .layout_controls .nav-pills>li.active>a:hover, .layout_controls .nav-pills>li.active>a:focus {
+	color: #fff;
+	background-color: #000;
+}
+
+.layout_controls .nav a:hover {
+  -webkit-transform: none;
+  -ms-transform: none;
+  transform: none;
+}
+
+.btn-inverse { 
+  color: #FFFFFF; 
+  background-color: #1D1526; 
+  border-color: #18171F; 
+} 
+ 
+.btn-inverse:hover, 
+.btn-inverse:focus, 
+.btn-inverse:active, 
+.btn-inverse.active, 
+.open .dropdown-toggle.btn-inverse { 
+  color: #FFFFFF; 
+  background-color: #383838; 
+  border-color: #18171F; 
+} 
+ 
+.btn-inverse:active, 
+.btn-inverse.active, 
+.open .dropdown-toggle.btn-inverse { 
+  background-image: none; 
+} 
+ 
+.btn-inverse.disabled, 
+.btn-inverse[disabled], 
+fieldset[disabled] .btn-inverse, 
+.btn-inverse.disabled:hover, 
+.btn-inverse[disabled]:hover, 
+fieldset[disabled] .btn-inverse:hover, 
+.btn-inverse.disabled:focus, 
+.btn-inverse[disabled]:focus, 
+fieldset[disabled] .btn-inverse:focus, 
+.btn-inverse.disabled:active, 
+.btn-inverse[disabled]:active, 
+fieldset[disabled] .btn-inverse:active, 
+.btn-inverse.disabled.active, 
+.btn-inverse[disabled].active, 
+fieldset[disabled] .btn-inverse.active { 
+  background-color: #1D1526; 
+  border-color: #18171F; 
+} 
+ 
+.btn-inverse .badge { 
+  color: #1D1526; 
+  background-color: #FFFFFF; 
+}
