@@ -103,12 +103,9 @@
 											    				<div class="row" id="body-section">
 
 											    					<div class="col-xs-12">
-											    						<div class="web_preview_uiscrollview">
-												                            <ul class="image_roll" data-bind="foreach: images">
-												                            	<li><img data-bind="attr:{src:url}" alt="" class="img-responsive"></li>
-												                            </ul>
-											    						</div>
+					                                           			<img class="img-responsive" data-bind="visible: large_title_image, menuImage: lazyLoadImage">
 											    					</div>
+											    					
 											    					<div class="col-xs-12">
 											    						<div class="dish-description">
 											    							<p data-bind="lText: description"></p>
