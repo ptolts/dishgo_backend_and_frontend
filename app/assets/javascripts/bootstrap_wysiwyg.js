@@ -764,7 +764,7 @@
           insert: 'Insert Horizontal Rule'
         },
         style: {
-          style: 'Style',
+          style: 'Text Size',
           normal: 'Normal',
           blockquote: 'Quote',
           pre: 'Code',

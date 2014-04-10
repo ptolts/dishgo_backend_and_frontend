@@ -1,9 +1,7 @@
 .restaurant_list {
-    background-color: #fff;
-    border-radius: 5px;
     max-height: 500px;
     overflow-y: scroll;
-    color: #000;
+    color: #fff;
 }
 
 .restaurant_list ul {
@@ -12,8 +10,20 @@
     margin: 0px;
 }
 
+.restaurant_list .row {
+    margin-bottom: 0;
+}
+
+.restaurant_list li h4 {
+    display: inline-block;
+    margin-top: 0;
+    margin-bottom: 0;
+    line-height: 35px;
+    height: 35px;
+}
+
 .restaurant_list li {
-    border: 2px solid #6DFFEA;
+    border: 3px solid #DCDCDC;
     border-radius: 5px;
     padding-left: 10px;
     padding-right: 10px;
@@ -29,5 +39,5 @@
 }
 
 .restaurant_list li:hover {
-    border-color: #60C0FF;
+    border-color: #C71010;
 }

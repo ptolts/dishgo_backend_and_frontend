@@ -1,4 +1,4 @@
-<div class="container">
+<div class="profile_controls">
 
     <div>
         <ul class="nav nav-pills" data-bind="foreach: $__page__.children">
@@ -6,20 +6,20 @@
         </ul>
     </div>
 
-    <div data-bind="page: {id: 'start', title: 'Restaurant Profile', with: restaurant}" class="pages">
-        <div data-bind="template: { name: 'restaurant_template', data: $parent.restaurant }"></div>
+    <div data-bind="page: {id: 'start', title: 'Restaurant Profile', with: restaurant}">
+        <div data-bind="template: { name: 'restaurant_template', data: $parent.restaurant }" class="profile_details"></div>
     </div>
    
-    <div data-bind="page: {id: 'user', title: 'User Profile', with: user}" class="pages">
-        <div data-bind="template: { name: 'user_template', data: $parent.user }"></div>
+    <div data-bind="page: {id: 'user', title: 'User Profile', with: user}">
+        <div data-bind="template: { name: 'user_template', data: $parent.user }" class="profile_details"></div>
     </div>
 
-    <div data-bind="page: {id: 'social_media', title: 'Restaurant Social Media Links', with: restaurant}" class="pages">
-        <div data-bind="template: { name: 'socialmedia_template', data: $parent.restaurant }"></div>
+    <div data-bind="page: {id: 'social_media', title: 'Restaurant Social Media Links', with: restaurant}">
+        <div data-bind="template: { name: 'socialmedia_template', data: $parent.restaurant }" class="profile_details"></div>
     </div>
 
-    <div data-bind="page: {id: 'hours', title: 'Restaurant Hours', with: restaurant}" class="pages">
-        <div data-bind="template: { name: 'hours_template', data: $parent.restaurant }"></div>
+    <div data-bind="page: {id: 'hours', title: 'Restaurant Hours', with: restaurant}">
+        <div data-bind="template: { name: 'hours_template', data: $parent.restaurant }" class="profile_details"></div>
     </div>
 
     <%= render 'shared/restaurant_template' %>

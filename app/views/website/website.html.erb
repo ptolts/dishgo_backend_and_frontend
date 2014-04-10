@@ -1,14 +1,14 @@
 <div class="layout_controls">
 
     <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-12">
             <ul class="nav nav-pills" data-bind="foreach: $page.children">
                 <li data-bind="css: {active: isVisible}"><a data-bind="text: $data.val('title'), page-href: $data"></a></li>
             </ul>
         </div>
     </div>    
 
-    <div data-bind="page: {id: 'start', title: 'Design'}" class="website_pages">
+<!--     <div data-bind="page: {id: 'start', title: 'Design'}" class="website_pages">
         <div class="row">
             <div class="col-xs-12">
                 <h3>Select a design: </h3>
@@ -18,24 +18,24 @@
                 <div class="row">
                     <div class="col-xs-12">
                         <hr class="website_line">
-                            <button class="btn btn-primary pull-left col-xs-4" data-bind="click: function(){ $root.previousPage($page) }, visible: $root.visiblePrevious($page)"><span class="glyphicon glyphicon-chevron-left"></span> Previous</button>
-                        <button class="btn btn-primary pull-right col-xs-4" data-bind="click: function(){ $root.nextPage($page) }, visible: $root.visibleNext($page)">Next <span class="glyphicon glyphicon-chevron-right"></span></button>
+                            <button class="btn btn-inverse pull-left col-xs-4" data-bind="click: function(){ $root.previousPage($page) }, visible: $root.visiblePrevious($page)"><span class="glyphicon glyphicon-chevron-left"></span> Previous</button>
+                        <button class="btn btn-inverse pull-right col-xs-4" data-bind="click: function(){ $root.nextPage($page) }, visible: $root.visibleNext($page)">Next <span class="glyphicon glyphicon-chevron-right"></span></button>
                     </div>
                 </div>              
             </div>
         </div>
-    </div>
+    </div> -->
 
     <!-- ko if: current_design -->
-        <div data-bind="page: {id: 'image_page', title: 'Images', with: current_design}" class="website_pages">
+        <div data-bind="page: {id: 'image_page', title: 'Images', with: current_design, role: 'start'}" class="website_pages">
             <div class="row">
                 <div class="col-xs-12">
                     <div data-bind="template: { name: 'customize_design_template', data: $root.current_design }"></div>
                     <div class="row">
                         <div class="col-xs-12">
                             <hr class="website_line">
-                            <button class="btn btn-primary pull-left col-xs-4" data-bind="click: function(){ $root.previousPage($page) }, visible: $root.visiblePrevious($page)"><span class="glyphicon glyphicon-chevron-left"></span> Previous</button>    
-                            <button class="btn btn-primary pull-right col-xs-4" data-bind="click: function(){ $root.nextPage($page) }, visible: $root.visibleNext($page)">Next <span class="glyphicon glyphicon-chevron-right"></span></button>
+                            <button class="btn btn-inverse pull-left col-xs-4" data-bind="click: function(){ $root.previousPage($page) }, visible: $root.visiblePrevious($page)"><span class="glyphicon glyphicon-chevron-left"></span> Previous</button>    
+                            <button class="btn btn-inverse pull-right col-xs-4" data-bind="click: function(){ $root.nextPage($page) }, visible: $root.visibleNext($page)">Next <span class="glyphicon glyphicon-chevron-right"></span></button>
                         </div>
                     </div>                  
                 </div>
@@ -49,8 +49,8 @@
                     <div class="row">
                         <div class="col-xs-12">
                             <hr class="website_line">
-                            <button class="btn btn-primary pull-left col-xs-4" data-bind="click: function(){ $root.previousPage($page) }, visible: $root.visiblePrevious($page)"><span class="glyphicon glyphicon-chevron-left"></span> Previous</button>    
-                            <button class="btn btn-primary pull-right col-xs-4" data-bind="click: function(){ $root.nextPage($page) }, visible: $root.visibleNext($page)">Next <span class="glyphicon glyphicon-chevron-right"></span></button>
+                            <button class="btn btn-inverse pull-left col-xs-4" data-bind="click: function(){ $root.previousPage($page) }, visible: $root.visiblePrevious($page)"><span class="glyphicon glyphicon-chevron-left"></span> Previous</button>    
+                            <button class="btn btn-inverse pull-right col-xs-4" data-bind="click: function(){ $root.nextPage($page) }, visible: $root.visibleNext($page)">Next <span class="glyphicon glyphicon-chevron-right"></span></button>
                         </div>
                     </div>                  
                 </div>
@@ -64,8 +64,8 @@
                     <div class="row">
                         <div class="col-xs-12">
                             <hr class="website_line">
-                            <button class="btn btn-primary pull-left col-xs-4" data-bind="click: function(){ $root.previousPage($page) }, visible: $root.visiblePrevious($page)"><span class="glyphicon glyphicon-chevron-left"></span> Previous</button>    
-                            <button class="btn btn-primary pull-right col-xs-4" data-bind="click: function(){ $root.nextPage($page) }, visible: $root.visibleNext($page)">Next <span class="glyphicon glyphicon-chevron-right"></span></button>
+                            <button class="btn btn-inverse pull-left col-xs-4" data-bind="click: function(){ $root.previousPage($page) }, visible: $root.visiblePrevious($page)"><span class="glyphicon glyphicon-chevron-left"></span> Previous</button>    
+                            <button class="btn btn-inverse pull-right col-xs-4" data-bind="click: function(){ $root.nextPage($page) }, visible: $root.visibleNext($page)">Next <span class="glyphicon glyphicon-chevron-right"></span></button>
                         </div>
                     </div>                  
                 </div>

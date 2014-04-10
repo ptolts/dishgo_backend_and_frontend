@@ -1,5 +1,39 @@
 /*user form*/
 
+.profile_controls .nav {
+    color: #000;
+    text-align: center;
+    width: 100%;
+}
+
+.profile_controls .col-md-8 {
+  float: none !important;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.profile_controls .nav li {
+    float: none;
+  display: inline-block;
+}
+
+.profile_controls .nav a {
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif !important;
+    font-size: 16px !important;
+    color: #000;
+}
+
+.profile_controls .nav-pills>li.active>a, .profile_controls .nav-pills>li.active>a:hover, .profile_controls .nav-pills>li.active>a:focus {
+    color: #fff;
+    background-color: #000;
+}
+
+.profile_controls .nav a:hover {
+  -webkit-transform: none;
+  -ms-transform: none;
+  transform: none;
+}
+
 .user_form_wrapper {
 	background:rgb(0,0,0);
     background: transparent\9;

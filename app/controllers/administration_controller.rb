@@ -1,7 +1,7 @@
 class AdministrationController < ApplicationController
   before_filter :authenticate_user!
-  before_filter :admin_or_user_with_resto!, :except => [:restaurant_setup, :search_restaurants, :set_restaurant]
-  before_filter :admin_user!, :only => [:users, :restaurants, :add_user, :user_destroy, :update_user]
+  before_filter :admin_or_user_with_resto!, :except => [:restaurant_setup, :free_search_restaurants, :set_restaurant]
+  before_filter :admin_user!, :only => [:users, :restaurants, :add_user, :user_destroy, :update_user, :search_restaurants]
   before_filter :admin_or_owner!, :only => [:edit_menu, :update_menu, :crop_image, :crop_icon, :publish_menu, :reset_draft_menu, :update_restaurant]
   layout 'administration'
   after_filter :set_access_control_headers
@@ -37,6 +37,18 @@ class AdministrationController < ApplicationController
       Rails.logger.warn "result.to_json"
     end
   	render :json => result.as_json(:include => :design)
+  end
+
+  def free_search_restaurants
+    if params[:lat].to_i != 0
+      result = Restaurant.where(user_id:nil, :locs => { "$near" => { "$geometry" => { "type" => "Point", :coordinates => [params[:lon].to_f,params[:lat].to_f] }, "$maxDistance" => 25000}})
+    else
+      result = Restaurant.where(:name => /#{params[:restaurant_name]}/i, user_id:nil).limit(25)
+      result.reject!{|resto| next resto.user}
+      Rails.logger.warn result.to_json
+      Rails.logger.warn "result.to_json"
+    end
+    render :json => result.as_json(:include => :design)
   end
 
   def search_users

@@ -11,9 +11,9 @@ class WebsiteController < ApplicationController
 		# unless current_user.owns_restaurants.font
 		# 	current_user.owns_restaurants.font = Font.first
 		# end
-		@design_id = ""
+		@design_id = Design.all.first.id
 		@design_id = current_user.owns_restaurants.design.id if current_user.owns_restaurants.design	
-		@font_id = ""
+		@font_id = Font.all.first.id
 		@font_id = current_user.owns_restaurants.font.id if current_user.owns_restaurants.font					
 		@designs = all_designs
 		@fonts = Font.all.as_json
