@@ -14,12 +14,13 @@ production:
     # Defines the default session. (required)
     default:
       hosts:
-        - database1.dishgo.io:27017
-        - database2.dishgo.io:27017
-        - database3.dishgo.io:27017
+        - 10.128.224.88:27017
+        - 10.128.221.33:27017
+        - 10.128.222.208:27017
       database: dishgo        
       username: phil
       password: 0ud1Vi7u
       options:
         ssl: true
         read: :primary_preferred      
+
