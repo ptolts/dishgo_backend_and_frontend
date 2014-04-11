@@ -75,6 +75,12 @@ class WebsiteController < ApplicationController
 		restaurant.font = Font.find(params["font_id"])
 		Rails.logger.warn restaurant_data
 		restaurant.about_text_translations = restaurant_data["about_text"]
+
+		restaurant.preview_token = loop do
+			token = SecureRandom.urlsafe_base64
+			break token unless Restaurant.where(preview_token: token).count > 0
+		end if restaurant.preview_token.blank?
+
 		restaurant.save		
 		render :json => {preview:"/app/onlinesite/preview/#{restaurant.preview_token.to_s}"}.as_json
 	end
