@@ -1,87 +1,98 @@
 <script id="restaurant_template" type="text/html">
-    <div class="col-md-8">
+    <div class="col-md-6">
         <div class="row">
             <div class="profile_form_wrapper">
                 <form class="form-horizontal">
                     <fieldset>
                         <!-- Address form -->
-                        <h2 class="text-center">Restaurant Profile</h2>
-                        <hr>
+                        <h3 class="text-center">Your Restaurant Profile</h3>
+                        <h4 class="text-center">All Fields are Manditory</h4>
                         <!-- full-name input-->
-                        <div class="form-group">
-                            <label>Restaurant Name</label>
-                            <div class="controls">
-                                <input id="resturant_name" name="resturant_name" type="text" placeholder="Restaurant Name" data-bind="value: name" class="form-control">
-                                <p class="help-block"></p>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>Restaurant Name</label>
+                                    <div class="controls">
+                                        <input id="resturant_name" name="resturant_name" type="text" placeholder="Restaurant Name" data-bind="value: name" class="form-control">
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <!-- phone input-->
-                        <div class="form-group">
-                            <label>Phone</label>
-                            <div class="controls">
-                                <input id="phone" name="phone" type="text" placeholder="Restaurant Phone Number" data-bind="value: phone" class="form-control">
-                                <p class="help-block"></p>
+                            <!-- phone input-->
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>Phone</label>
+                                    <div class="controls">
+                                        <input id="phone" name="phone" type="text" placeholder="Restaurant Phone Number" data-bind="value: phone" class="form-control">
+                                    </div>
+                                </div>
                             </div>
-                        </div>  
-                        <!-- dishgo subdomain input-->
-                        <div class="form-group">
-                            <label>DishGo Subdomain</label>
-                            <div class="controls" data-bind="css:{'has-error':!validateSubdomain()}">
-                                <input id="subdomain" name="subdomain" type="text" placeholder="your_restaurant.dishgo.io" data-bind="value: subdomain, valueUpdate: 'afterkeydown'" class="form-control">
-                                <p class="help-block">This is the subdomain your customers will use to access your dishgo site. Usually your restaurant name will suffice.</p>
+                            <!-- dishgo subdomain input-->
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>DishGo Subdomain</label>
+                                    <div class="controls" data-bind="css:{'has-error':!validateSubdomain()}">
+                                        <input id="subdomain" name="subdomain" type="text" placeholder="your_restaurant.dishgo.io" data-bind="value: subdomain, valueUpdate: 'afterkeydown'" class="form-control">
+                                    </div>
+                                </div>
                             </div>
-                        </div> 
-                        <!-- website input-->
-                        <div class="form-group">
-                            <label>Website</label>
-                            <div class="controls">
-                                <input id="website" name="website" type="text" placeholder="Your Restaurants Website" data-bind="value: website" class="form-control">
-                                <p class="help-block"></p>
+                            <!-- website input-->
+                            <div class="col-sm-6"> 
+                                <div class="form-group">
+                                    <label>Website</label>
+                                    <div class="controls">
+                                        <input id="website" name="website" type="text" placeholder="Your Restaurants Website" data-bind="value: website" class="form-control">
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <!-- address-line1 input-->
-                        <div class="form-group">
-                            <label>Address Line 1</label>
-                            <div class="controls">
-                                <input id="address_line1" name="address_line_1" type="text" placeholder="Address Line 1" data-bind="value: address_line_1" class="form-control">
-                                <p class="help-block">Street address, P.O. box, company name, c/o</p>
+                            <!-- address-line1 input-->
+                            <div class="col-sm-6">  
+                                <div class="form-group">
+                                    <label>Address Line 1</label>
+                                    <div class="controls">
+                                        <input id="address_line1" name="address_line_1" type="text" placeholder="Address Line 1" data-bind="value: address_line_1" class="form-control">
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <!-- address-line2 input-->
-                        <div class="form-group">
-                            <label>Address Line 2</label>
-                            <div class="controls">
-                                <input id="address_line2" name="address_line_2" type="text" placeholder="Address Line 2" data-bind="value: address_line_2" class="form-control">
-                                <p class="help-block">Apartment, suite , unit, building, floor, etc.</p>
+                            <!-- address-line2 input-->
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>Address Line 2</label>
+                                    <div class="controls">
+                                        <input id="address_line2" name="address_line_2" type="text" placeholder="Address Line 2" data-bind="value: address_line_2" class="form-control">
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <!-- city input-->
-                        <div class="form-group">
-                            <label>City / Town</label>
-                            <div class="controls">
-                                <input id="city" name="city" type="text" placeholder="City" data-bind="value: city" class="form-control">
-                                <p class="help-block"></p>
+                            <!-- city input-->
+                            <div class="col-sm-6">    
+                                <div class="form-group">
+                                    <label>City / Town</label>
+                                    <div class="controls">
+                                        <input id="city" name="city" type="text" placeholder="City" data-bind="value: city" class="form-control">
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <!-- region input-->
-                        <div class="form-group">
-                            <label>State / Province / Region</label>
-                            <div class="controls">
-                                <input id="region" name="region" type="text" placeholder="State / Province / Region" data-bind="value: province" class="form-control">
-                                <p class="help-block"></p>
+                            <!-- region input-->
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>State / Province / Region</label>
+                                    <div class="controls">
+                                        <input id="region" name="region" type="text" placeholder="State / Province / Region" data-bind="value: province" class="form-control">
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <!-- postal-code input-->
-                        <div class="form-group">
-                            <label>Zip / Postal Code</label>
-                            <div class="controls">
-                                <input id="postal-code" name="postal-code" type="text" placeholder="Zip or Postal Code" data-bind="value: postal_code" class="form-control">
-                                <p class="help-block"></p>
+                            <!-- postal-code input-->
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>Zip / Postal Code</label>
+                                    <div class="controls">
+                                        <input id="postal-code" name="postal-code" type="text" placeholder="Zip or Postal Code" data-bind="value: postal_code" class="form-control">
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </fieldset>
                 </form>
-                <div class="row">
+                <div class="row" style="margin-bottom:0px;">
                     <div class="col-xs-12">
                         <button class="btn btn-primary pull-right" data-bind="click: save">Save</button>
                     </div>
