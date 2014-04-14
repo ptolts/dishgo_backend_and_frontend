@@ -66,6 +66,17 @@
               <div class="web_preview" data-bind="visible: !$root.preview()">
                 <div class="col-md-12">
                   <div class="row">
+                    <div class="dish-title">
+                      <div class="col-md-9 col-xs-9" data-bind="lText: name">
+                      </div>
+                    </div>
+                    <div class="col-md-3 col-xs-3">
+                      <div class="dish-price">
+                        <i data-bind="text: computed_price"></i>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row" style="border-top: 1px solid #e5e5e5;">
                     <div class="dish-picture">
                       <div class="col-md-12">
                         <div class="dish_image">
@@ -79,43 +90,37 @@
                     </div>
                   </div>
                   <div class="row">
-                    <div class="dish-title">
-                      <div class="col-md-9 col-xs-9" data-bind="lText: name">
-                      </div>
-                    </div>
-                    <div class="col-md-3 col-xs-3">
-                      <div class="dish-price">
-                        <i data-bind="text: computed_price"></i>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
                     <div class="dish-description">
                       <div class="col-md-12">
-                        <p data-bind="lText: description"></p>
+                        <p class="text-center" data-bind="lText: description"></p>
                       </div>
                     </div>
                   </div>
                   <div class="row">
-                    <div class="dish-options">
-                      <div class="col-md-12">
-                        Options
+                    <div class="col-sm-6">
+                      <div data-bind="visible: sizes, with: sizes_object">
+                          <strong><h4 class="text-center">Select Size</h4></strong>
+                          <div data-bind="foreach: individual_options">
+                            <label class="button lightText square grey float_option" data-bind="css: {'active': $parents[1].sizeSelectedOptionValue() === $data}"><input name="sizes_radio" type="radio" data-bind="checkedValue: $data, checked: $parents[1].sizeSelectedOptionValue" style="opacity: 0; width: 0px"/><span data-bind="lText: name"></span></label>                         
+                          </div>
+                        </div>
                       </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-12">
-                      <hr>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="sizes">
-                      <div class="col-md-9">
-
+                      <!-- ko foreach: options -->
+                      <div class="col-sm-6">
+                          <strong><h4 class="text-center" data-bind="lText: name"></h4></strong>
+                          <div data-bind="foreach: individual_options">
+                            <label class="button lightText square red float_option" data-bind="css: {'active': $parent.selectedOptionValue().indexOf($data) >= 0}">
+                              <input name="sizes_radio" type="checkbox" data-bind="checkedValue: $data, checked: $parent.selectedOptionValue" style="opacity: 0; width: 0px"/>
+                              <span data-bind="lText: name"></span>
+                              <!-- ko if: $data.icon -->
+                              <img class="col-xs-12 thumbnail" data-bind="attr: {src: icon().url()}" />
+                              <!-- /ko -->
+                            </label>                         
+                          </div>
                       </div>
-                    </div>
-                  </div>
+                      <!-- /ko -->
                 </div> <!-- Dish#1 -->     
               </div>
             </div>
           </div>
+        </div>
