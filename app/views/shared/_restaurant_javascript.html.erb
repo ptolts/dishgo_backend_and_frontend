@@ -43,6 +43,25 @@
                     return "Closed";
                 }
             });
+
+            self.validateOpen_1 = ko.observable(true);
+            self.open_1.subscribe(function(newvalue){
+                if(newvalue == null){
+                    self.validateOpen_1(true);
+                } else {
+                    self.validateOpen_1(false);
+                }
+            });
+
+            self.validateClose_1 = ko.observable(true);
+            self.close_1.subscribe(function(newvalue){
+                if(newvalue == null){
+                    self.validateClose_1(true);
+                } else {
+                    self.validateClose_1(false);
+                }
+            });            
+
         }
 
         function Restaurant(data) {
@@ -149,11 +168,17 @@
                     return false;
                 }
                 var start = current_day.open_1();
+                if(start == null){
+                    return false;
+                }                
                 start = start.split(":");
                 start = new Date(2012,6,start[0],start[1]).getTime();
                 console.log(start);                
                 var now = new Date(2012,6,new Date().getHours(),new Date().getMinutes()).getTime();
                 var end = current_day.close_1();
+                if(end == null){
+                    return false;
+                }
                 end = end.split(":");
                 end = new Date(2012,6,end[0],end[1]).getTime();
                 console.log(end);
@@ -167,6 +192,14 @@
                     console.log("closed");
                 }                
             });
+
+            ko.bindingHandlers.validateSubdomain = {
+                update: function (element, valueAccessor, allBindingsAccessor, viewModel)
+                {
+                    var value = ko.utils.unwrapObservable(valueAccessor());
+                    viewModel.valInserted(value.replace(/[^0-9a-zA-Z]/g, ''));
+                }
+            };    
 
             self.areWeOpenedText = ko.computed(function(){ return self.areWeOpened() ? 'open' : 'closed'});        
 
@@ -213,6 +246,7 @@
             }            
 
             self.save = function(){
+
                 if(!self.validateSubdomain()){
                     bootbox.dialog({
                       message: "The subdomain you've chosen is either invalid or unavailable.",
@@ -226,6 +260,28 @@
                     }); 
                     return;                    
                 }
+
+                var validate_hours = _.every(self.hours(),function(e){ 
+                    if(e.closed()){
+                        return true;
+                    }
+                    return (!e.closed() && !e.validateOpen_1() && !e.validateClose_1());
+                });
+
+                if(!validate_hours){
+                    bootbox.dialog({
+                      message: "The hours you entered are incorrect or missing. Look for the one highlighted red.",
+                      title: "Invalid Hours",
+                      buttons: {
+                        success: {
+                          label: "Ok",
+                          className: "btn-primary pull-right col-xs-3",
+                        },
+                      }
+                    }); 
+                    return;                    
+                }    
+
                 $.ajax({
                   type: "POST",
                   url: "/app/administration/update_restaurant",

@@ -1,6 +1,6 @@
 class AdministrationController < ApplicationController
   before_filter :authenticate_user!
-  before_filter :admin_or_user_with_resto!, :except => [:restaurant_setup, :free_search_restaurants, :set_restaurant]
+  before_filter :admin_or_user_with_resto!, :except => [:restaurant_setup, :free_search_restaurants, :set_restaurant, :create_restaurant]
   before_filter :admin_user!, :only => [:users, :restaurants, :add_user, :user_destroy, :update_user, :search_restaurants]
   before_filter :admin_or_owner!, :only => [:edit_menu, :update_menu, :crop_image, :crop_icon, :publish_menu, :reset_draft_menu, :update_restaurant]
   layout 'administration'
@@ -100,7 +100,18 @@ class AdministrationController < ApplicationController
     user.owns_restaurants = restaurant
     user.save
     render :json => ["User Restaurant Saved."].as_json
-  end    
+  end 
+
+  def create_restaurant
+    settings = JSON.parse(params[:data])    
+    restaurant = Restaurant.create
+    restaurant.name = "New Restaurant"
+    restaurant.save
+    user = current_user
+    user.owns_restaurants = restaurant
+    user.save
+    render :json => ["User Restaurant Saved."].as_json
+  end      
 
   def edit_menu
     restaurant = Restaurant.find(params[:restaurant_id])
@@ -304,6 +315,12 @@ class AdministrationController < ApplicationController
     if settings["design"] and !settings["design"]["id"].blank?
       design = Design.find(settings["design"]["id"])
       restaurant.design = design
+    end
+
+    if restaurant.enough_info? 
+      u = current_user
+      u.sign_up_progress["profile"] = true
+      u.save
     end
 
     restaurant.save

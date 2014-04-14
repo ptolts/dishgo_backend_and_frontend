@@ -1,56 +1,47 @@
 <div class="container">
-        <div class="section-splash">
-			<div class="row">
-				<div class="col-xs-12">
-				<p class="red" style="margin-bottom: 5px;">Getting Started with DishGo</p>
-				<h1 style="margin-top: 0px;">The Home of Your New Menu</h1>
-				<hr id="splash_line">
-			</div>
-		</div>
+    <div class="section-splash">
 		<div class="row">
-			<div class="col-sm-8">
-				<h2>Restaurant Details</h2>
-				<p>First you need to fill out essential details about your restaurant such as the phone number and address.</p>
-			</div>
-			<div class="col-sm-4">
-				<div class="hidden-xs" style="margin-top: 40px;"></div>
-				<button class="btn btn-lg btn-dish btn-block">Restaurant Details</button>
-			</div>
-		</div>
-		<hr id="splash_line">		
-		<div class="row">
-			<div class="col-sm-8">
-				<h2>Dish Building Tutorials</h2>
-				<p>Review some standard dish layouts like Pizzas and Burgers to familiarize yourself with our Dish Builder</p>
-			</div>
-			<div class="col-sm-4">
-				<div class="hidden-xs" style="margin-top: 40px;"></div>
-				<button class="btn btn-lg btn-dish btn-block">Learn More</button>
-			</div>
-		</div>
-		<hr id="splash_line">
-		<div class="row">
-			<div class="col-sm-8">
-				<h2>Profile Details</h2>
-				<p>Manage your DishGo profile, restaurant information, app and web listings all conveniently in the profile section</p>
-			</div>
-			<div class="col-sm-4">
-				<div class="hidden-xs" style="margin-top: 40px;"></div>
-				<button class="btn btn-lg btn-section btn-block">Manage Profile</button>
-			</div>
-		</div>
-		<hr id="splash_line">
-		<div class="row">
-			<div class="col-sm-8">
-				<h2>Get Down to Business</h2>
-			</div>
-			<div class="col-sm-4">
-				<div class="hidden-xs" style="margin-top: 20px;"></div>
-				<button class="btn btn-lg btn-success btn-block">Build a Dish</button>
-			</div>
+			<div class="col-xs-12">
+			<p class="red" style="margin-bottom: 5px;">Getting Started with DishGo</p>
+			<h1 style="margin-top: 0px;">The Home of Your New Menu</h1>
+			<hr id="splash_line">
 		</div>
 	</div>
-</div>
+
+	<div class="row">
+		<div class="col-sm-8">
+			<h2>Restaurant Details</h2>
+			<p>First you need to fill out essential details about your restaurant such as the phone number and address.</p>
+		</div>
+		<div class="col-sm-4">
+			<div class="hidden-xs" style="margin-top: 40px;"></div>
+			<a href="/app/profile/edit" class="btn btn-lg btn-dish btn-block">Restaurant Details</a>
+		</div>
+	</div>
+
+	<hr id="splash_line">
+	<div class="row">
+		<div class="col-sm-8">
+			<h2>Setup Your Website</h2>
+			<p>Now design your website. You can choose different looks and upload custom background pictures.</p>			
+		</div>
+		<div class="col-sm-4">
+			<div class="hidden-xs" style="margin-top: 20px;"></div>
+			<a href="/app/website/index" class="btn btn-lg btn-warning btn-block">Website Setup</a>
+		</div>
+	</div>	
+
+	<hr id="splash_line">
+	<div class="row">
+		<div class="col-sm-8">
+			<h2>Build Your Menu</h2>
+			<p>Start building your beautiful interactive menu. Once you've created it, you can make changes at any time.</p>			
+		</div>
+		<div class="col-sm-4">
+			<div class="hidden-xs" style="margin-top: 20px;"></div>
+			<a href="/app/administration/edit_menu?restaurant_id=<%= current_user.owns_restaurants.id %>" class="btn btn-lg btn-success btn-block">Build a Dish</a>
+		</div>
+	</div>
 </div>
 
 

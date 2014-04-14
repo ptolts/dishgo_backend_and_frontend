@@ -145,6 +145,13 @@ class Restaurant
     return Oj.dump(menu)
   end  
 
+  def enough_info?
+    enough = true
+    enough = false if self.address_line_1.blank?
+    enough = false if self.phone.blank?
+    enough = false if self.name.blank? or self.name == "New Restaurant"
+  end
+
 end
 
 

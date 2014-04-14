@@ -25,18 +25,18 @@
               <label class="col-xs-3 control-label"><i class="glyphicon glyphicon-time"></i> <!-- ko text: name --><!-- /ko --></label>
 
               <div class="col-xs-3 text-center">
-                <button class="btn" data-bind="css:{ 'btn-success':!closed(), 'btn-danger': closed }, click: toggleClosed, text: buttonText"></button>
+                <button class="btn" data-bind="css:{ 'btn-success':!closed(), 'btn-danger': closed }, click: toggleClosed"><!-- ko text: buttonText--><!--/ko--><span class="glyphicon glyphicon-hand-up" style="margin-left: 5px"></span></button>
               </div>
 
               <div data-bind="visible: !closed()">
                 <div class="col-xs-3">
-                  <div class="controls">
+                  <div class="controls" data-bind="css:{'has-error':validateOpen_1}">
                     <select class="form-control" data-bind="options: times, value: open_1, optionsCaption: 'Opened at...'"></select>
                   </div>
                 </div>
 
                 <div class="col-xs-3">
-                  <div class="controls">
+                  <div class="controls" data-bind="css:{'has-error':validateClose_1}">
                     <select class="form-control" data-bind="options: times, value: close_1, optionsCaption: 'Closed at...'"></select>
                   </div>
                 </div>

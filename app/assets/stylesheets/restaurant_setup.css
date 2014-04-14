@@ -1,7 +1,7 @@
 .restaurant_list {
     max-height: 500px;
     overflow-y: scroll;
-    color: #fff;
+    color: #000;
 }
 
 .restaurant_list ul {

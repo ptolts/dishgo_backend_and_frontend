@@ -127,17 +127,32 @@
         }
 
         self.new_restaurant = function(){
-            self.current_restaurant(new Restaurant({
-                                                    name:"New Restaurant",
-                                                    lat:0.0,
-                                                    lon:0.0,
-                                                    _id:null,
-                                                    address_line_2:"",
-                                                    address_line_1:"",
-                                                    phone:"",
-                                                    city:"",
-                                                    province:""
-                                                }))
+            // self.current_restaurant(new Restaurant({
+            //                                         name:"New Restaurant",
+            //                                         lat:0.0,
+            //                                         lon:0.0,
+            //                                         _id:null,
+            //                                         address_line_2:"",
+            //                                         address_line_1:"",
+            //                                         phone:"",
+            //                                         city:"",
+            //                                         province:""
+            //                                     }));
+            $.ajax({
+              type: "POST",
+              url: "/app/administration/create_restaurant",
+              data: {
+                data: ko.toJSON(self.current_restaurant),
+              },
+                success: function(data, textStatus, jqXHR){
+                    console.log("success");
+                    window.location.href = "/app";
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown) { 
+                    console.log("error: " + errorThrown);
+                },
+                dataType: "json"
+            });    
         }
 
 		var success_handler = function(position) {

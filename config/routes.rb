@@ -71,6 +71,7 @@ Foodcloud::Application.routes.draw do
       post 'user_set_restaurant'  
       post 'validate_subdomain'  
       post 'set_restaurant'  
+      post 'create_restaurant'  
       post 'upload_icon'
       post 'crop_image'
       post 'crop_icon'       

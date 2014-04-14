@@ -15,9 +15,15 @@
           <ul class="nav navbar-nav">
             <% if user_signed_in? %>
               <% if current_user.owns_restaurants %>
-                <li class="<%= active_link('profile','edit') %>"><a href="/app/profile/edit">Profile</a></li>                          
-                <li class="<%= active_link('administration','edit_menu') %>"><a href="/app/administration/edit_menu?restaurant_id=<%= current_user.owns_restaurants.id %>">Edit Menu</a></li>
-                <li class="<%= active_link('website','index') %>"><a href="/app/website/index">Edit Website</a></li>
+                <% if sign_up_progress("profile") %>
+                  <li class="<%= active_link('profile','edit') %>"><a href="/app/profile/edit">Profile</a></li>                          
+                <% end %>
+                <% if sign_up_progress("website") %>                
+                  <li class="<%= active_link('website','index') %>"><a href="/app/website/index">Edit Website</a></li>
+                <% end %>                
+                <% if sign_up_progress("edit_menu") %>
+                  <li class="<%= active_link('administration','edit_menu') %>"><a href="/app/administration/edit_menu?restaurant_id=<%= current_user.owns_restaurants.id %>">Edit Menu</a></li>
+                <% end %>
               <% end %>
               <% if admin_user? %>
                 <li class="<%= active_link('administration','users') %>"><a href="/app/administration/users">Users</a></li>

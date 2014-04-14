@@ -7,4 +7,16 @@ module ApplicationHelper
 	def admin_user?
 		current_user.is_admin
 	end
+
+	def sign_up_progress(action)
+		if current_user.is_admin
+			return true
+		end
+		if current_user.sign_up_progress[action]
+			return true
+		else 
+			return false
+		end
+	end
+
 end

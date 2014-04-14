@@ -9,6 +9,9 @@ class User
          :recoverable, :rememberable, :trackable, 
          :validatable, :confirmable 
 
+
+  field :sign_up_progress, type: Hash, :default => {}
+
   # Setup accessible (or protected) attributes for your model
   # attr_accessible :email, :password, :password_confirmation, :remember_me, :providor, :facebook_auth_token, :facebook_user_id, :authentication_token
 
