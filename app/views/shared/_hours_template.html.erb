@@ -9,7 +9,7 @@
             <p class="text-right"><strong>Day</strong></p>
           </div>        
           <div class="col-xs-3">
-            <p class="text-center"><strong>Opened/Closed</strong></p>
+            <p class="text-center"><strong>Status</strong></p>
           </div>        
           <div class="col-xs-3">
             <p class="text-center"><strong>Opening hours</strong></p>
@@ -22,7 +22,7 @@
         <form class="form-horizontal col-xs-12" role="form" id="business-hours-form">
           <!-- ko foreach: hours -->
             <div class="row">
-              <label class="col-xs-3 control-label"><i class="glyphicon glyphicon-time"></i> <!-- ko text: name --><!-- /ko --></label>
+              <label class="col-xs-3 control-label"><i class="glyphicon glyphicon-time hidden-xs"></i> <!-- ko text: name --><!-- /ko --></label>
 
               <div class="col-xs-3 text-center">
                 <button class="btn" data-bind="css:{ 'btn-success':!closed(), 'btn-danger': closed }, click: toggleClosed"><!-- ko text: buttonText--><!--/ko--><span class="glyphicon glyphicon-hand-up" style="margin-left: 5px"></span></button>
