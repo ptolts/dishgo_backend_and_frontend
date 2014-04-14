@@ -191,15 +191,7 @@
                     return false;
                     console.log("closed");
                 }                
-            });
-
-            ko.bindingHandlers.validateSubdomain = {
-                update: function (element, valueAccessor, allBindingsAccessor, viewModel)
-                {
-                    var value = ko.utils.unwrapObservable(valueAccessor());
-                    viewModel.valInserted(value.replace(/[^0-9a-zA-Z]/g, ''));
-                }
-            };    
+            });  
 
             self.areWeOpenedText = ko.computed(function(){ return self.areWeOpened() ? 'open' : 'closed'});        
 
@@ -337,7 +329,18 @@
                 });
             });
 
-        }        
+        }
+
+        ko.bindingHandlers.fixSubdomain = {
+            update: function (element, valueAccessor, allBindingsAccessor, viewModel)
+            {
+                var value = ko.utils.unwrapObservable(valueAccessor());
+                if(value === undefined){
+                    value == "";
+                }
+                viewModel.subdomain(value.replace(/[^0-9a-zA-Z]/g, ''));
+            }
+        };                  
 
     //]]>  
     </script>

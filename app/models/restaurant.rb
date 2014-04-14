@@ -104,14 +104,14 @@ class Restaurant
 
   def menu_to_json
     # result = RubyProf.profile {
-      menu_to_spit_out = self.published_menu
+      menu_to_spit_out = self.published_menu.pub
       if menu_to_spit_out.empty?
-        menu_to_spit_out = Restaurant.where(name:/tuckshop/i).first.published_menu
+        menu_to_spit_out = Restaurant.where(name:/tuckshop/i).first.published_menu.pub
       end
       menu = menu_to_spit_out.collect do |section|
         hash = section.as_document
         hash[:id] = section.id
-        hash["dishes"] = section.dishes.collect do |dish|
+        hash["dishes"] = section.dishes.pub.collect do |dish|
           dish.custom_to_hash
         end
         next hash
@@ -127,11 +127,11 @@ class Restaurant
 
   def draft_menu_to_json
     # result = RubyProf.profile {
-      menu = self.draft_menu.collect do |section|
+      menu = self.draft_menu.unscoped.draft.collect do |section|
         hash = section.as_document
         hash[:id] = section.id
         hash.merge!(section.draft)
-        hash["dishes"] = section.draft_dishes.collect do |dish|
+        hash["dishes"] = section.draft_dishes.unscoped.draft.collect do |dish|
           dish.custom_to_hash_draft
         end
         next hash

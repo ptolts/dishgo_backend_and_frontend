@@ -6,6 +6,7 @@ class Section
 	store_in collection: "Section", database: "dishgo"
 	field :name, localize: true
 	field :position, type: Integer
+	field :draft_position, type: Integer
 	field :draft, type: Hash
 	field :published, type: Boolean
 
@@ -17,11 +18,14 @@ class Section
 	has_many :dishes, class_name: "Dish", inverse_of: :section
 	has_many :draft_dishes, class_name: "Dish", inverse_of: :draft_section
 
-	default_scope -> {asc(:created_at)}
+  	scope :draft, -> {asc(:draft_position)} 	
+	scope :pub, -> {asc(:position)}
+
 	index({ _id:1 }, { unique: true, name:"id_index" })
 
 	def publish_menu
 		self.name_translations = self.draft["name"]
+		self.position = self.draft_position
 		self.dishes = self.draft_dishes
 		self.dishes.each do |dish|
 			dish.publish_menu
@@ -32,6 +36,8 @@ class Section
 	def reset_draft_menu
 		draft = {}
 		draft[:name] = self.name_translations
+		draft[:position] = self.position
+		self.draft_position = self.position
 		self.draft = draft
 		self.draft_dishes = self.dishes
 		self.dishes.each do |dish|
@@ -44,6 +50,10 @@ class Section
 
 		draft = {}
 		draft[:name] = section["name"]
+		draft[:position] = section["position"].to_i
+		self.draft_position = section["position"].to_i
+
+		Rails.logger.warn "[#{self.name}] -> #{self.draft_position}"
 
 		dishes = section["dishes"].collect do |dish|
 	        # Load Dish Object, or create a new one.

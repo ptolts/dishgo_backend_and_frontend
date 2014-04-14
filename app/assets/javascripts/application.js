@@ -12,6 +12,7 @@
 //
 // = require jquery
 // = require jquery_ujs
+// = require jquery.ui.sortable
 // = require knockout-3.1.0.debug.js
 // = require underscore
 // = require underscore-ko-1.2.2.min.js

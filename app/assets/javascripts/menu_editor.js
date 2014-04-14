@@ -3,6 +3,7 @@
 *= require mb.bgndGallery.js
 *= require mb.bgndGallery.effects.js
 *= require jquery.hashchange.min.js
+*= require knockout-sortable.js
 */
 
 //<![CDATA[ 
@@ -118,7 +119,8 @@ function Section(data,topmodel) {
 
     var self = this;
     self.topmodel = topmodel;
-    self.id = ko.observable() 
+    self.id = ko.observable();
+    self.position = ko.observable(data.position ? data.position : 0);
 
     if(data._id){
         self.id(data._id);
@@ -148,6 +150,12 @@ function Section(data,topmodel) {
     if(data.dishes){
         self.dishes = ko.observableArray($.map(data.dishes, function(item) { return new Dish(item) }));     
     }
+
+    self.dishes.subscribe(function(newvalue){
+        _.each(self.dishes(),function(item,index){
+            item.position(index);
+        });
+    });    
 
     self.printJson = function(){
         console.log(ko.toJSON(self));
@@ -345,6 +353,7 @@ function Dish(data) {
     self.name = ko.observable(data.name);  
     self.description = ko.observable(data.description);
     self.price = ko.observable(data.price);
+    self.position = ko.observable(data.position ? data.position : 0);
     self.images = ko.observableArray([]);
     self.sizeSelectedOptionValue = ko.observable();
 
@@ -921,7 +930,7 @@ function MenuViewModel() {
     var self = this;
     self.menu = ko.observableArray([]);
     self.newDomCounter = 0;
-    self.preview = ko.observable(true);
+    self.preview = ko.observable(false);
     self.languages = ko.observableArray(['en','fr']);
     self.lang = ko.observable('en');
     lang = self.lang;
@@ -938,6 +947,12 @@ function MenuViewModel() {
         } else {
             return "iPhone Preview"
         }
+    });
+
+    self.menu.subscribe(function(newvalue){
+        _.each(self.menu(),function(item,index){
+            item.position(index);
+        });
     });
 
     self.menu($.map(menu_data.menu, function(item) { return new Section(item,self) }));

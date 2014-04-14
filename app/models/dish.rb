@@ -8,6 +8,7 @@ class Dish
   field :description, localize: true
   field :price, type: Float
   field :position, type: Integer
+  field :draft_position, type: Integer
   field :published, type: Boolean
   field :has_multiple_sizes, type: Boolean
   field :draft, type: Hash
@@ -27,6 +28,8 @@ class Dish
   has_one :draft_sizes, :class_name => 'Option', inverse_of: :draft_dish_which_uses_this_as_size_options
 
   # default_scope ->{ where(:name.nin => ["", nil]) }
+  scope :draft, -> {asc(:draft_position)}   
+  scope :pub, -> {asc(:position)}  
 
   index({ _id:1 }, { unique: true, name:"id_index" })
 
@@ -95,6 +98,8 @@ class Dish
     end    
 
     draft[:name] = dish["name"]
+    draft[:position] = dish["position"].to_i
+    self.draft_position = dish["position"].to_i
     draft[:description] = dish["description"]
     draft[:price] = dish["price"].to_f
 
@@ -113,6 +118,7 @@ class Dish
     self.name_translations = self.draft["name"]
     self.description_translations = self.draft["description"]
     self.price = self.draft["price"]
+    self.position = self.draft_position
     self.has_multiple_sizes = self.draft["has_multiple_sizes"]
     self.options = self.draft_options
     self.image = self.draft_image
@@ -127,6 +133,8 @@ class Dish
   def reset_draft_menu
     draft = {}
     draft["name"] = self.name_translations
+    draft["position"] = self.position
+    self.draft_position = self.position
     draft["description"] = self.description_translations
     draft["price"] = self.price
     draft["has_multiple_sizes"] = self.has_multiple_sizes
@@ -145,6 +153,7 @@ class Dish
     dish_hash = self.as_document
     dish_hash[:id] = self.id
     dish_hash.merge!(self.draft)
+    dish_hash["position"] = self.draft_position
     dish_hash["sizes"] = self.draft_sizes.custom_to_hash_draft
     dish_hash["options"] = self.draft_options.collect do |option|
       next option.custom_to_hash_draft
