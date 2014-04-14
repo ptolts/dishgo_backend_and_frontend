@@ -11,7 +11,11 @@ class WebsiteController < ApplicationController
 		# unless current_user.owns_restaurants.font
 		# 	current_user.owns_restaurants.font = Font.first
 		# end
-		@design_id = Design.all.first.id
+		dezign = Design.where(name:/garde/i).first
+		if current_user.owns_restaurants.design != dezign
+			current_user.owns_restaurants.design = dezign
+		end
+		@design_id = dezign.id
 		@design_id = current_user.owns_restaurants.design.id if current_user.owns_restaurants.design	
 		@font_id = Font.all.first.id
 		@font_id = current_user.owns_restaurants.font.id if current_user.owns_restaurants.font					

@@ -105,10 +105,6 @@
 	margin-top: 5px;
 }
 
-.contact_page_wrapper .address_box {
-	/*margin-top: 65px;*/
-}
-
 .mini_content_wrapper {
 	background-color: rgba(0, 0, 0, 0.85);
 	padding: 15px;
@@ -154,16 +150,20 @@
 
 @media screen and (max-width: 850px) {
 
+	.contact_page_wrapper {
+		top: 70px;
+		left: initial;		
+		-webkit-transform: none;
+		-ms-transform: none;
+		transform: none;	
+	}	
+
 	.currently_open_tag {
 		display: none;
 	}
 
 	.contact_page_wrapper .map_box {
 		margin-top: 0px;
-	}
-
-	.contact_page_wrapper .address_box {
-		margin-top: 65px;
 	}
 
 	.mini_content_wrapper {

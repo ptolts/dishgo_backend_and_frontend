@@ -1,6 +1,6 @@
 <div class="profile_controls">
 
-    <div>
+    <div class="col-md-2 col-md-offset-1">
         <ul class="nav nav-pills" data-bind="foreach: $__page__.children">
             <li data-bind="css: {active: isVisible}"><a data-bind="text: $data.val('title'), page-href: $data"></a></li>
         </ul>
@@ -14,7 +14,7 @@
         <div data-bind="template: { name: 'user_template', data: $parent.user }" class="profile_details"></div>
     </div>
 
-    <div data-bind="page: {id: 'social_media', title: 'Restaurant Social Media Links', with: restaurant}">
+    <div data-bind="page: {id: 'social_media', title: 'Social Media Links', with: restaurant}">
         <div data-bind="template: { name: 'socialmedia_template', data: $parent.restaurant }" class="profile_details"></div>
     </div>
 

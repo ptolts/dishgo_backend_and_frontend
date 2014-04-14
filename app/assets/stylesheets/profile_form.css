@@ -6,59 +6,67 @@
 }
 
 .profile_controls .col-md-6 {
-  float: none !important;
-  margin-left: auto;
-  margin-right: auto;
+    float: none !important;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .profile_controls .nav li {
     float: none;
-  display: inline-block;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.profile_controls .nav>li>a {
+    position: relative;
+    display: block;
+    padding: 8px 5px;    
 }
 
 .profile_controls .nav a {
     font-family: "Helvetica Neue",Helvetica,Arial,sans-serif !important;
-    font-size: 16px !important;
-    color: #fff;
+    font-size: 14px !important;
+    color: #838383;
 }
 
 .profile_controls .nav-pills>li {
-    background-color: #999;
-    background-image: -webkit-linear-gradient(hsla(0,0%,100%,.05), hsla(0,0%,0%,.1));
-    background-image: -moz-linear-gradient(hsla(0,0%,100%,.05), hsla(0,0%,0%,.1));
-    background-image: -ms-linear-gradient(hsla(0,0%,100%,.05), hsla(0,0%,0%,.1));
-    background-image: -o-linear-gradient(hsla(0,0%,100%,.05), hsla(0,0%,0%,.1));
-    background-image: linear-gradient(hsla(0,0%,100%,.05), hsla(0,0%,0%,.1));
-    border: none;
-    border-radius: .5em;
-    box-shadow: inset 0 0 0 1px hsla(0,0%,0%,.2), inset 0 2px 0 hsla(0,0%,100%,.1), inset 0 1.2em 0 hsla(0,0%,100%,0.1), inset 0 -.2em 0 hsla(0,0%,100%,.1), inset 0 -.25em 0 hsla(0,0%,0%,.25), 0 .25em .25em hsla(0,0%,0%,.05);
+    border-radius: 5px;
+    color: #000;
+    border: 1px solid #D4D4D4;
+    background-color: #fff;
+    background-image: -webkit-linear-gradient(hsla(0,0%,0%,.05), hsla(0,0%,100%,.05));
+    background-image: -moz-linear-gradient(hsla(0,0%,0%,.05), hsla(0,0%,100%,.05));
+    background-image: -ms-linear-gradient(hsla(0,0%,0%,.05), hsla(0,0%,100%,.05));
+    background-image: -o-linear-gradient(hsla(0,0%,0%,.05), hsla(0,0%,100%,.05));
+    background-image: linear-gradient(hsla(0,0%,0%,.05), hsla(0,0%,100%,.05));
 }
 .nav-pills>li.active>a, 
 .nav-pills>li.active>a:hover, 
 .nav-pills>li.active>a:focus,
 .profile_controls .nav-pills>li>a:hover,
 .profile_controls .nav-pills>li>a:focus {
-    background-color: #cf2f28;
+    background-color: #838383;
+    color: #fff;
     background-image: -webkit-linear-gradient(hsla(0,0%,100%,.05), hsla(0,0%,0%,.1));
     background-image: -moz-linear-gradient(hsla(0,0%,100%,.05), hsla(0,0%,0%,.1));
     background-image: -ms-linear-gradient(hsla(0,0%,100%,.05), hsla(0,0%,0%,.1));
     background-image: -o-linear-gradient(hsla(0,0%,100%,.05), hsla(0,0%,0%,.1));
     background-image: linear-gradient(hsla(0,0%,100%,.05), hsla(0,0%,0%,.1));
     border: none;
-    border-radius: .5em;
-    box-shadow: inset 0 0 0 1px hsla(0,0%,0%,.2), inset 0 2px 0 hsla(0,0%,100%,.1), inset 0 1.2em 0 hsla(0,0%,100%,0.1), inset 0 -.2em 0 hsla(0,0%,100%,.1), inset 0 -.25em 0 hsla(0,0%,0%,.25), 0 .25em .25em hsla(0,0%,0%,.05);
+    border-radius: 3px;
+    /*box-shadow: inset 0 0 0 1px hsla(0,0%,0%,.2), inset 0 2px 0 hsla(0,0%,100%,.1), inset 0 1.2em 0 hsla(0,0%,100%,0.1), inset 0 -.2em 0 hsla(0,0%,100%,.1), inset 0 -.25em 0 hsla(0,0%,0%,.25), 0 .25em .25em hsla(0,0%,0%,.05);*/
 }
 .profile_controls .nav-pills>li.active>a:hover,
 .profile_controls .nav-pills>li.active>a:focus {
-    background-color: #cf2f28;
-    border-radius: .5em;
-    box-shadow: inset 0 0 0 1px hsla(0,0%,0%,.2),
-                inset 0 2px 0 hsla(0,0%,100%,.1),
-                inset 0 1.2em 0 hsla(0,0%,100%,.1),
-                inset 0 -.2em 0 hsla(0,0%,100%,.1),
-                inset 0 -.25em 0 hsla(0,0%,0%,.25),
-                inset 0 0 0 3em hsla(0,0%,100%,.2),
-                0 .25em .25em hsla(0,0%,0%,.05);
+    background-color: #838383;
+    border-radius: 3px;
+/*    box-shadow: inset 0 0 0 1px hsla(0,0%,0%,.2),
+    inset 0 2px 0 hsla(0,0%,100%,.1),
+    inset 0 1.2em 0 hsla(0,0%,100%,.1),
+    inset 0 -.2em 0 hsla(0,0%,100%,.1),
+    inset 0 -.25em 0 hsla(0,0%,0%,.25),
+    inset 0 0 0 3em hsla(0,0%,100%,.2),
+    0 .25em .25em hsla(0,0%,0%,.05);*/
 }
 
 .user_form_wrapper {
@@ -76,31 +84,31 @@
     background-image:         linear-gradient(hsla(0,0%,0%,.05), hsla(0,0%,100%,.05));
 }
 .user_form_wrapper .form-horizontal .form-group {
-	margin-right: 0px;
-	margin-left: 0px;
+    margin-right: 0px;
+    margin-left: 0px;
 }
 .user_form_wrapper .form-horizontal h3 {
-	margin-top: 0px;
+    margin-top: 0px;
     color: #1a1a1a;
 }
 .user_form_wrapper .form-horizontal .form-group .help-block {
-	color: #fff;
+    color: #fff;
 }
 .user_form_wrapper .form-horizontal .btn {
-	margin-top: 10px;
+    margin-top: 10px;
 }
 .user_form_wrapper .form-horizontal .btn-default {
     margin-top: 0px;
 }
 .user_form_wrapper .form-horizontal ul {
-	padding-left: 0px;
+    padding-left: 0px;
 }
 /*/user form*/
 
 /*profile form*/ 
 
 .profile_form_wrapper {
-	border-radius: 5px;
+    border-radius: 5px;
     color: #838383;
     padding: 15px;
     margin-top: 15px;
@@ -115,22 +123,22 @@
 
 }
 .profile_form_wrapper .form-horizontal .form-group {
-	margin-right: 0px;
-	margin-left: 0px;
+    margin-right: 0px;
+    margin-left: 0px;
 }
 .profile_form_wrapper .form-horizontal h3 {
-	margin-top: 0px;
+    margin-top: 0px;
     text-transform: uppercase;
     color: #1a1a1a;
 }
 .profile_form_wrapper .form-horizontal .form-group .help-block {
-	color: #838383;
+    color: #838383;
 }
 /*/profile form*/
 
 /*design form*/
 .design_form_wrapper {
-	border-radius: 5px;
+    border-radius: 5px;
     color: #838383;
     padding: 15px;
     margin-top: 15px;
@@ -138,7 +146,7 @@
     margin-bottom: 15px;
 }
 .design_form_wrapper .form-group .btn {
-	margin-top: 10px;
+    margin-top: 10px;
 }
 
 .profile_form_wrapper select {
