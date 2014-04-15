@@ -16,19 +16,21 @@
         </div>
     </div>
 
-    <div class="col-md-12 sortable_container hidden-sm">
+    <div class="col-md-12 sortable_container">
         <div class="sortable_top">
             <img src="/app/public/icon@2x.png" width="25" class="icon">
             <div class="option_title">
                 <span>Reorder Sections or Dishes</span>      
             </div>                                                 
         </div>
-
+        <div class="col-xs-12">
+            <h2>Drag and Drop to Reorder</h1>
+        </div>
         <div class="col-md-6">
             <h4>Section Order:</h4>
             <ul class="sortable_sections" data-bind="sortable:  { template: 'section_tmp', data: $root.menu, options: { containment: 'parent', tolerance: 'pointer' } }"></ul>
             <script id="section_tmp" type="text/html">
-                <li class="section_sort" data-bind="lText: name, click: function(){ console.log($data.position()); }"></li>
+                <li class="section_sort fa fa-arrows-v" data-bind="lText: name, click: function(){ console.log($data.position()); }"></li>
             </script>              
         </div>
       
@@ -37,7 +39,7 @@
             <h4>Dish Order:</h4>
             <ul class="sortable_dishes" data-bind="sortable { template: 'dish_tmp', data: dishes, options: { containment: 'parent', tolerance: 'pointer' } }"></ul>
             <script id="dish_tmp" type="text/html">
-                <li class="dish_sort" data-bind="lText: name, click: function(){ console.log($data.position()); }"></li>
+                <li class="dish_sort fa fa-arrows-v" data-bind="lText: name, click: function(){ console.log($data.position()); }"></li>
             </script>               
         </div>
     </div>
