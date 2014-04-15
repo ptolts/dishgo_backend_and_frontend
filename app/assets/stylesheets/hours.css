@@ -36,7 +36,7 @@
 	0px 0px 10px #27E80C,
 	0px 0px 80px rgba(39,232,12, 0.6),
 	0px 0px 100px rgba(39,232,12, 0.9);
-	color: #B6FF00;
+	color: #B6FF00 !important;
   	border: 2px solid #B6FF00;
 	padding: 4px 4px;
 	-webkit-box-shadow:
@@ -64,7 +64,7 @@
 	0px 0px 10px #BA051A,
 	0px 0px 80px rgba(186,5,26, 0.6),
 	0px 0px 100px rgba(186,5,26, 0.9);
-	color: #FABBAA;
+	color: #FABBAA !important;
   	border: 2px solid #FABBAA;
 	padding: 4px 4px;
 	-webkit-box-shadow:
