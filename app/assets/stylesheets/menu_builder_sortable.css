@@ -14,30 +14,68 @@
     -moz-box-shadow: 3px 3px 3px -2px rgba(26,26,26,1);
     box-shadow: 2px 2px 3px -2px rgba(26,26,26,1);;
 }
+.sortable_container h2,
+.sortable_container h4 {
+  text-align: center;
+  font-weight: 700;
+}
 
 .sortable_container ul {
   list-style: none;
 }
 
 .sortable_container ul li{
+  height: 45px;
+  line-height: 48px;
+  font-size: 1.2em; 
+  color: #fff;
+  outline: 0;
+  padding: 0;
+  margin: 0;
   text-align: center;
-  border: 1px solid #000;
-  padding: 10px;
-  border-radius: 3px;
+  background: #4E525B;
+  background: -moz-linear-gradient(top,  rgb(78,82,91) 0%, rgb(57,61,68) 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgb(78,82,91)), color-stop(100%,rgb(57,61,68)));
+  background: -webkit-linear-gradient(top,  rgb(78,82,91) 0%,rgb(57,61,68) 100%);
+  background: -o-linear-gradient(top,  rgb(78,82,91) 0%,rgb(57,61,68) 100%);
+  background: -ms-linear-gradient(top,  rgb(78,82,91) 0%,rgb(57,61,68) 100%);
+  background: linear-gradient(to bottom,  rgb(78,82,91) 0%,rgb(57,61,68) 100%);
+  border-top: 1px solid rgba(255,255,255,.2);
+  border-bottom: 1px solid rgba(0,0,0,.5);
+  text-shadow: -1px -1px 0px rgba(0,0,0,.5);
+  cursor: pointer;
 }
 
-.sortable_container li:not(:last-child) {
-    margin-bottom: 5px;
+.sortable_container li:hover {
+  color: #fff;
+  background-color: #9097A7;
+  text-decoration: none;
+  background-image: -webkit-linear-gradient(hsla(0,0%,0%,.05), hsla(0,0%,100%,.05));
+  background-image: -moz-linear-gradient(hsla(0,0%,0%,.05), hsla(0,0%,100%,.05));
+  background-image: -ms-linear-gradient(hsla(0,0%,0%,.05), hsla(0,0%,100%,.05));
+  background-image: -o-linear-gradient(hsla(0,0%,0%,.05), hsla(0,0%,100%,.05));
+  background-image: linear-gradient(hsla(0,0%,0%,.05), hsla(0,0%,100%,.05));
 }
-
+.sortable_container li:active {
+    border: 2px dashed #838383;
+    background:rgb(209,237,255);
+    background: transparent\9;
+    background:rgba(209,237,255,0.7);
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#b2D1EDFF,endColorstr=#b2D1EDFF);
+    zoom: 1;
+}
+.sortable_container li.fa {
+  display: list-item;
+}
+.sortable_container li.fa:before {
+  margin-right: 10px;
+}
 .sortable_sections {
-  padding: 15px;
-  border: 1px solid black;
+  padding: 5px;
 }
 
 .sortable_dishes {
-  padding: 15px;
-  border: 1px solid black;
+  padding: 5px;
 }
 
 .sortable_top {
@@ -48,7 +86,6 @@
     height: 30px;
     width: 100%;
     border-radius: 5px 5px 0px 0px; 
-    /*border:1px solid #414141;*/
     background-color: #1a1a1a;
 }
 
