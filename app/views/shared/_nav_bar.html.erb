@@ -74,22 +74,25 @@
 <div data-bind="stopBinding">
   <div id="dishgo_helper">
     <i class="fa fa-question-circle" data-bind="click: function(){ showHelp(!showHelp()) }"></i>
-    <div id="help_form" data-bind="visible: showHelp">
-      <h2>Let's see if we can help!</h2>
-      <hr>
-      <div class="row">
-        <div class="col-xs-12">
-          <p>Write a short description of your problem, and we'll get back to you as soon as possible!</p>
+    <div id="help_form_on_top" data-bind="visible: showHelp">
+      <div id="help_form">
+        <h2>Let's see if we can help!</h2>
+        <hr>
+        <div class="row">
+          <div class="col-xs-12">
+            <p data-bind="click: function(){ fuckthis() }">Write a short description of your problem, and we'll get back to you as soon as possible!</p>
+          </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="col-xs-12">
-          <textarea data-bind="value: helpText"></textarea>
+        <div class="row">
+          <div class="col-xs-12">
+            <textarea data-bind="value: helpText"></textarea>
+          </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="col-xs-12">
-          <button class="btn btn-primary pull-right col-xs-4" data-bind="click: sendHelp">Help!</button>
+        <div class="row">
+          <div class="col-xs-12">          
+            <button class="btn btn-info pull-left col-xs-4" data-bind="click: function(){ showHelp(!showHelp()) }">Cancel</button>
+            <button class="btn btn-primary pull-right col-xs-4" data-bind="click: sendHelp">Help!</button>
+          </div>
         </div>
       </div>
     </div>
@@ -114,10 +117,15 @@
             type: "POST",
             url: "/app/administration/helpme",
             data: {
-
+              viewmodel: ko.toJSON(viewmodel),
+              console: ko.global_log_file,
+              user_agent: navigator.userAgent,
+              user_message: self.helpText(),
+              location: window.location.href,
             },
             success: function(data, textStatus, jqXHR){
-
+              self.showHelp(false);
+              self.helpText("");
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) { 
 
@@ -127,7 +135,7 @@
         }         
       }
       $(function(){ 
-        ko.applyBindings(new HelpViewModel(),$("#dishgo_helper")[0]);                 
+          ko.applyBindings(new HelpViewModel(),$("#dishgo_helper")[0]);                 
       });
     </script>
 

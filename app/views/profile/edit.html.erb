@@ -55,7 +55,7 @@
                 });                
             }
 
-        }    
+        }           
 
         function viewModel() {
             var self = this;
@@ -77,8 +77,9 @@
 
         };
 
+        var viewmodel = new viewModel();            
+
         $(function(){   
-            var viewmodel = new viewModel();            
             pager.Href.hash = '#!/';
             pager.extendWithPage(viewmodel);
             ko.applyBindings(viewmodel);                    

@@ -1,3 +1,7 @@
+.stop_scrolling { 
+  overflow: hidden;
+}
+
 .dish_button_for_phone {
   display: none;
 }

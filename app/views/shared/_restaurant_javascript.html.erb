@@ -60,9 +60,20 @@
                 } else {
                     self.validateClose_1(false);
                 }
-            });            
+            }); 
+
+            self.open_1.valueHasMutated();           
+            self.close_1.valueHasMutated();           
 
         }
+
+        Restaurant.prototype.toJSON = function() {
+            var copy = ko.toJS(this); //easy way to get a clean copy
+            delete copy.areWeOpened;
+            delete copy.areWeOpenedText;
+            delete copy.socialVisible;
+            return copy; //return the copy to be serialized
+        };          
 
         function Restaurant(data) {
             console.log("New Restaurant: " + data.name);

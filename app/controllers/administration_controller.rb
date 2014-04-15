@@ -1,6 +1,6 @@
 class AdministrationController < ApplicationController
   before_filter :authenticate_user!
-  before_filter :admin_or_user_with_resto!, :except => [:restaurant_setup, :free_search_restaurants, :set_restaurant, :create_restaurant]
+  before_filter :admin_or_user_with_resto!, :except => [:restaurant_setup, :free_search_restaurants, :set_restaurant, :create_restaurant,:help_me]
   before_filter :admin_user!, :only => [:users, :restaurants, :add_user, :user_destroy, :update_user, :search_restaurants]
   before_filter :admin_or_owner!, :only => [:edit_menu, :update_menu, :crop_image, :crop_icon, :publish_menu, :reset_draft_menu, :update_restaurant]
   layout 'administration'
@@ -13,6 +13,11 @@ class AdministrationController < ApplicationController
 
   def index
 
+  end
+
+  def helpme
+    HelpEmail.help(params,current_user)
+    render json: {success:true}.as_json
   end
 
   def restaurant_setup
@@ -123,6 +128,14 @@ class AdministrationController < ApplicationController
   end  
 
   def update_menu
+
+    #when the user first edits the menu, make the menu editor visible in his toolbar.
+    unless current_user.sign_up_progress["edit_menu"]
+      u = current_user
+      u.sign_up_progress["edit_menu"] = true
+      u.save
+    end
+
     # IF YOU EVER NEED TO SCALE, THIS COULD BE A PLACE TO OPTIMIZE
   	restaurant = Restaurant.find(params[:restaurant_id])
   	menu = JSON.parse(params[:menu]).collect do |section|
@@ -281,7 +294,11 @@ class AdministrationController < ApplicationController
 
   def update_restaurant
     settings = JSON.parse(params[:params])
-    Rails.logger.warn settings.to_s
+
+    # Rails.logger.warn "-----------------"
+    # Rails.logger.warn settings.to_s
+    # Rails.logger.warn "-----------------"
+
     if settings["id"].blank?
       restaurant = Restaurant.create
       current_user.owns_restaurants = restaurant
@@ -289,12 +306,17 @@ class AdministrationController < ApplicationController
     else
       restaurant = Restaurant.find(settings["id"])
     end
+
     restaurant.name = settings["name"]
     restaurant.phone = settings["phone"]
     restaurant.facebook = settings["facebook"]
     restaurant.twitter = settings["twitter"]
     restaurant.foursquare = settings["foursquare"]
     restaurant.instagram = settings["instagram"]
+
+    # Rails.logger.warn "--------[resto]--------"
+    # Rails.logger.warn restaurant.to_json
+    # Rails.logger.warn "-----------------"    
 
     if sub = Restaurant.where(subdomain:settings["subdomain"].downcase).first and sub != restaurant
       render :json => {error:"Bad Subdomain"}.as_json

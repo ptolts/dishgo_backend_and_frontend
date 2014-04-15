@@ -62,26 +62,6 @@ class Restaurant
 	 (Restaurant.includes(:sources).where(:locs => { "$near" => { "$geometry" => { "type" => "Point", :coordinates => cords }, "$maxDistance" => 10000}}).to_a + Restaurant.includes(:sources).where(:name => /moish/i).to_a)
   end
 
-  def phone
-    ph = self.sources.find do |e|
-      !e.phone.blank?
-    end
-    if ph
-      return ph.phone
-    end
-    return nil
-  end
-
-  def address
-    ph = self.sources.find do |e|
-      !e.address.blank?
-    end
-    if ph
-      return ph.address
-    end
-    return nil
-  end
-
   def dish_images
     resto = Restaurant.where(:name=>/cun/i).first
     images = resto.image.reject{|e| e.rejected}
@@ -150,6 +130,7 @@ class Restaurant
     enough = false if self.address_line_1.blank?
     enough = false if self.phone.blank?
     enough = false if self.name.blank? or self.name == "New Restaurant"
+    return enough
   end
 
 end

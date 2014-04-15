@@ -1843,7 +1843,6 @@ ko.exportSymbol('isComputed', ko.isComputed);
 
         visitPropertiesOrArrayEntries(rootObject, function(indexer) {
             var propertyValue = mapInputCallback(rootObject[indexer]);
-
             switch (typeof propertyValue) {
                 case "boolean":
                 case "number":
@@ -1874,6 +1873,9 @@ ko.exportSymbol('isComputed', ko.isComputed);
                 visitorCallback('toJSON');
         } else {
             for (var propertyName in rootObject) {
+                if(propertyName == "$__page__"){
+                    return;
+                }
                 visitorCallback(propertyName);
             }
         }

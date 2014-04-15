@@ -4,7 +4,7 @@
                         <div class="option_title">
                             <span data-bind="click: printJson">Dish Builder</span>      
                         </div>                          
-                        <span class="dish_close_icon glyphicon glyphicon glyphicon-remove" data-bind="click: $parent.remove"></span>                        
+                        <span class="dish_close_icon glyphicon glyphicon glyphicon-remove" data-bind="click: function(){ topmodel.remove($data) }"></span>                        
                     </div>                        
                     <div class="dish">
                         <div class="col-xs-12 push_down">

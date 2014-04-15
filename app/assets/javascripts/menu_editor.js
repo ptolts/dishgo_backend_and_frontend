@@ -33,7 +33,11 @@ var localizedMessages = {
     'remove_image' : {
         'en':"Are you sure you want to remove this image?",
         'fr':"",
-    },    
+    }, 
+    'remove_dish' : {
+        'en':"Are you sure you want to remove the dish titled \"MESSAGE\"?",
+        'fr':"",
+    }   
 }
 
 function localizeMessage(title, message){
@@ -149,7 +153,7 @@ function Section(data,topmodel) {
 
     self.dishes = ko.observableArray([]);
     if(data.dishes){
-        self.dishes = ko.observableArray($.map(data.dishes, function(item) { return new Dish(item) }));     
+        self.dishes = ko.observableArray($.map(data.dishes, function(item) { return new Dish(item,self) }));     
     }
 
     // self.dishes.extend({ rateLimit: 500 });
@@ -201,7 +205,7 @@ function Section(data,topmodel) {
 
     self.remove = function(item) {
         bootbox.dialog({
-          message: "Are you sure you want to remove the dish titled \"" + item.name() + "\"?",
+          message: localizeMessage(item.name(),"remove_dish"),
           title: "Remove Dish",
           buttons: {
             success: {
@@ -215,6 +219,7 @@ function Section(data,topmodel) {
               label: "Yes",
               className: "btn-danger col-xs-3 pull-right",
               callback: function() {
+                topmodel.current_dish(null);
                 self.dishes.remove(item);
               }
             },
@@ -226,7 +231,7 @@ function Section(data,topmodel) {
     self.newDishName = ko.observable();
     self.addDish = function() {
         // console.log("Adding Dish");
-        var new_dish = new Dish({name:copyDefaultHash(default_language_hash), description:copyDefaultHash(default_language_hash)});
+        var new_dish = new Dish({name:copyDefaultHash(default_language_hash), description:copyDefaultHash(default_language_hash)},self);
         self.dishes.unshift(new_dish);
         self.topmodel.current_section(null);
         self.topmodel.current_dish(new_dish);
@@ -351,11 +356,18 @@ ko.bindingHandlers.file_upload_icon = {
     }
 };
 
-function Dish(data) {
+Dish.prototype.toJSON = function() {
+    var copy = ko.toJS(this); //easy way to get a clean copy
+    delete copy.topmodel; //remove an extra property
+    return copy; //return the copy to be serialized
+};
+
+function Dish(data, topmodel) {
     var self = this;
     self.name = ko.observable(data.name);  
     self.description = ko.observable(data.description);
     self.price = ko.observable(data.price);
+    self.topmodel = topmodel;
     self.position = ko.observable(data.position ? data.position : 0);
     self.images = ko.observableArray([]);
     self.sizeSelectedOptionValue = ko.observable();
@@ -1425,7 +1437,7 @@ ko.virtualElements.allowedBindings.lText = true;
 function DemoViewModel() {
     // Data
     var self = this;
-    self.dish = new Dish(dish_demo_json);
+    self.dish = new Dish(dish_demo_json,self);
     self.showModal = function(image) {
         //console.log("#"+image.id());
         $("#"+image.id()).modal("show");

@@ -91,6 +91,8 @@ class Dish
       next option_object
     end
 
+    self.draft_image = []
+
     images = dish["images"].collect do |image|
       next if image["id"].blank?
       img = Image.find(image["id"])

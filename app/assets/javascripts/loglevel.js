@@ -1,4 +1,7 @@
 $(function(){ 
+    window.onerror = function (errorMsg, url, lineNumber) {
+        console.log('[error] ' + errorMsg + ' Script: ' + url + ' Line: ' + lineNumber);
+    }
     ko.global_log_file = [];
     var console = window.console
     if (!console) return
@@ -6,7 +9,7 @@ $(function(){
         var original = console[method]
         console[method] = function(){
             // do sneaky stuff
-            ko.global_log_file.push(method + " " + Array.prototype.slice.apply(arguments).join(' '));
+            ko.global_log_file.push("[" + method + "] " + _.map(arguments,function(e){return JSON.stringify(e)}).join("\n\r"));
             if (original.apply){
                 // Do this for normal browsers
                 original.apply(console, arguments)

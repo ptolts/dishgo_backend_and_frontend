@@ -1514,6 +1514,5 @@
         // without AMD
         window.pager = pagerJsModule($, ko);
     }
-
-
+   
 }(window));

@@ -12,6 +12,7 @@ module ApplicationHelper
 		if current_user.is_admin
 			return true
 		end
+		Rails.logger.warn "Current Status: #{current_user.sign_up_progress.to_s}"
 		if current_user.sign_up_progress[action]
 			return true
 		else 

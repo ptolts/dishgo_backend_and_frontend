@@ -18,6 +18,7 @@ Foodcloud::Application.routes.draw do
     collection do
       get 'index'
       get 'preview/:id', to: "onlinesite#preview"
+      get 'live/:id', to: "onlinesite#index"
     end
   end
 
@@ -75,6 +76,7 @@ Foodcloud::Application.routes.draw do
       post 'upload_icon'
       post 'crop_image'
       post 'crop_icon'       
+      post 'helpme'       
     end
   end
 
