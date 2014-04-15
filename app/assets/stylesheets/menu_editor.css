@@ -365,7 +365,7 @@ input {
     padding: 15px;
     padding-top: 30px; 
     max-width: 600px;  
-    width: 100%;
+    /*width: 100%;*/
     background-color: #f7f7f7;
     border: 1px solid #dae3e9;
     border-radius: 5px 5px 5px 5px;

@@ -70,3 +70,65 @@
       </div>
     </div>
   </div>
+
+<div data-bind="stopBinding">
+  <div id="dishgo_helper">
+    <i class="fa fa-question-circle" data-bind="click: function(){ showHelp(!showHelp()) }"></i>
+    <div id="help_form" data-bind="visible: showHelp">
+      <h2>Let's see if we can help!</h2>
+      <hr>
+      <div class="row">
+        <div class="col-xs-12">
+          <p>Write a short description of your problem, and we'll get back to you as soon as possible!</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <textarea data-bind="value: helpText"></textarea>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <button class="btn btn-primary pull-right col-xs-4" data-bind="click: sendHelp">Help!</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <script type='text/javascript'>//<![CDATA[ 
+
+      ko.bindingHandlers.stopBinding = {
+          init: function() {
+              return { controlsDescendantBindings: true };
+          }
+      };
+
+      function HelpViewModel() {
+        // Data
+        var self = this;
+        self.showHelp = ko.observable(false);
+        self.helpText = ko.observable("");
+
+        self.sendHelp = function(){
+          $.ajax({
+            type: "POST",
+            url: "/app/administration/helpme",
+            data: {
+
+            },
+            success: function(data, textStatus, jqXHR){
+
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) { 
+
+            },
+            dataType: "json"
+          });
+        }         
+      }
+      $(function(){ 
+        ko.applyBindings(new HelpViewModel(),$("#dishgo_helper")[0]);                 
+      });
+    </script>
+
+</div>

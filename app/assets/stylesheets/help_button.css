@@ -1,0 +1,38 @@
+#dishgo_helper {
+	position: fixed;
+	bottom: 15px;
+	right: 15px;
+	color: red;
+}
+
+#dishgo_helper i {
+	cursor: pointer;
+	font-size: 38px;	
+}
+
+#dishgo_helper textarea {
+	height: 150px;
+	width: 100%;
+}
+
+#help_form {
+	position: fixed;
+	left: 50%;
+	top: 50%;
+	width: 500px;	
+	height: 385px;
+	-webkit-transform:	translate(-50%, -50%);
+	-moz-transform:		translate(-50%, -50%);
+	-ms-transform:		translate(-50%, -50%);
+	-o-transform:		translate(-50%, -50%);  
+	transform:			translate(-50%, -50%);
+	-webkit-backface-visibility: hidden;
+	background-color: #fff;
+	border-radius: 5px;
+	padding: 15px;
+	color: #000;
+	border: 1px solid rgba(0, 0, 0, 0.2);
+	border-radius: 6px;
+	-webkit-box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+	box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);	
+}

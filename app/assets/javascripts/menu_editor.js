@@ -4,6 +4,7 @@
 *= require mb.bgndGallery.effects.js
 *= require jquery.hashchange.min.js
 *= require knockout-sortable.js
+*= require loglevel.js
 */
 
 //<![CDATA[ 
@@ -151,8 +152,10 @@ function Section(data,topmodel) {
         self.dishes = ko.observableArray($.map(data.dishes, function(item) { return new Dish(item) }));     
     }
 
+    // self.dishes.extend({ rateLimit: 500 });
     self.dishes.subscribe(function(newvalue){
         _.each(self.dishes(),function(item,index){
+            // console.log(item.name());
             item.position(index);
         });
     });    
@@ -949,10 +952,13 @@ function MenuViewModel() {
         }
     });
 
+    // self.menu.extend({ rateLimit: 500 });
     self.menu.subscribe(function(newvalue){
         _.each(self.menu(),function(item,index){
+            console.log(item.name());
             item.position(index);
         });
+        console.log("----------------");
     });
 
     self.menu($.map(menu_data.menu, function(item) { return new Section(item,self) }));
