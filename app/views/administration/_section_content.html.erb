@@ -33,7 +33,7 @@
         </div>
       
 
-        <div class="col-md-6">
+        <div class="col-md-6" data-bind="visible: dishes().length > 0">
             <h4>Dish Order:</h4>
             <ul class="sortable_dishes" data-bind="sortable { template: 'dish_tmp', data: dishes, options: { containment: 'parent', tolerance: 'pointer' } }"></ul>
             <script id="dish_tmp" type="text/html">
