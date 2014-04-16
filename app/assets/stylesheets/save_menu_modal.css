@@ -1,0 +1,26 @@
+#save_menu {
+	position: relative;
+	background-color: #fff;
+	border-radius: 5px;
+	padding: 15px;
+	color: #000;
+	border: 1px solid rgba(0, 0, 0, 0.2);
+	border-radius: 6px;
+	-webkit-box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+	box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);			
+}
+
+#save_menu_modal_on_top {
+	position: fixed;
+	left: 50%;
+	top: 50%;
+	z-index: 999;
+	width: 500px;	
+	height: 385px;
+	-webkit-transform:	translate(-50%, -50%);
+	-moz-transform:		translate(-50%, -50%);
+	-ms-transform:		translate(-50%, -50%);
+	-o-transform:		translate(-50%, -50%);  
+	transform:			translate(-50%, -50%);
+	-webkit-backface-visibility: hidden;
+}

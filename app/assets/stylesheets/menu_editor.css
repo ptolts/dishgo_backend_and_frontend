@@ -578,8 +578,12 @@ body {
   color: #fff;
   background-color: #343e4b;
   border: 1px solid #232A33;
+}
+
+#add_section_button .btn-section {
   width: 135px;
 }
+
 .btn-section:hover, .btn-section:focus, .btn-section:active, .btn-section.active, .open .dropdown-toggle.btn-section{
   opacity: 0.87;
   color: #fff;

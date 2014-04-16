@@ -46,21 +46,21 @@
           <% if current_page?(controller: "administration", action: "edit_menu") %>
             <ul class="nav navbar-nav navbar-right">
 
-              <li data-bind="click: togglePreview, visible: current_dish" id="togglePreview">
+<!--               <li data-bind="click: togglePreview, visible: current_dish" id="togglePreview">
                 <a data-bind="text: previewText"></a>  
-              </li>
-
-              <li data-bind="click: saveDraft" id="saveDraft">
-                <a><i class="glyphicon glyphicon-ok"></i> Save Draft</a>
-              </li>    
+              </li> -->
 
               <li data-bind="click: discardDraft" id="discardDraft">
-                <a><i class="glyphicon glyphicon-remove"></i> Discard Draft</a>
+                <a><i class="glyphicon glyphicon-remove"></i> Discard Changes</a>
               </li>
 
-              <li data-bind="click: publishMenu" id="saveMenu">
+<!--               <li data-bind="click: publishMenu" id="saveMenu">
                 <a><i class="glyphicon glyphicon-ok"></i> Publish Menu</a>
-              </li>              
+              </li>  -->
+
+              <li data-bind="click: saveDraft" id="saveMenu">
+                <a><i class="glyphicon glyphicon-ok"></i> Save Changes</a>
+              </li>                               
 
             </ul>                          
           <% end %>

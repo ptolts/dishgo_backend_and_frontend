@@ -5,7 +5,7 @@
     min-height: 100px;
     margin-bottom: 15px;
     padding: 15px;
-    padding-top: 45px;  
+    padding-top: 38px;  
     background-color: #f7f7f7;
     border: 1px solid #dae3e9;
     border-radius: 5px 5px 5px 5px;
@@ -24,8 +24,8 @@
 }
 
 .sortable_container ul li{
-  height: 45px;
-  line-height: 48px;
+  height: 38px;
+  line-height: 38px;
   font-size: 1.2em; 
   color: #fff;
   outline: 0;
@@ -66,7 +66,7 @@
 .sortable_container li span.fa {
   height: 100%;
   font-size: 22px;
-  line-height: 45px;
+  line-height: 38px;
 }
 .sortable_container li span.fa:before {
   margin-left: 10px;
