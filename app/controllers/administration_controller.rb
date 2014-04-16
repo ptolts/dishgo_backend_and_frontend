@@ -80,6 +80,14 @@ class AdministrationController < ApplicationController
   	render :text => "User Saved."
   end 
 
+  def update_current_user
+    data = JSON.parse(params["params"])
+    user = current_user
+    user.phone = data["phone"]
+    user.save
+    render :text => "User Saved."
+  end 
+
   def destroy_user
     user = User.find(params[:user_id])
     user.destroy
@@ -308,6 +316,7 @@ class AdministrationController < ApplicationController
     end
 
     restaurant.name = settings["name"]
+    restaurant.email = settings["email"]
     restaurant.phone = settings["phone"]
     restaurant.facebook = settings["facebook"]
     restaurant.twitter = settings["twitter"]

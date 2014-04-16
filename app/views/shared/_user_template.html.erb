@@ -5,13 +5,22 @@
                 <fieldset>
                     <!-- Address form -->
                     <h3 class="text-center">User Profile</h3>
+                    <p>This information is kept private and is used to keep in touch with you.</p>
+                    <hr>
                     <div class="form-group">
                         <label>Email</label>
                         <div class="controls">
-                            <input id="email" name="email" type="text" placeholder="Email" data-bind="value: email" class="form-control">
+                            <input id="email" name="email" type="text" placeholder="Email" data-bind="value: email" class="form-control" <% if !current_user.is_admin %>disabled<% end%>>
                             <p class="help-block"></p>
                         </div>
                     </div>
+                    <div class="form-group">
+                        <label>Phone</label>
+                        <div class="controls">
+                            <input id="phone" name="phone" type="text" placeholder="555-555-5555" data-bind="value: phone" class="form-control">
+                            <p class="help-block"></p>
+                        </div>
+                    </div>                                      
                     <% if current_user.is_admin && active_link('administration','users') %>
                         <p>Admin: <span data-bind="text: is_admin, click: toggle_is_admin"></span></p>
                         <p>Restaurant: <!-- ko with: restaurant --><span data-bind="text: name"></span><!-- /ko --></p>
@@ -24,7 +33,8 @@
                             <li><span data-bind="text: name"></span><button class="btn btn-info" data-bind="click: $parent.set_restaurant">Save</button>
                             </li>
                         </ul>          
-                    <% end %>  
+                    <% end %> 
+                    <hr> 
                 </fieldset>
             </form>
             <div class="row" style="margin-bottom:0px;">

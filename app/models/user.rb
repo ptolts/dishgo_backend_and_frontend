@@ -17,6 +17,7 @@ class User
 
   ## Database authenticatable
   field :email,               :type => String
+  field :phone,               :type => String
   field :encrypted_password,  :type => String
 
   ## Recoverable

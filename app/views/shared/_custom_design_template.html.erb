@@ -90,15 +90,13 @@
 </script> 
 
 <script id="text_content_template" type="text/html">
-    <div class="col-xs-12">
-        <div class="editor_language_selector">
-            <select class="form-control input-sm" data-bind="options: $root.languages, optionsText: function(item){ return fullLanguageName[item];}, value: $root.lang"></select>
-        </div>   
+    <div class="editor_language_selector">
+        <select class="form-control input-sm" data-bind="options: $root.languages, optionsText: function(item){ return fullLanguageName[item];}, value: $root.lang"></select>
+    </div>   
 
-        <div class="col-xs-12">
-            <textarea data-bind="wysiwyg: about_text" style="width: 100%"></textarea>
-        </div> 
-    </div>
+    <div class="website_content">
+        <textarea data-bind="wysiwyg: about_text" style="width: 100%"></textarea>
+    </div> 
 </script>
 
 <script id="pick_design_template" type="text/html">

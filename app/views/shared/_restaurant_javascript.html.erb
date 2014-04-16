@@ -82,6 +82,7 @@
             self.lat = ko.observable(data.lat ? data.lat : "");
             self.lon = ko.observable(data.lon ? data.lon : "");
             self.website = ko.observable(data.website ? data.website : "");
+            self.email = ko.observable(data.email ? data.email : "");
             self.subdomain = ko.observable(data.subdomain ? data.subdomain : "");
             self.facebook = ko.observable(data.facebook ? data.facebook : "");
             self.foursquare = ko.observable(data.foursquare ? data.foursquare : "");
@@ -240,7 +241,7 @@
 
             self.socialVisible = function(type){
                 return ko.computed(function(){
-                    if(self[type]() != null){
+                    if(self[type]() != null && self[type]() != ""){
                         return true;
                     } else {
                         return false;

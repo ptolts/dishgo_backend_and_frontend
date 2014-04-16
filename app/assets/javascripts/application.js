@@ -13,6 +13,7 @@
 // = require jquery
 // = require jquery_ujs
 // = require jquery.ui.sortable
+// = require jquery.scrollstop.js
 // = require knockout-3.1.0.debug.js
 // = require underscore
 // = require underscore-ko-1.2.2.min.js
@@ -24,6 +25,7 @@
 // = require bootstrap.min.js
 // = require pager.js
 // = require jquery.fittext.js
+// = require fastclick.js
 
 
 

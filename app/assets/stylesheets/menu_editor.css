@@ -1,6 +1,7 @@
 /*
 *= require_self
 *= require menu_builder_sortable
+*= require language_selector_menu
 */
 
 body {
@@ -501,7 +502,7 @@ body {
 
 .sidebar-nav {
   position: absolute;
-  top: 100px;
+  top: 108px;
   width: 230px;
   list-style: none;
   margin: 0;
@@ -512,6 +513,7 @@ body {
 .sidebar-nav .section_title_menu {
   padding-right: 0px;
   padding-left: 5px;
+  cursor: pointer;
 }
 
 .sidebar-nav li {
@@ -551,6 +553,7 @@ body {
     margin-right: 15px;
 }
 .sidebar-nav .menu_dish_item {
+    cursor: pointer;
     margin-left: 0px;
     position: relative;
     padding-left: 10px;
@@ -575,6 +578,7 @@ body {
   color: #fff;
   background-color: #343e4b;
   border: 1px solid #232A33;
+  width: 135px;
 }
 .btn-section:hover, .btn-section:focus, .btn-section:active, .btn-section.active, .open .dropdown-toggle.btn-section{
   opacity: 0.87;
@@ -616,6 +620,13 @@ body {
   text-align: right;
   padding-right: 5px;
 }
+
+.sidebar-nav .section_title_menu:hover {
+  color: #fff;
+  background-color: #343e4b;
+  text-decoration: none;
+}
+
 .sidebar-nav li.menu_dish_item:hover {
   color: #fff;
   background-color: #343e4b;
@@ -630,6 +641,9 @@ body {
     position: relative;
     margin-top: 10px;
     top: 0;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #dae1e8;
+    box-shadow: 0 2px 1px -1px #FFFFFF;    
 }
 
 .content-header {

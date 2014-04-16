@@ -591,7 +591,7 @@ function Dish(data, topmodel) {
 
 ko.bindingHandlers.menuImage = {
     update: function (element, valueAccessor) {
-        console.log("menuImaged");
+        // console.log("menuImaged");
         if(ko['menuVisible'] === undefined){
             ko['menuVisible'] = ko.observable(false);
         }
@@ -673,7 +673,7 @@ function Option(data,dish) {
         var cost = 0;
         if(self.extra_cost) {
             _.each(self.selectedOptionValue(),function(e){
-                console.log(e);
+                // console.log(e);
                 cost += parseFloat(e.computed_price());
             });
         }
@@ -1279,15 +1279,22 @@ function PublicMenuModel() {
     if($(window).width() > 600){
         keep_scrolling_updates = false;
     }
+
+    //This is for anything that should be applied to small screens.
     if(keep_scrolling_updates){
-        $(window).scroll(function(e){
-            console.log("scrolling");
+        $(document).on("scrollstop",function(){
+            console.log("scrollstop " + $("body").scrollTop());
             if($("body").scrollTop() <= 30){
                 self.atTop(false);
             } else {
                 self.atTop(true);
             }           
-         });        
+         });
+        // $(document).on("scrollstart",function(){
+        //     console.log("scrollstart");
+        //     self.atTop(true);
+        //  });        
+        FastClick.attach(document.body);
     }
 
 

@@ -196,6 +196,40 @@
 	        }
 	    }
 
+	    self.destroyImage = function(item){
+	        bootbox.dialog({
+	          message: "Are you sure you want to remove this image \"" + item.name() + "\"?",
+	          title: "Remove Image",
+	          buttons: {
+	            success: {
+	              label: "No",
+	              className: "btn-primary pull-left col-xs-3",
+	              callback: function() {
+
+	              }
+	            },
+	            danger: {
+	              label: "Yes",
+	              className: "btn-danger col-xs-3 pull-right",
+	              callback: function() {
+		            $.ajax({
+		              type: "POST",
+		              url: "/app/design/destroy_sub_image",
+		              data: {
+		                image_id:item.id(),
+		              },
+		              success: function(data, textStatus, jqXHR){
+		              	console.log("image destroyed");
+		              	self.global_images.remove(item);
+		              },
+		              dataType: "json"
+		            });
+	              }
+	            },
+	          }
+	        }); 		    	
+	    }	    
+
 	    self.get_id = function(){
             $.ajax({
               type: "POST",

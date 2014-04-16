@@ -37,11 +37,12 @@
             var self = this;
             self.id = data._id;
             self.email = ko.observable(data.email);
+            self.phone = ko.observable(data.phone);
 
             self.save = function(){
                 $.ajax({
                   type: "POST",
-                  url: "/app/administration/update_user",
+                  url: "/app/administration/update_current_user",
                   data: {
                     params:ko.toJSON(self),
                   },

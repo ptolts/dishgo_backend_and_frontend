@@ -1,6 +1,6 @@
 class DesignController < ApplicationController
   before_filter :authenticate_user!
-  before_filter :admin_user!, :only => [:create, :update, :destroy, :upload_image, :create_image]
+  before_filter :admin_user!, :only => [:create, :update, :destroy, :upload_image, :create_image, :destroy_sub_image]
   before_filter :admin_or_owner!, :only => [:set_design]
   before_filter :admin_or_image_owner!, :only => [:destroy_image]
   layout 'administration'
@@ -166,6 +166,12 @@ class DesignController < ApplicationController
     image.destroy
     render :json => {"Success"=>true}.as_json
   end  
+
+  def destroy_sub_image
+    image = GlobalImage.find(params[:image_id])
+    image.destroy
+    render :json => {"Success"=>true}.as_json
+  end    
 
   def update_font
     data = JSON.parse(params[:data])    

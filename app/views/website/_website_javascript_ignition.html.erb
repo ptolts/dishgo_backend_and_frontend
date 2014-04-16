@@ -129,7 +129,10 @@
                 });
             };                             
 
+
+            var skip_check = false;
             self.submitDesign = function(){
+                skip_check = true;
                 $.ajax({
                   type: "POST",
                   url: "/app/website/submit_design",
@@ -153,9 +156,9 @@
 
             self.original_data = ko.toJSON(self.current_design);
             $(window).on('beforeunload', function () {
-                if (self.original_data != ko.toJSON(self.current_design)) {
+                if (self.original_data != ko.toJSON(self.current_design) && !skip_check) {
                     return 'You haven\'t saved your changes.';
-                }
+                } 
             });                  
         };
 
