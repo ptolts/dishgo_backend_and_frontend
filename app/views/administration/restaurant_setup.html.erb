@@ -1,56 +1,58 @@
 <div class="container">
-    <div class="profile_form_wrapper">
-        <div class="row">
-            <div class="col-xs-12">
-                <h1 class="find_create_resto">Find or Create Your Restaurant</h1>
-                <hr>
-
-                <div class="col-md-6">
-                    <div class="row">
-                        <div class="col-xs-9">
-                            <input class="form-control" data-bind="value: search_name" />
-                        </div>
-                        <div class="col-xs-3">
-                            <button class="btn btn-default" data-bind="click: search_for_restaurant">Search</button>
-                        </div>                    
-                    </div>
-                    <hr>                    
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <div class="restaurant_list">
-                                <ul>
-                                    <!-- ko foreach: restaurants -->
-                                        <li data-bind="click: function(){ $root.current_restaurant($data)}">
-                                            <div class="row">
-                                                <h4 class="col-xs-6" data-bind="text: name"></h4>
-                                                <h4 class="col-xs-6" data-bind="text: address_line_1"></h4>
-                                            </div>
-                                        </li>
-                                    <!-- /ko -->
-                                    <!-- ko if: none_or_searching -->
-                                        <li><h4 data-bind="text: none_or_searching_text"></h4></li>
-                                    <!-- /ko -->
-                                </ul>
+    <div class="start_me_up col-md-8">
+        <div class="profile_form_wrapper">
+            <div class="row">
+                <div class="col-xs-12">
+                    <h1 class="find_create_resto">Find or Create Your Restaurant</h1>
+                     <div class="row">
+                            <div class="col-xs-12">
+                                <h4>Here are the restaurants closest to you.</h4>
+                                <div class="restaurant_list">
+                                    <ul>
+                                        <!-- ko foreach: restaurants -->
+                                            <li data-bind="click: function(){ $root.current_restaurant($data)}">
+                                                <div class="row">
+                                                    <h4 class="col-xs-6" data-bind="text: name"></h4>
+                                                    <h4 class="col-xs-6" data-bind="text: address_line_1"></h4>
+                                                </div>
+                                            </li>
+                                        <!-- /ko -->
+                                        <!-- ko if: none_or_searching -->
+                                            <li><h4 data-bind="text: none_or_searching_text"></h4></li>
+                                        <!-- /ko -->
+                                    </ul>
+                                </div>
                             </div>
-                        </div>
+                            <div class="col-xs-12">
+                            <!-- ko with: current_restaurant -->
+                                <div data-bind="template: { name: 'restaurant_static_template', data: $parent.current_restaurant }"></div>
+                            <!-- /ko -->
+                            </div>  
                     </div>
                     <hr>
                     <div class="row">
                         <div class="col-xs-12">
-                            <button class="btn btn-lg btn-primary col-xs-12" data-bind="click: new_restaurant">Can't find your restaurant? Create one!</button>
-                        </div>                    
-                    </div>                       
+                            <h4 style="margin-bottom: 20px;">Cant find your restaurant? Try searching our database or create a new listing.</h4>
+                            <div class="row">
+                                <div class="col-xs-9">
+                                    <input class="form-control" data-bind="value: search_name" />
+                                </div>
+                                <div class="col-xs-3">
+                                    <button class="btn btn-default" data-bind="click: search_for_restaurant">Search</button>
+                                </div>                    
+                            </div>
+                            <hr>                    
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <button class="btn btn-lg btn-primary col-xs-12" data-bind="click: new_restaurant">Can't find your restaurant? Create one!</button>
+                                </div>                    
+                            </div>                       
+                        </div>
+                    </div>              
                 </div>
-
-                <div class="col-md-6">
-                    <!-- ko with: current_restaurant -->
-                        <div data-bind="template: { name: 'restaurant_static_template', data: $parent.current_restaurant }"></div>
-                    <!-- /ko -->
-                </div>                
-                
-            </div>
-        </div>      
-	</div>
+            </div>      
+    	</div>
+    </div>
 </div>
 
 <%= render 'shared/restaurant_static_template' %>
