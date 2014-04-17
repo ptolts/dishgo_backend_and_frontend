@@ -68,6 +68,11 @@ class User
       self.save(:validate => false)
     end
   end
+
+  def confirm!
+    welcome_message
+    super
+  end  
  
   private
   def generate_authentication_token
@@ -93,5 +98,9 @@ class User
       return false
     end
   end
+
+  def welcome_message
+    Email.welcome(self)
+  end  
 
 end

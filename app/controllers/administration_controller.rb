@@ -16,7 +16,7 @@ class AdministrationController < ApplicationController
   end
 
   def helpme
-    HelpEmail.help(params,current_user)
+    Email.help(params,current_user)
     render json: {success:true}.as_json
   end
 
