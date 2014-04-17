@@ -1,0 +1,46 @@
+<div class="col-md-6">    
+    <div class="profile_form_wrapper">
+        <div class="row">
+            <div class="col-xs-12">
+                <form role="form" action="" method="POST" id="addCardForm">
+                    <div class="form-group">
+                        <label>Cardholder's Name</label>
+                        <input type="text" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Card Number</label>
+                        <div style="position: relative">
+                            <input type="text" class="form-control" data-stripe="number" id="card_numba">
+                            <i class="fa fa-check-circle" id="card_numba_ok" data-bind="visible: validCard"></i>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Exp Month</label>
+                                <input type="text" class="form-control" placeholder="MM" data-stripe="exp-month">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Exp Year</label>
+                                <input type="text" class="form-control" placeholder="YYYY" data-stripe="exp-year">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>CVC</label>
+                                <input type="text" class="form-control" placeholder="Ex. 331" data-stripe="cvc"> 
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 alert alert-danger" data-bind="visible: errorMessage(), text: errorMessage"></div>                
+                    <button data-bind="click: addCard" class="btn btn-info col-xs-4 col-xs-offset-8">Add Card</button>
+                </form>
+            </div>
+            <div class="col-md-4"></div>
+            <div class="col-md-4"></div>
+        </div>
+    </div>
+</div>
+

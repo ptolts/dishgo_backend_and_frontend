@@ -25,6 +25,8 @@ Foodcloud::Application.routes.draw do
   resources :profile do
     collection do
       get 'edit'
+      get 'billing'
+      post 'add_card'
     end
   end
 

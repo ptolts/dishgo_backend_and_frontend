@@ -1,0 +1,17 @@
+#card_numba_ok {
+    position: absolute;
+    right: 10px;
+    top: 5px;
+    font-size: 24px;
+    color: green;
+}
+
+.card {
+    width: 300px;
+    margin-right: auto;
+    margin-left: auto;
+    padding: 15px;
+    border: 2px solid black;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}

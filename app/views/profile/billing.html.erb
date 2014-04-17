@@ -1,0 +1,154 @@
+<div class="profile_controls">
+    <div class="col-md-2 col-md-offset-1">
+        <ul class="nav nav-pills" data-bind="foreach: $__page__.children">
+            <li data-bind="css: {active: isVisible}"><a data-bind="text: $data.val('title'), page-href: $data"></a></li>
+        </ul>
+    </div>
+
+    <div data-bind="page: {id: 'start', title: 'Plans', with: user}">
+        <%= render 'plan' %>
+    </div>
+
+    <div data-bind="page: {id: 'cards', title: 'Cards', with: user}">
+        <%= render 'cards' %>
+    </div>
+
+    <div data-bind="page: {id: 'add_card', title: 'Add Card', with: user}">
+        <%= render 'add_card' %>
+    </div>    
+
+    <%= javascript_include_tag "https://js.stripe.com/v1/" %>
+    <%= csrf_meta_tags %>
+    <%= tag :meta, :name => "stripe-key", :content => STRIPE_PUBLIC_KEY %>
+
+    <script type="text/javascript">//<![CDATA[ 
+
+            Stripe.setPublishableKey('<%= STRIPE_PUBLIC_KEY %>');
+
+            var user_data = <%= raw(current_user.as_json.to_json) %>;
+            var plan_data = <%= raw(@plans.as_json.to_json) %>;
+            var default_card = "<%= raw(@default_card) %>";
+
+            function Card(data,user){
+                
+                var self = this;
+                self.user = user;
+                self.last4 = data.last4;
+                self.type = data.type;
+                self.id = data.id;
+
+            }
+
+            function Plan(data,user){
+                
+                var self = this;
+                self.id = data.id;
+                self.name = data.name;
+                self.price = data.price;
+                self.interval = data.interval;
+
+            }            
+
+            function User(data) {
+                var self = this;
+                self.id = data._id;
+                self.email = ko.observable(data.email);
+                self.phone = ko.observable(data.phone);
+                self.cards = ko.observableArray([]);
+                self.errorMessage = ko.observable();
+                self.disableButton = ko.observable(false);
+                self.validCard = ko.observable(false);
+
+                _.each(data.cards,function(card){ self.cards.push(new Card(card,self)) });
+
+                var stripeResponseHandler = function(status, response) {
+                  var $form = $('#addCardForm');
+
+                  if (response.error) {
+                    self.errorMessage(response.error.message);
+                  } else {
+                    $.ajax({
+                      type: "POST",
+                      url: "/app/profile/add_card",
+                      data: {
+                        data:JSON.stringify(response),
+                      },
+                      success: function(data, textStatus, jqXHR){
+                            self.disableButton(false);
+                            if(data.success){
+                                self.cards.push(new Card(response.card, self));
+                            } else {
+                                self.errorMessage("Something went wrong. We're looking into it.");
+                            }
+                        },
+                        error: function(XMLHttpRequest, textStatus, errorThrown) { 
+                            console.log("There was an error saving the section " + errorThrown);
+                        },
+                        dataType: "json"
+                    });                      
+                  }
+                }; 
+
+                self.addCard = function() {
+                    var $form = $('#addCardForm');
+                    self.disableButton(true);
+                    self.errorMessage("");
+                    Stripe.card.createToken($form, stripeResponseHandler);
+                };
+
+                $(function(){  
+                    $("#card_numba").validateCreditCard(function(result){
+                        if(result.card_type){
+                            console.log(result.card_type.name);
+                        }
+                        if(result.length_valid && result.luhn_valid){
+                            self.validCard(true);
+                            console.log("card is valid");
+                        } else {
+                            self.validCard(false);
+                        }
+                    });
+                });       
+
+                self.save = function(){
+                    $.ajax({
+                      type: "POST",
+                      url: "/app/administration/update_current_user",
+                      data: {
+                        params:ko.toJSON(self),
+                      },
+                      success: function(data, textStatus, jqXHR){
+                            console.log("Saved!")      
+                        },
+                        error: function(XMLHttpRequest, textStatus, errorThrown) { 
+                            console.log("There was an error saving the section " + errorThrown);
+                        },
+                        dataType: "json"
+                    });                
+                }                                
+
+            }           
+
+            function viewModel() {
+                var self = this;
+                self.user = ko.observable(new User(user_data));
+                self.plans = ko.observableArray([]);
+                _.each(plan_data,function(plan){ self.plans.push(new Plan(plan)) });
+            };
+
+            var viewmodel = new viewModel();            
+
+            $(function(){   
+                pager.Href.hash = '#!/';
+                pager.extendWithPage(viewmodel);
+                ko.applyBindings(viewmodel);                    
+                pager.start();                   
+            });
+
+        //]]>  
+
+    </script>
+
+</div>
+
+

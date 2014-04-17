@@ -116,7 +116,7 @@ class AdministrationController < ApplicationController
   end 
 
   def create_restaurant
-    settings = JSON.parse(params[:data])    
+    # settings = JSON.parse(params[:data])    
     restaurant = Restaurant.create
     restaurant.name = "New Restaurant"
     restaurant.save

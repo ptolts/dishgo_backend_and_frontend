@@ -1,0 +1,15 @@
+<div class="col-md-6">    
+    <div class="profile_form_wrapper">   
+        <div class="row" data-bind="foreach: cards">
+            <div class="card">
+                <h4>XXXX-XXXX-XXXX-<!--ko text: last4 --><!-- /ko --></h4>
+                <h4 data-bind="text: type"></h4>
+                <div class="row">
+                    <h4 class="col-xs-4"><strong data-bind="visible: id == default_card">Default</strong></h4>
+                    <button class="btn btn-warning col-xs-4 col-xs-offset-3" data-bind="">Remove</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

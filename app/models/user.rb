@@ -19,6 +19,8 @@ class User
   field :email,               :type => String
   field :phone,               :type => String
   field :encrypted_password,  :type => String
+  field :stripe_token,        :type => String
+  field :cards,               :type => Array, :default => [] 
 
   ## Recoverable
   field :reset_password_token,   :type => String
@@ -72,7 +74,7 @@ class User
   def confirm!
     welcome_message
     super
-  end  
+  end 
  
   private
   def generate_authentication_token

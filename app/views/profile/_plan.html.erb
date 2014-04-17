@@ -1,0 +1,20 @@
+<div class="col-md-6">    
+    <div class="profile_form_wrapper">   
+        <div class="row">
+            <div class="col-xs-12">
+                <h2>Plans</h2>
+            </div>
+            <div class="col-xs-12">
+                <hr>
+            </div>
+            <div class="col-xs-12 plans" data-bind="foreach: $root.plans">
+                <div class="plan">
+                    <h4 data-bind="text: name"></h4>
+                    <h4 data-bind="text: price"></h4>
+                    <h4 data-bind="text: interval"></h4>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

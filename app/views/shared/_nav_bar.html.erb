@@ -24,6 +24,7 @@
                 <% if sign_up_progress("edit_menu") %>
                   <li class="<%= active_link('administration','edit_menu') %>"><a href="/app/administration/edit_menu?restaurant_id=<%= current_user.owns_restaurants.id %>">Edit Menu</a></li>
                 <% end %>
+                <li class="<%= active_link('profile','billing') %>"><a href="/app/profile/billing">Billing</a></li>
               <% end %>
               <% if admin_user? %>
                 <li class="<%= active_link('administration','users') %>"><a href="/app/administration/users">Users</a></li>
@@ -134,9 +135,12 @@
           });
         }         
       }
+
       $(function(){ 
           ko.applyBindings(new HelpViewModel(),$("#dishgo_helper")[0]);                 
       });
+
+    //]]>
     </script>
 
 </div>

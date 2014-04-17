@@ -22,7 +22,7 @@ gem "mongoid-paperclip", :require => "mongoid_paperclip"
 gem 'fog'
 gem 'ruby-prof'
 gem 'phantomjs'
-
+gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
 
 # Gems used only for assets and not required
 # in production environments by default.

@@ -26,6 +26,7 @@
 // = require pager.js
 // = require jquery.fittext.js
 // = require fastclick.js
+// = require card_validator.js
 
 
 
