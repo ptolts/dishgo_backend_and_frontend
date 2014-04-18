@@ -1,6 +1,9 @@
 class User
   include Mongoid::Document
+  include Mongoid::Timestamps
+
   has_many :addresses, :class_name => "Address"
+  has_many :notifications, :class_name => "Notification"
   has_many :orders, :class_name => "Order"
   has_one :owns_restaurants, :class_name => "Restaurant", inverse_of: :user
   # Include default devise modules. Others available are:
@@ -21,6 +24,7 @@ class User
   field :encrypted_password,  :type => String
   field :stripe_token,        :type => String
   field :cards,               :type => Array, :default => [] 
+  field :plan,                :type => Hash, :default => {}
 
   ## Recoverable
   field :reset_password_token,   :type => String

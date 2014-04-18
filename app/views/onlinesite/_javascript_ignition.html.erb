@@ -42,30 +42,46 @@
 
         	var map;
 
-			function init_map() {
-				var myLatlng = new google.maps.LatLng(45.404236,-74.03796);
-				var mapOptions = {
-					center: myLatlng,
-					zoom: 14,
-					mapTypeId: google.maps.MapTypeId.ROADMAP
-				};			
-				map = new google.maps.Map(document.getElementById("map-canvas"),mapOptions);
-				var marker = new google.maps.Marker({
-					position: myLatlng,
-					visible: true
-				});	
+	        ko.bindingHandlers.iMap = {
+	            update: function (element, valueAccessor) {
+	            	$(function(){	
+						var html = $('#iMapTemplate').text().replace(/endscript/g, 'script');
+						$(element)[0].contentWindow.document.open('text/html', 'replace');
+						$(element)[0].contentWindow.document.write(html);
+						$(element)[0].contentWindow.document.close();
+					});					          
+	                // $(element).contents().find("html").html(html);
+	            }
+	        };         	
 
-				marker.setMap(map);	
-				google.maps.event.trigger(map, 'resize'); 
-				map.setCenter(myLatlng);
-			}
+			// function init_map() {			
+			// 	var myLatlng = new google.maps.LatLng(45.404236,-74.03796);
+			// 	var mapOptions = {
+			// 		center: myLatlng,
+			// 		zoom: 14,
+			// 		mapTypeId: google.maps.MapTypeId.ROADMAP
+			// 	};			
+			// 	map = new google.maps.Map(document.getElementById("map-canvas"),mapOptions);
+			// 	var marker = new google.maps.Marker({
+			// 		position: myLatlng,
+			// 		visible: true
+			// 	});	
 
-			function showMap(page, callback) {
-				if(map === undefined){
-					init_map();
-				}
-				console.log("Map Loaded");
-			};			
+			// 	marker.setMap(map);	
+			// 	google.maps.event.trigger(map, 'resize'); 
+			// 	map.setCenter(myLatlng);
+			// }
+
+			// function showMap(page, callback) {
+			// 	if(map === undefined){
+			// 		init_map();
+			// 	}
+			// 	console.log("Map Loaded");
+			// };	
+
+			// function showMap(page, callback) {
+
+			// };						
 
 			function showModal(page, callback) {
 				$(page.element).modal('show');
@@ -74,4 +90,29 @@
 				$(page.element).modal('hide');
 			};				
 
+        </script>
+
+        <script id="iMapTemplate" type="text/x-jQuery-tmpl">
+			<!DOCTYPE html>
+			<html style="width: 100%; height: 100%">
+				<head>
+					<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDmVdO0hER_qFFNZN5C9Du28_-sSblng0Y&sensor=false"></endscript>
+				</head>
+				<body style="width: 100%; height: 100%; margin: 0px">
+					<script type="text/javascript">
+						var map;
+						function initialize() {
+						  var mapOptions = {
+						    zoom: 8,
+						    center: new google.maps.LatLng(-34.397, 150.644)
+						  };
+						  map = new google.maps.Map(document.getElementById('map-canvas'),
+						      mapOptions);
+						}
+
+						google.maps.event.addDomListener(window, 'load', initialize);					
+					</endscript>				
+					<div id="map-canvas" style="width: 100%; height: 100%"></div>
+				</body>
+			</html>
         </script>

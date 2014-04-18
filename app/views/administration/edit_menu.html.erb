@@ -2,6 +2,13 @@
     <div id = "center" style="position:fixed;top:50%;left:50%;z-index:200000"></div>
     <div id = "loading"></div>
 
+    <style>
+        body {
+            background-image: none !important;
+            background-color: white;
+        }
+    </style>
+
     <div id="save_menu_modal_on_top" data-bind="visible: save_menu_modal">
       <div id="save_menu">
         <div class="row">
@@ -77,13 +84,14 @@
                             <%= render 'section_content' %>
                         </div>
                     <!-- /ko -->
+                    <div class="row">
+                        <div class="col-md-6 col-xs-12 text-center" data-bind="with: current_dish">
+                            <%= render 'menu_content' %>
+                        </div> 
 
-                    <div class="col-md-6 col-xs-12 text-center" data-bind="with: current_dish">
-                        <%= render 'menu_content' %>
-                    </div> 
-
-                    <div class="col-md-6 col-xs-12" data-bind="with: current_dish">
-                        <%= render 'demo_code' %>
+                        <div class="col-md-6 col-xs-12" data-bind="with: current_dish">
+                            <%= render 'demo_code' %>
+                        </div> 
                     </div> 
 
                 </div>

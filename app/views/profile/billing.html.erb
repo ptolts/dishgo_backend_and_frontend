@@ -9,9 +9,11 @@
         <%= render 'plan' %>
     </div>
 
-    <div data-bind="page: {id: 'cards', title: 'Cards', with: user}">
-        <%= render 'cards' %>
-    </div>
+    <!-- ko if: card_list -->
+        <div data-bind="page: {id: 'cards', title: 'Cards', with: user}">
+            <%= render 'cards' %>
+        </div>
+    <!-- /ko -->
 
     <div data-bind="page: {id: 'add_card', title: 'Add Card', with: user}">
         <%= render 'add_card' %>
@@ -58,6 +60,11 @@
                 self.errorMessage = ko.observable();
                 self.disableButton = ko.observable(false);
                 self.validCard = ko.observable(false);
+                self.plan = ko.observable();
+
+                if(data.plan){
+                    self.plan(new Plan(data.plan));
+                }
 
                 _.each(data.cards,function(card){ self.cards.push(new Card(card,self)) });
 
@@ -134,6 +141,8 @@
                 self.user = ko.observable(new User(user_data));
                 self.plans = ko.observableArray([]);
                 _.each(plan_data,function(plan){ self.plans.push(new Plan(plan)) });
+
+                self.card_list = ko.computed(function(){ return self.user().cards().length > 0});
             };
 
             var viewmodel = new viewModel();            

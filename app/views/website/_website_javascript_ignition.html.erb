@@ -26,7 +26,7 @@
                 console.log("DEBUG: iFrame firing on: " + element);
                 var value = valueAccessor();
 
-                var html = "<!DOCTYPE html>\n<html>\n<head>\nFONT_LINK_DATA\n<style>html{ overflow: hidden; }</style></head>\n<body>\n<style>\nCSS_DATA_HERE\n</style>\n<h1>Example Header</h1>\n<h3>Sub Header</h3>\n<p>Paragraph style example. This is how the main text would always look throughout your site.</p>\n</body>\n</html>";
+                var html = "<!DOCTYPE html>\n<html>\n<head>\nFONT_LINK_DATA\n<style>\nhtml{ overflow: hidden}\n h1,h2,h3,h4,p{ margin-top: 0px; margin-bottom: 3px}\n</style></head>\n<body>\n<style>\nCSS_DATA_HERE\n</style>\n<h1>Header</h1>\n<h3>Sub Header</h3>\n<p>Paragraph style example. This is how the main text would always look throughout your site.</p>\n</body>\n</html>";
 
                 var html_result = html.replace("FONT_LINK_DATA",value.link_data());
                 html_result = html_result.replace("CSS_DATA_HERE",value.css());
@@ -102,16 +102,16 @@
             };
 
             self.nextPage = function(page) {      
-                pager.goTo(page.parentPage.children()[self.indexOfCurrentPage(page) + 1].path());
+                pager.goTo(page.children()[self.indexOfCurrentPage(page.currentChildPage()()) + 1].path());
             };
 
             self.previousPage = function(page) {      
-                pager.goTo(page.parentPage.children()[self.indexOfCurrentPage(page) - 1].path());
+                pager.goTo(page.children()[self.indexOfCurrentPage(page.currentChildPage()()) - 1].path());
             };     
 
             self.visiblePrevious = function(page) {      
                 return ko.computed(function(){ 
-                    if (page.parentPage.children()[self.indexOfCurrentPage(page) - 1]){
+                    if (page.currentChildPage()() && page.children()[self.indexOfCurrentPage(page.currentChildPage()()) - 1]){
                         return true;
                     } else {
                         return false;
@@ -121,7 +121,7 @@
 
             self.visibleNext = function(page) {      
                 return ko.computed(function(){ 
-                    if (page.parentPage.children()[self.indexOfCurrentPage(page) + 1]){
+                    if (page.currentChildPage()() && page.children()[self.indexOfCurrentPage(page.currentChildPage()()) + 1]){
                         return true;
                     } else {
                         return false;

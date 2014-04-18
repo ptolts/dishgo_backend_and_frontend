@@ -1,4 +1,8 @@
 /*user form*/
+.profile_controls {
+    margin-top: 40px;
+}
+
 
 .profile_controls .nav {
     text-align: center;
@@ -33,9 +37,8 @@
 }
 
 .profile_controls .nav-pills>li {
-    border-radius: 5px;
+    border-radius: 3px;
     color: #000;
-    border: 1px solid #838383;
     background-color: #fff;
     background-image: -webkit-linear-gradient(hsla(0,0%,0%,.05), hsla(0,0%,100%,.05));
     background-image: -moz-linear-gradient(hsla(0,0%,0%,.05), hsla(0,0%,100%,.05));
