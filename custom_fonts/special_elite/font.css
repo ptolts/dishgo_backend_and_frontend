@@ -1,5 +1,10 @@
-h1,
 .restaurant_name {
+    font-family: 'Special Elite';
+    font-weight: normal;
+    text-transform: uppercase;
+    font-size: 46px;
+}
+h1 {
     font-family: 'Special Elite';
     font-weight: normal;
     text-transform: uppercase;
@@ -48,4 +53,7 @@ address {
     line-height: 23px;
     font-weight: normal;
     font-style: normal;
+}
+.main_page_language_selector {
+    text-transform: uppercase;
 }

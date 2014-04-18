@@ -1,9 +1,9 @@
-h1,
 .restaurant_name {
     font-family: 'Lato', sans-serif;
     font-weight: 300;
-    line-height: 46px;
+    font-size: 46px;
 }
+h1,
 h2,
 h3,
 h4,
@@ -43,4 +43,7 @@ address {
 .hours p {
      font-size: 18px;
     line-height: 23px;
+}
+.main_page_language_selector {
+    text-transform: uppercase;
 }
