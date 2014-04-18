@@ -29,6 +29,7 @@ class Font
     hash = super {}
     if !self.template_location.blank?
       hash[:css] = self.template_font_css
+      hash[:link] = self.template_font_link
     end
     return hash
   end
