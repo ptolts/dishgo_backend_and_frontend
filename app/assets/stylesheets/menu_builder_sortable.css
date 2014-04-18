@@ -81,11 +81,10 @@
 
 .sortable_top {
     position: absolute;
-    left: 0px;
-    right: 0px;
-    top: 0px;
+    left: -1px;
+    right: -1px;
+    top: -1px;
     height: 30px;
-    width: 100%;
     border-radius: 5px 5px 0px 0px; 
     background-color: #1a1a1a;
 }

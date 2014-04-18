@@ -1,4 +1,8 @@
 /*user form*/
+.profile_controls {
+    margin-top: 40px;
+}
+
 
 .profile_controls .nav {
     text-align: center;

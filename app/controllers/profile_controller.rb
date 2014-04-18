@@ -1,5 +1,6 @@
 class ProfileController < ApplicationController
 	before_filter :authenticate_user!
+	before_filter :create_notifications!
 
 	layout 'administration'
 
@@ -69,6 +70,19 @@ class ProfileController < ApplicationController
 			flash[:error] = e.message
 			redirect_to charges_path
 		end
+	end
+
+	def smoke_notifications
+		# data = JSON.parse(params[:data])
+		user = current_user
+		# user.notifications.delete_if{|i| i[:id] == data["id"]}
+		# user.save
+		user.notifications.each do |e| 
+			e.read = true
+			e.save
+			Rails.logger.warn e.to_json
+		end
+		render json:{success:true}
 	end
 
 end

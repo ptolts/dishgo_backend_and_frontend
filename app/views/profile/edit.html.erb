@@ -22,8 +22,13 @@
         <div data-bind="template: { name: 'hours_template', data: $parent.restaurant }" class="profile_details"></div>
     </div>
 
+    <div data-bind="page: {id: 'notifications', title: 'Notifications', with: user, afterShow: user().mark_as_read}">
+        <div data-bind="template: { name: 'notifications_template', data: $parent.user}" class="profile_details"></div>
+    </div>    
+
     <%= render 'shared/restaurant_template' %>
     <%= render 'shared/socialmedia_template' %>
+    <%= render 'shared/notifications_template' %>
     <%= render 'shared/user_template' %>
     <%= render 'shared/hours_template' %>
     <%= render 'shared/restaurant_javascript' %>
@@ -31,13 +36,15 @@
     <script type='text/javascript'>//<![CDATA[ 
 
         var resto_data = <%= raw(current_user.owns_restaurants.as_json(include: :user).to_json) %>;
-        var user_data = <%= raw(current_user.as_json(include: :owns_restaurants).to_json) %>;
+        var user_data = <%= raw(current_user.as_json(include: :owns_restaurants, include: :notifications).to_json) %>;
 
         function User(data) {
             var self = this;
             self.id = data._id;
             self.email = ko.observable(data.email);
             self.phone = ko.observable(data.phone);
+            self.notifications = ko.observableArray([]);
+            _.each(notification_data,function(note){ self.notifications.push(new Notification(note)) });
 
             self.save = function(){
                 $.ajax({
@@ -55,6 +62,29 @@
                     dataType: "json"
                 });                
             }
+
+            self.mark_as_read = function(){
+                if(_.find(self.notifications(),function(e){ return !e.read() })){
+                    _.each(self.notifications(),function(e){ e.read(true) })
+                    if(helpmodel){
+                        _.each(helpmodel.notifications(),function(e){ e.read(true) })
+                    }
+                    $.ajax({
+                      type: "POST",
+                      url: "/app/profile/smoke_notifications",
+                      data: {
+                        params:ko.toJSON(self),
+                      },
+                      success: function(data, textStatus, jqXHR){
+                            console.log("notification destroyed")      
+                        },
+                        error: function(XMLHttpRequest, textStatus, errorThrown) { 
+                            console.log("There was an error saving the section " + errorThrown);
+                        },
+                        dataType: "json"
+                    }); 
+                }               
+            }              
 
         }           
 

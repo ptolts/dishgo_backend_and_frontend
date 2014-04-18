@@ -16,7 +16,12 @@
             <% if user_signed_in? %>
               <% if current_user.owns_restaurants %>
                 <% if sign_up_progress("profile") %>
-                  <li class="<%= active_link('profile','edit') %>"><a href="/app/profile/edit">Profile</a></li>                          
+                    <li class="<%= active_link('profile','edit') %>">
+                      <!-- ko stopBinding -->
+                        <a href="/app/profile/edit">Profile</a>
+                        <span id="profile_alert_circle" data-bind="text: notificationCount, visible: notificationVisible"></span>
+                      <!-- /ko -->
+                    </li>
                 <% end %>
                 <% if sign_up_progress("website") %>                
                   <li class="<%= active_link('website','index') %>"><a href="/app/website/index">Edit Website</a></li>
@@ -81,7 +86,7 @@
         <hr>
         <div class="row">
           <div class="col-xs-12">
-            <p data-bind="click: function(){ fuckthis() }">Write a short description of your problem, and we'll get back to you as soon as possible!</p>
+            <p>Write a short description of your problem, and we'll get back to you as soon as possible!</p>
           </div>
         </div>
         <div class="row">
@@ -101,17 +106,45 @@
 
     <script type='text/javascript'>//<![CDATA[ 
 
+      function Notification(data) {
+          var self = this;
+          self.id = data._id;
+          self.message = data.message;
+          self.read = ko.observable(data.read);           
+      }
+
       ko.bindingHandlers.stopBinding = {
           init: function() {
               return { controlsDescendantBindings: true };
           }
       };
+      ko.virtualElements.allowedBindings.stopBinding = true; 
+
+      var notification_data = <%= raw(current_user.notifications.as_json.to_json) %>;
 
       function HelpViewModel() {
         // Data
         var self = this;
         self.showHelp = ko.observable(false);
         self.helpText = ko.observable("");
+
+        self.notifications = ko.observableArray([]);
+
+        _.each(notification_data,function(note){ self.notifications.push(new Notification(note)) });
+
+        self.notificationCount = ko.computed(function(){
+          var c = 0;
+          _.each(self.notifications(),function(e){ 
+            if(!e.read()){
+              c++;
+            }
+          });
+          return c;
+        });
+
+        self.notificationVisible = ko.computed(function(){
+          return self.notificationCount() > 0;
+        });
 
         self.sendHelp = function(){
           $.ajax({
@@ -136,8 +169,11 @@
         }         
       }
 
+      var helpmodel = new HelpViewModel();
+
       $(function(){ 
-          ko.applyBindings(new HelpViewModel(),$("#dishgo_helper")[0]);                 
+          ko.applyBindings(helpmodel,$("#dishgo_helper")[0]);                 
+          ko.applyBindings(helpmodel,$("#profile_alert_circle")[0]);                 
       });
 
     //]]>

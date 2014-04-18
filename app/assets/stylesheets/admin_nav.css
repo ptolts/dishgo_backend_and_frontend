@@ -3,6 +3,20 @@
   width: 40px;
 }
 
+#profile_alert_circle {
+  position: absolute;
+  top: 5px;
+  right: 0px;
+  background-color: red;
+  font-size: 8px;
+  line-height: 11px;
+  height: 11px;
+  width: 11px;
+  text-align: center;
+  color: white;
+  border-radius: 5px;
+}
+
 #dishgo_bar {
   background-image:url('/black@2x.png');
 }
@@ -12,6 +26,9 @@
 }
 #dishgo_bar.nav > li > a {
   max-height: 50px;
+}
+#dishgo_bar a {
+  text-transform: uppercase;
 }
 #dishgo_bar .nav > li {
   background-image:url('/black@2x.png');
@@ -127,18 +144,22 @@ margin: 0px 15px;
 
 #togglePreview {
   background-color: #64A156 !important;
+  background-image: none !important;
 }
 
 #saveMenu {
   background-color: #10479B !important;
+  background-image: none !important;
 }
 
 #saveDraft {
   background-color: #F4950E !important;
+  background-image: none !important;
 }
 
 #discardDraft {
   background-color: #BC030E !important;
+  background-image: none !important;
 }
 
 /*#togglePreview:focus {

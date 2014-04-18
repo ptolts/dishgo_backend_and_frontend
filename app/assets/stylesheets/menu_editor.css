@@ -32,6 +32,7 @@ body {
     margin-right: auto;
     margin-left: auto;
     margin-bottom: 40px;
+    margin-top: 40px;
     padding-top: 20px;
     padding-bottom: 20px;
     border-radius: 5px;
@@ -333,11 +334,11 @@ input {
 
 .dish_top {
     position: absolute;
-    left: 0px;
-    right: 0px;
-    top: 0px;
+    left: -1px;
+    right: -1px;
+    top: -1px;
     height: 30px;
-    width: 100%;
+    /*width: 100%;*/
     border-radius: 5px 5px 0px 0px; 
     background-color: #1a1a1a;
 }
@@ -487,8 +488,8 @@ body {
 }
 
 #page-content-wrapper {
-    background-color: #fff;
   width: 100%;
+  background-color: white;
   height: 100%;
 }
 
