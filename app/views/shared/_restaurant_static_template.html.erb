@@ -1,9 +1,14 @@
 <script id="restaurant_static_template" type="text/html">
-    <div class="col-xs-12">
+    <div class="col-xs-12 text-center">
         <h3>Restaurant:</h3>
-        <hr>
         <h4 data-bind="text: name"></h4>
-        <hr>
+        <h4 data-bind="text: phone"></h4>
+        <h4 data-bind="text: address_line_1"></h4>
+        <h4 data-bind="text: address_line_2"></h4>
+        <h4 data-bind="text: city"></h4>
+        <h4 data-bind="text: province"></h4>
+        <h4 data-bind="text: postal_code"></h4>
+
         <button class="btn btn-lg btn-success col-xs-12" data-bind="click: $root.setRestaurant">This is my restaurant! <span class="glyphicon glyphicon-chevron-right"></span></button>
     </div>
 </script>
