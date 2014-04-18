@@ -22,8 +22,6 @@
 		<%= stylesheet_link_tag "online_site", type: 'text/css'%>
 		<%= javascript_include_tag "application" %>
 
-		<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDmVdO0hER_qFFNZN5C9Du28_-sSblng0Y&sensor=false"></script>	
-
 		<!--[if lt IE 9]>
 			<script src="https://css3-mediaqueries-js.googlecode.com/files/css3-mediaqueries.js"></script>
 			<script src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -102,7 +100,7 @@
 				<%= render 'start' %>
 			</div>							
 		</div>	
-		<div data-bind="page: {id: 'contact', title: 'Contact', afterShow: showMap}" class="pages">				
+		<div data-bind="page: {id: 'contact', title: 'Contact'}" class="pages">				
 			<%= render 'contact' %>														
 		</div>
 

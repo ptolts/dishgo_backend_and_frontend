@@ -36,17 +36,10 @@ body {
 #map-canvas{ 
 	height: 200px;
 	width: 90%;
+	display: block;
+	border: 0px;
 	margin-left: auto;
-	margin-right: auto;
-}
-
-#map-canvas label{
-	width:auto !important;
-	display:inline !important;
-}
-
-#map-canvas img{
-	max-width:none !important;
+	margin-right: auto;	
 }
 
 .overlay:after {
@@ -56,7 +49,7 @@ body {
 	position: fixed;
 	top: 0;
 	bottom: 0;
-	z-index: -5;
+	z-index: -500;
 	height: 100%;
 	right: 0;
 	left: 0;

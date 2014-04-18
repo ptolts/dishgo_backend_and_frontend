@@ -35,9 +35,9 @@
 }
 
 .profile_controls .nav-pills>li {
-    border-radius: 5px;
+    border-radius: 3px;
     color: #000;
-    border: 1px solid #D4D4D4;
+    /*border: 1px solid #D4D4D4;*/
     background-color: #fff;
     background-image: -webkit-linear-gradient(hsla(0,0%,0%,.05), hsla(0,0%,100%,.05));
     background-image: -moz-linear-gradient(hsla(0,0%,0%,.05), hsla(0,0%,100%,.05));
