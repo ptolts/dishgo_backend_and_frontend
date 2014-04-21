@@ -28,7 +28,7 @@
 		<![endif]-->	
 	</head>
     <body style="display: none;" data-bind="visible: true">
-		<style>
+		<style type='text/css'>
 
 			<%= raw(@design_css) %>
 			<%= raw(@design_menu_css) %>
@@ -37,7 +37,7 @@
 		</style>    	
 		<div data-bind="with: design">
 			<!-- ko foreach: global_images -->
-				<style data-bind="html: css"></style>
+				<style data-bind="html: css" type='text/css'></style>
 			<!-- /ko -->		  	
 		</div>
 		<div class="overlay"></div>  

@@ -46,15 +46,15 @@ class AdministrationController < ApplicationController
   end
 
   def free_search_restaurants
-    if params[:lat].to_i != 0
-      result = Restaurant.where(user_id:nil, :locs => { "$near" => { "$geometry" => { "type" => "Point", :coordinates => [params[:lon].to_f,params[:lat].to_f] }, "$maxDistance" => 25000}})
+    result = request.location
+    if result and result.coordinates[0].to_i != 0
+      coords = [result.coordinates[1],result.coordinates[0]]
     else
-      result = Restaurant.where(:name => /#{params[:restaurant_name]}/i, user_id:nil).limit(25)
-      result.reject!{|resto| next resto.user}
-      Rails.logger.warn result.to_json
-      Rails.logger.warn "result.to_json"
+      coords = [-74.155815,45.458972]
     end
-    render :json => result.as_json(:include => :design)
+    Rails.logger.warn "Result: #{result.to_s}\nCoords: #{coords.to_s}\n------------"
+    resto_list = Restaurant.where(user_id:nil, :locs => { "$near" => { "$geometry" => { "type" => "Point", :coordinates => coords }, "$maxDistance" => 25000}})
+    render :json => resto_list.as_json(:include => :design)
   end
 
   def search_users

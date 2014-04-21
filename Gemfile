@@ -23,6 +23,7 @@ gem 'fog'
 gem 'ruby-prof'
 gem 'phantomjs'
 gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
+gem "geocoder"
 
 # Gems used only for assets and not required
 # in production environments by default.

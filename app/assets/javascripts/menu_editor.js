@@ -1034,15 +1034,15 @@ function MenuViewModel() {
           title: "Publish Menu",
           buttons: {
             success: {
-              label: "No, continue editing.",
-              className: "btn-primary pull-left col-xs-5",
+              label: "Cancel",
+              className: "btn-default pull-left col-xs-5",
               callback: function() {
 
               }
             },
             danger: {
-              label: "Yes, publish changes.",
-              className: "btn-danger col-xs-5 pull-right",
+              label: "Publish",
+              className: "btn-primary col-xs-5 pull-right",
               callback: function() {
 
                 var spinner = new Spinner(opts).spin(document.getElementById('center')); 

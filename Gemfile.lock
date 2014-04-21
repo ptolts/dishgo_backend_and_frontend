@@ -103,6 +103,7 @@ GEM
     fog-json (1.0.0)
       multi_json (~> 1.0)
     formatador (0.2.4)
+    geocoder (1.2.0)
     hashie (2.0.5)
     hike (1.2.3)
     i18n (0.6.9)
@@ -219,6 +220,7 @@ DEPENDENCIES
   coffee-rails
   devise
   fog
+  geocoder
   instagram
   jquery-rails
   jquery-ui-rails
