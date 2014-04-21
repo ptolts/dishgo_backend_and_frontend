@@ -1281,10 +1281,11 @@ function PublicMenuModel() {
                 self.atTop(true);
             }           
          });
-        // $(document).on("scrollstart",function(){
-        //     console.log("scrollstart");
-        //     self.atTop(true);
-        //  });        
+        if($("body").scrollTop() <= 30){
+            self.atTop(false);
+        } else {
+            self.atTop(true);
+        }         
         FastClick.attach(document.body);
     }
 

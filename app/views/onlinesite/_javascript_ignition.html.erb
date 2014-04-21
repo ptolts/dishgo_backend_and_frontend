@@ -50,38 +50,31 @@
 						$(element)[0].contentWindow.document.write(html);
 						$(element)[0].contentWindow.document.close();
 					});					          
-	                // $(element).contents().find("html").html(html);
 	            }
-	        };         	
+	        }; 
 
-			// function init_map() {			
-			// 	var myLatlng = new google.maps.LatLng(45.404236,-74.03796);
-			// 	var mapOptions = {
-			// 		center: myLatlng,
-			// 		zoom: 14,
-			// 		mapTypeId: google.maps.MapTypeId.ROADMAP
-			// 	};			
-			// 	map = new google.maps.Map(document.getElementById("map-canvas"),mapOptions);
-			// 	var marker = new google.maps.Marker({
-			// 		position: myLatlng,
-			// 		visible: true
-			// 	});	
+	        ko.bindingHandlers.stop_scroll = {
+	            update: function (element, valueAccessor) {
+	            	$(function(){	
+						element.addEventListener('touchstart', function(event){
+						    this.allowUp = (this.scrollTop > 0);
+						    this.allowDown = (this.scrollTop < this.scrollHeight - this.clientHeight);
+						    this.prevTop = null; this.prevBot = null;
+						    this.lastY = event.pageY;
+						});
 
-			// 	marker.setMap(map);	
-			// 	google.maps.event.trigger(map, 'resize'); 
-			// 	map.setCenter(myLatlng);
-			// }
+						element.addEventListener('touchmove', function(event){
+						    var up = (event.pageY > this.lastY), down = !up;
+						    this.lastY = event.pageY;
 
-			// function showMap(page, callback) {
-			// 	if(map === undefined){
-			// 		init_map();
-			// 	}
-			// 	console.log("Map Loaded");
-			// };	
+						    if ((up && this.allowUp) || (down && this.allowDown)) event.stopPropagation();
+						    else event.preventDefault();
+						});	   
+					});					          
+	            }
+	        }; 	        
 
-			// function showMap(page, callback) {
-
-			// };						
+             						
 
 			function showModal(page, callback) {
 				$(page.element).modal('show');

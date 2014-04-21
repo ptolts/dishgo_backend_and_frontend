@@ -21,6 +21,7 @@
                         </div>
                     </div>                                      
                     <% if current_user.is_admin && active_link('administration','users') %>
+                        <hr>
                         <p>Admin: <span data-bind="text: is_admin, click: toggle_is_admin"></span></p>
                         <p>Restaurant: <!-- ko with: restaurant --><span data-bind="text: name"></span><!-- /ko --></p>
                         <p>Set Restaurant:</p>
@@ -29,9 +30,10 @@
                             <button class="btn btn-default" data-bind="click: search_for_restaurant">Search</button>
                         </div>                             
                         <ul data-bind="foreach: restaurants" style="list-style: none;">
-                            <li><span data-bind="text: name"></span><button class="btn btn-info" data-bind="click: $parent.set_restaurant">Save</button>
+                            <li class="row"><span class="col-xs-9" data-bind="text: name"></span><button class="col-xs-2 btn btn-info" data-bind="click: $parent.set_restaurant">Save</button>
                             </li>
-                        </ul>          
+                        </ul> 
+                        <hr>         
                     <% end %> 
                 </fieldset>
             </form>

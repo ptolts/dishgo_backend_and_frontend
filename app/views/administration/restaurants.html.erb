@@ -1,5 +1,12 @@
 <div class="container">
 
+    <style type="text/css">
+        body {
+          background-color: white;
+          background-image: none;
+        }
+    </style>
+
     <div class="col-xs-12 col-md-4 restaurant_admin_list">
 
         <div class="col-xs-12">
@@ -15,7 +22,7 @@
                     <tr>
                         <th>Name</th>
                         <th>Edit Restaurant</th>
-                        <th>Edit Menu</th>
+                        <th>Assume Control</th>
                     </tr>
                 </thead>
                 <tbody data-bind="template: { name: 'resto_temp', foreach: restaurants }"></tbody>
@@ -28,10 +35,10 @@
     </div>
 
 
-    <div class="col-md-8" data-bind="with: current_restaurant">
-        <div class="col-xs-12">
-            <div data-bind="template: { name: 'restaurant_template', data: $parent.current_restaurant }"></div>          
-        </div>
+    <div data-bind="with: current_restaurant">
+
+        <div data-bind="template: { name: 'restaurant_template', data: $parent.current_restaurant }"></div>          
+
         <div class="col-xs-12">
             <div data-bind="template: { name: 'admin_set_design_template', data: $parent.current_restaurant }"></div>          
         </div>
@@ -47,7 +54,7 @@
                 <button class="btn btn-default btn-sm" data-bind="click: $root.set_restaurant">Edit</button>
             </td> 
             <td>
-                <a data-bind="attr: { href: '/app/administration/edit_menu?restaurant_id=' + id}" class="btn btn-default btn-sm">Menu</a>
+                <a data-bind="attr: { href: '/app/administration/become?id=' + id}, visible: user_id" class="btn btn-default btn-sm">Control</a>
             </td>                                                  
         </tr>   
     </script>

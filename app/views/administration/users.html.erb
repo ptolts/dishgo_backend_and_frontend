@@ -1,5 +1,12 @@
 <div class="container">
 
+  <style type="text/css">
+    body {
+      background-color: white;
+      background-image: none;
+    }
+  </style>
+
     <div class="col-md-6 col-xs-12">
         <div class="form-inline" role="form">
             <input class="form-control" data-bind="value: email" />
@@ -17,11 +24,8 @@
         </table>
     </div>
 
-    <div class="col-md-6 col-xs-12" data-bind="with: current_user">
-        <div data-bind="template: { name: 'user_template', data: $parent.current_user }"></div>
-        <div class="row">
-            <button class="btn btn-default btn-sm" data-bind="click: save">Save</button>
-        </div>         
+    <div data-bind="with: current_user">
+        <div data-bind="template: { name: 'user_template', data: $parent.current_user }"></div>   
     </div>    
 
     <div class="col-xs-6">
@@ -60,6 +64,7 @@
             var self = this;
             self.id = data._id;
             self.email = ko.observable(data.email);
+            self.phone = ko.observable(data.phone);
             self.is_admin = ko.observable(data.is_admin);
             self.restaurant = ko.observable();
 

@@ -97,6 +97,7 @@
             self.design = ko.observable(data.design === undefined ? null : new Design(data.design));
             self.id = data._id;
             self.font_id = data.font_id ? data.font_id : "";
+            self.user_id = data.user_id ? data.user_id : "";
 
             self.about_text = ko.observable(data.about_text ? data.about_text : copyDefaultHash(default_language_hash));
             self.hours = ko.observableArray([]);
