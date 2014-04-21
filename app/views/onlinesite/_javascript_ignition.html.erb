@@ -55,22 +55,24 @@
 
 	        ko.bindingHandlers.stop_scroll = {
 	            update: function (element, valueAccessor) {
-	            	$(function(){	
-						element.addEventListener('touchstart', function(event){
-						    this.allowUp = (this.scrollTop > 0);
-						    this.allowDown = (this.scrollTop < this.scrollHeight - this.clientHeight);
-						    this.prevTop = null; this.prevBot = null;
-						    this.lastY = event.pageY;
-						});
+					element.addEventListener('touchstart', function(event){
+					    this.lastY = event.pageY;
+					});
 
-						element.addEventListener('touchmove', function(event){
-						    var up = (event.pageY > this.lastY), down = !up;
-						    this.lastY = event.pageY;
+					element.addEventListener('touchmove', function(event){
+					    var up = (event.pageY > this.lastY);
+					    var down = !up;
+					    this.lastY = event.pageY;
 
-						    if ((up && this.allowUp) || (down && this.allowDown)) event.stopPropagation();
-						    else event.preventDefault();
-						});	   
-					});					          
+					    this.allowUp = (this.scrollTop > 0);
+					    this.allowDown = (this.scrollTop < this.scrollHeight - this.clientHeight);					    
+
+					    if ((up && this.allowUp) || (down && this.allowDown)) {
+					    	event.stopPropagation()
+					    } else {
+					    	event.preventDefault()
+					    }
+					});	   				          
 	            }
 	        }; 	        
 

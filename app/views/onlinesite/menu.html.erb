@@ -82,10 +82,10 @@
 							                    </div>
 
 						                        <!-- garbage dish modal -->
-												<div data-bind="page: {id: $data.id(), afterShow: function(){ $('body').addClass('stop_scrolling'); }, afterHide: function(){ $('body').removeClass('stop_scrolling'); }}, stop_scroll" class="custom_modal">
-													<div class="modal_background" data-bind="click: function(){ pager.navigate($page.parentPage.path()) }"></div>
+												<div data-bind="page: {id: $data.id(), afterShow: function(){ $('body').addClass('stop_scrolling'); }, afterHide: function(){ $('body').removeClass('stop_scrolling'); }}" class="custom_modal">
+													<div class="modal_background" data-bind="click: function(){ pager.navigate($page.parentPage.path()) }, stop_scroll"></div>
 												    <!-- custom_modal -->
-											    	<div class="custom_modal-dialog">
+											    	<div class="custom_modal-dialog" data-bind="stop_scroll">
 											    		<div class="custom_modal-content">
 											    			<div class="custom_modal-header">
 											    				<a class="close" data-bind="page-href: '../'">&times;</a>

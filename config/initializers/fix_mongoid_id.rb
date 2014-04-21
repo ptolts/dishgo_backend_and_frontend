@@ -37,8 +37,13 @@ end
 if ENV['RAILS_ENV'].to_s.eql?('development')
   Rails.logger.warn("Faking Locs.")
   Restaurant.each do |r|
-    next if !r.locs.nil?
-    r.locs = [-74.155815,45.458972]
+    if r.locs.nil?
+      r.locs = [-74.155815,45.458972]
+    end
+    if r.lat.nil?
+      r.lat = 45.458972
+      r.lon = -74.155815
+    end
     r.save
   end
 end
