@@ -156,6 +156,21 @@
 .profile_form_wrapper ul {    
     list-style-type: none;
 }
+.profile_form_wrapper .secure_footer .fa{
+    color: #cf2f28;
+}
+.profile_form_wrapper .secure_footer {
+    text-align: center;
+}
+.profile_form_wrapper .stripe {
+    display: block;
+    margin-top: 10px;
+}
+.profile_form_wrapper .stripe:hover,
+.profile_form_wrapper .stripe:focus {
+    opacity:.70;
+    filter:alpha(opacity=70); 
+}
 @media (max-width: 992px) {
     .profile_form_wrapper{
         margin-left: auto;
