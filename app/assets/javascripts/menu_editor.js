@@ -5,6 +5,7 @@
 *= require jquery.hashchange.min.js
 *= require knockout-sortable.js
 *= require loglevel.js
+*= require masonry.min.js
 */
 
 //<![CDATA[ 
@@ -1212,6 +1213,24 @@ ko.bindingHandlers.fadeVisible = {
         var value = valueAccessor();
         ko.unwrap(value) ? $(element).fadeIn() : $(element).fadeOut();
     }
+};
+
+ko.bindingHandlers.masonry = {
+    update: function(element, valueAccessor) {
+        var value = valueAccessor();
+        var id = value[1].replace(/[^a-z]/g,'');
+        value = value[0]();
+        if(value && $(element).width() > 600){
+            // var w = Number($(element).width());
+            // console.log(w);
+            $(element).find(".image_section").addClass(id);
+            id = "." + id;
+            $(element).masonry({
+              columnWidth: id,
+              itemSelector: id,
+            });
+        }
+    },
 };
 
 function PublicMenuModel() {

@@ -5,11 +5,11 @@
         </ul>
     </div>
 
-    <div data-bind="page: {id: 'start', title: 'Plans', with: user}">
-        <%= render 'plan' %>
-    </div>
-
     <!-- ko if: card_list -->
+        <div data-bind="page: {id: 'start', title: 'Plans', with: user}">
+            <%= render 'plan' %>
+        </div>
+
         <div data-bind="page: {id: 'cards', title: 'Cards', with: user}">
             <%= render 'cards' %>
         </div>
@@ -67,6 +67,21 @@
                 }
 
                 _.each(data.cards,function(card){ self.cards.push(new Card(card,self)) });
+
+                self.plan.subscribe(function(newvalue){
+                    $.ajax({
+                      type: "POST",
+                      url: "/app/profile/subscribe",
+                      data: { data:ko.toJSON(newvalue)},
+                      success: function(data, textStatus, jqXHR){
+                            alert("Success");
+                        },
+                        error: function(XMLHttpRequest, textStatus, errorThrown) { 
+                            console.log("There was an error saving the section " + errorThrown);
+                        },
+                        dataType: "json"
+                    });                    
+                });
 
                 var stripeResponseHandler = function(status, response) {
                   var $form = $('#addCardForm');

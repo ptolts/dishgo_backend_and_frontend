@@ -3,6 +3,9 @@
         <div class="row">
             <div class="col-xs-12">
                 <h2 class="text-center">Add Card</h2>
+                <!-- ko if: !$root.card_list() -->
+                    <p>Before choosing a plan you must add a credit card. This form is powered by Stripe. Not only is this page encrypted, but your credit card information never touches our servers. For more information click <a href="https://stripe.com/ca/help/faq" target="_blank">here.</a></p>
+                <!-- /ko -->
                 <form role="form" action="" method="POST" id="addCardForm">
                     <div class="form-group">
                         <label>Cardholder's Name</label>
@@ -37,6 +40,7 @@
                     </div>
                     <div class="col-xs-12 alert alert-danger" data-bind="visible: errorMessage(), text: errorMessage"></div>                
                     <button data-bind="click: addCard" class="btn btn-dish col-xs-4 col-xs-offset-8">Add Card</button>
+                    <a href="https://stripe.com/" target="_blank"><img src="/glossy@2x.png" width="100" /></a>
                 </form>
             </div>
             <div class="col-md-4"></div>

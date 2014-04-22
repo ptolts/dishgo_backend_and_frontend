@@ -27,6 +27,24 @@ class ProfileController < ApplicationController
 		render 'billing'
 	end
 
+	def subscribe
+		data = JSON.parse(params[:data])
+		begin
+			customer = Stripe::Customer.retrieve(current_user.stripe_token)	
+			if customer["subscriptions"]["total_count"] == 0
+				customer.subscriptions.create(:plan => data["id"])			
+			else plan = customer["subscriptions"]["data"].first
+				Rails.logger.warn plan.to_s
+				plan = customer.subscriptions.retrieve(plan["id"])
+				customer.update_subscription(:plan => data["id"])
+			end	
+		rescue Stripe::APIConnectionError => message
+			Rails.logger.warn "Error with stripe.\n#{msg.to_s}"
+			bad = true
+		end		
+		render json: {success:true}.as_json
+	end
+
 	def add_card
 		user = current_user
 		data = JSON.parse(params[:data])
