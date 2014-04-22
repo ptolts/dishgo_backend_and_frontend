@@ -54,13 +54,13 @@
                             <div class="caption">
                                 <div class="pull-left">
                                     <span class="btn btn-dish" data-bind="click: $root.showModal">
-                                        <i class="glyphicon glyphicon-edit"></i>
+                                        <i class="glyphicon glyphicon-edit"></i> Crop
                                     </span>                     
                                 </div>
 
                                 <div class="pull-right">
                                     <span class="btn btn-warning" data-bind="click: $parent.removeImage">
-                                        <i class="glyphicon glyphicon-remove"></i>
+                                        <i class="glyphicon glyphicon-remove"></i> Remove
                                     </span>                     
                                 </div>                                
                             </div>
@@ -92,8 +92,8 @@
                 </div>
               </div>
               <div class="modal-footer">
-                <button type="button" class="btn btn-primary pull-left" data-bind="click: crop">Crop</button>
-                <button type="button" class="btn btn-warning" data-dismiss="modal">Cancel</button>
+              <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-dish" data-bind="click: crop">Crop</button>
               </div>
             </div><!-- /.modal-content -->
           </div><!-- /.modal-dialog -->

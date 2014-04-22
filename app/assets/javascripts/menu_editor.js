@@ -210,7 +210,7 @@ function Section(data,topmodel) {
           buttons: {
             success: {
               label: "No",
-              className: "btn-section pull-left col-xs-3",
+              className: "btn-default pull-left col-xs-3",
               callback: function() {
 
               }
@@ -543,7 +543,7 @@ function Dish(data, topmodel) {
           buttons: {
             success: {
               label: "No",
-              className: "btn-section pull-left col-xs-3",
+              className: "btn-default pull-left col-xs-3",
               callback: function() {
 
               }
@@ -567,7 +567,7 @@ function Dish(data, topmodel) {
           buttons: {
             success: {
               label: "No",
-              className: "btn-section pull-left col-xs-3",
+              className: "btn-default pull-left col-xs-3",
               callback: function() {
 
               }
@@ -709,7 +709,7 @@ function Option(data,dish) {
           buttons: {
             success: {
               label: "No",
-              className: "btn-section pull-left col-xs-3",
+              className: "btn-default pull-left col-xs-3",
               callback: function() {
 
               }
@@ -753,7 +753,7 @@ function SizePrices(data) {
           buttons: {
             success: {
               label: "No",
-              className: "btn-section pull-left col-xs-3",
+              className: "btn-default pull-left col-xs-3",
               callback: function() {
 
               }
@@ -1083,7 +1083,7 @@ function MenuViewModel() {
           buttons: {
             success: {
               label: "Continue Editing",
-              className: "btn-section pull-left col-xs-5",
+              className: "btn-default pull-left col-xs-5",
               callback: function() {
 
               }
@@ -1131,7 +1131,7 @@ function MenuViewModel() {
           buttons: {
             success: {
               label: "No",
-              className: "btn-section pull-left col-xs-3",
+              className: "btn-default pull-left col-xs-3",
               callback: function() {
 
               }
