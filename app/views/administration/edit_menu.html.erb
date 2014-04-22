@@ -13,16 +13,15 @@
       <div id="save_menu">
         <div class="row">
             <div class="col-xs-12">
-                <h3>Draft Saved.</h3>
-                <hr>
-                <p>This means your changes are saved, but they are not yet visible to your customers. In order to make them live, you must publish your changes.</p>
-                <p>If you wish to preview your changes, click <a data-bind="attr:{href:preview_token}" target=\"_blank\">here.</a></p>
-                <p>If you wish to publish this menu, click publish!</p>
+                <h3>Draft Saved</h3>
                 <div class="text-center">
-                    <button class="btn btn-primary" data-bind="click: function(){ save_menu_modal(!save_menu_modal()); publishMenu() }">Publish!</button>
+                <p class="text-left">Your changes are now saved. You can preview them <a data-bind="attr:{href:preview_token}" target=\"_blank\">here <i class="fa fa-external-link"></i></a>. In order to make them live, you must publish your changes.</p>
+                <h4 class="text-center" style="margin-top: 30px;">If you wish to publish this menu, click publish!</h4>
+                    <button class="btn btn-dish" data-bind="click: function(){ save_menu_modal(!save_menu_modal()); publishMenu() }">Publish</button>
                 </div>
-                <hr>
-                <button class="btn btn-info pull-right" data-bind="click: function(){ save_menu_modal(!save_menu_modal()) }">Close</button>
+                <div class="save_menu_footer">
+                    <button class="btn btn-default pull-right" data-bind="click: function(){ save_menu_modal(!save_menu_modal()) }">Close</button>
+                </div>
             </div>
         </div>
       </div>

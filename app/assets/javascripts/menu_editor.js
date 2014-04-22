@@ -210,7 +210,7 @@ function Section(data,topmodel) {
           buttons: {
             success: {
               label: "No",
-              className: "btn-primary pull-left col-xs-3",
+              className: "btn-section pull-left col-xs-3",
               callback: function() {
 
               }
@@ -543,7 +543,7 @@ function Dish(data, topmodel) {
           buttons: {
             success: {
               label: "No",
-              className: "btn-primary pull-left col-xs-3",
+              className: "btn-section pull-left col-xs-3",
               callback: function() {
 
               }
@@ -567,7 +567,7 @@ function Dish(data, topmodel) {
           buttons: {
             success: {
               label: "No",
-              className: "btn-primary pull-left col-xs-3",
+              className: "btn-section pull-left col-xs-3",
               callback: function() {
 
               }
@@ -709,7 +709,7 @@ function Option(data,dish) {
           buttons: {
             success: {
               label: "No",
-              className: "btn-primary pull-left col-xs-3",
+              className: "btn-section pull-left col-xs-3",
               callback: function() {
 
               }
@@ -753,7 +753,7 @@ function SizePrices(data) {
           buttons: {
             success: {
               label: "No",
-              className: "btn-primary pull-left col-xs-3",
+              className: "btn-section pull-left col-xs-3",
               callback: function() {
 
               }
@@ -1042,7 +1042,7 @@ function MenuViewModel() {
             },
             danger: {
               label: "Publish",
-              className: "btn-primary col-xs-5 pull-right",
+              className: "btn-success col-xs-5 pull-right",
               callback: function() {
 
                 var spinner = new Spinner(opts).spin(document.getElementById('center')); 
@@ -1061,7 +1061,7 @@ function MenuViewModel() {
                         // updateFilters();
                         spinner.stop();
                         $('#loading').fadeOut();
-                        bootbox.alert("Menu Publish!");
+                        bootbox.alert("Menu Published!");
                     },
                     error: function(XMLHttpRequest, textStatus, errorThrown) { 
                         spinner.stop();
@@ -1082,14 +1082,14 @@ function MenuViewModel() {
           title: "Discard Draft",
           buttons: {
             success: {
-              label: "No, continue editing.",
-              className: "btn-primary pull-left col-xs-5",
+              label: "Continue Editing",
+              className: "btn-section pull-left col-xs-5",
               callback: function() {
 
               }
             },
             danger: {
-              label: "Yes, discard draft.",
+              label: "Discard Draft",
               className: "btn-danger col-xs-5 pull-right",
               callback: function() {
 
@@ -1131,7 +1131,7 @@ function MenuViewModel() {
           buttons: {
             success: {
               label: "No",
-              className: "btn-primary pull-left col-xs-3",
+              className: "btn-section pull-left col-xs-3",
               callback: function() {
 
               }

@@ -6,12 +6,12 @@
                 <form role="form" action="" method="POST" id="addCardForm">
                     <div class="form-group">
                         <label>Cardholder's Name</label>
-                        <input type="text" class="form-control">
+                        <input type="text" class="form-control" placeholder="John Smith">
                     </div>
                     <div class="form-group">
                         <label>Card Number</label>
                         <div style="position: relative">
-                            <input type="text" class="form-control" data-stripe="number" id="card_numba">
+                            <input type="text" class="form-control" placeholder="**** **** **** ****" data-stripe="number" id="card_numba">
                             <i class="fa fa-check-circle" id="card_numba_ok" data-bind="visible: validCard"></i>
                         </div>
                     </div>
@@ -36,7 +36,7 @@
                         </div>
                     </div>
                     <div class="col-xs-12 alert alert-danger" data-bind="visible: errorMessage(), text: errorMessage"></div>                
-                    <button data-bind="click: addCard" class="btn btn-info col-xs-4 col-xs-offset-8">Add Card</button>
+                    <button data-bind="click: addCard" class="btn btn-dish col-xs-4 col-xs-offset-8">Add Card</button>
                 </form>
             </div>
             <div class="col-md-4"></div>

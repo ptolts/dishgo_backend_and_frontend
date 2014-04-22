@@ -63,7 +63,6 @@ margin: 0px 15px;
   }
 #dishgo_bar.navbar-inverse .navbar-nav > li > a:hover, #dishgo_bar.navbar-inverse .navbar-nav > li > a:focus {
   color: #cf2f28;
-  background-image:url('/black@2x.png');
 }
 
 #dishgo_bar.navbar-inverse .navbar-nav > .open > a, #dishgo_bar.navbar-inverse .navbar-nav > .open > a:hover, #dishgo_bar.navbar-inverse .navbar-nav > .open > a:focus {
@@ -148,10 +147,19 @@ margin: 0px 15px;
 }
 
 #saveMenu {
-  background-color: #10479B !important;
-  background-image: none !important;
+  background-color: #5cb85c;
+  background-image: -webkit-linear-gradient(hsla(0,0%,100%,.05), hsla(0,0%,0%,.1)) !important;
+    background-image:    -moz-linear-gradient(hsla(0,0%,100%,.05), hsla(0,0%,0%,.1)) !important;
+    background-image:     -ms-linear-gradient(hsla(0,0%,100%,.05), hsla(0,0%,0%,.1)) !important;
+    background-image:      -o-linear-gradient(hsla(0,0%,100%,.05), hsla(0,0%,0%,.1)) !important;
+    background-image:         linear-gradient(hsla(0,0%,100%,.05), hsla(0,0%,0%,.1)) !important;
 }
-
+#saveMenu a:hover,
+#saveMenu a:focus,
+#saveMenu a .active {
+  background-color: #4F9E4F;
+  color: #fff !important;
+}
 #saveDraft {
   background-color: #F4950E !important;
   background-image: none !important;
@@ -159,7 +167,17 @@ margin: 0px 15px;
 
 #discardDraft {
   background-color: #BC030E !important;
-  background-image: none !important;
+  background-image: -webkit-linear-gradient(hsla(0,0%,100%,.05), hsla(0,0%,0%,.1)) !important;
+    background-image:    -moz-linear-gradient(hsla(0,0%,100%,.05), hsla(0,0%,0%,.1)) !important;
+    background-image:     -ms-linear-gradient(hsla(0,0%,100%,.05), hsla(0,0%,0%,.1)) !important;
+    background-image:      -o-linear-gradient(hsla(0,0%,100%,.05), hsla(0,0%,0%,.1)) !important;
+    background-image:         linear-gradient(hsla(0,0%,100%,.05), hsla(0,0%,0%,.1)) !important;
+}
+#discardDraft a:hover,
+#discardDraft a:focus,
+#discardDraft a .active {
+  background-color: #A2030C;
+  color: #fff !important;
 }
 
 /*#togglePreview:focus {

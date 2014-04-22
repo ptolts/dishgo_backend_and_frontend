@@ -69,8 +69,13 @@
 			<div data-bind="style:{backgroundImage: $root.computeImage('header_background_pattern')}" class="pattern_background"></div>				
 		</div>
 
-		<div class="save_website_button col-md-3">
-		    <button class="coo_button lightText square green col-xs-12" data-bind="click: $root.submitDesign">Save <span class="glyphicon glyphicon-floppy-disk"></span></button>
+		<div class="save_website_button">
+			<div class="col-xs-6">
+				<a href="/app" class="coo_button lightText square red col-xs-12" style="text-decoration: none">Cancel <i class="glyphicon glyphicon-remove"></i></a>
+			</div>
+			<div class="col-xs-6">
+			    <button class="coo_button lightText square green col-xs-12" data-bind="click: $root.submitDesign">Save <span class="glyphicon glyphicon-ok"></span></button>
+			</div>
 		</div>
 
 		<div data-bind="page: {id: 'start', title: 'Layout'}">

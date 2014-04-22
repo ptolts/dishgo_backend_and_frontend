@@ -67,24 +67,25 @@
     background-color: #838383;
     border-radius: 3px;
 }
-
+.nav-pills>li+li {
+    margin-left: 0px;
+}
 /*profile form*/ 
 
 .profile_form_wrapper {
     border-radius: 5px;
-    color: #838383;
     padding: 15px;
     margin-top: 15px;
     margin-bottom: 15px;
     background-color: #fff;
-    background-image: -webkit-linear-gradient(hsla(0,0%,0%,.05), hsla(0,0%,100%,.05));
-    background-image:    -moz-linear-gradient(hsla(0,0%,0%,.05), hsla(0,0%,100%,.05));
-    background-image:     -ms-linear-gradient(hsla(0,0%,0%,.05), hsla(0,0%,100%,.05));
-    background-image:      -o-linear-gradient(hsla(0,0%,0%,.05), hsla(0,0%,100%,.05));
-    background-image:         linear-gradient(hsla(0,0%,0%,.05), hsla(0,0%,100%,.05));
     -webkit-box-shadow: 0px 0px 10px 1px rgba(0,0,0,0.75);
     -moz-box-shadow: 0px 0px 10px 1px rgba(0,0,0,0.75);
     box-shadow: 0px 0px 10px 1px rgba(0,0,0,0.75);
+    max-width: 700px;
+
+}
+.profile_form_wrapper label {
+    color: #838383;
 
 }
 .profile_form_wrapper .form-horizontal .form-group {
@@ -129,4 +130,27 @@
 .profile_form_wrapper select {
     margin: auto;
     display: block;
+}
+.base_bar {
+    background: rgba(248,248,248,.9);
+    border-top: 1px solid rgba(0,0,0,.1);
+    margin-bottom: -15px;
+    padding: 10px 0;
+    border-radius: 0 0 4px 4px;
+}
+#business-hours-form {
+    margin-bottom: 15px;
+}
+.profile_form_wrapper textarea:focus, 
+.profile_form_wrapper input[type="text"]:focus, 
+.profile_form_wrapper .uneditable-input:focus {   
+    border-color: rgba(51, 51, 51, 0.8);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 4px rgba(51, 51, 51, 0.6);
+    outline: 0 none;
+}
+@media (max-width: 992px) {
+    .profile_form_wrapper{
+        margin-left: auto;
+        margin-right: auto;
+    }
 }

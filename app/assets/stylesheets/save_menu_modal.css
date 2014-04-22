@@ -2,7 +2,7 @@
 	position: relative;
 	background-color: #fff;
 	border-radius: 5px;
-	padding: 15px;
+	padding: 0 15px;
 	color: #000;
 	border: 1px solid rgba(0, 0, 0, 0.2);
 	border-radius: 6px;
@@ -23,4 +23,13 @@
 	-o-transform:		translate(-50%, -50%);  
 	transform:			translate(-50%, -50%);
 	-webkit-backface-visibility: hidden;
+}
+#save_menu h3 {
+	padding-bottom: 15px;
+	border-bottom: 1px solid #ccc;
+}
+.save_menu_footer {
+	padding-top: 15px;
+	border-top: 1px solid #ccc;
+	margin-top: 15px;
 }
