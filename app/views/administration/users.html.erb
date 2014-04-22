@@ -66,6 +66,7 @@
             self.email = ko.observable(data.email);
             self.phone = ko.observable(data.phone);
             self.is_admin = ko.observable(data.is_admin);
+            self.cash_money = ko.observable(data.cash_money);
             self.restaurant = ko.observable();
 
             if(data.owns_restaurants){
@@ -107,7 +108,8 @@
                   data: {
                     user_id: self.id,
                     email: self.email(),
-                    is_admin: self.is_admin()
+                    is_admin: self.is_admin(),
+                    cash_money: self.cash_money(),
                   },
                   success: function(data, textStatus, jqXHR){
 

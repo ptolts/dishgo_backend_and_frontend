@@ -25,6 +25,7 @@ class User
   field :stripe_token,        :type => String
   field :cards,               :type => Array, :default => [] 
   field :plan,                :type => Hash, :default => {}
+  field :cash_money,          :type => Boolean, :default => false   
 
   ## Recoverable
   field :reset_password_token,   :type => String

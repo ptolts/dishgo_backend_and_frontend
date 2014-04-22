@@ -950,6 +950,7 @@ function MenuViewModel() {
     self.languages = ko.observableArray(['en','fr']);
     self.lang = ko.observable('en');
     lang = self.lang;
+    var skip_warning = false;
 
     self.restaurant = ko.observable(new Restaurant(resto_data));
 
@@ -1110,7 +1111,8 @@ function MenuViewModel() {
                         // updateFilters();
                         spinner.stop();
                         $('#loading').fadeOut();
-                        location.reload();
+                        skip_warning = true;
+                        window.location.href = "/app";
                     },
                     error: function(XMLHttpRequest, textStatus, errorThrown) { 
                         spinner.stop();
@@ -1154,51 +1156,32 @@ function MenuViewModel() {
     self.save_menu_modal = ko.observable(false);
     self.preview_token = ko.observable("");
     self.saveDraft = function(){
-
-        // console.log("Automatically saving menu.");
-
-        // if(self.auto_save_previous == null){
-        //     self.auto_save_previous = ko.toJSON(self.menu);
-        //     return
-        // }
-
-        // if(self.ajax_counter != 0){
-        //     console.log("Waiting until all ajax calls are processed before saving.");
-        //     return;
-        // }
-        // var auto_save_now = ko.toJSON(self.menu);
-        // if(self.auto_save_previous != auto_save_now){
-            $.ajax({
-              type: "POST",
-              url: "/app/administration/update_menu",
-              data: {
-                restaurant_id: restaurant_id,
-                menu: ko.toJSON(self.menu)
-              },
-              success: function(data, textStatus, jqXHR){
-                    // self.menu($.map(data.menu, function(item) { return new Section(item) }));
-                    // $(".tooltipclass").tooltip({delay: { show: 500, hide: 100 }});
-                    // updateFilters();
-                    // spinner.stop();
-                    self.preview_token(data.preview_token);
-                    self.save_menu_modal(true);
-                    // $('#loading').fadeOut();
-                    // console.log("Menu Saved.");
-                    // bootbox.alert("Draft Saved!\nPreview at <a href=\"" + data.preview_token + "\" target=\"_blank\">here.</a>");
-                    // self.auto_save_previous = auto_save_now;          
-                },
-                error: function(XMLHttpRequest, textStatus, errorThrown) { 
-                    // spinner.stop();
-                    // $('#loading').fadeOut();
-                    console.log("There was an error saving the menu: " + errorThrown);
-                },
-                dataType: "json"
-            });
-        // }
+        var spinner = new Spinner(opts).spin(document.getElementById('center')); 
+        $.ajax({
+          type: "POST",
+          url: "/app/administration/update_menu",
+          data: {
+            restaurant_id: restaurant_id,
+            menu: ko.toJSON(self.menu)
+          },
+          success: function(data, textStatus, jqXHR){
+                spinner.stop();
+                self.preview_token(data.preview_token);
+                self.save_menu_modal(true);
+                skip_warning = true;   
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) { 
+                console.log("There was an error saving the menu: " + errorThrown);
+                spinner.stop();
+            },
+            dataType: "json"
+        });
     }
 
     $(window).on('beforeunload', function () {
-        return "Make sure you've saved your changes!";
+        if(!skip_warning){
+            return "Make sure you've saved your changes!";            
+        }
     });     
 };
 
@@ -1235,6 +1218,10 @@ ko.bindingHandlers.masonry = {
 
 function PublicMenuModel() {
 
+    if(!ko["menuVisible"]){
+        ko.menuVisible = ko.observable(false);
+    }
+
     var self = this;
     self.menu = ko.observableArray([]);
     self.newDomCounter = 0;
@@ -1248,6 +1235,14 @@ function PublicMenuModel() {
       'en'  : 'English',
       'fr'  : 'Français',
     }    
+
+    self.main_title_visible = ko.computed(function(){
+        if($(window).width() < 900) {
+            return true;
+        } else {
+            return !ko["menuVisible"]();
+        }
+    })
 
     self.set_dish = function(dish) {
         self.selected_dish(dish);

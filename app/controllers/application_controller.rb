@@ -29,7 +29,7 @@ class ApplicationController < ActionController::Base
   end 
 
   def create_notifications!
-    if current_user.stripe_token.blank? and current_user.confirmed_at
+    if current_user.stripe_token.blank? and current_user.confirmed_at and !current_user.cash_money
       if !current_user.notifications.any?{|e| e.created_at.today? and e.type == "trial_period"}
         user = current_user
         note = Notification.create

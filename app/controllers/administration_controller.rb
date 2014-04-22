@@ -83,7 +83,8 @@ class AdministrationController < ApplicationController
 
   def update_user
   	user = User.find(params[:user_id])
-  	user.is_admin = params[:is_admin].to_bool
+    user.is_admin = params[:is_admin].to_bool
+  	user.cash_money = params[:cash_money].to_bool
   	user.save
   	render :text => "User Saved."
   end 

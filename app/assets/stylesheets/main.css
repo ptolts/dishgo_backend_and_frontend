@@ -1,26 +1,5 @@
-/*
-
-#dishgo_bar {
-	background-color: #332F2E;
-	border-bottom: 0px;
+.border_me {
+	border: 1px solid #DCDCDC;
+	border-radius: 5px;
+	padding: 5px;
 }
-
-#dishgo_bar .active a{
-	color: #CCBCB8;
-	background-color: #332F2E;
-}
-
-#dishgo_bar li a{
-	color: #CCBCB8;
-}
-
-#dishgo_bar li a:hover{	
-	color: #332F2E;
-}
-
-#dishgo_bar li:hover {
-	background: #CCBCB8;
-}
-
-
-*/

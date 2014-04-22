@@ -5,13 +5,15 @@ class Plan
                 id:"standard",
                 name:"Standard",
                 price:"59.99",
-                interval:"month"
+                interval:"Monthly",
+                message: "",
               },
               {
                 id:"standard_year",
                 name:"Standard Year",
                 price:"610",
-                interval:"year"
+                interval:"Yearly",
+                message: "Save 15%"
               }              
             ]
   end

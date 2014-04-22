@@ -48,12 +48,14 @@
                 self.name = data.name;
                 self.price = data.price;
                 self.interval = data.interval;
+                self.message = data.message;
 
             }            
 
-            function User(data) {
+            function User(data,model) {
                 var self = this;
                 self.id = data._id;
+                self.model = model;
                 self.email = ko.observable(data.email);
                 self.phone = ko.observable(data.phone);
                 self.cards = ko.observableArray([]);
@@ -62,25 +64,44 @@
                 self.validCard = ko.observable(false);
                 self.plan = ko.observable();
 
-                if(data.plan){
-                    self.plan(new Plan(data.plan));
-                }
-
                 _.each(data.cards,function(card){ self.cards.push(new Card(card,self)) });
 
+                if(data.plan){
+                    self.plan(_.find(model.plans(),function(plan){ return plan.id == data.plan.id }));
+                }                
+
                 self.plan.subscribe(function(newvalue){
-                    $.ajax({
-                      type: "POST",
-                      url: "/app/profile/subscribe",
-                      data: { data:ko.toJSON(newvalue)},
-                      success: function(data, textStatus, jqXHR){
-                            alert("Success");
+                    bootbox.dialog({
+                      message: "You're about to subscribe to the plan called " + newvalue.name + ". You can change or cancel at any time.",
+                      title: "Subscribe",
+                      buttons: {
+                        success: {
+                          label: "Cancel",
+                          className: "btn-default pull-left col-xs-3",
+                          callback: function() {
+
+                          }
                         },
-                        error: function(XMLHttpRequest, textStatus, errorThrown) { 
-                            console.log("There was an error saving the section " + errorThrown);
+                        danger: {
+                          label: "Subscribe",
+                          className: "btn-info col-xs-3 pull-right",
+                          callback: function() {
+                            $.ajax({
+                              type: "POST",
+                              url: "/app/profile/subscribe",
+                              data: { data:ko.toJSON(newvalue)},
+                              success: function(data, textStatus, jqXHR){
+                                    alert("Success");
+                                },
+                                error: function(XMLHttpRequest, textStatus, errorThrown) { 
+                                    console.log("There was an error saving the section " + errorThrown);
+                                },
+                                dataType: "json"
+                            }); 
+                          }
                         },
-                        dataType: "json"
-                    });                    
+                      }
+                    });                                        
                 });
 
                 var stripeResponseHandler = function(status, response) {
@@ -153,9 +174,9 @@
 
             function viewModel() {
                 var self = this;
-                self.user = ko.observable(new User(user_data));
                 self.plans = ko.observableArray([]);
                 _.each(plan_data,function(plan){ self.plans.push(new Plan(plan)) });
+                self.user = ko.observable(new User(user_data,self));
 
                 self.card_list = ko.computed(function(){ return self.user().cards().length > 0});
             };

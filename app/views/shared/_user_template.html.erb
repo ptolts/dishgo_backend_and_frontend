@@ -22,7 +22,8 @@
                     </div>                                      
                     <% if current_user.is_admin && active_link('administration','users') %>
                         <hr>
-                        <p>Admin: <span data-bind="text: is_admin, click: toggle_is_admin"></span></p>
+                        <p class="col-xs-6 border_me">Admin: <span data-bind="text: is_admin, click: toggle_is_admin"></span></p>
+                        <p class="col-xs-6 border_me">Cash_Money: <span data-bind="text: cash_money, click: function(){ cash_money(!cash_money()) }"></span></p>
                         <p>Restaurant: <!-- ko with: restaurant --><span data-bind="text: name"></span><!-- /ko --></p>
                         <p>Set Restaurant:</p>
                         <div class="form-inline" role="form">

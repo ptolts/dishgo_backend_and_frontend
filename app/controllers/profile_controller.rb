@@ -42,6 +42,11 @@ class ProfileController < ApplicationController
 			Rails.logger.warn "Error with stripe.\n#{msg.to_s}"
 			bad = true
 		end		
+		if !bad
+			user = current_user
+			user.plan = data
+			user.save
+		end
 		render json: {success:true}.as_json
 	end
 

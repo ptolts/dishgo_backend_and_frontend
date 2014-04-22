@@ -45,14 +45,14 @@
                 </div>                                                
             </div>               
             <ul class="sidebar-nav" data-bind="foreach: menu">
-                <li class="section_title_menu">
+                <li class="section_title_menu" data-bind="click: $root.set_section">
                     <span class="glyphicon glyphicon-play pull-right icon-flipped" data-bind="visible: $root.current_section_check($data)" id="icon_play"></span>                    
                     <div class="media push_down"> 
-                        <a class="pull-left" data-bind="click: $root.set_section">
+                        <a class="pull-left">
                             <img class="media-object" height="25" data-bind="attr:{src:title_image}">
                         </a>
                         <div class="media-body">
-                            <h4 class="media-heading" data-bind="text: computed_name, click: $root.set_section" id="uppercase"></h4><button class="btn btn-dish btn-xs pull-left" type="button" data-bind="click: addDish" id="add_dish_button">+ Add Dish</button> 
+                            <h4 class="media-heading" data-bind="text: computed_name" id="uppercase"></h4><button class="btn btn-dish btn-xs pull-left add_dish_button" type="button" data-bind="click: addDish, clickBubble: false" id="add_dish_button">+ Add Dish</button> 
                         </div>                          
                     </div>
                 </li>
