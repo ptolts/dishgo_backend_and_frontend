@@ -106,7 +106,7 @@
 </script>
 
 <script id="customize_font_template" type="text/html">
-    <div class="col-xs-12">
+    <div class="col-xs-12" style="padding-bottom: 40px;">
         <div class="fonts" data-bind="foreach: fonts">
             <div class="col-md-5 select_object" data-bind="css:{selected: $data === $root.current_font()}, click: $root.setFont">
                 <iframe class="col-xs-12 col-md-5 font_demo" data-bind="iFrame: $data"></iframe>
