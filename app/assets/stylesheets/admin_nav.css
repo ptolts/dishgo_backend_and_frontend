@@ -18,7 +18,7 @@
 }
 
 #dishgo_bar {
-  background-image:url('/black@2x.png');
+  background-image:url('/app/black@2x.png');
 }
 
 #dishgo_bar.navbar {
@@ -31,7 +31,7 @@
   text-transform: uppercase;
 }
 #dishgo_bar .nav > li {
-  background-image:url('/black@2x.png');
+  background-image:url('/app/black@2x.png');
 }
 #dishgo_bar.navbar-nav {
 margin: 0px 15px;
@@ -42,7 +42,7 @@ margin: 0px 15px;
   /*padding-bottom: 0px;*/
 }
 #dishgo_bar.navbar-inverse, #dishgo_bar .active a {
-  background-image:url('/black@2x.png');
+  background-image:url('/app/black@2x.png');
   /*background-color: initial;*/
 }
 #dishgo_bar.navbar-inverse .navbar-nav > li > a {
@@ -67,12 +67,12 @@ margin: 0px 15px;
 
 #dishgo_bar.navbar-inverse .navbar-nav > .open > a, #dishgo_bar.navbar-inverse .navbar-nav > .open > a:hover, #dishgo_bar.navbar-inverse .navbar-nav > .open > a:focus {
   color: #cf2f28;
-  background-image:url('/black@2x.png');
+  background-image:url('/app/black@2x.png');
 }
 
 #dishgo_bar.navbar-inverse .navbar-nav > .active > a, #dishgo_bar.navbar-inverse .navbar-nav > .active > a:hover, #dishgo_bar.navbar-inverse .navbar-nav > .active > a:focus {
   color: #cf2f28;
-  background-image:url('/black@2x.png');
+  background-image:url('/app/black@2x.png');
 }
 
 #dishgo_bar .navbar-inverse .navbar-toggle:hover, #dishgo_bar .navbar-inverse .navbar-toggle:focus {
@@ -116,7 +116,7 @@ margin: 0px 15px;
 #dishgo_bar .btn-primary:active, 
 #dishgo_bar .btn-primary.active, 
 #dishgo_bar.open .dropdown-toggle.btn-primary {
-  background-image:url('/black@2x.png');
+  background-image:url('/app/black@2x.png');
 }
 
 
