@@ -148,6 +148,14 @@
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 4px rgba(51, 51, 51, 0.6);
     outline: 0 none;
 }
+.profile_form_wrapper li:before {    
+    font-family: 'FontAwesome';
+    content: "\f0f3";
+    margin:0 5px 0 -15px;
+}
+.profile_form_wrapper ul {    
+    list-style-type: none;
+}
 @media (max-width: 992px) {
     .profile_form_wrapper{
         margin-left: auto;
