@@ -4,32 +4,32 @@
             <div class="row">
                 <div class="col-xs-12">
                     <h2 class="text-center">Find or Create Your Restaurant</h2>
+                    <div class="row create_restaurant_row">
+                        <div class="col-xs-12" data-bind="fadeVisible: search_name().length > 0">
+                            <button class="btn btn-lg btn-primary btn-block" data-bind="click: new_restaurant">Can't find your restaurant? Create one!</button>
+                        </div>                    
+                    </div>                     
                      <div class="row">
                         <div class="col-xs-12">
-                            <h4 style="margin-bottom: 20px;">Search our database for your restaurant.</h4>
+                            <h4>Search our database for your restaurant:</h4>
                             <div class="row">
                                 <div class="resto_search_bar">
                                     <input class="form-control" data-bind="value: search_name, valueUpdate: 'keyup'" />
                                     <div class="restaurant_list">
-                                        <ul>
+                                        <ul data-bind="visible: filtered_restaurants().length > 0">
                                             <!-- ko foreach: filtered_restaurants -->
                                                 <li data-bind="click: function(){ $root.current_restaurant($data)}">
                                                     <div class="row">
                                                         <i class="fa fa-arrow-circle-right result_icon"></i>
                                                         <h4 class="col-xs-6" data-bind="text: name"></h4>
-                                                        <h4 class="col-xs-6" data-bind="text: address_line_1"></h4>
+                                                        <h6 class="col-xs-6" data-bind="text: address_line_1"></h6>
                                                     </div>
                                                 </li>
                                             <!-- /ko -->
                                         </ul>
                                     </div>                                    
                                 </div>                 
-                            </div>               
-                            <div class="row">
-                                <div class="col-xs-12">
-                                    <button class="btn btn-lg btn-primary btn-block" data-bind="click: new_restaurant">Can't find your restaurant? Create one!</button>
-                                </div>                    
-                            </div>                       
+                            </div>                                     
                         </div>
                     </div>              
                 </div>
@@ -91,6 +91,7 @@
         var self = this;
         self.search_name = ko.observable("");
         self.restaurants = ko.observableArray([]);
+        self.restaurants.extend({ throttle: 500 }); 
         self.current_restaurant = ko.observable();
         var initial_search = true;
 
@@ -112,9 +113,9 @@
 
         self.filtered_restaurants = ko.computed(function(){
             var regex = new RegExp(self.search_name(),"i");
-            // if(self.search_name() == ""){
-            //     return [];
-            // }
+            if(self.search_name() == ""){
+                return [];
+            }
             return _.filter(self.restaurants(), function(resto){
                 if(resto.name().match(regex)){
                     return true;
@@ -167,6 +168,17 @@
 
         self.search_for_restaurant();   
 
+    };
+
+    ko.bindingHandlers.fadeVisible = {
+        init: function(element, valueAccessor) {
+            var value = valueAccessor();
+            $(element).toggle(ko.unwrap(value)); 
+        },
+        update: function(element, valueAccessor) {
+            var value = valueAccessor();
+            ko.unwrap(value) ? $(element).fadeIn() : $(element).fadeOut();
+        }
     };
 
     ko.bindingHandlers.iMap = {
