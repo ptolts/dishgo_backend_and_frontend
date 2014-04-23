@@ -1237,6 +1237,10 @@ var translations = {
         "en" : "Closed",
         "fr" : "Fermer"
     },    
+    "open" : {
+        "en" : "Open",
+        "fr" : "Ouvert"
+    },        
     "currently" : {
         "en" : "Currently",
         "fr" : "Presentment",
