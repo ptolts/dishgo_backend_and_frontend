@@ -53,7 +53,6 @@ class Image
       fog_public: true,
     }
 
-
   field :img_fingerprint, type: String
   field :manual_img_fingerprint, type: String
   validates_attachment_content_type :img, :content_type => %w(image/jpeg image/jpg image/png), :message => 'file type is not allowed (only jpeg/png/gif images)'    

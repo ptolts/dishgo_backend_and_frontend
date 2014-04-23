@@ -130,6 +130,9 @@ class OnlinesiteController < ApplicationController
     else
       @carousel = design.global_images.find_all{|e| e.carousel}.collect{|e| e.img_url_original}
     end
+
+    @lat = restaurant.lat
+    @lon = restaurant.lon  
     
     @design_data = design_as_json(design,restaurant)
     @resto_data = restaurant.as_document

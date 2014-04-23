@@ -44,12 +44,14 @@
 
 	        ko.bindingHandlers.iMap = {
 	            update: function (element, valueAccessor) {
-	            	$(function(){	
+	            	var value = valueAccessor();
+	            	if(value()){
 						var html = $('#iMapTemplate').text().replace(/endscript/g, 'script');
 						$(element)[0].contentWindow.document.open('text/html', 'replace');
 						$(element)[0].contentWindow.document.write(html);
 						$(element)[0].contentWindow.document.close();
-					});					          
+						value(false);
+					}		          
 	            }
 	        }; 
 
@@ -74,9 +76,7 @@
 					    }
 					});	   				          
 	            }
-	        }; 	        
-
-             						
+	        }; 	        				
 
 			function showModal(page, callback) {
 				$(page.element).modal('show');

@@ -80,7 +80,7 @@
 
 		<div id="footer" data-bind="fadeVisible: !atTop()">	
 			<div id="opened_or_closed_footer" data-bind="with: restaurant">
-				<h4><span class="currently_open_tag">currently </span><span class="currently_open" data-bind="css:{'hours_opened':areWeOpened(),'hours_closed':!areWeOpened()}, text: areWeOpenedText"></span></h4>
+				<h4><span class="currently_open_tag"  data-bind="lStaticText: 'currently'"> </span><span class="currently_open" data-bind="css:{'hours_opened':areWeOpened(),'hours_closed':!areWeOpened()}, lStaticText: areWeOpenedText"></span></h4>
 			</div>				
 			<div id="social_media_footer" class="social_media" data-bind="with: restaurant">
 				<a data-bind="visible: socialVisible('facebook'), attr:{href: facebook}"><i class="fa fa-facebook-square"></i></a>
@@ -88,7 +88,7 @@
 				<a data-bind="visible: socialVisible('instagram'), attr:{href: instagram}"><i class="fa fa-instagram"></i></a>
 			</div>	
 			<div data-bind="style:{backgroundImage: $root.computeImage('header_background_pattern')}" class="pattern_background"></div>
-			<div class="powered_by_dishgo"><a href="https://dishgo.io"><img src="logo.png" id="dishgo_logo"></a></div>			
+			<div class="powered_by_dishgo"><a href="https://dishgo.io" id="dishgo_logo"></a></div>			
 		</div>
 
 		<div id="opened_or_closed" data-bind="with: restaurant">
@@ -100,7 +100,7 @@
 				<%= render 'start' %>
 			</div>							
 		</div>	
-		<div data-bind="page: {id: 'contact', title: 'Contact'}" class="pages">				
+		<div data-bind="page: {id: 'contact', title: 'Contact', afterShow: function(){ ko['reloadMap'](true) }}" class="pages">				
 			<%= render 'contact' %>														
 		</div>
 

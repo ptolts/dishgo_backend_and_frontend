@@ -3,7 +3,49 @@
         var default_language_hash = {
             en: '',
             fr: '',
-        }
+        };
+
+        var opened_tr = {
+                "open": {
+                    'en':'Opened',
+                    'fr':'ouvert',
+                },       
+                "closed": {
+                    'en':'Closed',
+                    'fr':'fermé',
+                },
+        };
+
+        var days_tr = {
+                "monday": {
+                    'en':'Monday',
+                    'fr':'lundi',
+                },
+                "tuesday": {
+                    'en':'Tuesday',
+                    'fr':'mardi',
+                },
+                "wednesday": {
+                    'en':'Wednesday',
+                    'fr':'mercredi',
+                },   
+                "thusrday": {
+                    'en':'Thursday',
+                    'fr':'jeudi',
+                },   
+                "friday": {
+                    'en':'Friday',
+                    'fr':'vendredi',
+                },   
+                "saturday": {
+                    'en':'Saturday',
+                    'fr':'samedi',
+                },    
+                "sunday": {
+                    'en':'Sunday',
+                    'fr':'dimanche',
+                },                                               
+            };
 
         function copyDefaultHash(hash) {
             return JSON.parse(JSON.stringify(hash));
@@ -25,6 +67,17 @@
             self.open_2 = ko.observable(data.open_2);
             self.close_2 = ko.observable(data.close_2);
 
+            self.lName = ko.computed({
+                read: function() {
+                    if(viewmodel.lang){
+                        return days_tr[self.name][viewmodel.lang()];
+                    } else {
+                        return "";
+                    }
+                },
+                deferEvaluation: true                
+            });
+
             self.times = ["00:00", "00:30", "1:00", "1:30", "2:00", "2:30", "3:00", "3:30", "4:00", "4:30", "5:00", "5:30", "6:00", "6:30", "7:00", "7:30", "8:00", "8:30", "9:00", "9:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30", "13:00", "13:30", "14:00", "14:30", "15:00", "15:30", "16:00", "16:30", "17:00", "17:30", "18:00", "18:30", "19:00", "19:30", "20:00", "20:30", "21:00", "21:30", "22:00", "22:30", "23:00"];
 
 
@@ -36,13 +89,28 @@
                 self.closed(!self.closed());
             }
             
+            self.labelText = ko.computed({
+                read: function() {
+                    if(viewmodel.lang){
+                        if(!self.closed()){
+                            return opened_tr["open"][viewmodel.lang()];
+                        } else {
+                            return opened_tr["closed"][viewmodel.lang()];
+                        }
+                    } else {
+                        return self.buttonText();
+                    }                 
+                },
+                deferEvaluation: true                 
+            });
+
             self.buttonText = ko.computed(function(){
                 if(!self.closed()){
                     return "Open";
                 } else {
                     return "Closed";
                 }
-            });
+            });            
 
             self.validateOpen_1 = ko.observable(true);
             self.open_1.subscribe(function(newvalue){
@@ -207,38 +275,6 @@
             });  
 
             self.areWeOpenedText = ko.computed(function(){ return self.areWeOpened() ? 'open' : 'closed'});        
-
-            // hours: {
-            //     mon_1_open: "",
-            //     mon_1_close: "",
-            //     tue_1_open: "",
-            //     tue_1_close: "",
-            //     wed_1_open: "",
-            //     wed_1_close: "",
-            //     thu_1_open: "",
-            //     thu_1_close: "",
-            //     fri_1_open: "",
-            //     fri_1_close: "",
-            //     sat_1_open: "",
-            //     sat_1_close: "",
-            //     sun_1_open: "",
-            //     sun_1_close: "",
-
-            //     mon_2_open: "",
-            //     mon_2_close: "",
-            //     tue_2_open: "",
-            //     tue_2_close: "",
-            //     wed_2_open: "",
-            //     wed_2_close: "",
-            //     thu_2_open: "",
-            //     thu_2_close: "",
-            //     fri_2_open: "",
-            //     fri_2_close: "",
-            //     sat_2_open: "",
-            //     sat_2_close: "",
-            //     sun_2_open: "",
-            //     sun_2_close: "",
-            // },
 
             self.socialVisible = function(type){
                 return ko.computed(function(){

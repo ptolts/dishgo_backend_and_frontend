@@ -26,6 +26,7 @@ Foodcloud::Application.routes.draw do
     collection do
       get 'edit'
       get 'billing'
+      get 'location'
       post 'add_card'
       post 'subscribe'
       post 'smoke_notifications'

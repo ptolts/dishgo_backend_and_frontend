@@ -1216,11 +1216,42 @@ ko.bindingHandlers.masonry = {
     },
 };
 
+var translations = {
+    "Hours" : {
+        "en" : "Hours",
+        "fr" : "Heures",
+    },
+    "Address" : {
+        "en" : "Address",
+        "fr" : "Adresse"
+    },
+    "Opens" : {
+        "en" : "Opens",
+        "fr" : "Ouvrir"
+    },
+    "Closes" : {
+        "en" : "Closes",
+        "fr" : "Fermer"
+    },
+    "closed" : {
+        "en" : "Closed",
+        "fr" : "Fermer"
+    },    
+    "currently" : {
+        "en" : "Currently",
+        "fr" : "Presentment",
+    }      
+};
+
 function PublicMenuModel() {
 
     if(!ko["menuVisible"]){
         ko.menuVisible = ko.observable(false);
     }
+
+    if(!ko["reloadMap"]){
+        ko.reloadMap = ko.observable(false);
+    }    
 
     var self = this;
     self.menu = ko.observableArray([]);
@@ -1430,6 +1461,22 @@ ko.bindingHandlers.lText = {
         // });        
     }
 }; 
+
+ko.bindingHandlers.lStaticText = {
+    init: function (element, valueAccessor, allBindingsAccessor) {
+        var text = valueAccessor();
+        if(typeof(text) == "function"){
+            text = text();
+        }
+        var interceptor = ko.computed({
+            read: function () {
+                return translations[text][viewmodel.lang()];
+            },
+            deferEvaluation: true                 
+        });
+        ko.applyBindingsToNode(element, { text: interceptor});
+    }
+};
 
 ko.bindingHandlers.lHtml = {
     update: function (element, valueAccessor) {

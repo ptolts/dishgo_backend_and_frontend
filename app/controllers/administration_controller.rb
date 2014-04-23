@@ -214,8 +214,10 @@ class AdministrationController < ApplicationController
   def upload_image
     file = params[:files]
 
+    resto = current_user.owns_restaurants
+
     md5_sum = Digest::MD5.hexdigest(file.read)
-    if img = Image.where(:manual_img_fingerprint => md5_sum).first and img
+    if img = Image.where(:manual_img_fingerprint => md5_sum, :restaurant_id => resto.id).first and img
       Rails.logger.warn "Duplicate file. No need to upload twice."
       images = [img]
     else
@@ -234,7 +236,7 @@ class AdministrationController < ApplicationController
                         name: img.img_file_name,
                         size: img.img_file_size,
                         original:  img.img_url_original,
-                        thumbnailUrl:   img.img.url(:medium),
+                        thumbnailUrl:   img.img_url_medium,
                       }
                     }}.as_json
   end
@@ -325,6 +327,9 @@ class AdministrationController < ApplicationController
     end
 
     restaurant.name = settings["name"]
+    restaurant.lat = settings["lat"]
+    restaurant.lon = settings["lon"]
+    restaurant.locs = [settings["lat"],settings["lon"]]
     restaurant.email = settings["email"]
     restaurant.phone = settings["phone"]
     restaurant.facebook = settings["facebook"]

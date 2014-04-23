@@ -85,7 +85,12 @@ body {
 }
 #dishgo_logo {
 	margin-top: -5px;
-	height: 25px;
+	height: 30px;
+	display: inline-block;
+	width: 100px;
+	background-image: url('logo.png');
+	background-size: contain;
+	background-repeat: no-repeat;
 }
 #navigation_small {
 	display:none;

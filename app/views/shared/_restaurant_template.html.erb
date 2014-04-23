@@ -84,7 +84,16 @@
                                 <input id="email" name="email" type="text" placeholder="Email" data-bind="value: email" class="form-control">
                                 <p class="help-block"></p>
                             </div>
-                        </div>                        
+                        </div>
+                        <div class="col-sm-6">
+                            <label>Physical Location:</label>
+                            <!-- ko if: lat -->
+                                <a href="/app/profile/location" class="btn btn-sm btn-info col-xs-12">Change Location</a>
+                            <!-- /ko -->
+                            <!-- ko if: !lat() -->
+                                <a href="/app/profile/location" class="btn btn-sm btn-danger col-xs-12">Set Location</a>
+                            <!-- /ko -->
+                        </div>                                                
                     </div>
                 </fieldset>
             </form>

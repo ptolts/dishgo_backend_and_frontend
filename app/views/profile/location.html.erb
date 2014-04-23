@@ -1,0 +1,171 @@
+<style type="text/css">
+    body {
+        margin-top: 40px;
+    }
+</style>
+
+<div class="col-md-6 col-md-offset-3">    
+    <div class="profile_form_wrapper">
+        <div class="location_map_container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <h3>Physical Location:</h3>
+                    <p>Enter your city and province in the input field below. Once the map has moved over top your city, zoom in and find where your restaurant is located. Once you've done so, click to set the marker to exactly where your restaurant is located. If you're satisfied with the location, click set location.</p>
+                </div>
+            </div>
+            <div class="row location_search_form">
+                <input placeholder="Eg. Montreal, Quebec" class="form-control" data-bind="value: address, valueUpdate: 'keyup'" />
+                <i id="location_spinner" class="fa-li fa fa-spinner fa-spin" data-bind="visible: spin"></i>
+            </div>
+            <div class="row">
+                <div id="location_map" data-bind="iMap: mapObject"></div>
+            </div>                
+            <div class="row">
+                <button class="col-xs-5 btn btn-danger" data-bind="click: function(){ window.location.href = '/app'; }">Cancel</button>
+                <button class="col-xs-5 col-xs-offset-2 btn btn-info"  data-bind="click: saveLocation">Set Location</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <%= render 'shared/restaurant_javascript' %>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDmVdO0hER_qFFNZN5C9Du28_-sSblng0Y&sensor=false"></script>
+
+    <script type='text/javascript'>//<![CDATA[ 
+
+        var resto_data = <%= raw(current_user.owns_restaurants.as_json(include: :user).to_json) %>;
+    
+        function mapObject(data){
+            var self = this;
+            self.lat = ko.observable(data.lat ? data.lat : 45.458972);
+            self.lon = ko.observable(data.lon ? data.lon : -74.155815);
+            self.maker = null;
+            self.map = null;
+            self.location = new google.maps.LatLng(self.lat(),self.lon());
+            self.legit_data = false;
+
+            self.clickEvent = function(event){
+                if(event.latLng){
+                    self.location = new google.maps.LatLng(event.latLng.lat(),event.latLng.lng());
+                    self.setMarker();
+                }            
+            }
+
+            self.setMarker = function(){
+                if(!self.marker){
+                    self.marker = new google.maps.Marker({
+                        position: self.location, 
+                        map: self.map
+                    });
+                }       
+                self.marker.setPosition(self.location);  
+            }
+
+            if(data.lat){
+                self.legit_data = true;
+            }
+
+        }
+
+        function viewModel() {
+            var self = this;
+            self.restaurant = ko.observable(new Restaurant(resto_data));
+            self.address = ko.observable("");
+            self.spin = ko.observable(false);
+            self.mapObject = ko.observable(new mapObject({lat:self.restaurant().lat(),lon:self.restaurant().lon()}));
+
+            self.address.extend({ rateLimit: 2000 });
+
+            self.address.subscribe(function(newvalue){
+                self.spin(true);
+                $.ajax({
+                  url: "https://nominatim.openstreetmap.org/search.php",
+                  data: {
+                    q: self.address,
+                    format: "json",
+                  },
+                  success: function(data, textStatus, jqXHR){
+                        console.log(data);
+                        self.spin(false);
+                        if(data.length > 0){
+                            var first = data[0];
+                            self.mapObject().lat(first.lat);
+                            self.mapObject().lon(first.lon);
+                        }
+                    },
+                    error: function(XMLHttpRequest, textStatus, errorThrown) { 
+                        self.spin(false);
+                        console.log("There was an error saving the section " + errorThrown);
+                    },
+                    dataType: "json"
+                });                    
+            });
+
+            self.saveLocation = function(){
+                self.restaurant().lat = self.mapObject().location.lat();
+                self.restaurant().lon = self.mapObject().location.lng();
+                self.restaurant().save();
+                window.history.back();
+            }
+        };
+
+        ko.bindingHandlers.iMap = {
+            update: function (element, valueAccessor) {
+                var value = valueAccessor()();
+                var lat_lon = new google.maps.LatLng(value.lat(),value.lon());
+
+                if(!value.map){
+                    var styles = [
+                       {
+                         featureType: "poi",
+                         stylers: [
+                          { visibility: "off" }
+                         ]   
+                        },
+                       {
+                         featureType: "transit",
+                         stylers: [
+                          { visibility: "off" }
+                         ]   
+                        }                        
+                    ];
+
+                    var styledMap = new google.maps.StyledMapType(styles,{name: "Styled Map"});                    
+                    var mapOptions = {
+                        zoom: 10,
+                        center: lat_lon,
+                        mapTypeControlOptions: {
+                          mapTypeIds: []
+                        },
+                    };   
+                    value.map = new google.maps.Map(element,mapOptions);
+                    value.map.mapTypes.set('map_style', styledMap);
+                    if(value.legit_data){
+                        value.setMarker();
+                    }
+                    value.map.setMapTypeId('map_style');                    
+                    google.maps.event.addListener(value.map, 'click', function(event){ value.clickEvent(event) });     
+                }
+           
+                value.map.setCenter(lat_lon);
+            }
+        };         
+
+        var viewmodel = new viewModel();            
+
+        $(function(){   
+            ko.applyBindings(viewmodel);                        
+        });
+
+    //]]>  
+    </script>    
+
+    <script type="text/javascript">                
+    // var marker = new google.maps.Marker({
+    //     position: myLatlng,
+    //     visible: true
+    // }); 
+    // marker.setMap(map); 
+    </script>
+
+</div>

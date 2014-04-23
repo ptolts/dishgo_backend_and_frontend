@@ -108,17 +108,10 @@
 	padding: 15px;
 	color: #fff;
 	border-radius: 5px;
-	/*top: 50%;*/
     display: inline-block;
     vertical-align: middle;
     float: none;	
-	/*-webkit-transform: translateY(50%);	*/
-/*	border-style: solid;
-	border-width: 10px;
-	-moz-border-image: url(choppyborder.jpg) 14 15 15 14;
-	-webkit-border-image: url(choppyborder.jpg) 14 15 15 14;
-	-o-border-image: url(choppyborder.jpg) 14 15 15 14;
-	border-image: url(choppyborder.jpg) 14 15 15 14;*/	
+    min-width: 290px;
 }
 
 .hours_wrapper {
@@ -144,10 +137,11 @@
 	color: #000;
 }
 
-@media screen and (max-width: 850px) {
+@media screen and (max-width: 995px) {
 
 	.contact_page_wrapper {
 		top: 70px;
+		padding-bottom: 80px;
 		left: initial;		
 		-webkit-transform: none;
 		-ms-transform: none;
@@ -165,7 +159,8 @@
 	.mini_content_wrapper {
 		border-radius: 0px;
 		top: initial;
-		-webkit-transform: none;			
+		-webkit-transform: none;
+		/*padding-bottom: 0;			*/
 	}
 
 	.restaurant_name {

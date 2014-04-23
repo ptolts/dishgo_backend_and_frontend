@@ -8,6 +8,11 @@ class ProfileController < ApplicationController
 		render 'edit'
 	end
 
+	def location
+		@resto_data = current_user.owns_restaurants
+		render 'location'
+	end
+
 	def billing
 		@default_card = ""
 		@plans = Plan.new.plans
