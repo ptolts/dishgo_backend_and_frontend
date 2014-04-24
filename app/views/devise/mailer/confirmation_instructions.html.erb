@@ -1,5 +1,10 @@
-<p>Welcome <%= @email %>!</p>
+<p>Welcome to DishGo <%= @email %>!</p>
 
-<p>You can confirm your account email through the link below:</p>
+<p>Please confirm your account email through the link below:</p>
 
 <p><%= link_to 'Confirm my account', confirmation_url(@resource, :confirmation_token => @token, :script_name => "/app") %></p>
+<address>
+	<strong>DishGo Inc.</strong><br>
+    <a href="mailto:#">info@dishgo.io</a><br>
+    <abbr tittle="phone">P:</abbr>+1 514 591 9387
+</address>
