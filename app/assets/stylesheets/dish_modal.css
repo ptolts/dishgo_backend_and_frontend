@@ -1,82 +1,100 @@
 .custom_modal {
-	position: fixed;
-	top: 0;
-	bottom: 0;
-	right: 0;
-	left: 0;
-	z-index: 500;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    z-index: 500;
 }
 
 .modal_background {
-    background-color: rgba(0,0,0,0.8);
+    background-color: rgba(0,0,0,0.9);
     z-index: 0;
     width: 100%;
     height: 100%;    
 }
 
 .custom_modal-header {
-	border-bottom: 1px solid #e5e5e5;
-	margin-bottom: 10px;
+    border-bottom: 1px solid #e5e5e5;
+    position: absolute;
+    right: 0;
+    padding: 15px;
+    padding-bottom: 0px;
+    left: 0;
+    top: 0;
 }
+
+.custom_modal-body {
+    position: absolute;
+    bottom: 65px;
+    overflow-y: scroll;
+    left: 0;
+    right: 0;
+    padding: 15px;
+    top: 55px;
+}
+
 .custom_modal-dialog {
-	position: absolute;
-	left: 50%;
-	top: 50%;
-	max-height: 80%;
-	-webkit-transform:	translate(-50%, -50%);
-	-moz-transform:		translate(-50%, -50%);
-	-ms-transform:		translate(-50%, -50%);
-	-o-transform:		translate(-50%, -50%);  
-	transform:			translate(-50%, -50%);
-	-webkit-backface-visibility: hidden;	
-	max-width: 600px;
-	min-width: 400px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    min-height: 80%;
+    -webkit-transform:  translateY(-50%);
+    -moz-transform:     translateY(-50%);
+    -ms-transform:      translateY(-50%);
+    -o-transform:       translateY(-50%);  
+    transform:          translateY(-50%);
+    -webkit-backface-visibility: hidden;    
+    max-width: 90%;
+    min-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
     z-index: 1;
-	overflow-y: scroll;	
-	background-color: #fff;
-	border-radius: 5px;
-	padding: 15px;
-	color: #000;
-	border: 1px solid rgba(0, 0, 0, 0.2);
-	border-radius: 6px;
-	-webkit-box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
-	box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    background-color: #fff;
+    border-radius: 5px;
+    color: #000;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 6px;
+    -webkit-box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    padding: 15px;
 }
 .custom_modal-footer {
-	border-top: 1px solid #e5e5e5;
-	margin-top: 10px;
-	padding-top: 10px;
+    border-top: 1px solid #e5e5e5;
+    padding: 15px;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
 }
 .custom_modal-footer a {
-	float: right!important;
-}
-.custom_modal-content {
-	min-height: 100%;
+    float: right!important;
 }
 
 .custom_modal .each-dish {
-	text-align: none;
+    text-align: none;
 }
 .custom_modal-dialog .custom_modal-title {
-	font-size: 24px;
-	padding: 5px;
-	padding-left: 10px;
-	margin: 0;
+    font-size: 24px;
+    padding: 5px;
+    padding-left: 10px;
+    margin: 0;
 }
 .custom_modal-dialog .dish-price {
-	padding: 5px;
-	font-size: 24px;
-	color: #cf2f28;
+    padding: 5px;
+    font-size: 24px;
+    color: #cf2f28;
 }
 .custom_modal-dialog .close {
-	color: #000;
-	opacity: .4;
-	filter:alpha(opacity=40)
+    color: #000;
+    opacity: .4;
+    filter:alpha(opacity=40)
 }
 .custom_modal-dialog .dish-description p{
-	margin-top: 20px;
-	font-size: 18px;
-	font-weight: 300;
+    margin-top: 20px;
+    font-size: 18px;
+    font-weight: 300;
 }
 .custom_modal .button {
     background-color: #999;
@@ -175,8 +193,10 @@
 }
 
 @media (max-width: 600px) {
-	.custom_modal-dialog {
-		width: 100%;
-		min-width: 0;
-	}
+    .custom_modal-dialog {
+        width: 100%;
+        min-width: 100%;
+        margin-left: 0;
+        margin-right: 0;        
+    }
 }

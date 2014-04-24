@@ -221,17 +221,23 @@
 		border-radius: 5px;
 	}
 
+	.nav ul li{
+		width: 100%;
+		text-align: center;
+		font-size: 20px;
+		margin-bottom: 10px;
+	}
+
 	.nav .icon {
 		display: block; /* show only current <li> item */
-		font-size: 28px;
+		font-size: 28px !important;
 		padding-left: 10px;
 		padding-right: 10px;
 		margin: 0;
+		text-align: left !important;
 	}
 	.nav a {
 		display: block;
-		padding: 5px 5px 5px 32px;
-		text-align: left;
 	}
 
 	/* right nav */
