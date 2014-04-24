@@ -1223,7 +1223,7 @@ function MenuViewModel() {
     });
 
     self.firstDishHelp = ko.computed(function(){
-        return self.menu().length == 1 && self.menu()[0].dishes().length == 0 && self.menu()[0].name()['en'] != ''})
+        return self.menu().length == 1 && self.menu()[0].dishes().length == 0 && self.menu()[0].name()['en'] != ''
     });        
 
 };
