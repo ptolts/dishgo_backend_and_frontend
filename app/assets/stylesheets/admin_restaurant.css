@@ -5,6 +5,11 @@
 }
 
 .has-error input{
-  background-color: #FF9EA2;
+  background-color: #FFE7E8;
   color: black;
+}
+
+.badge_note {
+	background-color: #cf2f28 !important;
+	color: white !important;
 }

@@ -2,6 +2,7 @@
 *= require_self
 *= require menu_builder_sortable
 *= require language_selector_menu
+*= require menu_help_stuff
 */
 
 body {
@@ -503,7 +504,6 @@ body {
   -ms-transition: margin-right .3s ease;
   border-right: 1px solid #dae3e9;
   transition: margin-right.3s ease;
-  z-index: 200;
 }
 
 #page-content-wrapper {

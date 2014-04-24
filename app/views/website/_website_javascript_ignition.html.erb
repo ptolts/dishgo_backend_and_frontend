@@ -87,7 +87,11 @@
                 self.current_font(font);
               }
               self.fonts.push(font);
-            });                                         
+            });
+
+            if(!self.current_font()){
+                self.current_font(self.fonts()[0]);
+            }
 
             self.setDesign = function(item){
                 self.current_design(item);
@@ -101,8 +105,12 @@
                return page.parentPage.children.indexOf(page);
             };
 
-            self.nextPage = function(page) {      
-                pager.goTo(page.children()[self.indexOfCurrentPage(page.currentChildPage()()) + 1].path());
+            self.nextPage = function(page) {
+                if (page.currentChildPage()() && page.children()[self.indexOfCurrentPage(page.currentChildPage()()) + 1]){
+                    pager.goTo(page.children()[self.indexOfCurrentPage(page.currentChildPage()()) + 1].path());
+                } else {
+                    pager.goTo("pages");
+                }
             };
 
             self.previousPage = function(page) {      
@@ -124,7 +132,8 @@
                     if (page.currentChildPage()() && page.children()[self.indexOfCurrentPage(page.currentChildPage()()) + 1]){
                         return true;
                     } else {
-                        return false;
+                        // false if you dont want to jump to the pages page.
+                        return true;
                     }
                 });
             };                             

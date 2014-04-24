@@ -104,8 +104,9 @@
             self.saveLocation = function(){
                 self.restaurant().lat = self.mapObject().location.lat();
                 self.restaurant().lon = self.mapObject().location.lng();
-                self.restaurant().save();
-                window.history.back();
+                self.restaurant().save(function(){ 
+                    window.location.href = "/app/profile/edit";
+                });
             }
         };
 
@@ -160,12 +161,5 @@
     //]]>  
     </script>    
 
-    <script type="text/javascript">                
-    // var marker = new google.maps.Marker({
-    //     position: myLatlng,
-    //     visible: true
-    // }); 
-    // marker.setMap(map); 
-    </script>
 
 </div>

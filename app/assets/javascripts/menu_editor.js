@@ -18,6 +18,36 @@ ko.bindingHandlers.fitText = {
     }
 };
 
+ko.bindingHandlers.helperTip = {
+    init: function(element, valueAccessor) {
+        var new_element = document.createElement("div");
+        var data = valueAccessor();
+        //append a new ul to our element
+        document.body.appendChild(new_element);
+
+        var bodyRect = document.body.getBoundingClientRect();
+        var elemRect = element.getBoundingClientRect();
+        var offset   = elemRect.top - bodyRect.top + ($(element).height()/2);
+        var right_offset   = elemRect.right + 10;
+
+        //could use jQuery or DOM APIs to build the "template"
+        new_element.innerHTML = $('#' + data.template).text();
+
+        new_element = $(new_element).find("div")[0];
+
+        offset = offset - ($(new_element).height()/2);
+
+        $(new_element).css("top",offset+'px');
+        $(new_element).css("left",right_offset+'px');
+
+        //apply foreach binding to the newly created ul with the data that we passed to the binding
+        ko.applyBindingsToNode(new_element, { visible: data.when });;
+
+        //tell Knockout that we have already handled binding the children of this element
+        return { controlsDescendantBindings: true };
+    },
+}
+
 
 function currentLangName(observable){
     return {
@@ -1182,7 +1212,20 @@ function MenuViewModel() {
         if(!skip_warning){
             return "Make sure you've saved your changes!";            
         }
-    });     
+    }); 
+
+    self.firstSectionHelp = ko.computed(function(){
+        return self.menu().length == 0
+    });
+
+    self.firstSectionNameHelp = ko.computed(function(){
+        return self.menu().length == 1 && self.menu()[0].name()['en'] == ''
+    });
+
+    self.firstDishHelp = ko.computed(function(){
+        return self.menu().length == 1 && self.menu()[0].dishes().length == 0 && self.menu()[0].name()['en'] != ''})
+    });        
+
 };
 
 ko.bindingHandlers.fadeVisible = {
@@ -1474,6 +1517,10 @@ ko.bindingHandlers.lStaticText = {
         }
         var interceptor = ko.computed({
             read: function () {
+                if(!translations[text]){
+                    console.log("WARNING: Missing translation for '"+text+"'");
+                    return text;
+                }
                 return translations[text][viewmodel.lang()];
             },
             deferEvaluation: true                 

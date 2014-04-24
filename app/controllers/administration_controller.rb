@@ -2,7 +2,7 @@ class AdministrationController < ApplicationController
   before_filter :authenticate_user!
   before_filter :create_notifications!
   before_filter :admin_or_user_with_resto!, :except => [:restaurant_setup, :free_search_restaurants, :set_restaurant, :create_restaurant,:help_me]
-  before_filter :admin_user!, :only => [:users, :restaurants, :add_user, :user_destroy, :update_user, :search_restaurants, :become]
+  before_filter :admin_user!, :only => [:users, :restaurants, :add_user, :user_destroy, :update_user, :search_restaurants, :become, :become_user]
   before_filter :admin_or_owner!, :only => [:edit_menu, :update_menu, :crop_image, :crop_icon, :publish_menu, :reset_draft_menu, :update_restaurant]
   layout 'administration'
   after_filter :set_access_control_headers
@@ -22,6 +22,12 @@ class AdministrationController < ApplicationController
     sign_in(user)
     render 'index'
   end  
+
+  def become_user
+    user = User.find(params[:id])
+    sign_in(user)
+    render 'index'
+  end    
 
   def helpme
     Email.help(params,current_user)
@@ -327,9 +333,9 @@ class AdministrationController < ApplicationController
     end
 
     restaurant.name = settings["name"]
-    restaurant.lat = settings["lat"]
-    restaurant.lon = settings["lon"]
-    restaurant.locs = [settings["lat"],settings["lon"]]
+    restaurant.lat = settings["lat"] unless settings["lat"].blank?
+    restaurant.lon = settings["lon"] unless settings["lon"].blank?
+    restaurant.locs = [settings["lat"],settings["lon"]] unless settings["lat"].blank?
     restaurant.email = settings["email"]
     restaurant.phone = settings["phone"]
     restaurant.facebook = settings["facebook"]

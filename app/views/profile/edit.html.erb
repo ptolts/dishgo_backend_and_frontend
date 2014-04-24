@@ -2,7 +2,12 @@
 
     <div class="col-md-2 col-md-offset-1">
         <ul class="nav nav-pills" data-bind="foreach: $__page__.children">
-            <li data-bind="css: {active: isVisible}"><a data-bind="text: $data.val('title'), page-href: $data"></a></li>
+            <!-- ko if: $data.val('title').match(/notific/gi) -->
+                <li data-bind="css: {active: isVisible}"><a data-bind="page-href: $data"><!-- ko text: $data.val('title') --><!-- /ko --><span class="badge badge_note pull-right" data-bind="text: $root.user().notifications().length"></span></a></li>
+            <!-- /ko -->
+            <!-- ko if: !$data.val('title').match(/notific/gi)  -->
+                <li data-bind="css: {active: isVisible}"><a data-bind="text: $data.val('title'), page-href: $data"></a></li>
+            <!-- /ko -->            
         </ul>
     </div>
 

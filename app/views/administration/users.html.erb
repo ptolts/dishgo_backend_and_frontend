@@ -18,6 +18,7 @@
                 <tr>
                     <th>Email</th>
                     <th>Modify</th>
+                    <th>Assume Control</th>
                 </tr>
             </thead>
             <tbody data-bind="template: { name: 'user_temp', foreach: users }"></tbody>
@@ -52,7 +53,11 @@
             </td>   
             <td>
                 <button class="btn btn-default btn-sm" data-bind="click: $root.remove">Destroy</button>
-            </td>   
+            </td>  
+            <td>
+                <a data-bind="attr: { href: '/app/administration/become_user?id=' + id}" class="btn btn-default btn-sm">Control</a>
+            </td>  
+
         </tr>   
     </script>
 

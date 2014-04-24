@@ -286,8 +286,8 @@
                 })                
             }            
 
-            self.save = function(){
-
+            self.save = function(callback_done){
+                self.subdomain.valueHasMutated();
                 if(!self.validateSubdomain()){
                     bootbox.dialog({
                       message: "The subdomain you've chosen is either invalid or unavailable.",
@@ -301,6 +301,32 @@
                     }); 
                     return;                    
                 }
+                if(!self.validateAddress()){
+                    bootbox.dialog({
+                      message: "Please enter your restaurant address so that your users can find you.",
+                      title: "Blank Address",
+                      buttons: {
+                        success: {
+                          label: "Ok",
+                          className: "btn-primary pull-right col-xs-3",
+                        },
+                      }
+                    }); 
+                    return;                    
+                }
+                if(!self.validatePhone()){
+                    bootbox.dialog({
+                      message: "You havent entered a phone number. Please do so that your customers can get in touch with you.",
+                      title: "Blank Phone",
+                      buttons: {
+                        success: {
+                          label: "Ok",
+                          className: "btn-primary pull-right col-xs-3",
+                        },
+                      }
+                    }); 
+                    return;                    
+                }                                
 
                 var validate_hours = _.every(self.hours(),function(e){ 
                     if(e.closed()){
@@ -336,10 +362,15 @@
                           title: "Saved!",
                           buttons: {
                             success: {
-                              label: "Ok",
-                              className: "btn-primary pull-right col-xs-3",
-                            },
-                          }
+                                label: "Ok",
+                                className: "btn-primary pull-right col-xs-3",
+                                callback: function(){
+                                    if(callback_done){
+                                        callback_done();
+                                    }
+                                }                              
+                            },                            
+                          },
                         });      
                     },
                     error: function(XMLHttpRequest, textStatus, errorThrown) { 
@@ -351,6 +382,25 @@
 
             self.subdomain.extend({ rateLimit: 700 });
             self.validateSubdomain = ko.observable(true);
+            if(self.subdomain() == ""){
+                self.validateSubdomain(false);
+            }
+
+            self.validateAddress = ko.computed(function(){
+                if(self.address_line_1().length == 0){
+                    return false;
+                } else {
+                    return true;
+                }
+            })
+
+            self.validatePhone = ko.computed(function(){
+                if(self.phone().length == 0){
+                    return false;
+                } else {
+                    return true;
+                }
+            })            
 
             self.subdomain.subscribe(function(newvalue){
                 if(newvalue == ""){

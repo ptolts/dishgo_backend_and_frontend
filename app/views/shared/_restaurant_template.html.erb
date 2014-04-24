@@ -19,7 +19,7 @@
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label>Phone</label>
-                                <div class="controls">
+                                <div class="controls" data-bind="css:{'has-error':!validatePhone()}">
                                     <input id="phone" name="phone" type="text" placeholder="Restaurant Phone Number" data-bind="value: phone" class="form-control">
                                 </div>
                             </div>
@@ -37,7 +37,7 @@
                         <div class="col-sm-6">  
                             <div class="form-group">
                                 <label>Address Line 1</label>
-                                <div class="controls">
+                                <div class="controls" data-bind="css:{'has-error':!validateAddress()}">
                                     <input id="address_line1" name="address_line_1" type="text" placeholder="Address Line 1" data-bind="value: address_line_1" class="form-control">
                                 </div>
                             </div>

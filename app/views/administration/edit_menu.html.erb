@@ -41,7 +41,15 @@
                     </div>
                 </div>
                 <div class="row" id="add_section_button">
-                    <button class="btn btn-section btn-xs" type="button" data-bind="click: $root.addSection">+ Add Section</button>  
+                    <button class="btn btn-section btn-xs" type="button" data-bind="click: $root.addSection, helperTip: {template:'add_section_help_template', when: $root.firstSectionHelp, data: $root}">+ Add Section</button>
+                    <script id="add_section_help_template" type="text/x-jQuery-tmpl">
+                        <div class="fixed_helper_container">
+                            <div class="helper_container">
+                                <span class="glyphicon glyphicon-play helper_arrow"></span>
+                                <h4>Start by adding a section to your menu!</h4>
+                            </div>
+                        </div>
+                    </script> 
                 </div>                                                
             </div>               
             <ul class="sidebar-nav" data-bind="foreach: menu">
@@ -52,7 +60,16 @@
                             <img class="media-object" height="25" data-bind="attr:{src:title_image}">
                         </a>
                         <div class="media-body">
-                            <h4 class="media-heading" data-bind="text: computed_name" id="uppercase"></h4><button class="btn btn-dish btn-xs pull-left add_dish_button" type="button" data-bind="click: addDish, clickBubble: false" id="add_dish_button">+ Add Dish</button> 
+                            <h4 class="media-heading" data-bind="text: computed_name" id="uppercase"></h4>
+                            <button class="btn btn-dish btn-xs pull-left add_dish_button" type="button" data-bind="click: addDish, clickBubble: false, helperTip: {template:'add_dish_help_template', when: $root.firstDishHelp}" id="add_dish_button">+ Add Dish</button>
+                            <script id="add_dish_help_template" type="text/x-jQuery-tmpl">
+                                <div class="fixed_helper_container">
+                                    <div class="helper_container">
+                                        <span class="glyphicon glyphicon-play helper_arrow"></span>
+                                        <h4>Type the name of the section you would like to start with here.</h4>
+                                    </div>
+                                </div>
+                            </script>
                         </div>                          
                     </div>
                 </li>
