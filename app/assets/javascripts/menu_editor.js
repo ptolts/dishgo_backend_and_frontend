@@ -1243,7 +1243,7 @@ var translations = {
     },        
     "currently" : {
         "en" : "Currently",
-        "fr" : "Presentment",
+        "fr" : "Presentement",
     }      
 };
 
