@@ -672,7 +672,7 @@ function Option(data,dish) {
 
     self.computed_price = ko.computed(function(){
         var cost = 0;
-        if(self.extra_cost) {
+        if(self.extra_cost()) {
             _.each(self.selectedOptionValue(),function(e){
                 // console.log(e);
                 cost += parseFloat(e.computed_price());
@@ -892,7 +892,7 @@ function IndividualOption(data,option) {
                     return self.price();
                 }
             }
-            return 0;
+            return self.price();
         });
 
     }
