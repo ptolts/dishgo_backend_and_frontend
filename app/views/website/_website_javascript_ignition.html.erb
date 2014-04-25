@@ -31,7 +31,10 @@
                 var html_result = html.replace("FONT_LINK_DATA",value.link_data());
                 html_result = html_result.replace("CSS_DATA_HERE",value.css());
 
-                $(element).contents().find("html").html(html_result);
+                $(element)[0].contentWindow.document.open('text/html', 'replace');
+                $(element)[0].contentWindow.document.write(html_result);
+                $(element)[0].contentWindow.document.close();
+
             }
         };              
 

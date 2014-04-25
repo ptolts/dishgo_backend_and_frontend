@@ -5,6 +5,11 @@
             fr: '',
         };
 
+        var default_web_language_hash = {
+            en: 'Edit me!',
+            fr: 'Modifier moi!',
+        };        
+
         var opened_tr = {
                 "open": {
                     'en':'Opened',
@@ -167,7 +172,7 @@
             self.font_id = data.font_id ? data.font_id : "";
             self.user_id = data.user_id ? data.user_id : "";
 
-            self.about_text = ko.observable(data.about_text ? data.about_text : copyDefaultHash(default_language_hash));
+            self.about_text = ko.observable(data.about_text ? data.about_text : copyDefaultHash(default_web_language_hash));
             self.hours = ko.observableArray([]);
 
             var hours_list = {
@@ -427,6 +432,38 @@
                     dataType: "json"
                 });
             });
+
+            self.quick_save = function(callback_done){  
+                $.ajax({
+                  type: "POST",
+                  url: "/app/administration/update_restaurant",
+                  data: {
+                    restaurant_id: self.id,
+                    params:ko.toJSON(self),
+                  },
+                  success: function(data, textStatus, jqXHR){
+                        bootbox.dialog({
+                          message: "Saved!",
+                          title: "Saved!",
+                          buttons: {
+                            success: {
+                                label: "Ok",
+                                className: "btn-primary pull-right col-xs-3",
+                                callback: function(){
+                                    if(typeof(callback_done) == 'function'){
+                                        callback_done();
+                                    }
+                                }                              
+                            },                            
+                          },
+                        });      
+                    },
+                    error: function(XMLHttpRequest, textStatus, errorThrown) { 
+                        console.log("There was an error saving the section " + errorThrown);
+                    },
+                    dataType: "json"
+                });                
+            }    
 
         }
 

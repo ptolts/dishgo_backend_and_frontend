@@ -5,19 +5,21 @@
         </ul>
     </div>
 
-    <!-- ko if: card_list -->
-        <div data-bind="page: {id: 'start', title: 'Plans', with: user}">
-            <%= render 'plan' %>
-        </div>
+    <div data-bind="page: {id: 'start', title: 'Plans', with: user}">
+        <%= render 'plan' %>
+    </div>
 
-        <div data-bind="page: {id: 'cards', title: 'Cards', with: user}">
-            <%= render 'cards' %>
-        </div>
+    <!-- ko if: plan_picked -->
+        <!-- ko if: card_list -->
+            <div data-bind="page: {id: 'cards', title: 'Cards', with: user}">
+                <%= render 'cards' %>
+            </div>
+        <!-- /ko -->
+
+        <div data-bind="page: {id: 'add_card', title: 'Add Card', with: user, afterShow: user().startCheckingCard}">
+            <%= render 'add_card' %>
+        </div>    
     <!-- /ko -->
-
-    <div data-bind="page: {id: 'add_card', title: 'Add Card', with: user}">
-        <%= render 'add_card' %>
-    </div>    
 
     <%= javascript_include_tag "https://js.stripe.com/v1/" %>
     <%= csrf_meta_tags %>
@@ -58,11 +60,13 @@
                 self.model = model;
                 self.email = ko.observable(data.email);
                 self.phone = ko.observable(data.phone);
+                self.stripe_token = ko.observable(data.stripe_token ? data.stripe_token : null);
                 self.cards = ko.observableArray([]);
                 self.errorMessage = ko.observable();
                 self.disableButton = ko.observable(false);
                 self.validCard = ko.observable(false);
                 self.plan = ko.observable();
+                self.original_plan = data.plan ? data.plan : null;
 
                 _.each(data.cards,function(card){ self.cards.push(new Card(card,self)) });
 
@@ -70,16 +74,44 @@
                     self.plan(_.find(model.plans(),function(plan){ return plan.id == data.plan.id }));
                 }                
 
-                self.plan.subscribe(function(newvalue){
+                self.tutorialMode = ko.computed(function(){
+                    if(self.stripe_token()){
+                        return false;
+                    } else {
+                        return true;
+                    }
+                });
+
+                self.updatePlanButton = ko.computed(function(){
+                    if(!self.original_plan && self.plan()){
+                        return false;
+                    }
+                    if(self.plan() && self.original_plan && self.plan().id != self.original_plan.id){
+                        return false;
+                    } else {
+                        return true;
+                    }
+                });
+
+                self.updatePlanButtonText = ko.computed(function(){
+                    if(self.original_plan){
+                        return "Update Plan";
+                    } else {
+                        return "Subscribe to Plan";
+                    }
+                });
+
+
+                self.subscribeToPlan = function(){
                     bootbox.dialog({
-                      message: "You're about to subscribe to the plan called " + newvalue.name + ". You can change or cancel at any time.",
+                      message: "Would you like to immediately subscribe to the plan you selected called " + self.plan().name + "?",
                       title: "Subscribe",
                       buttons: {
                         success: {
                           label: "Cancel",
                           className: "btn-default pull-left col-xs-3",
                           callback: function() {
-
+                            return;
                           }
                         },
                         danger: {
@@ -89,9 +121,9 @@
                             $.ajax({
                               type: "POST",
                               url: "/app/profile/subscribe",
-                              data: { data:ko.toJSON(newvalue)},
+                              data: { data:ko.toJSON(self.plan())},
                               success: function(data, textStatus, jqXHR){
-                                    alert("Success");
+                                    alert("Subscribed!");
                                 },
                                 error: function(XMLHttpRequest, textStatus, errorThrown) { 
                                     console.log("There was an error saving the section " + errorThrown);
@@ -101,13 +133,14 @@
                           }
                         },
                       }
-                    });                                        
-                });
+                    });                      
+                }
 
                 var stripeResponseHandler = function(status, response) {
                   var $form = $('#addCardForm');
 
                   if (response.error) {
+                    self.disableButton(false);
                     self.errorMessage(response.error.message);
                   } else {
                     $.ajax({
@@ -120,11 +153,13 @@
                             self.disableButton(false);
                             if(data.success){
                                 self.cards.push(new Card(response.card, self));
+                                self.subscribeToPlan();
                             } else {
                                 self.errorMessage("Something went wrong. We're looking into it.");
                             }
                         },
                         error: function(XMLHttpRequest, textStatus, errorThrown) { 
+                            self.disableButton(false);
                             console.log("There was an error saving the section " + errorThrown);
                         },
                         dataType: "json"
@@ -139,7 +174,8 @@
                     Stripe.card.createToken($form, stripeResponseHandler);
                 };
 
-                $(function(){  
+                self.startCheckingCard = function(){ 
+                    console.log("Started!");
                     $("#card_numba").validateCreditCard(function(result){
                         if(result.card_type){
                             console.log(result.card_type.name);
@@ -151,7 +187,7 @@
                             self.validCard(false);
                         }
                     });
-                });       
+                };       
 
                 self.save = function(){
                     $.ajax({
@@ -179,6 +215,7 @@
                 self.user = ko.observable(new User(user_data,self));
 
                 self.card_list = ko.computed(function(){ return self.user().cards().length > 0});
+                self.plan_picked = ko.computed(function(){ return self.user().plan()});
             };
 
             var viewmodel = new viewModel();            

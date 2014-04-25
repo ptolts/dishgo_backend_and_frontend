@@ -104,7 +104,7 @@
             self.saveLocation = function(){
                 self.restaurant().lat = self.mapObject().location.lat();
                 self.restaurant().lon = self.mapObject().location.lng();
-                self.restaurant().save(function(){ 
+                self.restaurant().quick_save(function(){ 
                     window.location.href = "/app/profile/edit";
                 });
             }

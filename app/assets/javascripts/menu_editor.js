@@ -25,23 +25,32 @@ ko.bindingHandlers.helperTip = {
         //append a new ul to our element
         document.body.appendChild(new_element);
 
-        var bodyRect = document.body.getBoundingClientRect();
-        var elemRect = element.getBoundingClientRect();
-        var offset   = elemRect.top - bodyRect.top + ($(element).height()/2);
-        var right_offset   = elemRect.right + 10;
-
         //could use jQuery or DOM APIs to build the "template"
         new_element.innerHTML = $('#' + data.template).text();
 
         new_element = $(new_element).find("div")[0];
 
-        offset = offset - ($(new_element).height()/2);
+        data.when.helperFitter = ko.computed(function(){
+            if(data.when()){
+                var bodyRect = document.body.getBoundingClientRect();
+                var elemRect = element.getBoundingClientRect();
+                var offset   = elemRect.top - bodyRect.top + ($(element).height()/2);
+                var right_offset   = elemRect.right + 10;
+                offset = offset - ($(new_element).height()/2);
 
-        $(new_element).css("top",offset+'px');
-        $(new_element).css("left",right_offset+'px');
+                $(new_element).css("top",offset+'px');
+                $(new_element).css("left",right_offset+'px');
+            }           
+        });
 
         //apply foreach binding to the newly created ul with the data that we passed to the binding
-        ko.applyBindingsToNode(new_element, { visible: data.when });;
+        ko.applyBindingsToNode(new_element, { visible: data.when });
+
+        ko.utils.domNodeDisposal.addDisposeCallback(element, function() {
+            // This will be called when the element is removed by Knockout or
+            // if some other part of your code calls ko.removeNode(element)
+            $(new_element).remove();
+        });        
 
         //tell Knockout that we have already handled binding the children of this element
         return { controlsDescendantBindings: true };
@@ -133,17 +142,6 @@ var sectionNames = {
     en: '',
     fr: '',
 }  
-
-function updateFilters() {
-    // Only allow prices in any price field.
-    $(".price_filter").removeAttr("keypress");
-    $('.price_filter').keypress(function(eve) {
-       if (( eve.which != 46 || $(this).val().indexOf('.') != -1 ) && ( eve.which <  48 || eve.which > 57 ) || ( $(this).val().indexOf('.') == 0)){
-           eve.preventDefault();
-       }
-    });         
-} 
-
 
 Section.prototype.toJSON = function() {
     var copy = ko.toJS(this); //easy way to get a clean copy
@@ -266,7 +264,6 @@ function Section(data,topmodel) {
         self.dishes.unshift(new_dish);
         self.topmodel.current_section(null);
         self.topmodel.current_dish(new_dish);
-        updateFilters();
     }   
 
 }
@@ -558,7 +555,6 @@ function Dish(data, topmodel) {
     self.addOption = function() { 
         console.log("Adding option!");
         self.options.push(new Option({name:copyDefaultHash(default_language_hash), type:"generic",placeholder:"Type the option group title here.",individual_options:[{placeholder:"Type the first option title here.",price:'0.0',name:copyDefaultHash(default_language_hash)},{placeholder:"Type the second option title here.",price:'0.0', name: copyDefaultHash(default_language_hash)}]},self));
-        updateFilters();
     };
 
     self.addImage = function(item) { 
@@ -722,14 +718,12 @@ function Option(data,dish) {
 
     // Which option template to use.
     self.addSize = function() {
-        self.individual_options.push(new IndividualOption({name:copyDefaultHash(default_language_hash),placeholder:"Type new size title here.",price:'0.0'},self));
-        updateFilters();        
+        self.individual_options.push(new IndividualOption({name:copyDefaultHash(default_language_hash),placeholder:"Type new size title here.",price:'0.0'},self));        
     }
 
     // Which option template to use.
     self.addOption = function() {
         self.individual_options.push(new IndividualOption({name:copyDefaultHash(default_language_hash),placeholder:"Type new option title here.",price:'0.0'},self));
-        updateFilters();
     }   
 
     // Which option template to use.
@@ -1007,7 +1001,6 @@ function MenuViewModel() {
 
     self.menu($.map(menu_data.menu, function(item) { return new Section(item,self) }));
     $(".tooltipclass").tooltip({delay: { show: 500, hide: 100 }});
-    updateFilters();
 
     self.current_dish = ko.observable();
     self.current_section = ko.observable();
@@ -1090,7 +1083,6 @@ function MenuViewModel() {
                   success: function(data, textStatus, jqXHR){
                         // self.menu($.map(data.menu, function(item) { return new Section(item) }));
                         // $(".tooltipclass").tooltip({delay: { show: 500, hide: 100 }});
-                        // updateFilters();
                         spinner.stop();
                         $('#loading').fadeOut();
                         bootbox.alert("Menu Published!");
@@ -1138,7 +1130,6 @@ function MenuViewModel() {
                   success: function(data, textStatus, jqXHR){
                         // self.menu($.map(data.menu, function(item) { return new Section(item) }));
                         // $(".tooltipclass").tooltip({delay: { show: 500, hide: 100 }});
-                        // updateFilters();
                         spinner.stop();
                         $('#loading').fadeOut();
                         skip_warning = true;
@@ -1219,7 +1210,7 @@ function MenuViewModel() {
     });
 
     self.firstSectionNameHelp = ko.computed(function(){
-        return self.menu().length == 1 && self.menu()[0].name()['en'] == ''
+        return self.menu().length == 1 && self.menu()[0].name()['en'] == '' && self.current_section()
     });
 
     self.firstDishHelp = ko.computed(function(){
@@ -1492,6 +1483,27 @@ ko.bindingHandlers.lValue = {
 
     ko.applyBindingsToNode(element, { value: interceptor, valueUpdate: 'afterkeydown'});
     ko.applyBindingsToNode(element, { attr: {placeholder:placeholder} });
+  }
+};
+
+ko.bindingHandlers.price = {
+    init: function (element, valueAccessor, allBindingsAccessor) {
+    //console.log("DEBUG: lValue firing on: " + element);
+    var underlyingObservable = valueAccessor();
+    var interceptor = ko.computed({
+        read: function () {
+            return underlyingObservable();
+        },
+        write: function (newvalue) {
+            var current = underlyingObservable();
+            current = newvalue.replace(/[^0-9\.]/g,'');
+            current = current.replace(/([0-9]*\.[0-9]*).*/,function(match,$1){ return $1 });
+            // current = parseFloat(current).toFixed(2);
+            underlyingObservable(current);
+            underlyingObservable.notifySubscribers();
+        },
+    }).extend({ notify: 'always' });
+    ko.applyBindingsToNode(element, { value: interceptor, valueUpdate: 'afterkeydown'});
   }
 };
 

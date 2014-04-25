@@ -10,6 +10,12 @@ class ApplicationController < ActionController::Base
     "/app/users/sign_in"
   end  
 
+  def admin_or_user_without_resto!
+    if !current_user.is_admin and current_user.owns_restaurants
+      redirect_to :controller => 'administration', :action => 'index'
+    end
+  end  
+
   def admin_or_user_with_resto!
     if !current_user.is_admin and !current_user.owns_restaurants
       redirect_to :controller => 'administration', :action => 'restaurant_setup'

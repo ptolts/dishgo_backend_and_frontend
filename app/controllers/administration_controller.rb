@@ -4,11 +4,12 @@ class AdministrationController < ApplicationController
   before_filter :admin_or_user_with_resto!, :except => [:restaurant_setup, :free_search_restaurants, :set_restaurant, :create_restaurant,:help_me]
   before_filter :admin_user!, :only => [:users, :restaurants, :add_user, :user_destroy, :update_user, :search_restaurants, :become, :become_user]
   before_filter :admin_or_owner!, :only => [:edit_menu, :update_menu, :crop_image, :crop_icon, :publish_menu, :reset_draft_menu, :update_restaurant]
+  before_filter :admin_or_user_without_resto!, :only => [:restaurant_setup]
   layout 'administration'
   after_filter :set_access_control_headers
 
   def set_access_control_headers 
-    headers['Access-Control-Allow-Origin'] = '*' 
+    # headers['Access-Control-Allow-Origin'] = '*' 
     # headers['Access-Control-Allow-Origin'] = 'http://dev.foodcloud.ca' 
   end
 
@@ -348,14 +349,15 @@ class AdministrationController < ApplicationController
     # Rails.logger.warn "-----------------"    
 
     if sub = Restaurant.where(subdomain:settings["subdomain"].downcase).first and sub != restaurant
-      render :json => {error:"Bad Subdomain"}.as_json
-      return
+      Rails.logger.warn "Bad Subdomain for user: #{current_user.email}"
+    else
+      restaurant.subdomain = settings["subdomain"].downcase
     end
 
-    restaurant.subdomain = settings["subdomain"].downcase
     restaurant.address_line_1 = settings["address_line_1"]
     restaurant.address_line_2 = settings["address_line_2"]
     restaurant.city = settings["city"]
+    restaurant.province = settings["province"]
     restaurant.postal_code = settings["postal_code"]
 
     restaurant.hours = settings["hours"].inject({}) do |res,day|
