@@ -130,7 +130,7 @@
 												    								<label class="button lightText square red float_option" data-bind="css: {'active': $parent.selectedOptionValue().indexOf($data) >= 0}">
 												    									<input name="sizes_radio" type="checkbox" data-bind="checkedValue: $data, checked: $parent.selectedOptionValue" style="opacity: 0; width: 0px">
 												    									<!-- ko lText: name --><!-- /ko -->
-												    									<!-- ko if: price() && $parent.extra_cost() --><p>$<!-- ko text: price--><!-- /ko --></p><!-- /ko -->
+												    									<!-- ko if: computed_price() != "" && $parent.extra_cost() --><p>$<!-- ko text: computed_price--><!-- /ko --></p><!-- /ko -->
 												    									<!-- ko if: $data.icon -->
 												    										<img class="col-xs-12 thumbnail" data-bind="attr: {src: icon().url()}"/>
 												    									<!-- /ko -->
