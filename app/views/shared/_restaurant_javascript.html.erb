@@ -365,7 +365,7 @@
                                 label: "Ok",
                                 className: "btn-primary pull-right col-xs-3",
                                 callback: function(){
-                                    if(callback_done){
+                                    if(typeof(callback_done) == 'function'){
                                         callback_done();
                                     }
                                 }                              
