@@ -20,8 +20,11 @@ ko.bindingHandlers.fitText = {
 
 ko.bindingHandlers.helperTip = {
     init: function(element, valueAccessor) {
-        var new_element = document.createElement("div");
         var data = valueAccessor();
+        if(!$('#' + data.template)[0]){
+            return;
+        }
+        var new_element = document.createElement("div");
         //append a new ul to our element
         document.body.appendChild(new_element);
 
@@ -32,14 +35,22 @@ ko.bindingHandlers.helperTip = {
 
         data.when.helperFitter = ko.computed(function(){
             if(data.when()){
-                var bodyRect = document.body.getBoundingClientRect();
-                var elemRect = element.getBoundingClientRect();
-                var offset   = elemRect.top - bodyRect.top + ($(element).height()/2);
-                var right_offset   = elemRect.right + 10;
-                offset = offset - ($(new_element).height()/2);
-
-                $(new_element).css("top",offset+'px');
-                $(new_element).css("left",right_offset+'px');
+                if(data.position == 'bottom'){
+                    var bodyRect = document.body.getBoundingClientRect();
+                    var elemRect = element.getBoundingClientRect();
+                    var offset   = elemRect.bottom + 10;
+                    var right_offset   = elemRect.right - ($(element).width()/2);;
+                    $(new_element).css("top",offset+'px');
+                    $(new_element).css("left",right_offset+'px');
+                } else {
+                    var bodyRect = document.body.getBoundingClientRect();
+                    var elemRect = element.getBoundingClientRect();
+                    var offset   = elemRect.top - bodyRect.top + ($(element).height()/2);
+                    var right_offset   = elemRect.right + 10;
+                    offset = offset - ($(new_element).height()/2);
+                    $(new_element).css("top",offset+'px');
+                    $(new_element).css("left",right_offset+'px');
+                }
             }           
         });
 
@@ -1215,7 +1226,11 @@ function MenuViewModel() {
 
     self.firstDishHelp = ko.computed(function(){
         return self.menu().length == 1 && self.menu()[0].dishes().length == 0 && self.menu()[0].name()['en'] != ''
-    });        
+    });
+
+    self.firstDishPreviewHelp = ko.computed(function(){
+        return self.menu().length == 1 && self.menu()[0].dishes().length == 1;
+    });          
 
 };
 

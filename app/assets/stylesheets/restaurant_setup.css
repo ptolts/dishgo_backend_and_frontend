@@ -1,3 +1,35 @@
+.resto_setup_container {
+    top: 100px;
+    position: relative;
+    color: white;
+    left: 50%;
+    float: left;
+/*    -webkit-transform:  translateX(-50%);
+    -moz-transform:     translateX(-50%);
+    -ms-transform:      translateX(-50%);
+    -o-transform:       translateX(-50%);  
+    transform:          translateX(-50%);*/
+}
+
+.resto_contents {
+    background-color: rgba(0,0,0,0.7);
+    padding: 30px;
+    float: right;
+    position: relative;
+    left: -50%;
+}
+
+.resto_claim_box, .start_me_up {
+    display: inline-block;
+    width: 400px;
+    padding: 15px;
+    vertical-align: top;
+}
+
+.resto_setup_container .btn, .resto_setup_container input {
+    border-radius: 3px;
+}
+
 .create_restaurant_row {
     height: 35px;
 }
@@ -21,6 +53,7 @@
     z-index: 99;
     left: 15px;
     right: 15px;
+    color: black !important;
 }
 .restaurant_list::-webkit-scrollbar {
     width: 0px;

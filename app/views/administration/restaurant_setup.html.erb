@@ -1,9 +1,23 @@
-<div class="container">
-    <div class="start_me_up col-md-6">
-        <div class="profile_form_wrapper">
+<style type="text/css">
+    body {
+        background-image: url("https://dishgo.io/app/public/img/sign_up.jpg");
+        background-attachment: fixed;
+        background-position: top left;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        margin-bottom: 0px;       
+    }
+</style>
+
+<div class="resto_setup_container">
+    <div class="resto_contents">
+        <h2 class="text-center">Find Your Restaurant</h2>
+        <hr>
+        <div class="start_me_up">
             <div class="row">
                 <div class="col-xs-12">
-                    <h2 class="text-center">Find Your Restaurant</h2>
                     <div class="row create_restaurant_row">
                         <div class="col-xs-12" data-bind="fadeVisible: search_name().length > 0">
                             <button class="btn btn-lg btn-primary btn-block" data-bind="click: new_restaurant">Can't find your restaurant? Create one!</button>
@@ -35,19 +49,16 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div class="col-md-6">
-        <div class="profile_form_wrapper">
+        <div class="resto_claim_box" data-bind="visible: current_restaurant">
             <div class="row">
                 <div class="col-xs-12">
-                    <h2 class="text-center">Claim Your Restaurant</h2>
                     <!-- ko with: current_restaurant -->
                         <iframe id="map_loc_setup" data-bind="iMap: $data"></iframe>
                         <div data-bind="template: { name: 'restaurant_static_template', data: $parent.current_restaurant }"></div>
                     <!-- /ko -->
                 </div>
-            </div>
-        </div>        
+            </div>       
+        </div>
     </div>
 </div>
 
