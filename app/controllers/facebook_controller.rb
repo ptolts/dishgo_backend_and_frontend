@@ -1,7 +1,7 @@
 class FacebookController < ApplicationController
   skip_before_filter :verify_authenticity_token
   after_filter :allow_iframe, :only => [:index]
-  layout 'online_site'
+  layout 'facebook'
   
   def index
     
@@ -49,7 +49,7 @@ class FacebookController < ApplicationController
     @resto_data[:images] = restaurant.image.reject{|e| e.img_url_medium.blank?}.collect{|e| e.serializable_hash({})}
     @resto_data = @resto_data.as_json    
     @menu_data = "{ \"menu\" : #{restaurant.menu_to_json} }".as_json
-    render 'facebook'
+    render 'menu'
   end
 
   def design_as_json des, restaurant
