@@ -1,5 +1,5 @@
 .resto_setup_container {
-    top: 100px;
+    top: 55px;
     position: relative;
     color: white;
     left: 50%;
@@ -21,7 +21,7 @@
 
 .resto_claim_box, .start_me_up {
     display: inline-block;
-    width: 400px;
+    width: 500px;
     padding: 15px;
     vertical-align: top;
 }
@@ -31,7 +31,7 @@
 }
 
 .create_restaurant_row {
-    height: 35px;
+    min-height: 45px;
 }
 
 .restaurant_static_template {
@@ -43,6 +43,8 @@
     line-height: 25px;
     padding: 0px;
     margin: 0px;
+    padding-left: 4px;
+    padding-right: 4px;
     overflow: hidden;
 }
 
@@ -51,8 +53,8 @@
     overflow-y: scroll;
     position: absolute;
     z-index: 99;
-    left: 15px;
-    right: 15px;
+    left: 0px;
+    right: 0px;
     color: black !important;
 }
 .restaurant_list::-webkit-scrollbar {
@@ -77,8 +79,6 @@
 .resto_search_bar {
     position: relative;
     width: 100%;
-    padding-left: 15px;
-    padding-right: 15px;
 }
 
 .restaurant_list ul {

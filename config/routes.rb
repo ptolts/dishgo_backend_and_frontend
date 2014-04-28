@@ -14,13 +14,19 @@ Foodcloud::Application.routes.draw do
 
   resources :token_authentications, :only => [:create, :destroy]
 
+  resources :facebook do
+    collection do
+      post 'index/:id', to: "facebook#index"
+    end
+  end
+
   resources :onlinesite do
     collection do
       get 'index'
       get 'preview/:id', to: "onlinesite#preview"
       get 'live/:id', to: "onlinesite#index"
     end
-  end
+  end  
 
   resources :profile do
     collection do

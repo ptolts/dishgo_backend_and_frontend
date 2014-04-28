@@ -21,7 +21,7 @@
                 <div id="location_map" data-bind="iMap: mapObject"></div>
             </div>                
             <div class="row">
-                <button class="col-xs-5 btn btn-danger" data-bind="click: function(){ window.location.href = '/app'; }">Cancel</button>
+                <button class="col-xs-5 btn btn-danger" data-bind="click: function(){ window.history.back(); }">Cancel</button>
                 <button class="col-xs-5 col-xs-offset-2 btn btn-info"  data-bind="click: saveLocation">Set Location</button>
             </div>
         </div>

@@ -1,17 +1,14 @@
-class OnlinesiteController < ApplicationController
-  after_filter :phantom
+class FacebookController < ApplicationController
+  after_filter :allow_iframe, :only => [:index]
   layout 'online_site'
   
   def index
-    Rails.logger.warn "SUBDOMAIN: #{request.subdomain.to_s}"
-    resto_name = request.subdomain.split(".").first
-    if !resto_name.blank?
-      restaurant = Restaurant.where(:subdomain => resto_name).first
+    
+    if !params[:id].blank?
+      restaurant = Restaurant.where(subdomain:params[:id]).first
+      Rails.logger.warn "FACEBOOK: #{restaurant.name}"
     end
-    if !restaurant and !params[:id].blank?
-      restaurant = Restaurant.where(preview_token:params[:id]).first
-      Rails.logger.warn "found by preview: #{restaurant.to_json}"
-    end
+
     if !restaurant
       redirect_to "http://dishgo.io"
       return
@@ -98,56 +95,9 @@ class OnlinesiteController < ApplicationController
     des_json
   end  
 
-  def preview
-    restaurant = Restaurant.where(preview_token:params[:id]).first
-    if !restaurant
-      redirect_to "http://dishgo.io"
-      return
-    end
-
-    if restaurant.design
-      design = restaurant.design
-      @design_css = restaurant.design.template_base_css
-      @design_menu_css = restaurant.design.template_menu_css      
-    else
-      design = Design.where(name:/garde/i).first
-      @design_css = Design.where(name:/garde/i).first.template_base_css
-      @design_menu_css = Design.where(name:/garde/i).first.template_menu_css
-    end
-
-    if restaurant.font
-      font = restaurant.font
-      @font_css = restaurant.font.template_font_css
-      @font_link_data = restaurant.font.template_font_link      
-    else
-      font = Font.first
-      @font_css = Font.first.template_font_css
-      @font_link_data = Font.first.template_font_link
-    end
-
-    if carousel = restaurant.global_images.find_all{|e| e.carousel} and carousel.size > 0
-      @carousel = carousel.collect{|e| e.img_url_original}
-    else
-      @carousel = design.global_images.find_all{|e| e.carousel}.collect{|e| e.img_url_original}
-    end
-
-    @lat = restaurant.lat
-    @lon = restaurant.lon  
-    
-    @design_data = design_as_json(design,restaurant)
-    @resto_data = restaurant.as_document
-    @resto_data[:images] = restaurant.image.reject{|e| e.img_url_medium.blank?}.collect{|e| e.serializable_hash({})}
-    @resto_data = @resto_data.as_json    
-    @menu_data = "{ \"menu\" : #{restaurant.draft_menu_to_json} }".as_json
-    render 'menu'
-  end  
-
   private
-  def phantom
-    if request.user_agent =~ /facebook/i
-      # response.body = Phantomjs.run("#{Rails.root}/lib/phantom.js",response.body.to_s,"#{request.scheme}://#{request.host}#{request.path}")
-    end
-  end
-#"GET /app/menu/preview/jT29p3Jgbq9_4o7g0FO16g HTTP/1.1" 200 27337 "-" "facebookexternalhit/1.1 (+http://www.facebook.com/externalhit_uatext.php)"
+  def allow_iframe
+    response.headers.except! 'X-Frame-Options'
+  end 
 
 end

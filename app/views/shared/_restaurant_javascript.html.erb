@@ -370,6 +370,7 @@
                                 label: "Ok",
                                 className: "btn-primary pull-right col-xs-3",
                                 callback: function(){
+                                    self.dirty(false);
                                     if(typeof(callback_done) == 'function'){
                                         callback_done();
                                     }
@@ -463,7 +464,21 @@
                     },
                     dataType: "json"
                 });                
-            }    
+            }
+
+            self.dirty = ko.observable(false);
+            self.dirtyTrack = ko.computed(function(){
+                self.name();
+                self.subdomain();
+                self.address_line_1();
+                self.phone();
+                self.city();
+                self.postal_code();
+                self.province();
+                self.email();
+                self.dirty(true);
+            });
+            self.dirty(false);
 
         }
 
@@ -476,7 +491,7 @@
                 }
                 viewModel.subdomain(value.replace(/[^0-9a-zA-Z]/g, ''));
             }
-        };                  
+        };                         
 
     //]]>  
     </script>

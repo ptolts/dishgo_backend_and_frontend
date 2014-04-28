@@ -19,31 +19,28 @@
             <div class="row">
                 <div class="col-xs-12">
                     <div class="row create_restaurant_row">
-                        <div class="col-xs-12" data-bind="fadeVisible: search_name().length > 0">
-                            <button class="btn btn-lg btn-primary btn-block" data-bind="click: new_restaurant">Can't find your restaurant? Create one!</button>
-                        </div>                    
-                    </div>                     
-                     <div class="row">
                         <div class="col-xs-12">
-                            <h4>Search our database for your restaurant:</h4>
-                            <div class="row">
-                                <div class="resto_search_bar">
-                                    <input class="form-control" data-bind="value: search_name, valueUpdate: 'keyup'" />
-                                    <div class="restaurant_list">
-                                        <ul data-bind="visible: filtered_restaurants().length > 0">
-                                            <!-- ko foreach: filtered_restaurants -->
-                                                <li data-bind="click: function(){ $root.current_restaurant($data)}">
-                                                    <div class="row">
-                                                        <i class="fa fa-arrow-circle-right result_icon"></i>
-                                                        <h4 class="col-xs-6" data-bind="text: name"></h4>
-                                                        <h6 class="col-xs-6" data-bind="text: address_line_1"></h6>
-                                                    </div>
-                                                </li>
-                                            <!-- /ko -->
-                                        </ul>
-                                    </div>                                    
-                                </div>                 
-                            </div>                                     
+                            <button class="btn btn-lg btn-primary btn-block" data-bind="click: new_restaurant, fadeVisible: search_name().length > 0">Can't find your restaurant? Create one!</button>                  
+                        </div>
+                    </div>                     
+                     <div class="row" style="margin-top:10px">
+                        <div class="col-xs-12">
+                            <div class="resto_search_bar">
+                                <input class="form-control" data-bind="value: search_name, valueUpdate: 'keyup'" placeholder="Search our database for your restaurant"/>
+                                <div class="restaurant_list">
+                                    <ul data-bind="visible: filtered_restaurants().length > 0">
+                                        <!-- ko foreach: filtered_restaurants -->
+                                            <li data-bind="click: function(){ $root.current_restaurant($data)}">
+                                                <div class="row">
+                                                    <i class="fa fa-arrow-circle-right result_icon"></i>
+                                                    <h6 class="col-xs-8" data-bind="text: name, fitText"></h6>
+                                                    <h6 class="col-xs-4" data-bind="text: address_line_1"></h6>
+                                                </div>
+                                            </li>
+                                        <!-- /ko -->
+                                    </ul>
+                                </div>                                    
+                            </div>                       
                         </div>
                     </div>              
                 </div>
@@ -95,7 +92,15 @@
     </html>
 </script>
 
-<script type='text/javascript'>//<![CDATA[   
+<script type='text/javascript'>//<![CDATA[
+
+    ko.bindingHandlers.fitText = {
+        update: function(element, valueAccessor, allBindingsAccessor, viewModel, bindingContext) {
+            var self = this;
+            //console.log("DEBUG: fitText firing on: " + element);
+            $(element).fitText(1);
+        }
+    };
 
     function viewModel() {
 

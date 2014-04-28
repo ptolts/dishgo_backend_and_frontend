@@ -101,7 +101,7 @@ class AdministrationController < ApplicationController
     user = current_user
     user.phone = data["phone"]
     user.save
-    render :text => "User Saved."
+    render :json => {result: "Success!"}
   end 
 
   def destroy_user

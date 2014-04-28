@@ -43,6 +43,25 @@
         var resto_data = <%= raw(current_user.owns_restaurants.as_json(include: :user).to_json) %>;
         var user_data = <%= raw(current_user.as_json(include: :owns_restaurants, include: :notifications).to_json) %>;
 
+        ko.bindingHandlers.phone = {
+            init: function (element, valueAccessor, allBindingsAccessor) {
+            //console.log("DEBUG: lValue firing on: " + element);
+            var underlyingObservable = valueAccessor();
+            var interceptor = ko.computed({
+                read: function () {
+                    return underlyingObservable();
+                },
+                write: function (newvalue) {
+                    var current = underlyingObservable();
+                    current = newvalue.replace(/[^0-9\-\(\)]/g,'');
+                    underlyingObservable(current);
+                    underlyingObservable.notifySubscribers();
+                },
+            }).extend({ notify: 'always' });
+            ko.applyBindingsToNode(element, { value: interceptor, valueUpdate: 'afterkeydown'});
+          }
+        }; 
+
         function User(data) {
             var self = this;
             self.id = data._id;
