@@ -4,7 +4,6 @@
     font-size: 46px;
 }
 h1,
-h2,
 h3,
 h4,
 h5,
@@ -16,6 +15,9 @@ p,
 .menu_container .language_selector,
 address {
     font-family: 'Lato', sans-serif;
+}
+h2 {
+    font-family: 'Grand Hotel', cursive;
 }
 #footer #opened_or_closed_footer {
 	text-transform: uppercase;

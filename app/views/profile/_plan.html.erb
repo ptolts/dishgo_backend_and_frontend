@@ -15,14 +15,14 @@
         <!-- ko if: tutorialMode -->
             <div class="row" data-bind="visible: plan">
                 <div class="col-xs-12">
-                    <a class="btn btn-default col-xs-6 col-xs-offset-3" data-bind="page-href: '/add_card'">Add Credit Card</a>
+                    <a class="btn btn-dish col-xs-6 col-xs-offset-3" data-bind="page-href: '/add_card'">Add Credit Card</a>
                 </div>
             </div>
         <!-- /ko -->
         <!-- ko if: !tutorialMode() -->
             <div class="row">
                 <div class="col-xs-12">
-                    <button class="btn btn-default col-xs-6 col-xs-offset-3" data-bind="click: subscribeToPlan, disable: updatePlanButton, text: updatePlanButtonText">Update Plan</button>
+                    <button class="btn btn-dish col-xs-6 col-xs-offset-3" data-bind="click: subscribeToPlan, disable: updatePlanButton, text: updatePlanButtonText">Update Plan</button>
                 </div>
             </div>            
         <!-- /ko -->
