@@ -15,7 +15,7 @@ module Moped
       Rails.logger.warn "MONGOID BEFORE: host: #{host.to_s}[#{host.class}] port: #{port.to_s} timeout: #{timeout.to_s}\noptions: #{options.to_s}"
       if host.blank?
         Rails.logger.warn "MONGOID WARNING: host: #{host.to_s} port: #{port.to_s} timeout: #{timeout.to_s}\noptions: #{options.to_s}"
-        host = "10.128.224.88"
+        @host = "10.128.224.88"
       end
       @sock = if !!options[:ssl]
         Socket::SSL.connect(host, port, timeout)
@@ -31,13 +31,13 @@ module Moped
         Timeout::timeout(@timeout) do
           Resolv.each_address(host) do |ip|
             if ip =~ Resolv::IPv4::Regex
-              @ip ||= ip
+              @ip = ip
               break
             end
           end
           raise Resolv::ResolvError unless @ip
         end
-        @resolved ||= "#{ip}:#{port}"
+        @resolved = "#{ip}:#{port}"
       rescue Timeout::Error, Resolv::ResolvError
         Rails.logger.warn("  MOPED:", "Could not resolve IP for: #{original}", "n/a")
         node.down! and false
