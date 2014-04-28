@@ -38,15 +38,15 @@ module Moped
         end
         @resolved = "#{ip}:#{port}"
       rescue Timeout::Error, Resolv::ResolvError
-        Rails.logger.warn("  MOPED:", "Could not resolve IP for: #{original}", "n/a")
+        Rails.logger.warn("MOPED: Could not resolve IP for: #{original}")
         node.down! and false
       rescue SocketError
         if attempt <= 3
-          Rails.logger.warn("  MOPED:", "Retrying DNS Resolv for: #{original}, Retry: #{attempt}", "n/a")
+          Rails.logger.warn("MOPED: Retrying DNS Resolv for: #{original}, Retry: #{attempt}")
           attempt += 1
           retry
         end
-        Rails.logger.warn("  MOPED:", "Could not resolve IP for: #{original}", "n/a")
+        Rails.logger.warn("MOPED: Could not resolve IP for: #{original}")
         node.down! and false
       end
     end
