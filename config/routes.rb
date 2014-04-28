@@ -17,6 +17,7 @@ Foodcloud::Application.routes.draw do
   resources :facebook do
     collection do
       post 'index/:id', to: "facebook#index"
+      post '/:id', to: "facebook#index"
     end
   end
 

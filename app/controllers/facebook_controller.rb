@@ -5,8 +5,8 @@ class FacebookController < ApplicationController
   def index
     
     if !params[:id].blank?
+      Rails.logger.warn params[:id].to_s
       restaurant = Restaurant.where(subdomain:params[:id]).first
-      Rails.logger.warn "FACEBOOK: #{restaurant.name}"
     end
 
     if !restaurant
