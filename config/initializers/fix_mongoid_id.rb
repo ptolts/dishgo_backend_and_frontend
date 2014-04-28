@@ -39,15 +39,15 @@ module Moped
         end
         @resolved ||= "#{ip}:#{port}"
       rescue Timeout::Error, Resolv::ResolvError
-        Loggable.warn("  MOPED:", "Could not resolve IP for: #{original}", "n/a")
+        Rails.logger.warn("  MOPED:", "Could not resolve IP for: #{original}", "n/a")
         node.down! and false
       rescue SocketError
         if attempt <= 3
-          Loggable.warn("  MOPED:", "Retrying DNS Resolv for: #{original}, Retry: #{attempt}", "n/a")
+          Rails.logger.warn("  MOPED:", "Retrying DNS Resolv for: #{original}, Retry: #{attempt}", "n/a")
           attempt += 1
           retry
         end
-        Loggable.warn("  MOPED:", "Could not resolve IP for: #{original}", "n/a")
+        Rails.logger.warn("  MOPED:", "Could not resolve IP for: #{original}", "n/a")
         node.down! and false
       end
     end
