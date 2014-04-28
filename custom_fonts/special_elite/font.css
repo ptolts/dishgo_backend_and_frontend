@@ -9,7 +9,6 @@ h1 {
     font-weight: normal;
     text-transform: uppercase;
 }
-h2,
 h3,
 h4,
 h5,
@@ -21,6 +20,10 @@ p,
 .menu_container .language_selector,
 address {
     font-family: 'Special Elite';
+}
+h2 {
+    font-family: 'Josefin Slab';
+    font-style: italic;
 }
 #footer #opened_or_closed_footer {
     text-transform: uppercase;
