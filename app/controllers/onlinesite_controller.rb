@@ -23,9 +23,9 @@ class OnlinesiteController < ApplicationController
       @design_css = restaurant.design.template_base_css
       @design_menu_css = restaurant.design.template_menu_css            
     else
-      design = Design.first
-      @design_css = Design.first.template_base_css
-      @design_menu_css = Design.first.template_menu_css
+      design = Design.where(name:/garde/i).first
+      @design_css = Design.where(name:/garde/i).first.template_base_css
+      @design_menu_css = Design.where(name:/garde/i).first.template_menu_css
     end
 
     if restaurant.font
@@ -111,9 +111,9 @@ class OnlinesiteController < ApplicationController
       @design_css = restaurant.design.template_base_css
       @design_menu_css = restaurant.design.template_menu_css      
     else
-      design = Design.first
-      @design_css = Design.first.template_base_css
-      @design_menu_css = Design.first.template_menu_css
+      design = Design.where(name:/garde/i).first
+      @design_css = Design.where(name:/garde/i).first.template_base_css
+      @design_menu_css = Design.where(name:/garde/i).first.template_menu_css
     end
 
     if restaurant.font
