@@ -1,12 +1,12 @@
 			<div class="row">
 				<div class="col-xs-12">
-					<h1 class="text-center">Sign in to Dish<r>Go</r></h1>
+					<h1 class="text-center">Sign in to <img src="https://d5ca3b0520fac45026ad-6caa6fe89e7dac3eaf12230f0985b957.ssl.cf5.rackcdn.com/No_Plate_Logo.png" height="30" style="margin-bottom: 5px;"></h1>
 					<hr>
 				</div>
 			</div>
 			<form class="form-horizontal" role="form" id="sign-up-form" method="post" action="<%= session_path(resource_name) %>">
 				<div class="row" style="margin-bottom: 0px;">
-					<div class="col-sm-10 col-sm-offset-2">
+					<div class="col-sm-10 col-sm-offset-1">
 						<%= render 'shared/error_messages' %>
 						<input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>" />
 					</div>
