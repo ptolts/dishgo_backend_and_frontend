@@ -1,5 +1,6 @@
 class OnlinesiteController < ApplicationController
   after_filter :phantom
+  after_filter :allow_iframe, :only => [:preview]
   layout 'online_site'
   
   def index
@@ -149,6 +150,9 @@ class OnlinesiteController < ApplicationController
     end
   end
 
+  def allow_iframe
+    response.headers.except! 'X-Frame-Options'
+  end 
 #"GET /app/menu/preview/jT29p3Jgbq9_4o7g0FO16g HTTP/1.1" 200 27337 "-" "facebookexternalhit/1.1 (+http://www.facebook.com/externalhit_uatext.php)"
 
 end
