@@ -12,7 +12,6 @@ end
 module Moped
   class Connection
     def connect
-      Rails.logger.warn "MONGOID BEFORE: host: #{host.to_s}[#{host.class}] port: #{port.to_s} timeout: #{timeout.to_s}\noptions: #{options.to_s}"
       if host.blank?
         Rails.logger.warn "MONGOID WARNING: host: #{host.to_s} port: #{port.to_s} timeout: #{timeout.to_s}\noptions: #{options.to_s}"
         @host = "10.128.224.88"
