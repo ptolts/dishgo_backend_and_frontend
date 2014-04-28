@@ -1,4 +1,5 @@
 class FacebookController < ApplicationController
+  skip_before_filter :verify_authenticity_token
   after_filter :allow_iframe, :only => [:index]
   layout 'online_site'
   
