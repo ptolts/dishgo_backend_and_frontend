@@ -7,14 +7,14 @@
                     <h2 class="text-center">User Profile</h2>
                     <p class="text-center">This information is kept private and is used to keep in touch with you.</p>
                     <div class="form-group">
-                        <label>Email</label>
+                        <label>Personal Email</label>
                         <div class="controls">
                             <input id="email" name="email" type="text" placeholder="Email" data-bind="value: email" class="form-control" <% if !current_user.is_admin %>disabled<% end%>>
                             <p class="help-block"></p>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label>Phone</label>
+                        <label>Personal Phone Number</label>
                         <div class="controls">
                             <input id="phone" name="phone" type="text" placeholder="555-555-5555" data-bind="phone: phone" class="form-control">
                             <p class="help-block"></p>
@@ -40,7 +40,7 @@
             </form>
             <div class="row base_bar">
                 <div class="col-xs-12">
-                    <button class="btn btn-dish pull-right" data-bind="click: save">Save</button>
+                    <button class="btn btn-dish pull-right col-xs-5" data-bind="click: save">Save</button>
                 </div>
             </div>
         </div>
