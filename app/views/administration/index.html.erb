@@ -39,7 +39,9 @@
 		</div>
 		<div class="col-sm-4">
 			<div class="hidden-xs" style="margin-top: 20px;"></div>
-			<a href="/app/administration/edit_menu?restaurant_id=<%= current_user.owns_restaurants.id %>" class="btn btn-lg btn-success btn-block">Build a Dish</a>
+			<% if current_user.owns_restaurants %>
+				<a href="/app/administration/edit_menu?restaurant_id=<%= current_user.owns_restaurants.id %>" class="btn btn-lg btn-success btn-block">Build a Dish</a>
+			<% end %>
 		</div>
 	</div>
 </div>
