@@ -25,11 +25,7 @@
 
                   <div class="scrollable">
                     <div class="dish_image">
-                      <div class="uiscrollview">
-                        <ul data-bind="foreach: images">
-                          <li><img data-bind="attr:{src:url}" width="320" alt=""></li>
-                        </ul>
-                      </div>
+                      <img class="img-responsive" data-bind="visible: large_title_image, menuImage: lazyLoadImage">
                     </div> 
                     <div class="sub_content">
                       <div class="header_title">
