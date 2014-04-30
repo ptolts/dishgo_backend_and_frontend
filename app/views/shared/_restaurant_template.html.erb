@@ -24,15 +24,6 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- dishgo subdomain input-->
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <label>DishGo Subdomain</label>
-                                <div class="controls" data-bind="css:{'has-error':!validateSubdomain()}">
-                                    <input id="subdomain" name="subdomain" type="text" placeholder="your_restaurant.dishgo.io" data-bind="fixSubdomain: subdomain, valueUpdate: 'afterkeydown', value: subdomain" class="form-control">
-                                </div>
-                            </div>
-                        </div>
                         <!-- address-line1 input-->
                         <div class="col-sm-6">  
                             <div class="form-group">
@@ -79,10 +70,20 @@
                             </div>
                         </div>
                         <div class="col-sm-6">
-                            <label>Email</label>
-                            <div class="controls">
-                                <input id="email" name="email" type="text" placeholder="Email" data-bind="value: email" class="form-control">
-                                <p class="help-block"></p>
+                            <div class="form-group">
+                                <label>Email</label>
+                                <div class="controls">
+                                    <input id="email" name="email" type="text" placeholder="Email" data-bind="value: email" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <!-- dishgo subdomain input-->
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>DishGo Subdomain</label>
+                                <div class="input-group controls" data-bind="css:{'has-error':!validateSubdomain()}">
+                                    <input id="subdomain" name="subdomain" type="text" placeholder="restaurant_name" data-bind="fixSubdomain: subdomain, valueUpdate: 'afterkeydown', value: subdomain" class="form-control"><span class="input-group-addon">.dishgo.io</span>
+                                </div>
                             </div>
                         </div>
                         <div class="col-sm-6">

@@ -42,7 +42,7 @@ class ApplicationController < ActionController::Base
         note.type = "trial_period"
         days = (DateTime.now.to_time - user.confirmed_at).to_i / (24 * 60 * 60)
         days = 14 - days.to_i
-        note.message = "Your trial period will end in #{days} days. Please choose a plan and add the required payment method! Thanks!"
+        note.message = "Your trial period will end in #{days} days. Please navigate to the billing section, choose a plan and add the required payment method! Thanks!"
         return if user.notifications.any?{|e| e.message == note.message}
         note.save
         user.notifications << note
