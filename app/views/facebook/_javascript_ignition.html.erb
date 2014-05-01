@@ -6,25 +6,6 @@
 	        var resto_data = <%= raw(@resto_data.to_json) %>;	
 	        var background_images = <%= raw(@carousel.to_json) %>;
 
-			$(function(){
-				if($(window).width() > 600){
-			        $.mbBgndGallery.buildGallery({
-			                containment:"body",
-			                timer:4000,
-			                effTimer:2000,
-			                grayScale:false,
-			                images: background_images,
-
-			                onStart:function(){},
-			                onPause:function(){},
-			                onPlay:function(opt){},
-			                onChange:function(idx){}, //idx=the zero based index of the displayed photo
-			                onNext:function(opt){},   //opt=the options relatives to this component instance
-			                onPrev:function(opt){}   //opt=the options relatives to this component instance
-			        });
-				}
-			})
-
 	        editing_mode = false;    
 	        var viewmodel = new PublicMenuModel();
 

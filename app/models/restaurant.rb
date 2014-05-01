@@ -20,6 +20,7 @@ class Restaurant
   field :phone, type: String
   field :website, type: String
   field :facebook, type: String
+  field :facebook_page_id, type: String
   field :foursquare, type: String
   field :twitter, type: String
   field :urbanspoon, type: String

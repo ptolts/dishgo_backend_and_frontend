@@ -1,0 +1,49 @@
+
+<div class="section-signup">
+	<div class="container_small">
+		<div class="row">
+			<div class="col-xs-12">
+				<h1 class="text-center">Sign in to <img src="https://d5ca3b0520fac45026ad-6caa6fe89e7dac3eaf12230f0985b957.ssl.cf5.rackcdn.com/no_plate_white.png" height="30" style="margin-bottom: 5px;"></h1>
+				<hr>
+			</div>
+		</div>
+		<form class="form-horizontal" role="form" id="sign-up-form" method="post" action="/app/facebook/fb_sign_in">
+			<div class="row" style="margin-bottom: 0px;">
+				<div class="col-sm-10 col-sm-offset-1">
+					<input name="authenticity_token" type="hidden" value="xozm4tzEM66wdGPjNd39XcOucRwdr1foponcgkSD4EY=" />
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-10 col-sm-offset-1">
+					<input type="email" class="form-control" id="user_email" name="user[email]" placeholder="Email">
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-10 col-sm-offset-1">
+					<input type="password" class="form-control" id="user_password" name="user[password]" placeholder="Password">
+				</div>
+			</div>
+			<input name="user[remember_me]" type="hidden" value="1">
+			<div class="row">
+				<div class="col-sm-10 col-sm-offset-1">
+					<button class="btn btn-success col-sm-12" type="submit">Sign In<i class="fa fa-chevron-right" style="margin-left: 20px; font-size: 12px;"></i></button>
+				</div>
+			</div>
+			<div class="row text-center" style="margin-top:25px">
+				<div class="col-sm-10 col-sm-offset-1" id="shared_links">
+
+					<a class="btn btn-xs btn-danger" href="/app/users/sign_up">Sign up</a>
+
+					<a class="btn btn-xs btn-danger" href="/app/users/password/new">Forgot password?</a>
+
+					<a class="btn btn-xs btn-danger" href="/app/users/confirmation/new">Resend Confirmation</a>
+
+				</div>
+			</div>
+
+		</form>
+
+
+
+	</div>
+</div>

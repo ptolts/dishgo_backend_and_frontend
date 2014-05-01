@@ -1,0 +1,32 @@
+
+<div class="section-signup">
+	<div class="container_small">
+		<div class="row">
+			<div class="col-xs-12">
+				<h1 class="text-center"><img src="https://d5ca3b0520fac45026ad-6caa6fe89e7dac3eaf12230f0985b957.ssl.cf5.rackcdn.com/no_plate_white.png" height="30" style="margin-bottom: 5px;"></h1>
+				<hr>
+			</div>
+		</div>
+		<form class="form-horizontal" role="form" id="sign-up-form" method="post" action="/app/facebook/setup_page">
+			<div class="row" style="margin-bottom: 0px;">
+				<div class="col-sm-10 col-sm-offset-1">
+					<input name="authenticity_token" type="hidden" value="xozm4tzEM66wdGPjNd39XcOucRwdr1foponcgkSD4EY=" />
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-10 col-sm-offset-1">
+					<p>Just click the button below to link <%= current_user.owns_restaurants.name %> to this Facebook page.</p>
+				</div>
+			</div>			
+			<div class="row">
+				<div class="col-sm-10 col-sm-offset-1">
+					<button class="btn btn-success col-sm-12" type="submit">Link Restaurant to Facebook Page<i class="fa fa-chevron-right" style="margin-left: 20px; font-size: 12px;"></i></button>
+				</div>
+			</div>
+
+		</form>
+
+
+
+	</div>
+</div>

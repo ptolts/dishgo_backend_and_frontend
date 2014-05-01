@@ -1,15 +1,20 @@
 class FacebookController < ApplicationController
   skip_before_filter :verify_authenticity_token
-  after_filter :allow_iframe, :only => [:index]
+  after_filter :allow_iframe, :only => [:index, :setup_page, :fb_sign_in]
   layout 'facebook'
   
   def index
+        
+    oauth = Koala::Facebook::OAuth.new(ENV['FB_APP_ID'], ENV['FB_APP_SECRET'])
+    facebook_page_details = oauth.parse_signed_request(params[:signed_request])
+    #SESSION REQUEST: {"algorithm"=>"HMAC-SHA256", "issued_at"=>1398970432, "page"=>{"id"=>"711697415561117", "liked"=>false, "admin"=>true}, "user"=>{"country"=>"ca", "locale"=>"en_US", "age"=>{"min"=>21}}}
+    if page_id = facebook_page_details["page"]["id"]
+      restaurant = Restaurant.where(facebook_page_id:page_id).first
+    end
 
-    Rails.logger.warn request.env.to_s
-    
-    if !params[:id].blank?
-      Rails.logger.warn params[:id].to_s
-      restaurant = Restaurant.where(subdomain:params[:id]).first
+    if !restaurant and facebook_page_details["page"]["admin"].to_s == "true"
+      setup_page
+      return
     end
 
     if !restaurant
@@ -96,7 +101,32 @@ class FacebookController < ApplicationController
     des_json[:global_images] = image_objects_to_be_used
     #Rails.logger.warn "design_as_json stops"
     des_json
-  end  
+  end
+
+  def setup_page
+    if !current_user
+      fb_sign_in
+      return
+    end
+    oauth = Koala::Facebook::OAuth.new(ENV['FB_APP_ID'], ENV['FB_APP_SECRET'])
+    facebook_page_details = oauth.parse_signed_request(params[:signed_request])    
+    restaurant = current_user.owns_restaurants
+    restaurant.facebook_page_id = facebook_page_details["page"]["id"]
+    restaurant.save
+    redirect_to 'index'
+  end
+
+  def fb_sign_in
+    if params[:user] and params[:user][:email] and params[:user][:password]
+      @user = User.where(email:params[:user][:email]).first
+      if @user and @user.valid_password?(params[:user][:password])
+        sign_in @user
+        setup_page
+        return
+      end
+    end
+    render action: 'fb_sign_in', layout: 'facebook_setup'
+  end
 
   private
   def allow_iframe
