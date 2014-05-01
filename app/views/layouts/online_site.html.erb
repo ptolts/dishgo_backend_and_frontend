@@ -45,11 +45,11 @@
 			<ul>
 				<li class="icon" data-bind="click: display_menu_toggle"><i class="fa fa-bars"></i></li>
 				<!-- ko if: display_menu -->
-					<li><a data-bind="click: function() { goto_and_kill_menu('start') }">Home</a></li>
+					<li><a data-bind="click: function() { goto_and_kill_menu('about') }">Home</a></li>
 					<li><a data-bind="click: function() { goto_and_kill_menu('menu') }">Menu</a></li>
 					<li><a data-bind="click: function() { goto_and_kill_menu('contact') }">Contact</a></li>
 					<div class="language_select" data-bind="foreach: languages">
-						<li data-bind="css:{selected: $data === $root.lang()}, click: function(){ $root.lang($data) }"><a data-bind="text: $root.getFullLangName($data)"></a>
+						<li data-bind="css:{selected: $data === $root.lang()}, click: function(){ $root.lang($data); $root.display_menu(false) }"><a data-bind="text: $root.getFullLangName($data)"></a>
 					</div>						
 				<!-- /ko -->
 			</ul>		
@@ -60,7 +60,7 @@
 			</div>
 			<nav id="navigation" class="nav">
 				<ul>
-					<li><a data-bind="page-href: 'start', lText: about_tr">Home</a></li>
+					<li><a data-bind="page-href: 'about', lText: about_tr">Home</a></li>
 					<li><a data-bind="page-href: 'menu', lText: menu_tr">Menu</a></li>
 					<li><a data-bind="page-href: 'contact', lText: contact_tr">Contact</a></li>
 				</ul>
@@ -79,7 +79,7 @@
 		</div>
 
 		<div id="footer" data-bind="fadeVisible: !atTop()">	
-			<div id="opened_or_closed_footer" data-bind="with: restaurant">
+			<div id="opened_or_closed_footer" data-bind="with: restaurant, click: function() { goto_and_kill_menu('contact') }">
 				<h4><span class="currently_open_tag"  data-bind="lStaticText: 'currently'"> </span><span class="currently_open" data-bind="css:{'hours_opened':areWeOpened(),'hours_closed':!areWeOpened()}, lStaticText: areWeOpenedText"></span></h4>
 			</div>				
 			<div id="social_media_footer" class="social_media" data-bind="with: restaurant">
@@ -95,7 +95,7 @@
 			<h4><span class="currently_open_tag">currently </span><span class="currently_open" data-bind="css:{'hours_opened':areWeOpened(),'hours_closed':!areWeOpened()}, text: areWeOpenedText"></span></h4>
 		</div>	
 
-		<div data-bind="page: {id: 'start', title: $root.restaurant().name()}" class="pages">
+		<div data-bind="page: {id: 'about', title: $root.restaurant().name()}" class="pages">
 			<div class="content_wrapper">				
 				<%= render 'start' %>
 			</div>							

@@ -460,7 +460,7 @@ function Dish(data, topmodel) {
     } else {
         self.sizes = ko.observable(false);
         //console.log("no data sizes");
-        if(data.sizes && !typeof(data.sizes) == "boolean"){
+        if(data.sizes){
             self.sizes_object = ko.observable(new Option(data.sizes,self));
         } else {
             self.sizes_object = ko.observable(new Option({type:"size",name:copyDefaultHash(default_sizes_hash),individual_options:[{name:copyDefaultHash(default_sizes_hash_small),price:'0.0'},{name:copyDefaultHash(default_sizes_hash_large),price:'0.0'}]},self));            
@@ -625,7 +625,65 @@ function Dish(data, topmodel) {
         $('#image_upload' + index).click();
     }
 
+    self.computedWidth = ko.computed(function(){
+        var modal_width = 0;
+        if(self.large_title_image()){
+            modal_width += 40;
+        }
+        if(self.sizes() || self.description()[lang()]){
+            modal_width += 40;
+        }
+        if(modal_width > 0){
+            return modal_width + "%";
+        } else {
+            return "400px";
+        }
+    });
+
+    self.computedHeight = ko.computed(function(){
+        var modal_width = 0;
+        if(self.large_title_image()){
+            modal_width += 40;
+        }
+        if(self.sizes() || self.description()[lang()]){
+            modal_width += 40;
+        }
+        if(modal_width > 0){
+            return "80%";
+        }
+    });   
+
+    self.modalImageWidth = ko.computed(function(){
+        if(!self.sizes() && !self.description()[lang()]){
+            return "dish_full";
+        } else {
+            return "dish_half";
+        }
+    }); 
+
+    self.modalDescriptionWidth = ko.computed(function(){
+        if(!self.large_title_image()){
+            return "dish_full";
+        } else {
+            return "dish_half";
+        }
+    });             
+
 }
+
+// ko.bindingHandlers.modalSizing = {
+//     init: function (element, valueAccessor) {
+//         $(window).load(function(){
+//             var value = valueAccessor();
+//             if(value.name()['en'] != "Hambugers"){
+//                 return;
+//             }
+//             element = $(element)
+//             var dish_image = element.find(".dish_image").first();
+//             var dish_description = element.find(".dish_description").first();
+//         });
+//     }
+// };
 
 ko.bindingHandlers.menuImage = {
     update: function (element, valueAccessor) {
@@ -1112,7 +1170,7 @@ function MenuViewModel() {
 
     self.discardDraft = function() {
         bootbox.dialog({
-          message: "Are you sure you want to discard all your changes? Everything will revert to the way your menu is currently published.",
+          message: "Are you sure you want to discard all your changes? Everything will revert to your last save.",
           title: "Discard Draft",
           buttons: {
             success: {
@@ -1126,32 +1184,33 @@ function MenuViewModel() {
               label: "Discard Draft",
               className: "btn-danger col-xs-5 pull-right",
               callback: function() {
+                skip_warning = true;
+                location.reload();
+                // var spinner = new Spinner(opts).spin(document.getElementById('center')); 
+                // $('#loading').fadeIn();
 
-                var spinner = new Spinner(opts).spin(document.getElementById('center')); 
-                $('#loading').fadeIn();
-
-                $.ajax({
-                  type: "POST",
-                  url: "/app/administration/reset_draft_menu",
-                  data: {
-                    restaurant_id: restaurant_id,
-                    menu: ko.toJSON(self.menu)
-                  },
-                  success: function(data, textStatus, jqXHR){
-                        // self.menu($.map(data.menu, function(item) { return new Section(item) }));
-                        // $(".tooltipclass").tooltip({delay: { show: 500, hide: 100 }});
-                        spinner.stop();
-                        $('#loading').fadeOut();
-                        skip_warning = true;
-                        window.location.href = "/app";
-                    },
-                    error: function(XMLHttpRequest, textStatus, errorThrown) { 
-                        spinner.stop();
-                        $('#loading').fadeOut();
-                        bootbox.alert("There was an error publishing the menu.\n" + errorThrown);
-                    },
-                  dataType: "json"
-                }); 
+                // $.ajax({
+                //   type: "POST",
+                //   url: "/app/administration/reset_draft_menu",
+                //   data: {
+                //     restaurant_id: restaurant_id,
+                //     menu: ko.toJSON(self.menu)
+                //   },
+                //   success: function(data, textStatus, jqXHR){
+                //         // self.menu($.map(data.menu, function(item) { return new Section(item) }));
+                //         // $(".tooltipclass").tooltip({delay: { show: 500, hide: 100 }});
+                //         spinner.stop();
+                //         $('#loading').fadeOut();
+                //         skip_warning = true;
+                //         window.location.href = "/app";
+                //     },
+                //     error: function(XMLHttpRequest, textStatus, errorThrown) { 
+                //         spinner.stop();
+                //         $('#loading').fadeOut();
+                //         bootbox.alert("There was an error publishing the menu.\n" + errorThrown);
+                //     },
+                //   dataType: "json"
+                // }); 
               }
             },
           }

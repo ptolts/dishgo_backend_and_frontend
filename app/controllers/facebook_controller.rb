@@ -4,6 +4,8 @@ class FacebookController < ApplicationController
   layout 'facebook'
   
   def index
+
+    Rails.logger.warn request.env.to_s
     
     if !params[:id].blank?
       Rails.logger.warn params[:id].to_s

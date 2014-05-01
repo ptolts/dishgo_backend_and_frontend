@@ -85,7 +85,7 @@
 												<div data-bind="page: {id: $data.id(), afterShow: function(){ $('body').addClass('stop_scrolling'); }, afterHide: function(){ $('body').removeClass('stop_scrolling'); }}" class="custom_modal">
 													<div class="modal_background" data-bind="click: function(){ pager.navigate($page.parentPage.path()) }"></div>
 												    <!-- custom_modal -->
-											    	<div class="custom_modal-dialog">
+											    	<div class="custom_modal-dialog" data-bind="style:{'min-width':computedWidth,'min-height':computedHeight}">
 											    		<div class="custom_modal-content">
 											    			<div class="custom_modal-header">
 											    				<a class="close" data-bind="page-href: '../'">&times;</a>
@@ -101,13 +101,13 @@
 											    				</div>
 											    			</div>
 											    			<div class="custom_modal-body" data-bind="stop_scroll">
-											    				<div class="row" id="body-section">
+											    				<div class="dish_modal_body">
 
-											    					<div class="col-md-6">
+											    					<div class="dish_image" data-bind="css: modalImageWidth">
 					                                           			<img class="img-responsive" data-bind="visible: large_title_image, menuImage: lazyLoadImage">
 											    					</div>
 
-											    					<div class="col-md-6">
+											    					<div class="dish_description" data-bind="css: modalDescriptionWidth">
 
 											    						<div class="dish-description">
 											    							<p data-bind="lText: description"></p>
