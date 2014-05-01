@@ -460,7 +460,7 @@ function Dish(data, topmodel) {
     } else {
         self.sizes = ko.observable(false);
         //console.log("no data sizes");
-        if(data.sizes){
+        if(data.sizes && !typeof(data.sizes) == "boolean"){
             self.sizes_object = ko.observable(new Option(data.sizes,self));
         } else {
             self.sizes_object = ko.observable(new Option({type:"size",name:copyDefaultHash(default_sizes_hash),individual_options:[{name:copyDefaultHash(default_sizes_hash_small),price:'0.0'},{name:copyDefaultHash(default_sizes_hash_large),price:'0.0'}]},self));            
@@ -651,7 +651,6 @@ Option.prototype.toJSON = function() {
 };
 
 function Option(data,dish) {
-
     var self = this;
     self.name = ko.observable(data.name);
     self.dish = dish;
@@ -1383,8 +1382,10 @@ function PublicMenuModel() {
             self.atTop(false);
         } else {
             self.atTop(true);
-        }         
-        FastClick.attach(document.body);
+        }  
+        // $(function(){          
+        //     FastClick.attach(document.body);
+        // });
     }
 
 
