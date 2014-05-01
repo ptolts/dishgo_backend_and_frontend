@@ -293,9 +293,9 @@ function Image(data) {
     self.failed = ko.observable(false);
 
     if(data){
-        if(data.local_file){
+        if(data.local_file || data.url){
             self.id(data._id);
-            self.url = ko.observable(data.local_file);
+            self.url = ko.observable(data.local_file || data.url);
             self.completed(true);
             self.original = ko.observable(data.original);
             self.image_width = ko.observable(data.width);
