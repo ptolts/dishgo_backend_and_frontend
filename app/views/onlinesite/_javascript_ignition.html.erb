@@ -37,7 +37,10 @@
         		pager.Href.hash = '#!/';
 				pager.extendWithPage(viewmodel);
 	        	ko.applyBindings(viewmodel,$("html")[0]);        			
-				pager.start();			
+				pager.start();
+				if($(window).width() <= 600){
+					pager.goTo("about");
+				}
 			});
 
         	var map;

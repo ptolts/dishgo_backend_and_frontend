@@ -1428,7 +1428,7 @@ function PublicMenuModel() {
     }
 
     //This is for anything that should be applied to small screens.
-    if(keep_scrolling_updates){
+    if(keep_scrolling_updates){    
         $(document).on("scrollstop",function(){
             console.log("scrollstop " + $("body").scrollTop());
             if($("body").scrollTop() <= 30){
