@@ -230,8 +230,8 @@
 	.nav .icon {
 		display: block; /* show only current <li> item */
 		font-size: 28px !important;
-		padding-left: 10px;
-		padding-right: 10px;
+		padding: 5px 5px 2px 5px;
+		line-height: 0px;
 		margin: 0;
 		text-align: left !important;
 	}
