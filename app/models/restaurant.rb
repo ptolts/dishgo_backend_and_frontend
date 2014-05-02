@@ -61,7 +61,7 @@ class Restaurant
     else
       cords = [-74.155815,45.458972]
     end
-	 (Restaurant.includes(:sources).where(:locs => { "$near" => { "$geometry" => { "type" => "Point", :coordinates => cords }, "$maxDistance" => 10000}}).to_a + Restaurant.includes(:sources).where(:name => /moish/i).to_a)
+    return Restaurant.includes(:sources).where(:locs => { "$near" => { "$geometry" => { "type" => "Point", :coordinates => cords }, "$maxDistance" => 25000}}).to_a.reject!{|e| e.menu.empty?}
   end
 
   def dish_images
