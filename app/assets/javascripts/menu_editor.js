@@ -667,23 +667,30 @@ function Dish(data, topmodel) {
         } else {
             return "dish_half";
         }
-    });             
+    });
+
+    self.noContent = ko.computed(function(){
+        if(!self.sizes() && !self.description()[lang()] && !self.large_title_image()){
+            return true;
+        }
+        return false;
+    });                  
 
 }
 
-// ko.bindingHandlers.modalSizing = {
-//     init: function (element, valueAccessor) {
-//         $(window).load(function(){
-//             var value = valueAccessor();
-//             if(value.name()['en'] != "Hambugers"){
-//                 return;
-//             }
-//             element = $(element)
-//             var dish_image = element.find(".dish_image").first();
-//             var dish_description = element.find(".dish_description").first();
-//         });
-//     }
-// };
+ko.bindingHandlers.modalResize = {
+    init: function (element, valueAccessor) {
+        $(window).load(function(){
+            var value = valueAccessor();
+            // if(value.name()['en'] != "Hambugers"){
+            //     return;
+            // }
+            element = $(element)
+            var max_height = element.height();
+            element.find(".custom_modal_body").css("max-height",max_height);
+        });
+    }
+};
 
 ko.bindingHandlers.menuImage = {
     update: function (element, valueAccessor) {

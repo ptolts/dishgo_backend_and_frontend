@@ -7,6 +7,10 @@
     z-index: 500;
 }
 
+.noBorderBottom {
+    border-bottom: 0px !important;
+}
+
 .modal_background {
     background-color: rgba(0,0,0,0.9);
     z-index: 0;
@@ -14,7 +18,7 @@
     height: 100%;    
 }
 
-.custom_modal-header {
+.custom_modal_header {
     border-bottom: 1px solid #e5e5e5;
     position: absolute;
     right: 0;
@@ -24,13 +28,22 @@
     top: 0;
 }
 
-.custom_modal-body {
+.custom_modal_body {
     position: absolute;
-    bottom: 65px;
+    bottom: 0px;
     overflow-y: scroll;
     left: 0;
     right: 0;
-    top: 55px;
+    top: 60px;
+}
+
+.custom_modal_footer {
+    border-top: 1px solid #e5e5e5;
+    padding: 15px;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
 }
 
 .dish_modal_body {
@@ -63,11 +76,11 @@
     transform:          translateY(-50%);*/
 }
 
-.custom_modal-dialog {
+.custom_modal_dialog {
     position: absolute;
     left: 50%;
     top: 50%;
-    min-height: 125px;
+    min-height: 75px;
     -webkit-transform:  translate(-50%,-50%);
     -moz-transform:     translate(-50%,-50%);
     -ms-transform:      translate(-50%,-50%);
@@ -85,38 +98,31 @@
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
     padding: 15px;
 }
-.custom_modal-footer {
-    border-top: 1px solid #e5e5e5;
-    padding: 15px;
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    left: 0;
-}
-.custom_modal-footer a {
+
+.custom_modal_footer a {
     float: right!important;
 }
 
 .custom_modal .each-dish {
     text-align: none;
 }
-.custom_modal-dialog .custom_modal-title {
+.custom_modal_dialog .custom_modal_title {
     font-size: 24px;
     padding: 5px;
     padding-left: 10px;
     margin: 0;
 }
-.custom_modal-dialog .dish-price {
+.custom_modal_dialog .dish-price {
     padding: 5px;
     font-size: 24px;
     color: #cf2f28;
 }
-.custom_modal-dialog .close {
+.custom_modal_dialog .close {
     color: #000;
     opacity: .4;
     filter:alpha(opacity=40)
 }
-.custom_modal-dialog .dish-description p{
+.custom_modal_dialog .dish-description p{
     margin-top: 20px;
     font-size: 18px;
     font-weight: 300;
@@ -218,7 +224,7 @@
 }
 
 @media (max-width: 600px) {
-    .custom_modal-dialog {
+    .custom_modal_dialog {
         width: 100%;
         min-width: 100%;       
     }

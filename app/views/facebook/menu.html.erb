@@ -85,9 +85,9 @@
 												<div data-bind="page: {id: $data.id(), afterShow: function(){ $('body').addClass('stop_scrolling'); }, afterHide: function(){ $('body').removeClass('stop_scrolling'); }}" class="custom_modal">
 													<div class="modal_background" data-bind="click: function(){ pager.navigate($page.parentPage.path()) }, stop_scroll"></div>
 												    <!-- custom_modal -->
-											    	<div class="custom_modal-dialog" data-bind="stop_scroll">
-											    		<div class="custom_modal-content">
-											    			<div class="custom_modal-header">
+											    	<div class="custom_modal_dialog" data-bind="stop_scroll">
+											    		<div class="custom_modal_content">
+											    			<div class="custom_modal_header">
 											    				<a class="close" data-bind="page-href: '../'">&times;</a>
 											    				<div class="row">
 											    					<div class="col-sm-9 col-xs-8">
@@ -100,7 +100,7 @@
 											    					</div>
 											    				</div>
 											    			</div>
-											    			<div class="custom_modal-body">
+											    			<div class="custom_modal_body">
 											    				<div class="row" id="body-section">
 
 											    					<div class="col-md-6">
@@ -141,9 +141,9 @@
 											    					</div>
 											    				</div>
 											    			</div>
-											    			<div class="custom_modal-footer">
+<!-- 											    			<div class="custom_modal_footer">
 											    				<a class="btn btn-default" data-bind="page-href: '../'">Close</a>
-											    			</div>
+											    			</div> -->
 											    		</div>
 											    	</div>
 												</div>

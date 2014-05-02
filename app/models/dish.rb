@@ -179,6 +179,22 @@ class Dish
       next img_hash
     end
     return dish_hash
-  end    
+  end 
+
+  def api_custom_to_hash
+    dish_hash = self.as_document
+    dish_hash[:id] = self.id
+    dish_hash[:name] = self.name_translations["en"]
+    dish_hash[:description] = self.description_translations["en"]
+    dish_hash["sizes"] = self.sizes.custom_to_hash
+    dish_hash["options"] = self.options.collect do |option|
+      next option.custom_to_hash
+    end
+    dish_hash["image"] = self.image.collect do |image|
+      img_hash = image.custom_to_hash
+      next img_hash
+    end
+    return dish_hash
+  end        
 
 end

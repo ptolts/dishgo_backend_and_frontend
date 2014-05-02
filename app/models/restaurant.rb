@@ -107,6 +107,30 @@ class Restaurant
     return Oj.dump(menu)
   end
 
+  def api_menu_to_json
+    # result = RubyProf.profile {
+      menu_to_spit_out = self.published_menu.pub
+      if menu_to_spit_out.empty?
+        menu_to_spit_out = Restaurant.where(name:/tuckshop/i).first.published_menu.pub
+      end
+      menu = menu_to_spit_out.collect do |section|
+        hash = section.as_document
+        hash[:id] = section.id
+        hash[:name] = section.name
+        hash["dishes"] = section.dishes.pub.collect do |dish|
+          dish.api_custom_to_hash
+        end
+        next hash
+      end
+    # }
+
+    # open("callgrind.profile", "w") do |f|
+    #   RubyProf::CallTreePrinter.new(result).print(f, :min_percent => 1)
+    # end
+
+    return Oj.dump(menu)
+  end  
+
   def draft_menu_to_json
     # result = RubyProf.profile {
       menu = self.draft_menu.unscoped.draft.collect do |section|

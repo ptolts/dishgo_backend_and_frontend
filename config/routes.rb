@@ -19,6 +19,7 @@ Foodcloud::Application.routes.draw do
       post '/', to: "facebook#index"
       post 'fb_sign_in', to: "facebook#fb_sign_in"
       post 'setup_page', to: "facebook#setup_page"
+      post 'setup/', to: "facebook#setup"
     end
   end
 
