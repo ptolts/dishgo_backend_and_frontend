@@ -7,17 +7,15 @@
 		<title>Search Menus From The Best Local Restaurants in Town | Download DishGo!</title>
 
 		<%= stylesheet_link_tag    "application", :media => "all" %>
+		<%= stylesheet_link_tag    "signin" %>
 		<%= javascript_include_tag "application" %>
 		<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">	
 		<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>	
-		<link href="/app/public/css/font-awesome.min.css" rel="stylesheet">
-	    <!-- <link href="/app/public/css/style.css" rel="stylesheet"> -->
-	    <link href="/app/public/css/signin.css" rel="stylesheet">
 	    <%= csrf_meta_tags %>
 
 	</head>
 	<body>
-		<a class="fa fa-arrow-circle-left" style="position: fixed;top:20px;left: 20px; font-size: 30px; color: #fff;" href="javascript:history.back()"></a>
+		<a class="fa fa-arrow-circle-left back_button" style="position: fixed;top:20px;left: 20px; font-size: 30px; color: #fff;" href="javascript:history.back()"></a>
 		<div class="section-signup">
 			<div class="container_small">
 				<%= yield %>
