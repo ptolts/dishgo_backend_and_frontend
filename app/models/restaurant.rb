@@ -116,7 +116,7 @@ class Restaurant
       menu = menu_to_spit_out.collect do |section|
         hash = section.as_document
         hash[:id] = section.id
-        hash[:name] = section.name
+        hash["name"] = section.name_translations["en"]
         hash["dishes"] = section.dishes.pub.collect do |dish|
           dish.api_custom_to_hash
         end
