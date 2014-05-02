@@ -128,6 +128,12 @@ class FacebookController < ApplicationController
     render action: 'fb_sign_in', layout: 'facebook_setup'
   end
 
+  def setup
+    secret = "418685312c9717fc643646e9943660a4"
+    id = "484621004971056"
+    
+  end
+
   private
   def allow_iframe
     response.headers.except! 'X-Frame-Options'
