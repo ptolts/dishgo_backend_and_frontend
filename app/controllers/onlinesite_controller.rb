@@ -100,9 +100,9 @@ class OnlinesiteController < ApplicationController
 
   def preview
     restaurant = Restaurant.where(preview_token:params[:id]).first
+
     if !restaurant
-      redirect_to "http://dishgo.io"
-      return
+      restaurant = Restaurant.where(name:/berges/i).first
     end
 
     if restaurant.design
