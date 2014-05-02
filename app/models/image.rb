@@ -76,9 +76,9 @@ class Image
       if self.img_url_medium.nil?
         img_post_process
       end      
-      return {_id: _id, id: _id, local_file: self.img_url_medium, rejected: false, original: self.img_url_original}
+      return {_id: _id, id: _id, local_file: self.img_url_medium, medium: self.img_url_medium, rejected: false, original: self.img_url_original}
     else
-      return {_id: self._id, id: self._id, local_file: self.local_file, rejected: self.rejected, original: self.img_url_original}
+      return {_id: self._id, id: self._id, local_file: self.local_file, medium: self.img_url_medium, rejected: self.rejected, original: self.img_url_original}
     end
   end
 
@@ -91,9 +91,9 @@ class Image
       if self.img_url_medium.nil?
         img_post_process
       end   
-      return {_id: self._id, id: self._id, local_file: img_url_medium, rejected: false, original: self.img_url_original}
+      return {_id: self._id, id: self._id, local_file: img_url_medium, medium: self.img_url_medium, rejected: false, original: self.img_url_original}
     else
-      return {_id: self._id, id: self._id, local_file: self.local_file, rejected: self.rejected, original: self.img_url_original}
+      return {_id: self._id, id: self._id, local_file: self.local_file, medium: self.img_url_medium, rejected: self.rejected, original: self.img_url_original}
     end
   end
 

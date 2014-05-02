@@ -286,6 +286,7 @@ function Image(data) {
     self.id = ko.observable("");
     self.url = ko.observable("/loader.gif");
     self.original = ko.observable("/loader.gif");
+    self.medium = ko.observable("/loader.gif");
     self.completed = ko.observable(false);
     self.image_width = ko.observable(0);
     self.image_height = ko.observable(0);
@@ -298,6 +299,7 @@ function Image(data) {
             self.url = ko.observable(data.local_file || data.url);
             self.completed(true);
             self.original = ko.observable(data.original);
+            self.medium = ko.observable(data.medium);
             self.image_width = ko.observable(data.width);
             self.image_height = ko.observable(data.height);            
         }  
@@ -410,6 +412,7 @@ function Dish(data, topmodel) {
     self.position = ko.observable(data.position ? data.position : 0);
     self.images = ko.observableArray([]);
     self.sizeSelectedOptionValue = ko.observable();
+    self.modalVisible = ko.observable(false);
 
     self.printJson = function(){
         console.log(ko.toJSON(self));
@@ -523,6 +526,14 @@ function Dish(data, topmodel) {
             return "";
         }
     });
+
+    self.lazyLoadMediumImage = ko.computed(function(){
+        if(self.images().length > 0){
+            return self.images()[0].medium();
+        } else {
+            return "";
+        }
+    });    
 
     self.addQuantity = function(){
         if(self.quantity() == 12){
@@ -701,6 +712,17 @@ ko.bindingHandlers.menuImage = {
         var underlyingObservable = valueAccessor();
         if(ko.menuVisible()){
             element.setAttribute('src', underlyingObservable());
+        } else {
+            element.setAttribute('src', "");
+        }
+    }
+}; 
+
+ko.bindingHandlers.modalImage = {
+    update: function (element, valueAccessor, allBindings, bindingContext) {
+        var visible = valueAccessor();
+        if(bindingContext.modalVisible()){
+            element.setAttribute('src', valueAccessor()());
         } else {
             element.setAttribute('src', "");
         }
