@@ -73,7 +73,8 @@ module Foodcloud
                                     'online_site.css',
                                     'website.css',
                                     'picker.js',
-                                    'wysiwyg.js'
+                                    'wysiwyg.js',
+                                    'signin.css',
                                 ]
 
   end
