@@ -40,13 +40,23 @@ h2 {
     font-weight: 700;
     font-style: italic;
 }
-.menu_container p,
-.menu_container .dish_price i {
+.menu_container p {
     font-family: 'Josefin Slab';
     font-size: 17px;
     line-height: 23px;
     font-weight: normal;
-    font-style: normal;
+    font-style: italic;
+}
+.menu_container .dish_price i {
+    font-family: 'Special Elite';
+    font-size: 17px;
+    line-height: 23px;
+    font-weight: normal;
+    font-style: italic;
+}
+.menu_container .dish-price i {
+    font-family: 'Special Elite';
+    font-style: italic;
 }
 address {
     font-size: 17px;
