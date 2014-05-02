@@ -33,6 +33,9 @@
     margin-top: 20px;
     font-size: 14px;
 }
+.sign-up-bread .breadcrumb {
+	background-color: inherit;
+}
 .sign-up-bread {
     padding-left: 20px;
     padding-right: 20px;
