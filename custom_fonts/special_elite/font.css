@@ -71,3 +71,7 @@ address {
 .main_page_language_selector {
     text-transform: uppercase;
 }
+.hours_opened,
+.hours_closed {
+    padding-top: 8px;
+}
