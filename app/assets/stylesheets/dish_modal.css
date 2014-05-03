@@ -227,7 +227,7 @@
     background-color: #cf2f28;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
     .custom_modal_dialog {
         width: 100%;
         min-width: 100%;       
