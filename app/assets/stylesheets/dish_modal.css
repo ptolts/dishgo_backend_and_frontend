@@ -81,6 +81,10 @@
     left: 50%;
     top: 50%;
     min-height: 75px;
+    backface-visibility: hidden;
+    perspective: 1000;
+    -webkit-backface-visibility: hidden;
+    -webkit-perspective: 1000;    
     -webkit-transform:  translate(-50%,-50%);
     -moz-transform:     translate(-50%,-50%);
     -ms-transform:      translate(-50%,-50%);

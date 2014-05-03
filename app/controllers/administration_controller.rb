@@ -336,7 +336,7 @@ class AdministrationController < ApplicationController
     restaurant.name = settings["name"]
     restaurant.lat = settings["lat"] unless settings["lat"].blank?
     restaurant.lon = settings["lon"] unless settings["lon"].blank?
-    restaurant.locs = [settings["lat"],settings["lon"]] unless settings["lat"].blank?
+    restaurant.locs = [settings["lon"],settings["lat"]] unless settings["lat"].blank?
     restaurant.email = settings["email"]
     restaurant.phone = settings["phone"]
     restaurant.facebook = settings["facebook"]
