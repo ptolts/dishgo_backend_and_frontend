@@ -1339,7 +1339,7 @@ ko.bindingHandlers.masonry = {
         var value = valueAccessor();
         var id = value[1].replace(/[^a-z]/g,'');
         value = value[0]();
-        if(value && $(element).width() > 600){
+        if(value && $(element).width() > 768){
             // var w = Number($(element).width());
             // console.log(w);
             $(element).find(".image_section").addClass(id);
