@@ -71,7 +71,6 @@
 	width: 600px;
 	max-height: 500px;
 	min-height: 200px;
-	background-color: rgba(0, 0, 0, 0.75);
 	padding: 15px;
 	padding-top: 20px;
 	padding-bottom: 20px;
@@ -83,7 +82,15 @@
 	left: 50%;
 	-webkit-transform: translate(-50%,-50%);
 	-ms-transform: translate(-50%,-50%);
-	transform: translate(-50%,-50%);	
+	transform: translate(-50%,-50%);
+	background:rgb(0,0,0);
+	background: transparent\9;
+	background:rgba(0,0,0,0.85);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#d8000000,endColorstr=#d8000000);
+	zoom: 1;	
+}
+.content_wrapper:nth-child(n) {
+	filter: none;
 }
 .content_wrapper::-webkit-scrollbar {
 	width: 0px;
@@ -92,6 +99,7 @@
 .contact_page_wrapper {
 	width: 100%;
 	position: absolute;
+	z-index: -1;
 	top: 50%;
 	left: 50%;
 	-webkit-transform: translate(-50%,-50%);
@@ -104,7 +112,6 @@
 }
 
 .mini_content_wrapper {
-	background-color: rgba(0, 0, 0, 0.85);
 	padding: 15px;
 	color: #fff;
 	border-radius: 5px;
@@ -112,6 +119,14 @@
     vertical-align: middle;
     float: none;	
     min-width: 290px;
+    background:rgb(0,0,0);
+	background: transparent\9;
+	background:rgba(0,0,0,0.85);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#d8000000,endColorstr=#d8000000);
+	zoom: 1;
+}
+.mini_content_wrapper:nth-child(n) {
+	filter: none;
 }
 
 .hours_wrapper {
@@ -144,7 +159,16 @@
 		left: initial;		
 		-webkit-transform: none;
 		-ms-transform: none;
-		transform: none;	
+		transform: none;
+		min-height: 100%;
+		background:rgb(0,0,0);
+		background: transparent\9;
+		background:rgba(0,0,0,0.85);
+		filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#d8000000,endColorstr=#d8000000);
+		zoom: 1;
+	}
+	..contact_page_wrapper:nth-child(n) {
+	filter: none;
 	}	
 
 	.currently_open_tag {
@@ -160,6 +184,7 @@
 		top: initial;
 		-webkit-transform: none;
 		/*padding-bottom: 0;			*/
+		background: none;
 	}
 
 	.restaurant_name {
@@ -175,10 +200,10 @@
 		min-height: 100%;
 		top: 70px;
 		padding-bottom: 70px;
+		z-index: -1;
 		left: initial;
 		margin: 0;
 		border-radius: 0px;	
-		margin-bottom: 85px;
 		-webkit-transform: none;
 		-ms-transform: none;
 		transform: none;	
