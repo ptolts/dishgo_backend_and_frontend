@@ -52,3 +52,10 @@ address {
 .main_page_language_selector {
     text-transform: uppercase;
 }
+.content_wrapper span {
+    font-family: 'Alegreya', serif;
+}
+.note-editor .note-editable {
+    font-family: 'Alegreya', serif;
+    font-size: 24px;
+}
