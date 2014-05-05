@@ -79,7 +79,7 @@
 .custom_modal_content {
     width: 50%;
     height: 50%;
-    overflow: auto;
+    /*overflow: auto;*/
     margin: auto;
     position: fixed;
     z-index: 999;
