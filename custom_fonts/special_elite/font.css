@@ -75,3 +75,10 @@ address {
 .hours_closed {
     padding-top: 8px;
 }
+.content_wrapper span {
+    font-family: 'Special Elite';
+}
+.note-editor .note-editable {
+    font-family: 'Special Elite';
+    font-size: 24px;
+}

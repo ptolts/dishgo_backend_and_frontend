@@ -43,3 +43,10 @@ address {
 .hours p {
 	font-size: 18px;
 }
+.content_wrapper span {
+    font-family: 'Dancing Script', cursive;
+}
+.note-editor .note-editable {
+    font-family: 'Dancing Script', cursive;
+    font-size: 24px;
+}

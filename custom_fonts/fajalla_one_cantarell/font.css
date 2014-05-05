@@ -53,3 +53,10 @@ address {
 .main_page_language_selector {
     text-transform: uppercase;
 }
+.content_wrapper span {
+    font-family: 'Fjalla One', sans-serif;
+}
+.note-editor .note-editable {
+    font-family: 'Fjalla One', sans-serif;
+    font-size: 24px;
+}

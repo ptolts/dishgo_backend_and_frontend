@@ -27,6 +27,7 @@
 
 .currently_open {
 	margin-left: 5px;
+	cursor: pointer;
 }
 
 .hours_opened {
