@@ -85,8 +85,8 @@
 												<div data-bind="page: {id: $data.id(), afterShow: function(){ $('body').addClass('stop_scrolling'); $data.modalVisible(true)}, afterHide: function(){ $('body').removeClass('stop_scrolling'); $data.modalVisible(false) }}" class="custom_modal">
 													<div class="modal_background" data-bind="click: function(){ pager.navigate($page.parentPage.path()) }"></div>
 												    <!-- custom_modal -->
-											    	<div class="custom_modal_dialog" data-bind="style:{'min-width':computedWidth,'min-height':computedHeight}">
-											    		<div class="custom_modal_content">
+											    	<div class="custom_modal_dialog">
+											    		<div class="custom_modal_content" data-bind="style:{'min-width':computedWidth,'min-height':computedHeight}">
 											    			<div class="custom_modal_header" data-bind="css:{'noBorderBottom':noContent}">
 											    				<a class="close" data-bind="page-href: '../'">&times;</a>
 											    				<div class="row">

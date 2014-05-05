@@ -652,16 +652,18 @@ function Dish(data, topmodel) {
     });
 
     self.computedHeight = ko.computed(function(){
-        var modal_width = 0;
+        // var modal_width = 0;
         if(self.large_title_image()){
-            modal_width += 40;
+            // modal_width += 40;
+            return '80%';
         }
-        if(self.sizes() || self.description()[lang()]){
-            modal_width += 40;
-        }
-        if(modal_width > 0){
-            return "80%";
-        }
+        return '40%';
+        // if(self.sizes() || self.description()[lang()]){
+        //     modal_width += 40;
+        // }
+        // if(modal_width > 0){
+        //     return "80%";
+        // }
     });   
 
     self.modalImageWidth = ko.computed(function(){
@@ -690,16 +692,23 @@ function Dish(data, topmodel) {
 }
 
 ko.bindingHandlers.modalResize = {
-    init: function (element, valueAccessor) {
-        $(window).load(function(){
-            var value = valueAccessor();
-            // if(value.name()['en'] != "Hambugers"){
-            //     return;
-            // }
-            element = $(element)
-            var max_height = element.height();
-            element.find(".custom_modal_body").css("max-height",max_height);
-        });
+    update: function (element, valueAccessor) {
+        var value = valueAccessor()();
+        if(value){
+            element = $(element);
+            // var other_element = element.find(".custom_modal_body");
+            var last_element = element.find(".dish_modal_body");
+            // other_element.css("bottom","initial");
+            var max_height = last_element.height();
+            if(max_height < 75){
+                max_height = 75;
+            }
+            if(max_height > 100){
+                console.log("Big")
+            }
+            element.css("min-height",max_height + "px");
+            // other_element.css("bottom","0px");
+        }
     }
 };
 
@@ -753,6 +762,7 @@ function Option(data,dish) {
 
     if(data._id){
         self.id(data._id);
+        self.advanced(data.advanced);
         if(data.extra_cost){
             self.extra_cost(data.extra_cost);
         }
@@ -777,8 +787,8 @@ function Option(data,dish) {
     }
 
     self.type = data.type; 
-    self.max_selections = ko.observable();
-    self.min_selections = ko.observable();  
+    self.max_selections = ko.observable(data.max_selections ? data.max_selections : 0);
+    self.min_selections = ko.observable(data.min_selections ? data.min_selections : 0);  
     self.multiple_prices = self.dish.sizes;
 
     if(data.type != "size"){
@@ -790,6 +800,18 @@ function Option(data,dish) {
     if(data.individual_options){
         self.individual_options = ko.observableArray($.map(data.individual_options, function(item) { return new IndividualOption(item,self)})); 
     }
+
+    self.max_selection_list = ko.computed(function(){
+        var list = [];
+        _.each(self.individual_options(),function(item, index){ list.push(index + 1) });
+        return list;
+    });
+
+    self.min_selection_list = ko.computed(function(){
+        var list = [];
+        _.each(self.individual_options(),function(item, index){ list.push(index) });
+        return list;
+    });    
 
     self.selectedOptionValue = ko.observableArray([]);    
 

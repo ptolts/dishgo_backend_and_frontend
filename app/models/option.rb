@@ -9,6 +9,7 @@ class Option
 	field :max_selections, type: Integer
 	field :published, type: Boolean	
 	field :min_selections, type: Integer
+	field :advanced_options, type: Boolean
 	field :position, type: Integer
 	field :extra_cost, type: Boolean
 
@@ -55,6 +56,7 @@ class Option
 
 		draft[:name] = option["name"]
 		draft[:type] = option["type"]
+		draft[:advanced] = option["advanced"]
 		draft[:max_selections] = option["max_selections"]
 		draft[:min_selections] = option["min_selections"]
 		draft[:extra_cost] = option["extra_cost"]
@@ -67,6 +69,7 @@ class Option
 	def publish_menu
 		self.name_translations = self.draft["name"]
 		self.type = self.draft["type"]
+		self.advanced = self.draft["advanced"]
 		self.max_selections = self.draft["max_selections"]
 		self.min_selections = self.draft["min_selections"]
 		self.extra_cost = self.draft["extra_cost"]
@@ -81,6 +84,7 @@ class Option
 		draft = {}
 		draft[:name] = self.name_translations
 		draft[:type] = self.type
+		draft[:advanced] = self.advanced
 		draft[:max_selections] = self.max_selections
 		draft[:min_selections] = self.min_selections
 		draft[:extra_cost] = self.extra_cost

@@ -1,6 +1,6 @@
 class FacebookController < ApplicationController
   skip_before_filter :verify_authenticity_token
-  after_filter :allow_iframe, :only => [:index, :setup_page, :fb_sign_in]
+  after_filter :allow_iframe, :only => [:index, :setup_page, :fb_sign_in, :setup]
   layout 'facebook'
   
   def index
@@ -131,7 +131,7 @@ class FacebookController < ApplicationController
   def setup
     secret = "418685312c9717fc643646e9943660a4"
     id = "484621004971056"
-    
+    render  action: 'setup', layout: 'facebook_setup'
   end
 
   private
