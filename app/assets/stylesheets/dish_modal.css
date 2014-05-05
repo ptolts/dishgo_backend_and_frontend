@@ -122,9 +122,14 @@
     color: #cf2f28;
 }
 .custom_modal_dialog .close {
-    color: #000;
-    opacity: .4;
-    filter:alpha(opacity=40)
+    position: absolute;
+    font-size: 30px;
+    right: -30px;
+    top: 0px;
+    color: #fff;
+    opacity: 1;
+    filter: alpha(opacity=100);
+
 }
 .custom_modal_dialog .dish-description p{
     margin-top: 20px;
@@ -235,5 +240,12 @@
     .dish_half {
         width: 100%;
         display: inline-block;
+    }
+    .custom_modal_dialog .close {
+    top: 0;
+    right: 5px;
+    color: #000;
+    opacity: .4;
+    filter: alpha(opacity=40);
     }
 }
