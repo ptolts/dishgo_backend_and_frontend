@@ -30,26 +30,32 @@
     <div id="wrapper">
         <!-- Sidebar -->
         <div id="sidebar-wrapper">
-            <div class="col-xs-12 add_section" data-bind="with: restaurant" id="dark">
+            <div class="add_section" data-bind="with: restaurant" id="dark">
                 <div class="row">
-                    <h3 data-bind="text: name" id="restaurant_name"></h3>
+                    <div class="col-xs-12">
+                        <h3 data-bind="text: name" id="restaurant_name"></h3>
+                    </div>
                 </div>
                 <div class="row" id="no_bottom_margin">
-                    <div class="menu_editor_language">
-                        <span>Language: </span>
-                        <select data-bind="options: $root.languages, value: $root.lang"></select>                
+                    <div class="col-xs-12">
+                        <div class="menu_editor_language">
+                            <span>Language: </span>
+                            <select data-bind="options: $root.languages, value: $root.lang"></select>                
+                        </div>
                     </div>
                 </div>
                 <div class="row" id="add_section_button">
-                    <button class="btn btn-section btn-xs" type="button" data-bind="click: $root.addSection, helperTip: {template:'add_section_help_template', when: $root.firstSectionHelp, data: $root}">+ Add Section</button>
-                    <script id="add_section_help_template" type="text/x-jQuery-tmpl">
-                        <div class="fixed_helper_container">
-                            <div class="helper_container">
-                                <span class="glyphicon glyphicon-play helper_arrow"></span>
-                                <h4>Start by adding a section to your menu!</h4>
+                    <div class="col-xs-12">
+                        <button class="btn btn-section btn-xs" type="button" data-bind="click: $root.addSection, helperTip: {template:'add_section_help_template', when: $root.firstSectionHelp, data: $root}">+ Add Section</button>
+                        <script id="add_section_help_template" type="text/x-jQuery-tmpl">
+                            <div class="fixed_helper_container">
+                                <div class="helper_container">
+                                    <span class="glyphicon glyphicon-play helper_arrow"></span>
+                                    <h4>Start by adding a section to your menu!</h4>
+                                </div>
                             </div>
-                        </div>
-                    </script> 
+                        </script> 
+                    </div>
                 </div>                                                
             </div>               
             <ul class="sidebar-nav" data-bind="foreach: menu">
@@ -74,11 +80,11 @@
                     </div>
                 </li>
                 <!-- ko foreach: dishes -->
-                    <li class="menu_dish_item">
-                        <span class="glyphicon glyphicon-play pull-right icon-flipped" data-bind="visible: $root.current_dish_check($data)" id="icon_play"></span>
+                    <li class="menu_dish_item" data-bind="css: { active : $root.current_dish_check($data)}">
+                        <!-- <span class="glyphicon glyphicon-play pull-right icon-flipped" data-bind="visible: $root.current_dish_check($data)" id="icon_play"></span> -->
                         <div class="media" data-bind="click: $root.set_dish">
                             <div class="media-body">
-                                <span class="glyphicon glyphicon-pencil" id="icon_edit"></span><h4 class="media-heading" data-bind="text: computed_name"></h4>
+                                <span class="glyphicon glyphicon-pencil" id="icon_edit"></span><span class="media-heading h4" data-bind="text: computed_name"></span>
                             </div>                    
                         </div>
                     </li>

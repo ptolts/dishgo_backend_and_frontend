@@ -18,14 +18,14 @@
 							</ul>				        	      
 				        </div>
 
-				        <div class="menu_style_selector">
+<!-- 				        <div class="menu_style_selector">
 				            <div class="btn-toolbar" role="toolbar">
 				              <div class="btn-group">
 				              	 <button type="button" class="btn btn-default" data-bind="css:{'active':!showDetails()}, click: function(){showDetails(false);}"><span class="fa fa-list"></span></button>
 				                <button type="button" class="btn btn-default" data-bind="css:{'active':showDetails()}, click: function(){showDetails(true);}"><span class="fa fa-picture-o"></span></button>
 				              </div>
 				            </div>          
-				        </div>		                
+				        </div>	 -->	                
 			        </div>    
 			            <div class="row">
 			                <div class="each_dish">
@@ -40,7 +40,7 @@
 
 	                    						<!-- THIS IS THE DETAILED DISH OUTPUT. -->
 
-						                    	<div class="col-md-4 col-xs-12 image_section" data-bind="fadeVisible: $root.showDetails, click: function(){ pager.navigate($page.path() + '/' + $data.id()) }">
+<!-- 						                    	<div class="col-md-4 col-xs-12 image_section" data-bind="fadeVisible: $root.showDetails, click: function(){ pager.navigate($page.path() + '/' + $data.id()) }">
 					                                <div class="row">
 					                                    <div class="dish_title col-md-9 col-xs-9">
 					                                        <h2 data-bind="lText: name"></h2>
@@ -61,7 +61,7 @@
 					                                <div class="row dish_button_for_phone">
 						                            	<a class="btn btn-sm btn-dish" data-bind="page-href: $data.id()"><img data-bind="attr:{src:$root.design.imgs.logo_white_nav}" class="dishgo_icon"></a>
 					                                </div>
-						                   		</div>
+						                   		</div> -->
 
 
 	                        					<!-- dish on screen -->
@@ -83,11 +83,11 @@
 
 						                        <!-- dish modal -->
 												<div data-bind="page: {id: $data.id(), afterShow: function(){ $('body').addClass('stop_scrolling'); $data.modalVisible(true)}, afterHide: function(){ $('body').removeClass('stop_scrolling'); $data.modalVisible(false) }}" class="custom_modal">
-													<div class="modal_background" data-bind="click: function(){ pager.navigate($page.parentPage.path()) }, stop_scroll"></div>
+													<div class="modal_background" data-bind="click: function(){ pager.navigate($page.parentPage.path()) }"></div>
 												    <!-- custom_modal -->
-											    	<div class="custom_modal_dialog" data-bind="stop_scroll">
-											    		<div class="custom_modal_content">
-											    			<div class="custom_modal_header">
+											    	<div class="custom_modal_dialog">
+											    		<div class="custom_modal_content" data-bind="style:{'min-width':computedWidth,'min-height':computedHeight}">
+											    			<div class="custom_modal_header" data-bind="css:{'noBorderBottom':noContent}">
 											    				<a class="close" data-bind="page-href: '../'">&times;</a>
 											    				<div class="row">
 											    					<div class="col-sm-9 col-xs-8">
@@ -100,14 +100,14 @@
 											    					</div>
 											    				</div>
 											    			</div>
-											    			<div class="custom_modal_body">
-											    				<div class="row" id="body-section">
+											    			<div class="custom_modal_body" data-bind="stop_scroll">
+											    				<div class="dish_modal_body">
 
-											    					<div class="col-md-6">
+											    					<div class="dish_image" data-bind="css: modalImageWidth">
 					                                           			<img class="img-responsive" data-bind="visible: large_title_image, modalImage: lazyLoadImage">
 											    					</div>
 
-											    					<div class="col-md-6">
+											    					<div class="dish_description" data-bind="css: modalDescriptionWidth">
 
 											    						<div class="dish-description">
 											    							<p data-bind="lText: description"></p>

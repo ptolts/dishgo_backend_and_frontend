@@ -4,12 +4,16 @@ class FacebookController < ApplicationController
   layout 'facebook'
   
   def index
-        
-    oauth = Koala::Facebook::OAuth.new(ENV['FB_APP_ID'], ENV['FB_APP_SECRET'])
-    facebook_page_details = oauth.parse_signed_request(params[:signed_request])
-    #SESSION REQUEST: {"algorithm"=>"HMAC-SHA256", "issued_at"=>1398970432, "page"=>{"id"=>"711697415561117", "liked"=>false, "admin"=>true}, "user"=>{"country"=>"ca", "locale"=>"en_US", "age"=>{"min"=>21}}}
-    if page_id = facebook_page_details["page"]["id"]
-      restaurant = Restaurant.where(facebook_page_id:page_id).first
+       
+    if request.get?
+      restaurant = Restaurant.where(preview_token:"fZOdV4FrXLrTTAZLgly2XA").first
+    else
+      oauth = Koala::Facebook::OAuth.new(ENV['FB_APP_ID'], ENV['FB_APP_SECRET'])
+      facebook_page_details = oauth.parse_signed_request(params[:signed_request])
+      #SESSION REQUEST: {"algorithm"=>"HMAC-SHA256", "issued_at"=>1398970432, "page"=>{"id"=>"711697415561117", "liked"=>false, "admin"=>true}, "user"=>{"country"=>"ca", "locale"=>"en_US", "age"=>{"min"=>21}}}
+      if page_id = facebook_page_details["page"]["id"]
+        restaurant = Restaurant.where(facebook_page_id:page_id).first
+      end
     end
 
     if !restaurant and facebook_page_details["page"]["admin"].to_s == "true"

@@ -521,12 +521,12 @@ body {
 }
 
 .sidebar-nav {
-  position: absolute;
-  top: 108px;
-  width: 230px;
+  /*position: absolute;*/
+  /*top: 108px;*/
+  width: 100%;
   list-style: none;
   margin: 0;
-  padding-right: 10px;
+  /*padding-right: 10px;*/
   padding-left: 0px;
   padding-bottom: 50px;
 }
@@ -558,7 +558,7 @@ body {
 .sidebar-nav .media {
     margin: 0px;
 }
-.sidebar-nav h4 {
+.sidebar-nav h4, .sidebar-nav .h4{
     line-height: 25px;
     font-size: 15px;
     font-weight: 250;
@@ -586,7 +586,7 @@ body {
     position: absolute;
     right: -2px;
     top: 10px;
-    color: #000;
+    color: #f7f7f7;
     z-index: 6000;
 }
 
@@ -644,14 +644,7 @@ body {
   text-align: right;
   padding-right: 5px;
 }
-
-.sidebar-nav .section_title_menu:hover {
-  color: #fff;
-  background-color: #343e4b;
-  text-decoration: none;
-}
-
-.sidebar-nav li.menu_dish_item:hover {
+.sidebar-nav li.menu_dish_item:hover, .sidebar-nav .section_title_menu:hover, .sidebar-nav li.menu_dish_item.active, .sidebar-nav .section_title_menu.active {
   color: #fff;
   background-color: #343e4b;
   text-decoration: none;
@@ -662,9 +655,8 @@ body {
   text-decoration: none;
 }
 .add_section {
-    position: relative;
     margin-top: 10px;
-    top: 0;
+    width: 100%;
     padding-bottom: 10px;
     border-bottom: 1px solid #dae1e8;
     box-shadow: 0 2px 1px -1px #FFFFFF;    
