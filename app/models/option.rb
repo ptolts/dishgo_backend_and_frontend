@@ -9,7 +9,7 @@ class Option
 	field :max_selections, type: Integer
 	field :published, type: Boolean	
 	field :min_selections, type: Integer
-	field :advanced_options, type: Boolean
+	field :advanced, type: Boolean
 	field :position, type: Integer
 	field :extra_cost, type: Boolean
 
