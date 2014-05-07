@@ -13,8 +13,20 @@
 ko.bindingHandlers.fitText = {
     update: function(element, valueAccessor, allBindingsAccessor, viewModel, bindingContext) {
         var self = this;
+        // var value = valueAccessor();
         //console.log("DEBUG: fitText firing on: " + element);
-        $(element).fitText(1);
+        // $(element).fitText(1.2,{ minFontSize: '20px', maxFontSize: '60px' }).resize()
+        var resize = function(){
+            $(element).parent().textfill({ maxFontPixels: 36});
+        }
+
+        $(window).on('resize orientationchange', resize);        
+
+        // if(value){
+        //     resize();
+        // }
+
+        resize();
     }
 };
 

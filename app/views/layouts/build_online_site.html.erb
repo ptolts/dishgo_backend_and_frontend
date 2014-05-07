@@ -54,7 +54,12 @@
 		</nav>			  	
 		<div id="left_menu">
 			<div class="restaurant_name" data-bind="with: restaurant">
-			  <div class="logo" data-bind="text: name"></div>
+				<!-- ko if: logo_settings().logo_as_image -->
+					<img id="logo_image" data-bind="attr: {src:logo().url}, style: { 'height': logo_settings().image_height() + 'px', 'borderRadius':logo_settings().border_radius() + 'px', 'borderWidth':logo_settings().border_size() + 'px', 'borderColor': '#' + logo_settings().border_color()}" style="border-style: solid"/>
+				<!-- /ko -->
+				<!-- ko if: !logo_settings().logo_as_image() -->
+					<span class="logo" data-bind="text: name, fitText: !logo_settings().logo_as_image"></span>
+				<!-- /ko -->					
 			</div>
 			<nav id="navigation" class="nav">
 				<ul>

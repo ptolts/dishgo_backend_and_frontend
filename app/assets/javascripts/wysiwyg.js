@@ -1,5 +1,6 @@
 /*
 *= require bootstrap_wysiwyg.js
+*= require colorpicker.js
 */
 
 (function( $, ko ) {

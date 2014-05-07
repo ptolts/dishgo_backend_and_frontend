@@ -12,8 +12,39 @@
 
 <!-- ko if: current_design -->
 
-    <div data-bind="page: {id: 'start', title: 'About Page Content'}" class="content_wrapper content_wrapper_editor">
-        <div data-bind="template: { name: 'text_content_template', data: $root.restaurant }" class="build_website_template_holder"></div>                 
+    <div data-bind="page: {id: 'start', title: 'Pages'}" class="">
+
+        <div class="pages_controller navigation_controller text-center" data-bind="with: $root.restaurant">
+            <h4>Available Pages</h4>
+            <ul class="">
+                <!-- ko foreach: pages -->
+                    <li data-bind="click: function(){ $root.current_page($data) }, lText: name, css:{ active: $data == $root.current_page()}"></li>
+                <!-- /ko -->
+            </ul>
+            <button class="btn btn-inverse btn-sm" data-bind="click: function(){ $root.current_page(newPage()) }, attr:{disabled:pages().length > 2}"><a>Create New Page</a></button>
+        </div>
+
+        <!-- ko if: current_page -->
+            <div class="pages_settings" data-bind="with: current_page">
+                <div class="editor_page_name row">
+                    <span class="h4 col-xs-4">Page Title:</span>
+                    <div class="col-xs-8">
+                        <input class="form-control" data-bind="lValue: name">
+                    </div>
+                </div>   
+                <div class="editor_language_selector row">
+                    <span class="h4 col-xs-8">Currently Editing in:</span>
+                    <div class="col-xs-4">
+                        <select class="form-control input-sm" data-bind="options: $root.languages, optionsText: function(item){ return fullLanguageName[item];}, value: $root.lang"></select>
+                    </div>
+                </div> 
+            </div> 
+
+            <div class="content_wrapper content_wrapper_editor">
+                <div data-bind="template: { name: 'text_content_template', data: $root.current_page }" class="build_website_template_holder"></div>
+            </div>
+        <!-- /ko -->
+
     </div>
 
 <!-- /ko -->

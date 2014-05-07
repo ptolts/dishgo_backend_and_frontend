@@ -44,6 +44,7 @@
             self.fonts = ko.observableArray([]);
             self.current_design = ko.observable();
             self.current_font = ko.observable();
+            self.current_page = ko.observable();
             self.languages = ko.observableArray(['en','fr']);
             self.restaurant = ko.observable(new Restaurant(resto_data));
             self.lang = ko.observable('en');

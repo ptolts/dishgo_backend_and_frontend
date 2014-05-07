@@ -2,6 +2,8 @@
 
 class Restaurant
   include Mongoid::Document
+  include Mongoid::Timestamps
+
   store_in collection: "restaurants", database: "dishgo"
   field :lat, type: Float
   field :lon, type: Float
@@ -33,11 +35,16 @@ class Restaurant
   field :hours, type: Hash 
 
   belongs_to :font, class_name: "Font", index: true
-  has_many :global_images, class_name: "GlobalImage"
+  has_many :global_images, class_name: "GlobalImage", inverse_of: :restaurant
+  has_one :logo, class_name: "GlobalImage", inverse_of: :restaurant_logo
+  field :logo_settings, type: Hash 
+
   field :website_settings, type: Hash
 
   has_many :sources, :class_name => "Sources"
   has_many :image, :class_name => "Image"
+
+  has_many :pages, :class_name => "Page", inverse_of: :restaurant
 
   has_many :section, :class_name => "Section", inverse_of: :restaurant
 
@@ -157,6 +164,25 @@ class Restaurant
     enough = false if self.phone.blank?
     enough = false if self.name.blank? or self.name == "New Restaurant"
     return enough
+  end
+
+  def serializable_hash options
+    hash = super {}
+    if self.logo
+      hash[:logo] = self.logo.as_document
+    end
+    return hash
+  end
+
+  def as_document
+    hash = super
+    if self.logo
+      hash[:logo] = self.logo.as_json
+    end
+    if self.pages
+      hash[:pages] = self.pages.as_json
+    end    
+    return hash
   end
 
 end

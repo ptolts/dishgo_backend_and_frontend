@@ -114,4 +114,10 @@ fieldset[disabled] .btn-inverse.active {
   position: absolute;
   bottom: 10px;
   width: 100%;
+  background-color: white;
+}
+
+.layout_controls_next hr {
+  margin-top: 5px;
+  margin-bottom: 5px;
 }

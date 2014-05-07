@@ -85,9 +85,21 @@ class WebsiteController < ApplicationController
 		restaurant.save
 		restaurant.design = Design.find(data["id"])
 		restaurant.font = Font.find(params["font_id"])
+		restaurant.logo_settings = restaurant_data["logo_settings"]
 		Rails.logger.warn restaurant_data
 		restaurant.about_text_translations = restaurant_data["about_text"]
 
+		pages = restaurant_data["pages"].collect do |page|
+			p = Page.where(id:page["id"]).first
+			if !p
+				p = Page.create
+			end
+			p.name = page["name"]
+			p.html = page["html"]
+			p.save
+			next p
+		end
+		restaurant.pages = pages
 		restaurant.preview_token = loop do
 			token = SecureRandom.urlsafe_base64
 			break token unless Restaurant.where(preview_token: token).count > 0
@@ -96,6 +108,29 @@ class WebsiteController < ApplicationController
 		restaurant.save		
 		render :json => {preview:"/app/onlinesite/preview/#{restaurant.preview_token.to_s}"}.as_json
 	end
+
+	def upload_logo
+		data = JSON.parse(params[:data])
+		file = params[:files]
+		img = current_user.owns_restaurants.logo
+		if !img
+			img = GlobalImage.create
+			user = current_user 
+			user.owns_restaurants.logo = img
+			user.save
+		end
+		img.name = params[:name]
+		img.update_attributes({:img => file})
+		img.save
+
+		render :json => {files:[{
+		                    image_id: img.id,
+		                    name: img.name,
+		                    url:  img.img_url_original,
+		                    custom: true,
+		                  }]
+		                }.as_json
+	end	
 
 	def upload_image
 		data = JSON.parse(params[:data])

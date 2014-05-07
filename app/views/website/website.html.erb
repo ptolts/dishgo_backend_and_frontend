@@ -54,6 +54,15 @@
             </div>
         </div>
 
+        <div data-bind="page: {id: 'logo', title: 'Logo', with: restaurant}" class="col-md-9 website_pages">
+            <div class="row">
+                <div class="col-xs-12">
+                    <h3 class="text-center" style="margin-bottom: 20px;">Upload your restaurant logo.</h3>
+                    <div data-bind="template: { name: 'restaurant_logo', data: $root.restaurant }"></div>                
+                </div>
+            </div>
+        </div>        
+
         <div class="row layout_controls_next">
             <div class="col-xs-12">
                 <hr class="website_line">

@@ -4,6 +4,8 @@
   margin-right: auto;
   margin-left: auto;
   display: block;
+  width: 500px;  
+  height: 100%;
 }
 
 .logo {
@@ -11,17 +13,17 @@
   -webkit-text-shadow: .04em .04em 0 #fff, .08em .08em 0 #aaa;*/
   line-height: 70px;
   display: inline-block;
-  width: 500px;
+  overflow: hidden;
 }
 
 @media (max-width: 560px){
-	.logo {
+	.restaurant_name {
 		width: 300px;
 	}
 }
 
 @media (max-width: 340px){
-	.logo {
+	.restaurant_name {
 		width: 250px;
 	}
 }

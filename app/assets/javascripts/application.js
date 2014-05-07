@@ -13,6 +13,7 @@
 // = require jquery
 // = require jquery_ujs
 // = require jquery.ui.sortable
+// = require jquery.ui.slider
 // = require jquery.scrollstop.js
 // = require knockout-3.1.0.debug.js
 // = require underscore
@@ -24,7 +25,7 @@
 // = require spin.min.js
 // = require bootstrap.min.js
 // = require pager.js
-// = require jquery.fittext.js
+// = require jquery.textfill.js
 // = require fastclick.js
 // = require card_validator.js
 

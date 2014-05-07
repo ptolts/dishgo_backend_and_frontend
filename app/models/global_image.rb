@@ -20,7 +20,8 @@ class GlobalImage
 
   belongs_to :design, class_name: "Design", index: true, inverse_of: :global_images
   belongs_to :design_demo, class_name: "Design", index: true, inverse_of: :exmaple_image
-  belongs_to :restaurant, index: true
+  belongs_to :restaurant, index: true, inverse_of: :global_images
+  belongs_to :restaurant_logo, class_name: "Restaurant", index: true, inverse_of: :logo
 
   has_many :global_images, class_name: "GlobalImage"
   belongs_to :global_image, index: true

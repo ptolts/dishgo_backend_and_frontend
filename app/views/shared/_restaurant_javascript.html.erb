@@ -5,6 +5,11 @@
             fr: '',
         };
 
+        var default_page_language_hash = {
+            en: 'New Page',
+            fr: 'Nouvelle Page',
+        };        
+
         var default_web_language_hash = {
             en: 'Edit your home page content!',
             fr: 'Modifier le contenu de votre page d\'accueil!',
@@ -62,6 +67,24 @@
             delete copy.buttonText;
             return copy; //return the copy to be serialized
         };  
+
+        function Page(data){
+            data ? null : data = {}
+            var self = this;
+            self.id = data.id;
+            self.html = ko.observable(data.html ? data.html : copyDefaultHash(default_web_language_hash));
+            self.name = ko.observable(data.name ? data.name : copyDefaultHash(default_page_language_hash));
+        }        
+
+        function LogoSettings(data){
+            data ? null : data = {}
+            var self = this;
+            self.logo_as_image = ko.observable(data.logo_as_image ? data.logo_as_image : false);
+            self.image_height = ko.observable(data.image_height ? data.image_height : 50);
+            self.border_color = ko.observable(data.border_color ? data.border_color : "000000");
+            self.border_radius = ko.observable(data.border_radius ? data.border_radius : 3);
+            self.border_size = ko.observable(data.border_size ? data.border_size : 2);
+        }
 
         function Day(name,data){
             var self = this;
@@ -172,7 +195,17 @@
             self.font_id = data.font_id ? data.font_id : "";
             self.user_id = data.user_id ? data.user_id : "";
 
+            self.logo = ko.observable(data.logo ? new GlobalImage(data.logo) : new GlobalImage({}));
+            self.logo_settings = ko.observable(data.logo_settings ? new LogoSettings(data.logo_settings) : new LogoSettings());
+
             self.about_text = ko.observable(data.about_text ? data.about_text : copyDefaultHash(default_web_language_hash));
+
+            self.pages = ko.observableArray([]);
+
+            if(data.pages){
+                self.pages(_.map(data.pages,function(page){ return new Page(page) }));
+            }
+
             self.hours = ko.observableArray([]);
 
             var hours_list = {
@@ -480,6 +513,12 @@
             });
             self.dirty(false);
 
+            self.newPage = function(){
+                var new_page = new Page();
+                self.pages.push(new_page);
+                return new_page;
+            }
+
         }
 
         ko.bindingHandlers.fixSubdomain = {
@@ -491,7 +530,50 @@
                 }
                 viewModel.subdomain(value.replace(/[^0-9a-zA-Z]/g, ''));
             }
-        };                         
+        };         
+
+
+        ko.bindingHandlers.slider = {
+            init: function (element, valueAccessor, allBindingsAccessor, viewModel)
+            {
+                var value = valueAccessor();
+                var min = value[1];
+                var max = value[2];
+                value = value[0];
+
+                $( element ).slider({
+                  slide: function( event, ui ) {
+                    value(ui.value);
+                  },
+                  max: max,
+                  min: min,
+                  step: 1,
+                  value: value(),
+                });
+            }
+        };
+
+        ko.bindingHandlers.colorpicker = {
+            init: function (element, valueAccessor, allBindingsAccessor, viewModel)
+            {
+                var value = valueAccessor();
+                $(element).colpick({
+                    colorScheme:'dark',
+                    layout:'hex',
+                    color:value(),
+                    onSubmit:function(hsb,hex,rgb,el) {
+                        $(el).css('background-color', '#'+hex);
+                        value(hex);
+                        $(el).colpickHide();
+                    },
+                    onChange:function(hsb,hex,rgb,el,bySetColor) {
+                        $(el).css('background-color', '#'+hex);
+                        value(hex);
+                    }                    
+                });
+                $(element).css("background-color","#"+value());
+            }
+        };                               
 
     //]]>  
     </script>

@@ -303,6 +303,42 @@
 	            },                       
 	        });
 	    }
+	};	
+
+	ko.bindingHandlers.file_upload_logo = {
+	    update: function(element, valueAccessor, allBindingsAccessor, viewModel, bindingContext) {
+	        var self = this;
+	        viewModel.imageModel;
+	        $(element).fileupload({
+	            dropZone: $(element),
+	            formData: {
+	            	data: ko.toJSON(viewModel),
+	            	restaurant_id: restaurant_id,
+	            	name: viewModel.name(),
+	            	id: viewModel.id()
+	            },
+	            url: "/app/website/upload_logo",
+	            dataType: 'json',
+	            progressInterval: 50,
+	            send: function (e, data) {
+              		viewModel.fresh(false);
+	            },
+	            done: function (e, data) {
+	                var file = data.result.files[0];
+	                viewModel.update_info(file);
+	                if(viewModel.carousel()){
+		                viewModel.parent.addCarousel();                             	                	
+	                }	
+	            },
+	            progressall: function (e, data) {
+	                var progress = parseInt(data.loaded / data.total * 100, 10);
+	                viewModel.progressValue(progress);
+	            },
+	            fail: function (e, data) {
+	                viewModel.failed(true);
+	            },                       
+	        });
+	    }
 	};	     
 
 	ko.bindingHandlers.file_upload_global_customize = {

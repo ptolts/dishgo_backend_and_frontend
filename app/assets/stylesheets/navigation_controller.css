@@ -1,0 +1,25 @@
+.navigation_controller {
+
+}
+
+.navigation_controller ul {
+	list-style: none;
+	padding: 15px;
+	margin: 0px;
+}
+
+.navigation_controller li {
+	padding: 10px;
+	margin-bottom: 5px;
+	border-radius: 5px;
+}
+
+.navigation_controller li.active, .navigation_controller li:hover {
+	background-color: black;
+	color: white;
+}
+
+.navigation_controller a {
+	color: inherit;
+	text-decoration: none;
+}
