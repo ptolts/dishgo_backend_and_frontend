@@ -177,12 +177,23 @@ class Restaurant
   def as_document
     hash = super
     if self.logo
-      hash[:logo] = self.logo.as_json
+      hash["logo"] = self.logo.as_json
     end
     if self.pages
-      hash[:pages] = self.pages.as_json
+      hash["pages"] = self.pages.as_json
     end    
     return hash
+  end
+
+  def port_about
+    Restaurant.ne(about_text:nil).each do |rest|
+      next if rest.pages.count > 0
+      page = Page.create
+      page.name_translations = {"en"=>"About","fr"=>"Sur"}
+      page.html_translations = rest.about_text_translations
+      page.save
+      rest.pages << page
+    end
   end
 
 end

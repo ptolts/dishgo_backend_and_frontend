@@ -25,7 +25,7 @@
 
                   <div class="scrollable">
                     <div class="dish_image">
-                      <img class="img-responsive" data-bind="visible: large_title_image, menuImage: lazyLoadImage">
+                      <img class="img-responsive" data-bind="attr:{ src:lazyLoadImage}">
                     </div> 
                     <div class="sub_content">
                       <div class="header_title">
@@ -75,11 +75,7 @@
                     <div class="dish-picture">
                       <div class="col-md-12">
                         <div class="dish_image">
-                          <div class="web_preview_uiscrollview">
-                            <ul data-bind="foreach: images">
-                              <li><img data-bind="attr:{src:original}" alt="" class="img-responsive"></li>
-                            </ul>
-                          </div>
+                          <img class="img-responsive" data-bind="attr:{ src:lazyLoadImage}">
                         </div> 
                       </div>
                     </div>

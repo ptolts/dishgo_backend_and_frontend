@@ -94,8 +94,8 @@ class WebsiteController < ApplicationController
 			if !p
 				p = Page.create
 			end
-			p.name = page["name"]
-			p.html = page["html"]
+			p.name_translations = page["name"]
+			p.html_translations = page["html"]
 			p.save
 			next p
 		end

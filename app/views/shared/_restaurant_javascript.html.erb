@@ -74,6 +74,29 @@
             self.id = data.id;
             self.html = ko.observable(data.html ? data.html : copyDefaultHash(default_web_language_hash));
             self.name = ko.observable(data.name ? data.name : copyDefaultHash(default_page_language_hash));
+
+            self.remove = function(resto){
+                bootbox.dialog({
+                  message: "Remove page?",
+                  title: "Remove Page",
+                  buttons: {
+                    success: {
+                      label: "No",
+                      className: "btn-default pull-left col-xs-3",
+                      callback: function() {
+
+                      }
+                    },
+                    danger: {
+                      label: "Yes",
+                      className: "btn-danger col-xs-3 pull-right",
+                      callback: function() {
+                        resto.pages.remove(self);
+                      }
+                    },
+                  }
+                });                  
+            }
         }        
 
         function LogoSettings(data){
@@ -322,7 +345,15 @@
                         return false;
                     }
                 })                
-            }            
+            }  
+
+            self.createNewPageText = ko.computed(function(){
+                if(self.pages().length < 3){
+                    return "Create New Page";
+                } else {
+                    return "Max Pages Reached";
+                }
+            });        
 
             self.save = function(callback_done){
                 self.subdomain.valueHasMutated();

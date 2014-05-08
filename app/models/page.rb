@@ -15,6 +15,8 @@ class Page
   def serializable_hash options
     hash = super {}
     hash[:id] = self.id
+    hash[:name] = self.name_translations
+    hash[:html] = self.html_translations
     return hash
   end
 
