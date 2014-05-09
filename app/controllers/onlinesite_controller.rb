@@ -11,7 +11,7 @@ class OnlinesiteController < ApplicationController
     end
 
     if !restaurant and request.host.to_s != 'dishgo.io'
-      restaurant = Restaurant.where(:host => request.host.to_s.gsub(/www/,'')).first
+      restaurant = Restaurant.where(:host => request.host.to_s.gsub(/www\./,'')).first
     end
 
     if !restaurant and !params[:id].blank?
