@@ -22,6 +22,9 @@
 			                onNext:function(opt){},   //opt=the options relatives to this component instance
 			                onPrev:function(opt){}   //opt=the options relatives to this component instance
 			        });
+				} else {
+					$("body").addClass("static_background");
+					$("body").css("background","url("+ background_images[0] +") no-repeat center center fixed");				
 				}
 			})
 
@@ -39,7 +42,7 @@
 	        	ko.applyBindings(viewmodel,$("html")[0]);        			
 				pager.start();
 				if($(window).width() <= 600){
-					pager.goTo("about");
+					pager.goTo("contact");
 				}
 			});
 

@@ -40,7 +40,9 @@
 			<!-- /ko -->		  	
 		</div>
 
-		<%= yield %>
+		<div data-bind="page: {id: 'start', title: 'Menu'" class="pages">
+			<%= yield %>
+		</div>
 
     	<%= javascript_include_tag "menu_editor" %>
 

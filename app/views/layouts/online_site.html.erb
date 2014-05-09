@@ -48,7 +48,7 @@
 					<li><a data-bind="click: function() { goto_and_kill_menu('menu') }">Menu</a></li>
 					<li><a data-bind="click: function() { goto_and_kill_menu('contact') }">Contact</a></li>
 					<!-- ko foreach: restaurant().pages -->
-						<li><a data-bind="click: function() { goto_and_kill_menu($data.name()['en']) }, lText: name"></a></li>
+						<li><a data-bind="click: function() { $parent.goto_and_kill_menu($data.name()['en']) }, lText: name"></a></li>
 					<!-- /ko -->					
 					<div class="language_select" data-bind="foreach: languages">
 						<li data-bind="css:{selected: $data === $root.lang()}, click: function(){ $root.lang($data); $root.display_menu(false) }"><a data-bind="text: $root.getFullLangName($data)"></a>
@@ -58,10 +58,10 @@
 		</nav>			  	
 		<div id="left_menu">
 			<div class="restaurant_name" data-bind="with: restaurant">
-				<!-- ko if: logo_settings().logo_as_image -->
+				<!-- ko if: logo_settings().showLogo -->
 					<img id="logo_image" data-bind="attr: {src:logo().url}, style: { 'height': logo_settings().image_height() + 'px', 'borderRadius':logo_settings().border_radius() + 'px', 'borderWidth':logo_settings().border_size() + 'px', 'borderColor': '#' + logo_settings().border_color()}" style="border-style: solid"/>
 				<!-- /ko -->
-				<!-- ko if: !logo_settings().logo_as_image() -->
+				<!-- ko if: !logo_settings().showLogo() -->
 					<span class="logo" data-bind="text: name, fitText: !logo_settings().logo_as_image"></span>
 				<!-- /ko -->					
 			</div>

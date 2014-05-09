@@ -12,6 +12,13 @@
 *= require_self
 */
 
+.static_background {
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover; 
+}
+
 .pages {
   /*position: relative;*/
   /*height: 100%;*/
