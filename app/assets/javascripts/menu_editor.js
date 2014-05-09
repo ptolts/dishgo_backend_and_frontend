@@ -825,7 +825,15 @@ function Option(data,dish) {
         return list;
     });    
 
-    self.selectedOptionValue = ko.observableArray([]);    
+    self.selectedOptionValue = ko.observableArray([]);
+  
+    self.maxSelectionsMet = ko.computed(function(){
+        if(self.selectedOptionValue().length >= self.max_selections()){
+            return true;
+        } else {
+            return false;
+        }
+    }) 
 
     self.computed_price = ko.computed(function(){
         var cost = 0;
@@ -837,6 +845,8 @@ function Option(data,dish) {
         }
         return cost;
     });
+
+
 
     self.option_title = ko.computed(function(){
         return "Add an option to " + self.dish.name() + ".";
@@ -1074,7 +1084,18 @@ function IndividualOption(data,option) {
         var new_image = new Image(item);
         self.icon(new_image);
         return new_image;
-    };         
+    };  
+
+    self.clickable = ko.computed({
+        read: function(){
+            if(self.option.maxSelectionsMet() && !(self.option.selectedOptionValue().indexOf(self) >= 0)){
+                return true;
+            } else {
+                return false;
+            }
+        },
+        deferEvaluation: true,
+    })       
 }
 
 function Restaurant(data) {
@@ -1278,7 +1299,28 @@ function MenuViewModel() {
             },
           }
         });          
-    }       
+    }     
+
+    self.for_real_discard = function(){
+        $.ajax({
+          type: "POST",
+          url: "/app/administration/reset_draft_menu",
+          data: {
+            restaurant_id: restaurant_id,
+            menu: ko.toJSON(self.menu)
+          },
+          success: function(data, textStatus, jqXHR){
+                // self.menu($.map(data.menu, function(item) { return new Section(item) }));
+                // $(".tooltipclass").tooltip({delay: { show: 500, hide: 100 }});
+                skip_warning = true;
+                window.location.href = "/app";
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) { 
+                bootbox.alert("There was an error publishing the menu.\n" + errorThrown);
+            },
+          dataType: "json"
+        });        
+    }  
 
     self.remove = function(item) {
         bootbox.dialog({

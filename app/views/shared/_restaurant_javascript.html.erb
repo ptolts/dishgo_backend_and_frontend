@@ -103,10 +103,10 @@
             data ? null : data = {}
             var self = this;
             self.logo_as_image = ko.observable(data.logo_as_image ? data.logo_as_image : false);
-            self.image_height = ko.observable(data.image_height ? data.image_height : 50);
+            self.image_height = ko.observable(data.image_height != null  ? data.image_height : 50);
             self.border_color = ko.observable(data.border_color ? data.border_color : "000000");
-            self.border_radius = ko.observable(data.border_radius ? data.border_radius : 3);
-            self.border_size = ko.observable(data.border_size ? data.border_size : 2);
+            self.border_radius = ko.observable(data.border_radius != null  ? data.border_radius : 3);
+            self.border_size = ko.observable(data.border_size != null ? data.border_size : 2);
         }
 
         function Day(name,data){

@@ -1,31 +1,22 @@
-			<div class="container menu_container">
+			<div class="menu_container">
 			        <div class="row">
 			            <div class="menu_header">
 			                <img data-bind="attr:{src:$root.design.imgs.simple_header_1}" class="img-responsive">
 			            </div>
-		                <div class="resto_logo">
-							<div class="center">
-			                	<div class="menu_logo" data-bind="with: $root.restaurant">
-									<h4 data-bind="" style="width: 30%">restaurant</h4>
-									<h1 class="font-effect-shadow-multiple font-effect-stonewash" data-bind="text: name" style="width: 80%;">Carambola</h1>
-									<h3 data-bind="text: address_line_1, " style="width: 30%;">420 main</h3>
-								</div>
-							</div>
-		                </div>
+						<div class="resto_logo text-center" data-bind="with: $root.restaurant">
+							<!-- ko if: logo_settings().logo_as_image -->
+								<img id="logo_image" data-bind="attr: {src:logo().url}, style: { 'height': logo_settings().image_height() + 'px', 'borderRadius':logo_settings().border_radius() + 'px', 'borderWidth':logo_settings().border_size() + 'px', 'borderColor': '#' + logo_settings().border_color()}" style="border-style: solid"/>
+							<!-- /ko -->
+							<!-- ko if: !logo_settings().logo_as_image() -->
+								<span class="logo" data-bind="text: name, fitText: !logo_settings().logo_as_image"></span>
+							<!-- /ko -->					
+						</div>
 				        <div class="language_selector">
 							<ul class="language_select" data-bind="foreach: $root.languages">
 							  <li data-bind="css:{selected: $data === $root.lang()}, click: function(){ $root.lang($data) }"><span data-bind="text: $root.getFullLangName($data)"></span>
 							</ul>				        	      
 				        </div>
-
-<!-- 				        <div class="menu_style_selector">
-				            <div class="btn-toolbar" role="toolbar">
-				              <div class="btn-group">
-				              	 <button type="button" class="btn btn-default" data-bind="css:{'active':!showDetails()}, click: function(){showDetails(false);}"><span class="fa fa-list"></span></button>
-				                <button type="button" class="btn btn-default" data-bind="css:{'active':showDetails()}, click: function(){showDetails(true);}"><span class="fa fa-picture-o"></span></button>
-				              </div>
-				            </div>          
-				        </div>	 -->	                
+	                
 			        </div>    
 			            <div class="row">
 			                <div class="each_dish">

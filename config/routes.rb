@@ -25,6 +25,12 @@ Foodcloud::Application.routes.draw do
     end
   end
 
+  resources :injected do
+    collection do
+      get '/:id', to: "injected#index"
+    end
+  end  
+
   resources :onlinesite do
     collection do
       get 'index'

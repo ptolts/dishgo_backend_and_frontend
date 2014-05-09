@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<title></title>
+		<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, minimum-scale=1, maximum-scale=1, minimal-ui" />
+		<meta name="fragment" content="!" />	
+ 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+	    <%= raw(@font_link_data) %>
+
+		<%= stylesheet_link_tag "strictly_menu", type: 'text/css'%>
+		<%= javascript_include_tag "application" %>
+
+		<!--[if lt IE 9]>
+			<script src="https://css3-mediaqueries-js.googlecode.com/files/css3-mediaqueries.js"></script>
+			<script src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]-->	
+	</head>
+    <body style="display: none;" data-bind="visible: true">
+    	
+		<style type='text/css'>
+
+			<%= raw(@design_css) %>
+			<%= raw(@design_menu_css) %>
+			<%= raw(@font_css) %>
+
+		</style>
+
+		<style type='text/css'>
+
+			body {
+				background-color: transparent;
+			}
+
+		</style>  		
+
+		<div data-bind="with: design">
+			<!-- ko foreach: global_images -->
+				<style data-bind="html: css" type='text/css'></style>
+			<!-- /ko -->		  	
+		</div>
+
+		<%= yield %>
+
+    	<%= javascript_include_tag "menu_editor" %>
+
+		<%= render 'shared/design_javascript' %>
+		<%= render 'shared/restaurant_javascript' %>
+
+		<%= render 'javascript_ignition' %>
+
+    </body>
+</html>
