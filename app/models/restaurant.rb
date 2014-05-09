@@ -8,6 +8,7 @@ class Restaurant
   field :lat, type: Float
   field :lon, type: Float
   field :subdomain, type: String
+  field :host, type: String
   field :preview_token, type: String
   field :locs, type: Array
   field :menu, type: Hash

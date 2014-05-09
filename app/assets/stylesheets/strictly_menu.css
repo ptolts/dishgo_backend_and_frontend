@@ -12,6 +12,20 @@
 *= require_self
 */
 
+.injected_container {
+  margin-top: 20px;
+  max-width: 1200px;
+}
+
+.injected_container .menu_header {
+  background: url(https://6b4fc3f2e545a64911f5-bc3823134dac282175788fae91ee3089.ssl.cf5.rackcdn.com/1083ce14040e9ad55c844d73a2b67029aa1daef9_original.png?1396991848); 
+  padding: 45px;
+}
+
+.injected_menu_contents {
+  padding: 20px;
+}
+
 .pages {
   /*position: relative;*/
   /*height: 100%;*/

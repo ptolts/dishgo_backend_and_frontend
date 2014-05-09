@@ -3,11 +3,17 @@ class OnlinesiteController < ApplicationController
   layout 'online_site'
   
   def index
-    Rails.logger.warn "SUBDOMAIN: #{request.subdomain.to_s}"
+    Rails.logger.warn "SUBDOMAIN: #{request.subdomain.to_s} HOST: #{request.host.to_s}"
+
     resto_name = request.subdomain.split(".").first
     if !resto_name.blank?
       restaurant = Restaurant.where(:subdomain => resto_name).first
     end
+
+    if !restaurant and request.host.to_s != 'dishgo.io'
+      restaurant = Restaurant.where(:domain => request.host).first
+    end
+
     if !restaurant and !params[:id].blank?
       restaurant = Restaurant.where(preview_token:params[:id]).first
       Rails.logger.warn "found by preview: #{restaurant.to_json}"

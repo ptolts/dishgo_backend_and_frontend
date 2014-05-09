@@ -1,8 +1,7 @@
 class Subdomain
   def self.matches?(request)
-    case request.subdomain
-    when 'www', '', nil, 'dev'
-      false
+    if request.host == 'dishgo.io' and ['www','','dev'].include?(request.subdomain)
+      return false
     else
       true
     end
