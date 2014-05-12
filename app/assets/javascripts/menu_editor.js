@@ -1088,6 +1088,9 @@ function IndividualOption(data,option) {
 
     self.clickable = ko.computed({
         read: function(){
+            if(!self.option.advanced()){
+                return false;
+            }
             if(self.option.maxSelectionsMet() && !(self.option.selectedOptionValue().indexOf(self) >= 0)){
                 return true;
             } else {

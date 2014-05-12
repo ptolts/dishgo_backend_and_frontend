@@ -67,8 +67,6 @@
 			</div>
 			<nav id="navigation" class="nav">
 				<ul>
-					<li><a data-bind="page-href: 'menu', lText: menu_tr">Menu</a></li>
-					<li><a data-bind="page-href: 'contact', lText: contact_tr">Contact</a></li>
 					<!-- ko foreach: restaurant().pages -->
 						<li><a data-bind="page-href: $data.name()['en'], lText: name"></a></li>
 					<!-- /ko -->					
@@ -80,8 +78,12 @@
 				<a data-bind="visible: socialVisible('instagram'), attr:{href: instagram}"><i class="fa fa-instagram"></i></a>
 			</div>
 			<div class="main_page_language_selector">
-				<ul class="language_select" data-bind="foreach: languages">
-				  <li data-bind="css:{selected: $data === $root.lang()}, click: function(){ $root.lang($data) }"><span data-bind="text: $root.getFullLangName($data)"></span>
+				<ul class="language_select">
+					<li><span data-bind="page-href: 'menu', lText: menu_tr">Menu</span></li>
+					<li><span data-bind="page-href: 'contact', lText: contact_tr">Contact</span></li>					
+				  	<!-- ko foreach: languages -->
+				  		<li data-bind="css:{selected: $data === $root.lang()}, click: function(){ $root.lang($data) }"><span data-bind="text: $root.getFullLangName($data)"></span></li>
+				  	<!-- /ko -->
 				</ul>
 			</div>	
 			<div data-bind="style:{backgroundImage: $root.computeImage('header_background_pattern')}" class="pattern_background"></div>					
