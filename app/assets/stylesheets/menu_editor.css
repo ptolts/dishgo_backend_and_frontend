@@ -646,12 +646,12 @@ body {
 }
 .sidebar-nav li.menu_dish_item:hover, .sidebar-nav .section_title_menu:hover, .sidebar-nav li.menu_dish_item.active, .sidebar-nav .section_title_menu.active {
   color: #fff;
-  background-color: #343e4b;
+  background-color: #B7B7B7;
   text-decoration: none;
 }
 .sidebar-nav li >.active {
   color: #fff;
-  background-color: #343e4b;
+  background-color: #B7B7B7;
   text-decoration: none;
 }
 .add_section {
