@@ -62,7 +62,7 @@
 					<img id="logo_image" data-bind="attr: {src:logo().url}, style: { 'height': logo_settings().image_height() + 'px', 'borderRadius':logo_settings().border_radius() + 'px', 'borderWidth':logo_settings().border_size() + 'px', 'borderColor': '#' + logo_settings().border_color()}" style="border-style: solid"/>
 				<!-- /ko -->
 				<!-- ko if: !logo_settings().showLogo() -->
-					<span class="logo" data-bind="text: name, fitText: !logo_settings().logo_as_image"></span>
+					<span class="logo" data-bind="text: name, fitText: !logo_settings().logo_as_image"><%= @resto_data["name"] %></span>
 				<!-- /ko -->					
 			</div>
 			<nav id="navigation" class="nav">
@@ -79,8 +79,8 @@
 			</div>
 			<div class="main_page_language_selector">
 				<ul class="language_select">
-					<li><span data-bind="page-href: 'menu', lText: menu_tr">Menu</span></li>
-					<li><span data-bind="page-href: 'contact', lText: contact_tr">Contact</span></li>					
+					<li><a data-bind="page-href: 'menu', lText: menu_tr">Menu</a></li>
+					<li><a data-bind="page-href: 'contact', lText: contact_tr">Contact</a></li>					
 				  	<!-- ko foreach: languages -->
 				  		<li data-bind="css:{selected: $data === $root.lang()}, click: function(){ $root.lang($data) }"><span data-bind="text: $root.getFullLangName($data)"></span></li>
 				  	<!-- /ko -->
@@ -124,9 +124,6 @@
 		</div>	
 
     	<%= javascript_include_tag "menu_editor" %>
-
-		<%= render 'shared/design_javascript' %>
-		<%= render 'shared/restaurant_javascript' %>
 
 		<%= render 'javascript_ignition' %>
 

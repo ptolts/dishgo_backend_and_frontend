@@ -23,6 +23,10 @@ body {
 	position: absolute;
 }
 
+.main_page_language_selector a:hover{
+	text-decoration: none;
+}
+
 #left_menu i {
 	font-size: 38px;
 	-webkit-transition: all 0.5s ease;

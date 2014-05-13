@@ -69,6 +69,19 @@ class User
   index({ _id:1 }, { unique: true, name:"id_index" })
 
 
+  def get_preview_token
+    return false unless self.owns_restaurants
+    if self.owns_restaurants.preview_token.blank?
+      token = loop do
+        token = SecureRandom.urlsafe_base64
+        break token unless Restaurant.where(preview_token: token).count > 0
+      end
+      self.owns_restaurants.update_attributes({preview_token:token})
+    end
+    return self.owns_restaurants.preview_token
+  end
+
+
   def ensure_authentication_token
     if authentication_token.blank?
       self.authentication_token = generate_authentication_token

@@ -45,9 +45,17 @@
             self.current_design = ko.observable();
             self.current_font = ko.observable();
             self.current_page = ko.observable();
-            self.languages = ko.observableArray(['en','fr']);
             self.restaurant = ko.observable(new Restaurant(resto_data));
+            self.languages = self.restaurant().languages;
             self.lang = ko.observable('en');
+
+            self.show_lang = ko.computed(function(){
+                if(self.languages().length > 1){
+                    return true;
+                } else {
+                    return false;
+                }
+            });
 
 		    self.languages_full = {
 		      'en'  : 'English',

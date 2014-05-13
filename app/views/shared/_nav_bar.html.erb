@@ -49,7 +49,12 @@
             <li>
               <%= link_to('Login', new_user_session_path)  %>  
             </li>
-            <% end %>            
+            <% end %>
+            <% if token = current_user.get_preview_token %>
+              <li id="preview_site">
+                <a href="/app/onlinesite/preview/<%= token %>" target="_blank">Preview Site</a>
+              </li>         
+            <% end %>          
           </ul>
 
           <% if current_page?(controller: "administration", action: "edit_menu") %>
@@ -83,24 +88,27 @@
 <div data-bind="stopBinding">
   <div id="dishgo_helper">
     <i class="fa fa-question-circle" data-bind="click: function(){ showHelp(!showHelp()) }"></i>
-    <div id="help_form_on_top" data-bind="visible: showHelp">
-      <div id="help_form">
-        <h2>Let's see if we can help!</h2>
-        <hr>
-        <div class="row">
-          <div class="col-xs-12">
-            <p>Write a short description of your problem, and we'll get back to you as soon as possible!</p>
+    <div data-bind="visible: showHelp" style="display:none">
+      <div id="bg"></div>
+      <div id="help_form_on_top" data-bind="visible: showHelp" style="display:none">
+        <div id="help_form">
+          <h2>Let's see if we can help!</h2>
+          <hr>
+          <div class="row">
+            <div class="col-xs-12">
+              <p>Write a short description of your problem, and we'll get back to you as soon as possible!</p>
+            </div>
           </div>
-        </div>
-        <div class="row">
-          <div class="col-xs-12">
-            <textarea data-bind="value: helpText"></textarea>
+          <div class="row">
+            <div class="col-xs-12">
+              <textarea data-bind="value: helpText"></textarea>
+            </div>
           </div>
-        </div>
-        <div class="row">
-          <div class="col-xs-12">          
-            <button class="btn btn-default pull-left col-xs-4" data-bind="click: function(){ showHelp(!showHelp()) }">Cancel</button>
-            <button class="btn btn-dish pull-right col-xs-4" data-bind="click: sendHelp">Help!</button>
+          <div class="row">
+            <div class="col-xs-12">          
+              <button class="btn btn-default pull-left col-xs-4" data-bind="click: function(){ showHelp(!showHelp()) }">Cancel</button>
+              <button class="btn btn-dish pull-right col-xs-4" data-bind="click: sendHelp">Help!</button>
+            </div>
           </div>
         </div>
       </div>

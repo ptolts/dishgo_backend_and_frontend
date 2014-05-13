@@ -1,4 +1,4 @@
-    <script type='text/javascript'>//<![CDATA[       
+    
 
         Day.prototype.toJSON = function() {
             var copy = ko.toJS(this); //easy way to get a clean copy
@@ -151,7 +151,8 @@
         function Restaurant(data) {
             console.log("New Restaurant: " + data.name);
             var self = this;
-            self.languages(data.languages ? data.languages : ['en']);
+            self.languages = ko.observableArray(data.languages ? data.languages : ['en']);
+            self.available_languages = ko.observableArray(_.map(_.pairs(fullLanguageName),function(lang){ return new Language(lang[1],lang[0]) }));
             self.name = ko.observable(data.name ? data.name : "");
             self.lat = ko.observable(data.lat ? data.lat : "");
             self.lon = ko.observable(data.lon ? data.lon : "");
@@ -575,5 +576,3 @@
             }
         };                               
 
-    //]]>  
-    </script>

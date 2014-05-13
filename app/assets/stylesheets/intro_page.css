@@ -1,0 +1,185 @@
+@import url(http://fonts.googleapis.com/css?family=Roboto);
+
+.intro-splash .btn {
+	position: relative;
+}
+
+.intro-splash {
+	display: block;
+	margin-right: auto;
+	margin-left: auto;
+	width: 650px;
+	background: rgba(255,255,255,0.9);
+	padding: 15px;
+	overflow: hidden;
+	margin-top: 55px;
+	border-radius: 5px;
+	padding-top: 0px;
+	font-family: 'Roboto', sans-serif;
+}
+
+.intro-splash-top {
+	/*background: rgba(0,0,0,0.85);*/
+	height: 80px;
+	margin-bottom: 20px;
+}
+
+#dishgo_logo_intro {
+	margin-top: 25px;
+	display: block;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+.icon_left {
+	position: absolute;
+	left: 5px;
+	top: 15px;
+}
+
+.icon_right {
+	position: absolute;
+	right: 5px;
+	top: 15px;
+}
+
+/* BUTTONS */
+
+.btn-first { 
+  color: #ffffff; 
+  background-color: #CF2F28; 
+  border-color: #A5120A; 
+} 
+ 
+.btn-first:hover, 
+.btn-first:focus, 
+.btn-first:active, 
+.btn-first.active, 
+.open .dropdown-toggle.btn-first { 
+  color: #ffffff; 
+  background-color: #E8173A; 
+  border-color: #A1140D; 
+} 
+ 
+.btn-first:active, 
+.btn-first.active, 
+.open .dropdown-toggle.btn-first { 
+  background-image: none; 
+} 
+ 
+.btn-first.disabled, 
+.btn-first[disabled], 
+fieldset[disabled] .btn-first, 
+.btn-first.disabled:hover, 
+.btn-first[disabled]:hover, 
+fieldset[disabled] .btn-first:hover, 
+.btn-first.disabled:focus, 
+.btn-first[disabled]:focus, 
+fieldset[disabled] .btn-first:focus, 
+.btn-first.disabled:active, 
+.btn-first[disabled]:active, 
+fieldset[disabled] .btn-first:active, 
+.btn-first.disabled.active, 
+.btn-first[disabled].active, 
+fieldset[disabled] .btn-first.active { 
+  background-color: #CF2F28; 
+  border-color: #A1140D; 
+} 
+ 
+.btn-first .badge { 
+  color: #CF2F28; 
+  background-color: #ffffff; 
+}
+
+
+.btn-second { 
+  color: #ffffff; 
+  background-color: #9C3E0F; 
+  border-color: #63290C; 
+} 
+ 
+.btn-second:hover, 
+.btn-second:focus, 
+.btn-second:active, 
+.btn-second.active, 
+.open .dropdown-toggle.btn-second { 
+  color: #ffffff; 
+  background-color: #CC5519; 
+  border-color: #63290C; 
+} 
+ 
+.btn-second:active, 
+.btn-second.active, 
+.open .dropdown-toggle.btn-second { 
+  background-image: none; 
+} 
+ 
+.btn-second.disabled, 
+.btn-second[disabled], 
+fieldset[disabled] .btn-second, 
+.btn-second.disabled:hover, 
+.btn-second[disabled]:hover, 
+fieldset[disabled] .btn-second:hover, 
+.btn-second.disabled:focus, 
+.btn-second[disabled]:focus, 
+fieldset[disabled] .btn-second:focus, 
+.btn-second.disabled:active, 
+.btn-second[disabled]:active, 
+fieldset[disabled] .btn-second:active, 
+.btn-second.disabled.active, 
+.btn-second[disabled].active, 
+fieldset[disabled] .btn-second.active { 
+  background-color: #9C3E0F; 
+  border-color: #63290C; 
+} 
+ 
+.btn-second .badge { 
+  color: #9C3E0F; 
+  background-color: #ffffff; 
+}
+
+.btn-third { 
+  color: #ffffff; 
+  background-color: #329C0F; 
+  border-color: #21610C; 
+} 
+ 
+.btn-third:hover, 
+.btn-third:focus, 
+.btn-third:active, 
+.btn-third.active, 
+.open .dropdown-toggle.btn-third { 
+  color: #ffffff; 
+  background-color: #43C219; 
+  border-color: #21610C; 
+} 
+ 
+.btn-third:active, 
+.btn-third.active, 
+.open .dropdown-toggle.btn-third { 
+  background-image: none; 
+} 
+ 
+.btn-third.disabled, 
+.btn-third[disabled], 
+fieldset[disabled] .btn-third, 
+.btn-third.disabled:hover, 
+.btn-third[disabled]:hover, 
+fieldset[disabled] .btn-third:hover, 
+.btn-third.disabled:focus, 
+.btn-third[disabled]:focus, 
+fieldset[disabled] .btn-third:focus, 
+.btn-third.disabled:active, 
+.btn-third[disabled]:active, 
+fieldset[disabled] .btn-third:active, 
+.btn-third.disabled.active, 
+.btn-third[disabled].active, 
+fieldset[disabled] .btn-third.active { 
+  background-color: #329C0F; 
+  border-color: #21610C; 
+} 
+ 
+.btn-third .badge { 
+  color: #329C0F; 
+  background-color: #ffffff; 
+}

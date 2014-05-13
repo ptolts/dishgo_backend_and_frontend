@@ -6,6 +6,8 @@
 *= require knockout-sortable.js
 *= require loglevel.js
 *= require masonry.min.js
+*= require design
+*= require restaurant
 */
 
 //<![CDATA[ 
@@ -80,39 +82,6 @@ ko.bindingHandlers.helperTip = {
     },
 }
 
-
-function currentLangName(observable){
-    return {
-                'en' : observable()['en'],
-                'reso' : observable()[lang()]
-            }
-}
-
-var localizedMessages = {
-    'delete_section' : {
-        'en':"Are you sure you want to remove the section titled \"MESSAGE\"?",
-        'fr':"",
-    },
-    'remove_image' : {
-        'en':"Are you sure you want to remove this image?",
-        'fr':"",
-    }, 
-    'remove_dish' : {
-        'en':"Are you sure you want to remove the dish titled \"MESSAGE\"?",
-        'fr':"",
-    }   
-}
-
-function localizeMessage(title, message){
-    var lang = "en";
-    var msg = localizedMessages[message][lang];
-    if(title){
-        var message_localized = title[lang];
-        msg = msg.replace("MESSAGE",message_localized);
-    }
-    return msg;
-}
-
 var opts = {
   lines: 13, // The number of lines to draw
   length: 20, // The length of each line
@@ -131,40 +100,6 @@ var opts = {
   top: 'auto', // Top position relative to parent in px
   left: 'auto' // Left position relative to parent in px
 };
-
-function copyDefaultHash(hash) {
-    return JSON.parse(JSON.stringify(hash));
-}
-
-var fullLanguageName = {
-    'en' : 'English',
-    'fr' : 'French'
-};
-
-var default_language_hash = {
-    en: '',
-    fr: '',
-}
-
-var default_sizes_hash = {
-    en: 'Sizes',
-    fr: 'Tailles',
-}
-
-var default_sizes_hash_small = {
-    en: 'Small',
-    fr: 'Petit',
-}
-
-var default_sizes_hash_large = {
-    en: 'Large',
-    fr: 'Grand',
-}
-
-var sectionNames = {
-    en: '',
-    fr: '',
-}  
 
 Section.prototype.toJSON = function() {
     var copy = ko.toJS(this); //easy way to get a clean copy
@@ -833,7 +768,7 @@ function Option(data,dish) {
         } else {
             return false;
         }
-    }) 
+    });
 
     self.computed_price = ko.computed(function(){
         var cost = 0;
@@ -1098,25 +1033,25 @@ function IndividualOption(data,option) {
             }
         },
         deferEvaluation: true,
-    })       
+    });     
 }
 
-function Restaurant(data) {
-    var self = this;
-    self.name = ko.observable(data.name);
-    self.lat = ko.observable(data.lat);
-    self.lon = ko.observable(data.lon);
-    self.id = data._id;
-    self.phone = ko.observable("450-458-0123");
-    self.address = ko.observable("45 Creme Brule");
+// function Restaurant(data) {
+//     var self = this;
+//     self.name = ko.observable(data.name);
+//     self.lat = ko.observable(data.lat);
+//     self.lon = ko.observable(data.lon);
+//     self.id = data._id;
+//     self.phone = ko.observable("450-458-0123");
+//     self.address = ko.observable("45 Creme Brule");
 
-    self.image = ko.observable(new Image({local_file:"/assets/help.jpg"}));
+//     self.image = ko.observable(new Image({local_file:"/assets/help.jpg"}));
 
-    if(data.images && data.images[0]) {
-        //console.log(data.images[0]);
-        self.image(new Image(data.images[0]));                
-    }    
-}
+//     if(data.images && data.images[0]) {
+//         //console.log(data.images[0]);
+//         self.image(new Image(data.images[0]));                
+//     }    
+// }
 
 var editing_mode = true;
 var lang;
@@ -1126,12 +1061,20 @@ function MenuViewModel() {
     self.menu = ko.observableArray([]);
     self.newDomCounter = 0;
     self.preview = ko.observable(false);
-    self.languages = ko.observableArray(['en','fr']);
+    self.restaurant = ko.observable(new Restaurant(resto_data));    
+    self.languages = self.restaurant().languages;
     self.lang = ko.observable('en');
     lang = self.lang;
     var skip_warning = false;
 
-    self.restaurant = ko.observable(new Restaurant(resto_data));
+    self.show_lang = ko.computed(function(){
+        if(self.languages().length > 1){
+            return true;
+        } else {
+            return false;
+        }
+    });    
+
 
     self.togglePreview = function(){
         self.preview(!self.preview());
@@ -1476,10 +1419,19 @@ function PublicMenuModel() {
     self.menu = ko.observableArray([]);
     self.newDomCounter = 0;
     self.preview = ko.observable(true);
-    self.languages = ko.observableArray(['en','fr']);
-    self.lang = ko.observable('en');
+    self.restaurant = ko.observable(new Restaurant(resto_data));
+    self.languages = self.restaurant().languages; 
+    self.lang = ko.observable(self.languages()[0]);
     lang = self.lang;
     self.selected_dish = ko.observable();
+
+    self.show_lang = ko.computed(function(){
+        if(self.languages().length > 1){
+            return true;
+        } else {
+            return false;
+        }
+    }); 
 
     self.languages_full = {
       'en'  : 'English',
@@ -1570,20 +1522,12 @@ function PublicMenuModel() {
       },500);
     }, false);    
          
-
-    self.restaurant = ko.observable(new Restaurant(resto_data));
-
     self.showDetails = ko.observable(false);
     self.toggleDetails =  function(){
         self.showDetails(!self.showDetails());
     }   
 
     self.menu($.map(menu_data.menu, function(item) { return new Section(item,self) }));
-
-    self.sectionNames = {
-        en: '',
-        fr: '',
-    }
 
     self.computeImage = function(image){
         //console.log(image);

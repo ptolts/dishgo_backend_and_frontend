@@ -1,4 +1,4 @@
-@font-face {
+/*@font-face {
   font-family: 'Rancho';
   font-style: normal;
   font-weight: 400;
@@ -11,7 +11,7 @@
   font-weight: 400;
   src: local('Mr Dafoe Regular'), local('MrDafoe-Regular'), url(https://themes.googleusercontent.com/static/fonts/mrdafoe/v3/F1AgEicuA-Vh7KAhE4UhjXYhjbSpvc47ee6xR_80Hnw.woff) format('woff');
 }
-
+*/
 .font-effect-shadow-multiple {
   text-shadow: .04em .04em 0 #fff,.08em .08em 0 #aaa;
   -webkit-text-shadow: .04em .04em 0 #fff, .08em .08em 0 #aaa;
@@ -37,7 +37,7 @@
 }
 
 .menu_logo h1 {
-    font-family: 'Rancho', normal;
+    /*font-family: 'Rancho', normal;*/
     font-size: 58px;
     text-transform:uppercase;    
 }
@@ -46,7 +46,7 @@
     margin-top: 10px;
     margin-bottom: 5px;      
     font-size: 18px;
-    font-family: 'Mr Dafoe', normal;
+    /*font-family: 'Mr Dafoe', normal;*/
 }
 
 .menu_logo h1 {

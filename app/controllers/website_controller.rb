@@ -82,6 +82,7 @@ class WebsiteController < ApplicationController
 		end
 		Rails.logger.warn "--++++-\n#{settings}\n--+++++--"
 		restaurant.website_settings = settings
+		restaurant.languages = restaurant_data["languages"]
 		restaurant.save
 		restaurant.design = Design.find(data["id"])
 		restaurant.font = Font.find(params["font_id"])

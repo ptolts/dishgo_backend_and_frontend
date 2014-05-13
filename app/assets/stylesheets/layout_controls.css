@@ -3,8 +3,8 @@
 }
 
 .layout_controls .nav {
-	text-align: center;
-	width: 100%;
+  text-align: center;
+  width: 100%;
 }
 
 .layout_controls .nav li {
@@ -14,8 +14,8 @@
 }
 
 .layout_controls .nav a {
-	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif !important;
-	font-size: 16px !important;
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif !important;
+  font-size: 16px !important;
   -webkit-transform: none;
   -ms-transform: none;
   transform: none;  
@@ -120,4 +120,16 @@ fieldset[disabled] .btn-inverse.active {
 .layout_controls_next hr {
   margin-top: 5px;
   margin-bottom: 5px;
+}
+
+.available_languages .onoffswitch {
+  margin-top: 5px;
+}
+
+.available_languages {
+  text-align: center;
+}
+
+.available_languages h4 {
+  display: inline-block;
 }

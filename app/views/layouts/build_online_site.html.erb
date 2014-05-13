@@ -30,8 +30,7 @@
 		<![endif]-->	
 		<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, maximum-scale=1.0, minimal-ui" />		
 	</head>
-    <body>
-
+    <body data-bind="visible: true" style="display:none">
 		<div data-bind="with: current_design">
 			<style data-bind="html: css"></style>		  	
 			<style data-bind="html: menu_css"></style>
@@ -107,10 +106,9 @@
 	    <%= javascript_include_tag "menu_editor" %>
 	    <%= javascript_include_tag "wysiwyg" %>
 	    <%= render 'shared/restaurant_template' %>
+	    <%= render 'shared/langauge_selection_template' %>
 	    <%= render 'shared/custom_design_template' %>
-	    <%= render 'shared/design_javascript' %>
 	    <%= render 'shared/font_javascript' %>
-	    <%= render 'shared/restaurant_javascript' %>
 
 	    <%= render 'website_javascript_ignition' %>
 

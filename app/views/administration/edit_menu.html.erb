@@ -9,25 +9,28 @@
         }
     </style>
 
-    <div id="save_menu_modal_on_top" data-bind="visible: save_menu_modal">
-      <div id="save_menu">
-        <div class="row">
-            <div class="col-xs-12">
-                <h3>Draft Saved</h3>
-                <div class="text-center">
-                <p class="text-left">Your changes are now saved. You can preview them <a data-bind="attr:{href:preview_token}" target=\"_blank\">here <i class="fa fa-external-link"></i></a>. In order to make them live, you must publish your changes.</p>
-                <h4 class="text-center" style="margin-top: 30px;">If you wish to publish this menu, click publish!</h4>
-                    <button class="btn btn-dish" data-bind="click: function(){ save_menu_modal(!save_menu_modal()); publishMenu() }">Publish</button>
-                </div>
-                <div class="save_menu_footer">
-                    <button class="btn btn-default pull-right" data-bind="click: function(){ save_menu_modal(!save_menu_modal()) }">Close</button>
+    <div data-bind="visible: save_menu_modal" style="display:none">
+        <div id="bg"></div>
+        <div id="save_menu_modal_on_top">
+          <div id="save_menu">
+            <div class="row">
+                <div class="col-xs-12">
+                    <h3>Draft Saved</h3>
+                    <div class="text-center">
+                    <p class="text-left">Your changes are now saved. You can preview them <a data-bind="attr:{href:preview_token}" target=\"_blank\">here <i class="fa fa-external-link"></i></a>. In order to make them live, you must publish your changes.</p>
+                    <h4 class="text-center" style="margin-top: 30px;">If you wish to publish this menu, click publish!</h4>
+                        <button class="btn btn-dish" data-bind="click: function(){ save_menu_modal(!save_menu_modal()); publishMenu() }">Publish</button>
+                    </div>
+                    <div class="save_menu_footer">
+                        <button class="btn btn-default pull-right" data-bind="click: function(){ save_menu_modal(!save_menu_modal()) }">Close</button>
+                    </div>
                 </div>
             </div>
+          </div>
         </div>
-      </div>
     </div>
 
-    <div id="wrapper">
+    <div id="wrapper" data-bind="visible: true" style="display:none">
         <!-- Sidebar -->
         <div id="sidebar-wrapper">
             <div class="add_section" data-bind="with: restaurant" id="dark">
@@ -36,7 +39,7 @@
                         <h3 data-bind="text: name" id="restaurant_name"></h3>
                     </div>
                 </div>
-                <div class="row" id="no_bottom_margin">
+                <div class="row" id="no_bottom_margin" data-bind="visible: $root.show_lang">
                     <div class="col-xs-12">
                         <div class="menu_editor_language">
                             <span>Language: </span>

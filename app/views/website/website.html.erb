@@ -27,7 +27,16 @@
     </div> -->
 
     <!-- ko if: current_design -->
-        <div data-bind="page: {id: 'image_page', title: 'Images', with: current_design, role: 'start'}" class="col-md-9 website_pages">
+        <div data-bind="page: {id: 'langauges', title: 'Languages', role: 'start'}" class="col-md-9 website_pages">
+            <div class="row">
+                <div class="col-xs-12">
+                    <h3 class="text-center" style="margin-bottom: 20px;">Which languages would you like your menu/site in?</h3>
+                    <div data-bind="template: { name: 'langauge_selection_template', data: $root.restaurant }"></div>                
+                </div>
+            </div>
+        </div>
+
+        <div data-bind="page: {id: 'image_page', title: 'Images', with: current_design}" class="col-md-9 website_pages">
             <div class="row">
                 <div class="col-xs-12">
                     <h3 class="text-center" style="margin-bottom: 20px;">Choose your website pattern and menu header.</h3>

@@ -10,11 +10,21 @@
 	box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);			
 }
 
+#bg {
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 1050;
+	right: 0;
+	bottom: 0;
+	background: rgba(0,0,0,0.8);
+}
+
 #save_menu_modal_on_top {
 	position: fixed;
 	left: 50%;
 	top: 50%;
-	z-index: 999;
+	z-index: 1051;
 	width: 500px;	
 	height: 385px;
 	-webkit-transform:	translate(-50%, -50%);

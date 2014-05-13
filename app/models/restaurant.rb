@@ -28,7 +28,7 @@ class Restaurant
   field :twitter, type: String
   field :urbanspoon, type: String
   field :instagram, type: String
-
+  field :languages, type: Array
   field :category, type: Array
 
   field :about_text, localize: true
