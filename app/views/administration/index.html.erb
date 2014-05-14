@@ -3,37 +3,41 @@
 		<img src="/app/dishgo_logo.png" id="dishgo_logo_intro" />
 	</div>
 
-	<div class="row">
-		<div class="col-sm-8">
-			<h2><em>Step 1.</em> Restaurant Details</h2>
-			<p>First you need to fill out essential details about your restaurant such as the phone number and address.</p>
-		</div>
-		<div class="col-sm-4">
-			<div class="hidden-xs" style="margin-top: 40px;"></div>
-			<a href="/app/profile/edit" class="btn btn-first btn-block btn-lg">Restaurant Details <i class="fa fa-chevron-right icon_right" style="font-size: 14px"></i></a>
+	<div class="row text-center">
+		<div class="col-sm-10 col-sm-offset-1">
+			<h4>In order to provide the best experience for your users, you should complete each of the following steps. If you have any questions or comments, please don't hesitate to contact us! Click on the red question mark in the bottom right corner and fill out your question, and we'll get back to you as soon as possible. Thank you for using DishGo!</h4>
 		</div>
 	</div>
 
 	<div class="row">
-		<div class="col-sm-4">
-			<div class="hidden-xs" style="margin-top: 40px;"></div>
-			<a href="/app/website/index" class="btn btn-first btn-block btn-lg"><i class="fa fa-chevron-left icon_left" style="font-size: 14px"></i>Website Setup</a>
-		</div>		
-		<div class="col-sm-8">
-			<h2><em>Step 2.</em> Setup Your Website</h2>
-			<p>Now design your website. You can choose different looks and upload custom background pictures.</p>			
-		</div>
-	</div>	
+		<div class="col-sm-12 text-center">
+			<div class="col-sm-4">
+				<div class="wizard_button">
+					<a href="/app/profile/edit"></a>
+					<h1 class=""><i class="fa fa-building-o"></i></h1>
+					<h2>Restaurant Details</h2>
+					<p>First you need to fill out essential details about your restaurant such as the phone number and address.</p>
+				</div>
+			</div>
+		
+			<div class="col-sm-4">
+				<div class="wizard_button">
+					<a href="/app/website/index"></a>
+					<h1><i class="fa fa-laptop"></i></h1>
+					<h2>Setup Your Website</h2>
+					<p>Now design your website. You can choose different looks and upload custom background pictures.</p>			
+				</div>
+			</div>
 
-	<div class="row">
-		<div class="col-sm-8">
-			<h2><em>Step 3.</em> Build Your Menu</h2>
-			<p>Start building your beautiful interactive menu. Once you've created it, you can make changes at any time.</p>			
-		</div>
-		<div class="col-sm-4">
-			<div class="hidden-xs" style="margin-top: 40px;"></div>
 			<% if current_user.owns_restaurants %>
-				<a href="/app/administration/edit_menu?restaurant_id=<%= current_user.owns_restaurants.id %>" class="btn btn-first btn-block btn-lg">Build a Dish <i class="icon_right fa fa-chevron-right" style="font-size: 14px"></i></a>
+				<div class="col-sm-4">
+					<div class="wizard_button">
+						<a href="/app/administration/edit_menu?restaurant_id=<%= current_user.owns_restaurants.id %>"></a>
+						<h1><i class="fa fa-list-alt"></i></h1>
+						<h2>Build Your Menu</h2>
+						<p>Start building your beautiful interactive menu. Once you've created it, you can make changes at any time.</p>			
+					</div>
+				</div>
 			<% end %>
 		</div>
 	</div>

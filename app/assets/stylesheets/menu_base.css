@@ -61,12 +61,12 @@
 }
 
 .menu_container { 
-  background-color: #fff;
-  background-image: -webkit-linear-gradient(hsla(0,0%,0%,.05), hsla(0,0%,100%,.05));
+  background-color: #f9f9f9;
+/*  background-image: -webkit-linear-gradient(hsla(0,0%,0%,.05), hsla(0,0%,100%,.05));
   background-image:    -moz-linear-gradient(hsla(0,0%,0%,.05), hsla(0,0%,100%,.05));
   background-image:     -ms-linear-gradient(hsla(0,0%,0%,.05), hsla(0,0%,100%,.05));
   background-image:      -o-linear-gradient(hsla(0,0%,0%,.05), hsla(0,0%,100%,.05));
-  background-image:         linear-gradient(hsla(0,0%,0%,.05), hsla(0,0%,100%,.05));
+  background-image:         linear-gradient(hsla(0,0%,0%,.05), hsla(0,0%,100%,.05));*/
   overflow-x: hidden;
   margin-top: 65px;
   margin-bottom: 20px;
@@ -96,24 +96,24 @@ border-color: #6D6D6D;
 	text-transform: uppercase;
   overflow: hidden;
 	color: #000000;
-  width: 90%;
+  width: 98%;
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 15px;
   margin-top: 15px;
 }
 
-.dish_price h2 {
-  color: #cf2f28;
-}
-
 .mason {
-  padding-left: 15px;
-  padding-right: 15px;
+  padding-left: 25px;
+  padding-right: 25px;
 }
 
 .menu_container .dish_title {
 	color: #000000;
+}
+
+.menu_container .image_section {
+  cursor: pointer;
 }
 
 .menu_container .image_section .dish_title {
@@ -134,7 +134,7 @@ border-color: #6D6D6D;
 }
 .menu_container .dish_price i {
 	display: block;
-  color: #cf2f28;
+  /*color: #cf2f28;*/
 }
 .menu_container .dishgo_icon {
     width: 20px;
@@ -213,11 +213,41 @@ border-color: #6D6D6D;
   }  
 }
 
-@media (max-width: 1200px) {
-/*  .menu_container .resto_logo {
-    top: 105px;
-  }*/
-/*  .container {
-  	margin-top: 65px;
+.bg_dish_image {
+/*  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;*/
+  border-radius: 5px;
+}
+
+.dish_title_over_image {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  background: -moz-linear-gradient(top,  rgba(249,249,249,0) 0%, rgba(249,249,249,0.9) 30%, rgba(249,249,249,1) 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(249,249,249,0.95)), color-stop(30%,rgba(249,249,249,0.95)), color-stop(100%,rgba(249,249,249,1))); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top,  rgba(249,249,249,0) 0%,rgba(249,249,249,0.95) 30%,rgba(249,249,249,1) 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top,  rgba(249,249,249,0) 0%,rgba(249,249,249,0.95) 30%,rgba(249,249,249,1) 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top,  rgba(249,249,249,0) 0%,rgba(249,249,249,0.95) 30%,rgba(249,249,249,1) 100%); /* IE10+ */
+  background: linear-gradient(to bottom,  rgba(249,249,249,0) 0%,rgba(249,249,249,0.95) 30%,rgba(249,249,249,1) 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f9f9f9', endColorstr='#00ffffff',GradientType=0 ); /* IE6-9 */  
+}
+
+.dish_super_imposed {
+  position: relative;
+  min-height: 90px;
+}
+
+/*.dish-col-md-4 {
+  width: 31%;
+}*/
+
+@media (max-width: 768px) {
+/*  .dish-col-md-4 {
+    width: 100%;
   }*/
 }

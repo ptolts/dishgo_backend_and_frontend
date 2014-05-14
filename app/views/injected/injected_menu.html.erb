@@ -29,26 +29,19 @@
 	                    						<!-- THIS IS THE DETAILED DISH OUTPUT. -->
 
 						                    	<div class="col-md-4 col-xs-12 image_section" data-bind="click: function(){ pager.navigate($page.path() + '/' + $data.id()) }">
-					                                <div class="row">
-					                                    <div class="dish_title col-md-9 col-xs-9">
-					                                        <h2 data-bind="lText: name"></h2>
-					                                    </div>
-					                                    <div class="col-md-3 col-xs-3">
-					                                        <div class="dish_price">
-					                                            <h2 data-bind="text: computed_price"></h2>
-					                                        </div>
-					                                    </div>					                                   					                                    
-					                                </div>
-					                                <div class="row">
-					                                    <div class="dish_picture">
-					                                        <div class="col-md-12">
-					                                            <img class="img-responsive" data-bind="visible: large_title_image, menuImage: lazyLoadMediumImage">
-					                                        </div>
-					                                    </div>
-					                                </div>						                                
-					                                <div class="row dish_button_for_phone">
-						                            	<a class="btn btn-sm btn-dish" data-bind="page-href: $data.id()"><img data-bind="attr:{src:$root.design.imgs.logo_white_nav}" class="dishgo_icon"></a>
-					                                </div>
+					                                <div class="dish_super_imposed">
+						                                <div class="dish_title_over_image">
+						                                    <div class="dish_title col-xs-9">
+						                                        <h2 data-bind="lText: name"></h2>
+						                                    </div>
+						                                    <div class="col-xs-3">
+						                                        <div class="dish_price">
+						                                            <h2 data-bind="text: computed_price"></h2>
+						                                        </div>
+						                                    </div>					                                   					                                    
+						                                </div>
+					                                    <img class="bg_dish_image" data-bind="visible: large_title_image, menuImage: lazyLoadMediumImage">
+					                                </div>				                                				                                
 						                   		</div>
 
 						                        <!-- dish modal -->
