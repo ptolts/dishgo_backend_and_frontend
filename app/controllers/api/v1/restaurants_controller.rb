@@ -11,9 +11,7 @@ class Api::V1::RestaurantsController < ApplicationController
 
     Rails.logger.warn params.to_s
 
-    sources = Rails.cache.fetch("restaurants", expires_in: 1.second) do
-      (Restaurant.new.by_loc [params[:lat].to_f,params[:lon].to_f]).to_a
-    end
+    sources = (Restaurant.new.by_loc [params[:lat].to_f,params[:lon].to_f]).to_a
 
     sources_asjson = sources.as_json(:except => [:locs], :include => {:image => {:only => [:_id,:local_file,:rejected]}})
 

@@ -355,7 +355,6 @@ var dishList = ko.observableArray([]);
 
 function Dish(data, topmodel) {
     var self = this;
-    dishList.push(self);
     self.name = ko.observable(data.name);  
     self.description = ko.observable(data.description);
     self.price = ko.observable(data.price);
@@ -643,6 +642,8 @@ function Dish(data, topmodel) {
         }
         return false;
     });                  
+
+    dishList.push(self);
 
 }
 
