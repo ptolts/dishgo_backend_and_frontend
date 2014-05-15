@@ -188,7 +188,7 @@ class Dish
     dish_hash["description"] = self.description_translations["en"]
     dish_hash["sizes"] = self.sizes.custom_to_hash
     dish_hash["options"] = self.options.collect do |option|
-      next option.custom_to_hash
+      next option.api_custom_to_hash
     end
     dish_hash["image"] = self.image.collect do |image|
       img_hash = image.custom_to_hash
