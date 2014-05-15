@@ -157,7 +157,7 @@ body {
 	-o-transition: all 0.5s ease;		
 }
 
-@media (max-width: 600px) {
+@media (max-width: 995px) {
 	.main_page_language_selector {
 		display: none;
 	}
