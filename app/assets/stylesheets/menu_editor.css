@@ -116,10 +116,6 @@ body {
     padding-left: 0px;
     padding-right: 0px;
 }
-.dish_button div[class^=col-xs] {
-    padding-left: 0px;
-    padding-right: 0px;
-    }
 .dish_button_image div[class^=col-xs] {
     padding-left: 0px;
     padding-right: 10px;
