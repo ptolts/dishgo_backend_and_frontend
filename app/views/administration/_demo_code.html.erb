@@ -42,7 +42,7 @@
                       <!-- ko foreach: options -->
                       <div class="demo_options">
                         <strong><h4 style="text-decoration: underline;" data-bind="lText: name"></h4></strong>
-                        <div data-bind="foreach: individual_options">
+                        <div class="text-center" data-bind="foreach: individual_options">
                           <label class="btn btn-info float_option" data-bind="css: {'active': $parent.selectedOptionValue().indexOf($data) >= 0}">
                             <input name="sizes_radio" type="checkbox" data-bind="checkedValue: $data, checked: $parent.selectedOptionValue" style="opacity: 0; width: 0px"/>
                             <span data-bind="lText: name"></span>
@@ -99,7 +99,7 @@
                       <!-- ko foreach: options -->
                       <div class="col-sm-6">
                           <strong><h4 class="text-center" data-bind="lText: name"></h4></strong>
-                          <div data-bind="foreach: individual_options">
+                          <div class="text-center" data-bind="foreach: individual_options">
                             <label class="button lightText square red float_option" data-bind="css: {'active': $parent.selectedOptionValue().indexOf($data) >= 0}">
                               <input name="sizes_radio" type="checkbox" data-bind="checkedValue: $data, checked: $parent.selectedOptionValue" style="opacity: 0; width: 0px"/>
                               <span data-bind="lText: name"></span>

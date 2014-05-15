@@ -9,15 +9,13 @@ class Api::V1::RestaurantsController < ApplicationController
 
   def index
 
+    Rails.logger.warn params.to_s
+
     sources = Rails.cache.fetch("restaurants", expires_in: 1.second) do
-      (Restaurant.new.by_loc [45.458972,-74.155815]).to_a
+      (Restaurant.new.by_loc [params[:lat].to_f,params[:lon].to_f]).to_a
     end
 
     sources_asjson = sources.as_json(:except => [:locs], :include => {:image => {:only => [:_id,:local_file,:rejected]}})
-    sources_asjson.each do |so|
-      # so['image'].delete_if{|img| Rails.logger.warn img['rejected'];next ((img['rejected'].to_s == 'true') or (img['rejected'].to_s == '1'))}
-      so['image'].delete_if{|img| Rails.logger.warn img[:rejected];next ((img[:rejected].to_s == 'true') or (img[:rejected].to_s == '1'))}
-    end
 
     respond_with sources_asjson
   end

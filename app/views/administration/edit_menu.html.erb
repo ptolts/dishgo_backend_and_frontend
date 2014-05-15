@@ -30,6 +30,52 @@
         </div>
     </div>
 
+    <div data-bind="visible: showOptionsList" style="display:none">
+        <div id="bg"></div>
+        <div id="options_list_modal_on_top">
+          <div id="options_list">
+            <div class="row">
+                <div class="col-md-6">
+                    <h3>Select Option:</h3>
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <h4>Select Dish With Option</h4>
+                            <ul data-bind="foreach: dishList">
+                                <li data-bind="click: function(){ $root.currentDishOptions($data) }"><span class="li_label" data-bind="lText: name"></span></li>
+                            </ul>
+                        </div>
+                        <div class="col-xs-6">
+                            <div data-bind="with: currentDishOptions">
+                                <h4>Select Option</h4>
+                                <ul data-bind="foreach: options">
+                                    <li data-bind="click: function(){ $root.currentOption($data) }"><span class="li_label" data-bind="lText: name"></span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 web_preview" data-bind="with: currentOption">
+                  <h3>Selected Option</h3>
+                  <strong><h4 class="text-center" data-bind="lText: name"></h4></strong>
+                  <div data-bind="foreach: individual_options">
+                    <label class="button lightText square red float_option" data-bind="css: {'active': $parent.selectedOptionValue().indexOf($data) >= 0}">
+                      <input name="sizes_radio" type="checkbox" data-bind="checkedValue: $data, checked: $parent.selectedOptionValue" style="opacity: 0; width: 0px"/>
+                      <span data-bind="lText: name"></span>
+                      <!-- ko if: $data.icon -->
+                      <img class="col-xs-12 thumbnail" data-bind="attr: {src: icon().url()}" />
+                      <!-- /ko -->
+                    </label>                         
+                  </div>
+                  <button class="btn btn-primary btn-lg copy_option" data-bind="click: copyOptionIntoDish">Copy Option Into Current Dish</button>
+                </div>
+            </div>
+            <div class="options_list_footer">
+                <button class="btn btn-default pull-right" data-bind="click: closeCopyOption">Close</button>
+            </div>                         
+          </div>
+        </div>
+    </div>    
+
     <div id="wrapper" data-bind="visible: true" style="display:none">
         <!-- Sidebar -->
         <div id="sidebar-wrapper">

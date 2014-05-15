@@ -23,6 +23,7 @@
  *= require admin_restaurant
  *= require help_button
  *= require save_menu_modal
+ *= require options_list
  *= require credit_card
  *= require plans
  *= require location

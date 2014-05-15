@@ -350,8 +350,12 @@ Dish.prototype.toJSON = function() {
     return copy; //return the copy to be serialized
 };
 
+var showOptionsList = ko.observable(false);
+var dishList = ko.observableArray([]);
+
 function Dish(data, topmodel) {
     var self = this;
+    dishList.push(self);
     self.name = ko.observable(data.name);  
     self.description = ko.observable(data.description);
     self.price = ko.observable(data.price);
@@ -526,6 +530,10 @@ function Dish(data, topmodel) {
         self.options.push(new Option({name:copyDefaultHash(default_language_hash), type:"generic",placeholder:"Type the option group title here.",individual_options:[{placeholder:"Type the first option title here.",price:'0.0',name:copyDefaultHash(default_language_hash)},{placeholder:"Type the second option title here.",price:'0.0', name: copyDefaultHash(default_language_hash)}]},self));
     };
 
+    self.copyOption = function(){
+        showOptionsList(true);
+    }
+
     self.addImage = function(item) { 
         var new_image = new Image(item);
         self.images.unshift(new_image);
@@ -693,6 +701,8 @@ Option.prototype.toJSON = function() {
     return copy; //return the copy to be serialized
 };
 
+// var optionsList = ko.observableArray([]);
+
 function Option(data,dish) {
     var self = this;
     self.name = ko.observable(data.name);
@@ -707,6 +717,24 @@ function Option(data,dish) {
 
     self.id = ko.observable();
 
+    self.getId = function(){
+        $.ajax({
+          type: "POST",
+          url: "/app/menucrud/create_option",
+          data: {
+            restaurant_id: restaurant_id,
+          },
+          success: function(data, textStatus, jqXHR){
+                console.log("Option Saved.");
+                self.id(data.id);
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) { 
+                console.log("There was an error saving the option " + errorThrown);
+            },
+            dataType: "json"
+        });        
+    }
+
     if(data._id){
         self.id(data._id);
         self.advanced(data.advanced);
@@ -715,21 +743,7 @@ function Option(data,dish) {
         }
     } else {
         if(editing_mode){
-            $.ajax({
-              type: "POST",
-              url: "/app/menucrud/create_option",
-              data: {
-                restaurant_id: restaurant_id,
-              },
-              success: function(data, textStatus, jqXHR){
-                    console.log("Option Saved.");
-                    self.id(data.id);
-                },
-                error: function(XMLHttpRequest, textStatus, errorThrown) { 
-                    console.log("There was an error saving the option " + errorThrown);
-                },
-                dataType: "json"
-            });
+            self.getId();
         }
     }
 
@@ -741,6 +755,7 @@ function Option(data,dish) {
     if(data.type != "size"){
         // This is the list of size options if this happens to be the size option version of this model.
         self.sizes_object_names = dish.sizes_object().individual_options;
+        // optionsList.push(self);       
     }
 
     self.individual_options = ko.observableArray([]);
@@ -890,25 +905,30 @@ function IndividualOption(data,option) {
 
     var self = this;
     self.id = ko.observable();
+
+    self.getId = function(){
+        $.ajax({
+          type: "POST",
+          url: "/app/menucrud/create_individual_option",
+          data: {
+            restaurant_id: restaurant_id,
+          },
+          success: function(data, textStatus, jqXHR){
+                console.log("Individual Option Saved.");
+                self.id(data.id);
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) { 
+                console.log("There was an error saving the individual option " + errorThrown);
+            },
+            dataType: "json"
+        });
+    }
+
     if(data._id){
         self.id(data._id);
     } else {
         if(editing_mode){
-            $.ajax({
-              type: "POST",
-              url: "/app/menucrud/create_individual_option",
-              data: {
-                restaurant_id: restaurant_id,
-              },
-              success: function(data, textStatus, jqXHR){
-                    console.log("Individual Option Saved.");
-                    self.id(data.id);
-                },
-                error: function(XMLHttpRequest, textStatus, errorThrown) { 
-                    console.log("There was an error saving the individual option " + errorThrown);
-                },
-                dataType: "json"
-            });
+            self.getId();
         }
     }
     self.option = option;
@@ -1058,8 +1078,19 @@ var lang;
 function MenuViewModel() {
     // Data
     var self = this;
+    self.current_dish = ko.observable();
+    self.current_section = ko.observable();    
     self.menu = ko.observableArray([]);
     self.newDomCounter = 0;
+    self.currentOption = ko.observable();
+    self.currentDishOptions = ko.observable(false);
+    self.showOptionsList = showOptionsList;
+    self.dishList = ko.computed({
+        read: function(){
+                    return _.filter(dishList(),function(item){ return item.options().length > 0 });
+        }, deferEvaluation: true,
+    });
+    // self.optionsList = optionsList;
     self.preview = ko.observable(false);
     self.restaurant = ko.observable(new Restaurant(resto_data));    
     self.languages = self.restaurant().languages;
@@ -1073,8 +1104,23 @@ function MenuViewModel() {
         } else {
             return false;
         }
-    });    
+    });
 
+    self.closeCopyOption = function(){
+        self.currentOption(null);
+        self.currentDishOptions(null);
+        self.showOptionsList(false);
+    };
+
+    self.copyOptionIntoDish = function(item){
+        var new_opt = new Option(JSON.parse(ko.toJSON(self.currentOption())),self.current_dish());
+        new_opt.getId();
+        _.each(new_opt.individual_options(),function(e){e.getId()});
+        self.current_dish().options.push(new_opt);
+        self.currentOption(null);
+        self.currentDishOptions(null);
+        self.showOptionsList(false);
+    };
 
     self.togglePreview = function(){
         self.preview(!self.preview());
@@ -1099,9 +1145,6 @@ function MenuViewModel() {
 
     self.menu($.map(menu_data.menu, function(item) { return new Section(item,self) }));
     $(".tooltipclass").tooltip({delay: { show: 500, hide: 100 }});
-
-    self.current_dish = ko.observable();
-    self.current_section = ko.observable();
 
     self.set_dish = function(dish) {
         self.current_section(null);
