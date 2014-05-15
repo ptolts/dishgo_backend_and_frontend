@@ -10,9 +10,6 @@
   min-height: 150px;
 }
 
-.grow:hover, .grow:focus, .grow:active {
-  cursor:pointer;
-}
 
 .menu_container h1,.menu_container h2, .menu_container h3, .menu_container .h1, .menu_container .h2, .menu_container .h3 {
   margin-top: 15px;
@@ -199,11 +196,6 @@ border-color: #6D6D6D;
   }
   .dish_button_for_phone {
     display: visible;
-  }
-
-  .grow:hover, .grow:focus, .grow:active {
-    -webkit-transform: none;
-    transform: none;
   }
 
   .menu_style_selector {
