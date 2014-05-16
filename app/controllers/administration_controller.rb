@@ -22,7 +22,7 @@ class AdministrationController < ApplicationController
     user = resto.user
     sign_in(user)
     render 'index'
-  end  
+  end
 
   def become_user
     user = User.find(params[:id])
@@ -359,6 +359,12 @@ class AdministrationController < ApplicationController
     restaurant.city = settings["city"]
     restaurant.province = settings["province"]
     restaurant.postal_code = settings["postal_code"]
+
+    if current_user.is_admin
+      if !settings["host"].blank?
+        restaurant.host = settings["host"]
+      end
+    end
 
     restaurant.hours = settings["hours"].inject({}) do |res,day|
       res[day["name"]] = day

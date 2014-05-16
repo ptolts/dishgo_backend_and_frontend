@@ -86,6 +86,18 @@
                                 </div>
                             </div>
                         </div>
+
+                        <% if current_user.is_admin %>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>DishGo Hostname</label>
+                                    <div class="input-group controls">
+                                        <input id="hostname" name="hostname" type="text" placeholder="Hostname.com" data-bind="value: host" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                        <% end %>
+
                         <div class="col-sm-6">
                             <label>Location on Map:</label>
                             <!-- ko if: dirty -->
