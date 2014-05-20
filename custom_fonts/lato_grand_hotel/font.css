@@ -7,6 +7,7 @@ h1,
 h3,
 h4,
 h5,
+span,
 h6,
 p,
 .main_page_language_selector,
@@ -52,7 +53,11 @@ address {
 .content_wrapper span {
     font-family: 'Lato', sans-serif;
 }
-.note-editor .note-editable {
+/*.note-editor .note-editable {
     font-family: 'Lato', sans-serif;
+    font-size: 24px;
+}*/
+
+p {
     font-size: 24px;
 }

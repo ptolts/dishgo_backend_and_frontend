@@ -152,16 +152,16 @@
 
                     <!-- ko with: current_section -->
                         <div class="col-xs-12 text-center">
-                            <%= render 'section_content' %>
+                            <%= render 'administration/section_content' %>
                         </div>
                     <!-- /ko -->
                     <div class="row">
                         <div class="col-md-6 col-xs-12 text-center" data-bind="with: current_dish">
-                            <%= render 'menu_content' %>
+                            <%= render 'administration/menu_content' %>
                         </div> 
 
                         <div class="col-md-6 col-xs-12" data-bind="with: current_dish">                           
-                            <%= render 'demo_code' %>
+                            <%= render 'administration/demo_code' %>
                         </div> 
                     </div> 
 
@@ -171,7 +171,7 @@
 
     </div>
 
-    <%= render 'menu_templates' %>
+    <%= render 'administration/menu_templates' %>
 
     <script type='text/javascript'>
 

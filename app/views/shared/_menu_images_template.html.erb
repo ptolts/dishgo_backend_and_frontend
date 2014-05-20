@@ -1,0 +1,61 @@
+<script id="menu_images_template" type="text/html">
+<div class="col-md-6">
+  <div class="profile_form_wrapper">
+    <div class="row">
+      <div class="col-xs-12">
+        <h2>Upload Your Current Menu</h2>
+        <p>If you are a non free user, we will have this digitized into our interactive menu platform.</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <div data-bind="template: { name: 'menu_image', foreach: computed_menu_images}"></div>
+      </div>
+    </div>
+  </div>
+</div>
+</script>
+
+<script id="menu_image" type="text/html">
+    <div class="col-xs-12 col-md-4"> 
+        <div class="thumbnail col-xs-12">
+            <!-- ko if: !fresh() -->        
+                <div data-bind="visible: !failed()">
+                    <div class="uploading_image" data-bind="visible: !completed()">
+                        <div class="col-xs-10 col-xs-offset-1">
+                            <div class="progress" style="height: 10px">
+                                <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" data-bind="style: { width: progressValue() + '%'}"></div>
+                            </div>    
+                        </div> 
+                    </div> 
+                    <div class="completed_image" data-bind="visible: completed">
+                        <div class="col-xs-12 text-center">
+                            <div class="thumbnail">
+                                <img class="img-rounded" data-bind="attr: {src: url}" />
+                            </div>
+                        </div>
+                    </div> 
+                </div>
+                <div data-bind="visible: failed()">
+                    <div class="alert alert-warning alert-dismissable text-center">
+                      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                      <strong>Warning!</strong> There was a problem processing your image. Please contact support.
+                    </div>                
+                </div>
+            <!-- /ko -->
+            <div class="caption">
+                <!-- ko if: fresh() -->        
+                    <span class="btn btn-block btn-section file_upload_button col-xs-6">
+                        <i class="glyphicon glyphicon-picture"></i>
+                        <span>Upload Image</span>
+                        <!-- The file input field used as target for the file upload widget -->
+                        <input data-bind="file_upload_menu" id="fileupload" type="file" name="files"  class="file_upload_input" accept="images/*" capture="camera">
+                    </span>                                                                                     
+                <!-- /ko --> 
+                <!-- ko if: !fresh() -->        
+                    <span class="btn btn-block btn-section col-xs-6" data-bind="click: destroyMenuImage">Remove</span>                                                                              
+                <!-- /ko -->                 
+            </div>            
+        </div>
+    </div>
+</script> 

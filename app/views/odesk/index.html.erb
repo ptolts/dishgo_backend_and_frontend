@@ -1,0 +1,94 @@
+<div class="profile_form_wrapper container">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="form-inline" role="form">
+                <input class="form-control" data-bind="value: restaurant_name" />
+                <button class="btn btn-default" data-bind="click: search_for_restaurant">Search</button>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="max-height: 400px; overflow-y: scroll">
+        <div class="col-xs-12">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Address</th>
+                    </tr>
+                </thead>
+                <tbody data-bind="foreach: restaurants">
+                    <tr data-bind="click: function(){ $root.current_restaurant($data) }">
+                        <td>
+                            <p data-bind="text: name"></p>
+                        </td>   
+                        <td>
+                            <p data-bind="text: address_line_1"></p>
+                        </td>                                                                                              
+                    </tr>   
+                </tbody>
+            </table>
+        </div>
+    </div>    
+</div>
+
+<div class="profile_form_wrapper container" data-bind="with: current_restaurant">
+    <div class="row">
+        <div class="col-xs-12">
+            <h2 data-bind="text: name"></h2>
+        </div>
+        <div class="col-xs-12" data-bind="foreach: menu_images">
+            <div class="col-xs-3">
+                <img data-bind="attr: { src: url }" width="100%">
+            </div>
+        </div>
+        <div class="col-xs-12" data-bind="with: odesk">
+            <div class="col-xs-3">
+                <h4>Odesk Link</h4>
+            </div>
+            <div class="col-xs-9">
+                <h4>https://dishgo.io/app/odesk/edit_menu/<!-- ko text: access_token --><!-- /ko --></h4>
+            </div>            
+        </div>              
+    </div>
+</div>
+
+    <script type='text/javascript'>//<![CDATA[ 
+
+        function viewModel() {
+            var self = this;
+            self.restaurant_name = ko.observable("");
+            self.restaurants = ko.observableArray([]);
+            self.current_restaurant = ko.observable();
+            self.search_for_restaurant = function() {
+                $.getJSON("/app/odesk/search_restaurants?restaurant_name=" + self.restaurant_name(), function(data) { 
+                    self.restaurants($.map(data, function(item) { console.log(item); return new Restaurant(item) }));
+                }).fail( function(d, textStatus, error) {
+                    console.error("getJSON failed, status: " + textStatus + ", error: "+error)
+                });
+            };
+
+            self.set_restaurant = function(resto) {
+                self.current_restaurant(resto);
+            };
+
+            self.new_restaurant = function(){
+                self.current_restaurant(new Restaurant({
+                                                        name:"New Restaurant",
+                                                        lat:0.0,
+                                                        lon:0.0,
+                                                        _id:null,
+                                                        address_line_2:"",
+                                                        address_line_1:"",
+                                                        phone:"",
+                                                        city:"",
+                                                        province:""
+                                                    }))
+            }        
+        };
+
+        var viewmodel = new viewModel();
+        ko.applyBindings(viewmodel);
+
+
+    //]]>  
+    </script>

@@ -121,6 +121,7 @@
 	    self.description = ko.observable("");
 	    self.url = ko.observable("/loader.gif");
 	    self.custom = ko.observable(false);
+	    self.destroyed = ko.observable(false);
 	    self.fresh = ko.observable(true);
 	    self.customizable = ko.observable();
 	    self.css = ko.observable(data.css ? data.css : "");
@@ -227,7 +228,41 @@
 	            },
 	          }
 	        }); 		    	
-	    }	    
+	    }	
+
+	    self.destroyMenuImage = function(item){
+	        bootbox.dialog({
+	          message: "Are you sure you want to remove this image \"" + item.name() + "\"?",
+	          title: "Remove Image",
+	          buttons: {
+	            success: {
+	              label: "No",
+	              className: "btn-default pull-left col-xs-3",
+	              callback: function() {
+
+	              }
+	            },
+	            danger: {
+	              label: "Yes",
+	              className: "btn-danger col-xs-3 pull-right",
+	              callback: function() {
+		            $.ajax({
+		              type: "POST",
+		              url: "/app/odesk/destroy_image",
+		              data: {
+		                image_id:item.id(),
+		              },
+		              success: function(data, textStatus, jqXHR){
+		              	console.log("image destroyed");
+		              	self.destroyed(true);
+		              },
+		              dataType: "json"
+		            });
+	              }
+	            },
+	          }
+	        }); 		    	
+	    }		        
 
 	    self.get_id = function(){
             $.ajax({
@@ -261,7 +296,39 @@
       			return "Upload Image";
       		}
       	})
-	}   
+	}
+
+	ko.bindingHandlers.file_upload_menu = {
+	    update: function(element, valueAccessor, allBindingsAccessor, viewModel, bindingContext) {
+	        var self = this;
+	        $(element).fileupload({
+	            dropZone: $(element),
+	            formData: {
+	            	data: ko.toJSON(viewModel)
+	            },           
+	            url: "/app/odesk/upload_image",
+	            dataType: 'json',
+	            progressInterval: 50,
+	            submit: function(e, data){
+	            	console.log(data);
+	            },
+	            send: function (e, data) {
+              		viewModel.fresh(false);
+	            },
+	            done: function (e, data) {
+	                var file = data.result.files[0];	                
+	                viewModel.update_info(file);                                               
+	            },
+	            progressall: function (e, data) {
+	                var progress = parseInt(data.loaded / data.total * 100, 10);
+	                viewModel.progressValue(progress);
+	            },
+	            fail: function (e, data) {
+	                viewModel.failed(true);
+	            },                       
+	        });
+	    }
+	};	
 
 	ko.bindingHandlers.file_upload_global = {
 	    update: function(element, valueAccessor, allBindingsAccessor, viewModel, bindingContext) {

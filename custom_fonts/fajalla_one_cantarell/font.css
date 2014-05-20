@@ -13,6 +13,7 @@ h2,
 h3,
 h4,
 h5,
+span,
 h6,
 p,
 .hours,.main_page_language_selector,
@@ -55,7 +56,10 @@ address {
 .content_wrapper span {
     font-family: 'Fjalla One', sans-serif;
 }
-.note-editor .note-editable {
+/*.note-editor .note-editable {
     font-family: 'Fjalla One', sans-serif;
+    font-size: 24px;
+}*/
+p {
     font-size: 24px;
 }

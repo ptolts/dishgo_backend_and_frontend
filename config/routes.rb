@@ -25,6 +25,16 @@ Foodcloud::Application.routes.draw do
     end
   end
 
+  resources :odesk do
+    collection do
+      get '/', to: "odesk#index"
+      get 'edit_menu/:id', to: "odesk#edit_menu"
+      get 'search_restaurants', to: "odesk#search_restaurants"
+      post 'upload_image', to: "odesk#upload_image"
+      post 'destroy_image', to: "odesk#destroy_image"
+    end
+  end    
+
   resources :injected do
     collection do
       get '/:id', to: "injected#index"

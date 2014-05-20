@@ -13,6 +13,7 @@ h1 {
 h3,
 h4,
 h5,
+span,
 h6,
 p,
 .hours,.main_page_language_selector,
@@ -77,7 +78,10 @@ address {
 .content_wrapper span {
     font-family: 'Special Elite';
 }
-.note-editor .note-editable {
+/*.note-editor .note-editable {
     font-family: 'Special Elite';
+    font-size: 24px;
+}*/
+p {
     font-size: 24px;
 }

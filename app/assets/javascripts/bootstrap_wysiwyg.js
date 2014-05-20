@@ -765,11 +765,11 @@
         },
         style: {
           style: 'Text Size',
-          normal: 'Normal',
+          normal: 'Small',
           blockquote: 'Quote',
           pre: 'Code',
-          h1: 'Header 1',
-          h2: 'Header 2',
+          h1: 'Big',
+          h2: 'Medium',
           h3: 'Header 3',
           h4: 'Header 4',
           h5: 'Header 5',
@@ -976,13 +976,14 @@
         oStyle['list-style'] = bUnordered ? 'unordered' : 'ordered';
       }
 
-      var elPara = dom.ancestor(rng.sc, dom.isPara);
-      if (elPara && elPara.style['line-height']) {
-        oStyle['line-height'] = elPara.style.lineHeight;
-      } else {
-        var lineHeight = parseInt(oStyle['line-height']) / parseInt(oStyle['font-size']);
-        oStyle['line-height'] = lineHeight.toFixed(1);
-      }
+      // var elPara = dom.ancestor(rng.sc, dom.isPara);
+      // if (elPara && elPara.style['line-height']) {
+      //   oStyle['line-height'] = elPara.style.lineHeight;
+      // } else {
+      //   var lineHeight = parseInt(oStyle['line-height']) / parseInt(oStyle['font-size']);
+      //   oStyle['line-height'] = lineHeight.toFixed(1);
+      // }
+      oStyle["line-height"] = null;
 
       oStyle.image = dom.isImg(elTarget) && elTarget;
       oStyle.anchor = rng.isOnAnchor() && dom.ancestor(rng.sc, dom.isAnchor);
@@ -1840,7 +1841,7 @@
 
       // lineheight
       var $lineHeight = $toolbar.find('.note-height');
-      checkDropdownMenu($lineHeight, parseFloat(oStyle['line-height']));
+      // checkDropdownMenu($lineHeight, parseFloat(oStyle['line-height']));
 
       btnState('button[data-event="bold"]', function () {
         return oStyle['font-bold'] === 'bold';
@@ -2710,9 +2711,7 @@
                '<ul class="dropdown-menu">' +
                  '<li><a data-event="formatBlock" data-value="h1"><h1>' + lang.style.h1 + '</h1></a></li>' +
                  '<li><a data-event="formatBlock" data-value="h2"><h2>' + lang.style.h2 + '</h2></a></li>' +
-                 '<li><a data-event="formatBlock" data-value="h3"><h3>' + lang.style.h3 + '</h3></a></li>' +
-                 '<li><a data-event="formatBlock" data-value="h4"><h4>' + lang.style.h4 + '</h4></a></li>' +
-                 '<li><a data-event="formatBlock" data-value="p">' + lang.style.normal + '</a></li>' +
+                 '<li><a data-event="formatBlock" data-value="p"><p>' + lang.style.normal + '</p></a></li>' +
                '</ul>';
       },
       fontname: function(lang) {

@@ -53,10 +53,8 @@ class AdministrationController < ApplicationController
       result = Restaurant.where(:locs => { "$near" => { "$geometry" => { "type" => "Point", :coordinates => [params[:lon].to_f,params[:lat].to_f] }, "$maxDistance" => 25000}})
     else
       result = Restaurant.where(:name => /#{params[:restaurant_name]}/i).limit(25)
-      Rails.logger.warn result.to_json
-      Rails.logger.warn "result.to_json"
     end
-  	render :json => result.as_json(:include => :design)
+  	render :json => result.as_json(:include => [:design, :menu_images])
   end
 
   def free_search_restaurants

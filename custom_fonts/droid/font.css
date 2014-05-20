@@ -14,6 +14,7 @@ h3,
 h4,
 h5,
 h6,
+span,
 p,
 .main_page_language_selector,
 .nav li,
@@ -61,7 +62,10 @@ address {
 .content_wrapper span {
     font-family: 'Oswald', sans-serif;
 }
-.note-editor .note-editable {
-    font-family: 'Oswald', sans-serif;
+p {
     font-size: 24px;
 }
+/*.note-editor .note-editable {
+    font-family: 'Oswald', sans-serif;
+    font-size: 24px;
+}*/

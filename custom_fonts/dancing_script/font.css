@@ -13,7 +13,8 @@ p,
 .nav li,
 #footer .powered_by_dishgo,
 .menu_container .language_selector,
-address {
+address,
+span {
     font-family: 'EB Garamond', serif;
 }
 #footer #opened_or_closed_footer, .main_page_language_selector {
@@ -45,7 +46,10 @@ address {
 .content_wrapper span {
     font-family: 'Dancing Script', cursive;
 }
-.note-editor .note-editable {
-    font-family: 'Dancing Script', cursive;
+p {
     font-size: 24px;
 }
+/*.note-editor .note-editable {
+    font-family: 'Dancing Script', cursive;
+    font-size: 24px;
+}*/

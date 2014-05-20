@@ -36,7 +36,13 @@
                   }
                 });                  
             }
-        }        
+        }
+
+        function Odesk(data){
+            data ? null : data = {}
+            var self = this;
+            self.access_token = data.access_token;
+        }              
 
         function LogoSettings(data){
             data ? null : data = {}
@@ -178,6 +184,8 @@
             self.logo = ko.observable(data.logo ? new GlobalImage(data.logo) : new GlobalImage({}));
             self.logo_settings = ko.observable(data.logo_settings ? new LogoSettings(data.logo_settings) : new LogoSettings());
 
+            self.odesk = ko.observable(data.odesk ? new Odesk(data.odesk) : null );
+
             self.about_text = ko.observable(data.about_text ? data.about_text : copyDefaultHash(default_web_language_hash));
 
             self.pages = ko.observableArray([]);
@@ -185,6 +193,23 @@
             if(data.pages){
                 self.pages(_.map(data.pages,function(page){ return new Page(page) }));
             }
+
+            self.menu_images = ko.observableArray([]);
+
+            if(data.menu_images){
+                self.menu_images(_.map(data.menu_images,function(img){ return new GlobalImage(img) }))
+            }
+
+            self.computed_menu_images = ko.computed({
+                read: function(){
+                    if(self.menu_images().length == 0 || _.every(self.menu_images(),function(e){ console.log(e);return e.completed() })){
+                        self.menu_images.push(new GlobalImage({}));
+                    }
+                    self.menu_images.remove(function(img){ return img.destroyed() });
+                    return self.menu_images();
+                },
+                deferEvaluation: true,
+            })           
 
             self.hours = ko.observableArray([]);
 

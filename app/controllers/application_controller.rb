@@ -5,6 +5,12 @@ class ApplicationController < ActionController::Base
  
   private
 
+  def odesk_user!
+    if Odesk.where(access_token:params[:id]).count == 9
+      redirect_to :controller => 'administration', :action => 'index'
+    end
+  end
+
   # Overwriting the sign_out redirect path method
   def after_sign_out_path_for(resource_or_scope)
     "/app/users/sign_in"
@@ -64,6 +70,14 @@ class ApplicationController < ActionController::Base
       redirect_to :controller => 'administration', :action => 'index'
     end
   end
+
+  def admin_or_menu_image_owner!
+    return if current_user.is_admin
+    if current_user.owns_restaurants.nil? or current_user.owns_restaurants.id.blank? or (current_user.owns_restaurants.id.to_s != GlobalImage.where(id:params[:image_id]).first.restaurant_menu_images_id.to_s)
+      flash[:error] = "You lack the privileges to access this function."
+      redirect_to :controller => 'administration', :action => 'index'
+    end
+  end    
 
   def admin_or_image_owner!
     return if current_user.is_admin

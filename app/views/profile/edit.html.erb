@@ -27,6 +27,10 @@
         <div data-bind="template: { name: 'hours_template', data: $parent.restaurant }" class="profile_details"></div>
     </div>
 
+    <div data-bind="page: {id: 'menu', title: 'Menu Images', with: restaurant}">
+        <div data-bind="template: { name: 'menu_images_template', data: $parent.restaurant }" class="profile_details"></div>
+    </div>    
+
     <div data-bind="page: {id: 'notifications', title: 'Notifications', with: user, afterShow: user().mark_as_read}">
         <div data-bind="template: { name: 'notifications_template', data: $parent.user}" class="profile_details"></div>
     </div>    
@@ -36,10 +40,11 @@
     <%= render 'shared/notifications_template' %>
     <%= render 'shared/user_template' %>
     <%= render 'shared/hours_template' %>
+    <%= render 'shared/menu_images_template' %>
 
     <script type='text/javascript'>//<![CDATA[ 
 
-        var resto_data = <%= raw(current_user.owns_restaurants.as_json(include: :user).to_json) %>;
+        var resto_data = <%= raw(current_user.owns_restaurants.as_json(include: [:user, :menu_images]).to_json) %>;
         var user_data = <%= raw(current_user.as_json(include: :owns_restaurants, include: :notifications).to_json) %>;
 
         ko.bindingHandlers.phone = {
