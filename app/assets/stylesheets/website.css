@@ -386,3 +386,12 @@
 	-o-transform:		translateX(-50%);  
 	transform:			translateX(-50%);*/	
 }
+@media (max-width: 992px) {
+	.layout_controls {
+	width: 100%;
+	margin-bottom: 80px;
+}
+.layout_controls .nav-pills>li>a {
+	color: #000;
+}
+}
