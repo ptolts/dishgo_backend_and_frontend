@@ -6,11 +6,8 @@
 *= require knockout-sortable.js
 *= require loglevel.js
 *= require masonry.min.js
-*= require design
 *= require restaurant
 */
-
-//<![CDATA[ 
 
 ko.bindingHandlers.fitText = {
     update: function(element, valueAccessor, allBindingsAccessor, viewModel, bindingContext) {
@@ -1737,5 +1734,5 @@ function DemoViewModel() {
         $("#"+image.id()).modal("show");
     };     
 }
-//]]>  
+
 

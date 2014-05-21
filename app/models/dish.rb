@@ -14,6 +14,7 @@ class Dish
   field :draft, type: Hash
   # belongs_to :subsection, index: true
   belongs_to :restaurant, index: true
+  belongs_to :odesk, index: true
 
   has_and_belongs_to_many :image, inverse_of: nil, index: true
   has_and_belongs_to_many :draft_image, class_name: "Image", inverse_of: nil, index: true
@@ -64,8 +65,6 @@ class Dish
 
     size_option_object.save
 
-
-
     options = dish["options"].collect do |option|
       # Load Option Object, or create a new one.
       if option_object = Option.where(:_id => option["id"]).first and option_object
@@ -115,6 +114,71 @@ class Dish
     self.draft_options = options
     self.save
   end  
+
+  def odesk_load_data_from_json dish, odesk_request
+    draft = {}
+    sizes_object = dish["sizes_object"]
+    if size_option_object = Option.where(:_id => sizes_object["id"]).first and size_option_object
+      # If it was null, theres probably been a mistake.
+      if size_option_object.odesk.nil?
+        size_option_object.odesk = odesk_request
+      end
+      if size_option_object.odesk != odesk_request
+        return false
+      end     
+      size_option_object.draft_dish_which_uses_this_as_size_options = self
+    else
+      size_option_object = Option.create
+      size_option_object.published = false
+      size_option_object.draft_dish_which_uses_this_as_size_options = self
+      size_option_object.odesk = odesk_request
+      size_option_object.save
+    end
+    if !size_option_object.odesk_load_data_from_json(sizes_object,odesk_request)
+      return false
+    end  
+    size_option_object.save
+    options = dish["options"].collect do |option|
+      # Load Option Object, or create a new one.
+      if option_object = Option.where(:_id => option["id"]).first and option_object
+        # If it was null, theres probably been a mistake.
+        if option_object.odesk.nil?
+          option_object.odesk = odesk_request
+        end
+        if option_object.odesk != odesk_request
+          return false
+        end        
+      else
+        option_object = Option.create
+        option_object.published = false
+        option_object.odesk = odesk_request
+        option_object.save
+      end  
+      if !option_object.odesk_load_data_from_json(option,odesk_request)
+        return false
+      end      
+      next option_object
+    end
+    self.draft_image = []
+    images = dish["images"].collect do |image|
+      next if image["id"].blank?
+      img = Image.find(image["id"])
+      self.draft_image << img
+    end    
+    draft[:name] = dish["name"]
+    draft[:position] = dish["position"].to_i
+    self.draft_position = dish["position"].to_i
+    draft[:description] = dish["description"]
+    draft[:price] = dish["price"].to_f
+    if dish["sizes"]
+      draft[:has_multiple_sizes] = true
+    else
+      draft[:has_multiple_sizes] = false
+    end 
+    self.draft = draft
+    self.draft_options = options
+    self.save
+  end
 
   def publish_menu
     self.name_translations = self.draft["name"]

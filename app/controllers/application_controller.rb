@@ -63,6 +63,22 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def api_admin_or_owner!
+    if params["dishgo_token"].blank?
+      redirect_to :controller => 'administration', :action => 'index'
+    end
+    user = User.where(authentication_token:params["dishgo_token"]).first
+    if !user
+      redirect_to :controller => 'administration', :action => 'index'
+    end
+    sign_in user
+    return if user.is_admin
+    if user.owns_restaurants.nil? or user.owns_restaurants.id.blank? or (user.owns_restaurants.id.to_s != params["restaurant_id"].to_s)
+      flash[:error] = "You lack the privileges to access this function."
+      redirect_to :controller => 'administration', :action => 'index'
+    end
+  end  
+
   def admin_or_owner!
     return if current_user.is_admin
     if current_user.owns_restaurants.nil? or current_user.owns_restaurants.id.blank? or (current_user.owns_restaurants.id.to_s != params[:restaurant_id].to_s)

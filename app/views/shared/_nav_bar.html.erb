@@ -59,23 +59,12 @@
 
           <% if current_page?(controller: "administration", action: "edit_menu") %>
             <ul class="nav navbar-nav navbar-right">
-
-<!--               <li data-bind="click: togglePreview, visible: current_dish" id="togglePreview">
-                <a data-bind="text: previewText"></a>  
-              </li> -->
-
               <li data-bind="click: discardDraft" id="discardDraft">
                 <a>Discard Changes <i class="glyphicon glyphicon-remove"></i></a>
               </li>
-
-<!--               <li data-bind="click: publishMenu" id="saveMenu">
-                <a><i class="glyphicon glyphicon-ok"></i> Publish Menu</a>
-              </li>  -->
-
               <li data-bind="click: saveDraft" id="saveMenu">
                 <a>Save Changes <i class="glyphicon glyphicon-ok"></i> </a>
               </li>                               
-
             </ul>                          
           <% end %>
 
@@ -191,5 +180,4 @@
 
     //]]>
     </script>
-
 </div>

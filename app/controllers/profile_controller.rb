@@ -2,7 +2,7 @@ class ProfileController < ApplicationController
 	before_filter :authenticate_user!
 	before_filter :create_notifications!
 
-	layout 'administration'
+	layout 'profile'
 
 	def edit
 		render 'edit'

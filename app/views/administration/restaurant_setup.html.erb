@@ -37,8 +37,17 @@
                                                     <h6 class="col-xs-4" data-bind="text: address_line_1"></h6>
                                                 </div>
                                             </li>
-                                        <!-- /ko -->
+                                        <!-- /ko -->                                     
                                     </ul>
+                                    <!-- ko if: filtered_restaurants().length == 0 && search_name() != '' -->
+                                        <ul>
+                                            <li>
+                                                <div class="row">
+                                                    <h6 class="text-center">None Found</h6>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    <!-- /ko -->                                       
                                 </div>                                    
                             </div>                       
                         </div>

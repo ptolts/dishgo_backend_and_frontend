@@ -3,15 +3,15 @@ class Plan
     return [
               {
                 id:"standard",
-                name:"Standard",
-                price:"59.99",
+                name:"Professional",
+                price:"29",
                 interval:"Monthly",
                 message: "",
               },
               {
                 id:"standard_year",
-                name:"Standard Year",
-                price:"610",
+                name:"Professional Year",
+                price:"348",
                 interval:"Yearly",
                 message: "Save 15%"
               }              

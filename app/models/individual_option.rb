@@ -24,6 +24,8 @@ class IndividualOption
 	has_one :draft_icon, class_name: "Icon"
 
 	belongs_to :restaurant, index: true
+	belongs_to :odesk, index: true
+
 	default_scope -> {asc(:created_at)}
 	index({ _id:1 }, { unique: true, name:"id_index" })
 
@@ -48,6 +50,24 @@ class IndividualOption
 		self.draft = draft
 		self.save
 	end 
+
+
+	def odesk_load_data_from_json individual_option, odesk_request
+		draft = {}
+		if individual_option["size_prices"]
+			self.draft_size_prices = individual_option["size_prices"]
+		end
+		icon = individual_option["icon"]
+		if icon and !icon["id"].blank?
+			img = Icon.find(icon["id"])
+			self.draft_icon = img unless self.draft_icon == img
+		end
+		draft[:name] = individual_option["name"]
+		draft[:price] = individual_option["price"].to_f
+		draft[:price_according_to_size] = individual_option["price_according_to_size"].to_bool
+		self.draft = draft
+		self.save
+	end 	
 
 	def publish_menu
 		self.name_translations = self.draft["name"]

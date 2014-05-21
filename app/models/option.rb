@@ -23,6 +23,7 @@ class Option
 	belongs_to :draft_dish_which_uses_this_as_size_options, class_name: "Dish", inverse_of: :draft_sizes, index: true
 
 	belongs_to :restaurant, index: true
+	belongs_to :odesk, index: true
 
 	has_many :individual_options, class_name: "IndividualOption", inverse_of: :options
 	has_many :draft_individual_options, class_name: "IndividualOption", inverse_of: :draft_options
@@ -65,6 +66,39 @@ class Option
 		self.draft_individual_options = individual_options
 		self.save
 	end	
+
+	def odesk_load_data_from_json option, odesk_request
+		draft = {}
+		#Load or Create the individual options for this option.
+		individual_options = option["individual_options"].collect.with_index do |individual_option,index|
+			if individual_option_object = IndividualOption.where(:_id => individual_option["id"]).first and individual_option_object
+				# Rails.logger.warn "---\nLoading IndividualOption[#{individual_option["name"]}]\n---"
+			  # If someone has tried to load options from another restaurant, something fishy is going on.
+			  if individual_option_object.odesk != odesk_request
+			  	return false
+			  end
+			else
+				individual_option_object = IndividualOption.create
+				individual_option_object.published = false
+				individual_option_object.odesk = odesk_request
+			end
+
+			if !individual_option_object.odesk_load_data_from_json(individual_option,odesk_request)
+				return false
+			end
+
+			next individual_option_object
+		end
+		draft[:name] = option["name"]
+		draft[:type] = option["type"]
+		draft[:advanced] = option["advanced"]
+		draft[:max_selections] = option["max_selections"]
+		draft[:min_selections] = option["min_selections"]
+		draft[:extra_cost] = option["extra_cost"]
+		self.draft = draft
+		self.draft_individual_options = individual_options
+		self.save
+	end		
 
 	def publish_menu
 		self.name_translations = self.draft["name"]

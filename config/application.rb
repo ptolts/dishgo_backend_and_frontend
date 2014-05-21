@@ -44,7 +44,7 @@ module Foodcloud
     config.encoding = "utf-8"
 
     # Configure sensitive parameters which will be filtered from the log file.
-    config.filter_parameters += [:password]
+    config.filter_parameters += [:password, :image_data]
 
     # Enable escaping HTML in JSON.
     config.active_support.escape_html_entities_in_json = true
@@ -67,6 +67,7 @@ module Foodcloud
     config.assets.version = '1.0'
 
     config.assets.precompile += [   'menu_editor.js',
+                                    'restaurant.js',
                                     'menu-builder.css',
                                     'codemirror.js',
                                     'codemirror.css',

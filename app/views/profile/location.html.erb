@@ -28,7 +28,6 @@
     </div>
 </div>
 
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDmVdO0hER_qFFNZN5C9Du28_-sSblng0Y&sensor=false"></script>
 
     <script type='text/javascript'>//<![CDATA[ 
 
@@ -36,16 +35,16 @@
     
         function mapObject(data){
             var self = this;
-            self.lat = ko.observable(data.lat ? data.lat : 45.458972);
-            self.lon = ko.observable(data.lon ? data.lon : -74.155815);
-            self.maker = null;
+            self.lat = ko.observable(data.lat ? parseFloat(data.lat) : 45.458972);
+            self.lon = ko.observable(data.lon ? parseFloat(data.lon) : -74.155815);
+            self.marker = null;
             self.map = null;
-            self.location = new google.maps.LatLng(self.lat(),self.lon());
+            self.location = new google.maps.LatLng(parseFloat(self.lat()),parseFloat(self.lon()));
             self.legit_data = false;
 
             self.clickEvent = function(event){
                 if(event.latLng){
-                    self.location = new google.maps.LatLng(event.latLng.lat(),event.latLng.lng());
+                    self.location = new google.maps.LatLng(parseFloat(event.latLng.lat()),parseFloat(event.latLng.lng()));
                     self.setMarker();
                 }            
             }
@@ -110,9 +109,9 @@
         };
 
         ko.bindingHandlers.iMap = {
-            update: function (element, valueAccessor) {
+            init: function (element, valueAccessor) {
                 var value = valueAccessor()();
-                var lat_lon = new google.maps.LatLng(value.lat(),value.lon());
+                var lat_lon = new google.maps.LatLng(parseFloat(value.lat()),parseFloat(value.lon()));
 
                 if(!value.map){
                     var styles = [
@@ -146,19 +145,22 @@
                     value.map.setMapTypeId('map_style');                    
                     google.maps.event.addListener(value.map, 'click', function(event){ value.clickEvent(event) });     
                 }
-           
-                value.map.setCenter(lat_lon);
             }
         };         
 
-        var viewmodel = new viewModel();            
+        function loadScript() {
+            var script = document.createElement('script');
+            script.type = 'text/javascript';
+            script.src = 'https://maps.googleapis.com/maps/api/js?sensor=false&callback=initialize';
+            document.body.appendChild(script);
+        }    
 
-        $(function(){   
-            ko.applyBindings(viewmodel);                        
-        });
+        window.onload = loadScript;  
+
+        function initialize() {
+            viewmodel = new viewModel();     
+            ko.applyBindings(viewmodel); 
+        }        
 
     //]]>  
     </script>    
-
-
-</div>

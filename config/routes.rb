@@ -155,6 +155,7 @@ Foodcloud::Application.routes.draw do
       match 'order/confirm', to: 'order#confirm', via: [:post] 
       match 'order/status', to: 'order#status', via: [:post]  
       match 'order/fetch_orders', to: 'order#fetch_orders', via: [:post]                
+      match 'restaurant_admin/upload_image', to: 'restaurant_admin#upload_image', via: [:post]                
     end
   end
 end

@@ -11,6 +11,7 @@ class Section
 	field :published, type: Boolean
 
 	belongs_to :restaurant, class_name: "Restaurant", inverse_of: :section, index: true
+	belongs_to :odesk, index: true
 
 	belongs_to :draft_restaurant, class_name: "Restaurant", inverse_of: :draft_menu, index: true
 	belongs_to :published_restaurant, class_name: "Restaurant", inverse_of: :published_menu, index: true
@@ -81,5 +82,33 @@ class Section
 	    self.draft_dishes = dishes
 	    self.save
 	end	
+
+	def odesk_load_data_from_json section, odesk_request
+		draft = {}
+		draft[:name] = section["name"]
+		draft[:position] = section["position"].to_i
+		self.draft_position = section["position"].to_i
+		# Rails.logger.warn "[#{self.name}] -> #{self.draft_position}"
+		dishes = section["dishes"].collect do |dish|
+	        # Load Dish Object, or create a new one.
+	        if dish_object = Dish.where(:_id => dish["id"]).first and dish_object
+				if dish_object.odesk != odesk_request
+          			Rails.logger.warn "Dish Permission Error: #{dish_object.odesk.to_json} != #{odesk_request.to_json}"
+					return false
+				end	        	
+	        else
+	        	dish_object = Dish.create
+	        	dish_object.odesk_menu = odesk_request
+	        	dish_object.published = false
+	        end  
+	        if !dish_object.odesk_load_data_from_json(dish,odesk_request)
+	        	return false
+	        end
+	        next dish_object
+	    end
+	    self.draft = draft
+	    self.draft_dishes = dishes
+	    self.save
+	end		
 end
 

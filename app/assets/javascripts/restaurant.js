@@ -1,4 +1,6 @@
-    
+/*
+*= require design
+*/    
 
         Day.prototype.toJSON = function() {
             var copy = ko.toJS(this); //easy way to get a clean copy

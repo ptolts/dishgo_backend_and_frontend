@@ -43,6 +43,12 @@ class Api::V1::TokensController  < ApplicationController
 
       reso = {:current_orders => current_orders, :foodcloud_token=>@user.authentication_token, :phone_number => @user.phone_number, :last_name => @user.last_name, :first_name => @user.first_name}.merge(reso)
 
+      if @user.owns_restaurants
+        reso[:owns_restaurant_id] = @user.owns_restaurants.id
+      end
+
+      Rails.logger.warn reso.to_json
+
       render :status=>200, :json=> reso
     end
   end
