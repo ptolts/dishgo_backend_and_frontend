@@ -41,19 +41,19 @@ class ApplicationController < ActionController::Base
   end 
 
   def create_notifications!
-    if current_user.stripe_token.blank? and current_user.confirmed_at and !current_user.cash_money
-      if !current_user.notifications.any?{|e| e.created_at.today? and e.type == "trial_period"}
-        user = current_user
-        note = Notification.create
-        note.type = "trial_period"
-        days = (DateTime.now.to_time - user.confirmed_at).to_i / (24 * 60 * 60)
-        days = 14 - days.to_i
-        note.message = "Your trial period will end in #{days} days. Please navigate to the billing section, choose a plan and add the required payment method! Thanks!"
-        return if user.notifications.any?{|e| e.message == note.message}
-        note.save
-        user.notifications << note
-      end
-    end
+    # if current_user.stripe_token.blank? and current_user.confirmed_at and !current_user.cash_money
+    #   if !current_user.notifications.any?{|e| e.created_at.today? and e.type == "trial_period"}
+    #     user = current_user
+    #     note = Notification.create
+    #     note.type = "trial_period"
+    #     days = (DateTime.now.to_time - user.confirmed_at).to_i / (24 * 60 * 60)
+    #     days = 14 - days.to_i
+    #     note.message = "Your trial period will end in #{days} days. Please navigate to the billing section, choose a plan and add the required payment method! Thanks!"
+    #     return if user.notifications.any?{|e| e.message == note.message}
+    #     note.save
+    #     user.notifications << note
+    #   end
+    # end
   end  
 
   def admin_user!
