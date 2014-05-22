@@ -12,20 +12,21 @@
 								</div>
 							</div>
 		                </div>
+
 				        <div class="language_selector">
 							<ul class="language_select" data-bind="foreach: $root.languages">
 							  <li data-bind="css:{selected: $data === $root.lang()}, click: function(){ $root.lang($data) }"><span data-bind="text: $root.getFullLangName($data)"></span>
 							</ul>				        	      
 				        </div>
 
-				        <div class="menu_style_selector">
+<!-- 				        <div class="menu_style_selector">
 				            <div class="btn-toolbar" role="toolbar">
 				              <div class="btn-group">
 				              	 <button type="button" class="btn btn-default" data-bind="css:{'active':!showDetails()}, click: function(){showDetails(false);}"><span class="fa fa-list"></span></button>
 				                <button type="button" class="btn btn-default" data-bind="css:{'active':showDetails()}, click: function(){showDetails(true);}"><span class="fa fa-picture-o"></span></button>
 				              </div>
 				            </div>          
-				        </div>		                
+				        </div>	 -->	                
 			        </div>    
 			            <div class="row">
 			                <div class="each_dish">
@@ -40,7 +41,7 @@
 
 	                    						<!-- THIS IS THE DETAILED DISH OUTPUT. -->
 
-						                    	<div class="col-md-4 col-sm-6 col-xs-12 image_section" data-bind="fadeVisible: $root.showDetails, click: function(){ pager.navigate($page.path() + '/' + $data.id()) }">
+						                    	<div class="col-md-4 col-sm-6 col-xs-12 image_section dish_cursor" data-bind="fadeVisible: $root.showDetails, click: function(){ pager.navigate($page.path() + '/' + $data.id()) }">
 					                                <div class="row">
 					                                    <div class="dish_title col-md-9 col-xs-9">
 					                                        <h2 data-bind="lText: name"></h2>
@@ -65,7 +66,7 @@
 
 
 	                        					<!-- dish on screen -->
-	                        					<div class="col-xs-12 col-md-4 col-sm-6 dish_min_height" data-bind="fadeVisible: !$root.showDetails(), click: function(){ pager.navigate($page.path() + '/' + $data.id()) }">
+	                        					<div class="col-xs-12 col-md-4 col-sm-6 dish_min_height dish_cursor" data-bind="fadeVisible: !$root.showDetails(), click: function(){ pager.navigate($page.path() + '/' + $data.id()) }">
 							                        <div class="dish_title">
 							                            <h2 data-bind="lText: name"></h2>
 							                        </div>
