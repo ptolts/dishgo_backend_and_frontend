@@ -79,5 +79,7 @@ module Foodcloud
                                     'signin.css',
                                 ]
 
+    config.exceptions_app = self.routes
+
   end
 end

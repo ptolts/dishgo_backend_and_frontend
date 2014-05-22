@@ -15,6 +15,7 @@ class Api::V1::RegistrationController  < ApplicationController
     end
     
     @user = User.new({ :email => params[:email], :password => params[:password] })
+    @user.save
 
     if sign_in @user
       @user.ensure_authentication_token

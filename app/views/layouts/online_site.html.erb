@@ -120,7 +120,7 @@
 		</div>
 
 
-		<div data-bind="page: {id: 'menu', title: 'Menu', afterShow: function(){ ko['menuVisible'](true) }, afterHide: function(){ ko['menuVisible'](false) }}" class="pages">
+		<div data-bind="page: {id: 'menu', title: 'Menu', afterShow: function(){ ko['menuVisible'](true); pauseCarousel(); }, afterHide: function(){ ko['menuVisible'](false); playCarousel(); }}" class="pages">
 			<%= yield %>
 		</div>	
 

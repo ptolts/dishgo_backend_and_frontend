@@ -5,10 +5,11 @@
 	        var design_data = <%= raw(@design_data.to_json) %>;
 	        var resto_data = <%= raw(@resto_data.to_json) %>;	
 	        var background_images = <%= raw(@carousel.to_json) %>;
+	        var carousel;
 
 			$(function(){
 				if($(window).width() > 600){
-			        $.mbBgndGallery.buildGallery({
+			        carousel = new mbBgndGallery({
 			                containment:"body",
 			                timer:4000,
 			                effTimer:2000,
@@ -82,7 +83,21 @@
 					    }
 					});	   				          
 	            }
-	        }; 	        				
+	        };
+
+	        function pauseCarousel(){
+	        	if(carousel){
+	        		carousel.mbBgndGalleryPause();
+	        	}
+	        }
+
+	        function playCarousel(){
+	        	if(carousel){
+	        		var t = carousel.get(0);
+	        		t.opt.paused = false;
+	        		carousel.mbBgndGalleryPlay();
+	        	}
+	        } 	           				
 
 			function showModal(page, callback) {
 				$(page.element).modal('show');

@@ -1,0 +1,15 @@
+<script id="menu_style_template" type="text/html">
+    <div class="col-xs-12">
+        <div data-bind="foreach: available_languages" class="available_languages">
+            <h4><!-- ko text: name --><!-- /ko -->
+                <div class="onoffswitch">
+                    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" data-bind="checked: $parent.languages, checkedValue: abbreviation, attr:{ id: 'lang_' + name }">
+                    <label class="onoffswitch-label" data-bind="attr:{for: 'lang_' + name }">
+                        <div class="onoffswitch-inner"></div>
+                        <div class="onoffswitch-switch"></div>
+                    </label>
+                </div>
+            </h4>        
+        </div>
+    </div>
+</script>

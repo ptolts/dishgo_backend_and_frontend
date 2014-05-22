@@ -84,6 +84,7 @@ class Api::V1::TokensController  < ApplicationController
     if @user.nil? and !profile["id"].empty?
       Rails.logger.warn "CREATING ACCOUNT\nUser.create(:facebook_user_id => #{profile["id"]}, :providor => \"Facebook\", :facebook_auth_token => #{fb_token})"
       @user = User.create(:facebook_user_id => profile["id"], :providor => "Facebook", :facebook_auth_token => fb_token)
+      @user.skip_confirmation!
       sign_in @user
     end
 
