@@ -95,6 +95,7 @@ class OnlinesiteController < ApplicationController
         if default = img[:global_images].select{|e| e["default_image"]} and default = default.first
           image_objects_to_be_used << default 
         else 
+          Rails.logger.warn "INSERTING [#{img[:global_images].first.to_s}]"
           image_objects_to_be_used << img[:global_images].first
         end
       end

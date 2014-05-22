@@ -65,7 +65,7 @@ class User
   # Token authenticatable
   field :authentication_token, :type => String
 
-  index({ email:1 }, { unique: true, name:"email_index", sparse: true })
+  index({ email:1 }, { name:"email_index" })
   index({ _id:1 }, { unique: true, name:"id_index" })
 
 
@@ -118,6 +118,14 @@ class User
       return false
     end
   end
+
+  def password_required?
+    if self.facebook_auth_token.blank?
+      return true
+    else
+      return false
+    end
+  end  
 
   def welcome_message
     Email.welcome(self)
