@@ -92,6 +92,7 @@ class OnlinesiteController < ApplicationController
       elsif settings[img["name"]] and default = img[:global_images].select{|e| e["_id"].to_s == settings[img["name"]]} and default = default.first
         image_objects_to_be_used << default
       else
+        Rails.logger.warn "And here we are.\n#{img[:global_images].select{|e| e["default_image"]}}"
         if default = img[:global_images].select{|e| e["default_image"]} and default = default.first
           image_objects_to_be_used << default 
         end
