@@ -26,15 +26,8 @@ class OdeskController < ApplicationController
 
   def update_menu
 
-    #when the user first edits the menu, make the menu editor visible in his toolbar.
-    unless current_user.sign_up_progress["edit_menu"]
-      u = current_user
-      u.sign_up_progress["edit_menu"] = true
-      u.save
-    end
-
     # IF YOU EVER NEED TO SCALE, THIS COULD BE A PLACE TO OPTIMIZE
-    restaurant = Restaurant.find(params[:restaurant_id])
+    odesk = Odesk.where(access_token:params[:id]).first
     menu = JSON.parse(params[:menu]).collect do |section|
 
       # Load Option Object, or create a new one.

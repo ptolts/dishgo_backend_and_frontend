@@ -22,5 +22,6 @@ production:
       password: 0ud1Vi7u
       options:
         ssl: true
-        read: :primary_preferred      
+        read: :primary_preferred
+ 
 
