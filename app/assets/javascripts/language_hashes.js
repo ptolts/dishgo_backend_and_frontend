@@ -57,8 +57,8 @@ var default_page_language_hash = {
 };        
 
 var default_web_language_hash = {
-    en: 'Edit your home page content!',
-    fr: 'Modifier le contenu de votre page d\'accueil!',
+    en: 'Edit your page content!',
+    fr: 'Modifier le contenu de votre page!',
 };        
 
 var opened_tr = {

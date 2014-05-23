@@ -15,13 +15,13 @@
     <div data-bind="page: {id: 'start', title: 'Pages'}" class="">
 
         <div class="pages_controller navigation_controller text-center" data-bind="with: $root.restaurant">
-            <h4>Available Pages</h4>
+            <h4>Add / Edit Pages</h4>
             <ul class="">
                 <!-- ko foreach: pages -->
                     <li data-bind="click: function(){ $root.current_page($data) }, lText: name, css:{ active: $data == $root.current_page()}"></li>
                 <!-- /ko -->
             </ul>
-            <button class="btn btn-inverse btn-sm" data-bind="click: function(){ $root.current_page(newPage()) }, attr:{disabled:pages().length > 2}, text: createNewPageText"><a>Create New Page</a></button>
+            <button class="btn btn-inverse btn-lg" data-bind="click: function(){ $root.current_page(newPage()) }, attr:{disabled:pages().length > 2}, text: createNewPageText"><a>Create New Page</a></button>
         </div>
 
         <!-- ko if: current_page -->
