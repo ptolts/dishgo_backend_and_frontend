@@ -19,7 +19,7 @@ class ApplicationController < ActionController::Base
   private
 
   def odesk_user!
-    if Odesk.where(access_token:params[:id]).count == 9
+    if Odesk.where(access_token:params[:id]).count == 0
       redirect_to :controller => 'administration', :action => 'index'
     end
   end

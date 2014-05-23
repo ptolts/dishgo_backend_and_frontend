@@ -18,6 +18,7 @@ class Api::V1::RestaurantAdminController < ApplicationController
       dish = Dish.find(params[:dish_id])
       img.save
       dish.image << img
+      dish.draft_image << img
       images = [img]
     end
     render :json => {success:true}.as_json

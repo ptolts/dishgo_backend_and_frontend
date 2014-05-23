@@ -16,20 +16,14 @@
             <li class="<%= active_link('administration','index') %>"><a href="/app/administration">Home</a></li>
             <% if user_signed_in? %>
               <% if current_user.owns_restaurants %>
-                <% if sign_up_progress("profile") %>
-                    <li class="<%= active_link('profile','edit') %>">
-                      <!-- ko stopBinding -->
-                        <a href="/app/profile/edit">Profile</a>
-                        <span id="profile_alert_circle" data-bind="text: notificationCount, visible: notificationVisible"></span>
-                      <!-- /ko -->
-                    </li>
-                <% end %>
-                <% if sign_up_progress("website") %>                
-                  <li class="<%= active_link('website','index') %>"><a href="/app/website/index">Edit Website</a></li>
-                <% end %>                
-                <% if sign_up_progress("edit_menu") %>
+                  <li class="<%= active_link('profile','edit') %>">
+                    <!-- ko stopBinding -->
+                      <a href="/app/profile/edit">Profile</a>
+                      <span id="profile_alert_circle" data-bind="text: notificationCount, visible: notificationVisible"></span>
+                    <!-- /ko -->
+                  </li>             
+                  <li class="<%= active_link('website','index') %>"><a href="/app/website/index">Edit Website</a></li>            
                   <li class="<%= active_link('administration','edit_menu') %>"><a href="/app/administration/edit_menu?restaurant_id=<%= current_user.owns_restaurants.id %>">Edit Menu</a></li>
-                <% end %>
                 <% if !current_user.cash_money %>
                   <li class="<%= active_link('profile','billing') %>"><a href="/app/profile/billing">Billing</a></li>
                 <% end %>
