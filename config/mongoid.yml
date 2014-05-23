@@ -23,5 +23,5 @@ production:
       options:
         ssl: true
         read: :primary_preferred
-        identity_map_enabled: true  
+ 
 
