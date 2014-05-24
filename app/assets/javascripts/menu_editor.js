@@ -120,6 +120,7 @@ function Section(data,topmodel) {
               url: "/app/menucrud/create_section",
               data: {
                 restaurant_id: restaurant_id,
+                odesk_id: odesk_id,
               },
               success: function(data, textStatus, jqXHR){
                     console.log("Section Saved.");
@@ -389,6 +390,7 @@ function Dish(data, topmodel) {
               url: "/app/menucrud/create_dish",
               data: {
                 restaurant_id: restaurant_id,
+                odesk_id: odesk_id,
               },
               success: function(data, textStatus, jqXHR){
                     console.log("Section Saved.");
@@ -721,6 +723,7 @@ function Option(data,dish) {
           url: "/app/menucrud/create_option",
           data: {
             restaurant_id: restaurant_id,
+            odesk_id: odesk_id,
           },
           success: function(data, textStatus, jqXHR){
                 console.log("Option Saved.");
@@ -910,6 +913,7 @@ function IndividualOption(data,option) {
           url: "/app/menucrud/create_individual_option",
           data: {
             restaurant_id: restaurant_id,
+            odesk_id: odesk_id,
           },
           success: function(data, textStatus, jqXHR){
                 console.log("Individual Option Saved.");
@@ -1359,6 +1363,30 @@ function MenuViewModel() {
             dataType: "json"
         });
     }
+
+    self.odeskSaveDraft = function(){
+        var spinner = new Spinner(opts).spin(document.getElementById('center')); 
+        $.ajax({
+          type: "POST",
+          url: "/app/odesk/update_menu",
+          data: {
+            restaurant_id: restaurant_id,
+            odesk_id: odesk_id,
+            menu: ko.toJSON(self.menu)
+          },
+          success: function(data, textStatus, jqXHR){
+                spinner.stop();
+                self.preview_token(data.preview_token);
+                self.save_menu_modal(true);
+                skip_warning = true;   
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) { 
+                console.log("There was an error saving the menu: " + errorThrown);
+                spinner.stop();
+            },
+            dataType: "json"
+        });
+    }    
 
     $(window).on('beforeunload', function () {
         if(!skip_warning){

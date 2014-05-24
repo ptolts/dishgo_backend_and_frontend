@@ -13,22 +13,26 @@
 
         <div class="collapse navbar-collapse">
 
-          <% if current_page?(controller: "odesk", action: "edit_menu", id: 1) %>
-          <ul class="nav navbar-nav navbar-right">
+          <% if current_page?(controller: "odesk", action: "edit_menu") %>
+            <ul class="nav navbar-nav navbar-right">
 
-            <li data-bind="click: discardDraft" id="discardDraft">
-              <a>Discard Changes <i class="glyphicon glyphicon-remove"></i></a>
-            </li>
+              <li data-bind="click: discardDraft" id="discardDraft">
+                <a>Discard Changes <i class="glyphicon glyphicon-remove"></i></a>
+              </li>
 
-            <li data-bind="click: saveDraft" id="saveMenu">
-              <a>Save Changes <i class="glyphicon glyphicon-ok"></i> </a>
-            </li>                               
+              <li data-bind="click: odeskSaveDraft" id="saveMenu">
+                <a>Save Changes <i class="glyphicon glyphicon-ok"></i> </a>
+              </li>                               
 
-          </ul>                          
+            </ul>                          
           <% end %>
 
         </div> <!-- collapse -->
 
       </div>
     </div>
+
+    <script>
+      var odesk_id = "<%= @odesk_id %>";
+    </script>
 

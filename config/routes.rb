@@ -38,6 +38,7 @@ Foodcloud::Application.routes.draw do
       get 'search_restaurants', to: "odesk#search_restaurants"
       post 'upload_image', to: "odesk#upload_image"
       post 'destroy_image', to: "odesk#destroy_image"
+      post 'update_menu', to: "odesk#update_menu"
     end
   end    
 

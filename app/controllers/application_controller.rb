@@ -19,7 +19,7 @@ class ApplicationController < ActionController::Base
   private
 
   def odesk_user!
-    if Odesk.where(access_token:params[:id]).count == 0
+    if Odesk.where(access_token:(params[:id] || params[:odesk_id])).count == 0
       redirect_to :controller => 'administration', :action => 'index'
     end
   end
@@ -99,6 +99,18 @@ class ApplicationController < ActionController::Base
       redirect_to :controller => 'administration', :action => 'index'
     end
   end
+
+  def admin_or_owner_or_odesk!
+    if !params[:odesk_id].blank? and Odesk.where(access_token:params[:odesk_id]).count == 1
+      params.delete :restaurant_id
+      return
+    end
+    return if current_user.is_admin
+    if current_user.owns_restaurants.nil? or current_user.owns_restaurants.id.blank? or (current_user.owns_restaurants.id.to_s != params[:restaurant_id].to_s)
+      flash[:error] = "You lack the privileges to access this function."
+      redirect_to :controller => 'administration', :action => 'index'
+    end
+  end  
 
   def admin_or_menu_image_owner!
     return if current_user.is_admin

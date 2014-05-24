@@ -12,6 +12,7 @@ class OdeskController < ApplicationController
   def edit_menu
     odesk = Odesk.where(access_token:params[:id]).first
     restaurant = odesk.restaurant
+    @odesk_id = odesk.access_token
     @resto_data = restaurant.as_document
     @resto_data[:images] = restaurant.image.reject{|e| e.img_url_medium.blank?}.collect{|e| e.serializable_hash({})}
     @resto_data = @resto_data.as_json
@@ -27,24 +28,24 @@ class OdeskController < ApplicationController
   def update_menu
 
     # IF YOU EVER NEED TO SCALE, THIS COULD BE A PLACE TO OPTIMIZE
-    odesk = Odesk.where(access_token:params[:id]).first
+    odesk = Odesk.where(access_token:(params[:id] || params[:odesk_id] )).first
     menu = JSON.parse(params[:menu]).collect do |section|
 
       # Load Option Object, or create a new one.
       if section_object = Section.where(:_id => section["id"]).first and section_object
-        if section_object.restaurant != restaurant
-          Rails.logger.warn "#{section_object.restaurant.to_json} != #{restaurant.to_json}"
+        if section_object.odesk != odesk
+          Rails.logger.warn "#{section_object.odesk.to_json} != #{odesk.to_json}"
           render :json => {:error => "Invalid Permissions"}.as_json
           return
         end
       else
         section_object = Section.create
         section_object.published = false
-        section_object.restaurant = restaurant
+        section_object.odesk = odesk
       end  
 
       # Setups the section data, but make sure the user has permission to edit each object.
-      if !section_object.load_data_from_json(section,restaurant)
+      if !section_object.load_data_from_json(section,odesk)
         render :json => {:error => "Invalid Permissions"}.as_json
         return
       end
@@ -52,15 +53,10 @@ class OdeskController < ApplicationController
       next section_object
     end
 
-    restaurant.preview_token = loop do
-      token = SecureRandom.urlsafe_base64
-      break token unless Restaurant.where(preview_token: token).count > 0
-    end if restaurant.preview_token.blank?
+    odesk.sections = menu
+    odesk.save
 
-    restaurant.draft_menu = menu
-    restaurant.save
-    # render :json => ("{ \"menu\" : #{restaurant.draft_menu_to_json} }")
-    render :json => ("{ \"preview_token\" : \"/app/onlinesite/preview/#{restaurant.preview_token}\" }")
+    render :json => ("{ \"preview_token\" : \"/app/onlinesite/preview/#{odesk.access_token}\" }")
 
   end
 
