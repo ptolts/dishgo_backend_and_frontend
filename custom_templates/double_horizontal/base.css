@@ -167,7 +167,7 @@
 		filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#d8000000,endColorstr=#d8000000);
 		zoom: 1;
 	}
-	..contact_page_wrapper:nth-child(n) {
+	.contact_page_wrapper:nth-child(n) {
 	filter: none;
 	}	
 
