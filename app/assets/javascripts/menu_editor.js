@@ -30,7 +30,7 @@ ko.bindingHandlers.fitText = {
 };
 
 ko.bindingHandlers.helperTip = {
-    init: function(element, valueAccessor) {
+    init: function(element, valueAccessor, allBindings) {
         var data = valueAccessor();
         if(!$('#' + data.template)[0]){
             return;
@@ -62,7 +62,7 @@ ko.bindingHandlers.helperTip = {
                     $(new_element).css("top",offset+'px');
                     $(new_element).css("left",right_offset+'px');
                 }
-            }           
+            }        
         });
 
         //apply foreach binding to the newly created ul with the data that we passed to the binding
@@ -393,7 +393,7 @@ function Dish(data, topmodel) {
                 odesk_id: odesk_id,
               },
               success: function(data, textStatus, jqXHR){
-                    console.log("Section Saved.");
+                    console.log("Dish Saved.");
                     self.id(data.id);
                 },
                 error: function(XMLHttpRequest, textStatus, errorThrown) { 
@@ -1364,6 +1364,7 @@ function MenuViewModel() {
         });
     }
 
+    self.odesk_save_menu_modal = ko.observable(false);
     self.odeskSaveDraft = function(){
         var spinner = new Spinner(opts).spin(document.getElementById('center')); 
         $.ajax({
@@ -1377,7 +1378,7 @@ function MenuViewModel() {
           success: function(data, textStatus, jqXHR){
                 spinner.stop();
                 self.preview_token(data.preview_token);
-                self.save_menu_modal(true);
+                self.odesk_save_menu_modal(true);
                 skip_warning = true;   
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) { 
@@ -1387,6 +1388,28 @@ function MenuViewModel() {
             dataType: "json"
         });
     }    
+
+    self.odeskMenuComplete = function(){
+        var spinner = new Spinner(opts).spin(document.getElementById('center')); 
+        $.ajax({
+          type: "POST",
+          url: "/app/odesk/mark_menu_completed",
+          data: {
+            odesk_id: odesk_id,
+          },
+          success: function(data, textStatus, jqXHR){
+                spinner.stop();
+                self.preview_token(data.preview_token);
+                alert("Menu Marked Completed, thank you!")
+                skip_warning = true;   
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) { 
+                console.log("There was an error saving the menu: " + errorThrown);
+                spinner.stop();
+            },
+            dataType: "json"
+        });
+    }       
 
     $(window).on('beforeunload', function () {
         if(!skip_warning){

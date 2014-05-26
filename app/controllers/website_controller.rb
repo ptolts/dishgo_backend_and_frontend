@@ -50,7 +50,7 @@ class WebsiteController < ApplicationController
 				end
 			end
 			#Add all images which are actually carousels.
-			Rails.logger.warn "---\n#{custom_imgs.to_s}\n-----" 
+			# Rails.logger.warn "---\n#{custom_imgs.to_s}\n-----" 
 			des_json[:global_images] = custom_imgs + restaurant.global_images.select{|e| e.carousel}.as_json
 			des_json
 		end
@@ -71,23 +71,23 @@ class WebsiteController < ApplicationController
 		restaurant_data = JSON.parse(params[:restaurant_data])
 		settings = restaurant.website_settings || {}
 		data["global_images"].each do |image|
-			Rails.logger.warn "------\n#{image}\n-----"
+			# Rails.logger.warn "------\n#{image}\n-----"
 			if image["custom"].to_bool
 				settings[image["name"]] = image["id"]
 			else
-				Rails.logger.warn "--\n'#{image}'\n---"
-				Rails.logger.warn settings
+				# Rails.logger.warn "--\n'#{image}'\n---"
+				# Rails.logger.warn settings
 				settings[image["defaultImage"]["name"]] = image["defaultImage"]["id"]
 			end
 		end
-		Rails.logger.warn "--++++-\n#{settings}\n--+++++--"
+		# Rails.logger.warn "--++++-\n#{settings}\n--+++++--"
 		restaurant.website_settings = settings
 		restaurant.languages = restaurant_data["languages"]
 		restaurant.save
 		restaurant.design = Design.find(data["id"])
 		restaurant.font = Font.find(params["font_id"])
 		restaurant.logo_settings = restaurant_data["logo_settings"]
-		Rails.logger.warn restaurant_data
+		# Rails.logger.warn restaurant_data
 		restaurant.about_text_translations = restaurant_data["about_text"]
 
 		pages = restaurant_data["pages"].collect do |page|

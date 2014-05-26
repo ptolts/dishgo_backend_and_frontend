@@ -2,15 +2,32 @@ class OdeskController < ApplicationController
   before_filter :admin_user!, only: [:index, :search_restaurants]
   before_filter :admin_or_user_with_resto!, :only => [:upload_image]
   before_filter :admin_or_menu_image_owner!, :only => [:destroy_image]
-  before_filter :odesk_user!, only: [:edit_menu, :update_menu]
+  before_filter :odesk_user!, only: [:edit_menu, :update_menu, :files, :mark_menu_completed]
   layout 'odesk'
 
   def index
     render 'index'
   end
 
+  def files
+    odesk = Odesk.where(access_token:params[:id]).first
+    restaurant = odesk.restaurant    
+    @resto_data = restaurant.as_json(include: :menu_images)
+    render 'files'
+  end
+
+  def mark_menu_completed
+    odesk = Odesk.where(access_token:params[:odesk_id]).first
+    odesk.completed = true
+    odesk.logins << "[#{request.ip} marked menu completed at #{DateTime.now}]"
+    odesk.save
+    render json: {success:true}.as_json
+  end  
+
   def edit_menu
     odesk = Odesk.where(access_token:params[:id]).first
+    odesk.logins << "[#{request.ip} loaded edit menu at #{DateTime.now}]"
+    odesk.save
     restaurant = odesk.restaurant
     @odesk_id = odesk.access_token
     @resto_data = restaurant.as_document
@@ -29,8 +46,9 @@ class OdeskController < ApplicationController
 
     # IF YOU EVER NEED TO SCALE, THIS COULD BE A PLACE TO OPTIMIZE
     odesk = Odesk.where(access_token:(params[:id] || params[:odesk_id] )).first
+    odesk.logins << "[#{request.ip} updated menu at #{DateTime.now}]"
+    odesk.save    
     menu = JSON.parse(params[:menu]).collect do |section|
-
       # Load Option Object, or create a new one.
       if section_object = Section.where(:_id => section["id"]).first and section_object
         if section_object.odesk != odesk
@@ -43,21 +61,16 @@ class OdeskController < ApplicationController
         section_object.published = false
         section_object.odesk = odesk
       end  
-
       # Setups the section data, but make sure the user has permission to edit each object.
-      if !section_object.load_data_from_json(section,odesk)
+      if !section_object.odesk_load_data_from_json(section,odesk)
         render :json => {:error => "Invalid Permissions"}.as_json
         return
       end
-
       next section_object
     end
-
     odesk.sections = menu
     odesk.save
-
     render :json => ("{ \"preview_token\" : \"/app/onlinesite/preview/#{odesk.access_token}\" }")
-
   end
 
   def destroy_image

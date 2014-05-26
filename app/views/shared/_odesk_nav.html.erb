@@ -12,9 +12,14 @@
         </div>
 
         <div class="collapse navbar-collapse">
+         
 
-          <% if current_page?(controller: "odesk", action: "edit_menu") %>
+          <% if params[:id] and current_page?(controller: "odesk", action: "edit_menu", id: params[:id]) %>
             <ul class="nav navbar-nav navbar-right">
+
+              <li>
+                <a href="/app/odesk/files/<%= @odesk_id %>">Menu Files</a>
+              </li>   
 
               <li data-bind="click: discardDraft" id="discardDraft">
                 <a>Discard Changes <i class="glyphicon glyphicon-remove"></i></a>

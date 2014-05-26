@@ -44,6 +44,7 @@
             data ? null : data = {}
             var self = this;
             self.access_token = data.access_token;
+            self.completed = data.completed;
         }              
 
         function LogoSettings(data){

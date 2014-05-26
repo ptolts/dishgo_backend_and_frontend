@@ -34,11 +34,13 @@ Foodcloud::Application.routes.draw do
   resources :odesk do
     collection do
       get '/', to: "odesk#index"
+      get 'files/:id', to: "odesk#files"
       get 'edit_menu/:id', to: "odesk#edit_menu"
       get 'search_restaurants', to: "odesk#search_restaurants"
       post 'upload_image', to: "odesk#upload_image"
       post 'destroy_image', to: "odesk#destroy_image"
       post 'update_menu', to: "odesk#update_menu"
+      post 'mark_menu_completed', to: "odesk#mark_menu_completed"
     end
   end    
 

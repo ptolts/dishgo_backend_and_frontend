@@ -1,0 +1,31 @@
+<div class="profile_form_wrapper container" data-bind="with: current_restaurant">   
+    <div class="row">
+        <div class="col-xs-12">
+            <h2 data-bind="text: name"></h2>
+        </div>
+        <div class="col-xs-12" data-bind="foreach: menu_images">
+            <div class="col-xs-6">
+                <a data-bind="attr:{href:url}" target="_blank"><img data-bind="attr: { src: url }" width="100%"></a>
+            </div>
+        </div>           
+    </div>
+</div>
+
+    <script type='text/javascript'>//<![CDATA[ 
+
+        var resto_data = <%= raw(@resto_data.to_json) %>;
+
+        function viewModel() {
+            var self = this;
+            self.restaurant_name = ko.observable("");
+            self.hideNoMenu = ko.observable(false);
+            self.restaurants = ko.observableArray([]);
+            self.current_restaurant = ko.observable(new Restaurant(resto_data));       
+        };
+
+        var viewmodel = new viewModel();
+        ko.applyBindings(viewmodel);
+
+
+    //]]>  
+    </script>

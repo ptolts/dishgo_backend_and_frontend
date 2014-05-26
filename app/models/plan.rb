@@ -4,7 +4,7 @@ class Plan
               {
                 id:"standard",
                 name:"Professional",
-                price:"29",
+                price:"34",
                 interval:"Monthly",
                 message: "",
               },

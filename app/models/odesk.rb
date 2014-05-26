@@ -8,6 +8,8 @@ class Odesk
   store_in collection: "odesk", database: "dishgo"
 
   field :access_token, type: String
+  field :completed, type: Boolean
+  field :logins, type: Array, default: []
 
   belongs_to :restaurant, class_name: "Restaurant", index: true
 
