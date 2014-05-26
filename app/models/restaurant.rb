@@ -46,10 +46,12 @@ class Restaurant
 
   has_many :sources, :class_name => "Sources"
   has_many :image, :class_name => "Image"
+  has_many :icons, :class_name => "Icon", inverse_of: :restaurant
 
   has_many :pages, :class_name => "Page", inverse_of: :restaurant
 
   has_many :section, :class_name => "Section", inverse_of: :restaurant
+  has_many :options, :class_name => "Option", inverse_of: :restaurant
 
   has_many :draft_menu, :class_name => "Section", inverse_of: :draft_restaurant
   has_many :published_menu, :class_name => "Section", inverse_of: :published_restaurant
@@ -97,6 +99,9 @@ class Restaurant
   end
 
   def menu_to_json
+      icon_list = self.icons.collect{|e| e.individual_option_id}
+      image_list = self.image.collect{|e| e.dish_id}
+      option_list = self.options.collect{|e| e.dish_id}    
     # result = RubyProf.profile {
       menu_to_spit_out = self.published_menu.pub
       if menu_to_spit_out.empty?
@@ -106,7 +111,7 @@ class Restaurant
         hash = section.as_document
         hash[:id] = section.id
         hash["dishes"] = section.dishes.pub.collect do |dish|
-          dish.custom_to_hash
+          dish.custom_to_hash icon_list, image_list, option_list
         end
         next hash
       end
@@ -144,22 +149,15 @@ class Restaurant
   end  
 
   def draft_menu_to_json
-    # result = RubyProf.profile {
       menu = self.draft_menu.unscoped.draft.collect do |section|
         hash = section.as_document
         hash[:id] = section.id
         hash.merge!(section.draft)
         hash["dishes"] = section.draft_dishes.unscoped.draft.collect do |dish|
-          dish.custom_to_hash_draft
+          dish.custom_to_hash_draft 
         end
         next hash
       end
-    # }
-
-    # open("callgrind.profile", "w") do |f|
-    #   RubyProf::CallTreePrinter.new(result).print(f, :min_percent => 1)
-    # end
-
     return Oj.dump(menu)
   end  
 

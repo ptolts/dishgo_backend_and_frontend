@@ -215,14 +215,14 @@ class Dish
     self.save
   end     
 
-  def custom_to_hash_draft
+  def custom_to_hash_draft 
     dish_hash = self.as_document
     dish_hash[:id] = self.id
     dish_hash.merge!(self.draft)
     dish_hash["position"] = self.draft_position
     dish_hash["sizes"] = self.draft_sizes.custom_to_hash_draft
     dish_hash["options"] = self.draft_options.collect do |option|
-      next option.custom_to_hash_draft
+      next option.custom_to_hash_draft 
     end
     dish_hash["image"] = self.draft_image.collect do |image|
       img_hash = image.custom_to_hash
@@ -231,16 +231,20 @@ class Dish
     return dish_hash
   end  
 
-  def custom_to_hash
+  def custom_to_hash icon_list = [], image_list = [], option_list = []
     dish_hash = self.as_document
     dish_hash[:id] = self.id
-    dish_hash["sizes"] = self.sizes.custom_to_hash
-    dish_hash["options"] = self.options.collect do |option|
-      next option.custom_to_hash
+    dish_hash["sizes"] = self.sizes.custom_to_hash icon_list
+    if option_list.include?(self.id)
+      dish_hash["options"] = self.options.collect do |option|
+        next option.custom_to_hash icon_list
+      end
     end
-    dish_hash["image"] = self.image.collect do |image|
-      img_hash = image.custom_to_hash
-      next img_hash
+    if image_list.include?(self.id)
+      dish_hash["image"] = self.image.collect do |image|
+        img_hash = image.custom_to_hash
+        next img_hash
+      end
     end
     return dish_hash
   end 

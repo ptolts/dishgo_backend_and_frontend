@@ -30,6 +30,7 @@ class Option
 
 	index({ _id:1 }, { unique: true, name:"id_index" })
 
+  	default_scope -> { asc(:created_at) } 	
 
 	def load_data_from_json option, request_restaurant
 
@@ -144,13 +145,15 @@ class Option
 		return option_hash
 	end	
 
-	def custom_to_hash
+	def custom_to_hash icon_list = []
 		option_hash = self.as_document
 		option_hash[:id] = self.id
 		option_hash["individual_options"] = self.individual_options.collect do |ind_opt|
 			ind_opt_hash = ind_opt.as_document
 			ind_opt_hash[:id] = ind_opt.id
-			ind_opt_hash["icon"] = ind_opt.icon.serializable_hash({}) if ind_opt.icon
+			if icon_list.include?(ind_opt.id)
+				ind_opt_hash["icon"] = ic.serializable_hash({})
+			end
 			next ind_opt_hash
 		end
 		return option_hash
@@ -165,7 +168,7 @@ class Option
 			ind_opt_hash[:id] = ind_opt.id
 			ind_opt_hash.merge!(ind_opt.draft)
 			ind_opt["size_prices"] = ind_opt.draft_size_prices
-			ind_opt_hash["icon"] = ind_opt.draft_icon.serializable_hash({}) if ind_opt.icon
+			ind_opt_hash["icon"] = ind_opt.draft_icon.serializable_hash({})	
 			next ind_opt_hash
 		end
 		return option_hash
