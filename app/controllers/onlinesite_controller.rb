@@ -16,8 +16,8 @@ class OnlinesiteController < ApplicationController
 
     if !restaurant and !params[:id].blank?
       restaurant = Restaurant.where(preview_token:params[:id]).first
-      Rails.logger.warn "found by preview: #{restaurant.to_json}"
     end
+    
     if !restaurant
       redirect_to "http://dishgo.io"
       return
