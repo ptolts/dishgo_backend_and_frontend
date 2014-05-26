@@ -76,7 +76,7 @@
             self.restaurants = ko.observableArray([]);
             self.current_restaurant = ko.observable();
             self.search_for_restaurant = function() {
-                $.getJSON("/app/odesk/search_restaurants?restaurant_name=" + self.restaurant_name(), function(data) { 
+                $.getJSON("/app/odesk/search_restaurants?restaurant_name=" + self.restaurant_name() + "&hide_no_menu=" + self.hideNoMenu(), function(data) { 
                     self.restaurants($.map(data, function(item) { console.log(item); return new Restaurant(item) }));
                 }).fail( function(d, textStatus, error) {
                     console.error("getJSON failed, status: " + textStatus + ", error: "+error)

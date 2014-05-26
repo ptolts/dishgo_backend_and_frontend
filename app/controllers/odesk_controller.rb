@@ -38,7 +38,12 @@ class OdeskController < ApplicationController
   end  
 
   def search_restaurants
-    result = Restaurant.where(:name => /#{params[:restaurant_name]}/i).limit(25)
+    if params[:hide_no_menu].to_bool
+      resto_ids = GlobalImage.ne(restaurant_menu_images_id:nil).collect{|e| e.restaurant_menu_images_id}.flatten.uniq
+      result = Restaurant.where(:name => /#{params[:restaurant_name]}/i, :id.in => resto_ids).limit(25)
+    else
+      result = Restaurant.where(:name => /#{params[:restaurant_name]}/i).limit(25)
+    end
     render :json => result.as_json(:include => [:menu_images, :odesk])
   end  
 
