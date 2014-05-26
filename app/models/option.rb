@@ -168,7 +168,7 @@ class Option
 			ind_opt_hash[:id] = ind_opt.id
 			ind_opt_hash.merge!(ind_opt.draft)
 			ind_opt["size_prices"] = ind_opt.draft_size_prices
-			ind_opt_hash["icon"] = ind_opt.draft_icon.serializable_hash({})	
+			ind_opt_hash["icon"] = ind_opt.draft_icon.serializable_hash({})	if ind_opt.draft_icon
 			next ind_opt_hash
 		end
 		return option_hash
