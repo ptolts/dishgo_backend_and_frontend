@@ -1,0 +1,25 @@
+@media screen and (max-width: 1625px) {
+	.container.menu_container {
+		margin-left: 280px;
+		width: 1140px;
+	}
+}
+@media screen and (max-width: 1425px) {
+	.container.menu_container {
+		margin-left: 250px;
+		width: 1000px;
+	}
+}
+@media screen and (max-width: 1300px) {
+	.container.menu_container {
+		margin-left: 240px;
+		width: 775px;
+	}
+}
+@media screen and (max-width: 995px) {
+	.container.menu_container {
+		margin-left: auto;
+		margin-right: auto;
+		width: auto;
+	}
+}
