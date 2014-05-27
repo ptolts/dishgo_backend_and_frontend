@@ -61,16 +61,18 @@
                     <div class="row">
                         <div class="col-xs-6">
                             <h4>Select Dish With Option</h4>
-                            <ul data-bind="foreach: dishList">
-                                <li data-bind="click: function(){ $root.currentDishOptions($data) }"><span class="li_label" data-bind="lText: name"></span></li>
-                            </ul>
+                            <select class="form-control" data-bind="options: dishList,
+                                                   optionsText: function(item){ return item.lName() },
+                                                   value: $root.currentDishOptions,
+                                                   optionsCaption: 'Choose Dish'"></select>                            
                         </div>
                         <div class="col-xs-6">
                             <div data-bind="with: currentDishOptions">
                                 <h4>Select Option</h4>
-                                <ul data-bind="foreach: options">
-                                    <li data-bind="click: function(){ $root.currentOption($data) }"><span class="li_label" data-bind="lText: name"></span></li>
-                                </ul>
+                                <select class="form-control" data-bind="options: options,
+                                                       optionsText: function(item){ return item.lName() },
+                                                       value: $root.currentOption,
+                                                       optionsCaption: 'Choose Option'"></select>                                  
                             </div>
                         </div>
                     </div>

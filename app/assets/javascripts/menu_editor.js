@@ -640,7 +640,14 @@ function Dish(data, topmodel) {
             return true;
         }
         return false;
-    });                  
+    }); 
+
+    self.lName = ko.computed({
+        read: function(){
+            return self.name()[lang()];
+        },
+        deferEvaluation: true,
+    });                     
 
     dishList.push(self);
 
@@ -846,6 +853,13 @@ function Option(data,dish) {
     self.toggleAdvanced = function() {
         self.advanced(!self.advanced());
     }
+
+    self.lName = ko.computed({
+        read: function(){
+            return self.name()[lang()];
+        },
+        deferEvaluation: true,
+    });
 
 }
 
@@ -1085,7 +1099,7 @@ function MenuViewModel() {
     self.menu = ko.observableArray([]);
     self.newDomCounter = 0;
     self.currentOption = ko.observable();
-    self.currentDishOptions = ko.observable(false);
+    self.currentDishOptions = ko.observable();
     self.showOptionsList = showOptionsList;
     self.dishList = ko.computed({
         read: function(){
