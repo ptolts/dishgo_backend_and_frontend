@@ -43,7 +43,7 @@
         function Odesk(data){
             data ? null : data = {}
             var self = this;
-            self.access_token = data.access_token;
+            self.access_token = ko.observable(data.access_token);
             self.completed = data.completed;
         }              
 
@@ -528,6 +528,23 @@
                     dataType: "json"
                 });                
             }
+
+            self.regenerateToken = function(callback_done){  
+                $.ajax({
+                  type: "POST",
+                  url: "/app/odesk/regenerate_token",
+                  data: {
+                    restaurant_id: self.id,
+                  },
+                  success: function(data, textStatus, jqXHR){
+                        self.odesk().access_token(data.token);     
+                    },
+                    error: function(XMLHttpRequest, textStatus, errorThrown) { 
+                        console.log("There was an error saving the section " + errorThrown);
+                    },
+                    dataType: "json"
+                });                
+            }            
 
             self.dirty = ko.observable(false);
             self.dirtyTrack = ko.computed(function(){

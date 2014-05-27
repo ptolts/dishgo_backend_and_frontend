@@ -349,6 +349,7 @@ Dish.prototype.toJSON = function() {
 };
 
 var showOptionsList = ko.observable(false);
+var showSizesList = ko.observable(false);
 var dishList = ko.observableArray([]);
 
 function Dish(data, topmodel) {
@@ -531,6 +532,10 @@ function Dish(data, topmodel) {
     self.copyOption = function(){
         showOptionsList(true);
     }
+
+    self.copySize = function(){
+        showSizesList(true);
+    }    
 
     self.addImage = function(item) { 
         var new_image = new Image(item);
@@ -762,8 +767,12 @@ function Option(data,dish) {
 
     if(data.type != "size"){
         // This is the list of size options if this happens to be the size option version of this model.
-        self.sizes_object_names = dish.sizes_object().individual_options;
-        // optionsList.push(self);       
+        self.sizes_object_names = ko.computed({
+                                            read: function(){
+                                                return dish.sizes_object().individual_options();
+                                            },
+                                            deferEvaluation: true,
+                                        });   
     }
 
     self.individual_options = ko.observableArray([]);
@@ -828,7 +837,7 @@ function Option(data,dish) {
     // Which option template to use.
     self.remove = function(item) {
         bootbox.dialog({
-          message: "Are you sure you want to remove the size option titled \"" + item.name() + "\"?",
+          message: "Are you sure you want to remove the size option titled \"" + item.name()['en'] + "\"?",
           title: "Remove Size Option",
           buttons: {
             success: {
@@ -878,26 +887,27 @@ function SizePrices(data) {
     };  
 
     self.remove_self = function(){
-        bootbox.dialog({
-          message: "Are you sure you want to remove the suboption titled \"" + item.name() + "\"?",
-          title: "Remove Suboption",
-          buttons: {
-            success: {
-              label: "No",
-              className: "btn-default pull-left col-xs-3",
-              callback: function() {
+        self.ind_opt.remove_size_option(self);
+        // bootbox.dialog({
+        //   message: "Are you sure you want to remove the suboption titled \"" + self.name()['en'] + "\"?",
+        //   title: "Remove Suboption",
+        //   buttons: {
+        //     success: {
+        //       label: "No",
+        //       className: "btn-default pull-left col-xs-3",
+        //       callback: function() {
 
-              }
-            },
-            danger: {
-              label: "Yes",
-              className: "btn-danger col-xs-3 pull-right",
-              callback: function() {
-                self.ind_opt.remove_size_option(self);
-              }
-            },
-          }
-        });        
+        //       }
+        //     },
+        //     danger: {
+        //       label: "Yes",
+        //       className: "btn-danger col-xs-3 pull-right",
+        //       callback: function() {
+        //         self.ind_opt.remove_size_option(self);
+        //       }
+        //     },
+        //   }
+        // });        
     }    
 }
 SizePrices.prototype.toJSON = function() {
@@ -1020,7 +1030,7 @@ function IndividualOption(data,option) {
             // console.log("self.computed_price -> " + self.dish.sizes());
             if(self.dish.sizes()){
                 if(self.price_according_to_size()){
-                    var p = _.find(self.size_prices(),function(i){ return i.name() == self.dish.sizeSelectedOptionValue().name()});
+                    var p = _.find(self.size_prices.peek(),function(i){ return i.name() == self.dish.sizeSelectedOptionValue().name()});
                     //console.log(p);   
                     return p.price();
                 } else {
@@ -1072,22 +1082,9 @@ function IndividualOption(data,option) {
     });     
 }
 
-// function Restaurant(data) {
-//     var self = this;
-//     self.name = ko.observable(data.name);
-//     self.lat = ko.observable(data.lat);
-//     self.lon = ko.observable(data.lon);
-//     self.id = data._id;
-//     self.phone = ko.observable("450-458-0123");
-//     self.address = ko.observable("45 Creme Brule");
-
-//     self.image = ko.observable(new Image({local_file:"/assets/help.jpg"}));
-
-//     if(data.images && data.images[0]) {
-//         //console.log(data.images[0]);
-//         self.image(new Image(data.images[0]));                
-//     }    
-// }
+if(odesk_id === undefined){
+    var odesk_id = null;
+}
 
 var editing_mode = true;
 var lang;
@@ -1101,6 +1098,7 @@ function MenuViewModel() {
     self.currentOption = ko.observable();
     self.currentDishOptions = ko.observable();
     self.showOptionsList = showOptionsList;
+    self.showSizesList = showSizesList;
     self.dishList = ko.computed({
         read: function(){
                     return _.filter(dishList(),function(item){ return item.options().length > 0 });
@@ -1137,6 +1135,22 @@ function MenuViewModel() {
         self.currentDishOptions(null);
         self.showOptionsList(false);
     };
+
+    self.copySizeIntoDish = function(item){
+        var new_opt = new Option(JSON.parse(ko.toJSON(self.currentOption())),self.current_dish());
+        new_opt.getId();
+        _.each(new_opt.individual_options(),function(e){e.getId()});
+        _.each(self.current_dish().options(),function(opt){
+            _.each(opt.individual_options(),function(ind_opt){
+                ind_opt.size_prices([]);
+            });
+        });
+        self.current_dish().sizes_object(new_opt);
+        self.current_dish().sizes(true);
+        self.currentOption(null);
+        self.currentDishOptions(null);
+        self.showSizesList(false);
+    };    
 
     self.togglePreview = function(){
         self.preview(!self.preview());

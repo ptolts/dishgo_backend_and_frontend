@@ -27,7 +27,16 @@ class Odesk
         next hash
       end
     return Oj.dump(menu)
-  end  
+  end 
+
+  def regenerate_token
+    access_token = loop do
+      token = SecureRandom.urlsafe_base64
+      break token unless Odesk.where(access_token: token).count > 0
+    end 
+    self.access_token = access_token
+    self.save
+  end 
 
  protected
   def set_token

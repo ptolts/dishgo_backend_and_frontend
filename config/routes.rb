@@ -41,6 +41,7 @@ Foodcloud::Application.routes.draw do
       post 'destroy_image', to: "odesk#destroy_image"
       post 'update_menu', to: "odesk#update_menu"
       post 'mark_menu_completed', to: "odesk#mark_menu_completed"
+      post 'regenerate_token', to: "odesk#regenerate_token"
     end
   end    
 
