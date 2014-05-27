@@ -231,20 +231,16 @@ class Dish
     return dish_hash
   end  
 
-  def custom_to_hash icon_list = [], image_list = [], option_list = []
+  def custom_to_hash icon_list = []
     dish_hash = self.as_document
     dish_hash[:id] = self.id
     dish_hash["sizes"] = self.sizes.custom_to_hash icon_list
-    if option_list.include?(self.id)
-      dish_hash["options"] = self.options.collect do |option|
-        next option.custom_to_hash icon_list
-      end
+    dish_hash["options"] = self.options.collect do |option|
+      next option.custom_to_hash icon_list
     end
-    if image_list.include?(self.id)
-      dish_hash["image"] = self.image.collect do |image|
-        img_hash = image.custom_to_hash
-        next img_hash
-      end
+    dish_hash["image"] = self.image.collect do |image|
+      img_hash = image.custom_to_hash
+      next img_hash
     end
     return dish_hash
   end 

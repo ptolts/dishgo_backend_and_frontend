@@ -100,28 +100,19 @@ class Restaurant
   end
 
   def menu_to_json
-      icon_list = self.icons.collect{|e| e.individual_option_id}
-      image_list = self.image.collect{|e| e.dish_id}
-      option_list = self.options.collect{|e| e.dish_id}    
-    # result = RubyProf.profile {
-      menu_to_spit_out = self.published_menu.pub
-      if menu_to_spit_out.empty?
-        menu_to_spit_out = Restaurant.where(name:/tuckshop/i).first.published_menu.pub
+    icon_list = self.icons.collect{|e| e.individual_option_id}   
+    menu_to_spit_out = self.published_menu.pub
+    if menu_to_spit_out.empty?
+      menu_to_spit_out = Restaurant.where(name:/tuckshop/i).first.published_menu.pub
+    end
+    menu = menu_to_spit_out.collect do |section|
+      hash = section.as_document
+      hash[:id] = section.id
+      hash["dishes"] = section.dishes.pub.collect do |dish|
+        dish.custom_to_hash icon_list
       end
-      menu = menu_to_spit_out.collect do |section|
-        hash = section.as_document
-        hash[:id] = section.id
-        hash["dishes"] = section.dishes.pub.collect do |dish|
-          dish.custom_to_hash icon_list, image_list, option_list
-        end
-        next hash
-      end
-    # }
-
-    # open("callgrind.profile", "w") do |f|
-    #   RubyProf::CallTreePrinter.new(result).print(f, :min_percent => 1)
-    # end
-
+      next hash
+    end
     return Oj.dump(menu)
   end
 
