@@ -1,10 +1,5 @@
-
-body {
-	color: #fff;
-}
-
-body a:active, a:visited, a {
-	color: #fff;
+.nav *, .nav a:visited, .nav a:active, .nav a:focus, .nav a:hover {
+	color: #000;
 }
 
 #footer .pattern_background {
