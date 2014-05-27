@@ -60,13 +60,19 @@ class WebsiteController < ApplicationController
 	def submit_design
 
 	    #when the user first edits the website, make the website editor visible in his toolbar.
-	    unless current_user.sign_up_progress["website"]
-	      u = current_user
-	      u.sign_up_progress["website"] = true
-	      u.save
-	    end
+	    # unless current_user.sign_up_progress["website"]
+	    #   u = current_user
+	    #   u.sign_up_progress["website"] = true
+	    #   u.save
+	    # end
 
 		restaurant = Restaurant.find(params[:restaurant_id])
+
+	    if cache = restaurant.cache
+	      cache.website = nil
+	      cache.save
+	    end
+
 		data = JSON.parse(params[:data])
 		restaurant_data = JSON.parse(params[:restaurant_data])
 		settings = restaurant.website_settings || {}

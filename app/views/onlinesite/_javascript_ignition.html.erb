@@ -2,7 +2,7 @@
 
 	        var restaurant_id = "<%= params[:restaurant_id]%>";
 	        var menu_data = <%= raw(@menu_data) %>;
-	        var design_data = <%= raw(@design_data.to_json) %>;
+	        var design_data = <%= raw(@design_data) %>;
 	        var resto_data = <%= raw(@resto_data.to_json) %>;	
 	        var background_images = <%= raw(@carousel.to_json) %>;
 	        var carousel;

@@ -208,6 +208,10 @@ class AdministrationController < ApplicationController
 
   def publish_menu
     restaurant = Restaurant.find(params[:restaurant_id])
+    if cache = restaurant.cache
+      cache.menu = nil
+      cache.save
+    end
     restaurant.published_menu = restaurant.draft_menu
     restaurant.published_menu.each do |section|
       section.publish_menu

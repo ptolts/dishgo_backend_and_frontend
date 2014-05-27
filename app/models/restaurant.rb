@@ -60,6 +60,7 @@ class Restaurant
   belongs_to :user, :class_name => "User", index: true, inverse_of: :owns_restaurants
 
   has_one :odesk, :class_name => "Odesk", inverse_of: :restaurant
+  has_one :cache, :class_name => "Cache", inverse_of: :restaurant
 
   belongs_to :design, index: true
 

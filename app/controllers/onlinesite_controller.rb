@@ -23,6 +23,13 @@ class OnlinesiteController < ApplicationController
       return
     end
 
+    if !restaurant.cache
+      cache = Cache.create
+      restaurant.cache = cache
+      restaurant.save
+    end
+    cache = restaurant.cache   
+
     if design = restaurant.design
       @design_css = design.template_base_css
       @design_menu_css = design.template_menu_css            
@@ -50,11 +57,26 @@ class OnlinesiteController < ApplicationController
     @lat = restaurant.lat
     @lon = restaurant.lon   
 
-    @design_data = design_as_json(design,restaurant)
+    if !cache.website.blank?
+      @design_data = cache.website
+    else
+      @design_data = design_as_json(design,restaurant)
+      cache.website = @design_data
+      cache.save
+    end
+
     @resto_data = restaurant.as_document
     @resto_data[:images] = restaurant.image.reject{|e| e.img_url_medium.blank?}.collect{|e| e.serializable_hash({})}
-    @resto_data = @resto_data.as_json    
-    @menu_data = "{ \"menu\" : #{restaurant.menu_to_json} }".as_json
+    @resto_data = @resto_data.as_json
+
+    if !cache.menu.blank?
+      @menu_data = "{ \"menu\" : #{cache.menu} }".as_json
+    else
+      menu_d = restaurant.menu_to_json
+      cache.menu = menu_d
+      cache.save
+      @menu_data = "{ \"menu\" : #{menu_d} }".as_json
+    end
     render 'menu'
   end
 
@@ -104,7 +126,7 @@ class OnlinesiteController < ApplicationController
     #Rails.logger.warn "des_json[:global_images] = image_objects_to_be_used starting"
     des_json[:global_images] = image_objects_to_be_used
     #Rails.logger.warn "design_as_json stops"
-    des_json
+    des_json.to_json
   end  
 
   def preview
