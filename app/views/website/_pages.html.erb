@@ -21,7 +21,7 @@
                     <li data-bind="click: function(){ $root.current_page($data) }, lText: name, css:{ active: $data == $root.current_page()}"></li>
                 <!-- /ko -->
             </ul>
-            <button class="btn btn-inverse btn-lg" data-bind="click: function(){ $root.current_page(newPage()) }, attr:{disabled:pages().length > 2}, text: createNewPageText"><a>Create New Page</a></button>
+            <button class="btn btn-inverse btn-lg" data-bind="click: function(){ $root.current_page(newPage()) }, attr:{disabled:pages().length > 3}, text: createNewPageText"><a>Create New Page</a></button>
         </div>
 
         <!-- ko if: current_page -->
