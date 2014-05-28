@@ -164,7 +164,7 @@
 		zoom: 1;
 	}
 	.contact_page_wrapper:nth-child(n) {
-	filter: none;
+		filter: none;
 	}	
 
 	.currently_open_tag {
@@ -179,7 +179,6 @@
 		border-radius: 0px;
 		top: initial;
 		-webkit-transform: none;
-		/*padding-bottom: 0;			*/
 		background: none;
 	}
 
@@ -191,9 +190,11 @@
 	  display: block;
 	  height: 100%;
 	}
+
 	.nav *, .nav a:visited, .nav a:active, .nav a:focus, .nav a:hover {
-	color: #fff;
+		color: #fff;
 	}
+
 	.content_wrapper {
 		position: absolute;
 		width: 100%;
