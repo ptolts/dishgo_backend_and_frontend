@@ -91,7 +91,7 @@
 	background: transparent\9;
 	background:rgba(0,0,0,0.85);
 	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#d8000000,endColorstr=#d8000000);
-	zoom: 1;	
+	zoom: 1;
 }
 .content_wrapper:nth-child(n) {
 	filter: none;
@@ -121,7 +121,7 @@
 .contact_page_wrapper {
 	width: 100%;
 	position: absolute;
-	z-index: -1;
+	z-index: 1;
 	top: 50%;
 	left: 50%;
 	-webkit-transform: translate(-50%,-50%);

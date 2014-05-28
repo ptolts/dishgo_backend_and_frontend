@@ -9,7 +9,7 @@
 			        <strong data-bind="text: name"><%= @resto_data["name"] %></strong><br>
 			        <strong data-bind="text: address_line_1"><%= @resto_data["address_line_1"] %></strong><br>
 			        <abbr title="Phone">P:</abbr>
-			        <strong data-bind="text: phone"><%= @resto_data["phone"] %></strong><br>
+			        <strong><a data-bind="attr:{href:'tel:'+phone()},text: phone"><%= @resto_data["phone"] %></a></strong><br>
 			    </address>
 			    <!-- ko if: email_addresses().length > 0 -->
 					<h3 class="hours_header">Email</h3>

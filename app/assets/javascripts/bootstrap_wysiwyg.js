@@ -1945,13 +1945,13 @@
     this.update = function ($popover, oStyle) {
       var $linkPopover = $popover.find('.note-link-popover');
 
-      if (oStyle.anchor) {
-        var $anchor = $linkPopover.find('a');
-        $anchor.attr('href', oStyle.anchor.href).html(oStyle.anchor.href);
-        showPopover($linkPopover, oStyle.anchor);
-      } else {
-        $linkPopover.hide();
-      }
+      // if (oStyle.anchor) {
+      //   var $anchor = $linkPopover.find('a');
+      //   $anchor.attr('href', oStyle.anchor.href).html(oStyle.anchor.href);
+      //   showPopover($linkPopover, oStyle.anchor);
+      // } else {
+      //   $linkPopover.hide();
+      // }
 
       var $imagePopover = $popover.find('.note-image-popover');
       if (oStyle.image) {
