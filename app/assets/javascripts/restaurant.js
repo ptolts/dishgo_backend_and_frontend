@@ -404,7 +404,7 @@
             }  
 
             self.createNewPageText = ko.computed(function(){
-                if(self.pages().length < 3){
+                if(self.pages().length < 4){
                     return "Create New Page";
                 } else {
                     return "Max Pages Reached";
