@@ -1104,6 +1104,11 @@ function MenuViewModel() {
                     return _.filter(dishList(),function(item){ return item.options().length > 0 });
         }, deferEvaluation: true,
     });
+    self.dishSizeList = ko.computed({
+        read: function(){
+                    return _.filter(dishList(),function(item){ return item.sizes() });
+        }, deferEvaluation: true,
+    });    
     // self.optionsList = optionsList;
     self.preview = ko.observable(false);
     self.restaurant = ko.observable(new Restaurant(resto_data));    

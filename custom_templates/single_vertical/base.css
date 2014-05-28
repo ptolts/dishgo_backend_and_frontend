@@ -38,7 +38,7 @@
 }
 
 #logo_image {
-	float: left;
+	/*float: left;*/
 	margin-top: 20px;
 }
 
@@ -52,6 +52,10 @@
 
 .main_page_language_selector {
 	position: relative;
+}
+
+.restaurant_name {
+	width: 100%;
 }
 
 .mini_content_wrapper {

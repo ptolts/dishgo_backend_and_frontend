@@ -208,7 +208,7 @@
                     <input class="form-control" placeholder="Email" data-bind="value: email">
                 </div>
                 <div class="col-xs-3">
-                    <button class="btn btn-danger btn-sm pull-right">Remove</button>
+                    <button class="btn btn-danger btn-sm pull-right" data-bind="click: function(){ $parent.remove_email($data) }">Remove</button>
                 </div>                        
             </div>
             <div class="row" style="margin-top: 5px">
