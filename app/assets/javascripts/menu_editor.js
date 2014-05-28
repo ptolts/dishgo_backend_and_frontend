@@ -1124,6 +1124,7 @@ function MenuViewModel() {
         self.currentOption(null);
         self.currentDishOptions(null);
         self.showOptionsList(false);
+        self.showSizesList(false);
     };
 
     self.copyOptionIntoDish = function(item){
