@@ -16,6 +16,7 @@ class Restaurant
   field :name, type: String
   field :city, type: String
   field :email, type: String
+  field :email_addresses, type: Array
   field :address_line_1, type: String
   field :address_line_2, type: String
   field :province, type: String

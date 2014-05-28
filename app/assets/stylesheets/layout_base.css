@@ -10,6 +10,10 @@ body {
 	z-index: -9999;
 }
 
+.mbBgndGallery img {
+	-webkit-backface-visibility: hidden;
+}
+
 .disable-hover,
 .disable-hover * {
   pointer-events: none !important;

@@ -31,6 +31,7 @@
 				    // ['fontsize', ['fontsize']],
 				    ['color', ['color']],
 				    ['para', ['paragraph']],
+				    ['view', ['codeview']],
 				    // ['height', ['height']],
 				    //['insert', ['picture', 'link']], // no insert buttons
 				    //['table', ['table']], // no table button

@@ -45,7 +45,7 @@
                 <img data-bind="attr: { src: url }" width="100%">
             </div>
         </div>
-        <div class="col-xs-12" data-bind="with: odesk">
+        <div class="col-xs-12" data-bind="with: odesk" style="margin-top: 15px">
             <div class="col-xs-3">
                 <h4>Odesk Link</h4>
             </div>
@@ -53,24 +53,18 @@
                 <input class="form-control" type="text" data-bind="attr:{value: 'https://dishgo.io/app/odesk/edit_menu/' + access_token()}" style="width: 100%">
             </div>            
         </div>
-        <div class="col-xs-6" data-bind="with: odesk">
+        <div class="col-xs-12" data-bind="with: odesk" style="margin-top: 15px">
+            <div class="col-xs-8">
+                <input class="form-control" type="text" data-bind="value: assigned_to">
+            </div>
+            <button data-bind="click: function(){ assign($parent.id) }" class="btn btn-info col-xs-4">Assign <i class="fa fa-spinner fa-spin" data-bind="visible: spin"></i><i class="fa fa-check" data-bind="visible: saved"></i></button>
+        </div>        
+        <div class="col-xs-12 text-center" data-bind="with: odesk" style="margin-top: 15px">
             <!-- ko if: completed -->
-                <div class="col-xs-3">
-                    <h4>Regenerate Token</h4>
-                </div>
-                <div class="col-xs-9">
-                    <button class="btn btn-primary" data-bind="click: $parent.regenerateToken">Regenerate Token</button>
-                </div>
+                <button class="btn btn-primary" data-bind="click: $parent.regenerateToken">Regenerate Token</button>
             <!-- /ko -->         
-        </div>                             
-        <div class="col-xs-6" data-bind="with: odesk">
             <!-- ko if: completed -->
-                <div class="col-xs-3">
-                    <h4>Completed!</h4>
-                </div>
-                <div class="col-xs-9">
-                    <button class="btn btn-primary">Commit</button>
-                </div>
+                <button class="btn btn-primary">Merge Menu</button>
             <!-- /ko -->         
         </div>                     
     </div>

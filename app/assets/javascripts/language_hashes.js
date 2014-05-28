@@ -104,6 +104,36 @@ var days_tr = {
     };
 
 
+var translations = {
+    "Hours" : {
+        "en" : "Hours",
+        "fr" : "Heures",
+    },
+    "Address" : {
+        "en" : "Address",
+        "fr" : "Adresse"
+    },
+    "Opens" : {
+        "en" : "Opens",
+        "fr" : "Ouvrir"
+    },
+    "Closes" : {
+        "en" : "Closes",
+        "fr" : "Fermer"
+    },
+    "closed" : {
+        "en" : "Closed",
+        "fr" : "Fermer"
+    },    
+    "open" : {
+        "en" : "Open",
+        "fr" : "Ouvert"
+    },        
+    "currently" : {
+        "en" : "Currently",
+        "fr" : "Presentement",
+    }      
+};
 
 function copyDefaultHash(hash) {
     return JSON.parse(JSON.stringify(hash));

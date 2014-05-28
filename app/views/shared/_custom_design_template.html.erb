@@ -188,3 +188,37 @@
         <div data-bind="template: { name: 'customize_design_image', foreach: global_images}"></div>
     </div>
 </script>
+
+<script id="email_addresses" type="text/html">
+    <div class="col-xs-12">
+        <div class="row" style="margin-top: 15px">
+            <div class="col-xs-4">
+                <h4>Name</h4>
+            </div>
+            <div class="col-xs-5">
+                <h4>Email</h4>
+            </div>                       
+        </div>    
+        <!-- ko foreach: email_addresses -->
+            <div class="row" style="margin-top: 10px">
+                <div class="col-xs-4">
+                    <input class="form-control" placeholder="Name" data-bind="value: name">
+                </div>
+                <div class="col-xs-5">
+                    <input class="form-control" placeholder="Email" data-bind="value: email">
+                </div>
+                <div class="col-xs-3">
+                    <button class="btn btn-danger btn-sm pull-right">Remove</button>
+                </div>                        
+            </div>
+            <div class="row" style="margin-top: 5px">
+                <div class="col-xs-9">
+                    <input class="form-control" placeholder="Subject When User Clicks on Email" data-bind="value: subject">
+                </div>                       
+            </div>            
+        <!-- /ko -->
+        <div class="row" style="margin-top: 15px">
+            <button class="btn btn-sm btn-info pull-right col-xs-6" data-bind="click: addEmail, disable: email_addresses().length > 2">Add Email</button>
+        </div>
+    </div>
+</script>

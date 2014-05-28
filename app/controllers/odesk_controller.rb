@@ -1,5 +1,5 @@
 class OdeskController < ApplicationController
-  before_filter :admin_user!, only: [:index, :search_restaurants, :regenerate_token]
+  before_filter :admin_user!, only: [:index, :search_restaurants, :regenerate_token, :assign_to]
   before_filter :admin_or_user_with_resto!, :only => [:upload_image]
   before_filter :admin_or_menu_image_owner!, :only => [:destroy_image]
   before_filter :odesk_user!, only: [:edit_menu, :update_menu, :files, :mark_menu_completed]
@@ -8,6 +8,14 @@ class OdeskController < ApplicationController
   def index
     render 'index'
   end
+
+  def assign_to
+    restaurant = Restaurant.where(id:params[:restaurant_id]).first
+    odesk = restaurant.odesk
+    odesk.assigned_to = params[:assigned_to]
+    odesk.save
+    render json: {success:true}.as_json
+  end  
 
   def regenerate_token
     restaurant = Restaurant.where(id:params[:restaurant_id]).first

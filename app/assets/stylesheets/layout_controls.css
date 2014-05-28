@@ -1,5 +1,6 @@
 .layout_controls {
   min-height: 400px;
+  padding-bottom: 45px !important;
 }
 
 .layout_controls .nav {

@@ -45,6 +45,30 @@
             var self = this;
             self.access_token = ko.observable(data.access_token);
             self.completed = data.completed;
+            self.assigned_to = ko.observable(data.assigned_to);
+            self.spin = ko.observable(false);
+            self.saved = ko.observable(false);
+
+            self.assign = function(id){
+                self.spin(true);
+                $.ajax({
+                  type: "POST",
+                  url: "/app/odesk/assign_to",
+                  data: {
+                    restaurant_id: id,
+                    assigned_to: self.assigned_to()
+                  },
+                    success: function(data, textStatus, jqXHR){
+                        self.spin(false);
+                        self.saved(true);
+                    },
+                    error: function(XMLHttpRequest, textStatus, errorThrown) { 
+                        self.spin(false);
+                    },
+                    dataType: "json"
+                });
+            }
+
         }              
 
         function LogoSettings(data){
@@ -92,7 +116,7 @@
                 deferEvaluation: true                
             });
 
-            self.times = ["00:00", "00:30", "1:00", "1:30", "2:00", "2:30", "3:00", "3:30", "4:00", "4:30", "5:00", "5:30", "6:00", "6:30", "7:00", "7:30", "8:00", "8:30", "9:00", "9:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30", "13:00", "13:30", "14:00", "14:30", "15:00", "15:30", "16:00", "16:30", "17:00", "17:30", "18:00", "18:30", "19:00", "19:30", "20:00", "20:30", "21:00", "21:30", "22:00", "22:30", "23:00", "23:30"];
+            self.times = ["00:00", "00:30", "1:00", "1:30", "2:00", "2:30", "3:00", "3:30", "4:00", "4:30", "5:00", "5:30", "6:00", "6:30", "7:00", "7:30", "8:00", "8:30", "9:00", "9:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30", "13:00", "13:30", "14:00", "14:30", "15:00", "15:30", "16:00", "16:30", "17:00", "17:30", "18:00", "18:30", "19:00", "19:30", "20:00", "20:30", "21:00", "21:30", "22:00", "22:30", "23:00", "23:30","Closing"];
 
 
             if(data.closed == false){
@@ -149,6 +173,13 @@
 
         }
 
+        function Email(data) {
+            var self = this; 
+            self.email = ko.observable(data.email);
+            self.name = ko.observable(data.name);
+            self.subject = ko.observable(data.subject);
+        }
+
         Restaurant.prototype.toJSON = function() {
             var copy = ko.toJS(this); //easy way to get a clean copy
             delete copy.areWeOpened;
@@ -192,9 +223,16 @@
             self.about_text = ko.observable(data.about_text ? data.about_text : copyDefaultHash(default_web_language_hash));
 
             self.pages = ko.observableArray([]);
-
             if(data.pages){
                 self.pages(_.map(data.pages,function(page){ return new Page(page) }));
+            }
+
+            self.email_addresses = ko.observableArray([]);
+            if(data.email_addresses){
+                self.email_addresses(_.map(data.email_addresses,function(email){ return new Email(email) }));
+            }
+            self.addEmail = function(){
+                self.email_addresses.push(new Email({}));
             }
 
             self.menu_images = ko.observableArray([]);
@@ -288,9 +326,28 @@
                 6:5,
             }
 
+            self.current_day = ko.computed({
+                read: function(){
+                    var d = convert_day[(new Date()).getDay()];
+                    var current_day = self.hours()[d];
+                    return current_day;
+                },
+                deferEvaluation: true
+            }); 
+
+            self.showHourSign = ko.computed({
+                read: function(){
+                    var current_day = self.current_day();
+                    if(current_day.close_1() == "Closing"){
+                        return false;
+                    }
+                    return true;
+                },
+                deferEvaluation: true
+            });           
+
             self.areWeOpened = ko.computed(function(){
-                var d = convert_day[(new Date()).getDay()];
-                var current_day = self.hours()[d];
+                var current_day = self.current_day();
                 if(current_day.closed() || current_day.open_1() === undefined){
                     return false;
                 }

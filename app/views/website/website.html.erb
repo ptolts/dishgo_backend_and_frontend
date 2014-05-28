@@ -63,7 +63,16 @@
                     <div data-bind="template: { name: 'restaurant_logo', data: $root.restaurant }"></div>                
                 </div>
             </div>
-        </div>        
+        </div>   
+
+        <div data-bind="page: {id: 'contact', title: 'Contact Page', with: restaurant}" class="col-md-9 website_pages">
+            <div class="row">
+                <div class="col-xs-12">
+                    <h3 style="margin-bottom: 20px;">Add Email Addresses To The Contact Page</h3>
+                    <div data-bind="template: { name: 'email_addresses', data: $root.restaurant }"></div>                
+                </div>
+            </div>
+        </div>                
 
         <div class="row layout_controls_next">
             <div class="col-xs-12">

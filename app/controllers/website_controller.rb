@@ -5,15 +5,11 @@ class WebsiteController < ApplicationController
 	layout 'build_online_site'
 
 	def index
-		# unless current_user.owns_restaurants.design
-		# 	current_user.owns_restaurants.design = Design.first
-		# end
-		# unless current_user.owns_restaurants.font
-		# 	current_user.owns_restaurants.font = Font.first
-		# end
-		dezign = Design.where(name:/garde/i).first
-		if current_user.owns_restaurants.design != dezign
+		if !current_user.owns_restaurants.design
+			dezign = Design.where(name:/garde/i).first
 			current_user.owns_restaurants.design = dezign
+		else
+			dezign = current_user.owns_restaurants.design
 		end
 		@design_id = dezign.id
 		@design_id = current_user.owns_restaurants.design.id if current_user.owns_restaurants.design	
@@ -89,7 +85,6 @@ class WebsiteController < ApplicationController
 		# Rails.logger.warn "--++++-\n#{settings}\n--+++++--"
 		restaurant.website_settings = settings
 		restaurant.languages = restaurant_data["languages"]
-		restaurant.save
 		restaurant.design = Design.find(data["id"])
 		restaurant.font = Font.find(params["font_id"])
 		restaurant.logo_settings = restaurant_data["logo_settings"]
@@ -107,11 +102,11 @@ class WebsiteController < ApplicationController
 			next p
 		end
 		restaurant.pages = pages
+		restaurant.email_addresses = restaurant_data["email_addresses"]
 		restaurant.preview_token = loop do
 			token = SecureRandom.urlsafe_base64
 			break token unless Restaurant.where(preview_token: token).count > 0
 		end if restaurant.preview_token.blank?
-
 		restaurant.save		
 		render :json => {preview:"/app/onlinesite/preview/#{restaurant.preview_token.to_s}"}.as_json
 	end

@@ -1495,35 +1495,24 @@ ko.bindingHandlers.masonry = {
     },
 };
 
-var translations = {
-    "Hours" : {
-        "en" : "Hours",
-        "fr" : "Heures",
-    },
-    "Address" : {
-        "en" : "Address",
-        "fr" : "Adresse"
-    },
-    "Opens" : {
-        "en" : "Opens",
-        "fr" : "Ouvrir"
-    },
-    "Closes" : {
-        "en" : "Closes",
-        "fr" : "Fermer"
-    },
-    "closed" : {
-        "en" : "Closed",
-        "fr" : "Fermer"
-    },    
-    "open" : {
-        "en" : "Open",
-        "fr" : "Ouvert"
-    },        
-    "currently" : {
-        "en" : "Currently",
-        "fr" : "Presentement",
-    }      
+ko.bindingHandlers.lStaticText = {
+    init: function (element, valueAccessor, allBindingsAccessor) {
+        var text = valueAccessor();
+        if(typeof(text) == "function"){
+            text = text();
+        }
+        var interceptor = ko.computed({
+            read: function () {
+                if(!translations[text]){
+                    console.log("WARNING: Missing translation for '"+text+"'");
+                    return text;
+                }
+                return translations[text][viewmodel.lang()];
+            },
+            deferEvaluation: true                 
+        });
+        ko.applyBindingsToNode(element, { text: interceptor});
+    }
 };
 
 function PublicMenuModel() {
@@ -1768,26 +1757,6 @@ ko.bindingHandlers.lText = {
         // });        
     }
 }; 
-
-ko.bindingHandlers.lStaticText = {
-    init: function (element, valueAccessor, allBindingsAccessor) {
-        var text = valueAccessor();
-        if(typeof(text) == "function"){
-            text = text();
-        }
-        var interceptor = ko.computed({
-            read: function () {
-                if(!translations[text]){
-                    console.log("WARNING: Missing translation for '"+text+"'");
-                    return text;
-                }
-                return translations[text][viewmodel.lang()];
-            },
-            deferEvaluation: true                 
-        });
-        ko.applyBindingsToNode(element, { text: interceptor});
-    }
-};
 
 ko.bindingHandlers.lHtml = {
     update: function (element, valueAccessor) {
