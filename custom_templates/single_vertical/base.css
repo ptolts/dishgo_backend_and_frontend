@@ -106,7 +106,6 @@
 
 .restaurant_name {
 	text-align: left;
-
 }
 .powered_by_dishgo {
 	display: none;
@@ -149,6 +148,10 @@
 		box-shadow: 0px 1px 2px 0px rgba(0,0,0,0.75);
 	}
 
+	#social_media {
+		display: none;
+	}
+
 	.contact_page_wrapper {
 		top: 70px;
 		padding-left: 0px;
@@ -189,6 +192,10 @@
 	  margin-left: auto;
 	  display: block;
 	  height: 100%;
+	}
+
+	.restaurant_name .logo {
+		height: 100%;
 	}
 
 	.nav *, .nav a:visited, .nav a:active, .nav a:focus, .nav a:hover {
