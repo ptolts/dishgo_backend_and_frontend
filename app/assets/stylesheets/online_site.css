@@ -1,8 +1,6 @@
 /*
 *= require bootstrap.min
-
 *= require font-awesome
-*= require menu_base
 *= require layout_base
 *= require hours
 *= require dish_modal
@@ -10,6 +8,7 @@
 *= require lang_select
 *= require restaurant_logo
 *= require social_media
+*= require menu_base
 *= require_self
 */
 

@@ -25,7 +25,7 @@
 			        });
 				} else {
 					$(".background_mobile").addClass("static_background");
-					$(".background_mobile").css("background","url("+ background_images[0] +") no-repeat center center fixed");				
+					$(".background_mobile").css("background","url("+ background_images[0] +")");				
 				}
 			})
 
@@ -43,7 +43,7 @@
 	        	ko.applyBindings(viewmodel,$("html")[0]);      			
 				pager.start();
 				if($(window).width() <= 600){
-					pager.goTo("contact");
+					pager.navigate("#!/contact");
 				}
 				viewmodel.loading(false);
 			});

@@ -193,6 +193,7 @@
 	position: fixed;
 	top: 15px;
 	right: 5px;
+	z-index: 1;
 }
 .save_website_button .coo_button {
     background-image: -webkit-linear-gradient(hsla(0,0%,100%,.05), hsla(0,0%,0%,.1));

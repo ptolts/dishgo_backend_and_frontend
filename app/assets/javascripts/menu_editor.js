@@ -1576,7 +1576,7 @@ function PublicMenuModel() {
     } 
 
     self.goto_and_kill_menu = function(location){
-        pager.goTo(location);
+        pager.navigate("#!/" + location);
         self.display_menu(false);        
     }     
 

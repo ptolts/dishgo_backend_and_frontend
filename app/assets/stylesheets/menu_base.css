@@ -261,3 +261,219 @@ border-color: #6D6D6D;
     width: 100%;
   }*/
 }
+
+/***********************************
+ *  Title: Menu
+ *  Description: CSS Changes for new Reposnsive Menu Design / Styleguide
+ *  Author: WebCakes
+ *  Version: 0.1.0
+ **********************************/
+.menu_container {
+  background-color: rgba(255, 255, 255, 0.9);
+}
+.menu_container .section .section_title {
+  width: 80%;
+  border-bottom: dotted 2px rgba(210, 210, 210, 0.9);
+}
+.menu_container .section .section_title h1 {
+  line-height: 1.5em;
+  margin-top: 0.3em;
+  margin-bottom: 0.3em;
+  font-family: 'Josefin Sans', Georgia, serif;
+  font-size: 2.5em;
+  color: #666;
+}
+.menu_container .section .section_title h1:before {
+  position: static;
+}
+.menu_container .section .section_title h1:after {
+  position: static;
+}
+.menu_container .section .section_title.matching {
+  border: none;
+  background: url('https://6b4fc3f2e545a64911f5-bc3823134dac282175788fae91ee3089.ssl.cf5.rackcdn.com/5c8d932aed7324fe58b84dee9f86b4abd585c32f_original.png?1395693326;') repeat top left;
+  /* Should match pattern */
+
+}
+.menu_container .section .section_title.matching h1 {
+  color: #fff;
+}
+.menu_container .section .row {
+  padding-left: 1em;
+  padding-right: 1em;
+}
+.dish {
+  padding-top: 2em;
+  padding-bottom: 2em;
+  -o-transition: all 300ms ease-in-out;
+  -ms-transition: all 300ms ease-in-out;
+  -moz-transition: all 300ms ease-in-out;
+  -webkit-transition: all 300ms ease-in-out;
+  transition: all 300ms ease-in-out;
+}
+.dish:hover {
+  margin: auto;
+  background-color: rgba(0, 0, 0, 0.1);
+  box-shadow: inset 0px 0px 3px 1px rgba(0, 0, 0, 0.3), inset 0px 0px 30px 15px rgba(0, 0, 0, 0.1), 0px 0px 1px 1px #add8e6;
+}
+.dish.active {
+  background-color: #fff;
+  box-shadow: inset 0px 0px 1px 1px rgba(0, 0, 0, 0.4), inset 0px 0px 50px 10px rgba(0, 0, 0, 0.1), 0px 0px 25px 1px #add8e6;
+  padding-top: 4em;
+  padding-bottom: 4em;
+}
+.dish .dish_title h2 {
+  margin-top: 0;
+  font-size: 1.8em;
+  text-align: left;
+}
+.dish .dish_description {
+  padding: 0;
+}
+.dish .dish_description p {
+  font-family: Georgia, serif;
+  text-align: justify;
+  font-size: 1.1em;
+  line-height: 1.5em;
+}
+.dish .dish_price {
+  margin-bottom: 0;
+  text-align: right;
+  font-size: 1.7em;
+  line-height: 1em;
+  padding: 0.1em;
+  font-family: Georgia, serif;
+  border-top: dotted 1px rgba(0, 0, 0, 0.5);
+  padding-top: 0.5em;
+}
+.dish .dish_price span.text {
+  font-size: 0.8em;
+  font-family: Georgia, serif;
+}
+.dish .dish_price span.currency-symbol {
+  margin-right: -0.2em;
+  font-size: 0.8em;
+}
+.dish .dish_price span.number {
+  font-family: Georgia, serif;
+}
+.dish .dish_picture {
+  margin-bottom: 2em;
+}
+.dish .dish_picture .img-responsive {
+  text-align: center;
+  margin: 0 auto;
+  border-radius: 0.5em;
+  border: solid 1px rgba(0, 0, 0, 0.2);
+}
+.dish .dish_drawer {
+  border-top: solid 1px #ccc;
+  border-bottom: solid 1px #666;
+  margin-left: -15px;
+  width: calc(100% + 30px);
+  padding: 1em 2em 2em;
+  background-color: rgba(0, 0, 0, 0.5);
+  box-shadow: inset 0px 0px 1px 1px #ffffff, inset 0px 0px 30px 10px rgba(255, 255, 255, 0.3);
+}
+.dish .dish_drawer h2 {
+  font-size: 2em;
+  line-height: 1em;
+  font-family: Georgia, sans-serif;
+  font-weight: normal;
+  font-style: italic;
+  margin-bottom: 0.5em;
+  margin-top: 1em;
+}
+.dish .dish_drawer button.btn {
+  margin-left: 38px;
+  margin-right: 38px;
+}
+.custom_modal .custom_modal_content {
+  max-height: 90% !important;
+  width: 80%;
+  padding: 0;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+.custom_modal .custom_modal_content .custom_modal_header {
+  position: static;
+  padding-bottom: 0.5em;
+}
+.custom_modal .custom_modal_content .custom_modal_header .dish-price {
+  padding: 0;
+  font-size: inherit;
+  text-align: right;
+}
+.custom_modal .custom_modal_content .custom_modal_header .dish-price span.number {
+  font-style: italic;
+  font-family: 'Josefin Sans', Georgia, serif !important;
+  font-size: 2em;
+  font-weight: bold;
+  margin-right: 0.5em;
+  line-height: 1em;
+}
+.custom_modal .custom_modal_content .custom_modal_header .custom_modal-title {
+  font-family: 'Josefin Sans', Georgia, serif !important;
+  font-size: 2em;
+  line-height: 1em;
+  margin: 0;
+}
+.custom_modal .custom_modal_content .custom_modal_body {
+  position: static;
+  padding: 15px;
+}
+.custom_modal .custom_modal_content .custom_modal_body .dish-description p {
+  font-family: Georgia, serif;
+}
+.custom_modal .button {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 15px;
+  padding-right: 15px;
+  font-size: 1.5em;
+}
+.custom_modal .button span {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+}
+.custom_modal .img-responsive {
+  text-align: center;
+  margin: 0 auto;
+  border: solid 1px #bbb;
+  border-radius: 0.5em;
+  box-shadow: 0px 0px 5px 1px #ddd;
+}
+@media screen and (max-width: 767px) {
+  .dish .dish_info {
+    float: none;
+    margin: 0 auto;
+    max-width: 320px;
+  }
+  .dish .dish_price {
+    text-align: center;
+  }
+  .custom_modal .custom_modal_content .custom_modal_header .dish-price span.number {
+    font-size: 1.5em;
+  }
+  .custom_modal .custom_modal_content .custom_modal_header h4.custom_modal-title {
+    font-size: 1.5em;
+    line-height: 1em;
+  }
+}
+@media screen and (min-width: 1200px) {
+  .custom_modal .button {
+    margin-left: 4%;
+    margin-right: 4%;
+  }
+  .row > .col-lg-6 {
+    width: calc(50% - 40px);
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+  .dish:hover {
+    border-radius: 1em;
+  }
+  .dish.active {
+    border-radius: 1em;
+  }
+}
