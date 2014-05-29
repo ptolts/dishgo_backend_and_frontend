@@ -29,6 +29,19 @@ ko.bindingHandlers.fitText = {
     }
 };
 
+ko.bindingHandlers.lTruncatedText = {
+    update: function (element, valueAccessor, allBindingsAccessor) {
+        var value = valueAccessor();
+        var result = ko.observable(value()[viewmodel.lang()]);     
+        var length = 140;
+        var truncatedText = ko.observable(result().length > length ? result().substring(0, length) + "..." : result());
+        // updating text binding handler to show truncatedText
+        ko.bindingHandlers.text.update(element, function () {
+            return truncatedText; 
+        });
+    }
+};
+
 ko.bindingHandlers.helperTip = {
     init: function(element, valueAccessor, allBindings) {
         var data = valueAccessor();

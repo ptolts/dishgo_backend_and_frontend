@@ -23,10 +23,10 @@
 	                    						<!-- THIS IS THE DETAILED DISH OUTPUT. -->
 	                        					<!-- dish on screen -->
 	                        					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 dish_min_height dish_cursor dish" data-bind="fadeVisible: !$root.showDetails(), click: function(){ pager.navigate($page.path() + '/' + $data.id()) }">
-                                      <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 dish_picture">
-                                        <img class="img-responsive" data-bind="visible: large_title_image, menuImage: lazyLoadMediumImage">
+                                      <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 dish_picture" data-bind="visible: large_title_image">
+                                        <img class="img-responsive" data-bind="menuImage: lazyLoadMediumImage">
                                       </div>
-                                      <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 dish_info">
+                                      <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 dish_info" data-bind="css: { dish_full : !large_title_image() }">
                                         <div class="row dish_button_for_phone">
                                           <a class="btn btn-sm btn-dish" data-bind="page-href: $data.id()"><img data-bind="attr:{src:$root.design.imgs.logo_white_nav}" class="dishgo_icon"></a>
                                         </div>
@@ -34,7 +34,7 @@
                                           <h2 data-bind="lText: name"></h2>
                                         </div>
                                         <div class="dish_description">
-                                          <p data-bind="lText: description"></p>
+                                          <p data-bind="lTruncatedText: description"></p>
                                         </div>
                                         <div class="dish_price">
                                           <span class="text">Price: </span>
