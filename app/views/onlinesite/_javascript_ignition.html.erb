@@ -24,8 +24,8 @@
 			                onPrev:function(opt){}   //opt=the options relatives to this component instance
 			        });
 				} else {
-					$(".overlay").addClass("static_background");
-					$(".overlay").css("background","url("+ background_images[0] +") no-repeat center center fixed");				
+					$(".background_mobile").addClass("static_background");
+					$(".background_mobile").css("background","url("+ background_images[0] +") no-repeat center center fixed");				
 				}
 			})
 
@@ -40,11 +40,12 @@
         	$(function(){	
         		pager.Href.hash = '#!/';
 				pager.extendWithPage(viewmodel);
-	        	ko.applyBindings(viewmodel,$("html")[0]);        			
+	        	ko.applyBindings(viewmodel,$("html")[0]);      			
 				pager.start();
 				if($(window).width() <= 600){
 					pager.goTo("contact");
 				}
+				viewmodel.loading(false);
 			});
 
         	var map;

@@ -1531,6 +1531,7 @@ function PublicMenuModel() {
     }    
 
     var self = this;
+    self.loading = ko.observable(true);
     self.menu = ko.observableArray([]);
     self.newDomCounter = 0;
     self.preview = ko.observable(true);

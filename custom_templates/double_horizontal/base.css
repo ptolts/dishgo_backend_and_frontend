@@ -163,7 +163,7 @@
 		margin-right: 0px;
 	}
 
-	.overlay {
+	.background_mobile {
 		z-index: -5000;
 		position: fixed;
 		top: 0;

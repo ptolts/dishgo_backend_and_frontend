@@ -29,105 +29,119 @@
 			<script src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->	
 	</head>
-    <body style="display: none;" data-bind="visible: true">
-		<style type='text/css'>
+    <body>
+    	<div style="display: none;" data-bind="visible: true">
+			<style type='text/css'>
 
-			<%= raw(@design_css) %>
-			<%= raw(@design_menu_css) %>
-			<%= raw(@font_css) %>
+				<%= raw(@design_css) %>
+				<%= raw(@design_menu_css) %>
+				<%= raw(@font_css) %>
 
-		</style>    	
-		<div data-bind="with: design">
-			<!-- ko foreach: global_images -->
-				<style data-bind="html: css" type='text/css'></style>
-			<!-- /ko -->		  	
-		</div>
-		<div class="overlay"></div>  
-		<nav id="navigation_small" class="nav">
-			<ul>
-				<li class="icon" data-bind="click: display_menu_toggle"><i class="fa fa-bars"></i></li>
-				<div data-bind="visible: display_menu">
-					<li><a data-bind="click: function() { goto_and_kill_menu('menu') }">Menu</a></li>
-					<li><a data-bind="click: function() { goto_and_kill_menu('contact') }">Contact</a></li>
-					<!-- ko foreach: restaurant().pages -->
-						<li><a data-bind="click: function() { $parent.goto_and_kill_menu($data.name()['en']) }, lText: name"></a></li>
-					<!-- /ko -->					
-					<div class="language_select" data-bind="foreach: languages">
-						<li data-bind="css:{selected: $data === $root.lang()}, click: function(){ $root.lang($data); $root.display_menu(false) }"><a data-bind="text: $root.getFullLangName($data)"></a>
-					</div>						
-				</div>
-			</ul>		
-		</nav>			  	
-		<div id="left_menu">
-			<div class="restaurant_name" data-bind="with: restaurant">
-				<!-- ko if: logo_settings().showLogo -->
-					<img id="logo_image" data-bind="attr: {src:logo().url}, style: { 'height': logo_settings().image_height() + 'px', 'borderRadius':logo_settings().border_radius() + 'px', 'borderWidth':logo_settings().border_size() + 'px', 'borderColor': '#' + logo_settings().border_color()}" style="border-style: solid"/>
-				<!-- /ko -->
-				<!-- ko if: !logo_settings().showLogo() -->
-					<span class="logo" data-bind="text: name, fitText: !logo_settings().logo_as_image"><%= @resto_data["name"] %></span>
-				<!-- /ko -->					
+			</style>    	
+			<div data-bind="with: design">
+				<!-- ko foreach: global_images -->
+					<style data-bind="html: css" type='text/css'></style>
+				<!-- /ko -->		  	
 			</div>
-			<nav id="navigation" class="nav">
+			<div class="overlay"></div>  
+			<div class="background_mobile"></div>  
+			<nav id="navigation_small" class="nav">
 				<ul>
-					<!-- ko foreach: restaurant().pages -->
-						<li><a data-bind="page-href: $data.name()['en'], lText: name"></a></li>
+					<li class="icon" data-bind="click: display_menu_toggle"><i class="fa fa-bars"></i></li>
+					<div data-bind="visible: display_menu">
+						<li><a data-bind="click: function() { goto_and_kill_menu('menu') }">Menu</a></li>
+						<li><a data-bind="click: function() { goto_and_kill_menu('contact') }">Contact</a></li>
+						<!-- ko foreach: restaurant().pages -->
+							<li><a data-bind="click: function() { $parent.goto_and_kill_menu($data.name()['en']) }, lText: name"></a></li>
+						<!-- /ko -->					
+						<div class="language_select" data-bind="foreach: languages">
+							<li data-bind="css:{selected: $data === $root.lang()}, click: function(){ $root.lang($data); $root.display_menu(false) }"><a data-bind="text: $root.getFullLangName($data)"></a>
+						</div>						
+					</div>
+				</ul>		
+			</nav>			  	
+			<div id="left_menu">
+				<div class="restaurant_name" data-bind="with: restaurant">
+					<!-- ko if: logo_settings().showLogo -->
+						<img id="logo_image" data-bind="attr: {src:logo().url}, style: { 'height': logo_settings().image_height() + 'px', 'borderRadius':logo_settings().border_radius() + 'px', 'borderWidth':logo_settings().border_size() + 'px', 'borderColor': '#' + logo_settings().border_color()}" style="border-style: solid"/>
+					<!-- /ko -->
+					<!-- ko if: !logo_settings().showLogo() -->
+						<span class="logo" data-bind="text: name, fitText: !logo_settings().logo_as_image"><%= @resto_data["name"] %></span>
 					<!-- /ko -->					
-				</ul>
-			</nav>	
-			<div id="social_media" class="social_media" data-bind="with: restaurant">
-				<a data-bind="visible: socialVisible('facebook'), attr:{href: facebook}"><i class="fa fa-facebook-square"></i></a>
-				<a data-bind="visible: socialVisible('twitter'), attr:{href: twitter}"><i class="fa fa-twitter-square"></i></a>			
-				<a data-bind="visible: socialVisible('instagram'), attr:{href: instagram}"><i class="fa fa-instagram"></i></a>
+				</div>
+				<nav id="navigation" class="nav">
+					<ul>
+						<!-- ko foreach: restaurant().pages -->
+							<li><a data-bind="page-href: $data.name()['en'], lText: name"></a></li>
+						<!-- /ko -->					
+					</ul>
+				</nav>	
+				<div id="social_media" class="social_media" data-bind="with: restaurant">
+					<a data-bind="visible: socialVisible('facebook'), attr:{href: facebook}"><i class="fa fa-facebook-square"></i></a>
+					<a data-bind="visible: socialVisible('twitter'), attr:{href: twitter}"><i class="fa fa-twitter-square"></i></a>			
+					<a data-bind="visible: socialVisible('instagram'), attr:{href: instagram}"><i class="fa fa-instagram"></i></a>
+				</div>
+				<div class="main_page_language_selector">
+					<ul class="language_select">
+						<li><a data-bind="page-href: 'menu', lText: menu_tr">Menu</a></li>
+						<li><a data-bind="page-href: 'contact', lText: contact_tr">Contact</a></li>					
+					  	<!-- ko foreach: languages -->
+					  		<li data-bind="css:{selected: $data === $root.lang()}, click: function(){ $root.lang($data) }"><span data-bind="text: $root.getFullLangName($data)"></span></li>
+					  	<!-- /ko -->
+					</ul>
+				</div>	
+				<div data-bind="style:{backgroundImage: $root.computeImage('header_background_pattern')}" class="pattern_background"></div>					
 			</div>
-			<div class="main_page_language_selector">
-				<ul class="language_select">
-					<li><a data-bind="page-href: 'menu', lText: menu_tr">Menu</a></li>
-					<li><a data-bind="page-href: 'contact', lText: contact_tr">Contact</a></li>					
-				  	<!-- ko foreach: languages -->
-				  		<li data-bind="css:{selected: $data === $root.lang()}, click: function(){ $root.lang($data) }"><span data-bind="text: $root.getFullLangName($data)"></span></li>
-				  	<!-- /ko -->
-				</ul>
-			</div>	
-			<div data-bind="style:{backgroundImage: $root.computeImage('header_background_pattern')}" class="pattern_background"></div>					
-		</div>
 
-		<div id="footer" data-bind="fadeVisible: !atTop()">	
-			<div id="opened_or_closed_footer" data-bind="with: restaurant, click: function() { goto_and_kill_menu('contact') }">
-				<h4 data-bind="visible: showHourSign"><span class="currently_open_tag"  data-bind="lStaticText: 'currently'"> </span><span class="currently_open" data-bind="css:{'hours_opened':areWeOpened(),'hours_closed':!areWeOpened()}, lStaticText: areWeOpenedText"></span></h4>
-			</div>				
-			<div id="social_media_footer" class="social_media" data-bind="with: restaurant">
-				<a data-bind="visible: socialVisible('facebook'), attr:{href: facebook}"><i class="fa fa-facebook-square"></i></a>
-				<a data-bind="visible: socialVisible('twitter'), attr:{href: twitter}"><i class="fa fa-twitter-square"></i></a>			
-				<a data-bind="visible: socialVisible('instagram'), attr:{href: instagram}"><i class="fa fa-instagram"></i></a>
-			</div>	
-			<div data-bind="style:{backgroundImage: $root.computeImage('header_background_pattern')}" class="pattern_background"></div>
-			<div class="powered_by_dishgo"><a href="https://dishgo.io" id="dishgo_logo"></a></div>			
-		</div>
-
-		<div id="opened_or_closed" data-bind="with: restaurant">
-			<h4 data-bind="visible: showHourSign"><span class="currently_open_tag">currently </span><span class="currently_open" data-bind="css:{'hours_opened':areWeOpened(),'hours_closed':!areWeOpened()}, text: areWeOpenedText"></span></h4>
-		</div>	
-
-		<!-- ko foreach: restaurant().pages -->
-			<div data-bind="page: {id: $data.name()['en'], title: $root.restaurant().name()}" class="pages">
-				<div class="content_wrapper">				
-					<%= render 'start' %>
-				</div>							
+			<div id="footer" data-bind="fadeVisible: !atTop()">	
+				<div id="opened_or_closed_footer" data-bind="with: restaurant, click: function() { goto_and_kill_menu('contact') }">
+					<h4 data-bind="visible: showHourSign"><span class="currently_open_tag"  data-bind="lStaticText: 'currently'"> </span><span class="currently_open" data-bind="css:{'hours_opened':areWeOpened(),'hours_closed':!areWeOpened()}, lStaticText: areWeOpenedText"></span></h4>
+				</div>				
+				<div id="social_media_footer" class="social_media" data-bind="with: restaurant">
+					<a data-bind="visible: socialVisible('facebook'), attr:{href: facebook}"><i class="fa fa-facebook-square"></i></a>
+					<a data-bind="visible: socialVisible('twitter'), attr:{href: twitter}"><i class="fa fa-twitter-square"></i></a>			
+					<a data-bind="visible: socialVisible('instagram'), attr:{href: instagram}"><i class="fa fa-instagram"></i></a>
+				</div>	
+				<div data-bind="style:{backgroundImage: $root.computeImage('header_background_pattern')}" class="pattern_background"></div>
+				<div class="powered_by_dishgo"><a href="https://dishgo.io" id="dishgo_logo"></a></div>			
 			</div>
-		<!-- /ko -->
 
-		<div data-bind="page: {id: 'contact', title: 'Contact', afterShow: function(){ ko['reloadMap'](true) }}" class="pages">				
-			<%= render 'contact' %>														
+			<div id="opened_or_closed" data-bind="with: restaurant">
+				<h4 data-bind="visible: showHourSign"><span class="currently_open_tag">currently </span><span class="currently_open" data-bind="css:{'hours_opened':areWeOpened(),'hours_closed':!areWeOpened()}, text: areWeOpenedText"></span></h4>
+			</div>	
+
+			<!-- ko foreach: restaurant().pages -->
+				<div data-bind="page: {id: $data.name()['en'], title: $root.restaurant().name()}" class="pages">
+					<div class="content_wrapper">				
+						<%= render 'start' %>
+					</div>							
+				</div>
+			<!-- /ko -->
+
+			<div data-bind="page: {id: 'contact', title: 'Contact', afterShow: function(){ ko['reloadMap'](true) }}" class="pages">				
+				<%= render 'contact' %>														
+			</div>
+
+
+			<div data-bind="page: {id: 'menu', title: 'Menu', afterShow: function(){ ko['menuVisible'](true); pauseCarousel(); }, afterHide: function(){ ko['menuVisible'](false); playCarousel(); }}" class="pages">
+				<%= yield %>
+			</div>	
+
+	    	<%= javascript_include_tag "menu_editor" %>
+
+			<%= render 'javascript_ignition' %>
 		</div>
-
-
-		<div data-bind="page: {id: 'menu', title: 'Menu', afterShow: function(){ ko['menuVisible'](true); pauseCarousel(); }, afterHide: function(){ ko['menuVisible'](false); playCarousel(); }}" class="pages">
-			<%= yield %>
-		</div>	
-
-    	<%= javascript_include_tag "menu_editor" %>
-
-		<%= render 'javascript_ignition' %>
-
+    	<div class="loading_widget" data-bind="visible: loading">
+    		<div class="loading_widget_middle" style="text-align: center">
+				<div class="css_spinner">
+				  <div class="rect1"></div>
+				  <div class="rect2"></div>
+				  <div class="rect3"></div>
+				  <div class="rect4"></div>
+				  <div class="rect5"></div>
+				</div>
+    			<h4>LOADING</h4>
+    		</div>
+    	</div>		
     </body>
 </html>
