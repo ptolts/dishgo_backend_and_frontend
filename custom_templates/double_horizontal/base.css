@@ -154,8 +154,27 @@
 
 @media screen and (max-width: 995px) {
 
+	#left_menu {
+		position: relative;
+	}
+
+	.row {
+		margin-left: 0px;
+		margin-right: 0px;
+	}
+
+	.overlay {
+		z-index: -5000;
+		position: fixed;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+	}		
+
 	.contact_page_wrapper {
-		top: 70px;
+		/*top: 70px;*/
+		position: relative;
 		left: initial;		
 		-webkit-transform: none;
 		-ms-transform: none;
