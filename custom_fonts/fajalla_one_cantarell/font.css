@@ -7,7 +7,6 @@
 h1 {
     font-family: 'Fjalla One', sans-serif;
     font-weight: normal;
-    text-transform: uppercase;
 }
 h2,
 h3,
@@ -53,13 +52,10 @@ address {
 .main_page_language_selector {
     text-transform: uppercase;
 }
-.content_wrapper span {
-    font-family: 'Fjalla One', sans-serif;
+.content_wrapper p {
+    font-size: 18px;
 }
 /*.note-editor .note-editable {
     font-family: 'Fjalla One', sans-serif;
     font-size: 24px;
 }*/
-p {
-    font-size: 24px;
-}
