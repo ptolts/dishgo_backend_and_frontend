@@ -137,8 +137,8 @@
     			<h4>LOADING</h4>
     		</div>
     	</div>	
-		<%= javascript_include_tag "application" %>	
-    	<%= javascript_include_tag "menu_editor" %>
+		<%= javascript_include_tag "application", async: true%>	
+    	<%= javascript_include_tag "menu_editor", async: true %>
 		<%= render 'javascript_ignition' %>		
     </body>
 </html>
