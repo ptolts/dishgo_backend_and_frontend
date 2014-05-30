@@ -8,9 +8,7 @@
 h1 {
     font-family: 'Special Elite';
     font-weight: normal;
-    text-transform: uppercase;
 }
-h3,
 h4,
 h5,
 span,
@@ -23,7 +21,8 @@ p,
 address {
     font-family: 'Special Elite';
 }
-h2 {
+h2,
+h3 {
     font-family: 'Josefin Slab';
     font-style: italic;
 }
@@ -75,13 +74,10 @@ address {
 .hours_closed {
     padding-top: 8px;
 }
-.content_wrapper span {
-    font-family: 'Special Elite';
+.content_wrapper p {
+    font-size: 18px;
 }
 /*.note-editor .note-editable {
     font-family: 'Special Elite';
     font-size: 24px;
 }*/
-p {
-    font-size: 24px;
-}

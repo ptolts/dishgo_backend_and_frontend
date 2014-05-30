@@ -6,7 +6,6 @@
 }
 h1 {
     font-family: 'Oswald', sans-serif;
-    text-transform: uppercase;
     font-weight: 700;
 }
 h2,
@@ -59,11 +58,10 @@ address {
 .main_page_language_selector {
     text-transform: uppercase;
 }
-.content_wrapper span {
-    font-family: 'Oswald', sans-serif;
-}
-p {
-    font-size: 24px;
+.content_wrapper p {
+    font-size: 18px;
+    font-weight: normal;
+    font-style: normal;
 }
 /*.note-editor .note-editable {
     font-family: 'Oswald', sans-serif;

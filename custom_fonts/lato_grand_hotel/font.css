@@ -4,7 +4,6 @@
     font-size: 46px;
 }
 h1,
-h3,
 h4,
 h5,
 span,
@@ -16,8 +15,10 @@ p,
 .menu_container .language_selector,
 address {
     font-family: 'Lato', sans-serif;
+    font-weight: 300;
 }
-h2 {
+h2,
+h3 {
     font-family: 'Grand Hotel', cursive;
 }
 #footer #opened_or_closed_footer {
@@ -50,14 +51,18 @@ address {
 .main_page_language_selector {
     text-transform: uppercase;
 }
-.content_wrapper span {
+.content_wrapper h1 {
+    font-size: 42px;
+}
+.content_wrapper h2 {
+    font-size: 40px;
+}
+.content_wrapper p {
     font-family: 'Lato', sans-serif;
+    font-size: 18px;
+    font-weight: normal;
 }
 /*.note-editor .note-editable {
     font-family: 'Lato', sans-serif;
     font-size: 24px;
 }*/
-
-p {
-    font-size: 24px;
-}
