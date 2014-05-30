@@ -1,7 +1,7 @@
 	        var carousel;
 
 			$(function(){
-				if($(window).width() > 600){
+				if($(window).width() > 1000){
 			        carousel = new mbBgndGallery({
 			                containment:"body",
 			                timer:4000,
