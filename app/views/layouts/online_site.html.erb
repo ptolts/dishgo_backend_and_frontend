@@ -18,9 +18,7 @@
 				 document.body.appendChild(e); 
 			} 
 		</script> 
-	    <%= raw(@font_link_data) %>
 		<%= stylesheet_link_tag "loading_widget", type: 'text/css'%>
-
 		<!--[if lt IE 9]>
 			<script src="https://css3-mediaqueries-js.googlecode.com/files/css3-mediaqueries.js"></script>
 			<script src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -28,7 +26,7 @@
 	</head>
     <body>
 
-    	<div class="loading_widget" data-bind="visible: loading">
+    	<div class="loading_widget" data-bind="fadeVisible: loading">
     		<div class="loading_widget_middle" style="text-align: center">
 				<div class="css_spinner">
 				  <div class="rect1"></div>
@@ -148,6 +146,7 @@
 
 	    </script>	
 
+	    <%= raw(@font_link_data) %>
 		<%= stylesheet_link_tag "online_site", type: 'text/css'%>
 
 		<style type='text/css'>

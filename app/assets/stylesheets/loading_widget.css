@@ -6,7 +6,11 @@
 	left: 0;
 	right: 0;
 	background: black;
-	color: #fff;
+	color: #fff !important;
+}
+
+.loading_widget h4 {
+  color: #fff !important;
 }
 
 .loading_widget_middle {
