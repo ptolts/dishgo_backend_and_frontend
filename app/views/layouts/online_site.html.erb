@@ -19,7 +19,7 @@
 			} 
 		</script> 
 	    <%= raw(@font_link_data) %>
-		<%= stylesheet_link_tag "online_site", type: 'text/css'%>
+		<%= stylesheet_link_tag "loading_widget", type: 'text/css'%>
 
 		<!--[if lt IE 9]>
 			<script src="https://css3-mediaqueries-js.googlecode.com/files/css3-mediaqueries.js"></script>
@@ -27,19 +27,21 @@
 		<![endif]-->	
 	</head>
     <body>
-    	<div style="display: none;" data-bind="visible: true">
-			<style type='text/css'>
 
-				<%= raw(@design_css) %>
-				<%= raw(@design_menu_css) %>
-				<%= raw(@font_css) %>
+    	<div class="loading_widget" data-bind="visible: loading">
+    		<div class="loading_widget_middle" style="text-align: center">
+				<div class="css_spinner">
+				  <div class="rect1"></div>
+				  <div class="rect2"></div>
+				  <div class="rect3"></div>
+				  <div class="rect4"></div>
+				  <div class="rect5"></div>
+				</div>
+    			<h4>LOADING</h4>
+    		</div>
+    	</div>
 
-			</style>    	
-			<div data-bind="with: design">
-				<!-- ko foreach: global_images -->
-					<style data-bind="html: css" type='text/css'></style>
-				<!-- /ko -->		  	
-			</div>
+    	<div style="display: none;" data-bind="visible: true">		  					
 			<div class="overlay"></div>  
 			<div class="background_mobile"></div>  
 			<nav id="navigation_small" class="nav">
@@ -125,18 +127,6 @@
 			</div>	
 
 		</div>
-    	<div class="loading_widget" data-bind="visible: loading">
-    		<div class="loading_widget_middle" style="text-align: center">
-				<div class="css_spinner">
-				  <div class="rect1"></div>
-				  <div class="rect2"></div>
-				  <div class="rect3"></div>
-				  <div class="rect4"></div>
-				  <div class="rect5"></div>
-				</div>
-    			<h4>LOADING</h4>
-    		</div>
-    	</div>
 
     	<script>
 	        var restaurant_id = "<%= params[:restaurant_id]%>";
@@ -157,6 +147,21 @@
 			});
 
 	    </script>	
+
+		<%= stylesheet_link_tag "online_site", type: 'text/css'%>
+
+		<style type='text/css'>
+
+			<%= raw(@design_css) %>
+			<%= raw(@design_menu_css) %>
+			<%= raw(@font_css) %>
+
+		</style>    	
+		<div data-bind="with: design">
+			<!-- ko foreach: global_images -->
+				<style data-bind="html: css" type='text/css'></style>
+			<!-- /ko -->		  	
+		</div>				    
 
 		<%= render 'javascript_ignition' %>		
     </body>

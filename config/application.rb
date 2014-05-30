@@ -78,6 +78,7 @@ module Foodcloud
                                     'wysiwyg.js',
                                     'signin.css',
                                     'onlinesite_javascript.js',
+                                    'loading_widget.css',
                                 ]
 
     config.exceptions_app = self.routes
