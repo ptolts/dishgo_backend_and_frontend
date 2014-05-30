@@ -80,6 +80,7 @@
 	padding-top: 20px;
 	padding-bottom: 20px;
 	color: #fff;
+	z-index: 1;
 	overflow-y: scroll;
 	border-radius: 5px;
 	position: absolute;
