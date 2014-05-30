@@ -144,11 +144,19 @@
 	        var design_data = <%= raw(@design_data) %>;
 	        var resto_data = <%= raw(@resto_data.to_json) %>;	
 	        var background_images = <%= raw(@carousel.to_json) %>;
-	    </script>
 
-		<%= javascript_include_tag "application", async: true %>	
-    	<%= javascript_include_tag "menu_editor", async: true %>
-		<%= javascript_include_tag "onlinesite_javascript", async: true %>	
+			[
+				"<%= javascript_path 'application' %>",
+		    	"<%= javascript_path 'menu_editor' %>",
+				"<%= javascript_path 'onlinesite_javascript' %>",
+			].forEach(function(src) {
+			var script = document.createElement('script');
+			script.src = src;
+			script.async = false;
+			document.head.appendChild(script);
+			});
+
+	    </script>	
 
 		<%= render 'javascript_ignition' %>		
     </body>
