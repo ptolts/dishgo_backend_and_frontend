@@ -361,7 +361,7 @@
 	background-color: white;
 	border-radius: 5px;
 	padding: 15px;
-	z-index: 1;
+	z-index: 3;
 	-webkit-transform:	translateY(-50%);
 	-moz-transform:		translateY(-50%);
 	-ms-transform:		translateY(-50%);
@@ -382,7 +382,7 @@
 	background-color: white;
 	border-radius: 5px;
 	padding: 15px;
-	z-index: 1;
+	z-index: 3;
 /*	-webkit-transform:	translateX(-50%);
 	-moz-transform:		translateX(-50%);
 	-ms-transform:		translateX(-50%);
