@@ -77,6 +77,7 @@ module Foodcloud
                                     'picker.js',
                                     'wysiwyg.js',
                                     'signin.css',
+                                    'onlinesite_javascript.js',
                                 ]
 
     config.exceptions_app = self.routes

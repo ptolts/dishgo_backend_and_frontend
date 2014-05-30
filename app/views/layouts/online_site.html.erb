@@ -136,9 +136,20 @@
 				</div>
     			<h4>LOADING</h4>
     		</div>
-    	</div>	
-		<%= javascript_include_tag "application", async: true%>	
+    	</div>
+
+    	<script>
+	        var restaurant_id = "<%= params[:restaurant_id]%>";
+	        var menu_data = <%= raw(@menu_data) %>;
+	        var design_data = <%= raw(@design_data) %>;
+	        var resto_data = <%= raw(@resto_data.to_json) %>;	
+	        var background_images = <%= raw(@carousel.to_json) %>;
+	    </script>
+
+		<%= javascript_include_tag "application", async: true %>	
     	<%= javascript_include_tag "menu_editor", async: true %>
+		<%= javascript_include_tag "onlinesite_javascript", async: true %>	
+
 		<%= render 'javascript_ignition' %>		
     </body>
 </html>
