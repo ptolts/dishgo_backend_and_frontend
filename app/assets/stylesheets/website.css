@@ -382,6 +382,7 @@
 	background-color: white;
 	border-radius: 5px;
 	padding: 15px;
+	z-index: 1;
 /*	-webkit-transform:	translateX(-50%);
 	-moz-transform:		translateX(-50%);
 	-ms-transform:		translateX(-50%);
