@@ -60,9 +60,7 @@
             <button data-bind="click: function(){ assign($parent.id) }" class="btn btn-info col-xs-4">Assign <i class="fa fa-spinner fa-spin" data-bind="visible: spin"></i><i class="fa fa-check" data-bind="visible: saved"></i></button>
         </div>        
         <div class="col-xs-12 text-center" data-bind="with: odesk" style="margin-top: 15px">
-            <!-- ko if: completed -->
-                <button class="btn btn-primary" data-bind="click: $parent.regenerateToken">Regenerate Token</button>
-            <!-- /ko -->         
+            <button class="btn btn-primary" data-bind="click: $parent.regenerateToken">Regenerate Token</button>       
             <!-- ko if: completed -->
                 <button class="btn btn-primary">Merge Menu</button>
             <!-- /ko -->         
