@@ -22,11 +22,11 @@ class Dish
   belongs_to :section, class_name: "Section", index: true, inverse_of: :draft_dishes
   belongs_to :draft_section, class_name: "Section", index: true, inverse_of: :draft_dishes
 
-  has_many :options, :class_name => 'Option', inverse_of: :dish
-  has_many :draft_options, :class_name => 'Option', inverse_of: :draft_dish
+  has_many :options, :class_name => 'DishOption', inverse_of: :dish
+  has_many :draft_options, :class_name => 'DishOption', inverse_of: :draft_dish
 
-  has_one :sizes, :class_name => 'Option', inverse_of: :dish_which_uses_this_as_size_options
-  has_one :draft_sizes, :class_name => 'Option', inverse_of: :draft_dish_which_uses_this_as_size_options
+  has_one :sizes, :class_name => 'DishOption', inverse_of: :dish_which_uses_this_as_size_options
+  has_one :draft_sizes, :class_name => 'DishOption', inverse_of: :draft_dish_which_uses_this_as_size_options
 
   # default_scope ->{ where(:name.nin => ["", nil]) }
   scope :draft, -> {asc(:draft_position)}   
@@ -37,7 +37,7 @@ class Dish
   def load_data_from_json dish, request_restaurant
     draft = {}
     sizes_object = dish["sizes_object"]
-    if size_option_object = Option.where(:_id => sizes_object["id"]).first and size_option_object
+    if size_option_object = DishOption.where(:_id => sizes_object["id"]).first and size_option_object
       # If it was null, theres probably been a mistake.
       if size_option_object.restaurant.nil?
         size_option_object.restaurant = request_restaurant
@@ -47,11 +47,11 @@ class Dish
         Rails.logger.warn "Bailing out\n------------"
         return false
       end     
-      size_option_object.draft_dish_which_uses_this_as_size_options = self 
+      # size_option_object.draft_dish_which_uses_this_as_size_options = self 
     else
-      size_option_object = Option.create
+      size_option_object = DishOption.create
       size_option_object.published = false
-      size_option_object.draft_dish_which_uses_this_as_size_options = self
+      # size_option_object.draft_dish_which_uses_this_as_size_options = self
       size_option_object.restaurant = request_restaurant
       size_option_object.save
     end
@@ -62,10 +62,11 @@ class Dish
     end  
 
     size_option_object.save
+    self.draft_sizes = size_option_object unless self.draft_sizes == size_option_object
 
     options = dish["options"].collect do |option|
       # Load Option Object, or create a new one.
-      if option_object = Option.where(:_id => option["id"]).first and option_object
+      if option_object = DishOption.where(:_id => option["id"]).first and option_object
 
         # If it was null, theres probably been a mistake.
         if option_object.restaurant.nil?
@@ -77,7 +78,7 @@ class Dish
           return false
         end        
       else
-        option_object = Option.create
+        option_object = DishOption.create
         option_object.published = false
         option_object.restaurant = request_restaurant
         option_object.save
@@ -113,12 +114,13 @@ class Dish
     self.draft = draft
     self.draft_options = options 
     self.save
+
   end  
 
   def odesk_load_data_from_json dish, odesk_request
     draft = {}
     sizes_object = dish["sizes_object"]
-    if size_option_object = Option.where(:_id => sizes_object["id"]).first and size_option_object
+    if size_option_object = DishOption.where(:_id => sizes_object["id"]).first and size_option_object
       # If it was null, theres probably been a mistake.
       if size_option_object.odesk.nil?
         size_option_object.odesk = odesk_request
@@ -126,21 +128,24 @@ class Dish
       if size_option_object.odesk != odesk_request
         return false
       end     
-      size_option_object.draft_dish_which_uses_this_as_size_options = self
+      # size_option_object.draft_dish_which_uses_this_as_size_options = self
     else
-      size_option_object = Option.create
+      size_option_object = DishOption.create
       size_option_object.published = false
-      size_option_object.draft_dish_which_uses_this_as_size_options = self
+      # size_option_object.draft_dish_which_uses_this_as_size_options = self
       size_option_object.odesk = odesk_request
       size_option_object.save
     end
     if !size_option_object.odesk_load_data_from_json(sizes_object,odesk_request)
       return false
     end  
+    
     size_option_object.save
+    self.draft_sizes = size_option_object unless self.draft_sizes == size_option_object
+
     options = dish["options"].collect do |option|
       # Load Option Object, or create a new one.
-      if option_object = Option.where(:_id => option["id"]).first and option_object
+      if option_object = DishOption.where(:_id => option["id"]).first and option_object
         # If it was null, theres probably been a mistake.
         if option_object.odesk.nil?
           option_object.odesk = odesk_request
@@ -149,7 +154,7 @@ class Dish
           return false
         end        
       else
-        option_object = Option.create
+        option_object = DishOption.create
         option_object.published = false
         option_object.odesk = odesk_request
         option_object.save

@@ -418,7 +418,7 @@ function Dish(data, topmodel) {
         }
     }
 
-    if(data.has_multiple_sizes){
+    if(data.has_multiple_sizes && data.sizes){
         self.sizes = ko.observable(true);
         //console.log("data size:");
         //console.log(data.sizes);

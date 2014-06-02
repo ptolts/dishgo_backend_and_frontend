@@ -1,6 +1,6 @@
 #encoding: UTF-8
 
-class Option
+class DishOption
 	include Mongoid::Document
 	include Mongoid::Timestamps
 	store_in collection: "Options", database: "dishgo"
@@ -107,7 +107,7 @@ class Option
 	def publish_menu
 		self.name_translations = self.draft["name"]
 		self.type = self.draft["type"]
-		self.advanced = self.draft["advanced"]
+		self.advanced = self.draft["advanced"] || false
 		self.max_selections = self.draft["max_selections"]
 		self.min_selections = self.draft["min_selections"]
 		self.extra_cost = self.draft["extra_cost"]

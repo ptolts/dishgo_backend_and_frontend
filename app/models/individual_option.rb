@@ -17,8 +17,8 @@ class IndividualOption
 
 	field :draft, type: Hash
 
-	belongs_to :options, index: true, :class_name => 'Option', index: true, inverse_of: :individual_option
-	belongs_to :draft_options, index: true, :class_name => 'Option', index: true, inverse_of: :draft_individual_option
+	belongs_to :options, index: true, :class_name => 'DishOption', index: true, inverse_of: :individual_option
+	belongs_to :draft_options, index: true, :class_name => 'DishOption', index: true, inverse_of: :draft_individual_option
 
 	has_one :icon
 	has_one :draft_icon, class_name: "Icon"

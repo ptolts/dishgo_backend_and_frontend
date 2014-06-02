@@ -31,7 +31,7 @@ class MenucrudController < ApplicationController
   end
 
   def create_option
-    option = Option.create
+    option = DishOption.create
     option.published = false
     if !params[:odesk_id].blank?
       odesk = Odesk.where(access_token:params[:odesk_id]).first
