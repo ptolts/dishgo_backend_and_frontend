@@ -41,6 +41,7 @@ class Option
 				# Rails.logger.warn "---\nLoading IndividualOption[#{individual_option["name"]}]\n---"
 			  # If someone has tried to load options from another restaurant, something fishy is going on.
 			  if individual_option_object.restaurant != request_restaurant
+        		Rails.logger.warn "Bailing out in options\n------------"			  	
 			  	return false
 			  end
 			else
@@ -50,6 +51,7 @@ class Option
 			end
 
 			if !individual_option_object.load_data_from_json(individual_option,request_restaurant)
+        		Rails.logger.warn "Bailing out in options\n------------"			  					
 				return false
 			end
 
@@ -66,6 +68,7 @@ class Option
 		self.draft = draft
 		self.draft_individual_options = individual_options
 		self.save
+		Rails.logger.warn "------------- SAVED [#{self.id}] ------------"
 	end	
 
 	def odesk_load_data_from_json option, odesk_request

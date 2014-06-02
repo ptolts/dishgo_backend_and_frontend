@@ -35,9 +35,7 @@ class Dish
   index({ _id:1 }, { unique: true, name:"id_index" })
 
   def load_data_from_json dish, request_restaurant
-
     draft = {}
-
     sizes_object = dish["sizes_object"]
     if size_option_object = Option.where(:_id => sizes_object["id"]).first and size_option_object
       # If it was null, theres probably been a mistake.
@@ -46,11 +44,10 @@ class Dish
       end
 
       if size_option_object.restaurant != request_restaurant
+        Rails.logger.warn "Bailing out\n------------"
         return false
       end     
-
-      size_option_object.draft_dish_which_uses_this_as_size_options = self
-
+      size_option_object.draft_dish_which_uses_this_as_size_options = self 
     else
       size_option_object = Option.create
       size_option_object.published = false
@@ -60,6 +57,7 @@ class Dish
     end
 
     if !size_option_object.load_data_from_json(sizes_object,request_restaurant)
+      Rails.logger.warn "Bailing out\n------------"
       return false
     end  
 
@@ -75,6 +73,7 @@ class Dish
         end
 
         if option_object.restaurant != request_restaurant
+          Rails.logger.warn "Bailing out\n------------"
           return false
         end        
       else
@@ -85,6 +84,7 @@ class Dish
       end  
 
       if !option_object.load_data_from_json(option,request_restaurant)
+        Rails.logger.warn "Bailing out\n------------"        
         return false
       end      
       next option_object
@@ -111,7 +111,7 @@ class Dish
     end 
 
     self.draft = draft
-    self.draft_options = options
+    self.draft_options = options 
     self.save
   end  
 

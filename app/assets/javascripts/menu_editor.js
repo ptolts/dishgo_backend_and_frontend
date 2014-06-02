@@ -761,8 +761,9 @@ function Option(data,dish) {
         });        
     }
 
-    if(data._id){
-        self.id(data._id);
+    var id_tmp = data._id || data.id
+    if(id_tmp){
+        self.id(id_tmp);
         self.advanced(data.advanced);
         if(data.extra_cost){
             self.extra_cost(data.extra_cost);
@@ -963,8 +964,9 @@ function IndividualOption(data,option) {
         });
     }
 
-    if(data._id){
-        self.id(data._id);
+    var tmp_id = data.id || data._id;
+    if(tmp_id){
+        self.id(tmp_id);
     } else {
         if(editing_mode){
             self.getId();
