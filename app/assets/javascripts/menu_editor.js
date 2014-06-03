@@ -1783,7 +1783,7 @@ ko.bindingHandlers.lHtml = {
     update: function (element, valueAccessor) {
         //console.log("DEBUG: lHtml firing on: " + element);
         var value = valueAccessor();
-        var result = ko.observable(value()[viewmodel.lang()]);
+        var result = ko.observable(value()[viewmodel.lang()].replace(/noscript/g,'script'));
         ko.utils.setHtml(element, result);
         
         // $(element).fadeOut(250, function() {

@@ -107,6 +107,9 @@ class WebsiteController < ApplicationController
 			token = SecureRandom.urlsafe_base64
 			break token unless Restaurant.where(preview_token: token).count > 0
 		end if restaurant.preview_token.blank?
+		restaurant.show_map = restaurant_data["show_map"].to_bool
+		restaurant.show_hours = restaurant_data["show_hours"].to_bool
+		restaurant.show_menu = restaurant_data["show_menu"].to_bool
 		restaurant.save		
 		render :json => {preview:"/app/onlinesite/preview/#{restaurant.preview_token.to_s}"}.as_json
 	end

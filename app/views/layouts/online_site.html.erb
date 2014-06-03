@@ -48,7 +48,7 @@
 				<ul>
 					<li class="icon" data-bind="click: display_menu_toggle"><i class="fa fa-bars"></i></li>
 					<div data-bind="visible: display_menu">
-						<li><a data-bind="click: function() { goto_and_kill_menu('menu') }">Menu</a></li>
+						<!-- ko if: restaurant().show_menu() --><li><a data-bind="click: function() { goto_and_kill_menu('menu') }">Menu</a></li><!-- /ko -->
 						<li><a data-bind="click: function() { goto_and_kill_menu('contact') }">Contact</a></li>
 						<!-- ko foreach: restaurant().pages -->
 							<li><a data-bind="click: function() { $parent.goto_and_kill_menu($data.name()['en']) }, lText: name"></a></li>
@@ -82,7 +82,7 @@
 				</div>
 				<div class="main_page_language_selector">
 					<ul class="language_select">
-						<li><a data-bind="page-href: 'menu', lText: menu_tr">Menu</a></li>
+						<!-- ko if: restaurant().show_menu() --><li><a data-bind="page-href: 'menu', lText: menu_tr">Menu</a></li><!-- /ko -->
 						<li><a data-bind="page-href: 'contact', lText: contact_tr">Contact</a></li>					
 					  	<!-- ko foreach: languages -->
 					  		<li data-bind="css:{selected: $data === $root.lang()}, click: function(){ $root.lang($data) }"><span data-bind="text: $root.getFullLangName($data)"></span></li>
@@ -105,9 +105,12 @@
 				<div class="powered_by_dishgo"><a href="https://dishgo.io" id="dishgo_logo"></a></div>			
 			</div>
 
-			<div id="opened_or_closed" data-bind="with: restaurant">
-				<h4 data-bind="visible: showHourSign"><span class="currently_open_tag">currently </span><span class="currently_open" data-bind="css:{'hours_opened':areWeOpened(),'hours_closed':!areWeOpened()}, text: areWeOpenedText"></span></h4>
-			</div>	
+
+			<!-- ko if: restaurant().show_hours -->
+				<div id="opened_or_closed" data-bind="with: restaurant">
+					<h4 data-bind="visible: showHourSign"><span class="currently_open_tag">currently </span><span class="currently_open" data-bind="css:{'hours_opened':areWeOpened(),'hours_closed':!areWeOpened()}, text: areWeOpenedText"></span></h4>
+				</div>
+			<!-- /ko -->
 
 			<!-- ko foreach: restaurant().pages -->
 				<div data-bind="page: {id: $data.name()['en'], title: $root.restaurant().name()}" class="pages">

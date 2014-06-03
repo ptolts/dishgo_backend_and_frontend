@@ -215,6 +215,10 @@
             self.font_id = data.font_id ? data.font_id : "";
             self.user_id = data.user_id ? data.user_id : "";
 
+            self.show_map = ko.observable(data.show_map ? data.show_map : false);
+            self.show_hours = ko.observable(data.show_hours ? data.show_hours : false);
+            self.show_menu = ko.observable(data.show_menu ? data.show_menu : false);
+
             self.logo = ko.observable(data.logo ? new GlobalImage(data.logo) : new GlobalImage({}));
             self.logo_settings = ko.observable(data.logo_settings ? new LogoSettings(data.logo_settings) : new LogoSettings());
 
@@ -233,6 +237,10 @@
             }
             self.addEmail = function(){
                 self.email_addresses.push(new Email({}));
+            }
+
+            self.remove_email = function(email){
+                self.email_addresses.remove(email);
             }
 
             self.menu_images = ko.observableArray([]);
@@ -601,7 +609,41 @@
                     },
                     dataType: "json"
                 });                
+            }
+
+            self.spin = ko.observable(false);
+            self.saved = ko.observable(false);
+            self.listed = ko.observable(data.listed || false);
+            self.listInAppText = ko.computed(function(){
+                if(self.listed()){
+                    return "Unlist";
+                } else {
+                    return "List";
+                }
+            });
+            self.listInApp = function(){  
+                self.spin(true);
+                self.listed(!self.listed());
+                $.ajax({
+                  type: "POST",
+                  url: "/app/administration/list_in_app",
+                  data: {
+                    restaurant_id: self.id,
+                    listed: self.listed(),
+                  },
+                  success: function(data, textStatus, jqXHR){
+                        self.spin(false);
+                        self.saved(true);
+                        self.odesk().access_token(data.token);     
+                    },
+                    error: function(XMLHttpRequest, textStatus, errorThrown) {
+                        self.saved(false);
+                        console.log("There was an error saving the section " + errorThrown);
+                    },
+                    dataType: "json"
+                });                
             }            
+
 
             self.dirty = ko.observable(false);
             self.dirtyTrack = ko.computed(function(){

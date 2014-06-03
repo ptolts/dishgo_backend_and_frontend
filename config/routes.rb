@@ -43,6 +43,7 @@ Foodcloud::Application.routes.draw do
       post 'update_menu', to: "odesk#update_menu"
       post 'mark_menu_completed', to: "odesk#mark_menu_completed"
       post 'regenerate_token', to: "odesk#regenerate_token"
+      post 'merge_menu'
     end
   end    
 
@@ -107,6 +108,7 @@ Foodcloud::Application.routes.draw do
       get 'search_restaurants'
       get 'restaurant_setup'
       get 'search_users'
+      post 'list_in_app'  
       post 'update_user'  
       post 'update_current_user'  
       post 'update_restaurant'  

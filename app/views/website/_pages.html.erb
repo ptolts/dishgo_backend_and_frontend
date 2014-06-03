@@ -12,18 +12,19 @@
 
 <!-- ko if: current_design -->
 
+    <div class="pages_controller navigation_controller text-center" data-bind="with: $root.restaurant">
+        <h4>Add / Edit Pages</h4>
+        <ul class="">
+            <!-- ko foreach: pages -->
+                <li data-bind="click: function(){ $root.current_page($data); pager.navigate('#!/pages') }, lText: name, css:{ active: $data == $root.current_page()}"></li>
+            <!-- /ko -->
+            <li data-bind="click: function(){ $root.current_page(null); pager.navigate('#!/pages/contact') }, css:{ active: pager.page.find('pages/contact').isVisible}">Contact</li>
+            <li data-bind="click: function(){ $root.current_page(null); pager.navigate('#!/pages/menu') }, css:{ active: pager.page.find('pages/menu').isVisible}">Menu</li>
+        </ul>
+        <button class="btn btn-inverse btn-lg" data-bind="click: function(){ $root.current_page(newPage()) }, attr:{disabled:pages().length > 3}, text: createNewPageText"><a>Create New Page</a></button>
+    </div>
+
     <div data-bind="page: {id: 'start', title: 'Pages'}" class="">
-
-        <div class="pages_controller navigation_controller text-center" data-bind="with: $root.restaurant">
-            <h4>Add / Edit Pages</h4>
-            <ul class="">
-                <!-- ko foreach: pages -->
-                    <li data-bind="click: function(){ $root.current_page($data) }, lText: name, css:{ active: $data == $root.current_page()}"></li>
-                <!-- /ko -->
-            </ul>
-            <button class="btn btn-inverse btn-lg" data-bind="click: function(){ $root.current_page(newPage()) }, attr:{disabled:pages().length > 3}, text: createNewPageText"><a>Create New Page</a></button>
-        </div>
-
         <!-- ko if: current_page -->
             <div class="pages_settings" data-bind="with: current_page">
                 <h4 style="margin-top: 0px">Page Settings</h4>
@@ -46,8 +47,64 @@
                 <div data-bind="template: { name: 'text_content_template', data: $root.current_page }" class="build_website_template_holder"></div>
             </div>
         <!-- /ko -->
-
     </div>
+
+
+    <div data-bind="page: {id: 'menu', title: 'Menu Page', with: $root.restaurant}" class="content_wrapper">
+        <div class="row">
+            <div class="col-xs-12">
+                <h3 style="margin-bottom: 5px; margin-top: 5px">Menu Page Options</h3>                
+                <div class="row">
+                    <div class="col-xs-6">
+                        <h4>Show Menu</h4>
+                        <div class="onoffswitch">
+                            <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="show_menu_on_off" data-bind="checked: show_menu">
+                            <label class="onoffswitch-label" for="show_menu_on_off">
+                                <div class="onoffswitch-inner"></div>
+                                <div class="onoffswitch-switch"></div>
+                            </label>
+                        </div>
+                    </div>                
+                </div>                
+            </div>
+        </div>
+    </div>
+
+    <div data-bind="page: {id: 'contact', title: 'Contact Page', with: $root.restaurant}" class="content_wrapper">
+        <div class="row">
+            <div class="col-xs-12">
+                <h3 style="margin-bottom: 5px; margin-top: 5px">Contact Page Options</h3>
+                <div class="row">
+                    <div class="col-xs-6">
+                        <h4>Show Hours</h4>
+                        <div class="onoffswitch">
+                            <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="show_hours_on_off" data-bind="checked: show_hours">
+                            <label class="onoffswitch-label" for="show_hours_on_off">
+                                <div class="onoffswitch-inner"></div>
+                                <div class="onoffswitch-switch"></div>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-xs-6">
+                        <h4>Show Map</h4>
+                        <div class="onoffswitch">
+                            <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="show_map_on_off" data-bind="checked: show_map">
+                            <label class="onoffswitch-label" for="show_map_on_off">
+                                <div class="onoffswitch-inner"></div>
+                                <div class="onoffswitch-switch"></div>
+                            </label>
+                        </div>                                 
+                    </div>                                 
+                </div>                                 
+            </div>
+        </div>        
+        <div class="row">
+            <div class="col-xs-12">
+                <h3 style="margin-bottom: 5px; margin-top: 5px">Add Email Addresses To The Contact Page</h3>
+                <div data-bind="template: { name: 'email_addresses', data: $root.restaurant }"></div>                
+            </div>
+        </div>
+    </div>       
 
 <!-- /ko -->
       

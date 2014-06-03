@@ -31,6 +31,10 @@ class Restaurant
   field :instagram, type: String
   field :languages, type: Array
   field :category, type: Array
+  field :listed, type: Boolean
+  field :show_hours, type: Boolean, default: true
+  field :show_map, type: Boolean, default: true
+  field :show_menu, type: Boolean, default: true
 
   field :about_text, localize: true
 
@@ -77,7 +81,7 @@ class Restaurant
     else
       cords = [-74.155815,45.458972]
     end
-    return Restaurant.includes(:sources).where(:locs => { "$near" => { "$geometry" => { "type" => "Point", :coordinates => cords }, "$maxDistance" => 25000}}).to_a.reject!{|e| e.published_menu.empty?}
+    return Restaurant.includes(:sources).where(:locs => { "$near" => { "$geometry" => { "type" => "Point", :coordinates => cords }, "$maxDistance" => 25000}, listed: true}).to_a.reject!{|e| e.published_menu.empty?}
   end
 
   def dish_images

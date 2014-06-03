@@ -2,7 +2,7 @@ class AdministrationController < ApplicationController
   before_filter :authenticate_user!
   before_filter :create_notifications!
   before_filter :admin_or_user_with_resto!, :except => [:restaurant_setup, :free_search_restaurants, :set_restaurant, :create_restaurant, :help_me]
-  before_filter :admin_user!, :only => [:users, :restaurants, :add_user, :user_destroy, :update_user, :search_restaurants, :become, :become_user]
+  before_filter :admin_user!, :only => [:users, :restaurants, :add_user, :user_destroy, :update_user, :search_restaurants, :become, :become_user, :list_in_app]
   before_filter :admin_or_owner!, :only => [:edit_menu, :update_menu, :crop_image, :crop_icon, :publish_menu, :reset_draft_menu, :update_restaurant]
   before_filter :admin_or_user_without_resto!, :only => [:restaurant_setup]
   layout 'administration'
@@ -16,6 +16,13 @@ class AdministrationController < ApplicationController
   def index
 
   end
+
+  def list_in_app
+    resto = Restaurant.find(params[:restaurant_id])
+    resto.listed = params[:listed].to_bool
+    resto.save
+    render json: {success:true}.as_json
+  end  
 
   def become
     resto = Restaurant.find(params[:id])

@@ -10,7 +10,7 @@
         }        
     </style>
 
-    <div class="col-xs-12 col-md-4 restaurant_admin_list">
+    <div class="col-xs-12 col-md-6 restaurant_admin_list">
 
         <div class="col-xs-12">
             <div class="form-inline" role="form">
@@ -26,6 +26,7 @@
                         <th>Name</th>
                         <th>Edit Restaurant</th>
                         <th>Assume Control</th>
+                        <th>List in App</th>
                     </tr>
                 </thead>
                 <tbody data-bind="template: { name: 'resto_temp', foreach: restaurants }"></tbody>
@@ -58,7 +59,10 @@
             </td> 
             <td>
                 <a data-bind="attr: { href: '/app/administration/become?id=' + id}, visible: user_id" class="btn btn-default btn-sm">Control</a>
-            </td>                                                  
+            </td>
+            <td>
+                <button class="btn btn-sm" data-bind="click: listInApp, css: {'btn-success':listed, 'btn-danger':!listed()}"><!-- ko text: listInAppText --><!-- /ko --> <i class="fa fa-spinner fa-spin" data-bind="visible: spin"></i><i class="fa fa-check" data-bind="visible: saved"></i></button>
+            </td>                                                           
         </tr>   
     </script>
 

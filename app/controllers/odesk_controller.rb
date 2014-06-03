@@ -1,5 +1,5 @@
 class OdeskController < ApplicationController
-  before_filter :admin_user!, only: [:index, :search_restaurants, :regenerate_token, :assign_to]
+  before_filter :admin_user!, only: [:index, :search_restaurants, :regenerate_token, :assign_to, :merge_menu]
   before_filter :admin_or_user_with_resto!, :only => [:upload_image]
   before_filter :admin_or_menu_image_owner!, :only => [:destroy_image]
   before_filter :odesk_user!, only: [:edit_menu, :update_menu, :files, :mark_menu_completed]
@@ -22,6 +22,10 @@ class OdeskController < ApplicationController
     odesk = restaurant.odesk
     odesk.regenerate_token
     render json: {token:odesk.access_token}.as_json
+  end
+
+  def merge_menu
+
   end
 
   def files
