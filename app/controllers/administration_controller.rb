@@ -73,7 +73,7 @@ class AdministrationController < ApplicationController
     end
     Rails.logger.warn "Result: #{result.to_s}\nCoords: #{coords.to_s}\n------------"
     resto_list = Restaurant.where(user_id:nil, :locs => { "$near" => { "$geometry" => { "type" => "Point", :coordinates => coords }, "$maxDistance" => 25000}})
-    render :json => resto_list.as_json(:include => :design)
+    render :json => resto_list.as_json
   end
 
   def search_users
