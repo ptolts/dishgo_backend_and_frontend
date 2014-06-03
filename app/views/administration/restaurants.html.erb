@@ -16,6 +16,11 @@
             <div class="form-inline" role="form">
                 <input class="form-control" data-bind="value: restaurant_name" />
                 <button class="btn btn-default" data-bind="click: search_for_restaurant">Search</button>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" data-bind="checked: with_menu"> With Menu
+                    </label>
+                </div>
             </div>
         </div>
 
@@ -79,9 +84,10 @@
             self.restaurants = ko.observableArray([]);
             self.designs = ko.observable(($.map(design_data, function(item) { return new Design(item) })));
             self.current_restaurant = ko.observable();
+            self.with_menu = ko.observable(false);
             self.search_for_restaurant = function() {
                 console.log("Searching!");
-                $.getJSON("/app/administration/search_restaurants?restaurant_name=" + self.restaurant_name(), function(data) { 
+                $.getJSON("/app/administration/search_restaurants?restaurant_name=" + self.restaurant_name() + "&with_menus=" + self.with_menu(), function(data) { 
                     self.restaurants($.map(data, function(item) { console.log(item); return new Restaurant(item) }));
                 }).fail( function(d, textStatus, error) {
                     console.error("getJSON failed, status: " + textStatus + ", error: "+error)

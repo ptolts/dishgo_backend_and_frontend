@@ -75,6 +75,8 @@ class Restaurant
   index({ _id:1 }, { unique: true, name:"id_index" })
   index({ locs: "2dsphere" }, { name:"location_index"})
 
+  scope :has_menu, -> { any_in(:_id => includes(:published_menu).select{ |w| w.published_menu.size > 0 }.map{ |r| r.id }) }
+
   def by_loc loc=nil
     if loc
       cords = [loc[1],loc[0]]

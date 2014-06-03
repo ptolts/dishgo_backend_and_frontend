@@ -59,8 +59,12 @@ class AdministrationController < ApplicationController
     if params[:lat].to_i != 0
       result = Restaurant.where(:locs => { "$near" => { "$geometry" => { "type" => "Point", :coordinates => [params[:lon].to_f,params[:lat].to_f] }, "$maxDistance" => 25000}})
     else
-      result = Restaurant.where(:name => /#{params[:restaurant_name]}/i).limit(25)
+      result = Restaurant.where(:name => /#{params[:restaurant_name]}/i)
     end
+    if params[:with_menus].to_bool
+      result = result.has_menu
+    end
+    result = result.limit(25)
   	render :json => result.as_json(:include => [:design, :menu_images])
   end
 
