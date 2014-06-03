@@ -5,7 +5,9 @@ Geocoder.configure(
   :lookup => :google,
 
   # IP address geocoding service (see below for supported options):
-  :ip_lookup => :google,
+  ip_lookup: :maxmind_local, 
+
+  maxmind_local: {file: File.join(Rails.root, 'GeoLiteCity.dat')},
 
   # to use an API key:
   # :api_key => "...",

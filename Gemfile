@@ -11,6 +11,7 @@ gem 'oj', '~> 2.0.14'
 gem 'oj_mimic_json'
 gem 'instagram'
 gem 'thin'
+gem 'geoip'
 gem 'activeresource'
 gem "koala" #, "~> 1.8.0rc1"
 # gem 'activeadmin-mongoid', :git => "https://github.com/agungyuliaji/activeadmin-mongoid.git", :branch => 'rails4'
