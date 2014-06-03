@@ -25,7 +25,32 @@ class OdeskController < ApplicationController
   end
 
   def merge_menu
-
+    restaurant = Restaurant.where(id:params[:restaurant_id]).first
+    odesk = restaurant.odesk
+    sections = odesk.sections.collect do |section|
+      section.odesk = nil
+      section.restaurant = restaurant
+      section.save
+      section.draft_dishes.each do |dish|
+        dish.odesk = nil
+        dish.restaurant = restaurant
+        dish.save
+        dish.draft_options.each do |option|
+          option.odesk = nil
+          option.restaurant = restaurant
+          option.save
+          option.draft_individual_options.each do |individual_options|
+            individual_options.odesk = nil
+            individual_options.restaurant = restaurant
+            individual_options.save            
+          end
+        end
+      end
+      next section
+    end
+    restaurant.draft_menu = sections
+    restaurant.save
+    render json: {success:true}.as_json
   end
 
   def files

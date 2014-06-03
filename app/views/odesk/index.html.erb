@@ -61,9 +61,7 @@
         </div>        
         <div class="col-xs-12 text-center" data-bind="with: odesk" style="margin-top: 15px">
             <button class="btn btn-primary" data-bind="click: $parent.regenerateToken">Regenerate Token</button>       
-            <!-- ko if: completed -->
-                <button class="btn btn-primary">Merge Menu</button>
-            <!-- /ko -->         
+            <button class="btn btn-primary" data-bind="click: function(){ mergeMenu($parent.id) }">Merge Menu</button>      
         </div>                     
     </div>
 </div>

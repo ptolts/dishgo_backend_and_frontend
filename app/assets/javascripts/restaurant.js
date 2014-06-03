@@ -69,6 +69,41 @@
                 });
             }
 
+            self.mergeMenu = function(id){
+                bootbox.dialog({
+                  message: "Would you like to merge this menu? There is no going back!",
+                  title: "Merge Menu",
+                  buttons: {
+                    no: {
+                      label: "Cancel",
+                      className: "btn-default pull-left col-xs-3",
+                    },                    
+                    success: {
+                      label: "Merge",
+                      className: "btn-info pull-right col-xs-3",
+                      callback: function(){
+                            self.spin(true);
+                            $.ajax({
+                              type: "POST",
+                              url: "/app/odesk/merge_menu",
+                              data: {
+                                restaurant_id: id,
+                              },
+                                success: function(data, textStatus, jqXHR){
+                                    self.spin(false);
+                                    self.saved(true);
+                                },
+                                error: function(XMLHttpRequest, textStatus, errorThrown) { 
+                                    self.spin(false);
+                                },
+                                dataType: "json"
+                            });
+                      }
+                    },
+                  }
+                });                 
+            }            
+
         }              
 
         function LogoSettings(data){
