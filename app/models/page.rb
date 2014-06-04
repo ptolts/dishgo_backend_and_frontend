@@ -8,9 +8,11 @@ class Page
 
   field :html, localize: true
   field :name, localize: true
+  field :position, type: Integer
 
   belongs_to :restaurant, class_name: "Restaurant", index: true
 
+  default_scope -> { asc(:position) }   
 
   def serializable_hash options
     hash = super {}

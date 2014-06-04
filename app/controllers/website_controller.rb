@@ -98,6 +98,7 @@ class WebsiteController < ApplicationController
 			end
 			p.name_translations = page["name"]
 			p.html_translations = page["html"]
+			p.position = page["position"].to_i
 			p.save
 			next p
 		end

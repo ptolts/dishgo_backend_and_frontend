@@ -90,6 +90,7 @@
             self.id = data.id;
             self.html = ko.observable(data.html ? data.html : copyDefaultHash(default_web_language_hash));
             self.name = ko.observable(data.name ? data.name : copyDefaultHash(default_page_language_hash));
+            self.position = ko.observable(data.position ? data.position : 0);
 
             self.remove = function(resto){
                 bootbox.dialog({
@@ -779,6 +780,14 @@
                 self.pages.push(new_page);
                 return new_page;
             }
+
+            // self.dishes.extend({ rateLimit: 500 });
+            self.pages.subscribe(function(newvalue){
+                _.each(self.pages(),function(item,index){
+                    // console.log(item.name());
+                    item.position(index);
+                });
+            });              
 
         }
 

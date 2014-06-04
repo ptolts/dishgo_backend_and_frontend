@@ -21,6 +21,7 @@ ko.bindingHandlers.forEachWithLength = {
         ko.bindingHandlers.foreach.update(element, valueAccessor, allBindingsAccessor, viewModel, extendedContext);   
     }
 };
+ko.virtualElements.allowedBindings.forEachWithLength = true;
 
 ko.bindingHandlers.fitText = {
     update: function(element, valueAccessor, allBindingsAccessor, viewModel, bindingContext) {
@@ -1020,6 +1021,10 @@ function IndividualOption(data,option) {
     self.remove_size_option = function(item) {      
         self.size_prices.remove(item);      
     };  
+
+    self.dish_modal_full_width = function(length, index){
+        return (length % 2) == 1 && index() == (length - 1);  
+    };
 
     self.remove_size_options = function(){
         _.each(self.size_prices_to_remove,function(e){e.remove_self()}); 

@@ -14,10 +14,9 @@
 
     <div class="pages_controller navigation_controller text-center" data-bind="with: $root.restaurant">
         <h4>Add / Edit Pages</h4>
-        <ul class="">
-            <!-- ko foreach: pages -->
-                <li data-bind="click: function(){ $root.current_page($data); pager.navigate('#!/pages') }, lText: name, css:{ active: $data == $root.current_page()}"></li>
-            <!-- /ko -->
+        <ul class="sortable_dishes" data-bind="sortable { template: 'page_tmp', data: pages, options: { containment: 'parent', tolerance: 'pointer' } }"></ul>
+        <script id="page_tmp" type="text/html"><li data-bind="click: function(){ $root.current_page($data); pager.navigate('#!/pages') }, lText: name, css:{ active: $data == $root.current_page()}"></li></script>
+        <ul>
             <li data-bind="click: function(){ $root.current_page(null); pager.navigate('#!/pages/contact') }, css:{ active: pager.page.find('pages/contact').isVisible}">Contact</li>
             <li data-bind="click: function(){ $root.current_page(null); pager.navigate('#!/pages/menu') }, css:{ active: pager.page.find('pages/menu').isVisible}">Menu</li>
         </ul>

@@ -11,8 +11,15 @@
     z-index: 500;
 }
 
+.demo_options {
+    text-align: center;
+    width: 100%;
+}
+
 .demo_options .button {
     z-index: 10;
+    display: inline-block;
+    float: none;
 }
 
 .noBorderBottom {
@@ -30,9 +37,11 @@
     border-bottom: 1px solid #e5e5e5;
     position: absolute;
     right: 0;
+    z-index: 100;
     padding: 15px;
     padding-bottom: 0px;
     left: 0;
+    background-color: #fff;
     top: 0;
 }
 
@@ -171,8 +180,7 @@
 .custom_modal .button:hover {
     outline: none;
 }
-.custom_modal .button:hover,
-.custom_modal .button:focus {
+.custom_modal .button:hover {
     box-shadow: inset 0 0 0 1px hsla(0,0%,0%,.2),
                 inset 0 2px 0 hsla(0,0%,100%,.1),
                 inset 0 1.2em 0 hsla(0,0%,100%,.1),
@@ -206,8 +214,7 @@
     color: #fff;
     text-shadow: 0 -1px 1px hsla(0,0%,0%,.25);
 }
-.custom_modal .lightText:hover,
-.custom_modal .lightText:focus {
+.custom_modal .lightText:hover {
     box-shadow: inset 0 0 0 1px hsla(0,0%,0%,.25),
                 inset 0 2px 0 hsla(0,0%,100%,.1),
                 inset 0 1.2em 0 hsla(0,0%,100%,.05),
@@ -236,8 +243,11 @@
 }
 
 @media (max-width: 768px) {
+    .custom_modal .lightText:hover {
+        box-shadow: none;
+    }    
     .custom_modal_content {
-        width: 100%;
+        width: 100% !important;
         min-width: 100%;       
     }
     .dish_half {
@@ -245,10 +255,13 @@
         display: inline-block;
     }
     .custom_modal_dialog .close {
-    top: 0;
-    right: 5px;
-    color: #000;
-    opacity: .4;
-    filter: alpha(opacity=40);
+        top: 0;
+        right: 5px;
+        color: #000;
+        opacity: .4;
+        filter: alpha(opacity=40);
     }
+    .custom_modal .button {
+        width: 90% !important;
+    }    
 }
