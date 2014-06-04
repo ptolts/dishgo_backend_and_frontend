@@ -28,22 +28,22 @@ class FacebookController < ApplicationController
 
     if restaurant.design
       design = restaurant.design
-      @design_css = restaurant.design.template_base_css
-      @design_menu_css = restaurant.design.template_menu_css            
+      @design_css = design.template_base_css
+      @design_menu_css = design.template_menu_css            
     else
       design = Design.where(name:/garde/i).first
-      @design_css = Design.where(name:/garde/i).first.template_base_css
-      @design_menu_css = Design.where(name:/garde/i).first.template_menu_css
+      @design_css = design.template_base_css
+      @design_menu_css = design.template_menu_css
     end
 
     if restaurant.font
       font = restaurant.font
-      @font_css = restaurant.font.template_font_css
-      @font_link_data = restaurant.font.template_font_link      
+      @font_css = font.template_font_css
+      @font_link_data = font.template_font_link      
     else
       font = Font.first
-      @font_css = Font.first.template_font_css
-      @font_link_data = Font.first.template_font_link
+      @font_css = font.template_font_css
+      @font_link_data = font.template_font_link
     end    
 
     if carousel = restaurant.global_images.find_all{|e| e.carousel} and carousel.size > 0

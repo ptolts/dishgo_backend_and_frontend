@@ -32,6 +32,8 @@ class Image
   
   index({ _id:1 }, { unique: true, name:"id_index" })
 
+  scope :rejected, -> { ne(rejected: true) }   
+
   has_mongoid_attached_file :img, {
       :path           => ':hash_:style.png',
       :hash_secret => "we_like_food",

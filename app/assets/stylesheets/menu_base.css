@@ -405,7 +405,7 @@ border-color: #6D6D6D;
   overflow-x: hidden;
 }
 .custom_modal .custom_modal_content .custom_modal_header {
-  position: static;
+  /*position: static;*/
   padding-bottom: 0.5em;
 }
 .custom_modal .custom_modal_content .custom_modal_header .dish-price {
@@ -428,8 +428,8 @@ border-color: #6D6D6D;
   margin: 0;
 }
 .custom_modal .custom_modal_content .custom_modal_body {
-  position: static;
-  padding: 15px;
+/*  position: static;
+  padding: 15px;*/
 }
 .custom_modal .custom_modal_content .custom_modal_body .dish-description p {
   font-family: Georgia, serif;

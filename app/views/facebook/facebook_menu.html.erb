@@ -1,85 +1,51 @@
 			<div class="container menu_container">
-			        <div class="row">
+			        <div class="menu_row" style="position: relative">
 			            <div class="menu_header">
 			                <img data-bind="attr:{src:$root.design.imgs.simple_header_1}" class="img-responsive">
 			            </div>
 		                <div class="resto_logo">
 							<div class="center">
 			                	<div class="menu_logo" data-bind="with: $root.restaurant">
-									<h4 data-bind="" style="width: 30%">restaurant</h4>
-									<h1 class="font-effect-shadow-multiple font-effect-stonewash" data-bind="text: name" style="width: 80%;">Carambola</h1>
-									<h3 data-bind="text: address_line_1, " style="width: 30%;">420 main</h3>
+									<h1 class="" data-bind="text: name" style="width: 80%;"><%= @resto_data["name"] %></h1>
 								</div>
 							</div>
 		                </div>
-				        <div class="language_selector">
-							<ul class="language_select" data-bind="foreach: $root.languages">
-							  <li data-bind="css:{selected: $data === $root.lang()}, click: function(){ $root.lang($data) }"><span data-bind="text: $root.getFullLangName($data)"></span>
-							</ul>				        	      
-				        </div>
-
-<!-- 				        <div class="menu_style_selector">
-				            <div class="btn-toolbar" role="toolbar">
-				              <div class="btn-group">
-				              	 <button type="button" class="btn btn-default" data-bind="css:{'active':!showDetails()}, click: function(){showDetails(false);}"><span class="fa fa-list"></span></button>
-				                <button type="button" class="btn btn-default" data-bind="css:{'active':showDetails()}, click: function(){showDetails(true);}"><span class="fa fa-picture-o"></span></button>
-				              </div>
-				            </div>          
-				        </div>	 -->	                
+                
 			        </div>    
 			            <div class="row">
 			                <div class="each_dish">
         						<!-- ko foreach: menu -->
-					                    <div class="col-xs-12">
-<!-- 					                        <img data-bind="attr:{src:$root.design.imgs.simple_divider}" class="section_img_header center-block"> -->
+					                    <div class="section">
 					                        <div class="section_title">
-					                            <h1 data-bind="lText: name">Deserts</h1>
-					                            <!-- <img data-bind="attr:{src:$root.design.imgs.section_line}" class="section_img_divider center-block"> -->
+					                            <h1 data-bind="lText: name"></h1>
 					                        </div>
 	                        				<div class="row mason" data-bind="foreach: dishes, masonry: [$root.showDetails, $data.id()]">
-
 	                    						<!-- THIS IS THE DETAILED DISH OUTPUT. -->
-
-<!-- 						                    	<div class="col-md-4 col-xs-12 image_section" data-bind="fadeVisible: $root.showDetails, click: function(){ pager.navigate($page.path() + '/' + $data.id()) }">
-					                                <div class="row">
-					                                    <div class="dish_title col-md-9 col-xs-9">
-					                                        <h2 data-bind="lText: name"></h2>
-					                                    </div>
-					                                    <div class="col-md-3 col-xs-3">
-					                                        <div class="dish_price">
-					                                            <h2 data-bind="text: computed_price"></h2>
-					                                        </div>
-					                                    </div>					                                   					                                    
-					                                </div>
-					                                <div class="row">
-					                                    <div class="dish_picture">
-					                                        <div class="col-md-12">
-					                                            <img class="img-responsive" data-bind="visible: large_title_image, menuImage: lazyLoadMediumImage">
-					                                        </div>
-					                                    </div>
-					                                </div>						                                
-					                                <div class="row dish_button_for_phone">
-						                            	<a class="btn btn-sm btn-dish" data-bind="page-href: $data.id()"><img data-bind="attr:{src:$root.design.imgs.logo_white_nav}" class="dishgo_icon"></a>
-					                                </div>
-						                   		</div> -->
-
-
 	                        					<!-- dish on screen -->
-	                        					<div class="col-xs-12 col-md-4 col-sm-6 dish_min_height" data-bind="fadeVisible: !$root.showDetails(), click: function(){ pager.navigate($page.path() + '/' + $data.id()) }">
-							                        <div class="dish_title">
-							                            <h2 data-bind="lText: name">Powdered Duck Breast</h2>
-							                        </div>
-							                        <div class="dish_description">
-							                            <p data-bind="lText: description">Smoked confit fennel &amp; umbles</p>
-							                        </div>
-							                        <div class="dish_price">
-							                            <i data-bind="text: computed_price">$34.00</i>
-							                            <!-- <button class="btn btn-sm btn-dish" data-toggle="modal" data-target="#myModal" data-bind="click: $root.set_dish($data)"><img data-bind="attr:{src:$root.design.imgs.logo_white_nav}" class="dishgo_icon"></button> -->
-							                        </div>
-							                        <div class="dish_button_for_phone">
-						                            	<a class="btn btn-sm btn-dish" data-bind="page-href: $data.id()"><img data-bind="attr:{src:$root.design.imgs.logo_white_nav}" class="dishgo_icon"></a>
-							                        </div>
-							                    </div>
+	                        					<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 dish_min_height dish_cursor dish" data-bind="fadeVisible: !$root.showDetails(), click: function(){ pager.navigate($page.path() + '/' + $data.id()) }">
+                                      <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 dish_picture" data-bind="visible: large_title_image">
+                                        <img class="img-responsive" data-bind="attr:{src:lazyLoadMediumImage}">
+                                      </div>
+                                      <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 dish_info" data-bind="css: { dish_full : !large_title_image() }">
+                                        <div class="row dish_button_for_phone">
+                                          <a class="btn btn-sm btn-dish" data-bind="page-href: $data.id()"><img data-bind="attr:{src:$root.design.imgs.logo_white_nav}" class="dishgo_icon"></a>
+                                        </div>
+                                        <div class="dish_title">
+                                          <h2 data-bind="lText: name"></h2>
+                                        </div>
+                                        <div class="dish_description">
+                                          <p data-bind="lTruncatedText: description"></p>
+                                        </div>
+                                        <div class="dish_price">
+                                          <span class="text">Price: </span>
+                                          <span class="currency-symbol">$</span>
+                                          <span class="number" data-bind="text: computed_price"></span>
+                                        </div>
+                                        <div class="dish_button_for_phone">
+                                          <a class="btn btn-sm btn-dish" data-bind="page-href: $data.id()"><img data-bind="attr:{src:$root.design.imgs.logo_white_nav}" class="dishgo_icon"></a>
+                                        </div>
+                                      </div>
+                                    </div>
 
 						                        <!-- dish modal -->
 												<div data-bind="page: {id: $data.id(), afterShow: function(){ $('body').addClass('stop_scrolling'); $data.modalVisible(true)}, afterHide: function(){ $('body').removeClass('stop_scrolling'); $data.modalVisible(false) }}" class="custom_modal">
@@ -90,67 +56,62 @@
 											    			<div class="custom_modal_header" data-bind="css:{'noBorderBottom':noContent}">
 											    				<a class="close" data-bind="page-href: '../'">&times;</a>
 											    				<div class="row">
-											    					<div class="col-sm-9 col-xs-8">
-											    						<h4 class="custom_modal-title pull-left" data-bind="lText: name">Mac &amp Cheese</h4>
+											    					<div class="col-xs-8">
+											    						<h4 class="custom_modal-title pull-left" data-bind="lText: name"></h4>
 											    					</div>
-											    					<div class="col-xs-2">
+											    					<div class="col-xs-4">
 											    						<div class="dish-price">
-											    							<i data-bind="text: computed_price">$18.99</i>
+											    							<span class="number" data-bind="text: computed_price"></span>
 											    						</div>
 											    					</div>
 											    				</div>
 											    			</div>
 											    			<div class="custom_modal_body" data-bind="stop_scroll">
 											    				<div class="dish_modal_body">
-
-											    					<div class="dish_image" data-bind="css: modalImageWidth">
-					                                           			<img class="img-responsive" data-bind="visible: large_title_image, modalImage: lazyLoadImage">
+											    					<div class="dish_image col-xs-12 col-sm-12 col-md-12 col-lg-5">
+                                      									<img class="img-responsive" data-bind="visible: large_title_image, modalImage: lazyLoadImage">
 											    					</div>
 
-											    					<div class="dish_description" data-bind="css: modalDescriptionWidth">
+											    					<div class="dish_info col-xs-12 col-sm-12 col-md-12 col-lg-7">
 
 											    						<div class="dish-description">
 											    							<p data-bind="lText: description"></p>
 											    						</div>
 
-											    						<div data-bind="visible: sizes, with: sizes_object" class="demo_options">
+											    						<div data-bind="visible: sizes, with: sizes_object" class="demo_options col-xs-12">
 											    							<h3>Select Size</h3>
-											    							<div data-bind="foreach: individual_options">
-											    								<label class="button lightText square grey float_option_size" data-bind="css: {'active': $parents[1].sizeSelectedOptionValue() === $data}"><input name="sizes_radio" type="radio" data-bind="checkedValue: $data, checked: $parents[1].sizeSelectedOptionValue" style="opacity: 0; width: 0px"/>
-											    									<!-- ko lText: name --><!-- /ko -->
-											    									<!-- ko if: price --><p>$<!-- ko text: price--><!-- /ko --></p><!-- /ko -->
+											    							<div data-bind="forEachWithLength: individual_options">
+											    								<label class="button lightText square grey float_option_size col-xs-12 col-sm-12 col-md-12 col-lg-5" data-bind="css: {'active': $parents[1].sizeSelectedOptionValue() === $data, 'dish_modal_full_width': ($length % 2) == 1 && $index() == ($length - 1)}"><input name="sizes_radio" type="radio" data-bind="checkedValue: $data, checked: $parents[1].sizeSelectedOptionValue" style="opacity: 0; width: 0px"/>
+											    									<span class="text"><!-- ko lText: name --><!-- /ko --></span>
+											    									<!-- ko if: price --><span class="number"><span class="currency-symbol">$</span><!-- ko text: price--><!-- /ko --></span><!-- /ko -->
 											    								</label>
 											    							</div>
 											    						</div>
 
 											    						<!-- ko foreach: options -->
-												    						<div class="demo_options">
+												    						<div class="demo_options col-xs-12">
 												    							<h3 data-bind="lText: name"></h3>
 												    							<div data-bind="foreach: individual_options">
-												    								<label class="button lightText square red float_option" data-bind="css: {'active': $parent.selectedOptionValue().indexOf($data) >= 0}">
+												    								<label class="button lightText square red float_option col-xs-12 col-sm-12 col-md-12 col-lg-5" data-bind="css: {'active': $parent.selectedOptionValue().indexOf($data) >= 0}">
 												    									<input name="sizes_radio" type="checkbox" data-bind="checkedValue: $data, checked: $parent.selectedOptionValue, attr:{disabled: clickable}" style="opacity: 0; width: 0px">
-												    									<!-- ko lText: name --><!-- /ko -->
-												    									<!-- ko if: computed_price() != "" && $parent.extra_cost() --><p>$<!-- ko text: computed_price--><!-- /ko --></p><!-- /ko -->
+												    									<span class="text"><!-- ko lText: name --><!-- /ko --></span>
+												    									<!-- ko if: computed_price() != "" && $parent.extra_cost() --><span class="number"><span class="currency-symbol">$</span><!-- ko text: computed_price--><!-- /ko --></span><!-- /ko -->
 												    									<!-- ko if: $data.icon -->
 												    										<img class="col-xs-12 thumbnail" data-bind="attr: {src: icon().url()}"/>
 												    									<!-- /ko -->
-												    								</label>                        
+												    								</label>
 												    							</div>
-												    							<h6><!-- ko if: min_selections() > 0 -->* Select at least <!-- ko text: min_selections() --><!-- /ko --><!-- /ko --> <!-- ko if: max_selections() > 0 -->* Select at most <!-- ko text: max_selections() --><!-- /ko --><!-- /ko --></h6>												    							
+												    							<h6 data-bind="visible: advanced"><!-- ko if: min_selections() > 0 -->* Select at least <!-- ko text: min_selections() --><!-- /ko --><!-- /ko --> <!-- ko if: max_selections() > 0 -->* Select at most <!-- ko text: max_selections() --><!-- /ko --><!-- /ko --></h6>
 												    						</div>
 												    					<!-- /ko -->
 											    					</div>
 											    				</div>
 											    			</div>
-<!-- 											    			<div class="custom_modal_footer">
-											    				<a class="btn btn-default" data-bind="page-href: '../'">Close</a>
-											    			</div> -->
 											    		</div>
 											    	</div>
 												</div>
 						                        <!-- dish custom_modal -->
 					                      	</div>
-<!-- 					                        <img data-bind="attr:{src:$root.design.imgs.simple_divider_bottom}" class="section_img_divider center-block"> -->
 					                    </div>
 				                <!-- /ko -->
 			                </div>

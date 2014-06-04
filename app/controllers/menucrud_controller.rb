@@ -13,7 +13,7 @@ class MenucrudController < ApplicationController
       section.restaurant = restaurant
     end
     section.save
-    render :text => "{\"id\":\"#{section.id}\"}"
+    render json: {id:section.id}.as_json
   end
 
   def create_dish
@@ -27,7 +27,7 @@ class MenucrudController < ApplicationController
       dish.restaurant = restaurant
     end
     dish.save
-    render :text => "{\"id\":\"#{dish.id}\"}"
+    render json: {id:dish.id}.as_json
   end
 
   def create_option
@@ -41,7 +41,7 @@ class MenucrudController < ApplicationController
       option.restaurant = restaurant
     end
     option.save
-    render :text => "{\"id\":\"#{option.id}\"}"
+    render json: {id:option.id}.as_json
   end
 
   def create_individual_option
@@ -55,6 +55,6 @@ class MenucrudController < ApplicationController
       individual_option.restaurant = restaurant
     end
     individual_option.save
-    render :text => "{\"id\":\"#{individual_option.id}\"}"
+    render json: {id:individual_option.id}.as_json
   end
 end

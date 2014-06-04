@@ -8,14 +8,19 @@ class Api::V1::RestaurantsController < ApplicationController
   end
 
   def index
-
     Rails.logger.warn params.to_s
 
-    sources = (Restaurant.new.by_loc [params[:lat].to_f,params[:lon].to_f]).to_a
+    restaurants = Restaurant.new.by_loc [params[:lat].to_f,params[:lon].to_f]
+    restaurants.reject!{|e| e.published_menu.empty?}
+    restaurants = restaurants.collect do | restaurant |
+      hash = restaurant.as_document
+      hash[:image] = restaurant.image.rejected.collect do |image|
+        next image.custom_to_hash
+      end
+      hash
+    end
 
-    sources_asjson = sources.as_json(:except => [:locs], :include => {:image => {:only => [:_id,:local_file,:rejected]}})
-
-    respond_with sources_asjson
+    respond_with restaurants.as_json
   end
 
   def unique_id restaurant
@@ -31,14 +36,6 @@ class Api::V1::RestaurantsController < ApplicationController
       return
     end
     restaurant = Restaurant.find(params[:id])
-    # restaurant = Restaurant.includes(:section => {:subsection => {:dish => [{:options => {:option => :icon}}, :images]}}).find(params[:id])
-    # if restaurant.nil? or restaurant.section.empty?
-    #   # Rails.logger.warn "Restaurant.nil? #{restaurant.nil?} or Restaurant.section.empty? #{restaurant.section.empty?} and size: #{restaurant.section.size}"
-    #   # render :text => {}.to_json
-    #   # return
-    #   restaurant = Restaurant.where(:name => /cunningham/i).first
-    # end
-    # THIS IS FUCKING UGLY. THERE HAS TO BE A BETTER WAY.
     respond_with ("{ \"menu\" : #{restaurant.api_menu_to_json} }")
   end
 

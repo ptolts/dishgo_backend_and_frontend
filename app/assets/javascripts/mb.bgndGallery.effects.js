@@ -32,7 +32,7 @@
 
 $.mbBgndGallery.effects={
 	fade:{
-		enter:{left:0,opacity:0},
+		enter:{left:"1px",opacity:0},
 		exit:{left:"1px",opacity:0},
 		enterTiming:"ease-in",
 		exitTiming:"ease-in"

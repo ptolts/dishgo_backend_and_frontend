@@ -1,3 +1,7 @@
+.dish_modal_full_width {
+    width: 90%;
+}
+
 .custom_modal {
     position: fixed;
     top: 0;
@@ -5,6 +9,10 @@
     right: 0;
     left: 0;
     z-index: 500;
+}
+
+.demo_options .button {
+    z-index: 10;
 }
 
 .noBorderBottom {

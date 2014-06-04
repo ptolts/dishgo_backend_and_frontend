@@ -9,6 +9,19 @@
 *= require restaurant
 */
 
+ko.bindingHandlers.forEachWithLength = {
+    init: function (element, valueAccessor, allBindingsAccessor, viewModel, context)
+    {         
+        return ko.bindingHandlers.foreach.init(element, valueAccessor, allBindingsAccessor, viewModel, context);
+    },
+    update: function (element, valueAccessor, allBindingsAccessor, viewModel, context) 
+    {         
+        var array = ko.utils.unwrapObservable(valueAccessor());
+        var extendedContext = context.extend({"$length" : array.length });
+        ko.bindingHandlers.foreach.update(element, valueAccessor, allBindingsAccessor, viewModel, extendedContext);   
+    }
+};
+
 ko.bindingHandlers.fitText = {
     update: function(element, valueAccessor, allBindingsAccessor, viewModel, bindingContext) {
         var self = this;
@@ -991,7 +1004,7 @@ function IndividualOption(data,option) {
             // console.log("self.computed_price -> " + self.dish.sizes());
             if(self.dish.sizes()){
                 if(self.price_according_to_size()){
-                    var p = _.find(self.size_prices.peek(),function(i){ return i.name() == self.dish.sizeSelectedOptionValue().name()});
+                    var p = _.find(self.size_prices.peek(),function(i){ return i.size_id()() == self.dish.sizeSelectedOptionValue().id()});
                     //console.log(p);   
                     return p.price();
                 } else {
@@ -1112,6 +1125,7 @@ function MenuViewModel() {
                 ind_opt.size_prices([]);
             });
         });
+        self.current_dish().sizeSelectedOptionValue(new_opt.individual_options()[0]);
         self.current_dish().sizes_object(new_opt);
         self.current_dish().sizes(true);
         self.currentOption(null);
