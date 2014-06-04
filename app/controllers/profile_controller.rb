@@ -1,6 +1,7 @@
 class ProfileController < ApplicationController
 	before_filter :authenticate_user!
 	before_filter :create_notifications!
+	before_filter :admin_or_profile_image_owner!, only: [:reject_image]
 
 	layout 'profile'
 
@@ -113,4 +114,10 @@ class ProfileController < ApplicationController
 		render json:{success:true}
 	end
 
+	def reject_image
+		image = Image.find(params["image_id"])
+		image.rejected = !image.rejected
+		image.save
+		render json: {rejected: image.rejected}.as_json
+	end
 end

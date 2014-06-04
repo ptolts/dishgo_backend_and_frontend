@@ -19,6 +19,10 @@
         <div data-bind="template: { name: 'user_template', data: $parent.user }" class="profile_details"></div>
     </div>
 
+    <div data-bind="page: {id: 'profile_images', title: 'Profile Images', with: restaurant}">
+        <div data-bind="template: { name: 'profile_images_template', data: $parent.restaurant }" class="profile_details"></div>
+    </div>     
+
     <div data-bind="page: {id: 'social_media', title: 'Social Media Links', with: restaurant}">
         <div data-bind="template: { name: 'socialmedia_template', data: $parent.restaurant }" class="profile_details"></div>
     </div>
@@ -37,6 +41,7 @@
 
     <%= render 'shared/restaurant_template' %>
     <%= render 'shared/socialmedia_template' %>
+    <%= render 'shared/profileimages_template' %>
     <%= render 'shared/notifications_template' %>
     <%= render 'shared/user_template' %>
     <%= render 'shared/hours_template' %>
@@ -44,7 +49,7 @@
 
     <script type='text/javascript'>//<![CDATA[ 
 
-        var resto_data = <%= raw(current_user.owns_restaurants.as_json(include: [:user, :menu_images]).to_json) %>;
+        var resto_data = <%= raw(current_user.owns_restaurants.as_json(include: [:user, :menu_images, :image]).to_json) %>;
         var user_data = <%= raw(current_user.as_json(include: :owns_restaurants, include: :notifications).to_json) %>;
 
         ko.bindingHandlers.phone = {

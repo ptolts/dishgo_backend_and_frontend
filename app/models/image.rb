@@ -14,7 +14,7 @@ class Image
   field :likes, type: Integer
   field :source, type: String
   field :position, type: Integer
-  field :rejected, type: Boolean
+  field :rejected, type: Boolean, default: false
 
   field :img_url_medium, type: String
   field :img_url_original, type: String
@@ -91,9 +91,9 @@ class Image
       if self.img_url_medium.nil?
         img_post_process
       end   
-      return {_id: self._id, id: self._id, local_file: img_url_medium, medium: self.img_url_medium, rejected: false, original: self.img_url_original}
+      return {_id: self._id, id: self._id, local_file: img_url_medium, medium: self.img_url_medium, small: self.img_url_small, rejected: self.rejected, original: self.img_url_original}
     else
-      return {_id: self._id, id: self._id, local_file: self.local_file, medium: self.img_url_medium, rejected: self.rejected, original: self.img_url_original}
+      return {_id: self._id, id: self._id, local_file: self.local_file, medium: self.img_url_medium, small: self.img_url_small, rejected: self.rejected, original: self.img_url_original}
     end
   end
 

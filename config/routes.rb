@@ -68,6 +68,7 @@ Foodcloud::Application.routes.draw do
       get 'location'
       post 'add_card'
       post 'subscribe'
+      post 'reject_image'
       post 'smoke_notifications'
     end
   end

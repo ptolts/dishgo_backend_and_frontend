@@ -171,6 +171,21 @@
     opacity:.70;
     filter:alpha(opacity=70); 
 }
+
+.profile_images img {
+    border-radius: 5px;
+    margin-bottom: 5px;
+    border: 3px solid black;
+}
+
+.profile_images img.active {
+    border: 3px solid red;
+}
+
+.profile_images img:hover {
+    border: 3px solid blue;
+}
+
 @media (max-width: 992px) {
     .profile_form_wrapper{
         margin-left: auto;

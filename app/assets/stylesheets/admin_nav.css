@@ -79,6 +79,10 @@ margin: 0px 15px;
   /*background-color: #cf2f28;*/
 }
 
+#dishgo_bar ul .dropdown-menu {
+  background-color: #000;
+}
+
 #dishgo_bar.navbar-inverse .navbar-toggle {
   border-color: #fff;
   outline: none;
