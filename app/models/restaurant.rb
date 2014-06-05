@@ -74,6 +74,8 @@ class Restaurant
   index({ name: 1 }, { name: "name_index" })
   index({ _id:1 }, { unique: true, name:"id_index" })
   index({ locs: "2dsphere" }, { name:"location_index"})
+  index({ subdomain: 1}, {name: "subdomain_index"})
+  index({ host: 1}, {name: "host_index"})
 
   scope :has_menu, -> { any_in(:_id => includes(:published_menu).select{ |w| w.published_menu.size > 0 }.map{ |r| r.id }) }
 
