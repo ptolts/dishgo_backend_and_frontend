@@ -51,6 +51,10 @@
   margin-left: 15px;
 }
 
+.menu_header .img-responsive {
+  min-width: 100%;
+}
+
 .dish_container {
   overflow: visible;
 }
