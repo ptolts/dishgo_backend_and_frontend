@@ -157,6 +157,13 @@
 	#social_media {
 		display: none;
 	}
+	#social_media_footer {
+	position: absolute;
+	right: 15px;
+	text-align: center;
+	line-height: 70px;
+	display: block;
+	}
 
 	.overlay {
 		display: none;
