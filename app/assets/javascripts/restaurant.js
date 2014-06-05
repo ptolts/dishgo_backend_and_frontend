@@ -2,6 +2,33 @@
 *= require design
 */  
 
+
+    ko.bindingHandlers.profile_file_upload = {
+        update: function(element, valueAccessor, allBindingsAccessor, viewModel, bindingContext) {
+            var self = this;
+            var value = valueAccessor();
+            $(element).fileupload({
+                dropZone: $(element),
+                formData: {restaurant_id: restaurant_id},
+                url: image_upload_url,
+                dataType: 'json',
+                progressInterval: 50,
+                done: function (e, data) {
+                    var file = data.result.files[0];
+                    value.update_info(file);                
+                },
+                progressall: function (e, data) {
+                    var progress = parseInt(data.loaded / data.total * 100, 10);
+                    value.progressValue(progress);
+                },
+                fail: function (e, data) {
+                    value.failed(true);
+                },      
+            });
+        }
+    };
+
+
   function Image(data) {
     var self = this;
     self.progressValue = ko.observable(1);
@@ -69,11 +96,12 @@
 
     self.update_info = function(item){
         self.url(item.thumbnailUrl);
-        self.completed(true);
+        self.small(item.small);
         self.id(item.image_id);
         self.original(item.original);
         self.image_width = ko.observable(item.width);
         self.image_height = ko.observable(item.height); 
+        self.completed(true);
     }
 }
 
@@ -359,16 +387,34 @@
                 self.email_addresses.remove(email);
             }
 
+            self.new_image_holder = ko.observable(new Image());
+            self.new_image = ko.computed(function(){    
+                if(self.new_image_holder().completed()){
+                    self.images.push(self.new_image_holder());
+                    self.new_image_holder(new Image());
+                }
+                return self.new_image_holder();
+            });
+
             self.menu_images = ko.observableArray([]);
 
             if(data.menu_images){
                 self.menu_images(_.map(data.menu_images,function(img){ return new GlobalImage(img) }))
             }
 
+            self.created_menu_image;
+
             self.computed_menu_images = ko.computed({
                 read: function(){
-                    if(self.menu_images().length == 0 || _.every(self.menu_images(),function(e){ console.log(e);return e.completed() })){
-                        self.menu_images.push(new GlobalImage({}));
+                    if(_.every(self.menu_images(),function(e){ console.log(e);return e.completed() }) || self.menu_images().length == 0){
+                        var new_image = new GlobalImage({});
+                        self.created_menu_image = new_image;
+                        self.menu_images.push(new_image);
+                    }
+                    if(self.created_menu_image.completed()){
+                        var new_image = new GlobalImage({});
+                        self.created_menu_image = new_image;
+                        self.menu_images.push(new_image);
                     }
                     self.menu_images.remove(function(img){ return img.destroyed() });
                     return self.menu_images();

@@ -50,6 +50,12 @@ class OdeskController < ApplicationController
     end
     restaurant.draft_menu = sections
     restaurant.save
+    restaurant.reload
+    restaurant.published_menu = restaurant.draft_menu
+    restaurant.published_menu.each do |section|
+      section.publish_menu
+    end
+    restaurant.save    
     render json: {success:true}.as_json
   end
 

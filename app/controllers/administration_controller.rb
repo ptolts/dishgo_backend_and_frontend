@@ -256,6 +256,7 @@ class AdministrationController < ApplicationController
                         name: img.img_file_name,
                         size: img.img_file_size,
                         original:  img.img_url_original,
+                        small:  img.img_url_small,
                         thumbnailUrl:   img.img_url_medium,
                       }
                     }}.as_json
