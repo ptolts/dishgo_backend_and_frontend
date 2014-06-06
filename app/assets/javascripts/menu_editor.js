@@ -389,7 +389,7 @@ function Dish(data, topmodel) {
     }
 
     if(data.image) {
-        self.images = ko.observableArray($.map(data.image, function(item) { return new Image(item) }));                
+        self.images = ko.observableArray($.map(data.image, function(item) { return new ImageObj(item) }));                
     }
 
     self.quantity = ko.observable(1);
@@ -499,7 +499,7 @@ function Dish(data, topmodel) {
     }    
 
     self.addImage = function(item) { 
-        var new_image = new Image(item);
+        var new_image = new ImageObj(item);
         self.images.unshift(new_image);
         return new_image;
     };  
@@ -891,7 +891,7 @@ function IndividualOption(data,option) {
     }    
 
     if(data.icon) {
-        self.icon(new Image(data.icon));               
+        self.icon(new ImageObj(data.icon));               
     }  
 
     if(data.price_according_to_size){
@@ -984,7 +984,7 @@ function IndividualOption(data,option) {
     }; 
 
     self.addImage = function(item) { 
-        var new_image = new Image(item);
+        var new_image = new ImageObj(item);
         self.icon(new_image);
         return new_image;
     };  

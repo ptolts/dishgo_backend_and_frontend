@@ -29,7 +29,7 @@
     };
 
 
-  function Image(data) {
+  function ImageObj(data) {
     var self = this;
     self.progressValue = ko.observable(1);
     self.filename = ko.observable("");
@@ -372,7 +372,7 @@
 
             self.images = ko.observableArray([]);
             if(data.image){
-                self.images(_.map(data.image,function(image){ return new Image(image) }));
+                self.images(_.map(data.image,function(image){ return new ImageObj(image) }));
             }            
 
             self.email_addresses = ko.observableArray([]);
@@ -387,11 +387,11 @@
                 self.email_addresses.remove(email);
             }
 
-            self.new_image_holder = ko.observable(new Image());
+            self.new_image_holder = ko.observable(new ImageObj());
             self.new_image = ko.computed(function(){    
                 if(self.new_image_holder().completed()){
                     self.images.push(self.new_image_holder());
-                    self.new_image_holder(new Image());
+                    self.new_image_holder(new ImageObj());
                 }
                 return self.new_image_holder();
             });
