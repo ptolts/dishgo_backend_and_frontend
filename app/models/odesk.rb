@@ -24,7 +24,7 @@ class Odesk
       menu = self.sections.unscoped.draft.collect do |section|
         hash = section.as_document
         hash[:id] = section.id
-        hash.merge!(section.draft)
+        hash.merge!(section.draft) 
         hash["dishes"] = section.draft_dishes.unscoped.draft.collect do |dish|
           dish.custom_to_hash_draft
         end

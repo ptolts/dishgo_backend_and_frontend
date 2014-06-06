@@ -7,7 +7,7 @@ class Section
 	field :name, localize: true
 	field :position, type: Integer
 	field :draft_position, type: Integer
-	field :draft, type: Hash
+	field :draft, type: Hash, default: {}
 	field :published, type: Boolean
 
 	belongs_to :restaurant, class_name: "Restaurant", inverse_of: :section, index: true

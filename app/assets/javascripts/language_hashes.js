@@ -140,6 +140,12 @@ function copyDefaultHash(hash) {
 }
 
 function currentLangName(observable){
+    if(!observable()){
+        return {
+            'en':'error',
+            'reso':'error',
+        }
+    }
     return {
                 'en' : observable()['en'],
                 'reso' : observable()[lang()]
