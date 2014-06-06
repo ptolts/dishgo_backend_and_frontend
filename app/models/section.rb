@@ -65,7 +65,7 @@ class Section
 	        if dish_object = Dish.where(:_id => dish["id"]).first and dish_object
 				if dish_object.restaurant_id != request_restaurant.id
           			Rails.logger.warn "Dish Permission Error: #{dish_object.restaurant.to_json} != #{request_restaurant.to_json}"
-					return false
+					# return false
 				end	        	
 	        else
 	        	dish_object = Dish.create

@@ -47,7 +47,7 @@ class Dish
 
       if size_option_object.restaurant_id != request_restaurant.id
         Rails.logger.warn "Bailing out\n------------"
-        return false
+        # return false
       end     
       # size_option_object.draft_dish_which_uses_this_as_size_options = self 
     else
@@ -77,7 +77,7 @@ class Dish
 
         if option_object.restaurant_id != request_restaurant.id
           Rails.logger.warn "Bailing out\n------------"
-          return false
+          # return false
         end        
       else
         option_object = DishOption.create

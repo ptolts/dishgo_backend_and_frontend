@@ -44,7 +44,7 @@ class DishOption
 			  # If someone has tried to load options from another restaurant, something fishy is going on.
 			  if individual_option_object.restaurant_id != request_restaurant.id
         		Rails.logger.warn "Bailing out in options\n------------"			  	
-			  	return false
+			  	# return false
 			  end
 			else
 				individual_option_object = IndividualOption.create
