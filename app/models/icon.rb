@@ -10,7 +10,9 @@ class Icon
   field :height, type: Integer
   field :width, type: Integer
 
-  belongs_to :individual_option, index: true
+  belongs_to :individual_option, class_name: "IndividualOption", index: true
+  belongs_to :draft_individual_option, class_name: "IndividualOption", index: true
+
   belongs_to :restaurant, index: true
 
   has_mongoid_attached_file :img, {

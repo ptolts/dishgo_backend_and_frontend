@@ -30,7 +30,9 @@ class DishOption
 
 	index({ _id:1 }, { unique: true, name:"id_index" })
 
-  	default_scope -> { asc(:created_at) } 	
+  	default_scope -> { asc(:created_at) }	
+
+	# accepts_nested_attributes_for :individual_options, :draft_individual_options
 
 	def load_data_from_json option, request_restaurant
 
@@ -72,13 +74,14 @@ class DishOption
 	end	
 
 	def odesk_load_data_from_json option, odesk_request
+		# Rails.logger.warn "Dish_Options\n---------"
 		draft = {}
 		#Load or Create the individual options for this option.
 		individual_options = option["individual_options"].collect.with_index do |individual_option,index|
 			if individual_option_object = IndividualOption.where(:_id => individual_option["id"]).first and individual_option_object
 				# Rails.logger.warn "---\nLoading IndividualOption[#{individual_option["name"]}]\n---"
 			  # If someone has tried to load options from another restaurant, something fishy is going on.
-			  if individual_option_object.odesk != odesk_request
+			  if individual_option_object.odesk_id != odesk_request.id
 			  	return false
 			  end
 			else
@@ -101,6 +104,7 @@ class DishOption
 		draft[:extra_cost] = option["extra_cost"]
 		self.draft = draft
 		self.draft_individual_options = individual_options
+		# Rails.logger.warn "End Dish_Options\n---------"
 		self.save
 	end		
 

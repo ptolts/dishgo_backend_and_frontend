@@ -20,14 +20,15 @@ class IndividualOption
 	belongs_to :options, index: true, :class_name => 'DishOption', index: true, inverse_of: :individual_option
 	belongs_to :draft_options, index: true, :class_name => 'DishOption', index: true, inverse_of: :draft_individual_option
 
-	has_one :icon
-	has_one :draft_icon, class_name: "Icon"
+	has_one :icon, class_name: "Icon", inverse_of: :individual_option, validate: false
+	has_one :draft_icon, class_name: "Icon", inverse_of: :draft_individual_option, validate: false
 
 	belongs_to :restaurant, index: true
 	belongs_to :odesk, index: true
 
 	default_scope -> {asc(:created_at)}
 	index({ _id:1 }, { unique: true, name:"id_index" })
+
 
 	def load_data_from_json individual_option, request_restaurant
 
@@ -53,6 +54,7 @@ class IndividualOption
 
 
 	def odesk_load_data_from_json individual_option, odesk_request
+		# Rails.logger.warn "Individual Options\n---------"
 		draft = {}
 		if individual_option["size_prices"]
 			self.draft_size_prices = individual_option["size_prices"]
@@ -66,6 +68,7 @@ class IndividualOption
 		draft[:price] = individual_option["price"].to_f
 		draft[:price_according_to_size] = individual_option["price_according_to_size"].to_bool
 		self.draft = draft
+		# Rails.logger.warn "End Ind_Opts\n---------"
 		self.save
 	end 	
 

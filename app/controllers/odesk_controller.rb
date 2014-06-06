@@ -1,3 +1,5 @@
+require 'oj'
+
 class OdeskController < ApplicationController
   before_filter :admin_user!, only: [:index, :search_restaurants, :regenerate_token, :assign_to, :merge_menu]
   before_filter :admin_or_user_with_resto!, :only => [:upload_image]
@@ -103,7 +105,8 @@ class OdeskController < ApplicationController
     odesk = Odesk.where(access_token:(params[:id] || params[:odesk_id] )).first
     odesk.logins << "[#{request.ip} updated menu at #{DateTime.now}]"
     odesk.save    
-    menu = JSON.parse(params[:menu]).collect do |section|
+    # menu = JSON.parse(params[:menu]).collect do |section|
+    menu = Oj.load(params[:menu]).collect do |section|
       # Load Option Object, or create a new one.
       if section_object = Section.where(:_id => section["id"]).first and section_object
         if section_object.odesk != odesk

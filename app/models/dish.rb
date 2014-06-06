@@ -25,14 +25,16 @@ class Dish
   has_many :options, :class_name => 'DishOption', inverse_of: :dish
   has_many :draft_options, :class_name => 'DishOption', inverse_of: :draft_dish
 
-  has_one :sizes, :class_name => 'DishOption', inverse_of: :dish_which_uses_this_as_size_options
-  has_one :draft_sizes, :class_name => 'DishOption', inverse_of: :draft_dish_which_uses_this_as_size_options
+  has_one :sizes, :class_name => 'DishOption', inverse_of: :dish_which_uses_this_as_size_options, validate: false
+  has_one :draft_sizes, :class_name => 'DishOption', inverse_of: :draft_dish_which_uses_this_as_size_options, validate: false
 
   # default_scope ->{ where(:name.nin => ["", nil]) }
   scope :draft, -> {asc(:draft_position)}   
   scope :pub, -> {asc(:position)}  
 
   index({ _id:1 }, { unique: true, name:"id_index" })
+
+  # accepts_nested_attributes_for :options, :draft_options, :sizes, :draft_sizes
 
   def load_data_from_json dish, request_restaurant
     draft = {}
@@ -118,6 +120,7 @@ class Dish
   end  
 
   def odesk_load_data_from_json dish, odesk_request
+    # Rails.logger.warn "Dishes\n---------"
     draft = {}
     sizes_object = dish["sizes_object"]
     if size_option_object = DishOption.where(:_id => sizes_object["id"]).first and size_option_object
@@ -125,7 +128,7 @@ class Dish
       if size_option_object.odesk.nil?
         size_option_object.odesk = odesk_request
       end
-      if size_option_object.odesk != odesk_request
+      if size_option_object.odesk_id != odesk_request.id
         return false
       end     
       # size_option_object.draft_dish_which_uses_this_as_size_options = self
@@ -150,7 +153,7 @@ class Dish
         if option_object.odesk.nil?
           option_object.odesk = odesk_request
         end
-        if option_object.odesk != odesk_request
+        if option_object.odesk_id != odesk_request.id
           return false
         end        
       else
@@ -182,6 +185,7 @@ class Dish
     end 
     self.draft = draft
     self.draft_options = options
+    # Rails.logger.warn "End Dish\n---------"
     self.save
   end
 

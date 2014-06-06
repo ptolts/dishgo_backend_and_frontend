@@ -14,7 +14,10 @@ class Odesk
 
   belongs_to :restaurant, class_name: "Restaurant", index: true
 
-  has_many :sections, :class_name => "Section", inverse_of: :odesk_menu
+  has_many :sections, :class_name => "Section", inverse_of: :odesk
+  has_many :dishes, :class_name => "Dish", inverse_of: :odesk
+  has_many :dish_options, :class_name => "DishOption", inverse_of: :odesk
+  has_many :individual_options, :class_name => "IndividualOption", inverse_of: :odesk
 
   def draft_menu_to_json
     # result = RubyProf.profile {

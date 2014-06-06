@@ -26,6 +26,8 @@ class Section
 
 	index({ _id:1 }, { unique: true, name:"id_index" })
 
+	# accepts_nested_attributes_for :draft_dishes, :dishes
+
 	def publish_menu
 		self.name_translations = self.draft["name"]
 		self.position = self.draft_position
@@ -84,6 +86,7 @@ class Section
 	end	
 
 	def odesk_load_data_from_json section, odesk_request
+		# Rails.logger.warn "Sections\n---------"
 		draft = {}
 		draft[:name] = section["name"]
 		draft[:position] = section["position"].to_i
@@ -92,7 +95,7 @@ class Section
 		dishes = section["dishes"].collect do |dish|
 	        # Load Dish Object, or create a new one.
 	        if dish_object = Dish.where(:_id => dish["id"]).first and dish_object
-				if dish_object.odesk != odesk_request
+				if dish_object.odesk_id != odesk_request.id
           			Rails.logger.warn "Dish Permission Error: #{dish_object.odesk.to_json} != #{odesk_request.to_json}"
 					return false
 				end	        	
@@ -108,6 +111,7 @@ class Section
 	    end
 	    self.draft = draft
 	    self.draft_dishes = dishes
+		# Rails.logger.warn "End Sections\n---------"
 	    self.save
 	end		
 end

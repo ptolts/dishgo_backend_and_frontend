@@ -64,8 +64,8 @@ class Restaurant
   has_many :orders, :class_name => "Order"
   belongs_to :user, :class_name => "User", index: true, inverse_of: :owns_restaurants
 
-  has_one :odesk, :class_name => "Odesk", inverse_of: :restaurant
-  has_one :cache, :class_name => "Cache", inverse_of: :restaurant
+  has_one :odesk, :class_name => "Odesk", inverse_of: :restaurant, validate: false
+  has_one :cache, :class_name => "Cache", inverse_of: :restaurant, validate: false
 
   belongs_to :design, index: true
 
