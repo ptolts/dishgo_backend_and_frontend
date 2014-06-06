@@ -70,7 +70,6 @@ class DishOption
 		self.draft = draft
 		self.draft_individual_options = individual_options
 		self.save
-		Rails.logger.warn "------------- SAVED [#{self.id}] ------------"
 	end	
 
 	def odesk_load_data_from_json option, odesk_request
