@@ -125,12 +125,6 @@ var opts = {
   left: 'auto' // Left position relative to parent in px
 };
 
-Section.prototype.toJSON = function() {
-    var copy = ko.toJS(this); //easy way to get a clean copy
-    delete copy.topmodel;
-    return copy; //return the copy to be serialized
-};  
-
 function Section(data,topmodel) {
 
     var self = this;
@@ -313,12 +307,6 @@ ko.bindingHandlers.file_upload_icon = {
             },                       
         });
     }
-};
-
-Dish.prototype.toJSON = function() {
-    var copy = ko.toJS(this); //easy way to get a clean copy
-    delete copy.topmodel; //remove an extra property
-    return copy; //return the copy to be serialized
 };
 
 var showOptionsList = ko.observable(false);
@@ -678,14 +666,6 @@ ko.bindingHandlers.modalImage = {
     }
 }; 
 
-Option.prototype.toJSON = function() {
-    var copy = ko.toJS(this); //easy way to get a clean copy
-    delete copy.dish; //remove an extra property
-    delete copy.multiple_prices; 
-    delete copy.sizes_object_names; 
-    return copy; //return the copy to be serialized
-};
-
 // var optionsList = ko.observableArray([]);
 
 function Option(data,dish) {
@@ -787,8 +767,6 @@ function Option(data,dish) {
         return cost;
     });
 
-
-
     self.option_title = ko.computed(function(){
         return "Add an option to " + self.dish.name() + ".";
     });    
@@ -884,22 +862,7 @@ function SizePrices(data) {
         // });        
     }    
 }
-SizePrices.prototype.toJSON = function() {
-    var copy = ko.toJS(this); //easy way to get a clean copy
-    delete copy.ind_opt; //remove an extra property
-    delete copy.size_ind_opt;    
-    return copy; //return the copy to be serialized
-};
 
-
-IndividualOption.prototype.toJSON = function() {
-    var copy = ko.toJS(this); //easy way to get a clean copy
-    delete copy.option; //remove an extra property
-    delete copy.dish; 
-    delete copy.type;  
-    delete copy.size_prices_to_remove; 
-    return copy; //return the copy to be serialized
-};
 function IndividualOption(data,option) {
 
     var self = this;
@@ -1770,4 +1733,23 @@ function DemoViewModel() {
     };     
 }
 
-
+Section.prototype.toJSON = function() {
+    var copy = ko.toJS(this,["topmodel"]); //easy way to get a clean copy
+    return copy; //return the copy to be serialized
+};  
+Dish.prototype.toJSON = function() {
+    var copy = ko.toJS(this,["topmodel"]); //easy way to get a clean copy
+    return copy; //return the copy to be serialized
+};
+Option.prototype.toJSON = function() {
+    var copy = ko.toJS(this,["dish","multiple_prices","sizes_object_names"]); //easy way to get a clean copy
+    return copy; //return the copy to be serialized
+};
+SizePrices.prototype.toJSON = function() {
+    var copy = ko.toJS(this,["ind_opt","size_ind_opt"]); //easy way to get a clean copy
+    return copy; //return the copy to be serialized
+};
+IndividualOption.prototype.toJSON = function() {
+    var copy = ko.toJS(this,['dish','option','type','size_prices_to_remove']); //easy way to get a clean copy
+    return copy; //return the copy to be serialized
+}; 

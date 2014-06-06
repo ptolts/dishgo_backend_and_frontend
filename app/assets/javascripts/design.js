@@ -172,6 +172,10 @@
         		}
         		self.global_images.push(new_images);       		
 	        }); 
+
+	        if(!self.defaultImage()){
+	        	self.defaultImage(self.global_images()[0]);
+	        }
       
 	    }  
 

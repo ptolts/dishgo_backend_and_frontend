@@ -1812,9 +1812,12 @@ ko.exportSymbol('isComputed', ko.isComputed);
 (function() {
     var maxNestedObservableDepth = 10; // Escape the (unlikely) pathalogical case where an observable's current value is itself (or similar reference cycle)
 
-    ko.toJS = function(rootObject) {
+    ko.toJS = function(rootObject, ignoreList) {
         if (arguments.length == 0)
             throw new Error("When calling ko.toJS, pass the object you want to convert.");
+
+        ignoreList = ignoreList || [];
+        ignoreList.push('$__page__');
 
         // We just unwrap everything at every level in the object graph
         return mapJsObjectGraph(rootObject, function(valueToMap) {
@@ -1822,15 +1825,15 @@ ko.exportSymbol('isComputed', ko.isComputed);
             for (var i = 0; ko.isObservable(valueToMap) && (i < maxNestedObservableDepth); i++)
                 valueToMap = valueToMap();
             return valueToMap;
-        });
-    };
+        }, new objectLookup(), ignoreList);
+    };   
 
     ko.toJSON = function(rootObject, replacer, space) {     // replacer and space are optional
         var plainJavaScriptObject = ko.toJS(rootObject);
         return ko.utils.stringifyJson(plainJavaScriptObject, replacer, space);
     };
 
-    function mapJsObjectGraph(rootObject, mapInputCallback, visitedObjects) {
+    function mapJsObjectGraph(rootObject, mapInputCallback, visitedObjects, ignoreList) {
         visitedObjects = visitedObjects || new objectLookup();
 
         rootObject = mapInputCallback(rootObject);
@@ -1858,12 +1861,13 @@ ko.exportSymbol('isComputed', ko.isComputed);
                         : mapJsObjectGraph(propertyValue, mapInputCallback, visitedObjects);
                     break;
             }
-        });
+        }, ignoreList);
 
         return outputProperties;
     }
 
-    function visitPropertiesOrArrayEntries(rootObject, visitorCallback) {
+    function visitPropertiesOrArrayEntries(rootObject, visitorCallback, ignoreList) {
+        ignoreList = ignoreList || [];
         if (rootObject instanceof Array) {
             for (var i = 0; i < rootObject.length; i++)
                 visitorCallback(i);
@@ -1873,8 +1877,8 @@ ko.exportSymbol('isComputed', ko.isComputed);
                 visitorCallback('toJSON');
         } else {
             for (var propertyName in rootObject) {
-                if(propertyName == "$__page__"){
-                    return;
+                if(ignoreList.indexOf(propertyName) != -1){
+                    continue;
                 }
                 visitorCallback(propertyName);
             }

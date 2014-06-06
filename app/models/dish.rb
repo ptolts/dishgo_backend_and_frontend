@@ -45,7 +45,7 @@ class Dish
         size_option_object.restaurant = request_restaurant
       end
 
-      if size_option_object.restaurant != request_restaurant
+      if size_option_object.restaurant_id != request_restaurant.id
         Rails.logger.warn "Bailing out\n------------"
         return false
       end     
@@ -75,7 +75,7 @@ class Dish
           option_object.restaurant = request_restaurant
         end
 
-        if option_object.restaurant != request_restaurant
+        if option_object.restaurant_id != request_restaurant.id
           Rails.logger.warn "Bailing out\n------------"
           return false
         end        

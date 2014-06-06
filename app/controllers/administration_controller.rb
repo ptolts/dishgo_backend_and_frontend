@@ -1,3 +1,5 @@
+require 'oj'
+
 class AdministrationController < ApplicationController
   before_filter :authenticate_user!
   before_filter :create_notifications!
@@ -171,11 +173,11 @@ class AdministrationController < ApplicationController
 
     # IF YOU EVER NEED TO SCALE, THIS COULD BE A PLACE TO OPTIMIZE
   	restaurant = Restaurant.find(params[:restaurant_id])
-  	menu = JSON.parse(params[:menu]).collect do |section|
-
+    # menu = JSON.parse(params[:menu]).collect do |section|
+  	menu = Oj.load(params[:menu]).collect do |section|
       # Load Option Object, or create a new one.
       if section_object = Section.where(:_id => section["id"]).first and section_object
-        if section_object.restaurant != restaurant
+        if section_object.restaurant_id != restaurant.id
           Rails.logger.warn "#{section_object.restaurant.to_json} != #{restaurant.to_json}"
           render :json => {:error => "Invalid Permissions"}.as_json
           return
