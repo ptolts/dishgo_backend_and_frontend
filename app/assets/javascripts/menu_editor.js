@@ -1754,57 +1754,57 @@ IndividualOption.prototype.toJSON = function() {
     return copy; //return the copy to be serialized
 };
 
-var test_results;
-var test2_results;
-var len = 50;
+// var test_results;
+// var test2_results;
+// var len = 50;
 
-function test1(len){
-    len = len || 1500;
-    var start = new Date().getTime();
-    for(var i=0;i<len;i++){
-        test_results = ko.toJSON(viewmodel.menu);
-    }
-    var end = new Date().getTime();
-    var time = end - start;
-    time = time/len;
-    console.log('Test1 Execution time: ' + time);    
-}
+// function test1(len){
+//     len = len || 1500;
+//     var start = new Date().getTime();
+//     for(var i=0;i<len;i++){
+//         test_results = ko.toJSON(viewmodel.menu);
+//     }
+//     var end = new Date().getTime();
+//     var time = end - start;
+//     time = time/len;
+//     console.log('Test1 Execution time: ' + time);    
+// }
 
-function test2(len){
-    len = len || 1500;
-    Section.prototype.toJSON = function() {
-        var copy = ko.toJS(this,["topmodel","computedSkipPlease"]); //easy way to get a clean copy
-        return copy; //return the copy to be serialized
-    };  
-    Dish.prototype.toJSON = function() {
-        var copy = ko.toJS(this,["topmodel","computedSkipPlease"]); //easy way to get a clean copy
-        return copy; //return the copy to be serialized
-    };
-    Option.prototype.toJSON = function() {
-        var copy = ko.toJS(this,["dish","multiple_prices","sizes_object_names","computedSkipPlease"]); //easy way to get a clean copy
-        return copy; //return the copy to be serialized
-    };
-    SizePrices.prototype.toJSON = function() {
-        var copy = ko.toJS(this,["ind_opt","size_ind_opt","computedSkipPlease"]); //easy way to get a clean copy
-        return copy; //return the copy to be serialized
-    };
-    IndividualOption.prototype.toJSON = function() {
-        var copy = ko.toJS(this,['dish','option','type','size_prices_to_remove',"computedSkipPlease"]); //easy way to get a clean copy
-        return copy; //return the copy to be serialized
-    };    
-    var start = new Date().getTime();
-    for(var i=0;i<len;i++){
-        test2_results = ko.toJSON(viewmodel.menu);
-    }
-    var end = new Date().getTime();
-    var time = end - start;
-    time = time/len;
-    console.log('Test2 Execution time: ' + time + "\nTest Passed: " + (test_results == test2_results)); 
-}
+// function test2(len){
+//     len = len || 1500;
+//     Section.prototype.toJSON = function() {
+//         var copy = ko.toJS(this,["topmodel","computedSkipPlease"]); //easy way to get a clean copy
+//         return copy; //return the copy to be serialized
+//     };  
+//     Dish.prototype.toJSON = function() {
+//         var copy = ko.toJS(this,["topmodel","computedSkipPlease"]); //easy way to get a clean copy
+//         return copy; //return the copy to be serialized
+//     };
+//     Option.prototype.toJSON = function() {
+//         var copy = ko.toJS(this,["dish","multiple_prices","sizes_object_names","computedSkipPlease"]); //easy way to get a clean copy
+//         return copy; //return the copy to be serialized
+//     };
+//     SizePrices.prototype.toJSON = function() {
+//         var copy = ko.toJS(this,["ind_opt","size_ind_opt","computedSkipPlease"]); //easy way to get a clean copy
+//         return copy; //return the copy to be serialized
+//     };
+//     IndividualOption.prototype.toJSON = function() {
+//         var copy = ko.toJS(this,['dish','option','type','size_prices_to_remove',"computedSkipPlease"]); //easy way to get a clean copy
+//         return copy; //return the copy to be serialized
+//     };    
+//     var start = new Date().getTime();
+//     for(var i=0;i<len;i++){
+//         test2_results = ko.toJSON(viewmodel.menu);
+//     }
+//     var end = new Date().getTime();
+//     var time = end - start;
+//     time = time/len;
+//     console.log('Test2 Execution time: ' + time + "\nTest Passed: " + (test_results == test2_results)); 
+// }
 
-function test(lens){
-    len = lens || len;
-    console.log("Starting test.");
-    test1(len);
-    test2(len);
-}
+// function test(lens){
+//     len = lens || len;
+//     console.log("Starting test.");
+//     test1(len);
+//     test2(len);
+// }
