@@ -71,7 +71,7 @@ class Dish
       if option_object = DishOption.where(:_id => option["id"]).first and option_object
 
         # If it was null, theres probably been a mistake.
-        if option_object.restaurant.nil?
+        if option_object.restaurant_id.blank?
           option_object.restaurant = request_restaurant
         end
 

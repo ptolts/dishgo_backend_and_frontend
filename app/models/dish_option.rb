@@ -41,7 +41,11 @@ class DishOption
 		individual_options = option["individual_options"].collect.with_index do |individual_option,index|
 			if individual_option_object = IndividualOption.where(:_id => individual_option["id"]).first and individual_option_object
 				# Rails.logger.warn "---\nLoading IndividualOption[#{individual_option["name"]}]\n---"
-			  # If someone has tried to load options from another restaurant, something fishy is going on.
+			  	# If someone has tried to load options from another restaurant, something fishy is going on.
+				if individual_option_object.restaurant_id.blank?
+					individual_option_object.restaurant = request_restaurant
+				end
+
 			  if individual_option_object.restaurant_id != request_restaurant.id
         		Rails.logger.warn "Bailing out in options\n------------"			  	
 			  	# return false
