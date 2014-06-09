@@ -1748,7 +1748,7 @@ Section.prototype.toJSON = function() {
     return copy; //return the copy to be serialized
 };  
 Dish.prototype.toJSON = function() {
-    var copy = ko.toJS(this,["topmodel","computed_price","sizeSelectedOptionValue"]); //easy way to get a clean copy
+    var copy = ko.toJS(this,["topmodel","computed_price","sizeSelectedOptionValue","section_list","new_section"]); //easy way to get a clean copy
     return copy; //return the copy to be serialized
 };
 Option.prototype.toJSON = function() {
