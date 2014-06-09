@@ -180,6 +180,13 @@ function Section(data,topmodel) {
         self.dom_id = "";
     } 
 
+    self.lName = ko.computed({
+        read: function(){
+            return self.name()[lang()];
+        },
+        deferEvaluation: true,
+    });      
+
     self.computed_name = ko.computed(function(){
         var reso = currentLangName(self.name);
         if(reso['reso'] == ""){
@@ -365,6 +372,29 @@ function Dish(data, topmodel) {
             });
         }
     }
+
+    self.new_section = ko.observable();
+    self.moveToSection = function(old_section){
+        self.new_section().dishes.push(self);
+        self.topmodel.dishes.remove(self);
+        self.topmodel = self.new_section();
+        self.new_section(null);
+    }
+
+    self.section_list = ko.computed({
+        read: function(){
+            var sectionlist = [];
+            self.new_section();
+            _.each(viewmodel.menu(),function(section){ 
+                                        if(section != self.topmodel){
+                                            sectionlist.push(section);
+                                        }
+                                    }
+            );
+            return sectionlist;
+        },
+        deferEvaluation: true,
+    });
 
     if(data.has_multiple_sizes && data.sizes){
         self.sizes = ko.observable(true);

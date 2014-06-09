@@ -49,15 +49,28 @@
                         </div>
                         <div data-bind="template: { name: 'size', data: sizes_object }, visible: sizes"></div>
                         <div data-bind="template: { name: templateToUse, foreach: options }"></div>
-                            <div class="dish_button">
-                                <div class="col-xs-12 text-center push_down">
-                                    <button class="btn btn-section btn-block" data-bind="click: addOption">+ New Dish Option</button>
-                                </div>
-                                <div class="col-xs-6 text-center push_down">
-                                    <button class="btn btn-section btn-block" data-bind="click: copyOption">+ Copy Dish Option</button>
-                                </div>
-                                <div class="col-xs-6 text-center push_down">
-                                    <button class="btn btn-section btn-block" data-bind="click: copySize">+ Copy Dish Size</button>
-                                </div>                                                                  
-                            </div>                
-                        </div>
+                        <div class="dish_button">
+                            <div class="col-xs-12 text-center push_down">
+                                <button class="btn btn-section btn-block" data-bind="click: addOption">+ New Dish Option</button>
+                            </div>
+                            <div class="col-xs-6 text-center push_down">
+                                <button class="btn btn-section btn-block" data-bind="click: copyOption">+ Copy Dish Option</button>
+                            </div>
+                            <div class="col-xs-6 text-center push_down">
+                                <button class="btn btn-section btn-block" data-bind="click: copySize">+ Copy Dish Size</button>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12 push_down">
+                                    <div class="col-xs-6 text-center push_down">
+                                        <select class="form-control" data-bind="options: section_list,
+                                                               optionsText: function(item){ return item.lName() },
+                                                               value: new_section,
+                                                               optionsCaption: 'Choose Section'"></select>  
+                                    </div>
+                                    <div class="col-xs-6 text-center push_down">
+                                        <button class="btn btn-section btn-block" data-bind="enable: new_section(), click: function(){ moveToSection($parent); }">Move To Section</button>
+                                    </div>                                    
+                                </div>                                                                                        
+                            </div>                                                                                        
+                        </div>                
+                    </div>
