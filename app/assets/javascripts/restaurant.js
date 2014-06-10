@@ -331,6 +331,7 @@
             console.log("New Restaurant: " + data.name);
             var self = this;
             self.languages = ko.observableArray(data.languages ? data.languages : ['en']);
+            self.default_language = ko.observable(data.default_language ? data.default_language : 'en');
             self.available_languages = ko.observableArray(_.map(_.pairs(fullLanguageName),function(lang){ return new Language(lang[1],lang[0]) }));
             self.name = ko.observable(data.name ? data.name : "");
             self.lat = ko.observable(data.lat ? data.lat : "");

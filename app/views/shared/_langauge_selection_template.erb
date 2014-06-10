@@ -1,15 +1,27 @@
 <script id="langauge_selection_template" type="text/html">
     <div class="col-xs-12">
         <div data-bind="foreach: available_languages" class="available_languages">
-            <h4><!-- ko text: name --><!-- /ko -->
-                <div class="onoffswitch">
-                    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" data-bind="checked: $parent.languages, checkedValue: abbreviation, attr:{ id: 'lang_' + name }">
-                    <label class="onoffswitch-label" data-bind="attr:{for: 'lang_' + name }">
-                        <div class="onoffswitch-inner"></div>
-                        <div class="onoffswitch-switch"></div>
-                    </label>
-                </div>
-            </h4>        
+            <div class="col-xs-3">
+                <h4><!-- ko text: name --><!-- /ko -->
+                    <div class="onoffswitch">
+                        <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" data-bind="checked: $parent.languages, checkedValue: abbreviation, attr:{ id: 'lang_' + name }">
+                        <label class="onoffswitch-label" data-bind="attr:{for: 'lang_' + name }">
+                            <div class="onoffswitch-inner"></div>
+                            <div class="onoffswitch-switch"></div>
+                        </label>
+                    </div>
+                </h4>
+                <h4 data-bind="visible: canBeDefault($parent)">
+                    Default
+                    <div class="onoffswitch">
+                        <input type="radio" name="onoffswitch" class="onoffswitch-checkbox" data-bind="checked: $parent.default_language, checkedValue: abbreviation, attr:{ id: 'lang_' + name + '_default' }">
+                        <label class="onoffswitch-label" data-bind="attr:{for: 'lang_' + name + '_default' }">
+                            <div class="onoffswitch-inner"></div>
+                            <div class="onoffswitch-switch"></div>
+                        </label>
+                    </div>                
+                </h4>                  
+            </div>
         </div>
     </div>
 </script>

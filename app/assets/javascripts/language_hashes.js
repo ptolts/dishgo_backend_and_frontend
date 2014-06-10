@@ -17,6 +17,12 @@ function Language(name,abbreviation){
     var self = this;
     self.name = name;
     self.abbreviation = abbreviation;
+
+    self.canBeDefault = function(parent){
+        return ko.computed(function(){
+            return parent.languages().indexOf(self.abbreviation) >= 0;
+        });      
+    }
 }
 
 var fullLanguageName = {

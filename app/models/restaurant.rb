@@ -30,6 +30,7 @@ class Restaurant
   field :urbanspoon, type: String
   field :instagram, type: String
   field :languages, type: Array
+  field :default_language, type: String
   field :category, type: Array
   field :listed, type: Boolean
   field :show_hours, type: Boolean, default: true

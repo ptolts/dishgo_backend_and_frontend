@@ -1065,7 +1065,7 @@ function MenuViewModel() {
     self.preview = ko.observable(false);
     self.restaurant = ko.observable(new Restaurant(resto_data));    
     self.languages = self.restaurant().languages;
-    self.lang = ko.observable('en');
+    self.lang = ko.observable(self.restaurant().default_language() ? self.restaurant().default_language() : 'en');
     lang = self.lang;
     var skip_warning = false;
 
@@ -1490,7 +1490,7 @@ function PublicMenuModel() {
     self.preview = ko.observable(true);
     self.restaurant = ko.observable(new Restaurant(resto_data));
     self.languages = self.restaurant().languages; 
-    self.lang = ko.observable(self.languages()[0]);
+    self.lang = ko.observable(self.restaurant().default_language() ? self.restaurant().default_language() : 'en');
     lang = self.lang;
     self.selected_dish = ko.observable();
 

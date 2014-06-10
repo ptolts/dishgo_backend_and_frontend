@@ -111,6 +111,7 @@ class WebsiteController < ApplicationController
 		restaurant.show_map = restaurant_data["show_map"].to_bool
 		restaurant.show_hours = restaurant_data["show_hours"].to_bool
 		restaurant.show_menu = restaurant_data["show_menu"].to_bool
+		restaurant.default_language = restaurant_data["default_language"].to_s
 		restaurant.save		
 		render :json => {preview:"/app/onlinesite/preview/#{restaurant.preview_token.to_s}"}.as_json
 	end
