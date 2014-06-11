@@ -5,18 +5,20 @@ class WebsiteController < ApplicationController
 	layout 'build_online_site'
 
 	def index
-		if !current_user.owns_restaurants.design
+		restaurant = current_user.owns_restaurants
+		if !restaurant.design
 			dezign = Design.where(name:/garde/i).first
-			current_user.owns_restaurants.design = dezign
+			restaurant.design = dezign
 		else
-			dezign = current_user.owns_restaurants.design
+			dezign = restaurant.design
 		end
 		@design_id = dezign.id
-		@design_id = current_user.owns_restaurants.design.id if current_user.owns_restaurants.design	
+		@design_id = restaurant.design.id if restaurant.design	
 		@font_id = Font.all.first.id
-		@font_id = current_user.owns_restaurants.font.id if current_user.owns_restaurants.font					
+		@font_id = restaurant.font.id if restaurant.font					
 		@designs = all_designs
 		@fonts = Font.all.as_json
+		@sections = restaurant.published_menu.collect{|s| s_h = s.as_document; s_h["name"] = s.name_translations; next s_h}.as_json
 		render 'website'
 	end
 
@@ -70,6 +72,7 @@ class WebsiteController < ApplicationController
 	    end
 
 		data = JSON.parse(params[:data])
+		section_data = JSON.parse(params[:sections_data])
 		restaurant_data = JSON.parse(params[:restaurant_data])
 		settings = restaurant.website_settings || {}
 		data["global_images"].each do |image|
@@ -101,6 +104,11 @@ class WebsiteController < ApplicationController
 			p.position = page["position"].to_i
 			p.save
 			next p
+		end
+		section_data.each do |sec|
+			section = Section.find(sec["id"])
+			section.menu_link = sec["menu_link"]
+			section.save
 		end
 		restaurant.pages = pages
 		restaurant.email_addresses = restaurant_data["email_addresses"]

@@ -131,6 +131,14 @@ function Section(data,topmodel) {
     self.topmodel = topmodel;
     self.id = ko.observable();
     self.position = ko.observable(data.position ? data.position : 0);
+    self.menu_link = ko.observable(data.menu_link ? data.menu_link : false);
+
+    self.toggle_menu_link = function(dis){
+        if(dis()){
+            return;
+        }
+        self.menu_link(!self.menu_link());
+    }
 
     if(data._id){
         self.id(data._id);
@@ -1126,7 +1134,6 @@ function MenuViewModel() {
     // self.menu.extend({ rateLimit: 500 });
     self.menu.subscribe(function(newvalue){
         _.each(self.menu(),function(item,index){
-            console.log(item.name());
             item.position(index);
         });
         console.log("----------------");
@@ -1486,6 +1493,7 @@ function PublicMenuModel() {
     var self = this;
     self.loading = ko.observable(true);
     self.menu = ko.observableArray([]);
+    self.sections = ko.observableArray([]);
     self.newDomCounter = 0;
     self.preview = ko.observable(true);
     self.restaurant = ko.observable(new Restaurant(resto_data));
@@ -1596,7 +1604,8 @@ function PublicMenuModel() {
         self.showDetails(!self.showDetails());
     }   
 
-    self.menu($.map(menu_data.menu, function(item) { return new Section(item,self) }));
+    self.sections($.map(menu_data.menu, function(item) { return new Section(item,self) }));
+    self.menu(self.sections());
 
     self.computeImage = function(image){
         //console.log(image);

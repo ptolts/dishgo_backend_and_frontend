@@ -6,6 +6,7 @@
         var current_design_id = "<%= @design_id %>";
         var current_font_id = "<%= @font_id %>";     
         var resto_data = <%= raw(current_user.owns_restaurants.as_document.to_json) %>;
+        var section_data = <%= raw(@sections.to_json) %>;
 
 
         ko.bindingHandlers.logger = {
@@ -36,7 +37,9 @@
                 $(element)[0].contentWindow.document.close();
 
             }
-        };              
+        }; 
+
+        var lang;             
 
         function viewModel() {
             var self = this;
@@ -48,6 +51,21 @@
             self.restaurant = ko.observable(new Restaurant(resto_data));
             self.languages = self.restaurant().languages;
             self.lang = ko.observable('en');
+            lang = self.lang;
+            self.sections = ko.observableArray([]);
+
+            if(section_data){
+                self.sections(_.map(section_data,function(section){ return new Section(section); }));
+            }
+
+            self.disableSections = ko.computed(function(){
+                var i = 0;
+                _.each(self.sections(),function(s){ if(s.menu_link()){ i++; } });
+                if(i > 1){
+                    return true;
+                }
+                return false;
+            });
 
             self.show_lang = ko.computed(function(){
                 if(self.languages().length > 1){
@@ -160,6 +178,7 @@
                   data: {
                     restaurant_id: restaurant_id,
                     font_id: self.current_font().id(),
+                    sections_data: ko.toJSON(self.sections),
                     data: ko.toJSON(self.current_design),
                     restaurant_data: ko.toJSON(self.restaurant)
                   },

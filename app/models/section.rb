@@ -6,6 +6,7 @@ class Section
 	store_in collection: "Section", database: "dishgo"
 	field :name, localize: true
 	field :position, type: Integer
+	field :menu_link, type: Boolean
 	field :draft_position, type: Integer
 	field :draft, type: Hash, default: {}
 	field :published, type: Boolean

@@ -48,7 +48,14 @@
 				<ul>
 					<li class="icon" data-bind="click: display_menu_toggle"><i class="fa fa-bars"></i></li>
 					<div data-bind="visible: display_menu">
-						<!-- ko if: restaurant().show_menu() --><li><a data-bind="click: function() { goto_and_kill_menu('menu') }">Menu</a></li><!-- /ko -->
+						<!-- ko if: restaurant().show_menu() -->
+							<li><a data-bind="click: function() { $root.menu($root.sections()); goto_and_kill_menu('menu') }">Menu</a></li>
+							<!-- ko foreach: sections -->
+								<!-- ko if: menu_link -->
+									<li><a data-bind="click: function() { $root.menu([$data]); $parent.goto_and_kill_menu('menu') }, lText: name"></a></li>
+								<!-- /ko -->							
+							<!-- /ko -->							
+						<!-- /ko -->
 						<li><a data-bind="click: function() { goto_and_kill_menu('contact') }">Contact</a></li>
 						<!-- ko foreach: restaurant().pages -->
 							<li><a data-bind="click: function() { $parent.goto_and_kill_menu($data.name()['en']) }, lText: name"></a></li>
@@ -82,7 +89,14 @@
 				</div>
 				<div class="main_page_language_selector">
 					<ul class="language_select">
-						<!-- ko if: restaurant().show_menu() --><li><a data-bind="page-href: 'menu', lText: menu_tr">Menu</a></li><!-- /ko -->
+						<!-- ko if: restaurant().show_menu() -->
+							<li><a data-bind="click: function() { $root.menu($root.sections()); pager.navigate('#!/menu') }, lText: menu_tr">Menu</a></li>
+							<!-- ko foreach: sections -->
+								<!-- ko if: menu_link -->
+									<li><a data-bind="click: function() { $root.menu([$data]); pager.navigate('#!/menu') }, lText: name"></a></li>
+								<!-- /ko -->							
+							<!-- /ko -->							
+						<!-- /ko -->						
 						<li><a data-bind="page-href: 'contact', lText: contact_tr">Contact</a></li>					
 					  	<!-- ko foreach: languages -->
 					  		<li data-bind="css:{selected: $data === $root.lang()}, click: function(){ $root.lang($data) }"><span data-bind="text: $root.getFullLangName($data)"></span></li>
