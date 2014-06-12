@@ -30,9 +30,13 @@ class GlobalImage
   
   index({ _id:1 }, { unique: true, name:"id_index" })
 
-  has_mongoid_attached_file :img, {
+  has_queued_mongoid_attached_file :img, {
       :path           => ':hash_:style.png',
-      :hash_secret => "we_like_food",      
+      :hash_secret => "we_like_food",
+      :styles => {
+        :original => { res_ize: '1920x999999999>', format: :jpg },
+      },
+      :processors => [:converter, :compressor],          
       storage: :fog,
       fog_credentials: {
         provider: 'Rackspace',

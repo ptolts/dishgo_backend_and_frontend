@@ -17,13 +17,14 @@ class Icon
 
   belongs_to :restaurant, index: true
 
-  has_mongoid_attached_file :img, {
+  has_queued_mongoid_attached_file :img, {
       :path           => ':hash_:style.png',
       :hash_secret => "we_like_food",
       :styles => {
-        :original => ['1000x1000>', :png],
-        :icon    => ['100x100>',   :png]
+        :original => { res_ize: '500x999999999>', format: :jpg },
+        :icon    => { res_ize: '100x99999999>', format: :jpg },
       },
+      :processors => [:converter, :compressor],       
       storage: :fog,
       fog_credentials: {
         provider: 'Rackspace',
