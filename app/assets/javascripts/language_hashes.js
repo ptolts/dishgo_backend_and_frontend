@@ -91,7 +91,7 @@ var days_tr = {
             'en':'Wednesday',
             'fr':'mercredi',
         },   
-        "thusrday": {
+        "thursday": {
             'en':'Thursday',
             'fr':'jeudi',
         },   
