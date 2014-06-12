@@ -40,12 +40,11 @@ class Image
       :path           => ':hash_:style.png',
       :hash_secret => "we_like_food",
       :styles => {
-        :original => { geometry: '1920x>', format: :png},
-        :small    => { geometry: '100x>', format: :png},
-        :medium   => { geometry: '420x>', format: :png},
+        :original => { res_ize: '1920x999999999>', format: :jpg },
+        :small    => { res_ize: '100x99999999>', format: :jpg },
+        :medium   => { res_ize: '420x999999999>', format: :jpg },
       },
-      :convert_options => { all: "-quality '100' -strip" },
-      :processors => [:cropper, :compressor],      
+      :processors => [:converter, :compressor],      
       storage: :fog,
       fog_credentials: {
         provider: 'Rackspace',
@@ -61,7 +60,7 @@ class Image
   field :img_fingerprint, type: String
   field :manual_img_fingerprint, type: String
   validates_attachment_content_type :img, :content_type => %w(image/jpeg image/jpg image/png), :message => 'file type is not allowed (only jpeg/png/gif images)'    
-  # after_post_process :img_post_process
+  after_post_process :img_post_process
 
   def img_url_medium
     return super.to_s.gsub(/http:\/\//,'https://').gsub(/\.r.{2}\./,'.ssl.')
