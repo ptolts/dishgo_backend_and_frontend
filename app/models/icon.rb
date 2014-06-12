@@ -2,7 +2,9 @@
 
 class Icon
   include Mongoid::Document
-  include Mongoid::Paperclip
+  # include Mongoid::Paperclip
+  extend Mongoid::PaperclipQueue
+
   store_in collection: "Icon", database: "dishgo"
   field :url, type: String
   field :img_url_icon, type: String
@@ -15,13 +17,14 @@ class Icon
 
   belongs_to :restaurant, index: true
 
-  has_mongoid_attached_file :img, {
+  has_queued_mongoid_attached_file :img, {
       :path           => ':hash_:style.png',
       :hash_secret => "we_like_food",
       :styles => {
-        :original => ['1000x1000>', :png],
-        :icon    => ['100x100>',   :png]
+        :original => { res_ize: '500x999999999>', format: :jpg },
+        :icon    => { res_ize: '100x99999999>', format: :jpg },
       },
+      :processors => [:converter, :compressor],       
       storage: :fog,
       fog_credentials: {
         provider: 'Rackspace',
@@ -47,8 +50,13 @@ class Icon
   end
 
   def img_post_process
-    self.img_url_icon = img.url(:icon) 
-    self.img_url_original = img.url(:original) 
+    if img_post_process_complete
+      self.img_url_icon = img.url(:icon) 
+      self.img_url_original = img.url(:original)
+    else
+      self.img_url_original = img.url(:original)
+      self.img_url_icon = self.img_url_original
+    end
     tempfile = img.queued_for_write[:original]
     unless tempfile.nil?
       geometry = Paperclip::Geometry.from_file(tempfile)

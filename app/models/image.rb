@@ -1,9 +1,11 @@
 #encoding: UTF-8
+require "mongoid_paperclip_queue"
 
 class Image
   include Mongoid::Document
-  include Mongoid::Paperclip
+  # include Mongoid::Paperclip
   include Mongoid::Timestamps
+  extend Mongoid::PaperclipQueue
 
   store_in collection: "image", database: "dishgo"
   field :local_file, type: String
@@ -38,11 +40,11 @@ class Image
       :path           => ':hash_:style.png',
       :hash_secret => "we_like_food",
       :styles => {
-        :original => ['1000x1000>', :png],
-        :small    => ['100x',   :png],
-        :medium   => ['320x',    :png],
+        :original => { res_ize: '1920x999999999>', format: :jpg },
+        :small    => { res_ize: '100x99999999>', format: :jpg },
+        :medium   => { res_ize: '420x999999999>', format: :jpg },
       },
-      :processors => [:cropper],      
+      :processors => [:converter, :compressor],      
       storage: :fog,
       fog_credentials: {
         provider: 'Rackspace',
@@ -100,9 +102,15 @@ class Image
   end
 
   def img_post_process
-    self.img_url_medium = img.url(:medium) 
-    self.img_url_small = img.url(:small) 
-    self.img_url_original = img.url(:original) 
+    # if self.img_post_process_complete
+    #   self.img_url_medium = img.url(:medium) 
+    #   self.img_url_small = img.url(:small) 
+    #   self.img_url_original = img.url(:original) 
+    # else
+      self.img_url_original = img.url(:original) 
+      self.img_url_medium = self.img_url_original 
+      self.img_url_small = self.img_url_original 
+    # end
     tempfile = img.queued_for_write[:original]
     unless tempfile.nil?
       geometry = Paperclip::Geometry.from_file(tempfile)
@@ -131,11 +139,11 @@ class Image
     @geometry[style] ||= Paperclip::Geometry.from_file(path)
   end
 
-  # private
-  def reprocess_img
-    img.reprocess!
-    img_post_process 
-  end  
+  # # private
+  # def reprocess_img
+  #   img.assign(img)
+  #   img.save
+  # end  
 
 end
 

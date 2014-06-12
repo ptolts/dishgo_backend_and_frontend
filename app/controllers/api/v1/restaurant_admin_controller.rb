@@ -11,7 +11,7 @@ class Api::V1::RestaurantAdminController < ApplicationController
     if img = Image.where(:manual_img_fingerprint => md5_sum, :restaurant_id => resto.id).first and img
       images = [img]
     else
-      img = Image.create
+      img = Image.new
       img.restaurant = resto
       img.update_attributes({:img =>  StringIO.new(file)})
       img.manual_img_fingerprint = md5_sum
@@ -32,7 +32,7 @@ class Api::V1::RestaurantAdminController < ApplicationController
     if img = Image.where(:manual_img_fingerprint => md5_sum, :restaurant_id => resto.id).first and img
       Rails.logger.warn "Duplicate file. No need to upload twice."
     else
-      img = Image.create
+      img = Image.new
       img.restaurant = resto
       img.update_attributes({:img => file})
       img.manual_img_fingerprint = md5_sum

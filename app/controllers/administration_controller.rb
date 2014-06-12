@@ -258,8 +258,8 @@ class AdministrationController < ApplicationController
                         name: img.img_file_name,
                         size: img.img_file_size,
                         original:  img.img_url_original,
-                        small:  img.img_url_small,
-                        thumbnailUrl:   img.img_url_medium,
+                        small:  img.img_url_original,
+                        thumbnailUrl:   img.img_url_original,
                       }
                     }}.as_json
   end
@@ -286,7 +286,7 @@ class AdministrationController < ApplicationController
                         name: img.img_file_name,
                         size: img.img_file_size,
                         original:  img.img_url_original,
-                        thumbnailUrl:   img.img_url_icon,
+                        thumbnailUrl:   img.img_url_original,
                       }
                     }}.as_json
   end  

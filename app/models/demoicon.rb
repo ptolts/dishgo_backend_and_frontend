@@ -2,19 +2,22 @@
 
 class Demoicon
   include Mongoid::Document
-  include Mongoid::Paperclip
+  # include Mongoid::Paperclip
+  extend Mongoid::PaperclipQueue
+  
   store_in collection: "Demoicon", database: "demo"
 
   field :img_url_icon, type: String
   field :img_url_original, type: String
 
-  has_mongoid_attached_file :img, {
+  has_queued_mongoid_attached_file :img, {
       :path           => ':hash_:style.png',
       :hash_secret => "we_like_food",
       :styles => {
-        :icon    => ['100x100>',   :png],
-        :original    => ['500x500>',   :png],
+        :original => { res_ize: '500x999999999>', format: :jpg },
+        :icon    => { res_ize: '100x99999999>', format: :jpg },
       },
+      :processors => [:converter, :compressor], 
       storage: :fog,
       fog_credentials: {
         provider: 'Rackspace',

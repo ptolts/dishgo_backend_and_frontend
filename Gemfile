@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 
 gem 'rails'#, '~> 4.1.1'
 gem 'devise'
+gem 'resque'
 gem 'cancan'
 gem 'role_model'
 gem 'underscore-rails'
@@ -20,7 +21,8 @@ gem "koala" #, "~> 1.8.0rc1"
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 gem 'bootstrap_form'
-gem "mongoid-paperclip", :require => "mongoid_paperclip"
+# gem "mongoid-paperclip", :require => "mongoid_paperclip"
+gem 'mongoid_paperclip_queue', git: "https://github.com/ptolts/mongoid_paperclip_queue.git" #path: "/Users/philiptolton/Ruby/mongoid_paperclip_queue" #,
 gem 'fog'
 gem 'ruby-prof'
 gem 'phantomjs'

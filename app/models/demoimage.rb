@@ -2,8 +2,9 @@
 
 class Demoimage
   include Mongoid::Document
-  include Mongoid::Paperclip
+  # include Mongoid::Paperclip
   include Mongoid::Timestamps
+  extend Mongoid::PaperclipQueue  
 
   store_in collection: "demoimage", database: "demo"
 
@@ -12,14 +13,14 @@ class Demoimage
   field :height, type: Integer
   field :width, type: Integer
 
-  has_mongoid_attached_file :img, {
+  has_queued_mongoid_attached_file :img, {
       :path           => ':hash_:style.png',
       :hash_secret => "we_like_food",
       :styles => {
-        :medium   => ['320x',    :png],
-        :original => ['1000x1000>',  :png],
+        :original => { res_ize: '1920x999999999>', format: :jpg },
+        :medium   => { res_ize: '420x999999999>', format: :jpg },
       },
-      :processors => [:cropper],
+      :processors => [:converter, :compressor],       
       storage: :fog,
       fog_credentials: {
         provider: 'Rackspace',

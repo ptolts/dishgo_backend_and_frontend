@@ -19,8 +19,8 @@ module Paperclip
 	      if target.cropping?
 	      	["-crop","#{coordinates_r[2]}x#{coordinates_r[3]}+#{coordinates_r[0]}+#{coordinates_r[1]}"]
 	      end     
-  end
-end
+  		end
+	end
 end
 
 module Paperclip
