@@ -36,7 +36,7 @@ class Image
 
   scope :rejected, -> { ne(rejected: true) }   
 
-  has_queued_mongoid_attached_file :img, {
+  has_mongoid_attached_file :img, {
       :path           => ':hash_:style.png',
       :hash_secret => "we_like_food",
       :styles => {
@@ -102,15 +102,15 @@ class Image
   end
 
   def img_post_process
-    if self.img_post_process_complete
-      self.img_url_medium = img.url(:medium) 
-      self.img_url_small = img.url(:small) 
-      self.img_url_original = img.url(:original) 
-    else
+    # if self.img_post_process_complete
+    #   self.img_url_medium = img.url(:medium) 
+    #   self.img_url_small = img.url(:small) 
+    #   self.img_url_original = img.url(:original) 
+    # else
       self.img_url_original = img.url(:original) 
       self.img_url_medium = self.img_url_original 
       self.img_url_small = self.img_url_original 
-    end
+    # end
     tempfile = img.queued_for_write[:original]
     unless tempfile.nil?
       geometry = Paperclip::Geometry.from_file(tempfile)
@@ -139,11 +139,11 @@ class Image
     @geometry[style] ||= Paperclip::Geometry.from_file(path)
   end
 
-  # private
-  def reprocess_img
-    img.reprocess!
-    img_post_process 
-  end  
+  # # private
+  # def reprocess_img
+  #   img.assign(img)
+  #   img.save
+  # end  
 
 end
 

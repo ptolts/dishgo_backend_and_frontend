@@ -40,7 +40,7 @@ module Paperclip
     end
     def convert infile, outfile
       Rails.logger.warn `ls -al #{infile}`
-      cmd = "'#{infile}' -resize '#{@size}' -strip -auto-orient '#{outfile}'"
+      cmd = "'#{infile}' -auto-orient -resize '#{@size}' -strip '#{outfile}'"
       begin
        success = Paperclip.run('convert', cmd)
       rescue PaperclipCommandLineError
