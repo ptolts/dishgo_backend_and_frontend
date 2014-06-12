@@ -50,8 +50,13 @@ class Icon
   end
 
   def img_post_process
-    self.img_url_icon = img.url(:icon) 
-    self.img_url_original = img.url(:original) 
+    if img_post_process_complete
+      self.img_url_icon = img.url(:icon) 
+      self.img_url_original = img.url(:original)
+    else
+      self.img_url_original = img.url(:original)
+      self.img_url_icon = self.img_url_original
+    end
     tempfile = img.queued_for_write[:original]
     unless tempfile.nil?
       geometry = Paperclip::Geometry.from_file(tempfile)
