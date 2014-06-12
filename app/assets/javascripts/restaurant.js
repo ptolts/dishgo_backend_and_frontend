@@ -444,7 +444,7 @@
                     open_2: null,
                     close_2: null,
                 },   
-                thusrday: {
+                thursday: {
                     open_1: null,
                     close_1: null,
                     open_2: null,
