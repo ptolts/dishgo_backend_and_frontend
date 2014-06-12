@@ -1,9 +1,11 @@
 #encoding: UTF-8
+require "mongoid_paperclip_queue"
 
 class Image
   include Mongoid::Document
-  include Mongoid::Paperclip
+  # include Mongoid::Paperclip
   include Mongoid::Timestamps
+  extend Mongoid::PaperclipQueue
 
   store_in collection: "image", database: "dishgo"
   field :local_file, type: String
@@ -34,15 +36,16 @@ class Image
 
   scope :rejected, -> { ne(rejected: true) }   
 
-  has_mongoid_attached_file :img, {
+  has_queued_mongoid_attached_file :img, {
       :path           => ':hash_:style.png',
       :hash_secret => "we_like_food",
       :styles => {
-        :original => ['1000x1000>', :png],
-        :small    => ['100x',   :png],
-        :medium   => ['320x',    :png],
+        :original => { geometry: '1920x>', format: :png},
+        :small    => { geometry: '100x>', format: :png},
+        :medium   => { geometry: '420x>', format: :png},
       },
-      :processors => [:cropper],      
+      :convert_options => { all: "-quality '100' -strip" },
+      :processors => [:cropper, :compressor],      
       storage: :fog,
       fog_credentials: {
         provider: 'Rackspace',
@@ -58,7 +61,7 @@ class Image
   field :img_fingerprint, type: String
   field :manual_img_fingerprint, type: String
   validates_attachment_content_type :img, :content_type => %w(image/jpeg image/jpg image/png), :message => 'file type is not allowed (only jpeg/png/gif images)'    
-  after_post_process :img_post_process
+  # after_post_process :img_post_process
 
   def img_url_medium
     return super.to_s.gsub(/http:\/\//,'https://').gsub(/\.r.{2}\./,'.ssl.')

@@ -2,8 +2,9 @@
 
 class GlobalImage
   include Mongoid::Document
-  include Mongoid::Paperclip
+  # include Mongoid::Paperclip
   include Mongoid::Timestamps
+  extend Mongoid::PaperclipQueue  
 
   store_in collection: "global_image", database: "dishgo"
   field :name, type: String

@@ -2,7 +2,9 @@
 
 class Demoicon
   include Mongoid::Document
-  include Mongoid::Paperclip
+  # include Mongoid::Paperclip
+  extend Mongoid::PaperclipQueue
+  
   store_in collection: "Demoicon", database: "demo"
 
   field :img_url_icon, type: String
