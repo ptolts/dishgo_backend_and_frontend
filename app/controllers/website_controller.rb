@@ -68,6 +68,7 @@ class WebsiteController < ApplicationController
 
 	    if cache = restaurant.cache
 	      cache.website = nil
+	      cache.menu = nil
 	      cache.save
 	    end
 

@@ -1215,7 +1215,7 @@ function MenuViewModel() {
                   url: "/app/administration/publish_menu",
                   data: {
                     restaurant_id: restaurant_id,
-                    menu: ko.toJSON(self.menu)
+                    // menu: ko.toJSON(self.menu)
                   },
                   success: function(data, textStatus, jqXHR){
                         // self.menu($.map(data.menu, function(item) { return new Section(item) }));

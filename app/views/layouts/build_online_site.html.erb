@@ -21,6 +21,8 @@
 		</style>
 
 		<%= javascript_include_tag "application" %>
+	    <%= javascript_include_tag "menu_editor" %>
+	    <%= javascript_include_tag "wysiwyg" %>		
 		<%= csrf_meta_tags %>
 		
 		<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDmVdO0hER_qFFNZN5C9Du28_-sSblng0Y&sensor=true"></script>	
@@ -103,13 +105,10 @@
 			<%= render 'pages' %>
 		</div>	
 
-	    <%= javascript_include_tag "menu_editor" %>
-	    <%= javascript_include_tag "wysiwyg" %>
 	    <%= render 'shared/restaurant_template' %>
 	    <%= render 'shared/langauge_selection_template' %>
 	    <%= render 'shared/custom_design_template' %>
 	    <%= render 'shared/font_javascript' %>
-
 	    <%= render 'website_javascript_ignition' %>
 
     </body>

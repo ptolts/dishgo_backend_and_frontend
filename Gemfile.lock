@@ -10,6 +10,16 @@ GIT
       tzinfo (>= 0.3.37)
 
 GIT
+  remote: https://github.com/ptolts/mongoid_paperclip_queue.git
+  revision: 57b391fc560905c3fb3baac718a6a5d3f4664cf0
+  specs:
+    mongoid_paperclip_queue (0.1.3)
+      mongoid (>= 3.0)
+      paperclip (~> 4.1.1)
+      redis-namespace
+      resque
+
+GIT
   remote: https://github.com/stripe/stripe-ruby
   revision: 79cdeb054539909102fa29df94a97bfb435ac909
   specs:
@@ -17,15 +27,6 @@ GIT
       json (~> 1.8.1)
       mime-types (~> 1.25)
       rest-client (~> 1.4)
-
-PATH
-  remote: /Users/philiptolton/Ruby/mongoid_paperclip_queue
-  specs:
-    mongoid_paperclip_queue (0.1.3)
-      mongoid (>= 3.0)
-      paperclip (~> 4.1.1)
-      redis-namespace
-      resque
 
 GEM
   remote: https://rubygems.org/

@@ -22,6 +22,7 @@ class User
   field :email,               :type => String
   field :phone,               :type => String
   field :encrypted_password,  :type => String
+  field :setup_link,  :type => String
   field :stripe_token,        :type => String
   field :cards,               :type => Array, :default => [] 
   field :plan,                :type => Hash, :default => {}
@@ -68,6 +69,26 @@ class User
   index({ email:1 }, { name:"email_index" })
   index({ _id:1 }, { unique: true, name:"id_index" })
 
+  before_save :setup_link_field
+
+  def setup_link_field
+    if !self.email.blank? and password.blank? and setup_link.blank?
+      self.setup_link = loop do
+        token = SecureRandom.urlsafe_base64
+        break token unless User.where(setup_link: token).count > 0
+      end
+    end
+    if !password.blank?
+      self.setup_link = nil
+    end
+  end
+
+  def serializable_hash options = {}
+    hash = super options
+    # hash.delete("authentication_token")
+    hash.delete("setup_link")
+    hash
+  end  
 
   def get_preview_token
     return false unless self.owns_restaurants

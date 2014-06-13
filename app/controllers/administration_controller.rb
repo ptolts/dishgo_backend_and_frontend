@@ -4,7 +4,7 @@ class AdministrationController < ApplicationController
   before_filter :authenticate_user!
   before_filter :create_notifications!
   before_filter :admin_or_user_with_resto!, :except => [:restaurant_setup, :free_search_restaurants, :set_restaurant, :create_restaurant, :help_me]
-  before_filter :admin_user!, :only => [:users, :restaurants, :add_user, :user_destroy, :update_user, :search_restaurants, :become, :become_user, :list_in_app]
+  before_filter :admin_user!, :only => [:create_user_for_restaurant, :load_user, :users, :restaurants, :add_user, :user_destroy, :update_user, :search_restaurants, :become, :become_user, :list_in_app]
   before_filter :admin_or_owner!, :only => [:edit_menu, :update_menu, :crop_image, :crop_icon, :publish_menu, :reset_draft_menu, :update_restaurant]
   before_filter :admin_or_user_without_resto!, :only => [:restaurant_setup]
   layout 'administration'
@@ -63,6 +63,9 @@ class AdministrationController < ApplicationController
     else
       result = Restaurant.where(:name => /#{params[:restaurant_name]}/i)
     end
+    if params[:is_listed]
+      result = result.where(listed: true)
+    end
     if params[:with_menus].to_bool
       result = result.has_menu
     end
@@ -85,7 +88,14 @@ class AdministrationController < ApplicationController
   def search_users
   	result = User.where(:email => /#{params[:email]}/i).limit(25)
   	render :json => result.as_json(:include => :owns_restaurants)
-  end  
+  end
+
+  def load_user
+    user = User.find(params[:id])
+    json = user.serializable_hash
+    json[:setup_link] = user.setup_link    
+    render json: json.to_json
+  end 
 
   def create_user
     email = params[:email]
@@ -98,6 +108,30 @@ class AdministrationController < ApplicationController
     user.save!(:validate => false)
     render :json => {result: "Success!"}
   end   
+
+  def create_user_for_restaurant
+    data = JSON.parse(params[:params])
+    restaurant = Restaurant.find(params[:restaurant_id])
+    email = data["email"]
+    phone = data["phone"]    
+    if restaurant.user or email.blank?
+      render :json => {result: "Failure!"}.as_json
+      return
+    end
+    if User.where(:email => email).count > 0
+      render :json => {result: "User Exists!"}.as_json
+      return
+    end
+    user = User.new(:email => email, :phone => phone)
+    user.skip_confirmation!
+    user.skip_confirmation_notification!
+    user.save!(:validate => false)
+    user.owns_restaurants = restaurant
+    user.save    
+    json = user.serializable_hash
+    json[:setup_link] = user.setup_link
+    render :json => json.to_json
+  end  
 
   def update_user
   	user = User.find(params[:user_id])

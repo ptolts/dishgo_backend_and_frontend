@@ -107,6 +107,7 @@ Foodcloud::Application.routes.draw do
       get 'become'    
       get 'become_user'    
       get 'search_restaurants'
+      post 'search_restaurants'
       get 'restaurant_setup'
       get 'search_users'
       post 'list_in_app'  
@@ -125,9 +126,11 @@ Foodcloud::Application.routes.draw do
       post 'set_restaurant'  
       post 'create_restaurant'  
       post 'upload_icon'
+      post 'create_user_for_restaurant'
       post 'crop_image'
       post 'crop_icon'       
       post 'helpme'       
+      post 'load_user'       
     end
   end
 

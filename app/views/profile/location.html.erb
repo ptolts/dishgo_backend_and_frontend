@@ -109,7 +109,7 @@
         };
 
         ko.bindingHandlers.iMap = {
-            init: function (element, valueAccessor) {
+            update: function (element, valueAccessor) {
                 var value = valueAccessor()();
                 var lat_lon = new google.maps.LatLng(parseFloat(value.lat()),parseFloat(value.lon()));
 
@@ -145,6 +145,7 @@
                     value.map.setMapTypeId('map_style');                    
                     google.maps.event.addListener(value.map, 'click', function(event){ value.clickEvent(event) });     
                 }
+                value.map.setCenter(lat_lon);
             }
         };         
 
