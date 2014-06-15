@@ -13,7 +13,7 @@ Foodcloud::Application.configure do
   config.serve_static_assets = true
 
   # Compress JavaScripts and CSS
-  config.assets.compress = false
+  config.assets.compress = true
 
   # Compress JavaScripts and CSS
   class NoCompression
