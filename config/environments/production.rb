@@ -21,6 +21,7 @@ Foodcloud::Application.configure do
   # config.assets.css_compressor = :sass
     class NoCompression
       def compress(string)
+        Rails.logger.warn "FUCK"
         string
       end
     end
