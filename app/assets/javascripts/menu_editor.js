@@ -1416,7 +1416,7 @@ function MenuViewModel() {
     });
 
     self.firstSectionNameHelp = ko.computed(function(){
-        return self.menu().length == 1 && self.menu()[0].name()['en'] == '' && self.current_section()
+        return self.menu().length == 1 && self.menu()[0].name() && self.menu()[0].name()['en'] == '' && self.current_section()
     });
 
     self.firstDishHelp = ko.computed(function(){
