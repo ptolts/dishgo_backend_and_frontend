@@ -162,7 +162,7 @@ function Section(data,topmodel) {
             });
         }
     }
-    self.name = ko.observable(data.name);
+    self.name = ko.observable(data.name ? data.name : default_language_hash);
     // self.subsections = ko.observableArray($.map(data.subsection, function(item) { return new Subsection(item) }));
 
     self.dishes = ko.observableArray([]);
@@ -330,7 +330,7 @@ var dishList = ko.observableArray([]);
 
 function Dish(data, topmodel) {
     var self = this;
-    self.name = ko.observable(data.name);  
+    self.name = ko.observable(data.name ? data.name : default_language_hash);
     self.description = ko.observable(data.description);
     self.price = ko.observable(data.price);
     self.topmodel = topmodel;
@@ -708,7 +708,7 @@ ko.bindingHandlers.modalImage = {
 
 function Option(data,dish) {
     var self = this;
-    self.name = ko.observable(data.name);
+    self.name = ko.observable(data.name ? data.name : default_language_hash);
     self.dish = dish;
     self.advanced = ko.observable(false);  
     self.extra_cost = ko.observable(false); 
@@ -914,7 +914,7 @@ function IndividualOption(data,option) {
         }
     }
     self.option = option;
-    self.name = ko.observable(data.name);
+    self.name = ko.observable(data.name ? data.name : default_language_hash);
     self.price = ko.observable(data.price);     
     self.type = option.type;
     self.dish = option.dish;
@@ -1416,7 +1416,7 @@ function MenuViewModel() {
     });
 
     self.firstSectionNameHelp = ko.computed(function(){
-        return self.menu().length == 1 && self.menu()[0].name() && self.menu()[0].name()['en'] == '' && self.current_section()
+        return self.menu().length == 1 && self.menu()[0].name()['en'] == '' && self.current_section()
     });
 
     self.firstDishHelp = ko.computed(function(){
