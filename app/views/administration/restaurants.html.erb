@@ -83,6 +83,10 @@
             self.location = new google.maps.LatLng(parseFloat(self.lat()),parseFloat(self.lon()));
             self.legit_data = false;
 
+            self.lat.subscribe(function(newvalue){
+                self.location = new google.maps.LatLng(parseFloat(self.lat()),parseFloat(self.lon()));
+            });
+
             self.clickEvent = function(event){
                 if(event.latLng){
                     self.location = new google.maps.LatLng(parseFloat(event.latLng.lat()),parseFloat(event.latLng.lng()));

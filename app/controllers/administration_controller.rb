@@ -63,7 +63,7 @@ class AdministrationController < ApplicationController
     else
       result = Restaurant.where(:name => /#{params[:restaurant_name]}/i)
     end
-    if params[:is_listed]
+    if params[:is_listed].to_bool
       result = result.where(listed: true)
     end
     if params[:with_menus].to_bool
