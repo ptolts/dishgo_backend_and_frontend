@@ -16,7 +16,7 @@ class GlobalImage
   field :example_image, type: Boolean
   field :carousel, type: Boolean
   field :custom, type: Boolean
-  field :default_image, type: Boolean
+  field :default_image, type: Boolean, default: false
   field :description, localize: true
 
   belongs_to :design, class_name: "Design", index: true, inverse_of: :global_images

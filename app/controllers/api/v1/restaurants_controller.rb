@@ -36,7 +36,18 @@ class Api::V1::RestaurantsController < ApplicationController
       return
     end
     restaurant = Restaurant.find(params[:id])
-    respond_with ("{ \"menu\" : #{restaurant.api_menu_to_json} }")
+
+    cache = restaurant.cache
+    if !cache.api_menu.blank?
+      @menu_data = "{ \"menu\" : #{cache.api_menu} }".as_json
+    else
+      menu_d = restaurant.api_menu_to_json
+      cache.api_menu = menu_d
+      cache.save
+      @menu_data = "{ \"menu\" : #{menu_d} }".as_json
+    end    
+
+    respond_with @menu_data
   end
 
   

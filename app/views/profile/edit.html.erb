@@ -14,6 +14,10 @@
     <div data-bind="page: {id: 'start', title: 'Restaurant Profile', with: restaurant}">
         <div data-bind="template: { name: 'restaurant_template', data: $parent.restaurant }" class="profile_details"></div>
     </div>
+
+    <div data-bind="page: {id: 'localized', title: 'Localized Name', with: restaurant}">
+        <div data-bind="template: { name: 'restaurant_localized_template', data: $parent.restaurant }" class="profile_details"></div>
+    </div>    
    
     <div data-bind="page: {id: 'user', title: 'User Profile', with: user}">
         <div data-bind="template: { name: 'user_template', data: $parent.user }" class="profile_details"></div>
@@ -40,6 +44,7 @@
     </div>    
 
     <%= render 'shared/restaurant_template' %>
+    <%= render 'shared/restaurant_localized_template' %>
     <%= render 'shared/socialmedia_template' %>
     <%= render 'shared/profileimages_template' %>
     <%= render 'shared/notifications_template' %>

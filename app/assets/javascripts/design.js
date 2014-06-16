@@ -139,7 +139,20 @@
         self.global_images = ko.observableArray([]);
 
 		self.dropdowning = ko.observable(false);  
-	    self.drop = function() { self.dropdowning(true) }
+	    self.drop = function() { self.dropdowning(true) };
+
+      	self.d_sub = self.default_image.subscribe(function(newvalue){
+      		if(newvalue == true){
+	      		if(self.parent){
+	      			_.each(self.parent.global_images(),function(g){
+	      												if(g === self){
+	      													return;
+	      												}
+	      												g.default_image(false) 
+	      											});
+	      		}
+	      	}
+      	});	    
 
 	    if(data){
             self.id(data._id);
@@ -181,7 +194,7 @@
 
 	    self.background = ko.computed(function(){
 	    	return "url(" + self.url() + ")";
-	    })
+	    });
 
 	    self.setDefault = function(data){
 	    	self.dropdowning(false);
@@ -286,7 +299,7 @@
         self.addImage = function(){
         	var img = new GlobalImage({parent_id:self.id,name:self.name(),design_id:self.design_id(),parent:self});
         	if(self.global_images().length == 0){
-        		img.default_image = true;
+        		img.default_image = ko.observable(true);
         	}
         	self.global_images.push(img);
         }         

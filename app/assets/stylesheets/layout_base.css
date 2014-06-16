@@ -20,6 +20,10 @@ body {
   pointer-events: none !important;
 }
 
+.contact_wrapper a {
+	color: #fff;
+}
+
 #opened_or_closed {
 	display: none;
 }

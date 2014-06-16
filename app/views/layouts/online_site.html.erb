@@ -72,7 +72,7 @@
 						<img id="logo_image" data-bind="attr: {src:logo().url}, style: { 'height': logo_settings().image_height() + 'px', 'borderRadius':logo_settings().border_radius() + 'px', 'borderWidth':logo_settings().border_size() + 'px', 'borderColor': '#' + logo_settings().border_color()}" style="border-style: solid"/>
 					<!-- /ko -->
 					<!-- ko if: !logo_settings().showLogo() -->
-						<span class="logo" data-bind="text: name, fitText: !logo_settings().logo_as_image"><%= @resto_data["name"] %></span>
+						<span class="logo" data-bind="text: multi_resto_name, fitText: !logo_settings().logo_as_image"><%= @resto_data["name"] %></span>
 					<!-- /ko -->					
 				</div>
 				<nav id="navigation" class="nav">

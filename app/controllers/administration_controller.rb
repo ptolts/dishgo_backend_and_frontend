@@ -262,6 +262,7 @@ class AdministrationController < ApplicationController
     restaurant = Restaurant.find(params[:restaurant_id])
     if cache = restaurant.cache
       cache.menu = nil
+      cache.api_menu = nil
       cache.save
     end
     restaurant.published_menu = restaurant.draft_menu
@@ -398,6 +399,8 @@ class AdministrationController < ApplicationController
     restaurant.twitter = settings["twitter"]
     restaurant.foursquare = settings["foursquare"]
     restaurant.instagram = settings["instagram"]
+    restaurant.multi_name_translations = settings["multi_name"]
+    Rails.logger.warn settings["multi_name"]
 
     # Rails.logger.warn "--------[resto]--------"
     # Rails.logger.warn restaurant.to_json

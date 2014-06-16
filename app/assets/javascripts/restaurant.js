@@ -389,7 +389,6 @@
             self.languages = ko.observableArray(data.languages ? data.languages : ['en']);
             self.default_language = ko.observable(data.default_language ? data.default_language : 'en');
             self.available_languages = ko.observableArray(_.map(_.pairs(fullLanguageName),function(lang){ return new Language(lang[1],lang[0]) }));
-            self.name = ko.observable(data.name ? data.name : "");
             self.lat = ko.observable(data.lat ? data.lat : "");
             self.lon = ko.observable(data.lon ? data.lon : "");
             self.website = ko.observable(data.website ? data.website : "");
@@ -410,6 +409,24 @@
             self.id = data._id;
             self.font_id = data.font_id ? data.font_id : "";
             self.user_id = data.user_id ? data.user_id : "";
+
+            self.lang = ko.observable(self.default_language());
+            lang = self.lang;
+
+            self.name = ko.observable(data.name ? data.name : "");
+            self.multi_name = ko.observable(data.multi_name ? data.multi_name : default_language_hash);
+
+            self.multi_resto_name = ko.computed({
+                read: function(){
+                    var l = lang();
+                    var name_hash = self.multi_name();
+                    if(l && name_hash[l] && name_hash[l].length > 0){
+                        return name_hash[l];
+                    }
+                    return self.name();
+                },
+                deferEvaluation: true,
+            });
 
             self.show_map = ko.observable(data.show_map ? data.show_map : false);
             self.show_hours = ko.observable(data.show_hours ? data.show_hours : false);

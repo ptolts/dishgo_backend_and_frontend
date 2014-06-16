@@ -46,7 +46,7 @@ ko.bindingHandlers.fitText = {
 ko.bindingHandlers.lTruncatedText = {
     update: function (element, valueAccessor, allBindingsAccessor) {
         var value = valueAccessor();
-        var result = ko.observable(value()[viewmodel.lang()]);     
+        var result = ko.observable(value()[lang()]);     
         var length = 140;
         var truncatedText = ko.observable(result().length > length ? result().substring(0, length) + "..." : result());
         // updating text binding handler to show truncatedText
@@ -1472,7 +1472,7 @@ ko.bindingHandlers.lStaticText = {
                     console.log("WARNING: Missing translation for '"+text+"'");
                     return text;
                 }
-                return translations[text][viewmodel.lang()];
+                return translations[text][lang()];
             },
             deferEvaluation: true                 
         });
@@ -1664,12 +1664,12 @@ ko.bindingHandlers.lValue = {
     var underlyingObservable = valueAccessor();
     var interceptor = ko.computed({
         read: function () {
-            return underlyingObservable()[viewmodel.lang()];
+            return underlyingObservable()[lang()];
         },
 
         write: function (newValue) {
             var current = underlyingObservable();
-            current[viewmodel.lang()] = newValue;
+            current[lang()] = newValue;
             underlyingObservable(current);
         },
     });
@@ -1680,8 +1680,8 @@ ko.bindingHandlers.lValue = {
         if(default_value == null){
             default_value = $(element).attr("placeholder");
         }
-        if(viewmodel.lang() != 'en'){
-            return fullLanguageName[viewmodel.lang()] + " translation for '" + underlyingObservable()['en'] + "'";
+        if(lang() != 'en'){
+            return fullLanguageName[lang()] + " translation for '" + underlyingObservable()['en'] + "'";
         }
         return default_value;
     });    
@@ -1716,7 +1716,7 @@ ko.bindingHandlers.lText = {
     update: function (element, valueAccessor) {
         //console.log("DEBUG: lText firing on: " + element);        
         var value = valueAccessor();
-        var result = ko.observable(value()[viewmodel.lang()]);
+        var result = ko.observable(value()[lang()]);
         ko.bindingHandlers.text.update(element, result);
         
         // $(element).fadeOut(250, function() {
@@ -1730,13 +1730,14 @@ ko.bindingHandlers.lHtml = {
     update: function (element, valueAccessor) {
         //console.log("DEBUG: lHtml firing on: " + element);
         var value = valueAccessor();
-        var result = ko.observable(value()[viewmodel.lang()].replace(/noscript/g,'script'));
-        ko.utils.setHtml(element, result);
-        
-        // $(element).fadeOut(250, function() {
-        //     ko.bindingHandlers.text.update(element, result);
-        //     $(element).fadeIn(250);
-        // });        
+        var result = value()[lang()]
+        if(result){
+            result = result.replace(/noscript/g,'script');
+        } else {
+            result = "";
+        }
+        result = ko.observable(result);
+        ko.utils.setHtml(element, result);     
     }
 };   
 

@@ -523,4 +523,7 @@ border-color: #6D6D6D;
   .dish .dish_info {
     min-height: 170px;
   }
+  .dish_picture {
+    max-height: 100px;
+  }
 }

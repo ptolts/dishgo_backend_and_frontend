@@ -1,0 +1,33 @@
+<script id="restaurant_localized_template" type="text/html">
+    <div class="col-md-6">
+        <div class="profile_form_wrapper">
+            <form class="form-horizontal">
+                <fieldset>
+                    <h2 class="text-center">Localized Name</h2>
+                    <p>If you would like your restaurant name to change according to the language the user has selected, enter them below.</p>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Restaurant Name</label>
+                                <div class="controls">
+                                    <input id="resturant_name" name="resturant_name" type="text" placeholder="Restaurant Name" data-bind="lValue: multi_name" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>For Language</label>
+                                <select class="form-control" data-bind="options: languages, value: lang"></select>                
+                            </div>
+                        </div>                        
+                </fieldset>
+            </form>
+            <br />
+            <div class="base_bar">
+                <div style="width: 100%">
+                    <button class="btn btn-dish" data-bind="click: quick_save" style="width: 50%">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>

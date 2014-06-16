@@ -14,6 +14,7 @@ class Restaurant
   field :menu, type: Hash
   # field :images, type: Array
   field :name, type: String
+  field :multi_name, localize: true
   field :city, type: String
   field :email, type: String
   field :email_addresses, type: Array
@@ -176,6 +177,7 @@ class Restaurant
     if self.logo
       hash[:logo] = self.logo.as_document
     end
+    hash["multi_name"] = self.multi_name_translations
     return hash
   end
 
@@ -186,7 +188,8 @@ class Restaurant
     end
     if self.pages
       hash["pages"] = self.pages.as_json
-    end    
+    end
+    hash["multi_name"] = self.multi_name_translations
     return hash
   end
 
