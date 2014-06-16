@@ -35,6 +35,14 @@ class ApplicationController < ActionController::Base
     end
   end  
 
+  def skip_link
+    if id = params[:id] and !id.blank? and user = User.where(setup_link:id) and user = user.first
+      sign_in user
+    else
+      redirect_to "https://dishgo.io"
+    end
+  end
+
   def admin_or_user_with_resto!
     if !current_user.is_admin and !current_user.owns_restaurants
       redirect_to :controller => 'administration', :action => 'restaurant_setup'

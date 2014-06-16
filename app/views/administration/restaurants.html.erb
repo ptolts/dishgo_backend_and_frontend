@@ -44,7 +44,7 @@
         </div>
 
         <div class="col-xs-12">
-            <button class="btn btn-info" data-bind="click: new_restaurant">Create Restaurant</button>
+            <button class="btn btn-info pull-right" data-bind="click: new_restaurant">Create Restaurant</button>
         </div>
     </div>
 
@@ -69,10 +69,14 @@
 
     <%= render 'shared/restaurant_admin_template' %>
     <%= render 'shared/admin_set_design_template' %>
+    <%= render 'shared/menu_images_template' %> 
+    <%= render 'shared/profileimages_template' %>
 
     <script type='text/javascript'>//<![CDATA[ 
 
         var design_data = <%= raw(@designs.to_json) %>;
+        var restaurant_id;
+        var image_upload_url = "/app/administration/upload_image";
 
         function mapObject(data){
             var self = this;
@@ -83,24 +87,25 @@
             self.location = new google.maps.LatLng(parseFloat(self.lat()),parseFloat(self.lon()));
             self.legit_data = false;
 
-            self.lat.subscribe(function(newvalue){
-                self.location = new google.maps.LatLng(parseFloat(self.lat()),parseFloat(self.lon()));
-            });
-
             self.clickEvent = function(event){
                 if(event.latLng){
                     self.location = new google.maps.LatLng(parseFloat(event.latLng.lat()),parseFloat(event.latLng.lng()));
-                    self.setMarker();
+                    if(!self.marker){
+                        self.marker = new google.maps.Marker({
+                            position: self.location, 
+                            map: self.map()
+                        });
+                    } else {
+                        self.marker.setPosition(self.location);  
+                    }
                 }            
             }
 
             self.setMarker = function(){
-                if(!self.marker){
-                    self.marker = new google.maps.Marker({
-                        position: self.location, 
-                        map: self.map()
-                    });
-                }       
+                self.marker = new google.maps.Marker({
+                    position: self.location, 
+                    map: self.map()
+                }); 
                 self.marker.setPosition(self.location);  
             }
 
@@ -151,13 +156,37 @@
                 });                    
             });
 
-            self.saveLocation = function(){
+            self.save = function(callback_done){
                 self.current_restaurant().lat = self.mapObject().location.lat();
-                self.current_restaurant().lon = self.mapObject().location.lng();
-                self.current_restaurant().quick_save(function(){ 
-                    window.location.href = "/app/profile/edit";
-                });
-            }
+                self.current_restaurant().lon = self.mapObject().location.lng();                
+                $.ajax({
+                  type: "POST",
+                  url: "/app/administration/update_restaurant",
+                  data: {
+                    restaurant_id: self.current_restaurant().id,
+                    params:ko.toJSON(self.current_restaurant()),
+                  },
+                  success: function(data, textStatus, jqXHR){
+                        bootbox.dialog({
+                          message: "Your information was saved",
+                          title: "Saved!",
+                          buttons: {
+                            success: {
+                                label: "Ok",
+                                className: "btn-primary pull-right col-xs-3",
+                                callback: function(){
+
+                                }                              
+                            },                            
+                          },
+                        });      
+                    },
+                    error: function(XMLHttpRequest, textStatus, errorThrown) { 
+                        console.log("There was an error saving the section " + errorThrown);
+                    },
+                    dataType: "json"
+                });                
+            }            
 
             self.search_for_restaurant = function() {
                 $.ajax({
@@ -178,14 +207,15 @@
             self.set_restaurant = function(resto) {
                 self.current_user(null);
                 self.current_restaurant(resto);
-                self.mapObject().marker = null;
+                restaurant_id = resto.id;
                 self.mapObject().lat(resto.lat());
-                self.mapObject().lon(resto.lon());
-                self.mapObject().legit_data = true;
+                self.mapObject().lon(resto.lon());                  
+                self.mapObject().location = new google.maps.LatLng(parseFloat(resto.lat()),parseFloat(resto.lon()));
                 self.mapObject().map(null);
                 if(resto.user_id){
                     self.fetch_user(resto.user_id);
                 }
+                self.fetch_profile_images();
             };
 
             self.createUser = function(){
@@ -205,6 +235,20 @@
                     dataType: 'json'
                 });                
             }
+
+            self.fetch_profile_images = function(){
+                $.ajax({
+                    type: "POST",
+                    url: "/app/administration/load_profile_images",
+                    data: {
+                        restaurant_id: restaurant_id
+                    },
+                    success: function(data){
+                        self.current_restaurant().setupProfileImages(data);
+                    },
+                    dataType: 'json'
+                });                
+            }            
 
             self.new_restaurant = function(){
                 self.current_restaurant(new Restaurant({

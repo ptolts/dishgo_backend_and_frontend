@@ -1,9 +1,11 @@
 class ProfileController < ApplicationController
-	before_filter :authenticate_user!
+	before_filter :skip_link, only: [:set_password]
+	before_filter :authenticate_user! #, except: [:set_password]
 	before_filter :create_notifications!
 	before_filter :admin_or_profile_image_owner!, only: [:reject_image]
 
 	layout 'profile'
+	layout 'devise', only: :set_password
 
 	def edit
 		render 'edit'
@@ -119,5 +121,17 @@ class ProfileController < ApplicationController
 		image.rejected = !image.rejected
 		image.save
 		render json: {rejected: image.rejected}.as_json
+	end
+
+	def set_password_form
+		user = current_user
+		user.password = params[:password]
+		user.password_confirmation = params[:password_confirmation]
+		user.save
+		render json: {success:true}.as_json
+	end
+
+	def set_password
+		render 'set_password'
 	end
 end

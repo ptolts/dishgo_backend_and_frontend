@@ -21,7 +21,7 @@
                                 <div class="form-group">
                                     <label>Phone Number</label>
                                     <div class="controls" data-bind="css:{'has-error':!validatePhone()}">
-                                        <input id="phone" name="phone" type="text" placeholder="555-555-5555" data-bind="phone: phone" class="form-control">
+                                        <input id="phone" name="phone" type="text" placeholder="555-555-5555" data-bind="value: phone" class="form-control">
                                     </div>
                                 </div>
                             </div>
@@ -161,10 +161,33 @@
                         <div id="location_map" data-bind="iMap: $root.mapObject"></div>
                     </div>                         
                 </div>               
-            </div>            
+            </div>
+
+            <div class="col-xs-6">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <h3>Menu Images:</h3>
+                    </div>            
+                    <div class="col-xs-12"> 
+                        <div data-bind="template: { name: 'menu_image', foreach: computed_menu_images}"></div>       
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xs-12">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <h3>Menu Images:</h3>
+                    </div>  
+                    <div class="col-xs-12">
+                        <div data-bind="template: { name: 'profile_images_bare', data: $root.current_restaurant }"></div>
+                    </div>
+                </div>
+            </div>
+
             <div class="row base_bar">
                 <div class="col-xs-12">
-                    <button class="btn btn-dish pull-right btn-lg col-xs-6" data-bind="click: save">Save</button>
+                    <button class="btn btn-dish pull-right btn-lg col-xs-12" data-bind="click: $root.save">Save</button>
                 </div>
             </div>
         </div>

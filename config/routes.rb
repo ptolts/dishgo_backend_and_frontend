@@ -66,6 +66,8 @@ Foodcloud::Application.routes.draw do
       get 'edit'
       get 'billing'
       get 'location'
+      get 'set_password/:id', to: "profile#set_password"
+      post 'set_password_form'
       post 'add_card'
       post 'subscribe'
       post 'reject_image'
@@ -130,7 +132,8 @@ Foodcloud::Application.routes.draw do
       post 'crop_image'
       post 'crop_icon'       
       post 'helpme'       
-      post 'load_user'       
+      post 'load_user' 
+      post 'load_profile_images'      
     end
   end
 

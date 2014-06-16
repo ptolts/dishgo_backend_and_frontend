@@ -332,7 +332,7 @@
             self.id = ko.observable(data._id ? data._id : null);
             self.email = ko.observable(data.email);
             self.phone = ko.observable(data.phone);
-            self.setup_link = ko.observable(data.setup_link);
+            self.setup_link = ko.observable(window.location.protocol + "//" + window.location.host + "/app/profile/set_password/" + data.setup_link);
 
             self.created = ko.computed({
                 read: function(){
@@ -354,7 +354,8 @@
                     success: function(data, textStatus, jqXHR){
                         self.spin(false);
                         self.id(data._id);
-                        resto.user_id = data._id
+                        resto.user_id = data._id;
+                        self.setup_link(data.setup_link);
                     },
                     error: function(XMLHttpRequest, textStatus, errorThrown) { 
                         self.spin(false);
@@ -426,10 +427,14 @@
                 self.pages(_.map(data.pages,function(page){ return new Page(page) }));
             }
 
+            self.setupProfileImages = function(images){
+                self.images(_.map(images,function(image){ return new ImageObj(image) }));
+            }                   
+
             self.images = ko.observableArray([]);
             if(data.image){
-                self.images(_.map(data.image,function(image){ return new ImageObj(image) }));
-            }            
+                self.setupProfileImages(data.image);
+            }     
 
             self.email_addresses = ko.observableArray([]);
             if(data.email_addresses){

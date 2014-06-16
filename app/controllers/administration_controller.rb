@@ -4,7 +4,7 @@ class AdministrationController < ApplicationController
   before_filter :authenticate_user!
   before_filter :create_notifications!
   before_filter :admin_or_user_with_resto!, :except => [:restaurant_setup, :free_search_restaurants, :set_restaurant, :create_restaurant, :help_me]
-  before_filter :admin_user!, :only => [:create_user_for_restaurant, :load_user, :users, :restaurants, :add_user, :user_destroy, :update_user, :search_restaurants, :become, :become_user, :list_in_app]
+  before_filter :admin_user!, :only => [:load_profile_images, :create_user_for_restaurant, :load_user, :users, :restaurants, :add_user, :user_destroy, :update_user, :search_restaurants, :become, :become_user, :list_in_app]
   before_filter :admin_or_owner!, :only => [:edit_menu, :update_menu, :crop_image, :crop_icon, :publish_menu, :reset_draft_menu, :update_restaurant]
   before_filter :admin_or_user_without_resto!, :only => [:restaurant_setup]
   layout 'administration'
@@ -96,6 +96,11 @@ class AdministrationController < ApplicationController
     json[:setup_link] = user.setup_link    
     render json: json.to_json
   end 
+
+  def load_profile_images
+    images = Restaurant.find(params[:restaurant_id]).image
+    render json: images.to_json
+  end
 
   def create_user
     email = params[:email]
@@ -398,10 +403,18 @@ class AdministrationController < ApplicationController
     # Rails.logger.warn restaurant.to_json
     # Rails.logger.warn "-----------------"    
 
-    if sub = Restaurant.where(subdomain:settings["subdomain"].downcase).first and sub != restaurant
-      Rails.logger.warn "Bad Subdomain for user: #{current_user.email}"
-    else
-      restaurant.subdomain = settings["subdomain"].downcase
+    if current_user.is_admin
+      if !settings["subdomain"].blank? and sub = Restaurant.where(subdomain:settings["subdomain"].downcase).first and sub != restaurant
+        Rails.logger.warn "Bad Subdomain for user: #{current_user.email}"
+      else
+        restaurant.subdomain = settings["subdomain"].downcase
+      end
+
+      if !settings["host"].blank? and sub = Restaurant.where(host:settings["host"].downcase).first and sub != restaurant
+        Rails.logger.warn "Bad Hostname for user: #{current_user.email}"
+      else
+        restaurant.host = settings["host"].downcase
+      end      
     end
 
     restaurant.address_line_1 = settings["address_line_1"]
