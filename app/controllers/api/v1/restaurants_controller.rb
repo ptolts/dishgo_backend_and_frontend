@@ -37,6 +37,11 @@ class Api::V1::RestaurantsController < ApplicationController
     end
     restaurant = Restaurant.find(params[:id])
 
+    if !restaurant.cache
+      cache = Cache.create
+      restaurant.cache = cache
+      restaurant.save
+    end
     cache = restaurant.cache
     if cache and !cache.api_menu.blank?
       @menu_data = "{ \"menu\" : #{cache.api_menu} }".as_json
