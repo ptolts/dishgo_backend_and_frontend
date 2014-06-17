@@ -77,6 +77,7 @@ class OnlinesiteController < ApplicationController
       cache.save
       @menu_data = "{ \"menu\" : #{menu_d} }".as_json
     end
+    expires_in 10.minutes, :public => true
     render 'menu'
   end
 
