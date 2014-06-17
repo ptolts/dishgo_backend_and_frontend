@@ -318,10 +318,12 @@
 	ko.bindingHandlers.file_upload_menu = {
 	    update: function(element, valueAccessor, allBindingsAccessor, viewModel, bindingContext) {
 	        var self = this;
+	        console.log(restaurant_id);
 	        $(element).fileupload({
 	            dropZone: $(element),
 	            formData: {
-	            	data: ko.toJSON(viewModel)
+	            	restaurant_id: restaurant_id,
+	            	data: ko.toJSON(viewModel),
 	            },           
 	            url: "/app/odesk/upload_image",
 	            dataType: 'json',

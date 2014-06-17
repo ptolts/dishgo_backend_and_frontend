@@ -144,8 +144,13 @@ class OdeskController < ApplicationController
   end
 
   def upload_image
+    if current_user.is_admin and restaurant_id = params[:restaurant_id] and !restaurant_id.blank?
+      restaurant = Restaurant.find(restaurant_id)
+    else
+      restaurant = current_user.owns_restaurants
+    end
 
-    if restaurant = current_user.owns_restaurants and restaurant.odesk.nil?
+    if restaurant.odesk.nil?
       odesk = Odesk.create
       restaurant.odesk = odesk
       restaurant.save
@@ -161,7 +166,7 @@ class OdeskController < ApplicationController
     img.name = params[:name]
     img.custom = true
     img.carousel = false
-    img.restaurant_menu_images = current_user.owns_restaurants
+    img.restaurant_menu_images = restaurant
     img.update_attributes({:img => file})
     img.save
 

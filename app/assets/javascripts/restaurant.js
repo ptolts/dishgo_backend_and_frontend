@@ -355,7 +355,7 @@
                         self.spin(false);
                         self.id(data._id);
                         resto.user_id = data._id;
-                        self.setup_link(data.setup_link);
+                        self.setup_link(window.location.protocol + "//" + window.location.host + "/app/profile/set_password/" + data.setup_link);
                     },
                     error: function(XMLHttpRequest, textStatus, errorThrown) { 
                         self.spin(false);

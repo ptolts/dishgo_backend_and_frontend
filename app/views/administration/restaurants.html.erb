@@ -205,9 +205,9 @@
             };
 
             self.set_restaurant = function(resto) {
+                restaurant_id = resto.id;
                 self.current_user(null);
                 self.current_restaurant(resto);
-                restaurant_id = resto.id;
                 self.mapObject().lat(resto.lat());
                 self.mapObject().lon(resto.lon());                  
                 self.mapObject().location = new google.maps.LatLng(parseFloat(resto.lat()),parseFloat(resto.lon()));
