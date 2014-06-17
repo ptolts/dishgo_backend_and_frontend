@@ -9,6 +9,7 @@ Foodcloud::Application.routes.draw do
   constraints(Subdomain) do
     get '/' => 'onlinesite#index'
     get '/robots.txt' => 'robots#index'
+    get '/sitemap.xml' => 'robots#sitemap'
   end
 
   if Rails.env.production?
@@ -52,7 +53,13 @@ Foodcloud::Application.routes.draw do
     collection do
       get '/:id', to: "injected#index"
     end
-  end  
+  end 
+
+  resources :robots do
+    collection do
+      get '/sitemap.xml' => "robots#sitemap"
+    end
+  end   
 
   resources :onlinesite do
     collection do
