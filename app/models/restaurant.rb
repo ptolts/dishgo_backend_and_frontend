@@ -38,6 +38,8 @@ class Restaurant
   field :show_map, type: Boolean, default: true
   field :show_menu, type: Boolean, default: true
 
+  field :does_delivery, type: Boolean, default: false
+
   field :about_text, localize: true
 
   field :hours, type: Hash 

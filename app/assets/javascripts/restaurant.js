@@ -410,6 +410,8 @@
             self.font_id = data.font_id ? data.font_id : "";
             self.user_id = data.user_id ? data.user_id : "";
 
+            self.does_delivery = ko.observable(data.does_delivery ? data.does_delivery : false);
+
             self.lang = ko.observable(self.default_language());
             lang = self.lang;
 

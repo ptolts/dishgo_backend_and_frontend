@@ -400,7 +400,7 @@ class AdministrationController < ApplicationController
     restaurant.foursquare = settings["foursquare"]
     restaurant.instagram = settings["instagram"]
     restaurant.multi_name_translations = settings["multi_name"]
-    Rails.logger.warn settings["multi_name"]
+    restaurant.does_delivery = settings["does_delivery"]
 
     # Rails.logger.warn "--------[resto]--------"
     # Rails.logger.warn restaurant.to_json

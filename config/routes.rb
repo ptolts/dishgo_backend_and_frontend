@@ -8,6 +8,7 @@ Foodcloud::Application.routes.draw do
 
   constraints(Subdomain) do
     get '/' => 'onlinesite#index'
+    get '/robots.txt' => 'onlinesite#index'
   end
 
   if Rails.env.production?
