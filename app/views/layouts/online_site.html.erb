@@ -90,14 +90,14 @@
 				<div class="main_page_language_selector">
 					<ul class="language_select">
 						<!-- ko if: restaurant().show_menu() -->
-							<li><a data-bind="click: function() { $root.menu($root.sections()); pager.navigate('#!/menu') }, attr:{href:'#!/menu'}, lText: menu_tr">Menu</a></li>
+							<li><a alt="Explore our beautiful menu." data-bind="click: function() { $root.menu($root.sections()); pager.navigate('#!/menu') }, attr:{href:'#!/menu'}, lText: menu_tr">Menu</a></li>
 							<!-- ko foreach: sections -->
 								<!-- ko if: menu_link -->
 									<li><a data-bind="click: function() { $root.menu([$data]); pager.navigate('#!/menu') }, lText: name"></a></li>
 								<!-- /ko -->							
 							<!-- /ko -->							
 						<!-- /ko -->						
-						<li><a data-bind="page-href: 'contact', lText: contact_tr">Contact</a></li>					
+						<li><a alt="View our hours and find out how to get in touch." data-bind="page-href: 'contact', lText: contact_tr">Contact</a></li>					
 					  	<!-- ko foreach: languages -->
 					  		<li data-bind="css:{selected: $data === $root.lang()}, click: function(){ $root.lang($data) }"><span data-bind="text: $root.getFullLangName($data)"></span></li>
 					  	<!-- /ko -->
