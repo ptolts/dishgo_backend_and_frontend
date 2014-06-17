@@ -504,7 +504,7 @@
 
             self.hours = ko.observableArray([]);
 
-            var hours_list = {
+            self.hours_list = {
                 monday: {
                     open_1: null,
                     close_1: null,
@@ -549,8 +549,10 @@
                 },                                               
             }
 
+            self.backUpList = self.hours_list;
+
             if(data.hours){
-                hours_list = data.hours;
+                self.hours_list = data.hours;
             }
 
             self.available_hours = ko.observable(false);
@@ -558,11 +560,20 @@
             //     self.available_hours(true);
             // }
 
-            _.each(_.pairs(hours_list), function(day){
-                if(day[1].closed == false) {
+            // _.each(_.pairs(hours_list), function(day){
+            //     if(day[1].closed == false) {
+            //         self.available_hours(true);
+            //     }
+            //     var day = new Day(day[0],day[1]);
+            //     self.hours.push(day);
+            // });
+
+            _.each(_.pairs(self.backUpList), function(day){
+                var day = self.hours_list[day[0]];
+                if(day.closed == false) {
                     self.available_hours(true);
                 }
-                var day = new Day(day[0],day[1]);
+                var day = new Day(day.name,day);
                 self.hours.push(day);
             });
 
