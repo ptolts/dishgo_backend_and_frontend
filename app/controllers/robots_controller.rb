@@ -4,8 +4,14 @@ class RobotsController < ApplicationController
     if !resto_name.blank?
       restaurant = Restaurant.where(:subdomain => resto_name).first
     end
+    
     if !restaurant and request.host.to_s != 'dishgo.io'
       restaurant = Restaurant.where(:host => request.host.to_s.downcase.gsub(/www\./,'')).first
+    end
+
+    if !restaurant
+      redirect_to 'https://dishgo.io'
+      return
     end
     if host = restaurant.host
   		robots = "Sitemap: http://www.#{host}/sitemap.xml"
@@ -20,12 +26,16 @@ class RobotsController < ApplicationController
     if !resto_name.blank?
       restaurant = Restaurant.where(:subdomain => resto_name).first
     end
+
     if !restaurant and request.host.to_s != 'dishgo.io'
       restaurant = Restaurant.where(:host => request.host.to_s.downcase.gsub(/www\./,'')).first
     end
+
     if !restaurant
-    	restaurant = Restaurant.where(name:/bobs/i).first
+      redirect_to 'https://dishgo.io'
+      return
     end
+
     if host = restaurant.host
   		url = "http://www.#{host}/"
   	else
