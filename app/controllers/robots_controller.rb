@@ -1,7 +1,4 @@
-class RobotsController < ApplicationController
-
-  layout 'administration'
-  
+class RobotsController < ApplicationController  
   def index
   	resto_name = request.subdomain.split(".").first
     if !resto_name.blank?
