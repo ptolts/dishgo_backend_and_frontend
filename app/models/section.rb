@@ -107,7 +107,7 @@ class Section
 				end	        	
 	        else
 	        	dish_object = Dish.create
-	        	dish_object.odesk_menu = odesk_request
+	        	dish_object.odesk = odesk_request
 	        	dish_object.published = false
 	        end  
 	        if !dish_object.odesk_load_data_from_json(dish,odesk_request)
