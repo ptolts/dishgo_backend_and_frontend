@@ -4,7 +4,7 @@ class RobotsController < ApplicationController
     if !resto_name.blank?
       restaurant = Restaurant.where(:subdomain => resto_name).first
     end
-    
+
     if !restaurant and request.host.to_s != 'dishgo.io'
       restaurant = Restaurant.where(:host => request.host.to_s.downcase.gsub(/www\./,'')).first
     end
@@ -16,7 +16,7 @@ class RobotsController < ApplicationController
     if host = restaurant.host
   		robots = "Sitemap: http://www.#{host}/sitemap.xml"
   	else
-  		robots = "Sitemap: http://#{restaurant.subdomain}dishgo.io/sitemap.xml"
+  		robots = "Sitemap: http://#{restaurant.subdomain}.dishgo.io/sitemap.xml"
   	end
   	render text: robots
   end
@@ -39,7 +39,7 @@ class RobotsController < ApplicationController
     if host = restaurant.host
   		url = "http://www.#{host}/"
   	else
-  		url = "http://#{restaurant.subdomain}dishgo.io/"
+  		url = "http://#{restaurant.subdomain}.dishgo.io/"
   	end
 
     sitemapxml = %@<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\nCONTENTS_HERE_SITEMAP\n</urlset>@
