@@ -46,7 +46,7 @@ class RobotsController < ApplicationController
 	end
 
 	pages.each do |page|
-		sitemap << sitemap_url.gsub(/LOCATION_CHANGE/,"#!#{page}")
+		sitemap << sitemap_url.gsub(/LOCATION_CHANGE/,"#!/#{page}")
 	end
 
 	sitemapxml.gsub!(/CONTENTS_HERE_SITEMAP/,sitemap.join("\n"))

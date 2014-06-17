@@ -90,7 +90,7 @@
 				<div class="main_page_language_selector">
 					<ul class="language_select">
 						<!-- ko if: restaurant().show_menu() -->
-							<li><a data-bind="click: function() { $root.menu($root.sections()); pager.navigate('#!/menu') }, lText: menu_tr">Menu</a></li>
+							<li><a data-bind="click: function() { $root.menu($root.sections()); pager.navigate('#!/menu') }, attr:{href:'#!/menu'}, lText: menu_tr">Menu</a></li>
 							<!-- ko foreach: sections -->
 								<!-- ko if: menu_link -->
 									<li><a data-bind="click: function() { $root.menu([$data]); pager.navigate('#!/menu') }, lText: name"></a></li>
