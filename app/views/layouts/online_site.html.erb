@@ -236,18 +236,18 @@
 			<span itemprop="telephone"><%= @resto_data["phone"] %></span>
 		</div>
 
-		<% if !@resto_data["lat"].blank? %>
-			<div itemprop="location" style="display: none">
-			  <span itemscope itemtype="http://schema.org/Place">
-			    <div itemprop="geo">
-			      <span itemscope itemtype="http://schema.org/GeoCoordinates">
-			        <span property="latitude" content="<%= @resto_data['lat'] %>"></span>
-			        <span property="longitude" content="<%= @resto_data['lon'] %>"></span>
-			      </span>
-			    </div>
-			  </span>
-			</div>
-		<% end %>								    
+	<% if !@resto_data["lat"].blank? %>
+		<div itemprop="location" style="display: none">
+		  <span itemscope itemtype="http://schema.org/Place">
+		    <div itemprop="geo">
+		      <span itemscope itemtype="http://schema.org/GeoCoordinates">
+		        <span property="latitude" content="<%= @resto_data['lat'] %>"></span>
+		        <span property="longitude" content="<%= @resto_data['lon'] %>"></span>
+		      </span>
+		    </div>
+		  </span>
+		</div>
+	<% end %>								    
 
 		<%= render 'javascript_ignition' %>		
     </body>

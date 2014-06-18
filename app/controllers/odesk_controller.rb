@@ -94,14 +94,14 @@ class OdeskController < ApplicationController
     result = Restaurant.where(:name => /#{params[:restaurant_name]}/i)
     if params[:hide_no_menu].to_bool
       resto_ids = GlobalImage.ne(restaurant_menu_images_id:nil).collect{|e| e.restaurant_menu_images_id}.flatten.uniq
-      result.where(:id.in => resto_ids)
+      result = result.where(:id.in => resto_ids)
     end
     if params[:hide_with_menu].to_bool
       section_ids = Section.ne(published_restaurant_id:nil).only(:published_restaurant_id).collect{|e| e.published_restaurant_id }.flatten.uniq
       Rails.logger.warn "section_ids: #{section_ids.to_s}"
-      result.not_in(:id => section_ids)
+      result = result.not_in(:id => section_ids)
     end
-    result.limit(25).order_by(:updated_at.asc)
+    result = result.limit(25).order_by(:updated_at.asc)
     render :json => result.as_json(:include => [:menu_images, :odesk])
   end  
 
