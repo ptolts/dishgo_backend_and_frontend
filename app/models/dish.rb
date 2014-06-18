@@ -229,7 +229,7 @@ class Dish
     dish_hash[:id] = self.id
     dish_hash.merge!(self.draft)
     dish_hash["position"] = self.draft_position
-    dish_hash["sizes"] = self.draft_sizes.custom_to_hash_draft
+    dish_hash["sizes"] = self.draft_sizes.custom_to_hash_draft if self.draft_sizes
     dish_hash["options"] = self.draft_options.collect do |option|
       next option.custom_to_hash_draft 
     end
