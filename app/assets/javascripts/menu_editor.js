@@ -132,6 +132,7 @@ function Section(data,topmodel) {
     self.id = ko.observable();
     self.position = ko.observable(data.position ? data.position : 0);
     self.menu_link = ko.observable(data.menu_link ? data.menu_link : false);
+    self.description = ko.observable(data.description ? data.description : copyDefaultHash(default_language_hash));
 
     self.toggle_menu_link = function(dis){
         if(dis()){
@@ -162,7 +163,7 @@ function Section(data,topmodel) {
             });
         }
     }
-    self.name = ko.observable(data.name ? data.name : default_language_hash);
+    self.name = ko.observable(data.name ? data.name : copyDefaultHash(default_language_hash));
     // self.subsections = ko.observableArray($.map(data.subsection, function(item) { return new Subsection(item) }));
 
     self.dishes = ko.observableArray([]);
@@ -330,7 +331,7 @@ var dishList = ko.observableArray([]);
 
 function Dish(data, topmodel) {
     var self = this;
-    self.name = ko.observable(data.name ? data.name : default_language_hash);
+    self.name = ko.observable(data.name ? data.name : copyDefaultHash(default_language_hash));
     self.description = ko.observable(data.description);
     self.price = ko.observable(data.price);
     self.topmodel = topmodel;
@@ -708,7 +709,7 @@ ko.bindingHandlers.modalImage = {
 
 function Option(data,dish) {
     var self = this;
-    self.name = ko.observable(data.name ? data.name : default_language_hash);
+    self.name = ko.observable(data.name ? data.name : copyDefaultHash(default_language_hash));
     self.dish = dish;
     self.advanced = ko.observable(false);  
     self.extra_cost = ko.observable(false); 
@@ -914,7 +915,7 @@ function IndividualOption(data,option) {
         }
     }
     self.option = option;
-    self.name = ko.observable(data.name ? data.name : default_language_hash);
+    self.name = ko.observable(data.name ? data.name : copyDefaultHash(default_language_hash));
     self.price = ko.observable(data.price);     
     self.type = option.type;
     self.dish = option.dish;
@@ -1723,6 +1724,18 @@ ko.bindingHandlers.lText = {
         //     ko.bindingHandlers.text.update(element, result);
         //     $(element).fadeIn(250);
         // });        
+    }
+}; 
+
+ko.bindingHandlers.lVisible = {
+    update: function (element, valueAccessor) {      
+        var value = valueAccessor();
+        value = value()[lang()];
+        var isCurrentlyVisible = !(element.style.display == "none");
+        if (value && !isCurrentlyVisible)
+            element.style.display = "";
+        else if ((!value) && isCurrentlyVisible)
+            element.style.display = "none";
     }
 }; 
 

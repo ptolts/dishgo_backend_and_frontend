@@ -23,10 +23,13 @@
                         </div>
                     </script>                      
                 </div>
+                <div class="col-xs-12 push_down">
+                    <textarea rows="6" data-bind="lValue: description, valueUpdate: 'afterkeydown'" class="description form-control tooltipclass" data-toggle="tooltip" data-placement="top" title="Type a section description into this box. It isn't required." placeholder="Add Section Description (Optional)."></textarea>
+                </div>                  
             </div>
         </div>
         <div class="col-md-12" data-bind="visible: dishes().length > 0">
-            <h4>Dish Order:</h4>
+            <h4>Dish Order:</h4>          
             <ul class="sortable_dishes" data-bind="sortable { template: 'dish_tmp', data: dishes, options: { containment: 'parent', tolerance: 'pointer' } }"></ul>
             <script id="dish_tmp" type="text/html"><li class="dish_sort" data-bind="click: function(){ console.log($data.position()); }"><span class="pull-left fa fa-arrows-v"></span><span data-bind="lText: name"></span></li></script>               
         </div>        

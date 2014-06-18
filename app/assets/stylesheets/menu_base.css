@@ -26,6 +26,10 @@
   position: relative
 }
 
+.section_title h2 {
+  margin-top: 0px;
+}
+
 .menu_container h1 {
   position: relative; 
   display: inline-block;

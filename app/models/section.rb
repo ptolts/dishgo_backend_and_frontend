@@ -5,6 +5,7 @@ class Section
 	include Mongoid::Timestamps
 	store_in collection: "Section", database: "dishgo"
 	field :name, localize: true
+	field :description, localize: true
 	field :position, type: Integer
 	field :menu_link, type: Boolean
 	field :draft_position, type: Integer
@@ -31,6 +32,7 @@ class Section
 
 	def publish_menu
 		self.name_translations = self.draft["name"]
+		self.description_translations = self.draft["description"]
 		self.position = self.draft_position
 		self.dishes = self.draft_dishes
 		self.dishes.each do |dish|
@@ -42,6 +44,7 @@ class Section
 	def reset_draft_menu
 		draft = {}
 		draft[:name] = self.name_translations
+		draft[:description] = self.description_translations
 		draft[:position] = self.position
 		self.draft_position = self.position
 		self.draft = draft
@@ -56,6 +59,7 @@ class Section
 
 		draft = {}
 		draft[:name] = section["name"]
+		draft[:description] = section["description"]
 		draft[:position] = section["position"].to_i
 		self.draft_position = section["position"].to_i
 
