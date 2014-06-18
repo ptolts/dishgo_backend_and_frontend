@@ -377,6 +377,7 @@ border-color: #6D6D6D;
   border-top: dotted 1px rgba(0, 0, 0, 0.5);
   padding-top: 0.5em;
 }
+
 .dish .dish_price span.text {
   font-size: 0.8em;
   font-family: Georgia, serif;
@@ -388,6 +389,19 @@ border-color: #6D6D6D;
 .dish .dish_price span.number {
   font-family: Georgia, serif;
 }
+
+.dish .dish_price span.text-sm {
+  font-size: 0.7em;
+  font-family: Georgia, serif;
+}
+.dish .dish_price span.currency-symbol-sm {
+  margin-right: -0.2em;
+  font-size: 0.7em;
+}
+.dish .dish_price span.number-sm {
+  font-size: 0.8em;
+}
+
 .dish .dish_picture {
   margin-bottom: 2em;
 }

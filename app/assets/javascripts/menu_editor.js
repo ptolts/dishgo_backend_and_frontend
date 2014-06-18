@@ -433,6 +433,16 @@ function Dish(data, topmodel) {
 
     self.quantity = ko.observable(1);
 
+    self.price_template = ko.computed({
+        read: function(){
+            if(self.sizes())
+                return 'many_prices';
+            else
+                return 'single_price';
+        },
+        deferEvaluation: true,
+    });
+
     self.computed_price = ko.computed(function() {
         var cost;
         if(self.sizes()){

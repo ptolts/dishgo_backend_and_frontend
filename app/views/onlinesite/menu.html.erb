@@ -39,9 +39,19 @@
 															<p data-bind="lTruncatedText: description"></p>
 														</div>
 														<div class="dish_price">
-															<span class="text">Price: </span>
-															<span class="currency-symbol">$</span>
-															<span class="number" data-bind="text: computed_price"></span>
+															<div data-bind="template: { name: price_template }"></div>
+															<script id="single_price" type="text/x-jQuery-tmpl">
+																<span class="text">Price: </span>
+																<span class="currency-symbol">$</span>
+																<span class="number" data-bind="text: price"></span>
+															</script>
+															<script id="many_prices" type="text/x-jQuery-tmpl">
+																<!-- ko foreach: sizes_object().individual_options -->
+																	<span class="text-sm"><!-- ko lText: name --><!-- /ko -->:</span>
+																	<span class="currency-symbol-sm">$</span>
+																	<span class="number-sm" data-bind="text: price"></span>
+																<!-- /ko -->
+															</script>															
 														</div>
 														<div class="dish_button_for_phone">
 															<a class="btn btn-sm btn-dish" data-bind="page-href: $data.id()"><img data-bind="attr:{src:$root.design.imgs.logo_white_nav}" class="dishgo_icon"></a>
