@@ -9,6 +9,24 @@
 *= require restaurant
 */
 
+ko.bindingHandlers.maxHeight = {
+    update: function (element, valueAccessor, allBindingsAccessor) {
+        var value = valueAccessor();
+        if(window.width > 768){
+            setTimeout(function (element, value) {
+                var maxHeight = 0;
+                $(element).children("."+value).each(function(index,elem){
+                    var elem = $(elem);
+                    if(elem.height() > maxHeight)
+                        maxHeight = elem.height();
+                });
+                console.log(maxHeight);
+                $(element).children("."+value).css('min-height',maxHeight+'px');
+            }, 0, element, value);
+        }
+    }    
+}
+
 ko.bindingHandlers.forEachWithLength = {
     init: function (element, valueAccessor, allBindingsAccessor, viewModel, context)
     {         

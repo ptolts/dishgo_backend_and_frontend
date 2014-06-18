@@ -20,7 +20,7 @@
 					                            <h1 data-bind="lText: name"></h1>
 					                            <h2 data-bind="lText: description, lVisible: description"></h2>
 					                        </div>
-	                        				<div class="row mason" data-bind="foreach: dishes, masonry: [$root.showDetails, $data.id()]">
+	                        				<div class="row mason" data-bind="foreach: dishes, maxHeight: 'dish_min_height'">
 	                    						<!-- THIS IS THE DETAILED DISH OUTPUT. -->
 	                    						<a data-bind="attr:{href:$page.path() + '/' + $data.id()}" style="display:none"></a>
 	                        					<!-- dish on screen -->

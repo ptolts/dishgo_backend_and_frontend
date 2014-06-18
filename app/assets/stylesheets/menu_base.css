@@ -7,7 +7,7 @@
 }
 
 .dish_min_height {
-  min-height: 150px;
+  /*min-height: 150px;*/
 }
 
 .dish_cursor {
@@ -270,9 +270,9 @@ border-color: #6D6D6D;
   }*/
 }
 
-.dish_info {
+/*.dish_info {
   min-height: 170px;
-}
+}*/
 
 .dish_full {
   width: 100%;
@@ -538,9 +538,9 @@ border-color: #6D6D6D;
   .dish.active {
     border-radius: 1em;
   }
-  .dish .dish_info {
+/*  .dish .dish_info {
     min-height: 170px;
-  }
+  }*/
   .dish_picture {
     max-height: 100px;
   }
