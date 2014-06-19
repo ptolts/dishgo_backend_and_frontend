@@ -68,21 +68,6 @@ module Foodcloud
 
     config.assets.compile = true
 
-    class NoCompression
-        def compress(string)
-            Rails.logger.warn "FUCK"
-            string
-        end
-        def compile string
-            Rails.logger.warn "FUCK"
-            string
-        end
-    end
-
-     config.assets.compress = true
-     config.assets.js_compressor = NoCompression.new
-     config.assets.css_compressor = NoCompression.new     
-
     config.assets.precompile += [   'menu_editor.js',
                                     'restaurant.js',
                                     'menu-builder.css',
