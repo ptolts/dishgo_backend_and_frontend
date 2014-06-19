@@ -15,9 +15,20 @@ Foodcloud::Application.configure do
   # Compress JavaScripts and CSS
   config.assets.compress = true
 
+    class NoCompression
+        def compress(string)
+            Rails.logger.warn "FUCK"
+            string
+        end
+        def compile string
+            Rails.logger.warn "FUCK"
+            string
+        end
+    end
+
   # Don't fallback to assets pipeline if a precompiled asset is missed
   config.assets.compile = true
-  config.assets.js_compressor = Uglifier.new(:mangle => false)
+  config.assets.js_compressor = NoCompression.new
   config.assets.css_compressor = :sass
 
 
