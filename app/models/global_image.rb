@@ -34,7 +34,7 @@ class GlobalImage
       :path           => ':hash_:style.png',
       :hash_secret => "we_like_food",
       :styles => {
-        :original => { res_ize: '1920x999999999>', format: :jpg },
+        :original => { res_ize: '1920x999999999>' },
       },
       :processors => [:converter, :compressor],          
       storage: :fog,

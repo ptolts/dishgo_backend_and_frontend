@@ -551,7 +551,9 @@
 
             self.backUpList = self.hours_list;
 
-            if(data.hours){
+            console.log(data.hours != {});
+
+            if(data.hours && !jQuery.isEmptyObject(data.hours)){
                 self.hours_list = data.hours;
             }
 

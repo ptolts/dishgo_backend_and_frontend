@@ -4,6 +4,7 @@ require 'json'
 class Api::V1::OrderController < ApplicationController
   include ApiHelper
   before_filter :validate_auth_token
+  skip_before_filter :verify_authenticity_token  
   respond_to :json
 
   def submit_order

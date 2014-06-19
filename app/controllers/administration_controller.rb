@@ -410,13 +410,13 @@ class AdministrationController < ApplicationController
       if !settings["subdomain"].blank? and sub = Restaurant.where(subdomain:settings["subdomain"].downcase).first and sub != restaurant
         Rails.logger.warn "Bad Subdomain for user: #{current_user.email}"
       else
-        restaurant.subdomain = settings["subdomain"].downcase
+        restaurant.subdomain = settings["subdomain"].downcase if !settings["subdomain"].blank?
       end
 
       if !settings["host"].blank? and sub = Restaurant.where(host:settings["host"].downcase).first and sub != restaurant
         Rails.logger.warn "Bad Hostname for user: #{current_user.email}"
       else
-        restaurant.host = settings["host"].downcase
+        restaurant.host = settings["host"].downcase if !settings["host"].blank?
       end      
     end
 
@@ -426,13 +426,8 @@ class AdministrationController < ApplicationController
     restaurant.province = settings["province"]
     restaurant.postal_code = settings["postal_code"]
 
-    if current_user.is_admin
-      if !settings["host"].blank?
-        restaurant.host = settings["host"]
-      end
-    end
-
     restaurant.hours = settings["hours"].inject({}) do |res,day|
+      next res unless day["name"]
       res[day["name"]] = day
       next res
     end

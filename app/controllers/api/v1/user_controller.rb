@@ -1,5 +1,6 @@
 class Api::V1::UserController < ApplicationController
   include ApiHelper
+  skip_before_filter :verify_authenticity_token
   before_filter :validate_auth_token
   respond_to :json
 
