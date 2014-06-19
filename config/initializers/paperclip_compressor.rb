@@ -2,14 +2,14 @@ module Paperclip
   class Compressor < Processor
     def initialize(file, options = {}, attachment = nil)
       super
-      Rails.logger.warn options.to_s
+      # Rails.logger.warn options.to_s
       @file = file
       @path = @file.path
       cmd = "file -b --mime-type #{@file.path}"
-      Rails.logger.warn "cmd: #{cmd}"
+      # Rails.logger.warn "cmd: #{cmd}"
       @extension = `#{cmd}`
       @extension = @extension.to_s.gsub(/image\//,'').strip
-      Rails.logger.warn "EXTENSION: #{@extension}"
+      # Rails.logger.warn "EXTENSION: #{@extension}"
     end
     def make
       convert @path
@@ -57,7 +57,7 @@ module Paperclip
       File.open(dst_path)
     end
     def convert infile, outfile
-      Rails.logger.warn `ls -al #{infile}`
+      # Rails.logger.warn `ls -al #{infile}`
       cmd = "'#{infile}' -auto-orient -resize '#{@size}' -strip '#{outfile}'"
       begin
        success = Paperclip.run('convert', cmd)
