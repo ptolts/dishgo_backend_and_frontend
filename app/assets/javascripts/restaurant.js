@@ -506,42 +506,49 @@
 
             self.hours_list = {
                 monday: {
+                    name: "monday",
                     open_1: null,
                     close_1: null,
                     open_2: null,
                     close_2: null,
                 },
                 tuesday: {
+                    name: "tuesday",
                     open_1: null,
                     close_1: null,
                     open_2: null,
                     close_2: null,
                 },
                 wednesday: {
+                    name: "wednesday",
                     open_1: null,
                     close_1: null,
                     open_2: null,
                     close_2: null,
                 },   
                 thursday: {
+                    name: "thursday",
                     open_1: null,
                     close_1: null,
                     open_2: null,
                     close_2: null,
                 },   
                 friday: {
+                    name: "friday",
                     open_1: null,
                     close_1: null,
                     open_2: null,
                     close_2: null,
                 },   
                 saturday: {
+                    name: "saturday",
                     open_1: null,
                     close_1: null,
                     open_2: null,
                     close_2: null,
                 },    
                 sunday: {
+                    name: "sunday",
                     open_1: null,
                     close_1: null,
                     open_2: null,
