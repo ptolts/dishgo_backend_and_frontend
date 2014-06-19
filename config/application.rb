@@ -66,16 +66,16 @@ module Foodcloud
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
 
-    class NoCompression
-      def compress(string)
-        Rails.logger.warn "FUCK"
-        string
-      end
-    end
+    # class NoCompression
+    #   def compress(string)
+    #     Rails.logger.warn "FUCK"
+    #     string
+    #   end
+    # end
 
-     config.assets.compress = true
-     config.assets.js_compressor = NoCompression.new
-     config.assets.css_compressor = NoCompression.new     
+    #  config.assets.compress = true
+    #  config.assets.js_compressor = NoCompression.new
+    #  config.assets.css_compressor = NoCompression.new     
 
     config.assets.precompile += [   'menu_editor.js',
                                     'restaurant.js',
