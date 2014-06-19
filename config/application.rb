@@ -61,12 +61,12 @@ module Foodcloud
     # config.active_record.whitelist_attributes = true
 
     # Enable the asset pipeline
-    config.assets.enabled = false
+    config.assets.enabled = true
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
 
-    config.assets.compile = false
+    config.assets.compile = true
 
     class NoCompression
         def compress(string)
