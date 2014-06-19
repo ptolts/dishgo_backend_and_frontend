@@ -23,7 +23,7 @@ Foodcloud::Application.configure do
       end
     end
 
-     config.assets.compress = false
+     config.assets.compress = true
      config.assets.js_compressor = NoCompression.new
      config.assets.css_compressor = NoCompression.new 
 
