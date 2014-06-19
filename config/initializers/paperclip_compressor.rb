@@ -13,8 +13,9 @@ module Paperclip
       cmd = "#{infile}"
       begin
        success = Paperclip.run('jpegoptim', cmd)
-      rescue PaperclipCommandLineError
-        raise PaperclipError, "There was an error processing the preview for #{@basename}" if whiny
+      rescue => msg
+        Rails.logger.warn "There was an error processing the preview for #{msg.to_s}"
+        raise msg
       end
     end
   end
