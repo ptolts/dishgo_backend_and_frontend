@@ -76,20 +76,20 @@ module Foodcloud
      config.assets.js_compressor = NoCompression.new
      config.assets.css_compressor = NoCompression.new     
 
-    config.assets.precompile += [   'menu_editor.js',
-                                    'restaurant.js',
-                                    'menu-builder.css',
-                                    'codemirror.js',
-                                    'codemirror.css',
-                                    'online_site.css',
-                                    'strictly_menu.css',
-                                    'website.css',
-                                    'picker.js',
-                                    'wysiwyg.js',
-                                    'signin.css',
-                                    'onlinesite_javascript.js',
-                                    'loading_widget.css',
-                                ]
+    # config.assets.precompile += [   'menu_editor.js',
+    #                                 'restaurant.js',
+    #                                 'menu-builder.css',
+    #                                 'codemirror.js',
+    #                                 'codemirror.css',
+    #                                 'online_site.css',
+    #                                 'strictly_menu.css',
+    #                                 'website.css',
+    #                                 'picker.js',
+    #                                 'wysiwyg.js',
+    #                                 'signin.css',
+    #                                 'onlinesite_javascript.js',
+    #                                 'loading_widget.css',
+    #                             ]
 
     config.exceptions_app = self.routes
 
