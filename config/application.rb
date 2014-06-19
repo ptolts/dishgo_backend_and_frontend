@@ -44,7 +44,7 @@ module Foodcloud
     config.encoding = "utf-8"
 
     # Configure sensitive parameters which will be filtered from the log file.
-    config.filter_parameters += [:password, :image_data, :menu, :data]
+    config.filter_parameters += [:password, :image_data, :menu]
 
     # Enable escaping HTML in JSON.
     config.active_support.escape_html_entities_in_json = true
@@ -61,15 +61,22 @@ module Foodcloud
     # config.active_record.whitelist_attributes = true
 
     # Enable the asset pipeline
-    config.assets.enabled = true
+    config.assets.enabled = false
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
 
+    config.assets.compile = true
+
     class NoCompression
-      def compress(string)
-        string
-      end
+        def compress(string)
+            Rails.logger.warn "FUCK"
+            string
+        end
+        def compile string
+            Rails.logger.warn "FUCK"
+            string
+        end
     end
 
      config.assets.compress = true
