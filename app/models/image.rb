@@ -40,9 +40,9 @@ class Image
       :path           => ':hash_:style.png',
       :hash_secret => "we_like_food",
       :styles => {
-        :original => { res_ize: '1920x999999999>', format: :jpg },
-        :small    => { res_ize: '100x99999999>', format: :jpg },
-        :medium   => { res_ize: '420x999999999>', format: :jpg },
+        :original => { res_ize: '1920x999999999>' },
+        :small    => { res_ize: '100x99999999>' },
+        :medium   => { res_ize: '420x999999999>' },
       },
       :processors => [:converter, :compressor],      
       storage: :fog,
@@ -103,13 +103,13 @@ class Image
 
   def img_post_process
     # if self.img_post_process_complete
-    #   self.img_url_medium = img.url(:medium) 
-    #   self.img_url_small = img.url(:small) 
-    #   self.img_url_original = img.url(:original) 
-    # else
+      self.img_url_medium = img.url(:medium) 
+      self.img_url_small = img.url(:small) 
       self.img_url_original = img.url(:original) 
-      self.img_url_medium = self.img_url_original 
-      self.img_url_small = self.img_url_original 
+    # else
+    #   self.img_url_original = img.url(:original) 
+    #   self.img_url_medium = self.img_url_original 
+    #   self.img_url_small = self.img_url_original 
     # end
     tempfile = img.queued_for_write[:original]
     unless tempfile.nil?
