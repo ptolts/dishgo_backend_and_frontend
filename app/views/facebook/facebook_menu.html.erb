@@ -20,7 +20,7 @@
 					                            <h1 data-bind="lText: name"></h1>
 					                            <h2 data-bind="lText: description, lVisible: description"></h2>
 					                        </div>
-	                        				<div class="row mason" data-bind="foreach: dishes, maxHeight: 'dish_min_height'">
+	                        				<div class="row mason" data-bind="foreach: dishes, fbMaxHeight: 'dish_min_height'">
 	                    						<!-- THIS IS THE DETAILED DISH OUTPUT. -->
 	                        					<!-- dish on screen -->
 	                        					<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 dish_min_height dish_cursor dish" data-bind="fadeVisible: !$root.showDetails(), click: function(){ pager.navigate($page.path() + '/' + $data.id()) }">
