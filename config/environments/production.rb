@@ -13,22 +13,22 @@ Foodcloud::Application.configure do
   config.serve_static_assets = true
 
   # Compress JavaScripts and CSS
-  # config.assets.compress = true
+  config.assets.compress = true
 
   # Don't fallback to assets pipeline if a precompiled asset is missed
   # config.assets.compile = true
   # config.assets.js_compressor = :uglifier
   # config.assets.css_compressor = :sass
-
     class NoCompression
       def compress(string)
+        Rails.logger.warn "FUCK"
         string
       end
     end
 
      config.assets.compress = true
      config.assets.js_compressor = NoCompression.new
-     config.assets.css_compressor = NoCompression.new    
+     config.assets.css_compressor = NoCompression.new 
 
   config.eager_load = true
   # Generate digests for assets URLs

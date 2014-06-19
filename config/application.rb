@@ -44,7 +44,7 @@ module Foodcloud
     config.encoding = "utf-8"
 
     # Configure sensitive parameters which will be filtered from the log file.
-    config.filter_parameters += [:password, :image_data, :menu, :data]
+    config.filter_parameters += [:password, :image_data, :menu]
 
     # Enable escaping HTML in JSON.
     config.active_support.escape_html_entities_in_json = true
@@ -68,6 +68,7 @@ module Foodcloud
 
     class NoCompression
       def compress(string)
+        Rails.logger.warn "FUCK"
         string
       end
     end
@@ -76,20 +77,20 @@ module Foodcloud
      config.assets.js_compressor = NoCompression.new
      config.assets.css_compressor = NoCompression.new     
 
-    # config.assets.precompile += [   'menu_editor.js',
-    #                                 'restaurant.js',
-    #                                 'menu-builder.css',
-    #                                 'codemirror.js',
-    #                                 'codemirror.css',
-    #                                 'online_site.css',
-    #                                 'strictly_menu.css',
-    #                                 'website.css',
-    #                                 'picker.js',
-    #                                 'wysiwyg.js',
-    #                                 'signin.css',
-    #                                 'onlinesite_javascript.js',
-    #                                 'loading_widget.css',
-    #                             ]
+    config.assets.precompile += [   'menu_editor.js',
+                                    'restaurant.js',
+                                    'menu-builder.css',
+                                    'codemirror.js',
+                                    'codemirror.css',
+                                    'online_site.css',
+                                    'strictly_menu.css',
+                                    'website.css',
+                                    'picker.js',
+                                    'wysiwyg.js',
+                                    'signin.css',
+                                    'onlinesite_javascript.js',
+                                    'loading_widget.css',
+                                ]
 
     config.exceptions_app = self.routes
 
