@@ -29,7 +29,7 @@ class Api::V1::RestotokensController  < ApplicationController
     @user.ensure_authentication_token
 
     if not @user.valid_password?(password)
-      logger.info("User #{email} failed signin, password \"#{password}\" is invalid")
+      logger.info("User #{email} failed signin, password [REDACTED] is invalid")
       render :status=>401, :json=>{:message=>"Invalid email or password."}
       return
     end

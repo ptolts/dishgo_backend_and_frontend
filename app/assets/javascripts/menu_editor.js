@@ -17,8 +17,8 @@ ko.bindingHandlers.maxHeight = {
                 var maxHeight = 0;
                 $(element).children("."+value).each(function(index,elem){
                     var elem = $(elem);
-                    if(elem.height() > maxHeight)
-                        maxHeight = elem.height();
+                    if(elem.outerHeight() > maxHeight)
+                        maxHeight = elem.outerHeight();
                 });
                 console.log(maxHeight);
                 $(element).children("."+value).css('min-height',maxHeight+'px');

@@ -90,7 +90,7 @@ class Restaurant
     else
       cords = [-74.155815,45.458972]
     end
-    return Restaurant.where(:locs => { "$near" => { "$geometry" => { "type" => "Point", :coordinates => cords }, "$maxDistance" => 25000}}, listed: true)
+    return Restaurant.where(:locs => { "$near" => { "$geometry" => { "type" => "Point", :coordinates => cords }, "$maxDistance" => 50000}}, listed: true)
   end
 
   def dish_images
