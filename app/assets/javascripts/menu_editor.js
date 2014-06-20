@@ -169,7 +169,7 @@ function Section(data,topmodel) {
     self.description = ko.observable(data.description ? data.description : copyDefaultHash(default_language_hash));
 
     self.toggle_menu_link = function(dis){
-        if(dis()){
+        if(dis() && !self.menu_link()){
             return;
         }
         self.menu_link(!self.menu_link());
