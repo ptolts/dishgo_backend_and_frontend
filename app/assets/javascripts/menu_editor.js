@@ -22,7 +22,7 @@ ko.bindingHandlers.lightBox = {
 ko.bindingHandlers.maxHeight = {
     update: function (element, valueAccessor, allBindingsAccessor) {
         var value = valueAccessor();
-        if(window.width > 768){
+        if($(window).width() > 768){
             setTimeout(function (element, value) {
                 var maxHeight = 0;
                 $(element).children("."+value).each(function(index,elem){
