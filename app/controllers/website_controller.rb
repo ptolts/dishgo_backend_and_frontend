@@ -1,7 +1,7 @@
 class WebsiteController < ApplicationController
 	before_filter :authenticate_user!
 	before_filter :admin_user!, :only => []
-	before_filter :admin_or_owner!, :only => [:submit_design,:destroy_image]
+	before_filter :admin_or_owner!, :only => [:submit_design,:destroy_image, :upload_gallery]
 	layout 'build_online_site'
 
 	def index
@@ -171,6 +171,30 @@ class WebsiteController < ApplicationController
 		                  }]
 		                }.as_json
 	end
+
+	def upload_gallery
+		file = params[:files]
+		resto = current_user.owns_restaurants
+		md5_sum = Digest::MD5.hexdigest(file.read)
+
+		img = Image.create
+		img.restaurant_gallery = Restaurant.find(params[:restaurant_id])
+		img.update_attributes({:img => file})
+		img.manual_img_fingerprint = md5_sum
+		img.save
+		images = [img]
+
+		render :json => {files: images.collect{ |img|
+		                  {
+		                    image_id: img.id,
+		                    name: img.img_file_name,
+		                    size: img.img_file_size,
+		                    original:  img.img_url_original,
+		                    small:  img.img_url_original,
+		                    thumbnailUrl:   img.img_url_original,
+		                  }
+		                }}.as_json
+	end	
 
 	def destroy_image
 		image = GlobalImage.find(params[:image_id])

@@ -9,6 +9,7 @@
         <ul>
             <li data-bind="click: function(){ $root.current_page(null); pager.navigate('#!/pages/contact') }, css:{ active: pager.page.find('pages/contact').isVisible}">Contact</li>
             <li data-bind="click: function(){ $root.current_page(null); pager.navigate('#!/pages/menu') }, css:{ active: pager.page.find('pages/menu').isVisible}">Menu</li>
+            <li data-bind="click: function(){ $root.current_page(null); pager.navigate('#!/pages/gallery') }, css:{ active: pager.page.find('pages/gallery').isVisible}">Gallery</li>            
             <!-- ko foreach: $root.sections -->
                 <!-- ko if: menu_link -->
                     <li><i class="fa fa-file-text pull-left"></i> <!-- ko lText: name --><!-- /ko --></li>
@@ -74,6 +75,38 @@
         </div>
     </div>
 
+    <div data-bind="page: {id: 'gallery', title: 'Gallery Page', with: $root.restaurant}" class="content_wrapper">
+        <div class="row">
+            <div class="col-xs-12">              
+                <div class="row">
+                    <div class="col-xs-6">
+                        <span class="h4">Show Gallery</span>
+                        <div class="onoffswitch">
+                            <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="show_gallery" data-bind="checked: show_gallery">
+                            <label class="onoffswitch-label" for="show_gallery">
+                                <div class="onoffswitch-inner"></div>
+                                <div class="onoffswitch-switch"></div>
+                            </label>
+                        </div>
+                    </div>    
+                    <div class="col-xs-6">
+                        <span class="btn btn-block btn-info file_upload_button">
+                            <i class="glyphicon glyphicon-picture"></i>
+                            <span>Add Gallery Image</span>
+                            <!-- The file input field used as target for the file upload widget -->
+                            <input data-bind="file_upload_gallery: gallery_images" id="fileupload" type="file" name="files"  class="file_upload_input" accept="images/*" capture="camera">
+                        </span>                           
+                    </div>                
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div data-bind="template: { name: 'gallery_image', foreach: gallery_images}"></div>
+                    </div>                              
+                </div>                              
+            </div>
+        </div>
+    </div>    
+
     <div data-bind="page: {id: 'contact', title: 'Contact Page', with: $root.restaurant}" class="content_wrapper">
         <div class="row">
             <div class="col-xs-12">
@@ -112,3 +145,4 @@
 
 <!-- /ko -->
       
+<%= render 'shared/gallery_images_template' %>

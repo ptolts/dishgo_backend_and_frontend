@@ -1,5 +1,6 @@
 /*
 *= require design
+*= require imageobj
 */  
 
 
@@ -28,82 +29,6 @@
         }
     };
 
-
-  function ImageObj(data) {
-    var self = this;
-    self.progressValue = ko.observable(1);
-    self.filename = ko.observable("");
-    self.id = ko.observable("");
-    self.url = ko.observable("/loader.gif");
-    self.original = ko.observable("/loader.gif");
-    self.medium = ko.observable("/loader.gif");
-    self.small = ko.observable("/loader.gif");
-    self.completed = ko.observable(false);
-    self.image_width = ko.observable(0);
-    self.image_height = ko.observable(0);
-    self.rejected = ko.observable(false);
-    self.coordinates = [];
-    self.failed = ko.observable(false);
-
-    if(data){
-        if(data.local_file || data.url){
-            self.id(data._id);
-            self.url = ko.observable(data.local_file || data.url);
-            self.completed(true);
-            self.original = ko.observable(data.original);
-            self.medium = ko.observable(data.medium);
-            self.image_width = ko.observable(data.width);
-            self.image_height = ko.observable(data.height);            
-        }
-        self.rejected(data.rejected ? data.rejected : false);
-        self.small = ko.observable(data.small ? data.small : "/loader.gif");
-    }
-
-    self.crop = function(){
-        $.ajax({
-              type: "POST",
-              url: image_crop_url,
-              data: {
-                image_id: self.id(),
-                coordinates: self.coordinates,
-            },
-            success: function(data, textStatus, jqXHR){
-                self.update_info(data);
-            },
-            error: function(XMLHttpRequest, textStatus, errorThrown) { 
-                console.log(textStatus);
-            },
-            dataType: "json"
-        }); 
-    }
-
-    self.reject = function(){
-        $.ajax({
-              type: "POST",
-              url: "/app/profile/reject_image",
-              data: {
-                image_id: self.id(),
-            },
-            success: function(data, textStatus, jqXHR){
-                self.rejected(data.rejected);
-            },
-            error: function(XMLHttpRequest, textStatus, errorThrown) { 
-                console.log(textStatus);
-            },
-            dataType: "json"
-        }); 
-    }     
-
-    self.update_info = function(item){
-        self.url(item.thumbnailUrl);
-        self.small(item.small);
-        self.id(item.image_id);
-        self.original(item.original);
-        self.image_width = ko.observable(item.width);
-        self.image_height = ko.observable(item.height); 
-        self.completed(true);
-    }
-}
 
         Day.prototype.toJSON = function() {
             var copy = ko.toJS(this); //easy way to get a clean copy
@@ -433,6 +358,7 @@
             self.show_map = ko.observable(data.show_map ? data.show_map : false);
             self.show_hours = ko.observable(data.show_hours ? data.show_hours : false);
             self.show_menu = ko.observable(data.show_menu ? data.show_menu : false);
+            self.show_gallery = ko.observable(data.show_gallery ? data.show_gallery : false);
 
             self.logo = ko.observable(data.logo ? new GlobalImage(data.logo) : new GlobalImage({}));
             self.logo_settings = ko.observable(data.logo_settings ? new LogoSettings(data.logo_settings) : new LogoSettings());
@@ -476,6 +402,8 @@
                 return self.new_image_holder();
             });
 
+            // MENU IMAGES
+
             self.menu_images = ko.observableArray([]);
 
             if(data.menu_images){
@@ -500,7 +428,27 @@
                     return self.menu_images();
                 },
                 deferEvaluation: true,
-            })           
+            });
+
+            // GALLERY IMAGES
+
+            self.gallery_images = ko.observableArray([]);
+
+            if(data.gallery_images){
+                self.gallery_images(_.map(data.gallery_images,function(img){ return new ImageObj(img) }))
+            }
+
+            // self.created_gallery_image = new ImageObj({});
+
+            // self.created_gallery_image_subscription = ko.computed(function(){
+            //         if(self.created_gallery_image.started()){
+            //             var new_image = new ImageObj({});
+            //             self.gallery_images.push(self.created_gallery_image);                        
+            //             self.created_gallery_image = new_image;
+            //             self.created_gallery_image.started();
+            //         }
+            //     }
+            // );                     
 
             self.hours = ko.observableArray([]);
 

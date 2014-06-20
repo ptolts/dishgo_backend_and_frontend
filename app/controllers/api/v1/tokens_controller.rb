@@ -41,7 +41,7 @@ class Api::V1::TokensController  < ApplicationController
 
       current_orders = @user.orders.collect{|e| {:confirmed => e.confirmed, :order_id => e.id.to_s} }
 
-      reso = {:current_orders => current_orders, :foodcloud_token=>@user.authentication_token, :phone_number => @user.phone_number, :last_name => @user.last_name, :first_name => @user.first_name}.merge(reso)
+      reso = {:current_orders => current_orders, :foodcloud_token=>@user.authentication_token, :phone_number => @user.phone_number, :last_name => @user.last_name, :first_name => @user.first_name}.merge(reso).merge(@user.serializable_hash {})
 
       if @user.owns_restaurants
         reso[:owns_restaurant_id] = @user.owns_restaurants.id

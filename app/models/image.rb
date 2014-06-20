@@ -28,7 +28,8 @@ class Image
   field :height, type: Integer
   field :width, type: Integer  
 
-  belongs_to :restaurant, index: true
+  belongs_to :restaurant, class_name: "Restaurant", inverse_of: :image, index: true
+  belongs_to :restaurant_gallery, class_name: "Restaurant", inverse_of: :gallery_images, index: true
 
   belongs_to :dish, index: true
   

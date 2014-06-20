@@ -37,6 +37,7 @@ class Restaurant
   field :show_hours, type: Boolean, default: true
   field :show_map, type: Boolean, default: true
   field :show_menu, type: Boolean, default: true
+  field :show_gallery, type: Boolean, default: false
 
   field :does_delivery, type: Boolean, default: false
 
@@ -54,8 +55,10 @@ class Restaurant
   field :website_settings, type: Hash
 
   has_many :sources, :class_name => "Sources"
-  has_many :image, :class_name => "Image"
+  has_many :image, :class_name => "Image", inverse_of: :restaurant
   has_many :icons, :class_name => "Icon", inverse_of: :restaurant
+  has_many :gallery_images, :class_name => "Image", inverse_of: :restaurant_gallery
+
 
   has_many :pages, :class_name => "Page", inverse_of: :restaurant
 
@@ -192,6 +195,9 @@ class Restaurant
     if self.pages
       hash["pages"] = self.pages.as_json
     end
+    if self.gallery_images
+      hash["gallery_images"] = self.gallery_images.as_json
+    end    
     hash["multi_name"] = self.multi_name_translations
     return hash
   end

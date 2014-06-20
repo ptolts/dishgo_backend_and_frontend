@@ -89,6 +89,7 @@ Foodcloud::Application.routes.draw do
       post 'submit_design'
       post 'upload_image'
       post 'upload_logo'
+      post 'upload_gallery'
     end
   end
 

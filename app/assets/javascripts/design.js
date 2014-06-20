@@ -347,7 +347,48 @@
 	            },                       
 	        });
 	    }
-	};	
+	};
+
+	ko.bindingHandlers.file_upload_gallery = {
+	    init: function(element, valueAccessor, allBindingsAccessor, viewModel, bindingContext) {
+	        var self = this;
+	        self.value = valueAccessor();
+
+	        $(element).fileupload({
+	            dropZone: $(element),
+	            formData: {
+	            	restaurant_id: restaurant_id,
+	            	data: ko.toJSON(self.image),
+	            },           
+	            url: "/app/website/upload_gallery",
+	            dataType: 'json',
+	            progressInterval: 50,
+	            add: function(e,data){
+			        image = new ImageObj({});
+			        self.value.push(image);
+			        data.image = image;
+			        data.submit();
+	            },
+	            submit: function(e, data){
+	            	console.log(data);
+	            },
+	            send: function (e, data) {
+              		data.image.started(true);
+	            },
+	            done: function (e, data) {
+	                var file = data.result.files[0];	                
+	                data.image.update_info(file);                                               
+	            },
+	            progress: function (e, data) {
+	                var progress = parseInt(data.loaded / data.total * 100, 10);
+	                data.image.progressValue(progress);
+	            },
+	            fail: function (e, data) {
+	                data.image.failed(true);
+	            },                       
+	        });
+	    }
+	};			
 
 	ko.bindingHandlers.file_upload_global = {
 	    update: function(element, valueAccessor, allBindingsAccessor, viewModel, bindingContext) {
