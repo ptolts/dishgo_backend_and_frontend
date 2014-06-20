@@ -57,6 +57,9 @@
 							<!-- /ko -->							
 						<!-- /ko -->
 						<li><a data-bind="click: function() { goto_and_kill_menu('contact') }">Contact</a></li>
+						<!-- ko if: restaurant().show_gallery() -->
+							<li><a data-bind="click: function() { $parent.goto_and_kill_menu('gallery') }, lText: gallery_tr"></a></li>
+						<!-- /ko -->							
 						<!-- ko foreach: restaurant().pages -->
 							<li><a data-bind="click: function() { $parent.goto_and_kill_menu($data.name()['en']) }, lText: name"></a></li>
 						<!-- /ko -->					
@@ -79,7 +82,10 @@
 					<ul>
 						<!-- ko foreach: restaurant().pages -->
 							<li><a data-bind="page-href: $data.name()['en'], lText: name"></a></li>
-						<!-- /ko -->					
+						<!-- /ko -->
+						<!-- ko if: restaurant().show_gallery() -->
+							<li><a data-bind="page-href: 'gallery', lText: gallery_tr"></a></li>
+						<!-- /ko -->				
 					</ul>
 				</nav>	
 				<div id="social_media" class="social_media" data-bind="with: restaurant">
@@ -138,6 +144,9 @@
 				<%= render 'contact' %>														
 			</div>
 
+			<div data-bind="page: {id: 'gallery', title: 'Gallery', with: restaurant, afterShow: function(){ pauseCarousel(); }, afterHide: function(){ playCarousel(); }}" class="pages">				
+				<%= render 'gallery' %>														
+			</div>
 
 			<div data-bind="page: {id: 'menu', title: 'Menu', afterShow: function(){ ko['menuVisible'](true); pauseCarousel(); }, afterHide: function(){ ko['menuVisible'](false); playCarousel(); }}" class="pages">
 				<%= yield %>

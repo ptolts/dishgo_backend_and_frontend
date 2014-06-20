@@ -9,6 +9,7 @@
 *= require restaurant_logo
 *= require social_media
 *= require menu_base
+*= require lightbox
 *= require_self
 */
 

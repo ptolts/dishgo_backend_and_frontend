@@ -7,7 +7,17 @@
 *= require loglevel.js
 *= require masonry.min.js
 *= require restaurant
+*= require lightbox.js
 */
+
+ko.bindingHandlers.lightBox = {
+    update: function (element, valueAccessor, allBindingsAccessor) {
+        var value = valueAccessor();
+        setTimeout(function (element, value) {
+            buildLightbox();
+        }, 0, element, value);
+    }    
+}
 
 ko.bindingHandlers.maxHeight = {
     update: function (element, valueAccessor, allBindingsAccessor) {
@@ -1602,6 +1612,11 @@ function PublicMenuModel() {
         'en':'About',
         'fr':'Sur'
     });
+
+    self.gallery_tr = ko.observable({
+        'en':'Gallery',
+        'fr':'Galerie'
+    });    
 
     var keep_scrolling_updates = true;
     self.atTop = ko.observable(false);
