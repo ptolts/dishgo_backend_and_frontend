@@ -8,7 +8,8 @@
                         </div>    
                     </div> 
                 </div> 
-                <div class="completed_image" data-bind="visible: completed">
+                <div class="completed_image galleryImage" data-bind="visible: completed">
+                    <i class="fa fa-times galleryKill" data-bind="click: destroyGalleryImage"></i>
                     <img class="img-responsive" data-bind="attr: {src: url}" />
                 </div> 
             </div>

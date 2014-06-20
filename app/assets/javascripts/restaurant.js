@@ -434,6 +434,11 @@
 
             self.gallery_images = ko.observableArray([]);
 
+            self.subscribeGallery = ko.computed(function(){
+                self.gallery_images().length;
+                self.gallery_images.remove(function(img){ return img.destroyed() });
+            });
+
             if(data.gallery_images){
                 self.gallery_images(_.map(data.gallery_images,function(img){ return new ImageObj(img) }))
             }

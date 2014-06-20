@@ -1,6 +1,7 @@
 /*
 *= require bootstrap_wysihtml
 *= require design_box.css
+*= require gallery
 *= require layout_controls.css
 *= require jquery.ui.slider
 *= require colorpicker.css

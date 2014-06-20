@@ -1,7 +1,7 @@
 class WebsiteController < ApplicationController
 	before_filter :authenticate_user!
 	before_filter :admin_user!, :only => []
-	before_filter :admin_or_owner!, :only => [:submit_design,:destroy_image, :upload_gallery]
+	before_filter :admin_or_owner!, :only => [:submit_design, :destroy_image, :destroy_gallery_image, :upload_gallery]
 	layout 'build_online_site'
 
 	def index
@@ -202,5 +202,11 @@ class WebsiteController < ApplicationController
 		image.destroy
 		render :json => {"Success"=>true}.as_json
 	end
+
+	def destroy_gallery_image
+		image = Image.find(params[:image_id])
+		image.destroy
+		render :json => {"Success"=>true}.as_json
+	end	
 
 end

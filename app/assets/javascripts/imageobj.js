@@ -12,6 +12,7 @@
     self.image_height = ko.observable(0);
     self.started = ko.observable(false);
     self.rejected = ko.observable(false);
+    self.destroyed = ko.observable(false);
     self.coordinates = [];
     self.failed = ko.observable(false);
 
@@ -47,6 +48,42 @@
         }); 
     }
 
+    self.destroyGalleryImage = function(){
+        bootbox.dialog({
+          message: "Destroy Image?",
+          title: "Remove Image",
+          buttons: {
+            success: {
+              label: "No",
+              className: "btn-default pull-left col-xs-3",
+              callback: function() {
+
+              }
+            },
+            danger: {
+              label: "Yes",
+              className: "btn-danger col-xs-3 pull-right",
+              callback: function() {
+                $.ajax({
+                      type: "POST",
+                      url: "/app/website/destroy_gallery_image",
+                      data: {
+                        image_id: self.id(),
+                        },
+                        success: function(data, textStatus, jqXHR){
+                            self.destroyed(true);
+                        },
+                        error: function(XMLHttpRequest, textStatus, errorThrown) { 
+                            console.log(textStatus);
+                        },
+                        dataType: "json"
+                    }); 
+              }
+            },
+          }
+        }); 
+    }
+
     self.reject = function(){
         $.ajax({
               type: "POST",
@@ -61,8 +98,7 @@
                 console.log(textStatus);
             },
             dataType: "json"
-        });
-       
+        }); 
     }     
 
     self.update_info = function(item){
