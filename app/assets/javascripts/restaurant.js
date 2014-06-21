@@ -359,6 +359,7 @@
             self.show_hours = ko.observable(data.show_hours ? data.show_hours : false);
             self.show_menu = ko.observable(data.show_menu ? data.show_menu : false);
             self.show_gallery = ko.observable(data.show_gallery ? data.show_gallery : false);
+            self.show_app_install = ko.observable(data.show_app_install ? data.show_app_install : false);
 
             self.logo = ko.observable(data.logo ? new GlobalImage(data.logo) : new GlobalImage({}));
             self.logo_settings = ko.observable(data.logo_settings ? new LogoSettings(data.logo_settings) : new LogoSettings());

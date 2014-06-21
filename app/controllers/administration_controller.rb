@@ -401,6 +401,7 @@ class AdministrationController < ApplicationController
     restaurant.instagram = settings["instagram"]
     restaurant.multi_name_translations = settings["multi_name"]
     restaurant.does_delivery = settings["does_delivery"]
+    restaurant.show_app_install = settings["show_app_install"].to_bool
 
     # Rails.logger.warn "--------[resto]--------"
     # Rails.logger.warn restaurant.to_json
