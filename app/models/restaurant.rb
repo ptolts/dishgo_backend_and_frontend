@@ -117,6 +117,54 @@ class Restaurant
     nil    
   end
 
+  def copy_menu_from_restaurant restaurant
+    sections = restaurant.published_menu.pub.collect do |section|
+      section_dup = section.dup
+      section_dup.restaurant = self
+      section_dup.dishes = section.dishes.collect do |dish|
+        dish_dup = dish.dup
+        dish_dup.restaurant = self
+        dish_dup.image = dish.image.collect do |image|
+          image_dup = image.dup
+          image_dup.restaurant = self
+          image_dup.save
+          next image_dup
+        end
+        dish_dup.options = dish.options.collect do |option|
+          option_dup = option.dup
+          option_dup.restaurant = self
+          option_dup.individual_options = option.individual_options.collect do |ind_opt|
+            ind_opt_dup = ind_opt.dup
+            ind_opt_dup.restaurant = self
+            ind_opt_dup.save
+            next ind_opt_dup
+          end
+          option_dup.save
+          next option_dup
+        end
+        sizes_dup = dish.sizes.dup
+        sizes_dup.restaurant = self
+        sizes_dup.individual_options = dish.sizes.individual_options.collect do |ind_opt|
+          ind_opt_dup = ind_opt.dup
+          ind_opt_dup.restaurant = self
+          ind_opt_dup.save
+          next ind_opt_dup
+        end
+        dish_dup.sizes = sizes_dup      
+        dish_dup.save 
+        next dish_dup
+      end
+      section_dup.save
+      next section_dup
+    end
+    self.published_menu = sections
+    self.draft_menu = sections
+    self.draft_menu.each do |section|
+      section.reset_draft_menu
+    end    
+    self.save
+  end
+
   def menu_to_json
     icon_list = self.icons.collect{|e| e.individual_option_id}   
     menu_to_spit_out = self.published_menu.pub
