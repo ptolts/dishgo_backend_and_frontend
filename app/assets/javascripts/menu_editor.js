@@ -22,6 +22,10 @@ ko.bindingHandlers.lightBox = {
 ko.bindingHandlers.maxHeight = {
     update: function (element, valueAccessor, allBindingsAccessor) {
         var value = valueAccessor();
+        var pager_binding = allBindingsAccessor();
+        if(pager_binding.pager){
+            console.log("page is visible: " + pager_binding.pager.isVisible());
+        }
         if($(window).width() > 768){
             setTimeout(function (element, value) {
                 var maxHeight = 0;

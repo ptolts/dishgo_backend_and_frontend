@@ -12,5 +12,10 @@
 }
 
 .gallery img {
+	margin-top: 5px;
 	border-radius: 3px;
+}
+
+.gallery a {
+	display: block;
 }
