@@ -9,20 +9,20 @@ Foodcloud::Application.configure do
   config.consider_all_requests_local       = false
   config.action_controller.perform_caching = true
 
-  config.assets.precompile += [   'menu_editor.js',
-                                  'restaurant.js',
-                                  'menu-builder.css',
-                                  'codemirror.js',
-                                  'codemirror.css',
-                                  'online_site.css',
-                                  'strictly_menu.css',
-                                  'website.css',
-                                  'picker.js',
-                                  'wysiwyg.js',
-                                  'signin.css',
-                                  'onlinesite_javascript.js',
-                                  'loading_widget.css',
-                              ]
+  # config.assets.precompile += [   'menu_editor.js',
+  #                                 'restaurant.js',
+  #                                 'menu-builder.css',
+  #                                 'codemirror.js',
+  #                                 'codemirror.css',
+  #                                 'online_site.css',
+  #                                 'strictly_menu.css',
+  #                                 'website.css',
+  #                                 'picker.js',
+  #                                 'wysiwyg.js',
+  #                                 'signin.css',
+  #                                 'onlinesite_javascript.js',
+  #                                 'loading_widget.css',
+  #                             ]
 
   # Disable Rails's static asset server (Apache or nginx will already do this)
   config.serve_static_assets = true
