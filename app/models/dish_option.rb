@@ -47,7 +47,7 @@ class DishOption
 				end
 
 			  if individual_option_object.restaurant_id != request_restaurant.id
-        		Rails.logger.warn "Bailing out in options\n------------"			  	
+        		Rails.logger.warn "Bailing out in options individual_option_object.restaurant_id[#{individual_option_object.restaurant_id}] != request_restaurant.id[#{request_restaurant.id}]\n------------"			  	
 			  	# return false
 			  end
 			else
@@ -57,7 +57,7 @@ class DishOption
 			end
 
 			if !individual_option_object.load_data_from_json(individual_option,request_restaurant)
-        		Rails.logger.warn "Bailing out in options\n------------"			  					
+        		Rails.logger.warn "Bailing out in options individual_option_object.restaurant_id[#{individual_option_object.restaurant_id}] != request_restaurant.id[#{request_restaurant.id}]\n------------"			  			  					
 				return false
 			end
 

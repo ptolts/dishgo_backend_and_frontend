@@ -73,8 +73,8 @@
 	filter: none;
 }
 .content_wrapper {
-	width: 600px;
-	max-height: 500px;
+	width: 700px;
+	max-height: 95%;
 	/*min-height: 200px;*/
 	padding: 15px;
 	padding-top: 20px;
