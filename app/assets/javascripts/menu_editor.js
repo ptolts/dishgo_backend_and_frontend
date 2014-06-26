@@ -228,7 +228,7 @@ function Section(data,topmodel) {
     });    
 
     self.printJson = function(){
-        console.log(ko.toJSON(self));
+        console.log(ko.toJSON(self.id));
     }    
 
     if(data.dom_id){
