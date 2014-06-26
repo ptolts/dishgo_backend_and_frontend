@@ -130,27 +130,33 @@ class Restaurant
           image_dup.save
           next image_dup
         end
-        dish_dup.options = dish.options.collect do |option|
-          option_dup = option.dup
-          option_dup.restaurant = self
-          option_dup.individual_options = option.individual_options.collect do |ind_opt|
-            ind_opt_dup = ind_opt.dup
-            ind_opt_dup.restaurant = self
-            ind_opt_dup.save
-            next ind_opt_dup
-          end
-          option_dup.save
-          next option_dup
-        end
+        id_match = {}
         sizes_dup = dish.sizes.dup
         sizes_dup.restaurant = self
         sizes_dup.individual_options = dish.sizes.individual_options.collect do |ind_opt|
           ind_opt_dup = ind_opt.dup
           ind_opt_dup.restaurant = self
           ind_opt_dup.save
+          id_match[ind_opt.id.to_s] = ind_opt_dup.id.to_s
           next ind_opt_dup
         end
-        dish_dup.sizes = sizes_dup      
+        dish_dup.sizes = sizes_dup         
+        dish_dup.options = dish.options.collect do |option|
+          option_dup = option.dup
+          option_dup.restaurant = self
+          option_dup.individual_options = option.individual_options.collect do |ind_opt|
+            ind_opt_dup = ind_opt.dup
+            ind_opt_dup.restaurant = self
+            # Set size_id to point to new size object ids.
+            ind_opt_dup.size_prices.each do |size_price|
+              size_price['size_id'] = id_match[size_price['size_id']]
+            end
+            ind_opt_dup.save
+            next ind_opt_dup
+          end
+          option_dup.save
+          next option_dup
+        end     
         dish_dup.save 
         next dish_dup
       end
