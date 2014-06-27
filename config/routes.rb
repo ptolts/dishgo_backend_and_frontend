@@ -182,6 +182,8 @@ Foodcloud::Application.routes.draw do
       resources :registration, :only => [:create]
       match 'user/add_address', to: 'user#add_address', via: [:post]
       match 'order/submit_order', to: 'order#submit_order', via: [:post]
+      match 'dish/set_rating', to: 'dish#set_rating', via: [:post] 
+      match 'dish/get_ratings', to: 'dish#get_ratings', via: [:post] 
       match 'order/confirm', to: 'order#confirm', via: [:post] 
       match 'order/status', to: 'order#status', via: [:post]  
       match 'order/fetch_orders', to: 'order#fetch_orders', via: [:post]                

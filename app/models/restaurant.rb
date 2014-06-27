@@ -76,6 +76,8 @@ class Restaurant
   has_one :odesk, :class_name => "Odesk", inverse_of: :restaurant, validate: false
   has_one :cache, :class_name => "Cache", inverse_of: :restaurant, validate: false
 
+  has_many :ratings, :class_name => "Rating", inverse_of: :restaurant
+
   belongs_to :design, index: true
 
   accepts_nested_attributes_for :image, :allow_destroy => false

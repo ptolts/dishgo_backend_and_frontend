@@ -2,6 +2,7 @@ class User
   include Mongoid::Document
   include Mongoid::Timestamps
 
+  has_many :ratings, :class_name => "Rating"
   has_many :addresses, :class_name => "Address"
   has_many :notifications, :class_name => "Notification"
   has_many :orders, :class_name => "Order"

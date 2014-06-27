@@ -43,13 +43,13 @@
 															<script id="single_price" type="text/x-jQuery-tmpl">
 																<span class="text">Price: </span>
 																<span class="currency-symbol">$</span>
-																<span class="number" data-bind="text: price"></span>
+																<span class="number" data-bind="text: pretty_price"></span>
 															</script>
 															<script id="many_prices" type="text/x-jQuery-tmpl">
 																<!-- ko foreach: sizes_object().individual_options -->
 																	<span class="text-sm"><!-- ko lText: name --><!-- /ko -->:</span>
 																	<span class="currency-symbol-sm">$</span>
-																	<span class="number-sm" data-bind="text: price"></span>
+																	<span class="number-sm" data-bind="text: pretty_price"></span>
 																<!-- /ko -->
 															</script>															
 														</div>

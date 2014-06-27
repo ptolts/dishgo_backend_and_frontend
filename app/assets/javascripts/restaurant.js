@@ -364,6 +364,12 @@
             self.logo = ko.observable(data.logo ? new GlobalImage(data.logo) : new GlobalImage({}));
             self.logo_settings = ko.observable(data.logo_settings ? new LogoSettings(data.logo_settings) : new LogoSettings());
 
+            self.logo().url.subscribe(function(){
+                if(self.logo().url()){
+                    self.logo_settings().logo_as_image(true);
+                }
+            });
+
             self.odesk = ko.observable(data.odesk ? new Odesk(data.odesk) : null );
 
             self.about_text = ko.observable(data.about_text ? data.about_text : copyDefaultHash(default_web_language_hash));

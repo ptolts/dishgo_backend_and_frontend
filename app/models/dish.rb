@@ -12,9 +12,13 @@ class Dish
   field :published, type: Boolean
   field :has_multiple_sizes, type: Boolean
   field :draft, type: Hash
+
+  field :rating, type: Integer, default: 0
   # belongs_to :subsection, index: true
   belongs_to :restaurant, index: true
   belongs_to :odesk, index: true
+
+  has_many :ratings, :class_name => 'Rating', inverse_of: :dish
 
   has_and_belongs_to_many :image, inverse_of: nil, index: true
   has_and_belongs_to_many :draft_image, class_name: "Image", inverse_of: nil, index: true
@@ -118,6 +122,16 @@ class Dish
     self.save
 
   end  
+
+  def recalculate_rating
+    total = 0
+    self.ratings.each do |rating|
+      total += rating.rating
+    end
+    total = total / self.ratings.size
+    self.rating = total.round
+    self.save
+  end
 
   def odesk_load_data_from_json dish, odesk_request
     # Rails.logger.warn "Dishes\n---------"

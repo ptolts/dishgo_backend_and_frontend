@@ -511,6 +511,13 @@ function Dish(data, topmodel) {
         return parseFloat(cost).toFixed(2);
     }, self);
 
+    self.pretty_price = ko.computed({
+        read: function(){
+            return self.price().toFixed(2);
+        },
+        deferEvaluation: true,
+    });      
+
     self.title_image = ko.computed(function() {
         if(self.images().length > 0){
             return self.images()[0].url();
@@ -985,7 +992,14 @@ function IndividualOption(data,option) {
 
     if(data.placeholder){
         self.placeholder(data.placeholder);
-    }    
+    } 
+
+    self.pretty_price = ko.computed({
+        read: function(){
+            return self.price().toFixed(2);
+        },
+        deferEvaluation: true,
+    });   
 
     if(data.icon) {
         self.icon(new ImageObj(data.icon));               
