@@ -2,7 +2,7 @@ class WebsiteController < ApplicationController
 	before_filter :authenticate_user!
 	before_filter :admin_user!, :only => []
 	before_filter :admin_or_owner!, :only => [:submit_design, :destroy_image, :upload_gallery]
-	before_filter :admin_or_profile_image_owner!, :only => [:destroy_gallery_image]
+	before_filter :admin_or_gallery_image_owner!, :only => [:destroy_gallery_image]
 	layout 'build_online_site'
 
 	def index
