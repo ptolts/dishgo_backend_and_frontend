@@ -19,6 +19,11 @@ class Email < ActionMailer::Base
     notify_admins user
   end
 
+  def sign_up_link user
+    @link = user.sign_up_link
+    mail(:to => user.email, :subject => "Welcome to DishGo!").deliver  
+  end  
+
   def notify_admins user
     @user = user
     mail(:to => "phil@dishgo.io", :subject => "New User", template_name: 'notify_admins').deliver

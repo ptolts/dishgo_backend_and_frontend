@@ -1,6 +1,7 @@
 /*
 *= require design
 *= require imageobj
+*= require fileobj
 */  
 
 
@@ -258,6 +259,7 @@
             self.email = ko.observable(data.email);
             self.phone = ko.observable(data.phone);
             self.setup_link = ko.observable(window.location.protocol + "//" + window.location.host + "/app/profile/set_password/" + data.setup_link);
+            self.sign_up_link = ko.observable(data.sign_up_link ? window.location.protocol + "//" + window.location.host + "/app/profile/set_password/" + data.sign_up_link : null);
 
             self.created = ko.computed({
                 read: function(){
@@ -265,6 +267,8 @@
                 },
                 deferEvaluation: true
             });
+
+            self.resto_data = ko.observable();
 
             self.spin = ko.observable(false);
             self.createUser = function(resto){
@@ -288,7 +292,31 @@
                     },
                     dataType: "json"
                 });                
-            }              
+            }  
+
+            self.createSignUpUser = function(){
+                self.spin(true);
+                $.ajax({
+                    type: "POST",
+                    url: "/app/letsdishgo/create_user_and_restaurant",
+                    data: {
+                        params:ko.toJSON(self),
+                    },
+                    success: function(data, textStatus, jqXHR){
+                        self.spin(false);
+                        var restaurant = data.restaurant;
+                        data = data.user;
+                        self.id(data._id);
+                        self.resto_data(restaurant);
+                        self.sign_up_link(window.location.protocol + "//" + window.location.host + "/app/profile/set_password/" + data.sign_up_link);
+                    },
+                    error: function(XMLHttpRequest, textStatus, errorThrown) { 
+                        self.spin(false);
+                        console.log("There was an error saving the section " + errorThrown);
+                    },
+                    dataType: "json"
+                });                
+            }                          
 
             self.save = function(){
                 $.ajax({
@@ -436,6 +464,48 @@
                 },
                 deferEvaluation: true,
             });
+
+            // MENU FILES
+
+            self.menu_files = ko.observableArray([]);
+
+            if(data.menu_files){
+                self.menu_files(_.map(data.menu_files,function(img){ return new FileObj(img) }))
+            }
+
+            self.created_menu_image;
+
+            self.computed_menu_files = ko.computed({
+                read: function(){
+                    if(_.every(self.menu_files(),function(e){ return e.completed() }) || self.menu_files().length == 0){
+                        var new_image = new FileObj({});
+                        self.created_menu_image = new_image;
+                        self.menu_files.push(new_image);
+                    }
+                    if(self.created_menu_image.completed()){
+                        var new_image = new FileObj({});
+                        self.created_menu_image = new_image;
+                        self.menu_files.push(new_image);
+                    }
+                    self.menu_files.remove(function(img){ return img.destroyed() });
+                    return self.menu_files();
+                },
+                deferEvaluation: true,
+            });   
+
+            self.list_menu_files = ko.computed({
+                read: function(){
+                    return _.filter(self.menu_files(),function(file){
+                        return file.started() || file.completed();
+                    });
+                },
+                deferEvaluation: true,
+            });
+
+            self.subscribeMenu = ko.computed(function(){
+                self.menu_files().length;
+                self.menu_files.remove(function(img){ return img.destroyed() });
+            });                 
 
             // GALLERY IMAGES
 
@@ -784,6 +854,33 @@
                 });
             });
 
+            self.spin = ko.observable(false);
+            self.saved = ko.observable(false);
+            self.clean_save = function(){
+                if(!self.dirty()){
+                    self.saved(true);
+                    return;
+                }
+                self.spin(true);
+                $.ajax({
+                  type: "POST",
+                  url: "/app/administration/update_restaurant",
+                  data: {
+                    restaurant_id: self.id,
+                    params:ko.toJSON(self),
+                  },
+                  success: function(data, textStatus, jqXHR){
+                        self.spin(false);
+                        self.saved(true);
+                    },
+                    error: function(XMLHttpRequest, textStatus, errorThrown) { 
+                        self.spin(false);
+                    },
+                    dataType: "json"
+                });                
+            }
+
+
             self.quick_save = function(callback_done){  
                 $.ajax({
                   type: "POST",
@@ -833,8 +930,6 @@
                 });                
             }
 
-            self.spin = ko.observable(false);
-            self.saved = ko.observable(false);
             self.listed = ko.observable(data.listed || false);
             self.listInAppText = ko.computed(function(){
                 if(self.listed()){

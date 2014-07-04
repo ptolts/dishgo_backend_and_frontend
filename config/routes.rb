@@ -33,6 +33,16 @@ Foodcloud::Application.routes.draw do
     end
   end
 
+  resources :letsdishgo do
+    collection do
+      get '/', to: "letsdishgo#index"
+      post 'create_user_and_restaurant', to: "letsdishgo#create_user_and_restaurant"
+      post 'upload_menu_file', to: "letsdishgo#upload_menu_file"
+      post 'destroy_file', to: "letsdishgo#destroy_file"
+      post 'charge', to: "letsdishgo#charge"
+    end
+  end  
+
   resources :odesk do
     collection do
       get '/', to: "odesk#index"

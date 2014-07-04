@@ -70,6 +70,8 @@ class Restaurant
   has_many :draft_menu, :class_name => "Section", inverse_of: :draft_restaurant
   has_many :published_menu, :class_name => "Section", inverse_of: :published_restaurant
 
+  has_many :menu_files, :class_name => "MenuFiles", inverse_of: :restaurant
+
   has_many :orders, :class_name => "Order"
   belongs_to :user, :class_name => "User", index: true, inverse_of: :owns_restaurants
 
@@ -292,8 +294,8 @@ class Restaurant
     return enough
   end
 
-  def serializable_hash options
-    hash = super {}
+  def serializable_hash options = {}
+    hash = super options
     if self.logo
       hash[:logo] = self.logo.as_document
     end

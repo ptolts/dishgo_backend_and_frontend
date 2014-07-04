@@ -24,6 +24,7 @@ class User
   field :phone,               :type => String
   field :encrypted_password,  :type => String
   field :setup_link,  :type => String
+  field :sign_up_link,  :type => String
   field :stripe_token,        :type => String
   field :cards,               :type => Array, :default => [] 
   field :plan,                :type => Hash, :default => {}
@@ -71,6 +72,7 @@ class User
   index({ _id:1 }, { unique: true, name:"id_index" })
 
   before_save :setup_link_field
+  before_save :sign_up_link_field
 
   def setup_link_field
     if !self.email.blank? and password.blank? and setup_link.blank?
@@ -83,6 +85,18 @@ class User
       self.setup_link = nil
     end
   end
+
+  def sign_up_link_field
+    if !self.email.blank? and password.blank? and sign_up_link.blank?
+      self.sign_up_link = loop do
+        token = SecureRandom.urlsafe_base64
+        break token unless User.where(sign_up_link: token).count > 0
+      end
+    end
+    if !password.blank?
+      self.sign_up_link = nil
+    end
+  end  
 
   def serializable_hash options = {}
     hash = super options
