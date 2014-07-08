@@ -113,7 +113,7 @@ var days_tr = {
 var translations = {
     "Hours" : {
         "en" : "Hours",
-        "fr" : "Heures",
+        "fr" : "Heures d'ouverture",
     },
     "Address" : {
         "en" : "Address",
@@ -121,11 +121,11 @@ var translations = {
     },
     "Opens" : {
         "en" : "Opens",
-        "fr" : "Ouvrir"
+        "fr" : ""
     },
     "Closes" : {
         "en" : "Closes",
-        "fr" : "Fermer"
+        "fr" : ""
     },
     "closed" : {
         "en" : "Closed",
