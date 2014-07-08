@@ -6,9 +6,28 @@
 *= require knockout-sortable.js
 *= require loglevel.js
 *= require masonry.min.js
+*= require section.js
+*= require dish.js
+*= require option.js
+*= require individual_option.js
 *= require restaurant
 *= require lightbox.js
 */
+
+ko.bindingHandlers.saving = {
+    update: function (element, valueAccessor, allBindingsAccessor) {
+        var value = valueAccessor()();
+        var save = "<a>Saving <i class='fa fa-spinner fa-spin'></i></a>";
+        var saved = "<a>Saved <i class='fa fa-check-square'></i></a>";
+        if(value){
+            $(element).html(save);
+            $(element).fadeIn(500);
+        } else {
+            $(element).html(saved);
+            $(element).fadeOut(2000);
+        }
+    }    
+}
 
 ko.bindingHandlers.lightBox = {
     update: function (element, valueAccessor, allBindingsAccessor) {
@@ -173,141 +192,7 @@ var opts = {
   left: 'auto' // Left position relative to parent in px
 };
 
-function Section(data,topmodel) {
 
-    var self = this;
-    self.topmodel = topmodel;
-    self.id = ko.observable();
-    self.position = ko.observable(data.position ? data.position : 0);
-    self.menu_link = ko.observable(data.menu_link ? data.menu_link : false);
-    self.description = ko.observable(data.description ? data.description : copyDefaultHash(default_language_hash));
-
-    self.toggle_menu_link = function(dis){
-        if(dis() && !self.menu_link()){
-            return;
-        }
-        self.menu_link(!self.menu_link());
-    }
-
-    if(data._id){
-        self.id(data._id);
-    } else {
-        if(editing_mode){
-            $.ajax({
-              type: "POST",
-              url: "/app/menucrud/create_section",
-              data: {
-                restaurant_id: restaurant_id,
-                odesk_id: odesk_id,
-              },
-              success: function(data, textStatus, jqXHR){
-                    console.log("Section Saved.");
-                    self.id(data.id);          
-                },
-                error: function(XMLHttpRequest, textStatus, errorThrown) { 
-                    console.log("There was an error saving the section " + errorThrown);
-                },
-                dataType: "json"
-            });
-        }
-    }
-    self.name = ko.observable(data.name ? data.name : copyDefaultHash(default_language_hash));
-    // self.subsections = ko.observableArray($.map(data.subsection, function(item) { return new Subsection(item) }));
-
-    self.dishes = ko.observableArray([]);
-    if(data.dishes){
-        self.dishes = ko.observableArray($.map(data.dishes, function(item) { return new Dish(item,self) }));     
-    }
-
-    // self.dishes.extend({ rateLimit: 500 });
-    self.dishes.subscribe(function(newvalue){
-        _.each(self.dishes(),function(item,index){
-            // console.log(item.name());
-            item.position(index);
-        });
-    });    
-
-    self.printJson = function(){
-        console.log(ko.toJSON(self.id));
-    }    
-
-    if(data.dom_id){
-        self.dom_id = data.dom_id;
-    } else {
-        self.dom_id = "";
-    } 
-
-    self.lName = ko.computed({
-        read: function(){
-            return self.name()[lang()];
-        },
-        deferEvaluation: true,
-    });      
-
-    self.computed_name = ko.computed(function(){
-        var reso = currentLangName(self.name);
-        if(reso['reso'] == ""){
-            if(reso['en'] == ""){
-                return "New Section";                
-            } else {
-                return reso['en'];
-            }
-        } else {
-            return reso['reso'];
-        }
-    });
-
-    self.title_image = ko.computed(function() {
-        // if(self.images().length > 0){
-        //     return self.images()[0].url
-        // } else {
-            return "/app/public/icon@2x.png"
-        // }
-    }, self);        
-
-    self.editing_name = ko.observable(false);
-    // Behaviors
-    self.edit_name = function() { 
-        //console.log("Section Editing! " + self.editing_name());
-        self.editing_name(true);
-        //console.log("Section Editing! " + self.editing_name());     
-    }; 
-
-    self.remove = function(item) {
-        bootbox.dialog({
-          message: localizeMessage(item.name(),"remove_dish"),
-          title: "Remove Dish",
-          buttons: {
-            success: {
-              label: "No",
-              className: "btn-default pull-left col-xs-3",
-              callback: function() {
-
-              }
-            },
-            danger: {
-              label: "Yes",
-              className: "btn-danger col-xs-3 pull-right",
-              callback: function() {
-                topmodel.current_dish(null);
-                self.dishes.remove(item);
-              }
-            },
-          }
-        });        
-    }
-
-    // Operations
-    self.newDishName = ko.observable();
-    self.addDish = function() {
-        // console.log("Adding Dish");
-        var new_dish = new Dish({name:copyDefaultHash(default_language_hash), description:copyDefaultHash(default_language_hash)},self);
-        self.dishes.unshift(new_dish);
-        self.topmodel.current_section(null);
-        self.topmodel.current_dish(new_dish);
-    }   
-
-}
 
 ko.bindingHandlers.file_upload = {
     update: function(element, valueAccessor, allBindingsAccessor, viewModel, bindingContext) {
@@ -373,355 +258,7 @@ ko.bindingHandlers.file_upload_icon = {
     }
 };
 
-var showOptionsList = ko.observable(false);
-var showSizesList = ko.observable(false);
-var dishList = ko.observableArray([]);
 
-function Dish(data, topmodel) {
-    var self = this;
-    self.name = ko.observable(data.name ? data.name : copyDefaultHash(default_language_hash));
-    self.description = ko.observable(data.description);
-    self.price = ko.observable(data.price);
-    self.topmodel = topmodel;
-    self.position = ko.observable(data.position ? data.position : 0);
-    self.images = ko.observableArray([]);
-    self.sizeSelectedOptionValue = ko.observable();
-    self.modalVisible = ko.observable(false);
-
-    self.printJson = function(){
-        console.log(ko.toJSON(self));
-    }
-
-    self.computed_name = ko.computed(function(){
-        var reso = currentLangName(self.name);
-        if(reso['reso'] == ""){
-            if(reso['en'] == ""){
-                return "New Dish";                
-            } else {
-                return reso['en'];
-            }
-        } else {
-            return reso['reso'];
-        }
-    });
-
-    self.id = ko.observable();
-
-    if(data._id){
-        self.id(data._id);
-    } else {
-        if(editing_mode){
-            $.ajax({
-              type: "POST",
-              url: "/app/menucrud/create_dish",
-              data: {
-                restaurant_id: restaurant_id,
-                odesk_id: odesk_id,
-              },
-              success: function(data, textStatus, jqXHR){
-                    console.log("Dish Saved.");
-                    self.id(data.id);
-                },
-                error: function(XMLHttpRequest, textStatus, errorThrown) { 
-                    console.log("There was an error saving the section " + errorThrown);
-                },
-                dataType: "json"
-            });
-        }
-    }
-
-    self.new_section = ko.observable();
-    self.moveToSection = function(old_section){
-        self.new_section().dishes.push(self);
-        self.topmodel.dishes.remove(self);
-        self.topmodel = self.new_section();
-        self.new_section(null);
-    }
-
-    self.section_list = ko.computed({
-        read: function(){
-            var sectionlist = [];
-            self.new_section();
-            _.each(viewmodel.menu(),function(section){ 
-                                        if(section != self.topmodel){
-                                            sectionlist.push(section);
-                                        }
-                                    }
-            );
-            return sectionlist;
-        },
-        deferEvaluation: true,
-    });
-
-    if(data.has_multiple_sizes && data.sizes){
-        self.sizes = ko.observable(true);
-        //console.log("data size:");
-        //console.log(data.sizes);
-        self.sizes_object = ko.observable(new Option(data.sizes,self));
-    } else {
-        self.sizes = ko.observable(false);
-        //console.log("no data sizes");
-        if(data.sizes){
-            self.sizes_object = ko.observable(new Option(data.sizes,self));
-        } else {
-            self.sizes_object = ko.observable(new Option({type:"size",name:copyDefaultHash(default_sizes_hash),individual_options:[{name:copyDefaultHash(default_sizes_hash_small),price:'0.0'},{name:copyDefaultHash(default_sizes_hash_large),price:'0.0'}]},self));            
-        }
-    }
-
-    self.sizeSelectedOptionValue = ko.observable(self.sizes_object().individual_options()[0]);  
-
-    self.options = ko.observableArray([]);
-    if(data.options){
-        self.options = ko.observableArray($.map(data.options, function(item) { return new Option(item,self) }));        
-    }
-
-    if(data.image) {
-        self.images = ko.observableArray($.map(data.image, function(item) { return new ImageObj(item) }));                
-    }
-
-    self.quantity = ko.observable(1);
-
-    self.price_template = ko.computed({
-        read: function(){
-            if(self.sizes())
-                return 'many_prices';
-            else
-                return 'single_price';
-        },
-        deferEvaluation: true,
-    });
-
-    self.computed_price = ko.computed(function() {
-        var cost;
-        if(self.sizes()){
-            cost = parseFloat(self.sizeSelectedOptionValue().price());
-        } else {
-            cost = parseFloat(self.price());
-        }
-        _.each(self.options(),function(e){
-            var plus_price = parseFloat(e.computed_price());
-            // console.log("dish object -> " + plus_price + "\n" + cost + "\n---");
-            cost = cost + plus_price;
-            // console.log("new price: " + cost);
-        });
-        cost = cost * self.quantity();
-        if(isNaN(cost)){
-            return (0).toFixed(2);
-        }
-        return parseFloat(cost).toFixed(2);
-    }, self);
-
-    self.pretty_price = ko.computed({
-        read: function(){
-            return self.price().toFixed(2);
-        },
-        deferEvaluation: true,
-    });      
-
-    self.title_image = ko.computed(function() {
-        if(self.images().length > 0){
-            return self.images()[0].url();
-        } else {
-            return "/app/public/icon@2x.png";
-        }
-    }, self);  
-
-    self.large_title_image = ko.computed(function() {
-        if(self.images().length > 0){
-            return self.images()[0].original();
-        } else {
-            return false;
-        }
-    }, self);  
-
-    self.lazyLoadImage = ko.computed(function(){
-        if(self.images().length > 0){
-            return self.images()[0].original();
-        } else {
-            return "";
-        }
-    });
-
-    self.lazyLoadMediumImage = ko.computed(function(){
-        if(self.images().length > 0){
-            return self.images()[0].medium();
-        } else {
-            return "";
-        }
-    });    
-
-    self.addQuantity = function(){
-        if(self.quantity() == 12){
-            return;
-        } else {
-            self.quantity(self.quantity() + 1);
-        }            
-    }    
-
-    self.subQuantity = function(){
-        if(self.quantity() == 1){
-            return;
-        } else {
-            self.quantity(self.quantity() - 1);
-        }            
-    }      
-
-    self.editing = ko.observable(false);
-    // Behaviors
-    self.edit = function() { 
-        console.log("Editing "+self.name()+"!");
-        self.editing(true) 
-    };
-
-    self.editing_name = ko.observable(false);
-    // Behaviors
-    self.edit_name = function() { 
-        console.log("Editing_name!");
-        self.editing_name(true) 
-    };
-
-    // Which option template to use.
-    self.templateToUse = function(item) {
-        if(item.type == "size"){
-            return 'size';
-        } else {
-            return 'default';
-        }
-    }
-
-    self.addOption = function() { 
-        console.log("Adding option!");
-        self.options.push(new Option({name:copyDefaultHash(default_language_hash), type:"generic",placeholder:"Type the option group title here.",individual_options:[{placeholder:"Type the first option title here.",price:'0.0',name:copyDefaultHash(default_language_hash)},{placeholder:"Type the second option title here.",price:'0.0', name: copyDefaultHash(default_language_hash)}]},self));
-    };
-
-    self.copyOption = function(){
-        showOptionsList(true);
-    }
-
-    self.copySize = function(){
-        showSizesList(true);
-    }    
-
-    self.addImage = function(item) { 
-        var new_image = new ImageObj(item);
-        self.images.unshift(new_image);
-        return new_image;
-    };  
-
-    self.removeImage = function(item) { 
-        bootbox.dialog({
-          message: localizeMessage(null,"remove_image"),
-          title: "Remove Image",
-          buttons: {
-            success: {
-              label: "No",
-              className: "btn-default pull-left col-xs-3",
-              callback: function() {
-
-              }
-            },
-            danger: {
-              label: "Yes",
-              className: "btn-danger col-xs-3 pull-right",
-              callback: function() {
-                self.images.remove(item);
-              }
-            },
-          }
-        });        
-    };      
-
-    // Which option template to use.
-    self.remove = function(item) {
-        bootbox.dialog({
-          message: "Are you sure you want to remove the option titled \"" + item.name() + "\"?",
-          title: "Remove Option",
-          buttons: {
-            success: {
-              label: "No",
-              className: "btn-default pull-left col-xs-3",
-              callback: function() {
-
-              }
-            },
-            danger: {
-              label: "Yes",
-              className: "btn-danger col-xs-3 pull-right",
-              callback: function() {
-                self.options.remove(item);
-              }
-            },
-          }
-        });
-    }
-
-    self.triggerImageSelect = function(index){
-        $('#image_upload' + index).click();
-    }
-
-    self.computedWidth = ko.computed(function(){
-        var modal_width = 0;
-        if(self.large_title_image()){
-            modal_width += 40;
-        }
-        if(self.sizes() || self.description()[lang()]){
-            modal_width += 40;
-        }
-        if(modal_width > 0){
-            return modal_width + "%";
-        } else {
-            return "400px";
-        }
-    });
-
-    self.computedHeight = ko.computed(function(){
-        // var modal_width = 0;
-        if(self.large_title_image()){
-            // modal_width += 40;
-            return '80%';
-        }
-        return '40%';
-        // if(self.sizes() || self.description()[lang()]){
-        //     modal_width += 40;
-        // }
-        // if(modal_width > 0){
-        //     return "80%";
-        // }
-    });   
-
-    self.modalImageWidth = ko.computed(function(){
-        if(!self.sizes() && !self.description()[lang()]){
-            return "dish_full";
-        } else {
-            return "dish_half";
-        }
-    }); 
-
-    self.modalDescriptionWidth = ko.computed(function(){
-        if(!self.large_title_image()){
-            return "dish_full";
-        } else {
-            return "dish_half";
-        }
-    });
-
-    self.noContent = ko.computed(function(){
-        if(!self.sizes() && !self.description()[lang()] && !self.large_title_image()){
-            return true;
-        }
-        return false;
-    }); 
-
-    self.lName = ko.computed({
-        read: function(){
-            return self.name()[lang()];
-        },
-        deferEvaluation: true,
-    });                     
-
-    dishList.push(self);
-
-}
 
 ko.bindingHandlers.modalResize = {
     update: function (element, valueAccessor) {
@@ -772,161 +309,7 @@ ko.bindingHandlers.modalImage = {
 
 // var optionsList = ko.observableArray([]);
 
-function Option(data,dish) {
-    var self = this;
-    self.name = ko.observable(data.name ? data.name : copyDefaultHash(default_language_hash));
-    self.dish = dish;
-    self.advanced = ko.observable(false);  
-    self.extra_cost = ko.observable(false); 
-    self.placeholder = ko.observable("Type the option title here.");
 
-    if(data.placeholder){
-        self.placeholder(data.placeholder);
-    }
-
-    self.id = ko.observable();
-
-    self.getId = function(){
-        $.ajax({
-          type: "POST",
-          url: "/app/menucrud/create_option",
-          data: {
-            restaurant_id: restaurant_id,
-            odesk_id: odesk_id,
-          },
-          success: function(data, textStatus, jqXHR){
-                console.log("Option Saved.");
-                self.id(data.id);
-            },
-            error: function(XMLHttpRequest, textStatus, errorThrown) { 
-                console.log("There was an error saving the option " + errorThrown);
-            },
-            dataType: "json"
-        });        
-    }
-
-    var id_tmp = data._id || data.id
-    if(id_tmp){
-        self.id(id_tmp);
-        self.advanced(data.advanced);
-        if(data.extra_cost){
-            self.extra_cost(data.extra_cost);
-        }
-    } else {
-        if(editing_mode){
-            self.getId();
-        }
-    }
-
-    self.type = data.type; 
-    self.max_selections = ko.observable(data.max_selections ? data.max_selections : 0);
-    self.min_selections = ko.observable(data.min_selections ? data.min_selections : 0);  
-    self.multiple_prices = self.dish.sizes;
-
-    if(data.type != "size"){
-        // This is the list of size options if this happens to be the size option version of this model.
-        self.sizes_object_names = ko.computed({
-                                            read: function(){
-                                                return dish.sizes_object().individual_options();
-                                            },
-                                            deferEvaluation: true,
-                                        });   
-    }
-
-    self.individual_options = ko.observableArray([]);
-    if(data.individual_options){
-        self.individual_options = ko.observableArray($.map(data.individual_options, function(item) { return new IndividualOption(item,self)})); 
-    }
-
-    self.max_selection_list = ko.computed(function(){
-        var list = [];
-        _.each(self.individual_options(),function(item, index){ list.push(index + 1) });
-        return list;
-    });
-
-    self.min_selection_list = ko.computed(function(){
-        var list = [];
-        _.each(self.individual_options(),function(item, index){ list.push(index) });
-        return list;
-    });    
-
-    self.selectedOptionValue = ko.observableArray([]);
-  
-    self.maxSelectionsMet = ko.computed(function(){
-        if(self.selectedOptionValue().length >= self.max_selections()){
-            return true;
-        } else {
-            return false;
-        }
-    });
-
-    self.computed_price = ko.computed(function(){
-        var cost = 0;
-        if(self.extra_cost()) {
-            _.each(self.selectedOptionValue(),function(e){
-                // console.log(e);
-                cost += parseFloat(e.computed_price());
-            });
-        }
-        return cost;
-    });
-
-    self.option_title = ko.computed(function(){
-        return "Add an option to " + self.dish.name() + ".";
-    });    
-
-    self.editing_name = ko.observable(false);
-    self.edit_name = function() { 
-        self.editing_name(true);    
-    };  
-
-    // Which option template to use.
-    self.addSize = function() {
-        self.individual_options.push(new IndividualOption({name:copyDefaultHash(default_language_hash),placeholder:"Type new size title here.",price:'0.0'},self));        
-    }
-
-    // Which option template to use.
-    self.addOption = function() {
-        self.individual_options.push(new IndividualOption({name:copyDefaultHash(default_language_hash),placeholder:"Type new option title here.",price:'0.0'},self));
-    }   
-
-    // Which option template to use.
-    self.remove = function(item) {
-        bootbox.dialog({
-          message: "Are you sure you want to remove the size option titled \"" + item.name()['en'] + "\"?",
-          title: "Remove Size Option",
-          buttons: {
-            success: {
-              label: "No",
-              className: "btn-default pull-left col-xs-3",
-              callback: function() {
-
-              }
-            },
-            danger: {
-              label: "Yes",
-              className: "btn-danger col-xs-3 pull-right",
-              callback: function() {
-                item.remove_size_options();     
-                self.individual_options.remove(item);
-              }
-            },
-          }
-        });        
-    }
-
-    self.toggleAdvanced = function() {
-        self.advanced(!self.advanced());
-    }
-
-    self.lName = ko.computed({
-        read: function(){
-            return self.name()[lang()];
-        },
-        deferEvaluation: true,
-    });
-
-}
 
 function SizePrices(data) {
     var self = this;
@@ -947,174 +330,6 @@ function SizePrices(data) {
     }    
 }
 
-function IndividualOption(data,option) {
-
-    var self = this;
-    self.id = ko.observable();
-
-    self.getId = function(){
-        $.ajax({
-          type: "POST",
-          url: "/app/menucrud/create_individual_option",
-          data: {
-            restaurant_id: restaurant_id,
-            odesk_id: odesk_id,
-          },
-          success: function(data, textStatus, jqXHR){
-                console.log("Individual Option Saved.");
-                self.id(data.id);
-            },
-            error: function(XMLHttpRequest, textStatus, errorThrown) { 
-                console.log("There was an error saving the individual option " + errorThrown);
-            },
-            dataType: "json"
-        });
-    }
-
-    var tmp_id = data.id || data._id;
-    if(tmp_id){
-        self.id(tmp_id);
-    } else {
-        if(editing_mode){
-            self.getId();
-        }
-    }
-    self.option = option;
-    self.name = ko.observable(data.name ? data.name : copyDefaultHash(default_language_hash));
-    self.price = ko.observable(data.price);     
-    self.type = option.type;
-    self.dish = option.dish;
-    self.destroy_it = false;
-    self.icon = ko.observable();
-    self.size_prices = ko.observableArray([]); 
-    self.price_according_to_size = ko.observable(false); 
-    self.placeholder = ko.observable("Type the option here.");
-
-    if(data.placeholder){
-        self.placeholder(data.placeholder);
-    } 
-
-    self.pretty_price = ko.computed({
-        read: function(){
-            return self.price().toFixed(2);
-        },
-        deferEvaluation: true,
-    });   
-
-    if(data.icon) {
-        self.icon(new ImageObj(data.icon));               
-    }  
-
-    if(data.price_according_to_size){
-        self.price_according_to_size(data.price_according_to_size);
-    }  
-
-    if(data.size_prices && self.type != 'size'){
-        _.each(data.size_prices,function(e){
-            var found_object = _.find(self.option.sizes_object_names(),function(i){ return i.id() == e.size_id});
-            if(found_object){
-                var new_size_prices = new SizePrices({name:found_object.name,size_id:found_object.id,price:e.price,ind_opt:self,size_ind_opt:found_object});
-                self.size_prices.push(new_size_prices);
-            } 
-        });        
-    }
-
-    // if this is a size version of Options, then we need to remove all SizePrices from all other options. They will be pushed to this array.
-    self.size_prices_to_remove = new Array();
-
-    if(self.type != "size"){
-
-        // self.option.size_object is the size version of the options model. It lists the IndividualOptions of each size.
-        _.each(self.option.sizes_object_names(),function(e){
-            if(_.find(self.size_prices(),function(i){ return i.size_ind_opt == e})===undefined){
-                self.new_size_prices = new SizePrices({
-                                                        name:e.name,
-                                                        size_id:e.id,
-                                                        price:0.0,
-                                                        ind_opt:self,
-                                                        size_ind_opt:e
-                                                    });
-                self.size_prices.push(self.new_size_prices);
-                e.size_prices_to_remove.push(self.new_size_prices);
-            } 
-        });
-
-        self.option.sizes_object_names.subscribe(function (newValue) {
-                _.each(self.option.sizes_object_names(),function(e){
-                    if(_.find(self.size_prices(),function(i){ return i.size_ind_opt == e}) === undefined){
-                        self.new_size_prices = new SizePrices({
-                                                                name:e.name,
-                                                                size_id:e.id,
-                                                                price:0.0,
-                                                                ind_opt:self,
-                                                                size_ind_opt:e
-                                                            });
-                        self.size_prices.push(self.new_size_prices);
-                        e.size_prices_to_remove.push(self.new_size_prices);
-                    } 
-                });
-        }, self);
-
-        self.computed_price = ko.computed(function(){
-            // console.log("self.computed_price -> " + self.dish.sizes());
-            if(self.dish.sizes()){
-                if(self.price_according_to_size()){
-                    var p = _.find(self.size_prices.peek(),function(i){ return i.size_id()() == self.dish.sizeSelectedOptionValue().id()});
-                    //console.log(p);   
-                    return p.price();
-                } else {
-                    //console.log(self.name() + " <--");
-                    return self.price();
-                }
-            }
-            return self.price();
-        });
-
-    }
-
-    self.remove_size_option = function(item) {      
-        self.size_prices.remove(item);      
-    };  
-
-    self.dish_modal_full_width = function(length, index){
-        return (length % 2) == 1 && index() == (length - 1);  
-    };
-
-    self.remove_size_options = function(){
-        _.each(self.size_prices_to_remove,function(e){e.remove_self()}); 
-    };
-
-    self.editing_name = ko.observable(false);
-    self.edit_name = function() { 
-        self.editing_name(true);    
-    }; 
-
-    self.editing_price = ko.observable(false);
-    self.edit_price = function() { 
-        self.editing_price(true);   
-    }; 
-
-    self.addImage = function(item) { 
-        var new_image = new ImageObj(item);
-        self.icon(new_image);
-        return new_image;
-    };  
-
-    self.clickable = ko.computed({
-        read: function(){
-            if(!self.option.advanced()){
-                return false;
-            }
-            if(self.option.maxSelectionsMet() && !(self.option.selectedOptionValue().indexOf(self) >= 0)){
-                return true;
-            } else {
-                return false;
-            }
-        },
-        deferEvaluation: true,
-    });     
-}
-
 if(odesk_id === undefined){
     var odesk_id = null;
 }
@@ -1122,33 +337,31 @@ if(odesk_id === undefined){
 var editing_mode = true;
 var lang;
 function MenuViewModel() {
-    // Data
     var self = this;
-    self.current_dish = ko.observable();
-    self.current_section = ko.observable();    
-    self.menu = ko.observableArray([]);
     self.newDomCounter = 0;
-    self.currentOption = ko.observable();
-    self.currentDishOptions = ko.observable();
-    self.showOptionsList = showOptionsList;
-    self.showSizesList = showSizesList;
-    self.dishList = ko.computed({
-        read: function(){
-                    return _.filter(dishList(),function(item){ return item.options().length > 0 });
-        }, deferEvaluation: true,
-    });
-    self.dishSizeList = ko.computed({
-        read: function(){
-                    return _.filter(dishList(),function(item){ return item.sizes() });
-        }, deferEvaluation: true,
-    });    
-    // self.optionsList = optionsList;
     self.preview = ko.observable(false);
     self.restaurant = ko.observable(new Restaurant(resto_data));    
     self.languages = self.restaurant().languages;
     self.lang = ko.observable(self.restaurant().default_language() ? self.restaurant().default_language() : 'en');
     lang = self.lang;
     var skip_warning = false;
+    
+    self.menus = ko.observableArray([]);
+    self.menus($.map(resto_data.menus, function(item) { return new Menu(item, self) }));
+    self.current_menu = ko.observable(self.menus()[0]);
+
+    self.current_menu_edit = ko.observable();
+
+    self.current_menu.subscribe(function(next_menu) {
+        if(self.current_menu()){
+            self.current_menu().current_dish(null);
+        }
+        if (self.current_menu()){
+            self.current_menu().current_section(null);
+        }
+        self.current_menu_edit(next_menu);
+        $("body").animate({scrollTop:0}, '100', 'swing');
+    });        
 
     self.show_lang = ko.computed(function(){
         if(self.languages().length > 1){
@@ -1157,41 +370,7 @@ function MenuViewModel() {
             return false;
         }
     });
-
-    self.closeCopyOption = function(){
-        self.currentOption(null);
-        self.currentDishOptions(null);
-        self.showOptionsList(false);
-        self.showSizesList(false);
-    };
-
-    self.copyOptionIntoDish = function(item){
-        var new_opt = new Option(JSON.parse(ko.toJSON(self.currentOption())),self.current_dish());
-        new_opt.getId();
-        _.each(new_opt.individual_options(),function(e){e.getId()});
-        self.current_dish().options.push(new_opt);
-        self.currentOption(null);
-        self.currentDishOptions(null);
-        self.showOptionsList(false);
-    };
-
-    self.copySizeIntoDish = function(item){
-        var new_opt = new Option(JSON.parse(ko.toJSON(self.currentOption())),self.current_dish());
-        new_opt.getId();
-        _.each(new_opt.individual_options(),function(e){e.getId()});
-        _.each(self.current_dish().options(),function(opt){
-            _.each(opt.individual_options(),function(ind_opt){
-                ind_opt.size_prices([]);
-            });
-        });
-        self.current_dish().sizeSelectedOptionValue(new_opt.individual_options()[0]);
-        self.current_dish().sizes_object(new_opt);
-        self.current_dish().sizes(true);
-        self.currentOption(null);
-        self.currentDishOptions(null);
-        self.showSizesList(false);
-    };    
-
+  
     self.togglePreview = function(){
         self.preview(!self.preview());
     }
@@ -1204,301 +383,78 @@ function MenuViewModel() {
         }
     });
 
-    // self.menu.extend({ rateLimit: 500 });
-    self.menu.subscribe(function(newvalue){
-        _.each(self.menu(),function(item,index){
-            item.position(index);
-        });
-        console.log("----------------");
+
+    self.add_menu = function(){
+        var new_menu = new Menu({menu:menu_data.menu});
+        self.menus.push(new_menu);
+        self.current_menu = ko.observable(new_menu);
+    }
+
+
+    self.saving = ko.observableArray([]);
+    self.saving_monitor = ko.computed({
+        read: function(){
+            if(self.saving().length == 0){
+                return false;
+            } else {
+                return true;
+            }
+        }
     });
-
-    self.menu($.map(menu_data.menu, function(item) { return new Section(item,self) }));
-    $(".tooltipclass").tooltip({delay: { show: 500, hide: 100 }});
-
-    self.set_dish = function(dish) {
-        self.current_section(null);
-        self.current_dish(dish);
-        $("body").animate({scrollTop:0}, '100', 'swing');
-    };
-
-    self.set_section = function(section) {
-        self.current_dish(null);
-        self.current_section(section);
-        $("body").animate({scrollTop:0}, '100', 'swing');
-    };    
-
-    self.current_dish_check = function(dish) {    
-        if(dish == self.current_dish()){
-            return true;
-        } else {
-            return false;
-        }
-    } 
-
-    self.current_section_check = function(section) {    
-        if(section == self.current_section()){
-            return true;
-        } else {
-            return false;
-        }
-    }   
-
-    // Operations
-    self.newSectionName = ko.observable();
-    self.addSection = function() {
-        console.log("Adding Section");
-        self.newDomCounter++;
-        var new_section = new Section({name:copyDefaultHash(sectionNames),subsection:[],dom_id:self.newDomCounter},self);
-        self.menu.push(new_section);
-        self.current_section(new_section);
-        self.current_dish(null);
-        // var target = "#"+self.newDomCounter;
-        // $('html').animate({
-        //     scrollTop: $(target).offset().top
-        // }, 500);
-    } 
-
-    self.showModal = function(image) {
-        console.log("#"+image.id());
-        $("#"+image.id()).modal("show");
-    };      
-
-    self.publishMenu = function() {
-        bootbox.dialog({
-          message: "Are you sure you want to publish your changes to the menu? The changes will be immediately visible to the world.",
-          title: "Publish Menu",
-          buttons: {
-            success: {
-              label: "Cancel",
-              className: "btn-default pull-left col-xs-5",
-              callback: function() {
-
-              }
-            },
-            danger: {
-              label: "Publish",
-              className: "btn-success col-xs-5 pull-right",
-              callback: function() {
-
-                var spinner = new Spinner(opts).spin(document.getElementById('center')); 
-                $('#loading').fadeIn();
-
-                $.ajax({
-                  type: "POST",
-                  url: "/app/administration/publish_menu",
-                  data: {
-                    restaurant_id: restaurant_id,
-                    // menu: ko.toJSON(self.menu)
-                  },
-                  success: function(data, textStatus, jqXHR){
-                        // self.menu($.map(data.menu, function(item) { return new Section(item) }));
-                        // $(".tooltipclass").tooltip({delay: { show: 500, hide: 100 }});
-                        spinner.stop();
-                        $('#loading').fadeOut();
-                        bootbox.alert("Menu Published!");
-                    },
-                    error: function(XMLHttpRequest, textStatus, errorThrown) { 
-                        spinner.stop();
-                        $('#loading').fadeOut();
-                        bootbox.alert("There was an error publishing the menu.\n" + errorThrown);
-                    },
-                  dataType: "json"
-                }); 
-              }
-            },
-          }
-        });          
-    } 
-
-    self.discardDraft = function() {
-        bootbox.dialog({
-          message: "Are you sure you want to discard all your changes? Everything will revert to your last save.",
-          title: "Discard Draft",
-          buttons: {
-            success: {
-              label: "Continue Editing",
-              className: "btn-default pull-left col-xs-5",
-              callback: function() {
-
-              }
-            },
-            danger: {
-              label: "Discard Draft",
-              className: "btn-danger col-xs-5 pull-right",
-              callback: function() {
-                skip_warning = true;
-                location.reload();
-                // var spinner = new Spinner(opts).spin(document.getElementById('center')); 
-                // $('#loading').fadeIn();
-
-                // $.ajax({
-                //   type: "POST",
-                //   url: "/app/administration/reset_draft_menu",
-                //   data: {
-                //     restaurant_id: restaurant_id,
-                //     menu: ko.toJSON(self.menu)
-                //   },
-                //   success: function(data, textStatus, jqXHR){
-                //         // self.menu($.map(data.menu, function(item) { return new Section(item) }));
-                //         // $(".tooltipclass").tooltip({delay: { show: 500, hide: 100 }});
-                //         spinner.stop();
-                //         $('#loading').fadeOut();
-                //         skip_warning = true;
-                //         window.location.href = "/app";
-                //     },
-                //     error: function(XMLHttpRequest, textStatus, errorThrown) { 
-                //         spinner.stop();
-                //         $('#loading').fadeOut();
-                //         bootbox.alert("There was an error publishing the menu.\n" + errorThrown);
-                //     },
-                //   dataType: "json"
-                // }); 
-              }
-            },
-          }
-        });          
-    }     
-
-    self.for_real_discard = function(){
-        $.ajax({
-          type: "POST",
-          url: "/app/administration/reset_draft_menu",
-          data: {
-            restaurant_id: restaurant_id,
-            menu: ko.toJSON(self.menu)
-          },
-          success: function(data, textStatus, jqXHR){
-                // self.menu($.map(data.menu, function(item) { return new Section(item) }));
-                // $(".tooltipclass").tooltip({delay: { show: 500, hide: 100 }});
-                skip_warning = true;
-                window.location.href = "/app";
-            },
-            error: function(XMLHttpRequest, textStatus, errorThrown) { 
-                bootbox.alert("There was an error publishing the menu.\n" + errorThrown);
-            },
-          dataType: "json"
-        });        
-    }  
-
-    self.remove = function(item) {
-        bootbox.dialog({
-          message: localizeMessage(item.name(),"delete_section"),
-          title: "Remove Section",
-          buttons: {
-            success: {
-              label: "No",
-              className: "btn-default pull-left col-xs-3",
-              callback: function() {
-
-              }
-            },
-            danger: {
-              label: "Yes",
-              className: "btn-danger col-xs-3 pull-right",
-              callback: function() {
-                self.menu.remove(item);
-                self.current_section(self.menu()[0]);
-              }
-            },
-          }
-        });        
-    }
-
-    // Auto Saving
-    // self.auto_save_previous;
-    self.save_menu_modal = ko.observable(false);
-    self.preview_token = ko.observable("");
-    self.saveDraft = function(){
-        var spinner = new Spinner(opts).spin(document.getElementById('center')); 
-        $.ajax({
-          type: "POST",
-          url: "/app/administration/update_menu",
-          data: {
-            restaurant_id: restaurant_id,
-            menu: JSON.stringify(self.menu())
-          },
-          success: function(data, textStatus, jqXHR){
-                spinner.stop();
-                self.preview_token(data.preview_token);
-                self.save_menu_modal(true);
-                skip_warning = true;   
-            },
-            error: function(XMLHttpRequest, textStatus, errorThrown) { 
-                console.log("There was an error saving the menu: " + errorThrown);
-                spinner.stop();
-            },
-            dataType: "json"
-        });
-    }
-
-    self.odesk_save_menu_modal = ko.observable(false);
-    self.odeskSaveDraft = function(){
-        var spinner = new Spinner(opts).spin(document.getElementById('center')); 
-        $.ajax({
-          type: "POST",
-          url: "/app/odesk/update_menu",
-          data: {
-            restaurant_id: restaurant_id,
-            odesk_id: odesk_id,
-            menu: JSON.stringify(self.menu())
-          },
-            success: function(data, textStatus, jqXHR){
-                spinner.stop();
-                self.preview_token(data.preview_token);
-                self.odesk_save_menu_modal(true);
-                skip_warning = true;   
-            },
-            error: function(XMLHttpRequest, textStatus, errorThrown) { 
-                console.log("There was an error saving the menu: " + errorThrown);
-                spinner.stop();
-            },
-            dataType: "json"
-        });
-    }    
-
-    self.odeskMenuComplete = function(){
-        var spinner = new Spinner(opts).spin(document.getElementById('center')); 
-        $.ajax({
-          type: "POST",
-          url: "/app/odesk/mark_menu_completed",
-          data: {
-            odesk_id: odesk_id,
-          },
-          success: function(data, textStatus, jqXHR){
-                spinner.stop();
-                self.preview_token(data.preview_token);
-                alert("Menu Marked Completed, thank you!")
-                skip_warning = true;   
-            },
-            error: function(XMLHttpRequest, textStatus, errorThrown) { 
-                console.log("There was an error saving the menu: " + errorThrown);
-                spinner.stop();
-            },
-            dataType: "json"
-        });
-    }       
 
     $(window).on('beforeunload', function () {
-        if(!skip_warning){
-            return "Make sure you've saved your changes!";            
+        if(self.saving_monitor()){
+            return "Please wait for the menu to save!\nYou can see when it is done by the indicator next to the publish button.";            
         }
-    }); 
+    });     
 
-    self.firstSectionHelp = ko.computed(function(){
-        return self.menu().length == 0
-    });
+    self.publishMenu = function() {
+        if(self.saving_monitor()){
+            alert("Please wait until the menu has been saved. You'll see the saving indicator next to the publish button.");
+            return;
+        }
+        bootbox.dialog({
+            message: "Are you sure you want to publish your changes to the menu? The changes will be immediately visible to the world.",
+            title: "Publish Menu",
+            buttons: {
+                success: {
+                    label: "Cancel",
+                    className: "btn-default pull-left col-xs-5",
+                    callback: function() {
 
-    self.firstSectionNameHelp = ko.computed(function(){
-        return self.menu().length == 1 && self.menu()[0].name()['en'] == '' && self.current_section()
-    });
+                    }
+                },
+                danger: {
+                    label: "Publish",
+                    className: "btn-success col-xs-5 pull-right",
+                    callback: function() {
 
-    self.firstDishHelp = ko.computed(function(){
-        return self.menu().length == 1 && self.menu()[0].dishes().length == 0 && self.menu()[0].name()['en'] != ''
-    });
+                        var spinner = new Spinner(opts).spin(document.getElementById('center')); 
+                        $('#loading').fadeIn();
 
-    self.firstDishPreviewHelp = ko.computed(function(){
-        return self.menu().length == 1 && self.menu()[0].dishes().length == 1;
-    });          
+                        $.ajax({
+                            type: "POST",
+                            url: "/app/administration/publish_menu",
+                            data: {
+                                restaurant_id: restaurant_id,
+                            },
+                            success: function(data, textStatus, jqXHR){
+                                spinner.stop();
+                                $('#loading').fadeOut();
+                                bootbox.alert("Menu Published!");
+                            },
+                            error: function(XMLHttpRequest, textStatus, errorThrown) { 
+                                spinner.stop();
+                                $('#loading').fadeOut();
+                                bootbox.alert("There was an error publishing the menu.\n" + errorThrown);
+                            },
+                            dataType: "json"
+                        }); 
+                    }
+                },
+            }
+        });          
+    }     
 
 };
 
@@ -1565,8 +521,6 @@ function PublicMenuModel() {
 
     var self = this;
     self.loading = ko.observable(true);
-    self.menu = ko.observableArray([]);
-    self.sections = ko.observableArray([]);
     self.newDomCounter = 0;
     self.preview = ko.observable(true);
     self.restaurant = ko.observable(new Restaurant(resto_data));
@@ -1682,8 +636,14 @@ function PublicMenuModel() {
         self.showDetails(!self.showDetails());
     }   
 
-    self.sections($.map(menu_data.menu, function(item) { return new Section(item,self) }));
-    self.menu(self.sections());
+    // self.sections($.map(menu_data.menu, function(item) { return new Section(item,self) }));
+    // self.menu(self.sections());
+
+    self.menus = ko.observableArray([]);
+    self.menus($.map(menu_data, function(item) { 
+                                            return new Menu(item, self) 
+                                        }
+    ));
 
     self.computeImage = function(image){
         //console.log(image);
@@ -1843,14 +803,6 @@ function DemoViewModel() {
     };     
 }
 
-Section.prototype.toJSON = function() {
-    var copy = ko.toJS(this,["topmodel"]); //easy way to get a clean copy
-    return copy; //return the copy to be serialized
-};  
-Dish.prototype.toJSON = function() {
-    var copy = ko.toJS(this,["topmodel","computed_price","sizeSelectedOptionValue","section_list","new_section"]); //easy way to get a clean copy
-    return copy; //return the copy to be serialized
-};
 Option.prototype.toJSON = function() {
     var copy = ko.toJS(this,["dish","multiple_prices","sizes_object_names","lName","computed_price","maxSelectionsMet","min_selection_list","max_selection_list"]); //easy way to get a clean copy
     return copy; //return the copy to be serialized

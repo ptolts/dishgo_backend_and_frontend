@@ -1,6 +1,21 @@
 class MenucrudController < ApplicationController
   before_filter :admin_or_owner_or_odesk! #, :only => [:create_section,:create_dish,:create_option,:create_individual_option]
   
+  def create_menu
+    Rails.logger.warn params.to_s
+    menu = Menu.create
+    menu.published = false
+    if !params[:odesk_id].blank?
+      odesk = Odesk.where(access_token:params[:odesk_id]).first
+      menu.odesk = odesk
+    else
+      restaurant = Restaurant.find(params[:restaurant_id])
+      menu.restaurant = restaurant
+    end
+    menu.save
+    render json: {id:menu.id}.as_json
+  end
+
   def create_section
     Rails.logger.warn params.to_s
     section = Section.create

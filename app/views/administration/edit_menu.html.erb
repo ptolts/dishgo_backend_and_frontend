@@ -9,7 +9,7 @@
         }
     </style>
 
-    <div data-bind="visible: save_menu_modal" style="display:none">
+    <div data-bind="visible: current_menu().save_menu_modal" style="display:none">
         <div id="bg"></div>
         <div id="save_menu_modal_on_top">
           <div id="save_menu">
@@ -17,7 +17,7 @@
                 <div class="col-xs-12">
                     <h3>Draft Saved</h3>
                     <div class="text-center">
-                    <p class="text-left">Your changes are now saved. You can preview them <a data-bind="attr:{href:preview_token}" target=\"_blank\">here <i class="fa fa-external-link"></i></a>. In order to make them live, you must publish your changes.</p>
+                    <p class="text-left">Your changes are now saved. You can preview them <a data-bind="attr:{href: $root.preview_token}" target=\"_blank\">here <i class="fa fa-external-link"></i></a>. In order to make them live, you must publish your changes.</p>
                     <h4 class="text-center" style="margin-top: 30px;">If you wish to publish this menu, click publish!</h4>
                         <button class="btn btn-dish" data-bind="click: function(){ save_menu_modal(!save_menu_modal()); publishMenu() }">Publish</button>
                     </div>
@@ -30,7 +30,7 @@
         </div>
     </div>
 
-    <div data-bind="visible: odesk_save_menu_modal" style="display:none">
+    <div data-bind="visible: current_menu().odesk_save_menu_modal" style="display:none">
         <div id="bg"></div>
         <div id="save_menu_modal_on_top">
           <div id="save_menu">
@@ -63,23 +63,23 @@
                             <h4>Select Dish With Option</h4>
                             <select class="form-control" data-bind="options: dishList,
                                                    optionsText: function(item){ return item.lName() },
-                                                   value: $root.currentDishOptions,
+                                                   value: $root.current_menu().currentDishOptions,
                                                    optionsCaption: 'Choose Dish'"></select>                            
                         </div>
                         <div class="col-xs-6">
-                            <div data-bind="with: currentDishOptions">
+                            <div data-bind="with: $root.current_menu().currentDishOptions">
                                 <h4>Select Option</h4>
                                 <!-- ko if: showOptionsList -->
                                     <select class="form-control" data-bind="options: options,
                                                            optionsText: function(item){ return item.lName() },
-                                                           value: $root.currentOption,
+                                                           value: $root.current_menu().currentOption,
                                                            optionsCaption: 'Choose Option'"></select>
                                 <!-- /ko -->                                  
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6 web_preview" data-bind="with: currentOption">
+                <div class="col-md-6 web_preview" data-bind="with: $root.current_menu().currentOption">
                   <h3>Selected Option</h3>
                   <strong><h4 class="text-center" data-bind="lText: name"></h4></strong>
                   <div data-bind="foreach: individual_options">
@@ -91,11 +91,11 @@
                       <!-- /ko -->
                     </label>                         
                   </div>
-                  <button class="btn btn-primary btn-lg copy_option" data-bind="click: $root.copyOptionIntoDish">Copy Option Into Current Dish</button>
+                  <button class="btn btn-primary btn-lg copy_option" data-bind="click: $root.current_menu().copyOptionIntoDish">Copy Option Into Current Dish</button>
                 </div>
             </div>
             <div class="options_list_footer">
-                <button class="btn btn-default pull-right" data-bind="click: closeCopyOption">Close</button>
+                <button class="btn btn-default pull-right" data-bind="click: $root.current_menu().closeCopyOption">Close</button>
             </div>                         
           </div>
         </div>
@@ -112,16 +112,16 @@
                         <div class="col-xs-6">
                             <h4>Select Dish With Size</h4>
                             <!-- ko if: showSizesList -->
-                                <select class="form-control" data-bind="options: dishSizeList,
+                                <select class="form-control" data-bind="options: $root.current_menu().dishSizeList,
                                                        optionsText: function(item){ return item.lName() },
-                                                       value: $root.currentOption,
+                                                       value: $root.current_menu().currentOption,
                                                        optionsValue: 'sizes_object',
                                                        optionsCaption: 'Choose Dish'"></select> 
                             <!-- /ko -->                           
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6 web_preview" data-bind="with: currentOption">
+                <div class="col-md-6 web_preview" data-bind="with: $root.current_menu().currentOption">
                   <h3>Selected Size</h3>
                   <strong><h4 class="text-center" data-bind="lText: name"></h4></strong>
                   <div data-bind="foreach: individual_options">
@@ -133,11 +133,11 @@
                       <!-- /ko -->
                     </label>                         
                   </div>
-                  <button class="btn btn-primary btn-lg copy_option" data-bind="click: $root.copySizeIntoDish">Copy Size Into Current Dish</button>
+                  <button class="btn btn-primary btn-lg copy_option" data-bind="click: $root.current_menu().copySizeIntoDish">Copy Size Into Current Dish</button>
                 </div>
             </div>
             <div class="options_list_footer">
-                <button class="btn btn-default pull-right" data-bind="click: closeCopyOption">Close</button>
+                <button class="btn btn-default pull-right" data-bind="click: $root.current_menu().closeCopyOption">Close</button>
             </div>                         
           </div>
         </div>
@@ -159,10 +159,10 @@
                             <select data-bind="options: $root.languages, value: $root.lang"></select>                
                         </div>
                     </div>
-                </div>
+                </div>              
                 <div class="row" id="add_section_button">
                     <div class="col-xs-12">
-                        <button class="btn btn-section btn-xs" type="button" data-bind="click: $root.addSection, helperTip: {template:'add_section_help_template', when: $root.firstSectionHelp, data: $root}">+ Add Section</button>
+                        <button class="btn btn-section btn-xs" type="button" data-bind="click: $root.current_menu().addSection, helperTip: {template:'add_section_help_template', when: $root.current_menu().firstSectionHelp, data: $root.current_menu()}">+ Add Section</button>
                         <script id="add_section_help_template" type="text/x-jQuery-tmpl">
                             <div class="fixed_helper_container">
                                 <div class="helper_container">
@@ -174,16 +174,16 @@
                     </div>
                 </div>                                                
             </div>               
-            <ul class="sidebar-nav" data-bind="foreach: menu">
-                <li class="section_title_menu" data-bind="click: $root.set_section">
-                    <span class="glyphicon glyphicon-play pull-right icon-flipped" data-bind="visible: $root.current_section_check($data)" id="icon_play"></span>                    
+            <ul class="sidebar-nav" data-bind="foreach: $root.current_menu().menu">
+                <li class="section_title_menu" data-bind="click: $root.current_menu().set_section">
+                    <span class="glyphicon glyphicon-play pull-right icon-flipped" data-bind="visible: $root.current_menu().current_section_check($data)" id="icon_play"></span>                    
                     <div class="media push_down"> 
                         <a class="pull-left">
                             <img class="media-object" height="25" data-bind="attr:{src:title_image}">
                         </a>
                         <div class="media-body">
                             <h4 class="media-heading" data-bind="text: computed_name" id="uppercase"></h4>
-                            <button class="btn btn-dish btn-xs pull-left add_dish_button" type="button" data-bind="click: addDish, clickBubble: false, helperTip: {template:'add_dish_help_template', when: $root.firstDishHelp}" id="add_dish_button">+ Add Dish</button>
+                            <button class="btn btn-dish btn-xs pull-left add_dish_button" type="button" data-bind="click: addDish, clickBubble: false, helperTip: {template:'add_dish_help_template', when: $root.current_menu().firstDishHelp}" id="add_dish_button">+ Add Dish</button>
                             <script id="add_dish_help_template" type="text/x-jQuery-tmpl">
                                 <div class="fixed_helper_container">
                                     <div class="helper_container">
@@ -196,9 +196,9 @@
                     </div>
                 </li>
                 <!-- ko foreach: dishes -->
-                    <li class="menu_dish_item" data-bind="css: { active : $root.current_dish_check($data)}">
+                    <li class="menu_dish_item" data-bind="css: { active : $root.current_menu().current_dish_check($data)}">
                         <!-- <span class="glyphicon glyphicon-play pull-right icon-flipped" data-bind="visible: $root.current_dish_check($data)" id="icon_play"></span> -->
-                        <div class="media" data-bind="click: $root.set_dish">
+                        <div class="media" data-bind="click: $root.current_menu().set_dish">
                             <div class="media-body">
                                 <span class="glyphicon glyphicon-pencil" id="icon_edit"></span><span class="media-heading h4" data-bind="text: computed_name"></span>
                             </div>                    
@@ -216,18 +216,22 @@
                 <div class="row">
 
                     <a id="menu-toggle" href="#" class="btn btn-default"><i class="glyphicon glyphicon-th-list"></i></a>
-
-                    <!-- ko with: current_section -->
+                    <!-- ko with: current_menu_edit -->
+                        <div class="col-xs-12 text-center">
+                            <%= render 'administration/menu_edit_content' %>
+                        </div>
+                    <!-- /ko -->
+                    <!-- ko with: $root.current_menu().current_section -->
                         <div class="col-xs-12 text-center">
                             <%= render 'administration/section_content' %>
                         </div>
                     <!-- /ko -->
                     <div class="row">
-                        <div class="col-md-6 col-xs-12 text-center" data-bind="with: current_dish">
+                        <div class="col-md-6 col-xs-12 text-center" data-bind="with: $root.current_menu().current_dish">
                             <%= render 'administration/menu_content' %>
                         </div> 
 
-                        <div class="col-md-6 col-xs-12" data-bind="with: current_dish">                           
+                        <div class="col-md-6 col-xs-12" data-bind="with: $root.current_menu().current_dish">                           
                             <%= render 'administration/demo_code' %>
                         </div> 
                     </div> 
@@ -243,7 +247,6 @@
     <script type='text/javascript'>
 
         var restaurant_id = "<%= params[:restaurant_id]%>";
-        var menu_data = <%= raw(@menu_data) %>;
         var resto_data = <%= raw(@resto_data.to_json) %>;
         var image_crop_url = "/app/administration/crop_image";
         var icon_upload_url = "/app/administration/upload_icon"

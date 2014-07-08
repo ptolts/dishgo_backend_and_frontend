@@ -173,8 +173,19 @@ Foodcloud::Application.routes.draw do
       post 'create_option'
       post 'create_dish'
       post 'create_section'
+      post 'create_menu'
     end
-  end  
+  end 
+
+  resources :menu_update do
+    collection do
+      post 'update_individual_option'
+      post 'update_option'
+      post 'update_dish'
+      post 'update_section'
+      post 'update_menu'
+    end
+  end     
 
   # match 'administration/search_restaurants', to: 'administration#search_restaurants', via: [:get]
 

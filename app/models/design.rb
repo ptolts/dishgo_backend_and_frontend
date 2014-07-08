@@ -18,10 +18,12 @@ class Design
   index({ _id:1 }, { unique: true, name:"id_index" })
 
   def template_base_css
+    return "" unless File.exists?("#{self.template_location}/base.css")
     File.read("#{self.template_location}/base.css")
   end
 
   def template_menu_css
+    return "" unless File.exists?("#{self.template_location}/menu.css")    
     File.read("#{self.template_location}/menu.css")
   end 
 

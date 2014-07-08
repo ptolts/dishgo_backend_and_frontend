@@ -65,18 +65,19 @@ class OnlinesiteController < ApplicationController
       cache.save
     end
 
+    if !cache.menu.blank?
+      @menu_data = cache.menu
+    else
+      menu_d = restaurant.menus.collect{|e| e.menu_json }.as_json.to_json
+      cache.menu = menu_d
+      cache.save
+      @menu_data = menu_d
+    end
+
     @resto_data = restaurant.as_document
     @resto_data[:images] = restaurant.image.reject{|e| e.img_url_medium.blank?}.collect{|e| e.serializable_hash({})}
     @resto_data = @resto_data.as_json
 
-    if !cache.menu.blank?
-      @menu_data = "{ \"menu\" : #{cache.menu} }".as_json
-    else
-      menu_d = restaurant.menu_to_json
-      cache.menu = menu_d
-      cache.save
-      @menu_data = "{ \"menu\" : #{menu_d} }".as_json
-    end
     # expires_in 10.minutes, :public => true
     render 'menu'
   end
@@ -168,8 +169,9 @@ class OnlinesiteController < ApplicationController
     @design_data = design_as_json(design,restaurant)
     @resto_data = restaurant.as_document
     @resto_data[:images] = restaurant.image.reject{|e| e.img_url_medium.blank?}.collect{|e| e.serializable_hash({})}
+    @resto_data[:menus] = restaurant.menus.collect{|e| e.edit_menu_json }
     @resto_data = @resto_data.as_json    
-    @menu_data = "{ \"menu\" : #{restaurant.draft_menu_to_json} }".as_json
+    # @menu_data = "{ \"menu\" : #{restaurant.draft_menu_to_json} }".as_json
     render 'menu'
   end  
 

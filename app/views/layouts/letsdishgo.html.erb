@@ -87,7 +87,23 @@
 					$(elements).find("noscript").replaceWith(function(){
 					    return this.outerHTML.replace("noscript","script");
 					});
-				}	            
+				}	
+
+	            self.progress = ko.computed({
+	            	read: function(){
+	            		if(self.pay_us()){
+	            			return "four";
+	            		}		            		
+	            		if(self.current_restaurant().saved()){
+	            			return "three";
+	            		}	 
+	            		if(self.current_user().sign_up_link()){
+	            			return "two";
+	            		}           		
+            			return "one";	            		
+	            	},
+	            	deferEvaluation: true,
+	            });				            
 
 	            self.instructions = ko.computed({
 	            	read: function(){

@@ -10,7 +10,11 @@ var localizedMessages = {
     'remove_dish' : {
         'en':"Are you sure you want to remove the dish titled \"MESSAGE\"?",
         'fr':"",
-    }   
+    },
+    'remove_menu' : {
+        'en':"Are you sure you want to remove the menu titled \"MESSAGE\"?",
+        'fr':"",
+    }        
 }
 
 function Language(name,abbreviation){

@@ -7,13 +7,13 @@
             <div class="option_title">
                 <span data-bind="click: printJson">Current Section Details</span>      
             </div>                          
-            <span class="dish_close_icon glyphicon glyphicon glyphicon-remove" data-bind="click: $parent.remove"></span>                        
+            <span class="dish_close_icon glyphicon glyphicon glyphicon-remove" data-bind="click: $root.current_menu().remove"></span>                        
         </div>                        
         <div class="dish">
             <div class="col-xs-12 push_down">
                 <div class="col-xs-12" style="text-align: left">
                     <label>Section Title</label>
-                    <input data-bind="lValue: name, valueUpdate: 'afterkeydown', helperTip: {template:'section_name_help_template', when: $root.firstSectionNameHelp}" class="form-control col-xs-12 dish_name tooltipclass" data-toggle="tooltip" data-placement="top" title="Type the section name into this box." placeholder="Add Section Title"/>
+                    <input data-bind="lValue: name, valueUpdate: 'afterkeydown', helperTip: {template:'section_name_help_template', when: $root.current_menu().firstSectionNameHelp}" class="form-control col-xs-12 dish_name tooltipclass" data-toggle="tooltip" data-placement="top" title="Type the section name into this box." placeholder="Add Section Title"/>
                     <script id="section_name_help_template" type="text/x-jQuery-tmpl">
                         <div class="fixed_helper_container">
                             <div class="helper_container">
@@ -35,7 +35,7 @@
         </div>        
     </div>
 
-    <div class="col-md-5 col-md-offset-1 section_section sortable_container" data-bind="visible: $root.menu().length > 1">
+    <div class="col-md-5 col-md-offset-1 section_section sortable_container" data-bind="visible: $root.current_menu().menu().length > 1">
         <div class="sortable_top">
             <img src="/app/public/icon@2x.png" width="25" class="icon">
             <div class="option_title">
@@ -47,7 +47,7 @@
         </div>
         <div class="col-md-12">
             <h4>Section Order:</h4>
-            <ul class="sortable_sections" data-bind="sortable:  { template: 'section_tmp', data: $root.menu, options: { containment: 'parent', tolerance: 'pointer' } }"></ul>
+            <ul class="sortable_sections" data-bind="sortable:  { template: 'section_tmp', data: $root.current_menu().menu, options: { containment: 'parent', tolerance: 'pointer' } }"></ul>
             <script id="section_tmp" type="text/html"><li class="section_sort" data-bind="click: function(){ console.log($data.position()); }"><span class="pull-left fa fa-arrows-v"></span><span data-bind="lText: name"></span></li></script>              
         </div>
     </div>

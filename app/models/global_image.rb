@@ -71,6 +71,7 @@ class GlobalImage
 
   def template_image_css
     return nil unless !self.template_location.blank?
+    return nil unless File.exists?("#{self.template_location}/base.css")
     return File.read("#{self.template_location}/base.css")
   end
 

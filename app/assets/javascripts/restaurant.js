@@ -2,6 +2,7 @@
 *= require design
 *= require imageobj
 *= require fileobj
+*= require menu
 */  
 
 

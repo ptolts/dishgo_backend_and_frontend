@@ -70,6 +70,8 @@ class Restaurant
   has_many :draft_menu, :class_name => "Section", inverse_of: :draft_restaurant
   has_many :published_menu, :class_name => "Section", inverse_of: :published_restaurant
 
+  has_many :menus, :class_name => "Menu", inverse_of: :restaurant
+
   has_many :menu_files, :class_name => "MenuFiles", inverse_of: :restaurant
 
   has_many :orders, :class_name => "Order"

@@ -1,7 +1,7 @@
 <div class="row">
 	<div class="col-xs-12">
-		<div data-bind="template: { name: instructions }"></div>
-		<script type="text/html" id="welcome">
+		<div data-bind="template: { name: progress }"></div>
+		<script type="text/html" id="one">
 		    <h3>Welcome to DishGo</h3>
 		    <h4>First we need your email address and phone number. You can setup you password later.</h4>
 		</script>
@@ -16,9 +16,9 @@
 		</script>						
 	</div>
 	<div class="col-xs-12">
-		<div data-bind="template: { name: $root.user_template, afterRender: myPostProcessingLogic }"></div>
+		<div data-bind="template: { name: $root.progress() + '_meat', afterRender: myPostProcessingLogic }"></div>
 
-		<script type="text/html" id="sign_up">
+		<script type="text/html" id="one_meat">
 		    <form class="form-horizontal col-xs-6 col-xs-offset-3" data-bind="with: $root.current_user">
 	            <div class="form-group">
 	                <label>Personal Email</label>
@@ -37,7 +37,7 @@
 		    </form>
 	        <button class="btn btn-dish col-xs-12" data-bind="click: function() { $root.current_user().createSignUpUser() }">Next <i class="fa fa-spinner fa-spin" data-bind="visible: spin"></i></button>
 		</script>
-		<script type="text/html" id="signed_up">
+		<script type="text/html" id="two_meat">
 			<div class="col-xs-12" data-bind="with: $root.current_restaurant">
                 <div class="form-group col-xs-6">
                     <label>Restaurant Name</label>
@@ -66,7 +66,7 @@
 	        </div>
 		</script>
 
-		<script type="text/html" id="setup_menu">
+		<script type="text/html" id="three_meat">
 		    <div class="col-xs-6" data-bind="with: current_restaurant">
 		        <div class="file_upload_menu_button">
 		            <span class="btn btn-info upload_button"><i class="glyphicon glyphicon-picture"></i> Add Menu File</span>
@@ -82,7 +82,7 @@
         	</div>			
 		</script>
 
-		<script type="text/html" id="pay">
+		<script type="text/html" id="four_meat">
 			<div class="col-xs-12 text-center" style="margin-top: 25px">
 				<form action="/app/letsdishgo/charge" method="POST">
 				  <noscript
@@ -98,8 +98,6 @@
 		</script>		
 
 	</div>
-	
-
 </div>
 
 

@@ -3,6 +3,10 @@
   width: 40px;
 }
 
+.saving_monitor {
+  color: white;
+}
+
 #profile_alert_circle {
   position: absolute;
   top: 5px;
@@ -199,3 +203,7 @@ margin: 0px 15px;
 #discardDraft:focus {
   background-color: #FFF;
 }*/
+
+#menu_selector {
+  color: white;
+}
