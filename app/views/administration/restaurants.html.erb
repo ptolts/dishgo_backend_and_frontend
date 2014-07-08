@@ -36,6 +36,7 @@
                         <th>Name</th>
                         <th>Edit Restaurant</th>
                         <th>Assume Control</th>
+                        <th>Check Page</th>
                         <th>List in App</th>
                     </tr>
                 </thead>
@@ -61,6 +62,9 @@
             <td>
                 <a data-bind="attr: { href: '/app/administration/become?id=' + id}, visible: user_id" class="btn btn-default btn-sm">Control</a>
             </td>
+            <td>
+                <a data-bind="attr: { href: '/app/onlinesite/live/' + preview_token()}, visible: preview_token" class="btn btn-default btn-sm" target="_blank">Visit Site</a>
+            </td>            
             <td>
                 <button class="btn btn-sm" data-bind="click: listInApp, css: {'btn-success':listed, 'btn-danger':!listed()}"><!-- ko text: listInAppText --><!-- /ko --> <i class="fa fa-spinner fa-spin" data-bind="visible: spin"></i><i class="fa fa-check" data-bind="visible: saved"></i></button>
             </td>                                                           

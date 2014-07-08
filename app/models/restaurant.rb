@@ -253,9 +253,9 @@ class Restaurant
 
   def api_menu_to_json
     # result = RubyProf.profile {
-      menu_to_spit_out = self.published_menu.pub
-      if menu_to_spit_out.empty?
-        menu_to_spit_out = Restaurant.where(name:/bob/i).first.published_menu.pub
+      menu_to_spit_out = self.menus.to_a.find{|e| e.name == "Menu" }
+      if menu_to_spit_out
+        menu_to_spit_out = menu_to_spit_out.published_menu
       end
       menu = menu_to_spit_out.collect do |section|
         hash = section.as_document

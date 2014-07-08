@@ -348,6 +348,7 @@
             self.website = ko.observable(data.website ? data.website : "");
             self.email = ko.observable(data.email ? data.email : "");
             self.subdomain = ko.observable(data.subdomain ? data.subdomain : "");
+            self.preview_token = ko.observable(data.preview_token ? data.preview_token : "");
             self.host = ko.observable(data.host ? data.host : "");
             self.facebook = ko.observable(data.facebook ? data.facebook : "");
             self.foursquare = ko.observable(data.foursquare ? data.foursquare : "");

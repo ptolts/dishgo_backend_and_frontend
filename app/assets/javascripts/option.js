@@ -184,13 +184,13 @@ function Option(data,dish) {
     });
 
     self.track_saving = function(){
-        if(viewmodel){
+        if(viewmodel && viewmodel.saving){
             viewmodel.saving.push(self);
         };   
     }
 
     self.stop_track_saving = function(){
-        if(viewmodel){
+        if(viewmodel && viewmodel.saving){
             viewmodel.saving.remove(self);
         };   
     }
