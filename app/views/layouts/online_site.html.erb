@@ -147,7 +147,7 @@
 			</div>
 
 			<!-- ko foreach: menus -->
-				<div data-bind="page: {id: menu_id, title: lName, afterShow: function(){ ko['menuVisible'](true); pauseCarousel(); }, afterHide: function(){ ko['menuVisible'](false); playCarousel(); }}" class="pages">
+				<div data-bind="page: {id: menu_id, title: lName, afterShow: function(){ ko['menuVisible'](true); pauseCarousel(); }, beforeHide: function(){ ko['menuVisible'](false); playCarousel(); }}" class="pages">
 					<%= yield %>
 				</div>
 			<!-- /ko -->
@@ -156,7 +156,7 @@
 
     	<script>
 	        var restaurant_id = "<%= params[:restaurant_id]%>";
-	        var menu_data = <%= raw(@menu_data) %>;
+	        var menu_data = <%= @menu_data ? raw(@menu_data) : {} %>;
 	        var design_data = <%= raw(@design_data) %>;
 	        var resto_data = <%= raw(@resto_data.to_json) %>;	
 	        var background_images = <%= raw(@carousel.to_json) %>;

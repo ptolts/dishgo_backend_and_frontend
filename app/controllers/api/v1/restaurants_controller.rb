@@ -36,7 +36,6 @@ class Api::V1::RestaurantsController < ApplicationController
       return
     end
     restaurant = Restaurant.find(params[:id])
-
     if !restaurant.cache
       cache = Cache.create
       restaurant.cache = cache

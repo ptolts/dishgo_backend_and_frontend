@@ -10,6 +10,7 @@
 *= require dish.js
 *= require option.js
 *= require individual_option.js
+*= require size_prices.js
 *= require restaurant
 *= require lightbox.js
 */
@@ -309,27 +310,6 @@ ko.bindingHandlers.modalImage = {
 
 // var optionsList = ko.observableArray([]);
 
-
-
-function SizePrices(data) {
-    var self = this;
-    self.name = data.name;  
-    self.ind_opt = data.ind_opt;
-    self.size_ind_opt = data.size_ind_opt;
-    self.size_ind_opt_id = data.size_ind_opt._id;
-    self.price = ko.observable(data.price);
-    self.e_price = ko.observable(false);  
-    self.size_id = ko.observable(data.size_id);
-
-    self.edit_price_size = function() { 
-        self.e_price(true);     
-    };  
-
-    self.remove_self = function(){
-        self.ind_opt.remove_size_option(self);        
-    }    
-}
-
 if(odesk_id === undefined){
     var odesk_id = null;
 }
@@ -347,7 +327,13 @@ function MenuViewModel() {
     var skip_warning = false;
     
     self.menus = ko.observableArray([]);
-    self.menus($.map(resto_data.menus, function(item) { return new Menu(item, self) }));
+    // Make sure there is at least one menu. If not, create one.
+    if(resto_data.menus && resto_data.menus.length > 0){
+        self.menus($.map(resto_data.menus, function(item) { return new Menu(item, self) }));
+    } else {
+        var m = new Menu({name:{'en':'Menu','fr':'La Carte'},default_menu:true,menu:[]},self);
+        self.menus.push(m);
+    }
     self.current_menu = ko.observable(self.menus()[0]);
 
     self.current_menu_edit = ko.observable();
@@ -361,7 +347,15 @@ function MenuViewModel() {
         }
         self.current_menu_edit(next_menu);
         $("body").animate({scrollTop:0}, '100', 'swing');
-    });        
+    });
+
+    self.menu_default = function(new_default){
+        _.each(self.menus(),function(menu){
+            if(menu.default_menu != new_default){
+                menu.default_menu(false);
+            }
+        });            
+    };
 
     self.show_lang = ko.computed(function(){
         if(self.languages().length > 1){
@@ -383,13 +377,11 @@ function MenuViewModel() {
         }
     });
 
-
     self.add_menu = function(){
-        var new_menu = new Menu({menu:menu_data.menu});
+        var new_menu = new Menu({name:{'en':'New Menu','fr':'Nouvelle Carte'},default_menu:false,menu:[]},self);
         self.menus.push(new_menu);
-        self.current_menu = ko.observable(new_menu);
+        self.current_menu(new_menu);
     }
-
 
     self.saving = ko.observableArray([]);
     self.saving_monitor = ko.computed({
@@ -645,6 +637,21 @@ function PublicMenuModel() {
                                         }
     ));
 
+    self.menu = ko.computed(function(){
+        var m;
+        _.each(self.menus(),function(menu){
+            if(menu.default_menu()){
+                m = menu.menu();
+            }
+        });
+        if(m){
+            return m;
+        }
+        if(self.menus().length > 0){
+            return self.menus()[0].menu();
+        }
+    });
+
     self.computeImage = function(image){
         //console.log(image);
         if(self.design.imgs[image]){
@@ -807,10 +814,7 @@ Option.prototype.toJSON = function() {
     var copy = ko.toJS(this,["dish","multiple_prices","sizes_object_names","lName","computed_price","maxSelectionsMet","min_selection_list","max_selection_list"]); //easy way to get a clean copy
     return copy; //return the copy to be serialized
 };
-SizePrices.prototype.toJSON = function() {
-    var copy = ko.toJS(this,["ind_opt","size_ind_opt"]); //easy way to get a clean copy
-    return copy; //return the copy to be serialized
-};
+
 IndividualOption.prototype.toJSON = function() {
     var copy = ko.toJS(this,['dish','option','type','size_prices_to_remove',"clickable","computed_price"]); //easy way to get a clean copy
     return copy; //return the copy to be serialized

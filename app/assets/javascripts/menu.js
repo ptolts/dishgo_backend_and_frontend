@@ -33,12 +33,21 @@ function Menu(data, topmodel) {
     self.name = ko.observable(data.name ? data.name : copyDefaultHash(default_language_hash));
     self.current_dish = ko.observable();
     self.current_section = ko.observable();  
+    self.default_menu = ko.observable(data.default_menu ? data.default_menu : false);  
     self.currentOption = ko.observable();
     self.currentDishOptions = ko.observable();
     self.showOptionsList = showOptionsList;
     self.showSizesList = showSizesList;
     self.menu = ko.observableArray([]);
     self.topmodel = topmodel;
+
+    self.default_menu.subscribe(function(){
+    	if(self.default_menu()){
+	    	if(self.topmodel){
+	    		self.topmodel.menu_default(self.default_menu);
+	    	}
+	    }
+    });
 
     self.menu_id = ko.computed({
     	read: function(){
@@ -160,9 +169,26 @@ function Menu(data, topmodel) {
 		var new_section = new Section({name:copyDefaultHash(sectionNames),subsection:[],dom_id:self.newDomCounter},self);
 		self.menu.push(new_section);
 		self.current_section(new_section);
-		self.current_menu_edit(null);
 		self.current_dish(null);
 	} 
+
+
+	// Make sure we hide the menu edit interface.
+	self.current_dish.subscribe(function(value){
+		if(value){
+			if(self.topmodel && self.topmodel.current_menu_edit){
+				self.topmodel.current_menu_edit(null);
+			}			
+		}
+	});
+
+	self.current_section.subscribe(function(value){
+		if(value){
+			if(self.topmodel && self.topmodel.current_menu_edit){
+				self.topmodel.current_menu_edit(null);
+			}			
+		}
+	});	
 
 	self.showModal = function(image) {
 		console.log("#"+image.id());
@@ -395,6 +421,7 @@ function Menu(data, topmodel) {
     self.dirtyTrack = ko.computed(function(){
 	    self.id();
 	    self.name(); 
+	    self.default_menu();
         self.track_saving();	    
         self.dirty(true);
     });
@@ -405,7 +432,7 @@ function Menu(data, topmodel) {
         if(!self.dirty()){
             return;
         }    	
-    	if(self.id.peek()){
+    	if(self.id.peek() && editing_mode){
             $.ajax({
               type: "POST",
               url: "/app/menu_update/update_menu",

@@ -8,16 +8,24 @@ class MenuUpdateController < ApplicationController
       menu.destroy
       render json: {success:true}.as_json
       return
-    end 
+    end
+    #Make sure the user is allowed to edit this object.
     if !params[:odesk_id].blank?
       odesk = Odesk.where(access_token:params[:odesk_id]).first
-      menu.odesk = odesk
+      if(odesk != menu.odesk)
+        nice_try
+        return
+      end
     else
       restaurant = Restaurant.find(params[:restaurant_id])
-      menu.restaurant = restaurant
+      if(menu.restaurant != restaurant)
+        nice_try
+        return
+      end
     end    
     draft = {}
     draft[:name] = data["name"]
+    menu.default_menu = data["default_menu"]
     menu.draft = draft
     menu.save
     render json: {success:true}.as_json
@@ -32,10 +40,16 @@ class MenuUpdateController < ApplicationController
     
     if !params[:odesk_id].blank?
       odesk = Odesk.where(access_token:params[:odesk_id]).first
-      section.odesk = odesk
+      if(odesk != section.odesk)
+        nice_try
+        return
+      end
     else
       restaurant = Restaurant.find(params[:restaurant_id])
-      section.restaurant = restaurant
+      if(section.restaurant != restaurant)
+        nice_try
+        return
+      end
     end
 
     section.menu_draft_id = params["menu_id"]
@@ -54,6 +68,20 @@ class MenuUpdateController < ApplicationController
     draft = {}    
     data = JSON.parse(params[:data])
     dish = Dish.find(data["id"])
+
+    if !params[:odesk_id].blank?
+      odesk = Odesk.where(access_token:params[:odesk_id]).first
+      if(odesk != dish.odesk)
+        nice_try
+        return
+      end
+    else
+      restaurant = Restaurant.find(params[:restaurant_id])
+      if(dish.restaurant != restaurant)
+        nice_try
+        return
+      end
+    end
 
     dish.draft_image = []
     images = data["images"].collect do |image|
@@ -84,6 +112,20 @@ class MenuUpdateController < ApplicationController
     data = JSON.parse(params[:data])
     option = DishOption.find(data["id"])
 
+    if !params[:odesk_id].blank?
+      odesk = Odesk.where(access_token:params[:odesk_id]).first
+      if(odesk != option.odesk)
+        nice_try
+        return
+      end
+    else
+      restaurant = Restaurant.find(params[:restaurant_id])
+      if(option.restaurant != restaurant)
+        nice_try
+        return
+      end
+    end    
+
     if data["type"] == "size"
       option.draft_dish_which_uses_this_as_size_options_id = params["dish_id"]
       if !params["dish_id"].blank?
@@ -108,6 +150,21 @@ class MenuUpdateController < ApplicationController
     draft = {}
     data = JSON.parse(params[:data])
     individual_option = IndividualOption.find(data["id"])
+
+    if !params[:odesk_id].blank?
+      odesk = Odesk.where(access_token:params[:odesk_id]).first
+      if(odesk != individual_option.odesk)
+        nice_try
+        return
+      end
+    else
+      restaurant = Restaurant.find(params[:restaurant_id])
+      if(individual_option.restaurant != restaurant)
+        nice_try
+        return
+      end
+    end
+
     if data["size_prices"]
       individual_option.draft_size_prices = data["size_prices"]
     end
@@ -126,5 +183,9 @@ class MenuUpdateController < ApplicationController
     individual_option.draft = draft
     individual_option.save
     render json: {success:true}.as_json
+  end
+
+  def nice_try
+    render json: {success:false}.as_json
   end
 end

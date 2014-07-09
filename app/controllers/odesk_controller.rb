@@ -29,35 +29,43 @@ class OdeskController < ApplicationController
   def merge_menu
     restaurant = Restaurant.where(id:params[:restaurant_id]).first
     odesk = restaurant.odesk
-    sections = odesk.sections.collect do |section|
-      section.odesk = nil
-      section.restaurant = restaurant
-      section.save
-      section.draft_dishes.each do |dish|
-        dish.odesk = nil
-        dish.restaurant = restaurant
-        dish.save
-        dish.draft_options.each do |option|
-          option.odesk = nil
-          option.restaurant = restaurant
-          option.save
-          option.draft_individual_options.each do |individual_options|
-            individual_options.odesk = nil
-            individual_options.restaurant = restaurant
-            individual_options.save            
+    odesk.menus.each do |menu|
+      sections = menu.draft_menu.collect do |section|
+        section.odesk = nil
+        section.restaurant = restaurant
+        section.save
+        section.draft_dishes.each do |dish|
+          dish.odesk = nil
+          dish.restaurant = restaurant
+          dish.save
+          dish.draft_options.each do |option|
+            option.odesk = nil
+            option.restaurant = restaurant
+            option.save
+            option.draft_individual_options.each do |individual_options|
+              individual_options.odesk = nil
+              individual_options.restaurant = restaurant
+              individual_options.save            
+            end
           end
         end
+        next section
       end
-      next section
+      menu.odesk = nil
+      menu.restaurant = restaurant
+      menu.save
     end
-    restaurant.draft_menu = sections
-    restaurant.save
+
     restaurant.reload
-    restaurant.published_menu = restaurant.draft_menu
-    restaurant.published_menu.each do |section|
-      section.publish_menu
+    restaurant.menus.each do |menu|
+      menu.published_menu = menu.draft_menu
+      menu.published_menu.each do |section|
+        section.published_menu
+      end
+      menu.save
     end
     restaurant.save    
+    odesk.regenerate_token
     render json: {success:true}.as_json
   end
 
@@ -84,8 +92,9 @@ class OdeskController < ApplicationController
     @odesk_id = odesk.access_token
     @resto_data = restaurant.as_document
     @resto_data[:images] = restaurant.image.reject{|e| e.img_url_medium.blank?}.collect{|e| e.serializable_hash({})}
+    @resto_data[:menus] = odesk.menus.pub.collect{|e| e.edit_menu_json }    
     @resto_data = @resto_data.as_json
-    @menu_data = "{ \"menu\" : #{odesk.draft_menu_to_json} }".as_json
+    # @menu_data = "{ \"menu\" : #{odesk.draft_menu_to_json} }".as_json
     render 'administration/edit_menu'
   end  
 

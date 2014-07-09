@@ -11,14 +11,17 @@ class Menu
 	field :draft_position, type: Integer
 	field :draft, type: Hash, default: {}
 	field :published, type: Boolean
+	field :default_menu, type: Boolean, default: false
 
 	belongs_to :restaurant, class_name: "Restaurant", inverse_of: :menus, index: true
+	belongs_to :odesk, class_name: "Odesk", inverse_of: :menus, index: true
 
 	has_many :draft_menu, :class_name => "Section", inverse_of: :menu_draft
 	has_many :published_menu, :class_name => "Section", inverse_of: :published_menu
 
   	scope :draft, -> {asc(:draft_position)} 	
 	scope :pub, -> {asc(:position)}
+	scope :def, -> { where( default_menu:true ) }
 
 	index({ _id:1 }, { unique: true, name:"id_index" })
 
@@ -76,6 +79,7 @@ class Menu
 			# next if restaurant.published_menu.empty?
 			# puts restaurant.name
 			restaurant.menus.destroy_all
+			menu_list = []
 			restaurant.draft_menu.each do |section|
 				if section.menu_link
 					menu = Menu.create
@@ -83,17 +87,23 @@ class Menu
 					menu.restaurant = restaurant
 					menu.published_menu << section
 					menu.draft_menu << section
-					menu.save
+					menu_list << menu
 				end
 			end
 			published_menu = restaurant.published_menu.to_a.delete_if{|e| e.menu_link}
 			draft_menu = restaurant.draft_menu.to_a.delete_if{|e| e.menu_link}
 			menu = Menu.create
+			menu.default_menu = true
+			menu.position = 0
 			menu.name_translations = {'en'=>'Menu','fr'=>'La Carte'}
 			menu.restaurant = restaurant
 			menu.published_menu = published_menu
 			menu.draft_menu = draft_menu
 			menu.save
+			menu_list.each_with_index do |q,index|
+				q.position = index + 1
+				q.save
+			end
 		end
 		Cache.destroy_all
 	end

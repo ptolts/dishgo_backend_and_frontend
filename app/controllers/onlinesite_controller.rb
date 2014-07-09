@@ -68,7 +68,7 @@ class OnlinesiteController < ApplicationController
     if !cache.menu.blank?
       @menu_data = cache.menu
     else
-      menu_d = restaurant.menus.collect{|e| e.menu_json }.as_json.to_json
+      menu_d = restaurant.menus.pub.collect{|e| e.menu_json }.as_json.to_json
       cache.menu = menu_d
       cache.save
       @menu_data = menu_d
@@ -169,9 +169,9 @@ class OnlinesiteController < ApplicationController
     @design_data = design_as_json(design,restaurant)
     @resto_data = restaurant.as_document
     @resto_data[:images] = restaurant.image.reject{|e| e.img_url_medium.blank?}.collect{|e| e.serializable_hash({})}
-    @resto_data[:menus] = restaurant.menus.collect{|e| e.edit_menu_json }
+    # @resto_data[:menus] = restaurant.menus.pub.collect{|e| e.edit_menu_json }
     @resto_data = @resto_data.as_json    
-    # @menu_data = "{ \"menu\" : #{restaurant.draft_menu_to_json} }".as_json
+    @menu_data = restaurant.menus.pub.collect{|e| e.edit_menu_json }.as_json.to_json
     render 'menu'
   end  
 

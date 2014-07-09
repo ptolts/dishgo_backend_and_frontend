@@ -14,6 +14,8 @@ class Odesk
 
   belongs_to :restaurant, class_name: "Restaurant", index: true
 
+  has_many :menus, :class_name => "Menu", inverse_of: :odesk
+
   has_many :sections, :class_name => "Section", inverse_of: :odesk
   has_many :dishes, :class_name => "Dish", inverse_of: :odesk
   has_many :dish_options, :class_name => "DishOption", inverse_of: :odesk

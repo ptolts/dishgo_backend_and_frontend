@@ -13,7 +13,7 @@ class IndividualOption
 
 	field :size_ind_opt_id, type: String
 	field :position, type: Integer
-	field :price_according_to_size, type: Boolean
+	field :price_according_to_size, type: Boolean, default: false
 
 	field :draft, type: Hash
 
@@ -93,11 +93,12 @@ class IndividualOption
 	end	
 
 	def api_as_document
+		Rails.logger.warn "ID:  #{self.id}"
 		hash = self.as_document
 		hash["size_prices"] = hash["size_prices"].collect do |s|
 			s["id"] = self.id.to_s + s["size_id"].to_s
 			next s
-		end
+		end if self.price_according_to_size
 		return hash
 	end	
 

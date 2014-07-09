@@ -422,7 +422,7 @@ function Dish(data, topmodel) {
         if(!self.dirty()){
             return;
         }
-        if(self.id.peek()){
+        if(self.id.peek() && editing_mode){
             $.ajax({
               type: "POST",
               url: "/app/menu_update/update_dish",

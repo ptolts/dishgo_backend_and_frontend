@@ -4,29 +4,13 @@ class InjectedController < ApplicationController
   layout 'injected'
   
   def index
-       
-    # if request.get? and params[:id].blank?
-    #   restaurant = Restaurant.where(preview_token:"fZOdV4FrXLrTTAZLgly2XA").first
-    # else
-    #   oauth = Koala::Facebook::OAuth.new(ENV['FB_APP_ID'], ENV['FB_APP_SECRET'])
-    #   facebook_page_details = oauth.parse_signed_request(params[:signed_request])
-    #   #SESSION REQUEST: {"algorithm"=>"HMAC-SHA256", "issued_at"=>1398970432, "page"=>{"id"=>"711697415561117", "liked"=>false, "admin"=>true}, "user"=>{"country"=>"ca", "locale"=>"en_US", "age"=>{"min"=>21}}}
-    #   if page_id = facebook_page_details["page"]["id"]
-    #     restaurant = Restaurant.where(facebook_page_id:page_id).first
-    #   end
-    # end
-
-    # if !restaurant and facebook_page_details["page"]["admin"].to_s == "true"
-    #   setup_page
-    #   return
-    # end
 
     if params[:id]
       restaurant = Restaurant.where(preview_token:params[:id]).first
     end
 
     if !restaurant
-      restaurant = Restaurant.where(preview_token:"fZOdV4FrXLrTTAZLgly2XA").first
+      restaurant = Restaurant.where(preview_token:"_1cBOnm8VulZNOxzezNiPw").first
     end
 
     if restaurant.design
@@ -58,11 +42,26 @@ class InjectedController < ApplicationController
     @lat = restaurant.lat
     @lon = restaurant.lon   
 
+    if !restaurant.cache
+      cache = Cache.create
+      restaurant.cache = cache
+      restaurant.save
+    end
+    cache = restaurant.cache  
+    
+    if !cache.menu.blank?
+      @menu_data = cache.menu
+    else
+      menu_d = restaurant.menus.pub.collect{|e| e.menu_json }.as_json.to_json
+      cache.menu = menu_d
+      cache.save
+      @menu_data = menu_d
+    end    
+
     @design_data = design_as_json(design,restaurant)
     @resto_data = restaurant.as_document
     @resto_data[:images] = restaurant.image.reject{|e| e.img_url_medium.blank?}.collect{|e| e.serializable_hash({})}
     @resto_data = @resto_data.as_json    
-    @menu_data = "{ \"menu\" : #{restaurant.menu_to_json} }".as_json
     render 'injected_menu'
   end
 

@@ -16,19 +16,27 @@
 
           <% if params[:id] and current_page?(controller: "odesk", action: "edit_menu", id: params[:id]) %>
             <ul class="nav navbar-nav navbar-right">
+              <li class="saving_monitor" data-bind="saving: $root.saving_monitor">
 
+              </li>                 
               <li>
                 <a href="/app/odesk/files/<%= @odesk_id %>" target="_blank">Menu Files</a>
-              </li>   
-
-              <li data-bind="click: discardDraft" id="discardDraft">
-                <a>Discard Changes <i class="glyphicon glyphicon-remove"></i></a>
-              </li>
-
-              <li data-bind="click: odeskSaveDraft" id="saveMenu">
-                <a>Save Changes <i class="glyphicon glyphicon-ok"></i> </a>
-              </li>                               
-
+              </li>                          
+              <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                  Menus <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu" role="menu">
+                  <!-- ko foreach: $root.menus -->
+                    <li data-bind="click: function(item){ $root.current_menu(item) }">
+                      <a data-bind="lText: name"></a>
+                    </li>
+                  <!-- /ko -->
+                  <li data-bind="click: $root.add_menu">
+                    <a>+ Add Menu</a>
+                  </li>
+                </ul>
+              </li>              
             </ul>                          
           <% end %>
 

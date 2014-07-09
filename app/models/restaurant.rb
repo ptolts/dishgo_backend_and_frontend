@@ -253,8 +253,11 @@ class Restaurant
 
   def api_menu_to_json
     # result = RubyProf.profile {
-      menu_to_spit_out = self.menus.to_a.find{|e| e.name == "Menu" }
+      menu_to_spit_out = self.menus.def.first
       if menu_to_spit_out
+        menu_to_spit_out = menu_to_spit_out.published_menu
+      else
+        menu_to_spit_out = self.menus.first
         menu_to_spit_out = menu_to_spit_out.published_menu
       end
       menu = menu_to_spit_out.collect do |section|

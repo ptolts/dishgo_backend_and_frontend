@@ -6,7 +6,7 @@ class FacebookController < ApplicationController
   def index
        
     if request.get?
-      restaurant = Restaurant.where(preview_token:"fZOdV4FrXLrTTAZLgly2XA").first
+      restaurant = Restaurant.where(preview_token:"_1cBOnm8VulZNOxzezNiPw").first
     else
       oauth = Koala::Facebook::OAuth.new(ENV['FB_APP_ID'], ENV['FB_APP_SECRET'])
       facebook_page_details = oauth.parse_signed_request(params[:signed_request])
@@ -25,6 +25,14 @@ class FacebookController < ApplicationController
       redirect_to "http://dishgo.io"
       return
     end
+
+    if !restaurant.cache
+      cache = Cache.create
+      restaurant.cache = cache
+      restaurant.save
+    end
+
+    cache = restaurant.cache   
 
     if restaurant.design
       design = restaurant.design
@@ -59,7 +67,16 @@ class FacebookController < ApplicationController
     @resto_data = restaurant.as_document
     @resto_data[:images] = restaurant.image.reject{|e| e.img_url_medium.blank?}.collect{|e| e.serializable_hash({})}
     @resto_data = @resto_data.as_json    
-    @menu_data = "{ \"menu\" : #{restaurant.menu_to_json} }".as_json
+
+    if !cache.menu.blank?
+      @menu_data = cache.menu
+    else
+      menu_d = restaurant.menus.collect{|e| e.menu_json }.as_json.to_json
+      cache.menu = menu_d
+      cache.save
+      @menu_data = menu_d
+    end
+    
     render 'facebook_menu'
   end
 

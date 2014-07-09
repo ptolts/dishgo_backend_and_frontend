@@ -196,7 +196,7 @@ class AdministrationController < ApplicationController
     restaurant = Restaurant.find(params[:restaurant_id])
     @resto_data = restaurant.as_document
     @resto_data[:images] = restaurant.image.reject{|e| e.img_url_medium.blank?}.collect{|e| e.serializable_hash({})}
-    @resto_data[:menus] = restaurant.menus.collect{|e| e.edit_menu_json }
+    @resto_data[:menus] = restaurant.menus.pub.collect{|e| e.edit_menu_json }
     @resto_data = @resto_data.as_json
     # @menu_data = "{ \"menu\" : #{restaurant.draft_menu_to_json} }".as_json
   	render 'edit_menu'
@@ -267,10 +267,12 @@ class AdministrationController < ApplicationController
       cache.save
     end
     restaurant.menus.each do |menu|
+      menu.name_translations = menu.draft["name"]
       menu.published_menu = menu.draft_menu
       menu.published_menu.each do |section|
         section.publish_menu
       end
+      menu.save
     end
     restaurant.save
     render json: {success:true}.as_json

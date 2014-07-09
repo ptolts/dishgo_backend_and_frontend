@@ -10,6 +10,10 @@ IndividualOption.prototype.fastJSON = function(){
                 continue;
             }
             if(typeof result == "object"){
+                if(property == "size_prices"){
+                    fast[property] = ko.toJS(result);
+                    continue;
+                }                   
                 if(result == null){
                     fast[property] = result;
                     continue;
@@ -26,6 +30,7 @@ IndividualOption.prototype.fastJSON = function(){
     } 
     return JSON.stringify(fast);    
 }
+
 
 function IndividualOption(data,option) {
 
@@ -93,7 +98,7 @@ function IndividualOption(data,option) {
         _.each(data.size_prices,function(e){
             var found_object = _.find(self.option.sizes_object_names(),function(i){ return i.id() == e.size_id});
             if(found_object){
-                var new_size_prices = new SizePrices({name:found_object.name,size_id:found_object.id,price:e.price,ind_opt:self,size_ind_opt:found_object});
+                var new_size_prices = new SizePrices({name:found_object.name,size_id:found_object.id,price:e.price,ind_opt:self,size_ind_opt:found_object},self);
                 self.size_prices.push(new_size_prices);
             } 
         });        
@@ -113,7 +118,7 @@ function IndividualOption(data,option) {
                                                         price:0.0,
                                                         ind_opt:self,
                                                         size_ind_opt:e
-                                                    });
+                                                    },self);
                 self.size_prices.push(self.new_size_prices);
                 e.size_prices_to_remove.push(self.new_size_prices);
             } 
@@ -128,7 +133,7 @@ function IndividualOption(data,option) {
                                                                 price:0.0,
                                                                 ind_opt:self,
                                                                 size_ind_opt:e
-                                                            });
+                                                            },self);
                         self.size_prices.push(self.new_size_prices);
                         e.size_prices_to_remove.push(self.new_size_prices);
                     } 
@@ -217,6 +222,7 @@ function IndividualOption(data,option) {
         self.price();
         self.option.id();
         self.size_prices();
+        self.price_according_to_size();
         self.track_saving();
         self.dirty(true);
     });
@@ -226,7 +232,7 @@ function IndividualOption(data,option) {
         if(!self.dirty()){
             return;
         }
-        if(self.id.peek()){
+        if(self.id.peek() && editing_mode){
             $.ajax({
               type: "POST",
               url: "/app/menu_update/update_individual_option",
