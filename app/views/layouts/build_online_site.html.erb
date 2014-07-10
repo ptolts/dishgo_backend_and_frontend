@@ -63,10 +63,7 @@
 				<!-- /ko -->					
 			</div>
 			<nav id="navigation" class="nav">
-				<ul>
-					<li><a data-bind="page-href: 'start', lText: layout_tr">Layout</a></li>
-					<li><a data-bind="page-href: 'pages', lText: pages_tr">Text</a></li>
-				</ul>
+
 			</nav>	
 			<div id="social_media" class="social_media" data-bind="with: restaurant">
 				<a data-bind="visible: socialVisible('facebook'), attr:{href: facebook}"><i class="fa fa-facebook-square"></i></a>
@@ -89,11 +86,17 @@
 		</div>
 
 		<div class="save_website_button">
-			<div class="col-xs-6">
-				<a href="/app" class="coo_button lightText square red col-xs-12" style="text-decoration: none" data-bind="click: function(){ skip_check = true; window.location.href = "/app"}">Cancel <i class="glyphicon glyphicon-remove"></i></a>
+			<div class="col-xs-3">
+				<a class="coo_button lightText square white" data-bind="page-href: 'start', lText: layout_tr">Layout</a>
 			</div>
-			<div class="col-xs-6">
-			    <button class="coo_button lightText square green col-xs-12" data-bind="click: $root.submitDesign">Save <span class="glyphicon glyphicon-ok"></span></button>
+			<div class="col-xs-3">					
+				<a class="coo_button lightText square white" data-bind="page-href: 'pages', lText: pages_tr">Text</a>
+			</div>			
+			<div class="col-xs-3">
+				<a href="/app" class="coo_button lightText square red" style="text-decoration: none" data-bind="click: function(){ skip_check = true; window.location.href = "/app"}">Cancel <i class="glyphicon glyphicon-remove"></i></a>
+			</div>
+			<div class="col-xs-3">
+			    <button class="coo_button lightText square green" data-bind="click: $root.submitDesign">Save <span class="glyphicon glyphicon-ok"></span></button>
 			</div>
 		</div>
 

@@ -51,9 +51,18 @@ class Api::V1::RestaurantsController < ApplicationController
       @menu_data = "{ \"menu\" : #{menu_d} }".as_json
     end    
 
+    create_page_view restaurant
+
     respond_with @menu_data
   end
 
-  
+  def create_page_view restaurant
+    page_view = PageView.new
+    page_view.ip = request.ip
+    page_view.user_agent = request.user_agent
+    page_view.restaurant = restaurant
+    page_view.end_point = "OnlinesiteController"
+    page_view.save
+  end  
 
 end

@@ -46,8 +46,9 @@ class LetsdishgoController < ApplicationController
 		menu_file.save
 
 		render :json => {
-		                    name: menu_file.name,
-		                    url:   menu_file.url,
+		                    name: 	menu_file.name,
+		                    url: 	menu_file.url,
+		                    id: 	menu_file.id,
 		                }.as_json
 
 	end
@@ -59,7 +60,23 @@ class LetsdishgoController < ApplicationController
 	end	
 
 	def charge
-		Rails.logger.warn params.to_s
+		begin
+		  charge = Stripe::Charge.create(
+		    :amount => 3500, # amount in cents, again
+		    :currency => "cad",
+		    :card => params[:stripeToken],
+		    :description => params[:stripeEmail],
+		  )
+		rescue Stripe::CardError => e
+		  render 'declined'
+		  return
+		end
 		render 'charge'
 	end	
+
+	def user_check
+		Rails.logger.warn params.to_s
+		user = User.where(email:params[:email]).count
+		render json: {exists:(user > 0) ? true : false}.as_json
+	end
 end

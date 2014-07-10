@@ -40,6 +40,7 @@ Foodcloud::Application.routes.draw do
       post 'upload_menu_file', to: "letsdishgo#upload_menu_file"
       post 'destroy_file', to: "letsdishgo#destroy_file"
       post 'charge', to: "letsdishgo#charge"
+      post 'user_check', to: "letsdishgo#user_check"
     end
   end  
 

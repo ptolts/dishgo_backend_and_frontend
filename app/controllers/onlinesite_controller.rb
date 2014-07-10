@@ -78,6 +78,7 @@ class OnlinesiteController < ApplicationController
     @resto_data[:images] = restaurant.image.reject{|e| e.img_url_medium.blank?}.collect{|e| e.serializable_hash({})}
     @resto_data = @resto_data.as_json
 
+    create_page_view restaurant
     # expires_in 10.minutes, :public => true
     render 'menu'
   end
@@ -182,5 +183,14 @@ class OnlinesiteController < ApplicationController
     end
   end
 #"GET /app/menu/preview/jT29p3Jgbq9_4o7g0FO16g HTTP/1.1" 200 27337 "-" "facebookexternalhit/1.1 (+http://www.facebook.com/externalhit_uatext.php)"
+
+  def create_page_view restaurant
+    page_view = PageView.new
+    page_view.ip = request.ip
+    page_view.user_agent = request.user_agent
+    page_view.restaurant = restaurant
+    page_view.end_point = "OnlinesiteController"
+    page_view.save
+  end  
 
 end

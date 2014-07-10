@@ -82,6 +82,8 @@ class Restaurant
 
   has_many :ratings, :class_name => "Rating", inverse_of: :restaurant
 
+  has_many :page_views, :class_name => "PageView", inverse_of: :restaurant
+
   belongs_to :design, index: true
 
   accepts_nested_attributes_for :image, :allow_destroy => false

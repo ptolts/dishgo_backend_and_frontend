@@ -293,7 +293,7 @@
                     },
                     dataType: "json"
                 });                
-            }  
+            } 
 
             self.createSignUpUser = function(){
                 self.spin(true);

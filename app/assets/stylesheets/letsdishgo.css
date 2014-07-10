@@ -1,8 +1,28 @@
 /*Sign in styles */
-@import url(http://fonts.googleapis.com/css?family=Josefin+Slab);
+@import url(https://fonts.googleapis.com/css?family=Abel|Medula+One);
 
 * {
-  font-family: 'Josefin Slab', serif;
+  font-family: 'Abel', sans-serif;
+}
+
+.red {
+  color: #cf2f28;
+}
+
+h1 {
+  font-family: 'Medula One', cursive;
+  font-weight: normal;
+  line-height: 35px;
+  font-size: 35px;
+  margin: 0 0 10px 0;
+  color: #cf2f28;
+}
+
+h2 {
+  font-family: 'Abel', sans-serif;
+  font-size: 25px;
+  line-height: 25px;
+  margin: 0 0 10px 0;
 }
 
 .upload_button {

@@ -196,6 +196,7 @@
 	top: 15px;
 	right: 5px;
 	z-index: 1;
+	width: 600px;
 }
 .save_website_button .coo_button {
     background-image: -webkit-linear-gradient(hsla(0,0%,100%,.05), hsla(0,0%,0%,.1));
@@ -290,6 +291,10 @@
 }
 .save_website_button .red {
     background-color: #BC030E;
+}
+
+.save_website_button .white {
+    background-color: #747474;
 }
 
 /* SWITCH CODE */

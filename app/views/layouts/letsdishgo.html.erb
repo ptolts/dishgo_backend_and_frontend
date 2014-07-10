@@ -23,7 +23,7 @@
 	</head>
 	<body>
 		<div class="section-signup">
-			<div class="container_small">
+			<div class="container_small letsdishgomeat">
 				<%= yield %>
 			</div>
 		</div>
@@ -92,50 +92,26 @@
 	            self.progress = ko.computed({
 	            	read: function(){
 	            		if(self.pay_us()){
+		            		$(".letsdishgomeat").css("max-width","100%");
+		            		$(".letsdishgomeat").css("width","750px");	            			
 	            			return "four";
 	            		}		            		
 	            		if(self.current_restaurant().saved()){
+		            		$(".letsdishgomeat").css("max-width","100%");
+		            		$(".letsdishgomeat").css("width","750px");	            			
 	            			return "three";
 	            		}	 
 	            		if(self.current_user().sign_up_link()){
+		            		$(".letsdishgomeat").css("max-width","100%");
+		            		$(".letsdishgomeat").css("width","750px");	            			
 	            			return "two";
-	            		}           		
+	            		} 
+	            		$(".letsdishgomeat").css("max-width","100%");
+	            		$(".letsdishgomeat").css("width","320px");
             			return "one";	            		
 	            	},
 	            	deferEvaluation: true,
 	            });				            
-
-	            self.instructions = ko.computed({
-	            	read: function(){
-	            		if(self.pay_us()){
-	            			return "four";
-	            		}		            		
-	            		if(self.current_restaurant().saved()){
-	            			return "three";
-	            		}	 
-	            		if(self.current_user().sign_up_link()){
-	            			return "two";
-	            		}           		
-            			return "welcome";	            		
-	            	},
-	            	deferEvaluation: true,
-	            });
-
-	            self.user_template = ko.computed({
-	            	read: function(){
-	            		if(self.pay_us()){
-	            			return "pay";
-	            		}		            		
-	            		if(self.current_restaurant().saved()){
-	            			return "setup_menu";
-	            		}	 
-	            		if(self.current_user().sign_up_link()){
-	            			return "signed_up";
-	            		}           		
-            			return "sign_up";
-	            	},
-	            	deferEvaluation: true,
-	            });	
 
 	            self.pay = function(){
 	            	self.pay_us(true);
