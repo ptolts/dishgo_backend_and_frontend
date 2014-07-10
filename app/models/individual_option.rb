@@ -26,7 +26,7 @@ class IndividualOption
 	belongs_to :restaurant, index: true
 	belongs_to :odesk, index: true
 
-	default_scope -> {asc(:position)}
+	default_scope -> {asc(:created_at)}
 	index({ _id:1 }, { unique: true, name:"id_index" })
 
 
