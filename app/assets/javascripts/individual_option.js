@@ -71,6 +71,7 @@ function IndividualOption(data,option) {
     self.dish = option.dish;
     self.destroy_it = false;
     self.icon = ko.observable();
+    self.position = ko.observable(data.position);
     self.size_prices = ko.observableArray([]); 
     self.price_according_to_size = ko.observable(false); 
     self.placeholder = ko.observable("Type the option here.");
@@ -220,6 +221,7 @@ function IndividualOption(data,option) {
         self.id();
         self.name();
         self.price();
+        self.position();
         self.option.id();
         self.size_prices();
         self.price_according_to_size();

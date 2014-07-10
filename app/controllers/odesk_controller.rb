@@ -58,9 +58,10 @@ class OdeskController < ApplicationController
 
     restaurant.reload
     restaurant.menus.each do |menu|
+      menu.name_translations = menu.draft["name"]
       menu.published_menu = menu.draft_menu
       menu.published_menu.each do |section|
-        section.published_menu
+        section.publish_menu
       end
       menu.save
     end

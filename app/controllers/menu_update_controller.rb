@@ -176,7 +176,7 @@ class MenuUpdateController < ApplicationController
     # end
 
     individual_option.draft_options_id = params["option_id"]
-
+    individual_option.position = data["position"]
     draft[:name] = data["name"]
     draft[:price] = data["price"].to_f
     draft[:price_according_to_size] = data["price_according_to_size"].to_bool

@@ -188,6 +188,7 @@ class OnlinesiteController < ApplicationController
     page_view = PageView.new
     page_view.ip = request.ip
     page_view.user_agent = request.user_agent
+    page_view.referrer = request.referrer
     page_view.restaurant = restaurant
     page_view.end_point = "OnlinesiteController"
     page_view.save

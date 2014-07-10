@@ -89,9 +89,18 @@ function Option(data,dish) {
     }
 
     self.individual_options = ko.observableArray([]);
+
     if(data.individual_options){
         self.individual_options = ko.observableArray($.map(data.individual_options, function(item) { return new IndividualOption(item,self)})); 
     }
+
+    self.track_ind_opt_position = ko.computed(function(){
+        _.each(self.individual_options(),function(item,index){
+            if(item.position() != index){
+                item.position(index);
+            }
+        });
+    });     
 
     self.max_selection_list = ko.computed(function(){
         var list = [];
@@ -193,7 +202,7 @@ function Option(data,dish) {
         if(viewmodel && viewmodel.saving){
             viewmodel.saving.remove(self);
         };   
-    }
+    }    
 
     self.dirty = ko.observable(false);
     self.dirtyTrack = ko.computed(function(){
