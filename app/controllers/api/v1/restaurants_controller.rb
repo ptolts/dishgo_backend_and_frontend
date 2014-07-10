@@ -61,7 +61,7 @@ class Api::V1::RestaurantsController < ApplicationController
     page_view.ip = request.ip
     page_view.user_agent = request.user_agent
     page_view.restaurant = restaurant
-    page_view.end_point = "OnlinesiteController"
+    page_view.end_point = "RestaurantsController"
     page_view.save
   end  
 
