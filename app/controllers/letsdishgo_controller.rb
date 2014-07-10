@@ -28,7 +28,7 @@ class LetsdishgoController < ApplicationController
 		user.owns_restaurants = restaurant
 		user.save
 		restaurant.reload
-		Email.sign_up_link(user)
+		# Email.sign_up_link(user)
 		sign_in user
 		json = {}  
 		json["user"] = user.serializable_hash

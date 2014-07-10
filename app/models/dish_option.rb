@@ -184,13 +184,5 @@ class DishOption
 		return option_hash
 	end	
 
-	def migrate_ind_opt
-		DishOption.each do |option|
-			option.individual_options.each_with_index do |i_o,index|
-				i_o.position = index
-				i_o.save
-			end
-		end
-	end
 end
 

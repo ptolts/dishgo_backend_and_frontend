@@ -92,26 +92,22 @@
 	            self.progress = ko.computed({
 	            	read: function(){
 	            		if(self.pay_us()){
-		            		$(".letsdishgomeat").css("max-width","100%");
 		            		$(".letsdishgomeat").css("width","750px");	            			
 	            			return "four";
 	            		}		            		
 	            		if(self.current_restaurant().saved()){
-		            		$(".letsdishgomeat").css("max-width","100%");
 		            		$(".letsdishgomeat").css("width","750px");	            			
 	            			return "three";
 	            		}	 
 	            		if(self.current_user().sign_up_link()){
-		            		$(".letsdishgomeat").css("max-width","100%");
-		            		$(".letsdishgomeat").css("width","750px");	            			
+		            		$(".letsdishgomeat").css("width","750px");            			
 	            			return "two";
 	            		} 
-	            		$(".letsdishgomeat").css("max-width","100%");
-	            		$(".letsdishgomeat").css("width","320px");
+	            		$(".letsdishgomeat").css("width","320px");	 
             			return "one";	            		
 	            	},
 	            	deferEvaluation: true,
-	            });				            
+	            });
 
 	            self.pay = function(){
 	            	self.pay_us(true);
@@ -209,6 +205,20 @@
 	                }
 	                self.fetch_profile_images();
 	            };
+
+	            self.creating = ko.observable(false);
+	            self.creatingUser = ko.computed(function(){
+	            	if(self.creating() && self.current_user() && self.current_user().spin()){
+	            		return true;
+	            	} else {
+	            		return false;
+	            	}
+	            });
+
+	            self.submitUser = function(){
+	            	self.creating(true);
+	            	self.current_user().createSignUpUser();
+	            }
 
 	            self.createUser = function(){
 	                self.current_user(new User({}));

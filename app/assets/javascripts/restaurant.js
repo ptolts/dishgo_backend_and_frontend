@@ -305,6 +305,10 @@
                     },
                     success: function(data, textStatus, jqXHR){
                         self.spin(false);
+                        if(data.result == "User Exists!"){
+                            alert("That email address already exists in our database. Check your email for the link to sign in, or contact us for support at info@dishgo.io.\nWe apologize for the inconvenience.");
+                            return;
+                        }                        
                         var restaurant = data.restaurant;
                         data = data.user;
                         self.id(data._id);
@@ -313,6 +317,7 @@
                     },
                     error: function(XMLHttpRequest, textStatus, errorThrown) { 
                         self.spin(false);
+                        alert("Something went wrong. Maybe a bad email address?");
                         console.log("There was an error saving the section " + errorThrown);
                     },
                     dataType: "json"
