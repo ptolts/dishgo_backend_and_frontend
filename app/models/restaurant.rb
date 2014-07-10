@@ -48,7 +48,7 @@ class Restaurant
 
   belongs_to :font, class_name: "Font", index: true
   has_many :global_images, class_name: "GlobalImage", inverse_of: :restaurant
-  has_one :logo, class_name: "GlobalImage", inverse_of: :restaurant_logo
+  has_one :logo, class_name: "GlobalImage", inverse_of: :restaurant_logo, validate: false
   has_many :menu_images, class_name: "GlobalImage", inverse_of: :restaurant_menu_images
 
   field :logo_settings, type: Hash 

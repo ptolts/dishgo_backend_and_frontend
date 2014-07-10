@@ -78,7 +78,8 @@ class ProfileController < ApplicationController
 		# if !user.cards.any?{|e| e["id"] == data["id"]}		
 		# 	user.cards << data["card"]
 		# end
-		user.save
+		Rails.logger.warn "ID: #{user.to_json}"
+		user.save(validate:false)
 		render json: {success:true}.as_json
 	end
 

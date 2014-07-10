@@ -13,7 +13,7 @@ class Design
 
   has_many :restaurant
   has_many :global_images, class_name: "GlobalImage", inverse_of: :design
-  has_one :example_image, class_name: "GlobalImage", inverse_of: :design_demo
+  has_one :example_image, class_name: "GlobalImage", inverse_of: :design_demo, validate: false
 
   index({ _id:1 }, { unique: true, name:"id_index" })
 

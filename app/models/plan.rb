@@ -2,16 +2,16 @@ class Plan
   def plans
     return [
               {
-                id:"standard",
-                name:"Professional",
-                price:"34",
+                id:"premium",
+                name:"Premium",
+                price:"59.99",
                 interval:"Monthly",
                 message: "",
               },
               {
-                id:"standard_year",
-                name:"Professional Year",
-                price:"348",
+                id:"premium_year",
+                name:"Premium Year",
+                price:"610.00",
                 interval:"Yearly",
                 message: "Save 15%"
               }              
