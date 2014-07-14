@@ -27,6 +27,19 @@
 				<%= yield %>
 			</div>
 		</div>
+		<div class="letsdishgo-bottom">
+			<ul>
+				<li class="first">
+					<a href="https://dishgo.io/privacy-policy.html" target="_blank">Privacy Policy</a>
+				</li>
+				<li>
+					<a href="mailto:info@dishgo.io">Contact Us</a>
+				</li>
+				<li class="last">
+					<a href="https://dishgo.io">© DishGo</a>
+				</li>
+			</ul>
+		</div>
 	    <script type='text/javascript'>//<![CDATA[ 
 
 	        var user = <%= current_user ? raw(current_user.to_json) : {} %>;
@@ -92,15 +105,15 @@
 	            self.progress = ko.computed({
 	            	read: function(){
 	            		if(self.pay_us()){
-		            		$(".letsdishgomeat").css("width","750px");	            			
+		            		$(".letsdishgomeat").css("width","320px");	            			
 	            			return "four";
 	            		}		            		
 	            		if(self.current_restaurant().saved()){
-		            		$(".letsdishgomeat").css("width","750px");	            			
+		            		$(".letsdishgomeat").css("width","320px");	            			
 	            			return "three";
 	            		}	 
 	            		if(self.current_user().sign_up_link()){
-		            		$(".letsdishgomeat").css("width","750px");            			
+		            		$(".letsdishgomeat").css("width","320px");            			
 	            			return "two";
 	            		} 
 	            		$(".letsdishgomeat").css("width","320px");	 

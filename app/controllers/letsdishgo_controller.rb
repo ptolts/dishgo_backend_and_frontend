@@ -24,7 +24,7 @@ class LetsdishgoController < ApplicationController
 		user.skip_confirmation!
 		user.skip_confirmation_notification!
 		user.save!(:validate => false)
-		restaurant = Restaurant.create(name:"New Restaurant")
+		restaurant = Restaurant.create(name:"Restaurant Name")
 		user.owns_restaurants = restaurant
 		user.save
 		restaurant.reload
