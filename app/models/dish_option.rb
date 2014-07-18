@@ -162,7 +162,7 @@ class DishOption
 			ind_opt_hash = ind_opt.as_document
 			ind_opt_hash[:id] = ind_opt.id
 			if icon_list.include?(ind_opt.id)
-				ind_opt_hash["icon"] = ic.serializable_hash({})
+				ind_opt_hash["icon"] = ind_opt.icon.serializable_hash({})
 			end
 			next ind_opt_hash
 		end
