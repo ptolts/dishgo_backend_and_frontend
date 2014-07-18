@@ -254,7 +254,6 @@ class Restaurant
   end
 
   def api_menu_to_json
-    # result = RubyProf.profile {
       menu_to_spit_out = self.menus.def.first
       if menu_to_spit_out
         menu_to_spit_out = menu_to_spit_out.published_menu
@@ -271,12 +270,6 @@ class Restaurant
         end
         next hash
       end
-    # }
-
-    # open("callgrind.profile", "w") do |f|
-    #   RubyProf::CallTreePrinter.new(result).print(f, :min_percent => 1)
-    # end
-
     return Oj.dump(menu)
   end  
 

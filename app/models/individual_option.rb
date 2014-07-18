@@ -20,8 +20,8 @@ class IndividualOption
 	belongs_to :options, index: true, :class_name => 'DishOption', index: true, inverse_of: :individual_option
 	belongs_to :draft_options, index: true, :class_name => 'DishOption', index: true, inverse_of: :draft_individual_option
 
-	has_one :icon, class_name: "Icon", inverse_of: :individual_option, validate: false
-	has_one :draft_icon, class_name: "Icon", inverse_of: :draft_individual_option, validate: false
+	belongs_to :icon, class_name: "Icon", index: true
+	belongs_to :draft_icon, class_name: "Icon", index: true
 
 	belongs_to :restaurant, index: true
 	belongs_to :odesk, index: true
@@ -77,7 +77,7 @@ class IndividualOption
 		self.price = self.draft["price"]
 		self.size_prices = self.draft_size_prices
 		self.price_according_to_size = self.draft["price_according_to_size"]
-		self.icon = self.draft_icon
+		self.icon_id = self.draft_icon_id
 		self.save
 	end	
 

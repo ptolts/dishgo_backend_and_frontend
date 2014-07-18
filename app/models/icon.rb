@@ -12,8 +12,8 @@ class Icon
   field :height, type: Integer
   field :width, type: Integer
 
-  belongs_to :individual_option, class_name: "IndividualOption", index: true
-  belongs_to :draft_individual_option, class_name: "IndividualOption", index: true
+  has_one :individual_option, class_name: "IndividualOption", inverse_of: :icon, validate: false
+  has_one :draft_individual_option, class_name: "IndividualOption", inverse_of: :draft_icon, validate: false
 
   belongs_to :restaurant, index: true
 
