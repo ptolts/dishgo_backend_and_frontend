@@ -6,14 +6,14 @@ Foodcloud::Application.routes.draw do
     get "users/registration/confirm" => "users/registration#confirm"
   end
 
+  constraints(Letsdishgo) do
+    get '/' => 'letsdishgo#index'
+  end
+
   constraints(Subdomain) do
     get '/' => 'onlinesite#index'
     get '/robots.txt' => 'robots#index'
     get '/sitemap.xml' => 'robots#sitemap'
-  end
-
-  constraints(Letsdishgo) do
-    get '/' => 'letsdishgo#index'
   end
 
   if Rails.env.production?
