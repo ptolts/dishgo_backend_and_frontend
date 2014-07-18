@@ -74,6 +74,7 @@ h2 {
   font-size: 20px;
   font-weight: 700;
   text-shadow: 1px 2px 3px #000;
+  text-decoration: none;
 }
 
 .letsdishgo-bottom li a:hover,
@@ -269,6 +270,9 @@ select {
 @media (max-width: 767px) {
       .move {
     margin-top: 10px;
+}
+.letsdishgo-bottom li a {
+  font-size: 18px;
 }
 #bread {
     font-size: 16px;
