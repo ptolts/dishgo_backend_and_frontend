@@ -59,7 +59,9 @@ function Section(data,topmodel) {
                     self.id(data.id);          
                 },
                 error: function(XMLHttpRequest, textStatus, errorThrown) { 
-                    console.log("There was an error saving the section " + errorThrown);
+                    console.log("There was an error creating the section " + errorThrown);
+                    var ret = this;
+                    retryAjax(ret);
                 },
                 dataType: "json"
             });

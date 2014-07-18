@@ -15,6 +15,25 @@
 *= require lightbox.js
 */
 
+var internet_connection_error = ko.observable(false);
+function retryAjax(ret){
+    if(ret.retry_count == undefined){
+        ret.retry_count = 0;
+    }
+    if(ret.retry_count > 2){
+        internet_connection_error(true);
+        if(viewmodel){
+            if(viewmodel.saving()){
+                viewmodel.saving([]);
+            }
+        }
+        return;
+    } else {
+        ret.retry_count++;
+        setTimeout(function(){ $.ajax(ret); }, 3000);                              
+    }
+}
+
 ko.bindingHandlers.saving = {
     update: function (element, valueAccessor, allBindingsAccessor) {
         var value = valueAccessor()();

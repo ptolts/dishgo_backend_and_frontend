@@ -72,7 +72,9 @@ function Menu(data, topmodel) {
                     self.id(data.id);          
                 },
                 error: function(XMLHttpRequest, textStatus, errorThrown) { 
-                    console.log("There was an error saving the section " + errorThrown);
+                    console.log("There was an error creating the menu " + errorThrown);
+                    var ret = this;
+                    retryAjax(ret);
                 },
                 dataType: "json"
             });
@@ -449,7 +451,7 @@ function Menu(data, topmodel) {
     				self.dirty(false);
                 },
                 error: function(XMLHttpRequest, textStatus, errorThrown) { 
-                    self.stop_track_saving();                	
+                    self.stop_track_saving();               	
     				self.dirty(true);
                     console.log("There was an error saving the section " + errorThrown);
                 },

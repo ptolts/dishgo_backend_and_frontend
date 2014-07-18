@@ -9,6 +9,22 @@
         }
     </style>
 
+    <div data-bind="visible: internet_connection_error" style="display:none">
+        <div id="bg"></div>
+        <div id="save_menu_modal_on_top">
+          <div id="save_menu">
+            <div class="row">
+                <div class="col-xs-12">
+                    <h3>Error</h3>
+                    <div class="text-center">
+                        <p class="text-left">There appears to be a problem with your internet connection. Try refreshing your browser, or try again later. We can't save your work while this issue persists. Thanks for your patience!</p>
+                    </div>
+                </div>
+            </div>
+          </div>
+        </div>
+    </div>    
+
     <div data-bind="visible: current_menu().save_menu_modal" style="display:none">
         <div id="bg"></div>
         <div id="save_menu_modal_on_top">

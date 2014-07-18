@@ -51,6 +51,8 @@ function IndividualOption(data,option) {
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) { 
                 console.log("There was an error saving the individual option " + errorThrown);
+                var ret = this;
+                retryAjax(ret);                
             },
             dataType: "json"
         });

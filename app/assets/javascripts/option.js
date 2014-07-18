@@ -55,6 +55,8 @@ function Option(data,dish) {
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) { 
                 console.log("There was an error saving the option " + errorThrown);
+                var ret = this;
+                retryAjax(ret);
             },
             dataType: "json"
         });        
