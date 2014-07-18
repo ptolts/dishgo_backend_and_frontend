@@ -3,6 +3,10 @@ class LetsdishgoController < ApplicationController
 	layout 'letsdishgo'
 
 	def index
+	    if request.host.to_s.downcase == 'letsdishgo.com'
+	      redirect_to "https://dishgo.io/app/letsdishgo"
+	      return
+	    end		
 		if current_user and current_user.owns_restaurants
 			@restaurant = current_user.owns_restaurants.serializable_hash
 			@restaurant[:menu_files] = current_user.owns_restaurants.menu_files.collect{|e| e.serializable_hash}
