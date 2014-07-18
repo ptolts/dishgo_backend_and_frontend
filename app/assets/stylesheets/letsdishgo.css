@@ -133,7 +133,10 @@ h2 {
 .file_upload_menu_button {
   position: relative;
   text-align: center;
-  border: dashed 2px white;
+  border: dashed 2px #ffffff;
+  -moz-border-radius: 0px;
+  -webkit-border-radius: 0px;
+  border-radius: 0px;
   width: 100%;
   padding: 10px;
   overflow: hidden;
@@ -280,14 +283,13 @@ select {
 .container_small {
     margin-right: auto;
     margin-left: auto;
-    margin-top: 40px;
+    margin-top: 0;
+    border-radius: 0;
 }
 .sign-up-bread .active {
 font-size: 20px;
 }
-.file_upload_menu_button {
-  border: none;
-}
+
 .letsdishgo-bottom {
   position: relative;
   text-align: center;
