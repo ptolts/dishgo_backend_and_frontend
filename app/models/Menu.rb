@@ -43,7 +43,8 @@ class Menu
 	end	
 
 	def menu_to_json
-		icon_list = self.restaurant.icons.collect{|e| e.individual_option_id}   
+		# icon_list = self.restaurant.icons.collect{|e| e.individual_option_id}   
+		icon_list = []  
 		menu_to_spit_out = self.published_menu.pub
 		if menu_to_spit_out.empty?
 			menu_to_spit_out = Restaurant.where(name:/tuckshop/i).first.published_menu.pub
