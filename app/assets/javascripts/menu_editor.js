@@ -452,7 +452,7 @@ function MenuViewModel() {
                             success: function(data, textStatus, jqXHR){
                                 spinner.stop();
                                 $('#loading').fadeOut();
-                                bootbox.alert("Menu Published!");
+                                bootbox.alert("Menu publishing in progress. Your new menu will soon be visible!");
                             },
                             error: function(XMLHttpRequest, textStatus, errorThrown) { 
                                 spinner.stop();

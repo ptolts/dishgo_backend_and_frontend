@@ -15,6 +15,7 @@ gem 'thin'
 gem 'geoip'
 gem 'activeresource'
 gem "koala" #, "~> 1.8.0rc1"
+gem 'delayed_job_mongoid'
 # gem 'activeadmin-mongoid', :git => "https://github.com/agungyuliaji/activeadmin-mongoid.git", :branch => 'rails4'
 # gem 'activeadmin', github: 'gregbell/active_admin'  
 

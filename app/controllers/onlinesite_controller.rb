@@ -68,7 +68,7 @@ class OnlinesiteController < ApplicationController
     if !cache.menu.blank?
       @menu_data = cache.menu
     else
-      menu_d = restaurant.menus.pub.collect{|e| e.menu_json }.as_json.to_json
+      menu_d = restaurant.onlinesite_json
       cache.menu = menu_d
       cache.save
       @menu_data = menu_d

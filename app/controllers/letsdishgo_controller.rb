@@ -32,7 +32,9 @@ class LetsdishgoController < ApplicationController
 		user.owns_restaurants = restaurant
 		user.save
 		restaurant.reload
-		# Email.sign_up_link(user)
+		if Rails.env.production?
+			Email.sign_up_link(user)
+		end
 		sign_in user
 		json = {}  
 		json["user"] = user.serializable_hash

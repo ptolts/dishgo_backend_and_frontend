@@ -16,9 +16,8 @@ class Api::V1::DishController < ApplicationController
       user.ratings << rating
     end
     rating.rating = params[:rating]
-    rating.save
+    rating.save            
     user.save
-    dish.recalculate_rating    
     render json: {}.as_json
   end
 

@@ -126,7 +126,7 @@ class Dish
   def recalculate_rating
     total = 0
     self.ratings.each do |rating|
-      total += rating.rating
+      total += rating.rating.to_f
     end
     total = total / self.ratings.size
     self.rating = total.round

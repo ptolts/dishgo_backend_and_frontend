@@ -261,19 +261,8 @@ class AdministrationController < ApplicationController
 
   def publish_menu
     restaurant = Restaurant.find(params[:restaurant_id])
-    if cache = restaurant.cache
-      cache.menu = nil
-      cache.api_menu = nil
-      cache.save
-    end
-    restaurant.menus.each do |menu|
-      menu.name_translations = menu.draft["name"]
-      menu.published_menu = menu.draft_menu
-      menu.published_menu.each do |section|
-        section.publish_menu
-      end
-      menu.save
-    end
+    restaurant.publish_menu
+    restaurant.cache_job
     restaurant.save
     render json: {success:true}.as_json
   end

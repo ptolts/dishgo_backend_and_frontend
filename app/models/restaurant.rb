@@ -253,26 +253,6 @@ class Restaurant
     return Oj.dump(menu)
   end
 
-  def api_menu_to_json
-      menu_to_spit_out = self.menus.def.first
-      if menu_to_spit_out
-        menu_to_spit_out = menu_to_spit_out.published_menu
-      else
-        menu_to_spit_out = self.menus.first
-        menu_to_spit_out = menu_to_spit_out.published_menu
-      end
-      menu = menu_to_spit_out.collect do |section|
-        hash = section.as_document
-        hash[:id] = section.id
-        hash["name"] = section.name_translations["en"]
-        hash["dishes"] = section.dishes.pub.collect do |dish|
-          dish.api_custom_to_hash
-        end
-        next hash
-      end
-    return Oj.dump(menu)
-  end  
-
   def draft_menu_to_json
       menu = self.draft_menu.unscoped.draft.collect do |section|
         hash = section.as_document
@@ -327,6 +307,40 @@ class Restaurant
       page.save
       rest.pages << page
     end
+  end
+
+  #JSON GENERATORS
+  def onlinesite_json
+    return self.menus.pub.collect{|e| e.menu_json }.as_json.to_json
+  end
+
+  def api_menu_to_json
+      menu_to_spit_out = self.menus.def.first
+      if menu_to_spit_out
+        menu_to_spit_out = menu_to_spit_out.published_menu
+      else
+        menu_to_spit_out = self.menus.first
+        menu_to_spit_out = menu_to_spit_out.published_menu
+      end
+      menu = menu_to_spit_out.collect do |section|
+        hash = section.as_document
+        hash[:id] = section.id
+        hash["name"] = section.name_translations["en"]
+        hash["dishes"] = section.dishes.pub.collect do |dish|
+          dish.api_custom_to_hash
+        end
+        next hash
+      end
+    return Oj.dump(menu)
+  end  
+
+  #long running publish menu
+  def publish_menu
+    CacheJson.new.delay.publish_menu(self.id)
+  end  
+
+  def cache_job
+    CacheJson.new.delay.rebuild_cache(self.id)
   end
 
 end

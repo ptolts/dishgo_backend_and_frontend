@@ -413,7 +413,9 @@ function Dish(data, topmodel) {
         self.price();
         self.sizes();
         self.position();
-        self.images();
+        _.each(self.images(),function(image){
+            image.id();
+        });
         self.topmodel.id();
         self.track_saving();
         self.dirty(true);
