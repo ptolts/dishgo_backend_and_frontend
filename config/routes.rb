@@ -12,6 +12,10 @@ Foodcloud::Application.routes.draw do
     get '/sitemap.xml' => 'robots#sitemap'
   end
 
+  constraints(Letsdishgo) do
+    get '/' => 'letsdishgo#index'
+  end
+
   if Rails.env.production?
      get '404', :to => 'application#page_not_found'
      get '422', :to => 'application#server_error'
