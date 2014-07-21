@@ -2,7 +2,7 @@ class CacheJson
   def rebuild_cache restaurant_id
     restaurant = Restaurant.find(restaurant_id)
     cache = restaurant.cache
-    cache ||= cache.new
+    cache ||= Cache.new
     cache.api_menu = restaurant.api_menu_to_json
     cache.menu = restaurant.onlinesite_json
     cache.save
