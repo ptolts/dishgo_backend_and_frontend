@@ -34,6 +34,7 @@ class LetsdishgoController < ApplicationController
 		restaurant.reload
 		if Rails.env.production?
 			Email.sign_up_link(user)
+			Email.notify_admins(user)
 		end
 		sign_in user
 		json = {}  
