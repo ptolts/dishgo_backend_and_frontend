@@ -3,7 +3,7 @@ class LetsdishgoController < ApplicationController
 	layout 'letsdishgo'
 
 	def index
-	    if request.host.to_s.downcase == 'letsdishgo.com'
+	    if request.host.to_s.downcase == 'letsdishgo.com' || request.host.to_s.downcase == 'www.letsdishgo.com'
 	      redirect_to "https://dishgo.io/app/letsdishgo"
 	      return
 	    end		
