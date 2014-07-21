@@ -29,6 +29,7 @@
 // = require jquery.textfill.js
 // = require fastclick.js
 // = require card_validator.js
+// = require chart.min.js
 
 
 

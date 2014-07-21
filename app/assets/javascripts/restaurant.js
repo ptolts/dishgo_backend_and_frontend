@@ -47,6 +47,16 @@
             self.name = ko.observable(data.name ? data.name : copyDefaultHash(default_page_language_hash));
             self.position = ko.observable(data.position ? data.position : 0);
 
+            self.page_link = ko.computed(function(){
+                var possible_names = self.name();
+                if(possible_names['en'] && possible_names['en'].length > 0){
+                    return possible_names['en'].replace(/ /,'_');
+                }
+                if(possible_names['fr'] && possible_names['fr'].length > 0){
+                    return possible_names['fr'].replace(/ /,'_');
+                }                
+            });
+
             self.remove = function(resto){
                 bootbox.dialog({
                   message: "Remove page?",

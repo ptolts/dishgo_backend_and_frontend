@@ -10,8 +10,13 @@ class PageView
   field :user_agent, type: String
   field :end_point, type: String
   field :referrer, type: String
+  field :processed_hourly, type: Boolean
+  field :processed_daily, type: Boolean
 
   belongs_to :restaurant, class_name: "Restaurant", inverse_of: :page_views, index: true
+
+  scope :unprocessed_hourly, -> { ne(processed_hourly:true) }
+  scope :unprocessed_daily, -> { ne(processed_daily:true) }
 
   def global_count
   	c = {}

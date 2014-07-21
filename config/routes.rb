@@ -37,6 +37,13 @@ Foodcloud::Application.routes.draw do
     end
   end
 
+  resources :analytics do
+    collection do
+      post 'day_data', to: "analytics#day_data"
+      post 'week_data', to: "analytics#week_data"
+    end
+  end    
+
   resources :letsdishgo do
     collection do
       get '/', to: "letsdishgo#index"

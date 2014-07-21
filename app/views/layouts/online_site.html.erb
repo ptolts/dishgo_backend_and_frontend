@@ -62,7 +62,7 @@
 							<li><a data-bind="click: function() { goto_and_kill_menu('gallery') }, lText: gallery_tr"></a></li>
 						<!-- /ko -->							
 						<!-- ko foreach: restaurant().pages -->
-							<li><a data-bind="click: function() { $parent.goto_and_kill_menu($data.name()['en']) }, lText: name"></a></li>
+							<li><a data-bind="click: function() { $parent.goto_and_kill_menu($data.page_link()) }, lText: name"></a></li>
 						<!-- /ko -->					
 						<div class="language_select" data-bind="foreach: languages">
 							<li data-bind="css:{selected: $data === $root.lang()}, click: function(){ $root.lang($data); $root.display_menu(false) }"><a data-bind="text: $root.getFullLangName($data)"></a>
@@ -82,7 +82,7 @@
 				<nav id="navigation" class="nav">
 					<ul>
 						<!-- ko foreach: restaurant().pages -->
-							<li><a data-bind="page-href: $data.name()['en'], lText: name"></a></li>
+							<li><a data-bind="page-href: $data.page_link(), lText: name"></a></li>
 						<!-- /ko -->
 						<!-- ko if: restaurant().show_gallery() -->
 							<li><a data-bind="page-href: 'gallery', lText: gallery_tr"></a></li>
@@ -131,7 +131,7 @@
 			<!-- /ko -->
 
 			<!-- ko foreach: restaurant().pages -->
-				<div data-bind="page: {id: $data.name()['en'], title: $root.restaurant().name()}" class="pages">
+				<div data-bind="page: {id: $data.page_link(), title: $root.restaurant().name()}" class="pages">
 					<div class="content_wrapper">				
 						<%= render 'start' %>
 					</div>							

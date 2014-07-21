@@ -1,0 +1,98 @@
+ <div class="intro-splash">
+	<div class="row intro-splash-top">
+		<div class="col-xs-12">
+			<h1>Page Views</h1>
+			<p>You can checkout some statistics about your website on the chart below. Want more traffic? Contact us, we can help!</p>
+		</div>
+	</div>
+
+
+	<div class="row">
+		<div class="col-sm-6 col-sm-offset-3 text-center">
+			<div class="btn-group">
+				<button type="button" class="btn btn-default" data-bind="click: function(){ day_data(); }">24 Hours</button>
+				<button type="button" class="btn btn-default" data-bind="click: function(){ week_data(); }">7 Days</button>
+			</div>			
+		</div>		
+		<div class="col-sm-6 col-sm-offset-3 text-center">
+			<canvas id="canvas" height="350" width="600"></canvas>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+	
+	function MainViewModel(data) {
+		var self = this;
+		self.chart = new Chart($("#canvas").get(0).getContext("2d"));
+		self.chart_data = {
+			labels : [],
+			datasets : [],
+		};		
+		self.base_data_set = {
+								fillColor : "rgba(151,187,205,0.5)",
+								strokeColor : "rgba(151,187,205,1)",
+								pointColor : "rgba(151,187,205,1)",
+								pointStrokeColor : "#fff",
+							};
+		self.global_chart;
+
+		self.day_data = function(){
+            $.ajax({
+				type: "POST",
+				url: "/app/analytics/day_data",
+				data: {
+					restaurant_id: "<%= current_user.owns_restaurants.id %>",
+				},
+				success: function(data, textStatus, jqXHR){
+					if(self.global_chart)
+						self.global_chart.destroy();
+					document.getElementById("canvas").width = 600;
+					document.getElementById("canvas").height = 350;						
+					var chart_data = self.chart_data;
+					chart_data.labels = data.labels;
+					var data_set = self.base_data_set;
+					data_set.data = data.data;
+					chart_data.datasets = [data_set];
+					self.global_chart = self.chart.Bar( chart_data );            		
+				},
+				error: function(XMLHttpRequest, textStatus, errorThrown) { 
+
+				},
+				dataType: "json"
+            }); 
+		}
+
+		self.week_data = function(){
+            $.ajax({
+				type: "POST",
+				url: "/app/analytics/week_data",
+				data: {
+					restaurant_id: "<%= current_user.owns_restaurants.id %>",
+				},
+				success: function(data, textStatus, jqXHR){				
+					if(self.global_chart)
+						self.global_chart.destroy();
+					document.getElementById("canvas").width = 600;
+					document.getElementById("canvas").height = 350;					
+					var chart_data = self.chart_data;
+					chart_data.labels = data.labels;
+					var data_set = self.base_data_set;
+					data_set.data = data.data;
+					chart_data.datasets = [data_set];
+					self.global_chart = self.chart.Bar( chart_data );            		           		
+				},
+				error: function(XMLHttpRequest, textStatus, errorThrown) { 
+
+				},
+				dataType: "json"
+            }); 
+		}		
+
+		self.week_data();
+	}
+	
+	var vm = new MainViewModel();
+	ko.applyBindings(vm);
+	
+</script>
