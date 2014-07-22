@@ -73,7 +73,7 @@
 	filter: none;
 }
 .content_wrapper {
-	width: 700px;
+	min-width: 700px;
 	max-height: 95%;
 	/*min-height: 200px;*/
 	padding: 15px;
@@ -255,7 +255,7 @@
 
 	.content_wrapper {
 		position: absolute;
-		width: 100%;
+		min-width: 100%;
 		max-height: none;
 		min-height: 100%;
 		top: 70px;
