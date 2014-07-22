@@ -2,23 +2,42 @@
 	<div class="row intro-splash-top">
 		<div class="col-xs-12">
 			<div class="row">
-				<div class="col-xs-8"><h1>Page Views</h1></div>
+				<div class="col-xs-8"><h2>Website Statistics</h2></div>
 				<div class="col-xs-4"><h6 class="pull-right">*Experimental</h6></div>
 			</div>
-			<p>You can checkout some statistics about your website on the chart below. Want more traffic? Contact us, we can help!</p>
+			<div class="row">
+				<div class="col-xs-12 text-center">
+					<p>You can checkout some statistics about your website on the chart below. Want more traffic? Contact us, we can help!</p>
+				</div>
+			</div>			
 			<br />
 		</div>
 	</div>
 
 
 	<div class="row">
-		<div class="col-sm-6 col-sm-offset-3 text-center">
+		<div class="col-sm-5 text-center">
+			<div class="row">
+				<div class="col-xs-12">
+					<h3>Total Views: <%= @total_traffic %></h3>
+				</div>	
+			</div>
+			<div class="row">
+				<div class="col-xs-12">
+					<h3>Unique Visitors: <%= @unique %></h3>
+				</div>	
+			</div>				
+			<div class="row">
+				<div class="col-xs-12">
+					<h3>Users on page now: <%= @active %></h3>
+				</div>	
+			</div>				
+		</div>	
+		<div class="col-sm-6 text-center">
 			<div class="btn-group">
 				<button type="button" class="btn btn-default" data-bind="click: function(){ day_data(); }">24 Hours</button>
 				<button type="button" class="btn btn-default" data-bind="click: function(){ week_data(); }">7 Days</button>
-			</div>			
-		</div>		
-		<div class="col-sm-6 col-sm-offset-3 text-center">
+			</div>				
 			<canvas id="canvas" height="350" width="600"></canvas>
 		</div>
 	</div>

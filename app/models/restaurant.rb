@@ -56,7 +56,7 @@ class Restaurant
   field :website_settings, type: Hash
 
   has_many :sources, :class_name => "Sources"
-  has_many :image, :class_name => "Image", inverse_of: :restaurant
+  has_many :image, :class_name => "Image", inverse_of: :restaurant, validate: false
   has_many :icons, :class_name => "Icon", inverse_of: :restaurant
   has_many :gallery_images, :class_name => "Image", inverse_of: :restaurant_gallery
 
@@ -128,57 +128,63 @@ class Restaurant
   end
 
   def copy_menu_from_restaurant restaurant
-    sections = restaurant.published_menu.pub.collect do |section|
-      section_dup = section.dup
-      section_dup.restaurant = self
-      section_dup.dishes = section.dishes.collect do |dish|
-        dish_dup = dish.dup
-        dish_dup.restaurant = self
-        dish_dup.image = dish.image.collect do |image|
-          image_dup = image.dup
-          image_dup.restaurant = self
-          image_dup.save
-          next image_dup
-        end
-        id_match = {}
-        sizes_dup = dish.sizes.dup
-        sizes_dup.restaurant = self
-        sizes_dup.individual_options = dish.sizes.individual_options.collect do |ind_opt|
-          ind_opt_dup = ind_opt.dup
-          ind_opt_dup.restaurant = self
-          ind_opt_dup.save
-          id_match[ind_opt.id.to_s] = ind_opt_dup.id.to_s
-          next ind_opt_dup
-        end
-        dish_dup.sizes = sizes_dup         
-        dish_dup.options = dish.options.collect do |option|
-          option_dup = option.dup
-          option_dup.restaurant = self
-          option_dup.individual_options = option.individual_options.collect do |ind_opt|
-            ind_opt_dup = ind_opt.dup
-            ind_opt_dup.restaurant = self
-            # Set size_id to point to new size object ids.
-            ind_opt_dup.size_prices.each do |size_price|
-              size_price['size_id'] = id_match[size_price['size_id']]
-            end
-            ind_opt_dup.save
-            next ind_opt_dup
+    menus = restaurant.menus.collect do |menu|
+      menu_dup = menu.dup
+      menu_dup.restaurant_id = self.id
+      sections = menu.published_menu.pub.collect do |section|
+        section_dup = section.dup
+        section_dup.restaurant_id = self.id
+        section_dup.dishes = section.dishes.collect do |dish|
+          dish_dup = dish.dup
+          dish_dup.restaurant_id = self.id
+          dish_dup.image = dish.image.collect do |image|
+            image_dup = image.dup
+            image_dup.restaurant_id = self.id
+            image_dup.save
+            next image_dup
           end
-          option_dup.save
-          next option_dup
-        end     
-        dish_dup.save 
-        next dish_dup
+          id_match = {}
+          if dish.sizes
+            sizes_dup = dish.sizes.dup
+            sizes_dup.restaurant = self
+            sizes_dup.individual_options = dish.sizes.individual_options.collect do |ind_opt|
+              ind_opt_dup = ind_opt.dup
+              ind_opt_dup.restaurant_id = self.id
+              ind_opt_dup.save
+              id_match[ind_opt.id.to_s] = ind_opt_dup.id.to_s
+              next ind_opt_dup
+            end
+            dish_dup.sizes = sizes_dup 
+          end
+          dish_dup.options = dish.options.collect do |option|
+            option_dup = option.dup
+            option_dup.restaurant_id = self.id
+            option_dup.individual_options = option.individual_options.collect do |ind_opt|
+              ind_opt_dup = ind_opt.dup
+              ind_opt_dup.restaurant_id = self.id
+              # Set size_id to point to new size object ids.
+              ind_opt_dup.size_prices.each do |size_price|
+                size_price['size_id'] = id_match[size_price['size_id']]
+              end
+              ind_opt_dup.save
+              next ind_opt_dup
+            end
+            option_dup.save
+            next option_dup
+          end     
+          dish_dup.save 
+          next dish_dup
+        end
+        section_dup.save
+        next section_dup
       end
-      section_dup.save
-      next section_dup
+      menu_dup.save
+      menu_dup.draft_menu = sections
+      menu_dup.reset_draft_menu
+      next menu_dup
     end
-    self.published_menu = sections
-    self.draft_menu = sections
-    self.draft_menu.each do |section|
-      section.reset_draft_menu
-    end    
     self.save
+    self.publish_menu
   end
 
   def copy_section_from_restaurant section
@@ -300,17 +306,6 @@ class Restaurant
     return hash
   end
 
-  def port_about
-    Restaurant.ne(about_text:nil).each do |rest|
-      next if rest.pages.count > 0
-      page = Page.create
-      page.name_translations = {"en"=>"About","fr"=>"Sur"}
-      page.html_translations = rest.about_text_translations
-      page.save
-      rest.pages << page
-    end
-  end
-
   #JSON GENERATORS
   def onlinesite_json
     return self.menus.pub.collect{|e| e.menu_json }.as_json.to_json
@@ -339,6 +334,7 @@ class Restaurant
   #long running publish menu
   def publish_menu
     CacheJson.new.delay.publish_menu(self.id)
+    cache_job
   end  
 
   def cache_job

@@ -1,0 +1,124 @@
+<div class="container menu_container">
+    <div class="menu_row" style="position: relative">
+        <div class="menu_header">
+            <img src="https://6b4fc3f2e545a64911f5-bc3823134dac282175788fae91ee3089.ssl.cf5.rackcdn.com/5c8d932aed7324fe58b84dee9f86b4abd585c32f_original.png?1395693326" class="img-responsive">
+        </div>
+        <div class="resto_logo" style="display: none">
+            <div class="center">
+                <div class="menu_logo" data-bind="with: $root.restaurant">
+                    <h1 class="" data-bind="text: name" style="width: 80%;"><%= @resto_data["name"] %></h1>
+                </div>
+            </div>
+        </div>
+
+    </div>    
+    <div class="row">
+        <div class="each_dish">
+            <!-- ko foreach: menu -->
+                    <div class="section">
+                        <div class="section_title">
+                            <h1 data-bind="lText: name"></h1>
+                            <h2 data-bind="lText: description, lVisible: description"></h2>
+                        </div>
+                        <div class="row mason" data-bind="foreach: dishes, maxHeight: 'dish_min_height'">
+                            <!-- dish on screen -->
+                            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 dish_min_height dish_cursor dish" data-bind="fadeVisible: !$root.showDetails(), click: function(){ pager.navigate('#!/' + $data.id()) }">
+                                <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 dish_picture" data-bind="visible: large_title_image">
+                                    <img class="img-responsive" data-bind="menuImage: lazyLoadMediumImage">
+                                </div>
+                                <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 dish_info" data-bind="css: { dish_full : !large_title_image() }">
+                                    <div class="dish_title">
+                                        <h2 data-bind="lText: name"></h2>
+                                    </div>
+                                    <div class="dish_description">
+                                        <p data-bind="lTruncatedText: description"></p>
+                                    </div>
+                                    <div class="dish_price">
+                                        <div data-bind="template: { name: price_template }"></div>
+                                        <script id="single_price" type="text/x-jQuery-tmpl">
+                                            <span class="text">Price: </span>
+                                            <span class="currency-symbol">$</span>
+                                            <span class="number" data-bind="text: pretty_price"></span>
+                                        </script>
+                                        <script id="many_prices" type="text/x-jQuery-tmpl">
+                                            <!-- ko foreach: sizes_object().individual_options -->
+                                                <span class="text-sm"><!-- ko lText: name --><!-- /ko -->:</span>
+                                                <span class="currency-symbol-sm">$</span>
+                                                <span class="number-sm" data-bind="text: pretty_price"></span>
+                                            <!-- /ko -->
+                                        </script>                                                           
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- dish modal -->
+                            <div data-bind="page: {id: $data.id(), afterShow: function(){ $('body').addClass('stop_scrolling'); $data.modalVisible(true)}, afterHide: function(){ $('body').removeClass('stop_scrolling'); $data.modalVisible(false) }}" class="custom_modal">
+                                <div class="modal_background" data-bind="click: function(){ pager.navigate($page.parentPage.path()) }"></div>
+                                <!-- custom_modal -->
+                                <div class="custom_modal_dialog">
+                                    <div class="custom_modal_content" data-bind="style:{'min-width':computedWidth,'min-height':computedHeight}">
+                                        <div class="custom_modal_header" data-bind="css:{'noBorderBottom':noContent}">
+                                            <a class="close" data-bind="page-href: '../'">&times;</a>
+                                            <div class="row">
+                                                <div class="col-xs-8">
+                                                    <h4 class="custom_modal-title pull-left" data-bind="lText: name"></h4>
+                                                </div>
+                                                <div class="col-xs-4">
+                                                    <div class="dish-price">
+                                                        <span class="number" data-bind="text: computed_price"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="custom_modal_body" data-bind="stop_scroll">
+                                            <div class="dish_modal_body">
+                                                <div class="dish_image col-xs-12 col-sm-12 col-md-12 col-lg-5">
+                                                    <img class="img-responsive" data-bind="visible: large_title_image, modalImage: lazyLoadImage">
+                                                </div>
+
+                                                <div class="dish_info col-xs-12 col-sm-12 col-md-12 col-lg-7">
+
+                                                    <div class="dish-description">
+                                                        <p data-bind="lText: description"></p>
+                                                    </div>
+
+                                                    <div data-bind="visible: sizes, with: sizes_object" class="demo_options">
+                                                        <h3>Select Size</h3>
+                                                        <!-- ko forEachWithLength: individual_options -->
+                                                            <label class="button lightText square grey float_option_size col-xs-12 col-sm-12 col-md-12 col-lg-5" data-bind="css: {'active': $parents[1].sizeSelectedOptionValue() === $data, 'dish_modal_full_width': dish_modal_full_width($length, $index)}"><input name="sizes_radio" type="radio" data-bind="checkedValue: $data, checked: $parents[1].sizeSelectedOptionValue" style="opacity: 0; width: 0px"/>
+                                                                <span class="text"><!-- ko lText: name --><!-- /ko --></span>
+                                                                <!-- ko if: price --><span class="number"><span class="currency-symbol">$</span><!-- ko text: price--><!-- /ko --></span><!-- /ko -->
+                                                            </label>
+                                                        <!-- /ko -->
+                                                    </div>
+
+                                                    <!-- ko foreach: options -->
+                                                        <div class="demo_options">
+                                                            <h3 data-bind="lText: name"></h3>
+                                                            <!-- ko forEachWithLength: individual_options -->
+                                                                <label class="button lightText square red float_option col-xs-12 col-sm-12 col-md-12 col-lg-5" data-bind="css: {'active': $parent.selectedOptionValue().indexOf($data) >= 0, 'dish_modal_full_width': dish_modal_full_width($length, $index)}">
+                                                                    <input name="sizes_radio" type="checkbox" data-bind="checkedValue: $data, checked: $parent.selectedOptionValue, attr:{disabled: clickable}" style="opacity: 0; width: 0px">
+                                                                    <span class="text"><!-- ko lText: name --><!-- /ko --></span>
+                                                                    <!-- ko if: computed_price() != "" && $parent.extra_cost() --><span class="number"><span class="currency-symbol">$</span><!-- ko text: computed_price--><!-- /ko --></span><!-- /ko -->
+                                                                    <!-- ko if: $data.icon -->
+                                                                        <img class="col-xs-12 thumbnail" data-bind="attr: {src: icon().url()}"/>
+                                                                    <!-- /ko -->
+                                                                </label>
+                                                            <!-- /ko -->
+                                                            <h6 data-bind="visible: advanced"><!-- ko if: min_selections() > 0 -->* Select at least <!-- ko text: min_selections() --><!-- /ko --><!-- /ko --> <!-- ko if: max_selections() > 0 -->* Select at most <!-- ko text: max_selections() --><!-- /ko --><!-- /ko --></h6>
+                                                        </div>
+                                                    <!-- /ko -->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- dish custom_modal -->
+                        </div>
+                    </div>
+            <!-- /ko -->
+        </div>
+    </div>
+</div>
+                

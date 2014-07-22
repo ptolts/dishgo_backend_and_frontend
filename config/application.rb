@@ -81,6 +81,7 @@ module Foodcloud
                                     'signin.css',
                                     'letsdishgo.css',
                                     'onlinesite_javascript.js',
+                                    'network_javascript.js',
                                     'loading_widget.css',
                                 ]
 

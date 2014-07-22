@@ -11,6 +11,7 @@
 *= require menu_base
 *= require lightbox
 *= require gallery
+*= require network
 *= require_self
 */
 

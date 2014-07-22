@@ -37,6 +37,12 @@ Foodcloud::Application.routes.draw do
     end
   end
 
+  resources :network do
+    collection do
+      get '/', to: "network#index"
+    end
+  end   
+
   resources :analytics do
     collection do
       post 'day_data', to: "analytics#day_data"
@@ -132,6 +138,14 @@ Foodcloud::Application.routes.draw do
       post 'update_font'
     end
   end  
+
+  resources :copymenu do
+    collection do
+      get 'index'
+      post 'search'
+      post 'initiate_copy'    
+    end
+  end
 
   resources :administration do
     collection do

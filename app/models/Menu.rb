@@ -42,6 +42,20 @@ class Menu
 		return hash
 	end	
 
+	def reset_draft_menu
+		draft = {}
+		draft[:name] = self.name_translations
+		draft[:description] = self.description_translations
+		draft[:position] = self.position
+		self.draft_position = self.position
+		self.draft = draft
+		self.draft_menu = self.published_menu
+		self.draft_menu.each do |section|
+			section.reset_draft_menu
+		end
+		self.save
+	end		
+
 	def menu_to_json
 		# icon_list = self.restaurant.icons.collect{|e| e.individual_option_id}   
 		icon_list = []  

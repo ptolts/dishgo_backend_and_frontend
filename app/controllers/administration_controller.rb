@@ -16,7 +16,12 @@ class AdministrationController < ApplicationController
   end
 
   def index
-
+    if restaurant = current_user.owns_restaurants and restaurant_id = restaurant.id
+      @total_traffic = PageView.where(restaurant_id: restaurant_id).count
+      now = DateTime.now - 5.minute
+      @active = PageView.where(:restaurant_id => restaurant_id, :created_at.gte => now).pluck(:ip).uniq.count
+      @unique = PageView.where(:restaurant_id => restaurant_id).pluck(:ip).uniq.count
+    end
   end
 
   def list_in_app
@@ -262,7 +267,6 @@ class AdministrationController < ApplicationController
   def publish_menu
     restaurant = Restaurant.find(params[:restaurant_id])
     restaurant.publish_menu
-    restaurant.cache_job
     restaurant.save
     render json: {success:true}.as_json
   end

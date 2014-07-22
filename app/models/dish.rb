@@ -212,7 +212,7 @@ class Dish
     self.options = self.draft_options
     self.image = self.draft_image
     self.sizes = self.draft_sizes unless self.sizes == self.draft_sizes
-    self.sizes.publish_menu
+    self.sizes.publish_menu if self.sizes
     self.options.each do |option|
       option.publish_menu
     end

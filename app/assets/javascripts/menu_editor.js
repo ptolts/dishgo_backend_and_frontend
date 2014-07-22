@@ -13,6 +13,7 @@
 *= require size_prices.js
 *= require restaurant
 *= require lightbox.js
+*= require network.js
 */
 
 var internet_connection_error = ko.observable(false);

@@ -52,7 +52,7 @@
 	</div>
 </div>
 
-<% if current_user.owns_restaurants %>
+<% if current_user.owns_restaurants and (!current_user.owns_restaurants.host.blank? or !current_user.owns_restaurants.subdomain.blank?) %>
 	<%= render 'analytics' %>
 <% end %>
 

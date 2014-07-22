@@ -428,6 +428,11 @@
                 self.images(_.map(images,function(image){ return new ImageObj(image) }));
             }                   
 
+            if(data.menus){
+                self.has_menu = data.menus.length > 0 ? true : false;
+                self.menu_names = _.collect(data.menus,function(m){ return m.name });
+            }
+
             self.images = ko.observableArray([]);
             if(data.image){
                 self.setupProfileImages(data.image);

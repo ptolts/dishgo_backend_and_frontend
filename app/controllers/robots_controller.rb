@@ -52,7 +52,7 @@ class RobotsController < ApplicationController
 
 	pages = ['menu','contact']
 	restaurant.pages.each do |page|
-		pages << page.name
+		pages << page.name.to_s.gsub(/\s/,'_')
 	end
 
 	pages.each do |page|

@@ -1,0 +1,202 @@
+<div class="container" style="margin-top: 25px">
+
+    <style type="text/css">
+        body {
+          background-color: white;
+          background-image: none;
+        }
+        body {
+            margin-top: 20px;
+        }        
+    </style>
+
+    <div class="row">
+        <div class="col-xs-5 restaurant_admin_list">
+            <div class="row">
+                <div class="col-xs-12">
+                    <h2>Copy From:</h2>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="form-inline" role="form">
+                        <input class="form-control" data-bind="value: search_term" />
+                        <button class="btn btn-default" data-bind="click: search">Search</button>             
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12" style="overflow: scroll">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Address</th>
+                            </tr>
+                        </thead>
+                        <tbody data-bind="template: { name: 'menu_from', foreach: with_menus }"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <script id="menu_from" type="text/html">
+                <tr data-bind="click: function(){ $root.copy_from($data) }">
+                    <td>
+                        <p data-bind="text: name" style="max-width: 200px; overflow: hidden"></p>
+                    </td>                       
+                    <td>
+                        <p data-bind="text: address_line_1" style="max-width: 200px; overflow: hidden"></p>
+                    </td>                                                           
+                </tr>   
+            </script>
+
+        </div>
+       
+        <div class="col-xs-5 restaurant_admin_list col-xs-offset-2">
+            <div class="row">
+                <div class="col-xs-12">
+                    <h2>Copy To:</h2>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12" style="overflow: scroll">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Address</th>
+                            </tr>
+                        </thead>
+                        <tbody data-bind="template: { name: 'menu_to', foreach: without_menus }"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <script id="menu_to" type="text/html">
+                <tr data-bind="click: function(){ $root.copy_to($data) }">
+                    <td>
+                        <p data-bind="text: name" style="max-width: 200px; overflow: hidden"></p>
+                    </td>                       
+                    <td>
+                        <p data-bind="text: address_line_1" style="max-width: 200px; overflow: hidden"></p>
+                    </td>                                                           
+                </tr>   
+            </script>
+
+        </div>   
+    </div>
+
+    <div class="restaurant_admin_list">
+        <div class="row">
+            <div class="col-xs-4" data-bind="with: copy_from">
+                <div class="col-xs-4">
+                    <p data-bind="text: name" style="max-width: 200px; overflow: hidden"></p>
+                </div>        
+                <div class="col-xs-4">
+                    <p data-bind="text: address_line_1" style="max-width: 200px; overflow: hidden"></p>   
+                </div>
+                <div class="col-xs-4">
+                    <ul data-bind="foreach: menu_names">
+                        <li data-bind="text: $data" style="max-width: 200px; overflow: hidden"></li>   
+                    </ul>
+                </div>            
+            </div>
+            <div class="col-xs-1">
+                <i class="fa fa-exchange"></i>
+            </div>
+            <div class="col-xs-4" data-bind="with: copy_to">
+                <div class="col-xs-6">
+                    <p data-bind="text: name" style="max-width: 200px; overflow: hidden"></p>
+                </div>        
+                <div class="col-xs-6">
+                    <p data-bind="text: address_line_1" style="max-width: 200px; overflow: hidden"></p>   
+                </div>            
+            </div>
+            <div class="col-xs-3">
+                <button class="btn btn-default col-xs-12" data-bind="click: initiate_copy, disbale: spin">Copy! <i class="fa fa-spinner fa-spin pull-right" data-bind="visible: spin"></i></button>
+            </div>            
+        </div>   
+    </div>   
+
+    <%= render 'shared/restaurant_admin_template' %>
+    <%= render 'shared/admin_set_design_template' %>
+    <%= render 'shared/menu_images_template' %> 
+    <%= render 'shared/profileimages_template' %>
+
+    <script type='text/javascript'>//<![CDATA[ 
+
+        function viewModel() {
+            var self = this;
+            self.restaurants = ko.observableArray([]);
+            self.search_term = ko.observable();
+            self.copy_from = ko.observable();
+            self.copy_to = ko.observable();
+
+            self.with_menus = ko.computed({
+                read: function(){
+                    return _.filter(self.restaurants(),function(restaurant){
+                        return restaurant.has_menu;
+                    });
+                },
+                deferEvaluation: true,
+            });
+
+            self.without_menus = ko.computed({
+                read: function(){
+                    return _.filter(self.restaurants(),function(restaurant){
+                        return !restaurant.has_menu;
+                    });
+                },
+                deferEvaluation: true,
+            });            
+
+            self.spin = ko.observable(false);
+
+            self.search = function() {
+                $.ajax({
+                    type: "POST",
+                    url: "/app/copymenu/search",
+                    data: {
+                        restaurant_name: self.search_term(),
+                    },
+                    success: function(data){
+                        self.restaurants($.map(data, function(item) { console.log(item); return new Restaurant(item) }));
+                    },
+                    dataType: 'json'
+                });
+            };
+
+            self.initiate_copy = function() {
+                self.spin(true);
+                $.ajax({
+                    type: "POST",
+                    url: "/app/copymenu/initiate_copy",
+                    data: {
+                        from: self.copy_from().id,
+                        to: self.copy_to().id,
+                    },
+                    success: function(data){
+                        self.spin(false);
+                        alert("Success");
+                    },
+                    error: function(data){
+                        self.spin(false);
+                        alert("Error!");
+                    },
+                    dataType: 'json'
+                });
+            };
+     
+        };
+
+        var viewmodel = new viewModel();
+        ko.applyBindings(viewmodel);
+  
+
+    //]]>  
+    </script>    
+
+</div>

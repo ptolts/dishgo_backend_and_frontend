@@ -1,0 +1,30 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+        	<div class="restaurant-data pull-left">
+            	<div class="restaurant-pic pull-left">
+            		<span class="restaurant-like"><a href="#"><i class="glyphicon glyphicon-heart-empty"></i></a></span>
+            		<span class="restaurant-share"><a href="#"><i class="glyphicon glyphicon-share"></i></a></span>
+            		<span class="restaurant-plus"><a href="#"><i class="glyphicon glyphicon-plus-sign"></i></a></span>
+            		<a href="#">
+            			<img src="http://placehold.it/122x122" alt="" class="img-responsive" />
+            		</a>
+            	</div>
+                <div class="restaurant-prfle pull-right">
+                	<div class="restaurant-title">
+                    	<%= @restaurant.name %>
+                    </div>
+                    <div class="counter-tab">
+                    	<div class="counter_comnt"><i class="glyphicon glyphicon-comment"></i> 359</div>
+                    	<div class="counter_like"><i class="glyphicon glyphicon-heart"></i> 2256</div>
+                    </div>
+                </div>
+                <div class="bot-links">
+                    <% @restaurant.category.each do |category| %>
+                	   <a href="#"><%= category %></a>
+                    <% end %>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
