@@ -11,6 +11,7 @@ class FacebookController < ApplicationController
       oauth = Koala::Facebook::OAuth.new(ENV['FB_APP_ID'], ENV['FB_APP_SECRET'])
       facebook_page_details = oauth.parse_signed_request(params[:signed_request])
       #SESSION REQUEST: {"algorithm"=>"HMAC-SHA256", "issued_at"=>1398970432, "page"=>{"id"=>"711697415561117", "liked"=>false, "admin"=>true}, "user"=>{"country"=>"ca", "locale"=>"en_US", "age"=>{"min"=>21}}}
+      Rails.logger.warn "#{facebook_page_details}"      
       if page_id = facebook_page_details["page"]["id"]
         restaurant = Restaurant.where(facebook_page_id:page_id).first
       end
