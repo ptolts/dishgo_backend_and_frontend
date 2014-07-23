@@ -17,6 +17,7 @@ class FacebookController < ApplicationController
     end
 
     if !restaurant and facebook_page_details["page"]["admin"].to_s == "true"
+      Rails.logger.warn "#{facebook_page_details}\nNo Restaurant Associated with that Facebook page. Starting Setup"
       setup_page
       return
     end
@@ -126,6 +127,7 @@ class FacebookController < ApplicationController
 
   def setup_page
     if !current_user
+      Rails.logger.warn "No Current User. fb_sign_in"
       fb_sign_in
       return
     end

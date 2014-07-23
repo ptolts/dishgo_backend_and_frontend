@@ -17,10 +17,11 @@ class CopymenuController < ApplicationController
   def initiate_copy
     from = Restaurant.find(params["from"])
     to = Restaurant.find(params["to"])
-    if to.menus.count > 0
-      render json:{success:false}, status: 500
-      return
-    end
+    to.menus.destroy_all
+    # if to.menus.count > 0
+    #   render json:{success:false}, status: 500
+    #   return
+    # end
     to.copy_menu_from_restaurant from
     render json:{success:true}
   end

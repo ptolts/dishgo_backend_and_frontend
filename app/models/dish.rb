@@ -257,7 +257,7 @@ class Dish
   def custom_to_hash icon_list = []
     dish_hash = self.as_document
     dish_hash[:id] = self.id
-    dish_hash["sizes"] = self.sizes.custom_to_hash icon_list
+    dish_hash["sizes"] = (self.sizes.custom_to_hash icon_list) if self.sizes
     dish_hash["options"] = self.options.collect do |option|
       next option.custom_to_hash icon_list
     end
@@ -273,7 +273,7 @@ class Dish
     dish_hash[:id] = self.id
     dish_hash["name"] = self.name_translations["en"]
     dish_hash["description"] = self.description_translations["en"]
-    dish_hash["sizes"] = self.sizes.api_custom_to_hash
+    dish_hash["sizes"] = self.sizes.api_custom_to_hash if self.sizes
     dish_hash["options"] = self.options.collect do |option|
       next option.api_custom_to_hash
     end

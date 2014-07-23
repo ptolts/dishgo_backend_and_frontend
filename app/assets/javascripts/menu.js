@@ -51,7 +51,11 @@ function Menu(data, topmodel) {
 
     self.menu_id = ko.computed({
     	read: function(){
-    		return self.name()[lang()].replace(/\s/,"_");
+    		if(self.name()[lang()]){
+    			return self.name()[lang()].replace(/\s/,"_");
+    		} else {
+    			return "menu";
+    		}
     	},
     	deferEvaluation: true
     });

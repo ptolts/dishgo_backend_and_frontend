@@ -131,12 +131,15 @@ class Restaurant
     menus = restaurant.menus.collect do |menu|
       menu_dup = menu.dup
       menu_dup.restaurant_id = self.id
+      menu_dup.save      
       sections = menu.published_menu.pub.collect do |section|
         section_dup = section.dup
         section_dup.restaurant_id = self.id
+        section_dup.save
         section_dup.dishes = section.dishes.collect do |dish|
           dish_dup = dish.dup
           dish_dup.restaurant_id = self.id
+          dish_dup.section_id = section_dup.id
           dish_dup.image = dish.image.collect do |image|
             image_dup = image.dup
             image_dup.restaurant_id = self.id
@@ -146,7 +149,7 @@ class Restaurant
           id_match = {}
           if dish.sizes
             sizes_dup = dish.sizes.dup
-            sizes_dup.restaurant = self
+            sizes_dup.restaurant_id = self.id
             sizes_dup.individual_options = dish.sizes.individual_options.collect do |ind_opt|
               ind_opt_dup = ind_opt.dup
               ind_opt_dup.restaurant_id = self.id
@@ -175,11 +178,11 @@ class Restaurant
           dish_dup.save 
           next dish_dup
         end
+        section_dup.published_menu_id = menu_dup.id
         section_dup.save
         next section_dup
       end
-      menu_dup.save
-      menu_dup.draft_menu = sections
+      menu_dup.reload    
       menu_dup.reset_draft_menu
       next menu_dup
     end
