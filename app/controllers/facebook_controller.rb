@@ -17,6 +17,8 @@ class FacebookController < ApplicationController
       end
     end
 
+    Rails.logger.warn "restaurant: #{restaurant}"      
+
     if !restaurant and facebook_page_details["page"]["admin"].to_s == "true"
       Rails.logger.warn "#{facebook_page_details}\nNo Restaurant Associated with that Facebook page. Starting Setup"
       setup_page
