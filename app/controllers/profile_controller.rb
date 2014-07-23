@@ -37,14 +37,24 @@ class ProfileController < ApplicationController
 
 	def subscribe
 		data = JSON.parse(params[:data])
+		plan_hash = { :plan => data["id"] }
+		if !params[:coupon].blank?
+			begin
+				Stripe::Coupon.retrieve(params[:coupon])
+			rescue => msg
+				render json: {success:"bad_coupon"};
+				return
+			end
+			plan_hash[:coupon] = params[:coupon]
+		end
 		begin
-			customer = Stripe::Customer.retrieve(current_user.stripe_token)	
+			customer = Stripe::Customer.retrieve(current_user.stripe_token)
 			if customer["subscriptions"]["total_count"] == 0
-				customer.subscriptions.create(:plan => data["id"])			
+				customer.subscriptions.create(plan_hash)			
 			else plan = customer["subscriptions"]["data"].first
 				Rails.logger.warn plan.to_s
 				plan = customer.subscriptions.retrieve(plan["id"])
-				customer.update_subscription(:plan => data["id"])
+				customer.update_subscription(plan_hash)
 			end	
 		rescue Stripe::APIConnectionError => message
 			Rails.logger.warn "Error with stripe.\n#{msg.to_s}"

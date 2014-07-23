@@ -87,40 +87,5 @@ class Menu
 		end
 		return menu
 	end 
-
-	def migrate
-		Restaurant.includes(:draft_menu,:published_menu).has_menu.each do |restaurant|
-			# next if restaurant.menus.count > 0
-			# next if restaurant.published_menu.empty?
-			# puts restaurant.name
-			restaurant.menus.destroy_all
-			menu_list = []
-			restaurant.draft_menu.each do |section|
-				if section.menu_link
-					menu = Menu.create
-					menu.name_translations = section.name_translations
-					menu.restaurant = restaurant
-					menu.published_menu << section
-					menu.draft_menu << section
-					menu_list << menu
-				end
-			end
-			published_menu = restaurant.published_menu.to_a.delete_if{|e| e.menu_link}
-			draft_menu = restaurant.draft_menu.to_a.delete_if{|e| e.menu_link}
-			menu = Menu.create
-			menu.default_menu = true
-			menu.position = 0
-			menu.name_translations = {'en'=>'Menu','fr'=>'La Carte'}
-			menu.restaurant = restaurant
-			menu.published_menu = published_menu
-			menu.draft_menu = draft_menu
-			menu.save
-			menu_list.each_with_index do |q,index|
-				q.position = index + 1
-				q.save
-			end
-		end
-		Cache.destroy_all
-	end
 end
 

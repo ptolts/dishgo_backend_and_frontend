@@ -62,6 +62,7 @@
                 self.phone = ko.observable(data.phone);
                 self.stripe_token = ko.observable(data.stripe_token ? data.stripe_token : null);
                 self.cards = ko.observableArray([]);
+                self.coupon = ko.observable("");
                 self.errorMessage = ko.observable();
                 self.disableButton = ko.observable(false);
                 self.validCard = ko.observable(false);
@@ -121,12 +122,19 @@
                             $.ajax({
                               type: "POST",
                               url: "/app/profile/subscribe",
-                              data: { data:ko.toJSON(self.plan())},
+                              data: { 
+                                data:ko.toJSON(self.plan()),
+                                coupon: self.coupon(),
+                              },
                               success: function(data, textStatus, jqXHR){
+                                    if(data.success == "bad_coupon"){
+                                        alert("Invalid Coupon.");
+                                        return;
+                                    }                                
                                     alert("Subscribed!");
                                 },
-                                error: function(XMLHttpRequest, textStatus, errorThrown) { 
-                                    console.log("There was an error saving the section " + errorThrown);
+                                error: function(data, XMLHttpRequest, textStatus, errorThrown) { 
+                                    alert(errorThrown);
                                 },
                                 dataType: "json"
                             }); 

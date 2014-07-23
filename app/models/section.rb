@@ -15,8 +15,8 @@ class Section
 	belongs_to :restaurant, class_name: "Restaurant", inverse_of: :section, index: true
 	belongs_to :odesk, index: true
 
-	belongs_to :draft_restaurant, class_name: "Restaurant", inverse_of: :draft_menu, index: true
-	belongs_to :published_restaurant, class_name: "Restaurant", inverse_of: :published_menu, index: true
+	# belongs_to :draft_restaurant, class_name: "Restaurant", inverse_of: :draft_menu, index: true
+	# belongs_to :published_restaurant, class_name: "Restaurant", inverse_of: :published_menu, index: true
 
 	belongs_to :menu_draft, class_name: "Menu", inverse_of: :draft_menu, index: true
 	belongs_to :published_menu, class_name: "Menu", inverse_of: :published_menu, index: true	

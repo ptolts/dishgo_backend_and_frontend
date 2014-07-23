@@ -685,40 +685,40 @@ function PublicMenuModel() {
 
 ko.bindingHandlers.jcrop = {
     update: function(element, valueAccessor, allBindings, viewModel, bindingContext){
-        var self = this;
-        var value = valueAccessor();
-        var valueUnwrapped = ko.unwrap(value);
+        // var self = this;
+        // var value = valueAccessor();
+        // var valueUnwrapped = ko.unwrap(value);
 
-        //console.log(value);
-        //console.log(valueUnwrapped);
+        // //console.log(value);
+        // //console.log(valueUnwrapped);
 
-        var update_cords = function update_crop(coords) {
-            viewModel.coordinates = [coords.x,coords.y,coords.w,coords.h];
-           //console.log(viewModel.coordinates);
-        }
+        // var update_cords = function update_crop(coords) {
+        //     viewModel.coordinates = [coords.x,coords.y,coords.w,coords.h];
+        //    //console.log(viewModel.coordinates);
+        // }
 
-        $(element).attr("src",valueUnwrapped.src());
+        // $(element).attr("src",valueUnwrapped.src());
 
-        $(element).css({
-            width: valueUnwrapped.width(),
-            height: valueUnwrapped.height(),
-        })
+        // $(element).css({
+        //     width: valueUnwrapped.width(),
+        //     height: valueUnwrapped.height(),
+        // })
 
-        JcropAPI = $(element).data('Jcrop');
+        // JcropAPI = $(element).data('Jcrop');
 
-        if(JcropAPI != undefined) {
-            JcropAPI.destroy();
-        }
+        // if(JcropAPI != undefined) {
+        //     JcropAPI.destroy();
+        // }
 
-        $(element).Jcrop({ 
-                boxWidth:   450,
-                bgColor:    'black',
-                bgOpacity:  .4,
-                setSelect:  [ 100, 100, 50, 50 ], 
-                onChange: update_cords,
-                onSelect: update_cords,
-            }
-        );
+        // $(element).Jcrop({ 
+        //         boxWidth:   450,
+        //         bgColor:    'black',
+        //         bgOpacity:  .4,
+        //         setSelect:  [ 100, 100, 50, 50 ], 
+        //         onChange: update_cords,
+        //         onSelect: update_cords,
+        //     }
+        // );
 
     }
 };

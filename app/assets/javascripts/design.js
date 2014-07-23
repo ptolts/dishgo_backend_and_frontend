@@ -119,7 +119,7 @@
 	    self.name = ko.observable(data.name || "");
 	    self.css = ko.observable(data.css || "");
 	    self.description = ko.observable("");
-	    self.url = ko.observable("/loader.gif");
+	    self.url = ko.observable("");
 	    self.custom = ko.observable(false);
 	    self.destroyed = ko.observable(false);
 	    self.fresh = ko.observable(true);
@@ -307,7 +307,7 @@
       	self.apply = function(){}
 
       	self.computedImageUpload = ko.computed(function(){
-      		if(self.url() != "/loader.gif"){
+      		if(self.url() != ""){
       			return "Replace Image";
       		} else {
       			return "Upload Image";

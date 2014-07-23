@@ -19,7 +19,7 @@ class WebsiteController < ApplicationController
 		@font_id = restaurant.font.id if restaurant.font					
 		@designs = all_designs
 		@fonts = Font.all.as_json
-		@sections = restaurant.published_menu.collect{|s| s_h = s.as_document; s_h["name"] = s.name_translations; next s_h}.as_json
+		@sections = restaurant.section.collect{|s| s_h = s.as_document; s_h["name"] = s.name_translations; next s_h}.as_json
 		render 'website'
 	end
 

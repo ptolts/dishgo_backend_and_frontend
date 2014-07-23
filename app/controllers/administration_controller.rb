@@ -204,65 +204,65 @@ class AdministrationController < ApplicationController
     @resto_data[:images] = restaurant.image.reject{|e| e.img_url_medium.blank?}.collect{|e| e.serializable_hash({})}
     @resto_data[:menus] = restaurant.menus.pub.collect{|e| e.edit_menu_json }
     @resto_data = @resto_data.as_json
-    # @menu_data = "{ \"menu\" : #{restaurant.draft_menu_to_json} }".as_json
   	render 'edit_menu'
   end  
 
   def update_menu
 
     #when the user first edits the menu, make the menu editor visible in his toolbar.
-    unless current_user.sign_up_progress["edit_menu"]
-      u = current_user
-      u.sign_up_progress["edit_menu"] = true
-      u.save
-    end
+   #  unless current_user.sign_up_progress["edit_menu"]
+   #    u = current_user
+   #    u.sign_up_progress["edit_menu"] = true
+   #    u.save
+   #  end
 
-    # IF YOU EVER NEED TO SCALE, THIS COULD BE A PLACE TO OPTIMIZE
-  	restaurant = Restaurant.find(params[:restaurant_id])
-    # menu = JSON.parse(params[:menu]).collect do |section|
-  	menu = Oj.load(params[:menu]).collect do |section|
-      # Load Option Object, or create a new one.
-      if section_object = Section.where(:_id => section["id"]).first and section_object
-        if section_object.restaurant_id != restaurant.id
-          Rails.logger.warn "#{section_object.restaurant.to_json} != #{restaurant.to_json}"
-          render :json => {:error => "Invalid Permissions"}.as_json
-          return
-        end
-      else
-        section_object = Section.create
-        section_object.published = false
-        section_object.restaurant = restaurant
-      end  
+   #  # IF YOU EVER NEED TO SCALE, THIS COULD BE A PLACE TO OPTIMIZE
+  	# restaurant = Restaurant.find(params[:restaurant_id])
+   #  # menu = JSON.parse(params[:menu]).collect do |section|
+  	# menu = Oj.load(params[:menu]).collect do |section|
+   #    # Load Option Object, or create a new one.
+   #    if section_object = Section.where(:_id => section["id"]).first and section_object
+   #      if section_object.restaurant_id != restaurant.id
+   #        Rails.logger.warn "#{section_object.restaurant.to_json} != #{restaurant.to_json}"
+   #        render :json => {:error => "Invalid Permissions"}.as_json
+   #        return
+   #      end
+   #    else
+   #      section_object = Section.create
+   #      section_object.published = false
+   #      section_object.restaurant = restaurant
+   #    end  
 
-      # Setups the section data, but make sure the user has permission to edit each object.
-      if !section_object.load_data_from_json(section,restaurant)
-        render :json => {:error => "Invalid Permissions"}.as_json
-        return
-      end
+   #    # Setups the section data, but make sure the user has permission to edit each object.
+   #    if !section_object.load_data_from_json(section,restaurant)
+   #      render :json => {:error => "Invalid Permissions"}.as_json
+   #      return
+   #    end
 
-      next section_object
-  	end
+   #    next section_object
+  	# end
 
-    restaurant.preview_token = loop do
-      token = SecureRandom.urlsafe_base64
-      break token unless Restaurant.where(preview_token: token).count > 0
-    end if restaurant.preview_token.blank?
+   #  restaurant.preview_token = loop do
+   #    token = SecureRandom.urlsafe_base64
+   #    break token unless Restaurant.where(preview_token: token).count > 0
+   #  end if restaurant.preview_token.blank?
 
-    restaurant.draft_menu = menu
-    restaurant.save
-    # render :json => ("{ \"menu\" : #{restaurant.draft_menu_to_json} }")
-    render :json => ("{ \"preview_token\" : \"/app/onlinesite/preview/#{restaurant.preview_token}\" }")
+   #  restaurant.draft_menu = menu
+   #  restaurant.save
+   #  # render :json => ("{ \"menu\" : #{restaurant.draft_menu_to_json} }")
+   #  render :json => ("{ \"preview_token\" : \"/app/onlinesite/preview/#{restaurant.preview_token}\" }")
 
   end
 
   def reset_draft_menu
-    restaurant = Restaurant.find(params[:restaurant_id])
-    restaurant.draft_menu = restaurant.published_menu
-    restaurant.draft_menu.each do |section|
-      section.reset_draft_menu
-    end
-    restaurant.save
-    render :text => "{\"success\":\"true\"}"    
+    return
+    # restaurant = Restaurant.find(params[:restaurant_id])
+    # restaurant.draft_menu = restaurant.published_menu
+    # restaurant.draft_menu.each do |section|
+    #   section.reset_draft_menu
+    # end
+    # restaurant.save
+    # render :text => "{\"success\":\"true\"}"    
   end
 
   def publish_menu

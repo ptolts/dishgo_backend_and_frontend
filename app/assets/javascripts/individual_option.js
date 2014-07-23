@@ -11,7 +11,7 @@ IndividualOption.prototype.fastJSON = function(){
             }
             if(typeof result == "object"){
                 if(property == "size_prices"){
-                    fast[property] = ko.toJS(result);
+                    fast[property] = _.collect(result,function(res){ return res.fastJSON() });
                     continue;
                 }                   
                 if(result == null){
@@ -206,6 +206,7 @@ function IndividualOption(data,option) {
         deferEvaluation: true,
     });
 
+
     self.track_saving = function(){
         if(viewmodel && viewmodel.saving){
             viewmodel.saving.push(self);
@@ -225,7 +226,9 @@ function IndividualOption(data,option) {
         self.price();
         self.position();
         self.option.id();
-        self.size_prices();
+        _.each(self.size_prices(),function(s){
+            s.price();
+        });
         self.price_according_to_size();
         self.track_saving();
         self.dirty(true);

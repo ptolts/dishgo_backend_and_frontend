@@ -24,7 +24,9 @@ SizePrices.prototype.fastJSON = function(){
             fast[property] = result;
         }
     } 
-    return JSON.stringify(fast);    
+    // This model doesn't save itself, so we return the raw JS object.
+    return fast;
+    // return JSON.stringify(fast);    
 }
 
 SizePrices.prototype.toJSON = function() {

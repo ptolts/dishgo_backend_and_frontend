@@ -3,10 +3,10 @@
     self.progressValue = ko.observable(1);
     self.filename = ko.observable("");
     self.id = ko.observable("");
-    self.url = ko.observable("/loader.gif");
-    self.original = ko.observable("/loader.gif");
-    self.medium = ko.observable("/loader.gif");
-    self.small = ko.observable("/loader.gif");
+    self.url = ko.observable("");
+    self.original = ko.observable("");
+    self.medium = ko.observable("");
+    self.small = ko.observable("");
     self.completed = ko.observable(false);
     self.image_width = ko.observable(0);
     self.image_height = ko.observable(0);
@@ -27,7 +27,7 @@
             self.image_height = ko.observable(data.height);            
         }
         self.rejected(data.rejected ? data.rejected : false);
-        self.small = ko.observable(data.small ? data.small : "/loader.gif");
+        self.small = ko.observable(data.small ? data.small : "");
     }
 
     self.crop = function(){

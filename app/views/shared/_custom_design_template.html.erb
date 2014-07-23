@@ -143,7 +143,7 @@
                     <img data-bind="attr:{src:defaultImage().url()}, click: drop">
                     <div class="image_dropdown_div" data-bind="visible: dropdowning, event: {mouseleave: dropdowning(false)}">
                         <ul data-bind="foreach: global_images">
-                            <!-- ko if: url() != '/loader.gif' -->
+                            <!-- ko if: url() != '' -->
                                 <li><img data-bind="click: $parent.setDefault, attr:{src:url}"></li>
                             <!-- /ko -->
                         </ul> 

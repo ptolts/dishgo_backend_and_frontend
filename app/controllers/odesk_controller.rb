@@ -107,7 +107,7 @@ class OdeskController < ApplicationController
       result = result.where(:id.in => resto_ids)
     end
     if params[:hide_with_menu].to_bool
-      section_ids = Section.ne(published_restaurant_id:nil).only(:published_restaurant_id).collect{|e| e.published_restaurant_id }.flatten.uniq
+      section_ids = Section.ne(restaurant_id:nil).only(:restaurant_id).collect{|e| e.published_restaurant_id }.flatten.uniq
       Rails.logger.warn "section_ids: #{section_ids.to_s}"
       result = result.not_in(:id => section_ids)
     end
