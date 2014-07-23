@@ -95,8 +95,10 @@ class Restaurant
   index({ locs: "2dsphere" }, { name:"location_index"})
   index({ subdomain: 1}, {name: "subdomain_index"})
   index({ host: 1}, {name: "host_index"})
+  index({ facebook_page_id: 1}, {name: "facebook_page_id_index"})
+  index({ preview_token: 1}, {name: "preview_token_index"})
 
-  scope :has_menu, -> { any_in(:_id => includes(:published_menu).select{ |w| w.published_menu.size > 0 }.map{ |r| r.id }) }
+  scope :has_menu, -> { any_in(:_id => includes(:section).select{ |w| w.section.size > 0 }.map{ |r| r.id }) }
 
   def by_loc loc=nil
     if loc
