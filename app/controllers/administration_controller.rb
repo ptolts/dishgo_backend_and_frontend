@@ -128,6 +128,7 @@ class AdministrationController < ApplicationController
       render :json => {result: "Failure!"}.as_json
       return
     end
+    email.downcase!
     if User.where(:email => email).count > 0
       render :json => {result: "User Exists!"}.as_json
       return

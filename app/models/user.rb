@@ -73,6 +73,11 @@ class User
 
   before_save :setup_link_field
   before_save :sign_up_link_field
+  before_save {|user| 
+                if !user.email.blank?
+                  user.email = user.email.downcase
+                end
+              }
 
   def setup_link_field
     if !self.email.blank? and password.blank? and setup_link.blank?

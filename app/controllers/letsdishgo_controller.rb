@@ -18,7 +18,7 @@ class LetsdishgoController < ApplicationController
 
 	def create_user_and_restaurant
 		data = JSON.parse(params[:params])
-		email = data["email"]
+		email = data["email"].downcase
 		phone = data["phone"]    
 		if User.where(:email => email).count > 0
 		  render :json => {result: "User Exists!"}.as_json

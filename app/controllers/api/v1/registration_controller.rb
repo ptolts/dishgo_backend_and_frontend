@@ -9,12 +9,12 @@ class Api::V1::RegistrationController  < ApplicationController
       return
     end
 
-    if User.where(:email => params[:email]).count > 0
+    if User.where(:email => params[:email].downcase).count > 0
       render :json => {:error => "Email exists."}, :status=>422
       return      
     end
     
-    @user = User.new({ :email => params[:email], :password => params[:password] })
+    @user = User.new({ :email => params[:email].downcase, :password => params[:password] })
     @user.save
 
     if sign_in @user
