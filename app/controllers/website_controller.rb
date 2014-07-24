@@ -94,7 +94,6 @@ class WebsiteController < ApplicationController
 		restaurant.font = Font.find(params["font_id"])
 		restaurant.logo_settings = restaurant_data["logo_settings"]
 		# Rails.logger.warn restaurant_data
-		restaurant.about_text_translations = restaurant_data["about_text"]
 
 		pages = restaurant_data["pages"].collect do |page|
 			p = Page.where(id:page["id"]).first

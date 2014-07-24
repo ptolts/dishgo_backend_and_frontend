@@ -417,8 +417,6 @@
 
             self.odesk = ko.observable(data.odesk ? new Odesk(data.odesk) : null );
 
-            self.about_text = ko.observable(data.about_text ? data.about_text : copyDefaultHash(default_web_language_hash));
-
             self.pages = ko.observableArray([]);
             if(data.pages){
                 self.pages(_.map(data.pages,function(page){ return new Page(page) }));

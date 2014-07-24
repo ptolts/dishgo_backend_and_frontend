@@ -42,8 +42,6 @@ class Restaurant
 
   field :does_delivery, type: Boolean, default: false
 
-  field :about_text, localize: true
-
   field :hours, type: Hash 
 
   belongs_to :font, class_name: "Font", index: true
@@ -299,12 +297,12 @@ class Restaurant
     return hash
   end
 
-  def as_document
-    hash = super
+  def as_document options = {}
+    hash = super()
     if self.logo
       hash["logo"] = self.logo.as_json
     end
-    if self.pages
+    if self.pages and !options[:pages]
       hash["pages"] = self.pages.as_json
     end
     if self.gallery_images

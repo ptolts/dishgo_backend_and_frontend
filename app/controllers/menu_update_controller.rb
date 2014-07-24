@@ -160,8 +160,10 @@ class MenuUpdateController < ApplicationController
       end
     else
       restaurant = Restaurant.find(params[:restaurant_id])
+      if individual_option.restaurant.nil?
+        individual_option.restaurant = restaurant
+      end
       if(individual_option.restaurant != restaurant)
-        Rails.logger.warn "#{individual_option.restaurant.id} != #{restaurant.id}"
         nice_try
         return
       end

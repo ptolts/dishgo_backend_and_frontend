@@ -1,7 +1,9 @@
 class Api::V1::RestaurantAdminController < ApplicationController
   respond_to :json
   skip_before_filter :verify_authenticity_token
-  before_filter :api_admin_or_owner!
+  before_filter :authenticate_user!
+  before_filter :api_admin_or_owner_variable_only!
+  before_filter :api_admin_or_owner!, except: [:upload_image_file]
   
   def upload_image
     resto = current_user.owns_restaurants
@@ -25,25 +27,28 @@ class Api::V1::RestaurantAdminController < ApplicationController
   end
 
   def upload_image_file
-    resto = current_user.owns_restaurants
+    resto = Restaurant.find(params[:restaurant_id])
     data = params
     file = params[:image]
     md5_sum = Digest::MD5.hexdigest(file.read)
 
     img = Image.new
     img.restaurant = resto
+    img.user = current_user
     img.update_attributes({:img => file})
     img.manual_img_fingerprint = md5_sum
     dish = Dish.find(params[:dish_id])
     dish.image << img
     dish.draft_image << img
-    dish.save    
+    dish.save 
     img.save
-      
-    if cache = resto.cache
-      cache.api_menu = nil
-      cache.save
+
+    if @admin or @owner
+      img.unverified = true
+      img.save
+      resto
     end
+
     render :json => {success:true}.as_json
   end  
 

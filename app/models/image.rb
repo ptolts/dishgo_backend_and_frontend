@@ -17,6 +17,7 @@ class Image
   field :source, type: String
   field :position, type: Integer
   field :rejected, type: Boolean, default: false
+  field :unverified, type: Boolean, default: false
 
   field :img_url_medium, type: String
   field :img_url_original, type: String
@@ -28,6 +29,8 @@ class Image
   field :height, type: Integer
   field :width, type: Integer  
 
+  belongs_to :user, class_name: "User", inverse_of: :dish_images, index: true
+
   belongs_to :restaurant, class_name: "Restaurant", inverse_of: :image, index: true
   belongs_to :restaurant_gallery, class_name: "Restaurant", inverse_of: :gallery_images, index: true
 
@@ -35,7 +38,8 @@ class Image
   
   index({ _id:1 }, { unique: true, name:"id_index" })
 
-  scope :rejected, -> { ne(rejected: true) }   
+  scope :rejected, -> { ne(rejected: true) }
+  default_scope -> { ne(unverified: true) } 
 
   has_mongoid_attached_file :img, {
       :path           => ':hash_:style.png',

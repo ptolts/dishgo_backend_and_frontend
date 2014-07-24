@@ -11,12 +11,12 @@ class Api::V1::RestaurantsController < ApplicationController
     Rails.logger.warn params.to_s
 
     restaurants = Restaurant.new.by_loc [params[:lat].to_f,params[:lon].to_f]
-    restaurants.reject!{|e| e.menus.all?{|r| r.published_menu.empty? } }
     restaurants = restaurants.collect do | restaurant |
-      hash = restaurant.as_document
+      hash = restaurant.as_document({pages: true})
       hash[:image] = restaurant.image.rejected.collect do |image|
         next image.custom_to_hash
       end
+      hash[:image] = hash[:image][0..5]
       hash
     end
 
