@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container network_menu_header">
     <div class="row">
         <div class="col-md-4">
         	<div class="restaurant-data pull-left">
@@ -27,4 +27,11 @@
             </div>
         </div>
     </div>
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4">
+            <!-- ko foreach: menus -->
+                <button class="btn btn-default" data-bind="click: function(){ $root.selected_menu($data) }, lText: name"></button>
+            <!-- /ko -->
+        </div>
+    </div>        
 </div>

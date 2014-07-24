@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>DishGo</title>
+	<%= stylesheet_link_tag    "application", :media => "all" %>
+	<%= javascript_include_tag "application" %>	
+    <%= javascript_include_tag "menu_editor" %>	
+	<%= csrf_meta_tags %>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+</head>
+
+<style>
+	body {
+	  padding-top: 40px;
+	  background-image:url('/app/grey@2x.png');
+	}
+</style>
+
+<body>
+	<%= render 'shared/nav_bar' %>		
+	<% yield %>
+</body>
+</html>

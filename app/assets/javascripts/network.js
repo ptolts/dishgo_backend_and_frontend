@@ -1,3 +1,44 @@
+ko.bindingHandlers.menuVisibleImage = {
+    update: function (element, valueAccessor, allBindings, viewModel, bindingContext) {
+        var underlyingObservable = valueAccessor();
+        if(bindingContext['$menu']){
+            element.setAttribute('src', underlyingObservable());
+        } else {
+            element.setAttribute('src', "");
+        }
+    }
+};
+
+ko.bindingHandlers.networkMaxHeight = {
+    update: function (element, valueAccessor, allBindingsAccessor, viewModel, bindingContext) {
+        var value = valueAccessor();
+        var page = bindingContext['$menu']();
+        if(page){
+            console.log("Menu Visible");
+        }
+        if($(window).width() > 768){
+            setTimeout(function (element, value) {
+                var maxHeight = 0;
+                $(element).children("."+value).each(function(index,elem){
+                    var elem = $(elem);
+                    if(elem.outerHeight() > maxHeight)
+                        maxHeight = elem.outerHeight();
+                });
+                $(element).children("."+value).css('min-height',maxHeight+'px');
+            }, 0, element, value);
+        }
+    }    
+}
+
+ko.bindingHandlers.currentMenu = {
+    init: function(element, valueAccessor, allBindings, viewModel, bindingContext) {
+        bindingContext['$menu'] = ko.observable(bindingContext['$root'].selected_menu() == bindingContext['$data']);
+    },
+    update: function(element, valueAccessor, allBindings, viewModel, bindingContext) {
+        bindingContext['$menu'](bindingContext['$root'].selected_menu() == bindingContext['$data']);
+    }
+};
+
 function NetworkModel() {
 
     if(!ko["menuVisible"]){
@@ -132,20 +173,17 @@ function NetworkModel() {
                                         }
     ));
 
-    self.menu = ko.computed(function(){
-        var m;
-        _.each(self.menus(),function(menu){
-            if(menu.default_menu()){
-                m = menu.menu();
-            }
-        });
-        if(m){
-            return m;
-        }
-        if(self.menus().length > 0){
-            return self.menus()[0].menu();
+    self.selected_menu = ko.observable();
+
+    _.each(self.menus(),function(menu){
+        if(menu.default_menu()){
+            self.selected_menu(menu);
         }
     });
+
+    if(!self.selected_menu() && self.menus().length > 0){
+        self.selected_menu(self.menus()[0].menu());
+    }
 
     self.computeImage = function(image){
         //console.log(image);
