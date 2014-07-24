@@ -78,6 +78,7 @@ class MenuUpdateController < ApplicationController
     else
       restaurant = Restaurant.find(params[:restaurant_id])
       if(dish.restaurant != restaurant)
+        Rails.logger.warn "#{dish.restaurant.id} != #{restaurant.id}"
         nice_try
         return
       end
@@ -160,6 +161,7 @@ class MenuUpdateController < ApplicationController
     else
       restaurant = Restaurant.find(params[:restaurant_id])
       if(individual_option.restaurant != restaurant)
+        Rails.logger.warn "#{individual_option.restaurant.id} != #{restaurant.id}"
         nice_try
         return
       end
@@ -186,6 +188,7 @@ class MenuUpdateController < ApplicationController
   end
 
   def nice_try
+    Rails.logger.warn "NICE TRY."
     render json: {success:false}.as_json
   end
 end

@@ -66,6 +66,7 @@ class Restaurant
   has_many :section, :class_name => "Section", inverse_of: :restaurant
   has_many :dishes, :class_name => "Dish", inverse_of: :restaurant
   has_many :options, :class_name => "DishOption", inverse_of: :restaurant
+  has_many :individual_options, :class_name => "IndividualOption", inverse_of: :restaurant
 
   # has_many :draft_menu, :class_name => "Section", inverse_of: :draft_restaurant
   # has_many :published_menu, :class_name => "Section", inverse_of: :published_restaurant
@@ -344,6 +345,35 @@ class Restaurant
     CacheJson.new.delay.rebuild_cache(self.id)
   end
 
+
+  def fix_menus
+    ['530bcd5b80410efe30000c78'].each do |id|
+      r = Restaurant.find(id)
+      rr = Restaurant.find("530bd69180410efe30006a61")
+      r.menus.destroy_all
+      r.section.each{|e| e.restaurant_id = rr.id; e.save}
+      r.options.each{|e| e.restaurant_id = rr.id; e.save}
+      r.dishes.each{|e| e.restaurant_id = rr.id; e.save}
+      r.individual_options.each{|e| e.restaurant_id = rr.id; e.save}
+      r.image.each{|e| e.restaurant_id = rr.id; e.save}
+    end
+
+    ['530bcd6e80410efe30000dab','530bcd5b80410efe30000c78','530bce2a80410efe30001a02'].each do |id|
+      r = Restaurant.find(id)
+      r.menus.destroy_all
+      r.section.destroy_all
+      r.options.destroy_all
+      r.dishes.destroy_all
+      r.individual_options.destroy_all
+    end
+
+    rr = Restaurant.find("530bd69180410efe30006a61")
+    rr.dishes.each do |dish|
+      if Dish.where("name.en" => dish.name_translations['en'], "name.fr" => dish.name_translations['fr'], restaurant_id: rr.id).count > 1
+        dish.destroy
+      end
+    end
+  end
 end
 
 
