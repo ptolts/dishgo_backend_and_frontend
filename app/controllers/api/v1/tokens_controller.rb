@@ -28,29 +28,12 @@ class Api::V1::TokensController  < ApplicationController
     # http://rdoc.info/github/plataformatec/devise/master/Devise/Models/TokenAuthenticatable
     @user.ensure_authentication_token
 
-    if not @user.valid_password?(password)
+    if !@user.valid_password?(password)
       logger.info("User #{email} failed signin, password [REDACTED] is invalid")
       render :status=>401, :json=>{:message=>"Invalid email or password."}
-    else
-      reso = @user.addresses.to_a.find{|e| e.default}
-      if reso
-        reso = reso.attributes.inject({}){|res,x| res[x[0]] = x[1]; res}
-      else
-        reso = {}
-      end
-
-      current_orders = @user.orders.collect{|e| {:confirmed => e.confirmed, :order_id => e.id.to_s} }
-
-      reso = {:current_orders => current_orders, :foodcloud_token=>@user.authentication_token, :phone_number => @user.phone_number, :last_name => @user.last_name, :first_name => @user.first_name}.merge(reso).merge(@user.serializable_hash {})
-
-      if @user.owns_restaurants
-        reso[:owns_restaurant_id] = @user.owns_restaurants.id
-      end
-
-      Rails.logger.warn reso.to_json
-
-      render :status=>200, :json=> reso
     end
+
+    build_data_and_respond
   end
 
   def create_from_facebook
@@ -90,20 +73,47 @@ class Api::V1::TokensController  < ApplicationController
 
     @user.ensure_authentication_token
 
+    build_data_and_respond
+    # reso = @user.addresses.to_a.find{|e| e.default}
+    # if reso
+    #   reso = reso.attributes.inject({}){|res,x| res[x[0]] = x[1]; res}
+    # else
+    #   reso = {}
+    # end   
+
+    # current_orders = @user.orders.collect{|e| {:confirmed => e.confirmed, :order_id => e.id.to_s} }
+
+    # reso = {:current_orders => current_orders, :phone_number => @user.phone_number, :facebook_name => profile["name"], :facebook_id => profile["id"], :foodcloud_token => @user.authentication_token, :last_name => @user.last_name, :first_name => @user.first_name}.merge(reso) 
+
+    # Rails.logger.warn "RESULT: #{reso.to_json}"
+
+    # render :json => reso
+  end
+
+  def build_data_and_respond
     reso = @user.addresses.to_a.find{|e| e.default}
     if reso
       reso = reso.attributes.inject({}){|res,x| res[x[0]] = x[1]; res}
     else
       reso = {}
-    end   
+    end
 
     current_orders = @user.orders.collect{|e| {:confirmed => e.confirmed, :order_id => e.id.to_s} }
 
-    reso = {:current_orders => current_orders, :phone_number => @user.phone_number, :facebook_name => profile["name"], :facebook_id => profile["id"], :foodcloud_token => @user.authentication_token, :last_name => @user.last_name, :first_name => @user.first_name}.merge(reso) 
+    reso = {
+            :current_orders => current_orders,
+            :foodcloud_token=>@user.authentication_token,
+            :phone_number => @user.phone_number,
+            :last_name => @user.last_name,
+            :first_name => @user.first_name,
+            :dishcoins => @user.dishcoins,
+          }.merge(reso).merge(@user.serializable_hash {})
 
-    Rails.logger.warn "RESULT: #{reso.to_json}"
+    if @user.owns_restaurants
+      reso[:owns_restaurant_id] = @user.owns_restaurants.id
+    end
 
-    render :json => reso
+    render :status=>200, :json=> reso
   end
 
   def destroy

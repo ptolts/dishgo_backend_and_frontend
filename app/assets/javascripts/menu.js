@@ -60,6 +60,8 @@ function Menu(data, topmodel) {
     	deferEvaluation: true
     });
 
+    self.selected_section = ko.observable(null);
+
     if(data._id){
         self.id(data._id);
     } else {

@@ -82,7 +82,21 @@ function Section(data,topmodel) {
                 item.position(index);
             }
         });
-    });    
+    });
+
+    self.check_visible = ko.computed({
+        read: function(){
+            if(topmodel && topmodel.selected_section){
+                if(topmodel.selected_section() == null || topmodel.selected_section() == self){
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+            return true;
+        },
+        deferEvaluation: true
+    });
 
     self.printJson = function(){
         console.log(ko.toJSON(self.id));

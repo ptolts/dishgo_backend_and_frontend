@@ -53,7 +53,10 @@ class User
   field :phone_number,           :type => String 
   field :last_name,              :type => String 
   field :is_admin,               :type => Boolean, :default => false   
-  field :first_name,             :type => String    
+  field :first_name,             :type => String 
+
+  #DISHCOINS
+  field :dishcoins,      :type => Integer, :default => 0
 
   # Confirmable
   field :confirmation_token,   :type => String

@@ -14,7 +14,7 @@ var localizedMessages = {
     'remove_menu' : {
         'en':"Are you sure you want to remove the menu titled \"MESSAGE\"?",
         'fr':"",
-    }        
+    },
 }
 
 function Language(name,abbreviation){
@@ -142,7 +142,15 @@ var translations = {
     "currently" : {
         "en" : "Currently",
         "fr" : "Presentement",
-    }      
+    },
+    'jump_to' : {
+        'en':"Jump to Section",
+        'fr':"Aller à la Section",
+    },
+    'all' : {
+        'en':"- All",
+        'fr':"- Tous",
+    },       
 };
 
 function copyDefaultHash(hash) {

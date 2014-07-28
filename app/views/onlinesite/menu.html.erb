@@ -10,12 +10,26 @@
 								</div>
 							</div>
 		                </div>
-                
+		                <div class="section_control" data-bind="">
+		                	<div class="col-xs-10 col-xs-offset-1">
+								<div class="btn-group">
+									<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+										<!-- ko lStaticText: 'jump_to' --><!-- /ko --> <span class="caret"></span>
+									</button>
+									<ul class="dropdown-menu" role="menu">
+										<li><a href="#" data-bind="lStaticText: 'all', click: function(){ $parent.selected_section(null) }"></a></li>
+										<!-- ko foreach: menu -->
+											<li><a href="#" data-bind="lText: name, click: function(){ $parent.selected_section($data) }"></a></li>
+										<!-- /ko -->
+									</ul>
+								</div>
+							</div>
+		                </div>
 			        </div>    
 			            <div class="row">
 			                <div class="each_dish">
         						<!-- ko foreach: menu -->
-					                    <div class="section">
+					                    <div class="section" data-bind="visible: check_visible">
 					                        <div class="section_title">
 					                            <h1 data-bind="lText: name"></h1>
 					                            <h2 data-bind="lText: description, lVisible: description"></h2>

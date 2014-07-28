@@ -521,6 +521,8 @@ ko.bindingHandlers.lStaticText = {
     }
 };
 
+ko.virtualElements.allowedBindings.lStaticText = true; 
+
 function PublicMenuModel() {
 
     if(!ko["menuVisible"]){

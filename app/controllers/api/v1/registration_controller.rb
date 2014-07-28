@@ -1,5 +1,5 @@
 class Api::V1::RegistrationController  < ApplicationController
-
+  skip_before_filter :verify_authenticity_token  
   respond_to :json
 
   def create
@@ -16,6 +16,8 @@ class Api::V1::RegistrationController  < ApplicationController
     
     @user = User.new({ :email => params[:email].downcase, :password => params[:password] })
     @user.save
+    @user.skip_confirmation!
+    @user.skip_confirmation_notification!
 
     if sign_in @user
       @user.ensure_authentication_token
