@@ -215,8 +215,15 @@ h2 {
     margin-top: 30px;
     padding-top: 20px;
     padding-bottom: 20px;
-    background: rgba(0,0,0,.7);
     border-radius: 5px;
+    background:rgb(0,0,0);
+    background: transparent\9;
+    background:rgba(0,0,0,0.7);
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#b2000000,endColorstr=#b2000000);
+    zoom: 1;
+}
+.container_small:nth-child(n) {
+  filter: none;
 }
 #sign-up-form {
     padding-top: 10px;

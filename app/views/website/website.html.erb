@@ -9,7 +9,7 @@
     </div>    
 
     <div data-bind="page: {id: 'start', title: 'Design'}" class="col-md-9 website_pages">
-        <div class="row">
+        <div class="rows">
             <div class="col-xs-12">
                 <h3>Select a design: </h3>
                 <div data-bind="template: { name: 'pick_design_template', foreach: designs }" class="designs"></div>          
@@ -19,7 +19,7 @@
 
     <!-- ko if: current_design -->
         <div data-bind="page: {id: 'langauges', title: 'Languages', role: 'start'}" class="col-md-9 website_pages">
-            <div class="row">
+            <div class="rows">
                 <div class="col-xs-12">
                     <h3 class="text-center" style="margin-bottom: 20px;">Which languages would you like your menu/site in?</h3>
                     <div data-bind="template: { name: 'langauge_selection_template', data: $root.restaurant }"></div>                
@@ -27,17 +27,17 @@
             </div>
         </div>
 
-        <div data-bind="page: {id: 'image_page', title: 'Background Pattern', with: current_design}" class="col-md-9 website_pages">
-            <div class="row">
+        <div data-bind="page: {id: 'image_page', title: 'Styling', with: current_design}" class="col-md-9 website_pages">
+            <div class="rows">
                 <div class="col-xs-12">
-                    <h3 class="text-center" style="margin-bottom: 20px;">Choose your website pattern.</h3>
+                    <h3 class="text-center" style="margin-bottom: 20px;">Choose your website pattern &amp menu header.</h3>
                     <div data-bind="template: { name: 'customize_design_template', data: $root.current_design }"></div>                
                 </div>
             </div>
         </div>
 
         <div data-bind="page: {id: 'font', title: 'Font', with: $root}" class="col-md-9 website_pages">
-            <div class="row">
+            <div class="rows">
                 <div class="col-xs-12">
                     <h3 class="text-center" style="margin-bottom: 20px;">Choose your font package.</h3>
                     <div data-bind="template: { name: 'customize_font_template', data: $root }"></div>                
@@ -45,8 +45,8 @@
             </div>
         </div>
 
-        <div data-bind="page: {id: 'carousel', title: 'Background Carousel', with: current_design}" class="col-md-9 website_pages">
-            <div class="row">
+        <div data-bind="page: {id: 'carousel', title: 'Background Images', with: current_design}" class="col-md-9 website_pages">
+            <div class="rows">
                 <div class="col-xs-12">
                     <h3 class="text-center" style="margin-bottom: 20px;">Upload your background carousel images.</h3>
                     <h4 style="margin-bottom: 20px;">These images will slowly scroll across the background of your site. Accepted file formats are JPEG and PNG. We advise compressing your images prior to upload, please use the <a href="http://compressor.io/compress" target="_blank" title="image compressor">Compressor</a> service.</h4>
@@ -56,7 +56,7 @@
         </div>
 
         <div data-bind="page: {id: 'logo', title: 'Logo', with: restaurant}" class="col-md-9 website_pages">
-            <div class="row">
+            <div class="rows">
                 <div class="col-xs-12">
                     <h3 class="text-center" style="margin-bottom: 20px;">Upload your restaurant logo.</h3>
                     <h4 style="margin-bottom: 20px;">These images will slowly scroll across the background of your site. Accepted file formats are JPEG and PNG. We advise compressing your images prior to upload, please use the <a href="http://compressor.io/compress" target="_blank" title="image compressor">Compressor</a> service.</h4>
@@ -65,7 +65,7 @@
             </div>
         </div>                  
 
-        <div class="row layout_controls_next">
+        <div class="rows layout_controls_next">
             <div class="col-xs-12">
                 <hr class="website_line">
                 <button class="btn btn-inverse pull-left col-xs-4" data-bind="click: function(){ $root.previousPage($page) }, visible: $root.visiblePrevious($page)"><span class="glyphicon glyphicon-chevron-left"></span> Previous</button>    
