@@ -45,9 +45,6 @@ body {
 .container_small:nth-child(n) {
     filter: none;
 }
-.container_small button {
-    display: inline;
-}
 
 footer {
     padding-top: 15px;
@@ -107,8 +104,9 @@ footer a:focus {
     height: 60px;
 }
 
-.dish_picture {
+.dish-picture {
     position: relative;
+    height: 100%;
 }
 .dish_title_bar {
     position: absolute;
@@ -135,7 +133,6 @@ footer a:focus {
     vertical-align: top;
     width: 20px;
     height: 20px;
-    margin-right: 5px;
     font-size: 0;
     color: transparent;
 }
@@ -214,7 +211,7 @@ footer a:focus {
 /* Large Devices, Wide Screens */
     @media only screen and (min-width : 1200px) {
         .dish_title_bar {
-            width: 330px;
+            width: 320px;
         }
 
     }

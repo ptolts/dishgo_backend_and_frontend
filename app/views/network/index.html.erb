@@ -13,7 +13,7 @@
 						</div>
 					</div>
 				</div>
-				<button class="btn btn-lg btn-search" data-bind="click: search_for_restaurant">Search</button>                                                               
+				<button class="btn btn-lg btn-search" data-bind="click: search_for_restaurant">Search</button>
 			</form>
 		</div>
 	</div>
@@ -25,79 +25,80 @@
 			<div class="col-xs-12 col-sm-6 col-md-4">
 				<a href="/app/network/restaurant" class="full_dish_link"></a>
 				<div class="dish_container">
-					<div class="col-xs-12 dish_picture">
+					<div class="col-xs-12 dish-picture">
 						<img class="img-responsive" src="<%= dish.img_src %>">
 						<span class="dish_title_bar">
 							<span class="dishgo_icon">
 								<img src="https://58900edd332817a2d530-6caa6fe89e7dac3eaf12230f0985b957.ssl.cf5.rackcdn.com/icon.png" class="img-responsive">
-								<%= dish.name %>
 							</span>
+							<%= dish.name %>
 						</span>
 						<span class="dish_rating">
 								<img src="https://58900edd332817a2d530-6caa6fe89e7dac3eaf12230f0985b957.ssl.cf5.rackcdn.com/five-stars.png" class="img-responsive">
 						</span>
 					</div>
-				</div>
-				<div class="col-xs-12">
-					<div class="dish-description">
-						<p><%= dish.description %></p>
+					<div class="col-xs-12">
+						<div class="dish-description">
+							<p><%= dish.description %></p>
+						</div>
 					</div>
 				</div>
 			</div>
 		<% end %>
 	</div>
 </div>	
-
-<div class="container">
-	<div class="row">
-		<div class="col-sm-3">
-			<h3>About Us</h3>
-			<ul style="list-style: none; float: left; padding-left:0px; font-size: 14px;">
-				<li><a href="https://dishgo.io" target="_blank">Website Builder</a>
-				<li><a href="dishgo-mobile-app.html" target="_blank">DishGo App</a></li>
-				<li><a href="/blog" target="_blank">Blog</a></li>
-				<li><a href="/app/users/sign_in" target="_blank">Log In</a></li>
-				<li><a href="/app/users/sign_up" target="_blank">Sign Up</a></li>
-				<li><a href="index_fr.html">Français</a></li>
-			</ul>
-		</div>
-		<div class="col-sm-3">
-			<h3>Restaurants</h3>
-			<ul style="list-style: none; float: left; padding-left:0px; font-size: 14px;">
-				<li><a href="http://www.letsdishgo.com" target="_blank">Get Listed</a></li>
-				<li><a href="#" target="_blank">Get Featured</a></li>
-				<li><a href="#" target="_blank">Menu Optimization</a></li>
-			</ul>
-		</div>
-		<div class="col-sm-3">
-			<h3>Earn Rewards</h3>
-			<ul style="list-style: none; float: left; padding-left:0px; font-size: 14px;">
-				<li><a href="#">DishCoins</a></li>
-				<li><a href="#">Redeem</a></li>
-				<li><a href="#">Contests</a></li>
-			</ul>
-		</div>
-		<div class="col-sm-3">
-			<h3>LATEST TWEETS</h3>
-			<a class="twitter-timeline" href="https://twitter.com/twitterapi" data-widget-id="435779578913497088" data-theme="dark" data-link-color="#2682a9"  data-related="twitterapi,twitter" data-chrome="nofooter noborders noheader noscrollbar transparent" data-aria-polite="assertive"  data-tweet-limit="2"  width="520" height="120" lang="EN"></a>
-			<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+<footer>
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-3">
+				<h3>About Us</h3>
+				<ul style="list-style: none; float: left; padding-left:0px; font-size: 14px;">
+					<li><a href="https://dishgo.io" target="_blank">Website Builder</a>
+					<li><a href="dishgo-mobile-app.html" target="_blank">DishGo App</a></li>
+					<li><a href="/blog" target="_blank">Blog</a></li>
+					<li><a href="/app/users/sign_in" target="_blank">Log In</a></li>
+					<li><a href="/app/users/sign_up" target="_blank">Sign Up</a></li>
+					<li><a href="index_fr.html">Français</a></li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<h3>Restaurants</h3>
+				<ul style="list-style: none; float: left; padding-left:0px; font-size: 14px;">
+					<li><a href="http://www.letsdishgo.com" target="_blank">Get Listed</a></li>
+					<li><a href="#" target="_blank">Get Featured</a></li>
+					<li><a href="#" target="_blank">Menu Optimization</a></li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<h3>Earn Rewards</h3>
+				<ul style="list-style: none; float: left; padding-left:0px; font-size: 14px;">
+					<li><a href="#">DishCoins</a></li>
+					<li><a href="#">Redeem</a></li>
+					<li><a href="#">Contests</a></li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<h3>LATEST TWEETS</h3>
+				<a class="twitter-timeline" href="https://twitter.com/twitterapi" data-widget-id="435779578913497088" data-theme="dark" data-link-color="#2682a9"  data-related="twitterapi,twitter" data-chrome="nofooter noborders noheader noscrollbar transparent" data-aria-polite="assertive"  data-tweet-limit="2"  width="520" height="120" lang="EN"></a>
+				<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+			</div>
 		</div>
 	</div>
-</div>
-			
-<div class="letsdishgo-bottom">
-	<ul>
-		<li class="first">
-			<a href="https://dishgo.io/privacy-policy.html" target="_blank">Privacy Policy</a>
-		</li>
-		<li>
-			<a href="mailto:info@dishgo.io">Contact Us</a>
-		</li>
-		<li class="last">
-			<a href="https://dishgo.io">©DishGo</a>
-		</li>
-	</ul>
-</div>
+				
+	<div class="letsdishgo-bottom">
+		<ul>
+			<li class="first">
+				<a href="https://dishgo.io/privacy-policy.html" target="_blank">Privacy Policy</a>
+			</li>
+			<li>
+				<a href="mailto:info@dishgo.io">Contact Us</a>
+			</li>
+			<li class="last">
+				<a href="https://dishgo.io">©DishGo</a>
+			</li>
+		</ul>
+	</div>
+</footer>
 
 <script>
 	[
