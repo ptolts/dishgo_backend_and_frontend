@@ -33,7 +33,7 @@ class Restaurant
   field :languages, type: Array
   field :default_language, type: String
   field :category, type: Array
-  field :listed, type: Boolean
+  field :listed, type: Boolean, default: false
   field :show_hours, type: Boolean, default: true
   field :show_map, type: Boolean, default: true
   field :show_menu, type: Boolean, default: true
