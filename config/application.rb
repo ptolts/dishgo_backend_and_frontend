@@ -74,6 +74,7 @@ module Foodcloud
                                     'codemirror.js',
                                     'codemirror.css',
                                     'online_site.css',
+                                    'network.css',
                                     'strictly_menu.css',
                                     'website.css',
                                     'picker.js',

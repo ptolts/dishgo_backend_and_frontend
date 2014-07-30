@@ -1,8 +1,11 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
-		<title><%= @resto_data['name'] %></title>
-		<meta name="description" content="DishGo listing for <%= @resto_data['name'] %>.">
+		<% if current_page?(controller: "network", action: "index") %>
+			<%= render 'index_meta' %>
+		<% else %>
+			<%= render 'restaurant_meta' %>
+		<% end %>
 		<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, minimum-scale=1, maximum-scale=1, minimal-ui" />
 		<meta name="fragment" content="!" />
 		<meta name="format-detection" content="telephone=no">
@@ -17,95 +20,6 @@
     <body>
 
     	<%= yield %>
-    	<div data-bind="visible: true" style="display:none">
-	    	<!-- ko foreach: menus -->
-	    		<%= render 'menu' %>
-	    	<!-- /ko -->
-    	</div>
-
-    	<script>
-	        var restaurant_id = "<%= params[:restaurant_id]%>";
-	        var menu_data = <%= @menu_data ? raw(@menu_data) : {} %>;
-	        var resto_data = <%= raw(@resto_data.to_json) %>;	
-
-			[
-				"<%= stylesheet_path 'online_site'%>",
-			].forEach(function(src) {
-				var l = document.createElement('link'); 
-				l.rel = 'stylesheet';
-				l.href = src;
-				document.head.appendChild(l);
-			});
-
-			var scripts = [
-				"<%= javascript_path 'application' %>",
-		    	"<%= javascript_path 'menu_editor' %>",
-				"<%= javascript_path 'network_javascript' %>",
-			];
-			var src;
-			var script;
-			var pendingScripts = [];
-			var firstScript = document.scripts[0];
-
-			// Watch scripts load in IE
-			function stateChange() {
-			  // Execute as many scripts in order as we can
-			  var pendingScript;
-			  while (pendingScripts[0] && pendingScripts[0].readyState == 'loaded') {
-			    pendingScript = pendingScripts.shift();
-			    // avoid future loading events from this script (eg, if src changes)
-			    pendingScript.onreadystatechange = null;
-			    // can't just appendChild, old IE bug if element isn't closed
-			    firstScript.parentNode.insertBefore(pendingScript, firstScript);
-			  }
-			}
-
-			// loop through our script urls
-			while (src = scripts.shift()) {
-			  if ('async' in firstScript) { // modern browsers
-			    script = document.createElement('script');
-			    script.async = false;
-			    script.src = src;
-			    document.head.appendChild(script);
-			  }
-			  else if (firstScript.readyState) { // IE<10
-			    // create a script and add it to our todo pile
-			    script = document.createElement('script');
-			    pendingScripts.push(script);
-			    // listen for state changes
-			    script.onreadystatechange = stateChange;
-			    // must set src AFTER adding onreadystatechange listener
-			    // else we’ll miss the loaded event for cached scripts
-			    script.src = src;
-			  }
-			  else { // fall back to defer
-			    document.write('<script src="' + src + '" defer></'+'script>');
-			  }
-			}			
-
-	    </script>	
-
-		<div itemscope itemtype="http://schema.org/Organization" style="display: none"> 
-			<span itemprop="name"><%= @resto_data["name"] %></span> 
-			<div itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
-				<span itemprop="streetAddress"><%= @resto_data["address_line_1"] %></span>,
-				<span itemprop="addressLocality"><%= @resto_data["city"] %></span>,
-				<span itemprop="addressRegion"><%= @resto_data["province"] %></span>.
-			</div>
-			<span itemprop="telephone"><%= @resto_data["phone"] %></span>
-		</div>
-
-		<% if !@resto_data["lat"].blank? %>
-			<div itemprop="location" style="display: none">
-			  <span itemscope itemtype="http://schema.org/Place">
-			    <div itemprop="geo">
-			      <span itemscope itemtype="http://schema.org/GeoCoordinates">
-			        <span property="latitude" content="<%= @resto_data['lat'] %>"></span>
-			        <span property="longitude" content="<%= @resto_data['lon'] %>"></span>
-			      </span>
-			    </div>
-			  </span>
-			</div>
-		<% end %>								    	
+    								    	
     </body>
 </html>

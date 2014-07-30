@@ -3,6 +3,12 @@ class NetworkController < ApplicationController
   
   def index
     restaurant = Restaurant.where(name:/cunningham/i).first
+    @dishes = restaurant.dishes.to_a.reject{|e| e.image.count == 0}[0..2]
+    render 'index'
+  end
+
+  def restaurant
+    restaurant = Restaurant.where(name:/cunningham/i).first
     @restaurant = restaurant
 
     @lat = restaurant.lat
@@ -30,7 +36,7 @@ class NetworkController < ApplicationController
 
     create_page_view restaurant
 
-    render 'index'
+    render 'restaurant'
   end
 
   def create_page_view restaurant

@@ -1,3 +1,224 @@
+/*
+*= require bootstrap.min
+*= require font-awesome
+*= require dish_modal
+*= require menu_base
+*= require_self
+*/
+
+.full_dish_link {
+	position: absolute;
+	top: 0;
+	right: 0;
+	left: 0;
+	bottom: 0;
+	z-index: 10;
+}
+
+body {
+    background: url(https://58900edd332817a2d530-6caa6fe89e7dac3eaf12230f0985b957.ssl.cf5.rackcdn.com/main_background.jpg) repeat;
+    background-attachment: fixed;
+    background-position: top left;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    color: #fff;
+    margin: 0;
+    padding-top: 0;
+}
+
+.container_small {
+    width: auto;
+    min-width: 0;
+    max-width: 100%;
+    font-size: 16px;
+    padding: 15px;
+    margin: 30px auto;
+    border-radius: 5px;
+    background:rgb(0,0,0);
+    background: transparent\9;
+    background:rgba(0,0,0,0.7);
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#b2000000,endColorstr=#b2000000);
+    zoom: 1;
+}
+.container_small:nth-child(n) {
+    filter: none;
+}
+.container_small button {
+    display: inline;
+}
+
+footer {
+    padding-top: 15px;
+    background:rgb(0,0,0);
+    background: transparent\9;
+    background:rgba(0,0,0,0.9);
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#e5000000,endColorstr=#e5000000);
+    zoom: 1;
+    overflow: hidden;
+}
+footer:nth-child(n) {
+    filter: none;
+}
+footer h3 {
+    color: #cf2f28;
+}
+footer a {
+    color: #fff;
+
+}
+footer a:hover,
+footer a:focus {
+    color: #cf2f28;
+    text-decoration: none;
+}
+
+.letsdishgomeat {
+  max-width: 100%;
+  width: 520px;
+}
+.input-group-addon {
+  background-color: #fff;
+}
+
+.input-group-addon .fa {
+  color: #cf2f28;
+}
+
+.dish_container {
+    overflow: hidden;
+    color: #000;
+    padding: 15px 0;
+    cursor: pointer;
+    margin-bottom: 15px;
+    background:rgb(255,255,255);
+    background: transparent\9;
+    background:rgba(255,255,255,0.9);
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#e5ffffff,endColorstr=#e5ffffff);
+    zoom: 1;
+}
+.dish_container:nth-child(n) {
+    filter: none;
+}
+
+.dish_container p {
+    margin: 15px 0;
+    height: 60px;
+}
+
+.dish_picture {
+    position: relative;
+}
+.dish_title_bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 0 15px;
+    padding: 5px;
+    width: 100%;
+    color: #fff;
+    font-size: 18px;
+    line-height: 20px;
+    background: url("https://58900edd332817a2d530-6caa6fe89e7dac3eaf12230f0985b957.ssl.cf5.rackcdn.com/dark_background.png") repeat;
+}
+.dish_rating {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 33%;
+    margin: 0 15px;
+    padding: 5px;
+}
+.dishgo_icon {
+    display: inline-block;
+    vertical-align: top;
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+    font-size: 0;
+    color: transparent;
+}
+
+.letsdishgo-bottom {
+  margin: 10px 0;
+  z-index: 1;
+  width: 100%;
+  text-align: center;
+  padding: 0 5px;
+}
+
+.letsdishgo-bottom ul {
+  padding: 0;
+  margin-bottom: 0px;
+}
+
+.letsdishgo-bottom li {
+  display: inline;
+  padding: 0 20px 0 16px;
+  background-image: url("https://58900edd332817a2d530-6caa6fe89e7dac3eaf12230f0985b957.ssl.cf5.rackcdn.com/bullet-aea2163bbda2bc1aad5c4c6737484a04.png");
+  background-size: 4px 5px;
+  background-position: 100% 6px;
+  background-repeat: no-repeat;
+  list-style: none;
+}
+
+.letsdishgo-bottom li a {
+  color: white;
+  font-family: 'Oswald', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  text-shadow: 1px 2px 3px #000;
+  text-decoration: none;
+}
+
+.letsdishgo-bottom li a:hover,
+.letsdishgo-bottom li a:focus {
+  color: #cf2f28;
+}
+
+.letsdishgo-bottom li.first {
+  padding-left: 20px;
+}
+
+.letsdishgo-bottom li.last {
+  padding-right: 16px;
+  background: 0;
+}
+.btn-search {
+    background: #cf2f28;
+    color: #fff;
+}
+.btn-search:hover,
+.btn-search:focus {
+    color: #fff;
+    opacity: .80;
+}
+
+/* Small Devices, Tablets */
+    @media only screen and (min-width : 768px) {
+        .dish_title_bar {
+            width: 315px;
+        }
+
+    }
+
+/* Medium Devices, Desktops */
+    @media only screen and (min-width : 992px) {
+        .dish_title_bar {
+            width: 263px;
+        }
+
+    }
+
+/* Large Devices, Wide Screens */
+    @media only screen and (min-width : 1200px) {
+        .dish_title_bar {
+            width: 330px;
+        }
+
+    }
+
 .restaurant-title{color:#231f20; font-size:20px; font-weight:700;}
 .restaurant-data{width:100%; padding-bottom: 25px;}
 .restaurant-pic{width:33%;position: relative;}

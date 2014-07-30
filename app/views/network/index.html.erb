@@ -1,37 +1,158 @@
-<div class="container network_menu_header">
-    <div class="row">
-        <div class="col-md-4">
-        	<div class="restaurant-data pull-left">
-            	<div class="restaurant-pic pull-left">
-            		<span class="restaurant-like"><a href="#"><i class="glyphicon glyphicon-heart-empty"></i></a></span>
-            		<span class="restaurant-share"><a href="#"><i class="glyphicon glyphicon-share"></i></a></span>
-            		<span class="restaurant-plus"><a href="#"><i class="glyphicon glyphicon-plus-sign"></i></a></span>
-            		<a href="#">
-            			<img src="http://placehold.it/122x122" alt="" class="img-responsive" />
-            		</a>
-            	</div>
-                <div class="restaurant-prfle pull-right">
-                	<div class="restaurant-title">
-                    	<%= @restaurant.name %>
-                    </div>
-                    <div class="counter-tab">
-                    	<div class="counter_comnt"><i class="glyphicon glyphicon-comment"></i> 359</div>
-                    	<div class="counter_like"><i class="glyphicon glyphicon-heart"></i> 2256</div>
-                    </div>
-                </div>
-                <div class="bot-links">
-                    <% @restaurant.category.each do |category| %>
-                	   <a href="#"><%= category %></a>
-                    <% end %>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-4 col-md-offset-4">
-            <!-- ko foreach: menus -->
-                <button class="btn btn-default" data-bind="click: function(){ $root.selected_menu($data) }, lText: name"></button>
-            <!-- /ko -->
-        </div>
-    </div>        
+
+<div class="container_small letsdishgomeat">
+	<div class="row">
+		<div class="col-xs-12 text-center">
+			<img src="https://58900edd332817a2d530-6caa6fe89e7dac3eaf12230f0985b957.ssl.cf5.rackcdn.com/small_logo.png" class="img-responsive" alt="DishGo Logo" />
+			<h1>Search Restaurant Menus</h1>
+			<form class="form-inline" role="form" data-bind="#">
+				<div class="form-group">
+					<div class="controls">
+						<div class="input-group input-group-lg">
+							<div class="input-group-addon"><i class="fa fa-search"></i></div>
+							<input id="#" name="#" type="text" placeholder="Search" data-bind="#" class="form-control">
+						</div>
+					</div>
+				</div>
+				<button class="btn btn-lg btn-search" data-bind="click: search_for_restaurant">Search</button>                                                               
+			</form>
+		</div>
+	</div>
 </div>
+
+<div class="container">
+	<div class="row">
+		<% @dishes.each do |dish| %>
+			<div class="col-xs-12 col-sm-6 col-md-4">
+				<a href="/app/network/restaurant" class="full_dish_link"></a>
+				<div class="dish_container">
+					<div class="col-xs-12 dish_picture">
+						<img class="img-responsive" src="<%= dish.img_src %>">
+						<span class="dish_title_bar">
+							<span class="dishgo_icon">
+								<img src="https://58900edd332817a2d530-6caa6fe89e7dac3eaf12230f0985b957.ssl.cf5.rackcdn.com/icon.png" class="img-responsive">
+								<%= dish.name %>
+							</span>
+						</span>
+						<span class="dish_rating">
+								<img src="https://58900edd332817a2d530-6caa6fe89e7dac3eaf12230f0985b957.ssl.cf5.rackcdn.com/five-stars.png" class="img-responsive">
+						</span>
+					</div>
+				</div>
+				<div class="col-xs-12">
+					<div class="dish-description">
+						<p><%= dish.description %></p>
+					</div>
+				</div>
+			</div>
+		<% end %>
+	</div>
+</div>	
+
+<div class="container">
+	<div class="row">
+		<div class="col-sm-3">
+			<h3>About Us</h3>
+			<ul style="list-style: none; float: left; padding-left:0px; font-size: 14px;">
+				<li><a href="https://dishgo.io" target="_blank">Website Builder</a>
+				<li><a href="dishgo-mobile-app.html" target="_blank">DishGo App</a></li>
+				<li><a href="/blog" target="_blank">Blog</a></li>
+				<li><a href="/app/users/sign_in" target="_blank">Log In</a></li>
+				<li><a href="/app/users/sign_up" target="_blank">Sign Up</a></li>
+				<li><a href="index_fr.html">Français</a></li>
+			</ul>
+		</div>
+		<div class="col-sm-3">
+			<h3>Restaurants</h3>
+			<ul style="list-style: none; float: left; padding-left:0px; font-size: 14px;">
+				<li><a href="http://www.letsdishgo.com" target="_blank">Get Listed</a></li>
+				<li><a href="#" target="_blank">Get Featured</a></li>
+				<li><a href="#" target="_blank">Menu Optimization</a></li>
+			</ul>
+		</div>
+		<div class="col-sm-3">
+			<h3>Earn Rewards</h3>
+			<ul style="list-style: none; float: left; padding-left:0px; font-size: 14px;">
+				<li><a href="#">DishCoins</a></li>
+				<li><a href="#">Redeem</a></li>
+				<li><a href="#">Contests</a></li>
+			</ul>
+		</div>
+		<div class="col-sm-3">
+			<h3>LATEST TWEETS</h3>
+			<a class="twitter-timeline" href="https://twitter.com/twitterapi" data-widget-id="435779578913497088" data-theme="dark" data-link-color="#2682a9"  data-related="twitterapi,twitter" data-chrome="nofooter noborders noheader noscrollbar transparent" data-aria-polite="assertive"  data-tweet-limit="2"  width="520" height="120" lang="EN"></a>
+			<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+		</div>
+	</div>
+</div>
+			
+<div class="letsdishgo-bottom">
+	<ul>
+		<li class="first">
+			<a href="https://dishgo.io/privacy-policy.html" target="_blank">Privacy Policy</a>
+		</li>
+		<li>
+			<a href="mailto:info@dishgo.io">Contact Us</a>
+		</li>
+		<li class="last">
+			<a href="https://dishgo.io">©DishGo</a>
+		</li>
+	</ul>
+</div>
+
+<script>
+	[
+		"<%= stylesheet_path 'network'%>",
+	].forEach(function(src) {
+		var l = document.createElement('link'); 
+		l.rel = 'stylesheet';
+		l.href = src;
+		document.head.appendChild(l);
+	});
+
+	var scripts = [
+		"<%= javascript_path 'application' %>",
+    	"<%= javascript_path 'menu_editor' %>",
+	];
+	var src;
+	var script;
+	var pendingScripts = [];
+	var firstScript = document.scripts[0];
+
+	// Watch scripts load in IE
+	function stateChange() {
+	  // Execute as many scripts in order as we can
+	  var pendingScript;
+	  while (pendingScripts[0] && pendingScripts[0].readyState == 'loaded') {
+	    pendingScript = pendingScripts.shift();
+	    // avoid future loading events from this script (eg, if src changes)
+	    pendingScript.onreadystatechange = null;
+	    // can't just appendChild, old IE bug if element isn't closed
+	    firstScript.parentNode.insertBefore(pendingScript, firstScript);
+	  }
+	}
+
+	// loop through our script urls
+	while (src = scripts.shift()) {
+	  if ('async' in firstScript) { // modern browsers
+	    script = document.createElement('script');
+	    script.async = false;
+	    script.src = src;
+	    document.head.appendChild(script);
+	  }
+	  else if (firstScript.readyState) { // IE<10
+	    // create a script and add it to our todo pile
+	    script = document.createElement('script');
+	    pendingScripts.push(script);
+	    // listen for state changes
+	    script.onreadystatechange = stateChange;
+	    // must set src AFTER adding onreadystatechange listener
+	    // else we’ll miss the loaded event for cached scripts
+	    script.src = src;
+	  }
+	  else { // fall back to defer
+	    document.write('<script src="' + src + '" defer></'+'script>');
+	  }
+	}			
+
+</script>	
+

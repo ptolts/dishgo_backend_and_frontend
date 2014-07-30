@@ -1,5 +1,5 @@
 class PrizesController < ApplicationController
-  before_filter :admin_or_user_with_resto!, :except => [:list] #, :only => [:create_section,:create_dish,:create_option,:create_individual_option]
+  before_filter :admin_or_user_with_resto!, :except => [:list, :bid] #, :only => [:create_section,:create_dish,:create_option,:create_individual_option]
   before_filter :sign_in_user_for_prizes, only: [:list, :bid]
   layout 'prizes'
   
@@ -64,7 +64,7 @@ class PrizesController < ApplicationController
   def bid
     data = JSON.parse(params[:prize])
     user = current_user
-    if user.dishcoins <= data["number_of_bets"]
+    if user.dishcoins < data["number_of_bets"]
       render json: {error: "You don't have enough DishCoins!"}.as_json
       return
     end

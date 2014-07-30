@@ -79,6 +79,8 @@ function Prize(data) {
             self.saved(true);
             if(data.won){
               alert(data.won);
+            } else if(data.error){
+              alert(data.error);
             } else {
               alert(data.lost);
             }

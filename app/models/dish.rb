@@ -203,6 +203,14 @@ class Dish
     self.save
   end
 
+  def img_src
+    img = self.image.first
+    if img 
+      return img.img_url_medium
+    end
+    return ""
+  end
+
   def publish_menu
     self.name_translations = self.draft["name"]
     self.description_translations = self.draft["description"]
