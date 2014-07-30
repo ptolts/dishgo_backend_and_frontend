@@ -134,3 +134,7 @@ fieldset[disabled] .btn-inverse.active {
 .available_languages h4 {
   display: inline-block;
 }
+.rows {
+  margin-right: -15px;
+  margin-left: -15px;
+}

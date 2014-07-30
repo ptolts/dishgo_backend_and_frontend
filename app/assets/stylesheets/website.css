@@ -196,7 +196,7 @@
 	top: 15px;
 	right: 5px;
 	z-index: 1;
-	width: 600px;
+	width: 550px;
 }
 .save_website_button .coo_button {
     background-image: -webkit-linear-gradient(hsla(0,0%,100%,.05), hsla(0,0%,0%,.1));
@@ -221,6 +221,8 @@
     margin: 0 .5em 1em;
     padding: .5em 1.5em .75em;
     text-shadow: 0 1px 1px hsla(0,0%,100%,.25);
+    text-decoration: none;
+    text-align: center;
 }
 .save_website_button .coo_button:hover {
     outline: none;
@@ -292,7 +294,12 @@
 .save_website_button .red {
     background-color: #BC030E;
 }
-
+.save_website_button .yellow {
+    background-color: #F2CF66;
+}
+.save_website_button .blue {
+    background-color: #3498DB;
+}
 .save_website_button .white {
     background-color: #747474;
 }
