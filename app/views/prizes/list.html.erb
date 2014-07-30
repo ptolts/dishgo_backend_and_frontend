@@ -1,0 +1,67 @@
+<div class="prizes_list_controls" data-bind="visible: !selected_prize()">
+    <div class="row">
+        <div class="col-xs-12" data-bind="with: user">
+            <div class="dishcoin_count">
+                <p>You have <!-- ko text: dishcoins --><!-- /ko --> DishCoins to spend.</p>
+                <p>Below is a list of currently available gift certificates you can try to win.</p>
+                <p>Every attempt costs 1 DishCoin, and the chances of winning it are listed.</p>
+            </div>
+        </div>
+    </div>      
+    <div class="row">
+        <div class="col-xs-12">
+            <ul class="list-prizes" data-bind="foreach: prizes">
+                <li class="list-prizes-item" data-bind="text: computed_name, click: function(){ $root.selected_prize($data) }"></li>
+            </ul>
+        </div>
+    </div>  
+</div>
+
+<div class="prizes_control" data-bind="visible: selected_prize, with: selected_prize">
+    <i class="fa fa-times-circle close_prize" data-bind="click: function(){ $root.selected_prize(null) }"></i>
+    <div class="row">
+        <div class="col-xs-12">
+            <h4 data-bind="lText: name"></h4>
+            <p data-bind="lText: description"></p>
+            <div class="row">
+                <div class="col-xs-6">
+                    <select class="form-control" data-bind="options: $root.user().dishcoin_list(), value: number_of_bets"></select>          
+                </div>                
+                <div class="col-xs-6">         
+                    <button class="btn btn-info" data-bind="click: function(){ $root.bid($data) }">Bid!</button>
+                </div>
+            </div>
+        </div>
+    </div>       
+</div>
+
+<script type='text/javascript'>//<![CDATA[ 
+
+    var prizes_data = <%= raw(@prizes.to_json) %>;
+    var user_data = <%= raw(current_user.to_json) %>;
+    var languages = <%= raw(@languages) %>;
+    var default_language = <%= raw(@default_language) %>;
+    var lang = ko.observable(default_language);
+    var languages = ko.observableArray(languages);
+
+    function viewModel() {
+        var self = this;
+        self.selected_prize = ko.observable();
+        self.prizes = ko.observableArray(_.map(prizes_data,function(prize){ return new Prize(prize) }));
+        self.user = ko.observable(new User(user_data));
+        self.lang = lang;
+
+        self.bid = function(prize){
+            prize.bid();
+            self.user().dishcoins(self.user().dishcoins() - prize.number_of_bets());
+        }
+    };
+
+    var viewmodel = new viewModel();            
+
+    $(function(){   
+        ko.applyBindings(viewmodel);                        
+    });
+
+//]]>  
+</script>    

@@ -1,7 +1,13 @@
 	<h2>Change your password</h2>
-	<form class="form-horizontal" role="form" id="new_user" method="post" action="<%= password_path(resource_name) %>">
-		<%= devise_error_messages! %>
-		<input name="reset_password_token" type="hidden" value="<%= resource.reset_password_token %>" />
+	<form class="form-horizontal" role="form" id="new_user" method="POST" action="<%= password_path(resource_name) %>">
+		<div class="row">
+			<div class="col-sm-offset-1 col-sm-10">
+				<%= devise_error_messages! %>
+			</div>
+		</div>
+		
+		<input name="_method" type="hidden" value="patch" />
+		<input name="user[reset_password_token]" type="hidden" value="<%= resource.reset_password_token %>" />
 		<input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>" />
 
 		<div class="row">
@@ -22,9 +28,11 @@
 			</div>
 		</div>
 
-		<div class="col-xs-12">
-			<div class="secured">
-				<i class="fa fa-lock"></i> Your information is secure with DishGo
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="secured">
+					<i class="fa fa-lock"></i> Your information is secure with DishGo
+				</div>
 			</div>
 		</div>
 	</form>

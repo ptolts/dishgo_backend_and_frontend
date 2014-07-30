@@ -14,6 +14,7 @@
 // = require jquery
 // = require jquery_ujs
 // = require jquery.ui.sortable
+// = require jquery.ui.datepicker
 // = require jquery.ui.slider
 // = require jquery.scrollstop.js
 // = require knockout-3.1.0.debug.js

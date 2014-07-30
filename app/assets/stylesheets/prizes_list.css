@@ -1,0 +1,36 @@
+.list-prizes {
+    list-style: none;
+    width: 100%;
+    margin: 0px;
+    padding: 0px;
+}
+
+.list-prizes-item {
+    background: #FFF;
+    padding: 10px;
+    border-bottom: 1px solid #000;
+}
+
+.dishcoin_count {
+    background: #FFF;
+    padding: 10px;
+    border-bottom: 1px solid #000;   
+    border-top: 1px solid #000;   
+}
+
+.prizes_control {
+    background: #FFF;
+    padding: 10px;
+    border-bottom: 1px solid #000;   
+    border-top: 1px solid #000;   
+}
+
+.close_prize {
+    position: absolute;
+    height: 40px;
+    width: 40px;
+    right: 5px;
+    top: 5px;
+    font-size: 3em;
+    z-index: 10;
+}

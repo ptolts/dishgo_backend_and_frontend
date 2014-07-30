@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
+  before_filter :configure_permitted_parameters, if: :devise_controller?
   layout :layout_by_resource
 
   def page_not_found
@@ -76,6 +77,12 @@ class ApplicationController < ActionController::Base
     #   end
     # end
   end  
+
+  def sign_in_user_for_prizes
+    if id = params[:token] and !id.blank? and user = User.where(authentication_token: id).first and user
+      sign_in user
+    end
+  end
 
   def admin_user!
     unless current_user.is_admin
@@ -183,5 +190,12 @@ class ApplicationController < ActionController::Base
   def handle_unverified_request
     redirect_to root_url, :error => "forgery protection"
   end  
+
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.for(:account_update) do |u|
+      Rails.logger.warn "HAHAHAHAHAHA"
+      u.permit :password, :password_confirmation, :reset_password_token
+    end
+  end
 
 end

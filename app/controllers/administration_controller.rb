@@ -406,12 +406,13 @@ class AdministrationController < ApplicationController
     # Rails.logger.warn restaurant.to_json
     # Rails.logger.warn "-----------------"    
 
+    if !settings["subdomain"].blank? and sub = Restaurant.where(subdomain:settings["subdomain"].downcase).first and !sub.nil? and sub != restaurant
+      Rails.logger.warn "Bad Subdomain for user: #{current_user.email}"
+    else
+      restaurant.subdomain = settings["subdomain"].downcase if !settings["subdomain"].blank?
+    end
+
     if current_user.is_admin
-      if !settings["subdomain"].blank? and sub = Restaurant.where(subdomain:settings["subdomain"].downcase).first and sub != restaurant
-        Rails.logger.warn "Bad Subdomain for user: #{current_user.email}"
-      else
-        restaurant.subdomain = settings["subdomain"].downcase if !settings["subdomain"].blank?
-      end
 
       if !settings["host"].blank? and sub = Restaurant.where(host:settings["host"].downcase).first and sub != restaurant
         Rails.logger.warn "Bad Hostname for user: #{current_user.email}"

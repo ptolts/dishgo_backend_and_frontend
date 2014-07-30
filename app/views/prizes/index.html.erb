@@ -1,0 +1,58 @@
+<div class="prizes_controls">
+    <div class="row">
+        <div class="col-xs-3">
+            <div class="row">
+                <div class="col-xs-12">
+                    <button class="btn btn-default" data-bind="click: create_prize" style="width: 100%">Create Prize</button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <ul class="list-group" data-bind="foreach: prizes">
+                        <li class="list-group-item" data-bind="text: computed_name, click: function(){ $root.selected_prize($data) }"></li>
+                    </ul>
+                </div>
+            </div>            
+        </div>
+        <div class="col-xs-9" data-bind="with: selected_prize">
+            <div class="prizes_form_wrapper">
+                <%= render 'prizes_form' %>
+            </div>
+        </div>
+    </div>  
+</div>
+
+<script type='text/javascript'>//<![CDATA[ 
+
+    var prizes_data = <%= raw(@prizes.to_json) %>;
+    var languages = <%= raw(@languages) %>;
+    var default_language = <%= raw(@default_language) %>;
+    var lang = ko.observable(default_language);
+    var languages = ko.observableArray(languages);
+
+    function viewModel() {
+        var self = this;
+        self.selected_prize = ko.observable();
+        self.prizes = ko.observableArray(_.map(prizes_data,function(prize){ return new Prize(prize) }));
+        self.lang = lang;
+
+        self.create_prize = function(){
+            var p = new Prize({});
+            self.prizes.push(p);
+            self.selected_prize(p);
+        }
+    };
+
+    var restaurant_id = "<%= current_user.owns_restaurants.id %>";
+    var viewmodel = new viewModel();            
+
+    $(function(){   
+        ko.applyBindings(viewmodel);                        
+    });
+
+    $(function() {
+        $( "#datepicker" ).datepicker();
+    });    
+
+//]]>  
+</script>    

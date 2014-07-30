@@ -1,0 +1,74 @@
+<h2 class="text-center">Prize</h2>
+<!-- full-name input-->
+<div class="row">
+
+    <div class="col-sm-6">
+        <div class="form-group">
+            <label>Prize Name</label>
+            <div class="input-group controls">
+                <input id="name" name="name" type="text" placeholder="Prize Name" data-bind="valueUpdate: 'afterkeydown', lValue: name" class="form-control">
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-6">
+        <div class="form-group">
+            <label>Amount</label>
+            <div class="input-group">
+                <span class="input-group-addon">$</span>
+                <input id="amount" name="amount" type="text" placeholder="Prize Name" data-bind="valueUpdate: 'afterkeydown', value: amount" class="form-control">
+            </div>            
+        </div>
+    </div>
+
+    <div class="col-sm-6">
+        <div class="form-group">
+            <label>Quantity</label>
+            <select class="form-control" data-bind="options: quantity_list, value: quantity"></select>          
+        </div>
+    </div>    
+
+    <div class="col-sm-6">
+        <div class="form-group">
+            <label>Description</label>
+            <textarea rows="3" data-bind="lValue: description, valueUpdate: 'afterkeydown'" class="form-control" placeholder="Add Dish Description"></textarea>          
+        </div>
+    </div>
+
+    <div class="col-sm-6">
+        <div class="form-group">
+            <label>Start Date</label>
+            <input type="text" data-bind="datepicker: start_date">
+        </div>
+    </div> 
+
+    <div class="col-sm-6">
+        <div class="form-group">
+            <label>End Date</label>
+            <input type="text" data-bind="datepicker: end_date">
+        </div>
+    </div>        
+
+    <div class="col-sm-12">
+        <h4>Total Value: <!-- ko text: total_value --><!-- /ko --></h4>
+        <h4>Quantity Awarded: <!-- ko text: awarded --><!-- /ko --></h4>
+    </div>
+
+<!--     <div class="col-sm-6">
+        <div class="form-group">
+            <div class="checkbox">
+                <label>
+                    Delivery <input type="checkbox" data-bind="checked: does_delivery">
+                </label>
+            </div>
+        </div>
+    </div>    -->                                                                     
+</div>
+
+<div class="row base_bar">
+    <div class="col-xs-12">
+        <button class="btn btn-dish pull-right col-xs-5" data-bind="click: save">Save <i class="fa fa-spinner fa-spin pull-right" data-bind="visible: spin"></i><i class="fa fa-check pull-right" data-bind="visible: saved"></i></button>
+    </div>
+</div>
+
+

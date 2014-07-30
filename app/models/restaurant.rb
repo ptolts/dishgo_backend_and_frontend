@@ -61,6 +61,8 @@ class Restaurant
 
   has_many :pages, :class_name => "Page", inverse_of: :restaurant
 
+  has_many :prizes, :class_name => "Prize", inverse_of: :restaurant
+
   has_many :section, :class_name => "Section", inverse_of: :restaurant
   has_many :dishes, :class_name => "Dish", inverse_of: :restaurant
   has_many :options, :class_name => "DishOption", inverse_of: :restaurant

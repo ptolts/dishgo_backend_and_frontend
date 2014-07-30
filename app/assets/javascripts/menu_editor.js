@@ -6,6 +6,8 @@
 *= require knockout-sortable.js
 *= require loglevel.js
 *= require masonry.min.js
+*= require prize.js
+*= require strftime.js
 *= require section.js
 *= require dish.js
 *= require option.js

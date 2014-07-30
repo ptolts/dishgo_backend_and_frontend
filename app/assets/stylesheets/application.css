@@ -9,6 +9,7 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
+ *= require jquery.ui.datepicker 
  *= require bootstrap.min.css
  *= require admin_nav.css
  *= require iphone_demo.css
@@ -16,6 +17,8 @@
  *= require main.css
  *= require menu_editor.css
  *= require profile_form.css
+ *= require prizes_form.css
+ *= require prizes_list.css
  *= require website.css
  *= require restaurant_setup
  *= require font-awesome
