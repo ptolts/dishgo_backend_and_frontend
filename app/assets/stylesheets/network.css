@@ -80,9 +80,16 @@ body {
 
 #login_buttons ul {
 	list-style: none;
+	height: 80px;
 }
 #login_buttons ul li {
 	display: inline;
+}
+#login_buttons .btn {
+	padding: 34px 15px 20px 15px;
+	line-height: 24px;
+	border-radius: 0;
+	text-transform: uppercase;
 }
 
 footer {
@@ -232,6 +239,15 @@ footer a:focus {
     opacity: .80;
 }
 
+.btn-none {
+    background: #fff;
+    color: #cf2f28;
+}
+.btn-none:hover,
+.btn-none:focus {
+	opacity: .80;
+}
+
 /* Small Devices, Tablets */
     @media only screen and (min-width : 768px) {
         .dish_title_bar {
@@ -281,8 +297,8 @@ footer a:focus {
 			height: 50px;
 		}
 		.network_header #logo {
-			height: 30px;
-			width: 160px;
+			height: 40px;
+			width: 140px;
 			margin: 10px 0;
 		}
 		#login_buttons ul {
@@ -290,7 +306,6 @@ footer a:focus {
 			margin: 0;
 		}
 		#login_buttons ul li {
-			display: inline;
 			line-height: 24px;
 		}
 		#login_buttons .btn {
