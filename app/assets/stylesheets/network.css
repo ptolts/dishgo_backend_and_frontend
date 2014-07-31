@@ -2,7 +2,7 @@
 *= require bootstrap.min
 *= require font-awesome
 *= require dish_modal
-*= require menu_base
+*= require network_menu_base
 *= require_self
 */
 

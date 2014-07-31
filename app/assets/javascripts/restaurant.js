@@ -255,7 +255,7 @@
             self.email = ko.observable(data.email);
             self.phone = ko.observable(data.phone);
             self.name = ko.observable(data.name);
-            self.subject = ko.observable(data.subject);
+            self.subject = ko.observable(data.subject || "");
         }    
 
         Restaurant.prototype.toJSON = function() {
