@@ -85,7 +85,7 @@ class ApplicationController < ActionController::Base
   end
 
   def admin_user!
-    unless current_user.is_admin
+    if !current_user or !current_user.is_admin
       flash[:error] = "You lack the privileges to access this function."
       redirect_to :controller => 'administration', :action => 'index'
     end
