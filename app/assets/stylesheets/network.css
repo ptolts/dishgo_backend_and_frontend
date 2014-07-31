@@ -6,6 +6,23 @@
 *= require_self
 */
 
+.network_header {
+	background-color: #fff;
+	color: #cf2f28;
+	height: 80px;
+	font-size: 12px;
+}
+
+.network_header #logo {
+	height: 60px;
+	width: 220px;
+	margin: 10px 0;
+}
+
+.container_small.letsdishgomeat .form-inline {
+	margin-bottom: 20px;
+}
+
 .full_dish_link {
 	position: absolute;
 	top: 0;
@@ -23,27 +40,49 @@ body {
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
-    color: #fff;
     margin: 0;
     padding-top: 0;
 }
 
+#white_background {
+	background-color: #fff
+}
+
+#menu_background {
+	height: 500px;
+}
+
 .container_small {
-    width: auto;
-    min-width: 0;
-    max-width: 100%;
+    position: absolute;
+    margin-left: -260px;
+    margin-top: -85px;
+    top:50%;
+    left:50%;
     font-size: 16px;
     padding: 15px;
-    margin: 30px auto;
     border-radius: 5px;
     background:rgb(0,0,0);
     background: transparent\9;
     background:rgba(0,0,0,0.7);
     filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#b2000000,endColorstr=#b2000000);
     zoom: 1;
+    color: #fff;
 }
 .container_small:nth-child(n) {
     filter: none;
+}
+
+#login_buttons {
+	position: absolute;
+	top: 0;
+	right: 0;
+}
+
+#login_buttons ul {
+	list-style: none;
+}
+#login_buttons ul li {
+	display: inline;
 }
 
 footer {
@@ -74,6 +113,7 @@ footer a:focus {
 .letsdishgomeat {
   max-width: 100%;
   width: 520px;
+  height: 170px;
 }
 .input-group-addon {
   background-color: #fff;
@@ -214,6 +254,50 @@ footer a:focus {
             width: 320px;
         }
 
+    }
+/* small rules */
+    @media only screen and (max-width : 600px) {
+    	body {
+			background-position: center;
+		}
+        .letsdishgomeat {
+	  		max-width: 100%;
+	  		width: 520px;
+	  		height: auto;
+		}
+		.container_small {
+			width: auto;
+		    min-width: 0;
+		    max-width: 100%;
+		    margin: 0 auto;
+		    position: static;
+		    border-radius: 0;
+		}
+		#menu_background {
+			height: 285px;
+			padding: 40px 0;
+		}
+		.network_header {
+			height: 50px;
+		}
+		.network_header #logo {
+			height: 30px;
+			width: 160px;
+			margin: 10px 0;
+		}
+		#login_buttons ul {
+			height: 50px;
+			margin: 0;
+		}
+		#login_buttons ul li {
+			display: inline;
+			line-height: 24px;
+		}
+		#login_buttons .btn {
+			padding: 17px 15px 7px 15px;
+			line-height: 24px;
+			border-radius: 0;
+		}
     }
 
 .restaurant-title{color:#231f20; font-size:20px; font-weight:700;}
