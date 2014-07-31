@@ -14,9 +14,10 @@
 			        <strong><a data-bind="text: phone, attr:{href:'tel:'+phone()}"><%= @resto_data["phone"] %></a></strong><br>
 			    </address>
 			    <!-- ko if: email_addresses().length > 0 -->
-					<h3 class="hours_header">Email</h3>
+					<h3 class="hours_header" data-bind="lStaticText: 'contact'"></h3>
 					<!-- ko foreach: email_addresses -->
-						<h4><!-- ko text: name --><!-- /ko --> <a data-bind="attr: {href:'mailto:'+email()+'?subject=' + subject()}, text: email"></a></h4>
+						<strong><!-- ko text: name --><!-- /ko --> <a data-bind="attr: {href:'mailto:'+email()+'?subject=' + subject()}, text: email"></a></strong><br />
+						<strong><a data-bind="text: phone, attr:{href:'tel:'+phone()}"></a></strong><br />
 					<!-- /ko -->
 			    <!-- /ko -->
 			</div>

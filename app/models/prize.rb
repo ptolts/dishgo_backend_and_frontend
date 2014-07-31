@@ -19,7 +19,7 @@ class Prize
   field :winning_number, type: Integer
 
   belongs_to :restaurant, class_name: "Restaurant", inverse_of: :prizes, index: true
-  has_and_belongs_to_many :users, class_name: "User", inverse_of: :prizes, index: true
+  has_and_belongs_to_many :users, class_name: "User", inverse_of: :prizes, index: true #, validate: false
 
   before_save :setup_winner
 

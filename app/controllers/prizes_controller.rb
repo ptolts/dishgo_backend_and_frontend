@@ -70,9 +70,16 @@ class PrizesController < ApplicationController
     end
     prize = Prize.find(data["id"])
     attempt_count = 0
+    attempt_record = []
     while attempt_count < data["number_of_bets"]
       attempt_count += 1
-      attempt = SecureRandom.random_number(prize.chance)
+
+      #If they've bet more than one dishcoin, give them a better chance of winning.
+      begin
+        attempt = SecureRandom.random_number(prize.chance)
+      end while attempt_record.include?(attempt)
+      attempt_record << attempt
+
       user.dishcoins = user.dishcoins - 1
       if attempt == prize.winning_number
         user.prizes << prize
@@ -81,6 +88,7 @@ class PrizesController < ApplicationController
         return
       end      
     end
+    Rails.logger.warn "Attempts: #{attempt_record} and the winning number #{prize.winning_number}"
     user.save(validate: false)      
     render json: {lost: "We are sorry, you didn't win this time."}.as_json
     return    

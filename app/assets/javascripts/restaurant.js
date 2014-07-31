@@ -253,9 +253,10 @@
         function Email(data) {
             var self = this; 
             self.email = ko.observable(data.email);
+            self.phone = ko.observable(data.phone);
             self.name = ko.observable(data.name);
             self.subject = ko.observable(data.subject);
-        }
+        }    
 
         Restaurant.prototype.toJSON = function() {
             var copy = ko.toJS(this); //easy way to get a clean copy
@@ -268,7 +269,7 @@
         function Restaurant(data) {
             console.log("New Restaurant: " + data.name);
             var self = this;
-            self.languages = ko.observableArray(data.languages ? data.languages : ['en']);
+            self.languages = ko.observableArray(data.languages ? data.languages : ['en','fr']);
             self.default_language = ko.observable(data.default_language ? data.default_language : 'en');
             self.available_languages = ko.observableArray(_.map(_.pairs(fullLanguageName),function(lang){ return new Language(lang[1],lang[0]) }));
             self.lat = ko.observable(data.lat ? data.lat : "");
@@ -356,10 +357,9 @@
             self.addEmail = function(){
                 self.email_addresses.push(new Email({}));
             }
-
             self.remove_email = function(email){
                 self.email_addresses.remove(email);
-            }
+            }         
 
             self.new_image_holder = ko.observable(new ImageObj());
             self.new_image = ko.computed(function(){    

@@ -150,7 +150,11 @@ var translations = {
     'all' : {
         'en':"- All",
         'fr':"- Tous",
-    },       
+    },
+    'contact' : {
+        'en':'Contact',
+        'fr':'Contact'
+    },         
 };
 
 function copyDefaultHash(hash) {
