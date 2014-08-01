@@ -6,6 +6,10 @@
 *= require_self
 */
 
+.page-container {
+  padding-top: 80px;
+}
+
 .network_header {
 	background-color: #fff;
 	color: #cf2f28;
@@ -17,6 +21,11 @@
 	height: 60px;
 	width: 220px;
 	margin: 10px 0;
+}
+.network_header.fixed {
+  position: fixed;
+  width: 100%;
+  z-index: 10000;
 }
 
 .container_small.letsdishgomeat .form-inline {
@@ -50,6 +59,7 @@ body {
 
 #menu_background {
 	height: 500px;
+  position: relative;
 }
 
 .container_small {
@@ -313,7 +323,7 @@ footer a:focus {
 		}
     }
 
-.restaurant-title{color:#231f20; font-size:20px; font-weight:700;}
+/*.restaurant-title{color:#231f20; font-size:20px; font-weight:700;}
 .restaurant-data{width:100%; padding-bottom: 25px;}
 .restaurant-pic{width:33%;position: relative;}
 .restaurant-pic span a{color: #fff; font-size: 16px; display: none;}
@@ -329,10 +339,59 @@ footer a:focus {
 .bot-links{float: left; width: 100%; padding-top: 10px;}
 .bot-links a{display: inline-block; padding: 5px; background: #ccc; font-size: 12px; margin-bottom: 5px; color: #9c9c9c; text-decoration:none;}
 span.play-icon{position: absolute; left: 31%; top: 32%; display: none;}
-.restaurant-pic:hover img.play-icon, .restaurant-pic:hover span a{display: block; } 
+.restaurant-pic:hover img.play-icon, .restaurant-pic:hover span a{display: block; } */
 
 .network_menu_header {
-	background-image:url('https://d5ca3b0520fac45026ad-6caa6fe89e7dac3eaf12230f0985b957.ssl.cf5.rackcdn.com/dark_leather_@2X.png');
-	background-repeat:repeat;	
+	background:url('http://placehold.it/1900x1080/cf2f28/ffffff');
+  background-attachment: fixed;
+  background-position: center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+  margin: 0;
+  padding-top: 0;
+  height: 320px;
+  position: relative;
 }
 
+.restaurant_logo_wrap {
+  top: 65px;
+  left: 10px;
+  position: absolute;
+  transition: bottom .3s;
+  z-index: 3;
+}
+
+.restaurant_logo {
+  background: #fff;
+  border: 5px solid #fff;
+  border-radius: 12px;
+  box-shadow: 0 1px 1px rgba(136,153,166,0.15);
+  height: 200px;
+  position: relative;
+  width: 200px;
+}
+.restaurant-data{width:100%; padding-bottom: 25px;}
+.restaurant-pic span.restaurant-like{position: absolute; left: 11%; bottom: 10px;}
+.restaurant-pic span.restaurant-share{position: absolute; left:46%; bottom: 10px;}
+.restaurant-pic span.restaurant-plus{position: absolute; right: 9%; bottom: 10px;}
+.restaurant-title{color:#231f20; font-size:28px; font-weight:700; margin: 10px 0;}
+
+.resto_details {
+  background-color: #fff;
+  border-bottom: 1px solid #e1e8ed;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  min-height: 60px;
+}
+
+.section_wrap {
+  position: relative;
+}
+
+.menu_sections {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
