@@ -57,6 +57,12 @@
                     <div class="restaurant-title">
                         <%= @restaurant.name %>
                     </div>
+                    <address class="hi">
+                        <%= @restaurant.address_line_1 %>
+                        <%= @restaurant.city %>
+                        <%= @restaurant.postal_code %>
+                        <a href="tel:<%= @restaurant.phone %>"><%= @restaurant.phone %></a>
+                </address>
                 </div>
                 <div class="col-xs-12 col-sm-6 col-md-4">
                     <div class="counter-tab">
@@ -69,9 +75,9 @@
                         <% end %>
                     </div>
                 </div>
-                <div class="col-xs-12 col-sm-6 col-md-4 section_wrap">
+                <div class="col-xs-12 col-sm-6 col-md-4">
                     <!-- ko foreach: menus -->
-                        <button class="btn btn-default menu_sections" data-bind="click: function(){ $root.selected_menu($data) }, lText: name"></button>
+                        <button class="btn btn-default pull-right" data-bind="click: function(){ $root.selected_menu($data) }, lText: name"></button>
                     <!-- /ko -->
                 </div>
             </div>
