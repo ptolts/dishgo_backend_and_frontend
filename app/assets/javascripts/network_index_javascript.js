@@ -2,6 +2,7 @@ function NetworkIndexModel() {
 
     var self = this;
     self.restaurant_search_term = ko.observable("");
+    self.restaurants = ko.observableArray([]);
 
     self.top_search = ko.computed({
     	read: function(){
@@ -13,6 +14,31 @@ function NetworkIndexModel() {
     	},
     	deferEvaluation: true,
     });
+
+    self.ajax_search = function(){
+		$.ajax({
+			type: "POST",
+			url: "/app/network/search",
+			data: {
+				restaurant_search_term: self.restaurant_search_term(),
+			},
+			success: function(data, textStatus, jqXHR){
+				self.restaurants(_.map(data.restaurants,function(restaurant){ return new Restaurant(restaurant) }));
+			},
+			error: function(XMLHttpRequest, textStatus, errorThrown) { 
+
+			},
+			dataType: "json"
+		});    	
+    }
+
+    self.search_restaurants = ko.computed({
+    	read: function(){
+    		if(self.restaurant_search_term().length > 0){
+    			self.ajax_search();
+    		}
+    	}
+    }).extend({rateLimit: 500});
 
 };
 

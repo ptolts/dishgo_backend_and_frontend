@@ -1,4 +1,5 @@
 class NetworkController < ApplicationController
+  skip_before_filter :verify_authenticity_token, only: [:search]
   layout 'network'
   
   def index
@@ -37,6 +38,18 @@ class NetworkController < ApplicationController
     create_page_view restaurant
 
     render 'restaurant'
+  end
+
+  def search
+    restaurants = Restaurant.limit(25)
+    if result = request.location    
+      coords = [result.coordinates[1],result.coordinates[0]]
+      restaurants = restaurants.where(:locs => { "$near" => { "$geometry" => { "type" => "Point", :coordinates => coords }, "$maxDistance" => 100000}})
+    end
+    regex = /#{params[:restaurant_search_term]}/i
+    restaurants = restaurants.where(name:regex)
+    restaurants = restaurants.collect{|e| e.as_document({pages:true})}.as_json
+    render json: {restaurants:restaurants}.to_json
   end
 
   def create_page_view restaurant

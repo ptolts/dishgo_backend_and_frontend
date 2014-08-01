@@ -307,7 +307,7 @@ class Restaurant
     if self.pages and !options[:pages]
       hash["pages"] = self.pages.as_json
     end
-    if self.gallery_images
+    if self.gallery_images and !options[:pages]
       hash["gallery_images"] = self.gallery_images.as_json
     end    
     hash["multi_name"] = self.multi_name_translations

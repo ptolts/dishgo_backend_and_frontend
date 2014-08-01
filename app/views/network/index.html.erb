@@ -54,8 +54,34 @@
 
 	<!-- SEARCH RESULTS WILL APPEAR HERE -->
 
+	<div class="container letsdishgomeat"  data-bind="visible: top_search">
+		<div class="row" data-bind="foreach: restaurants">
+			<div class="col-md-4">
+				<div class="dish_container">
+					<div class="col-xs-12 dish-picture">
+						<img class="img-responsive" data-bind="attr:{src:logo}">
+						<span class="dish_title_bar">
+							<span class="dishgo_icon">
+								<img src="https://58900edd332817a2d530-6caa6fe89e7dac3eaf12230f0985b957.ssl.cf5.rackcdn.com/icon.png" class="img-responsive">
+							</span>
+							<!-- ko text: name --><!-- /ko -->
+						</span>
+						<span class="dish_rating">
+								<img src="https://58900edd332817a2d530-6caa6fe89e7dac3eaf12230f0985b957.ssl.cf5.rackcdn.com/five-stars.png" class="img-responsive">
+						</span>
+					</div>
+					<div class="col-xs-12">
+						<div class="dish-description">
+							<p>Bla bla bla bla restaurant description.</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
 </div>
-<div id="white_background">
+<div id="white_background" data-bind="slideVisible: !top_search()">
 	<div class="container">
 		<div class="row">
 			<h2 class="text-center">Top dishes of the day</h2>

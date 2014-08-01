@@ -1,3 +1,17 @@
+ko.bindingHandlers.slideVisible = {
+    update: function (element, valueAccessor, allBindings, viewModel, bindingContext) {
+        var value = valueAccessor();
+        var jElement = $(element);
+        if(value && !jElement.is(":visible")){
+            jElement.toggle( "slide" );
+        }
+
+        if(!value && jElement.is(":visible")){
+            jElement.toggle( "slide" );
+        }
+    }
+};
+
 ko.bindingHandlers.menuVisibleImage = {
     update: function (element, valueAccessor, allBindings, viewModel, bindingContext) {
         var underlyingObservable = valueAccessor();
