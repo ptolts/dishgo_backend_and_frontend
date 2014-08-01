@@ -4,3 +4,11 @@
 #footer a, #footer div, #footer {
 	color: #fff;
 }
+#left_menu .nav a:hover,
+#left_menu .language_select a:hover,
+#left_menu span:hover {
+  	color: #BFBFBF;
+}
+#left_menu .logo:hover {
+	color: #fff;
+}

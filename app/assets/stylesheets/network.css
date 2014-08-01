@@ -60,7 +60,6 @@ body {
     left:50%;
     font-size: 16px;
     padding: 15px;
-    border-radius: 5px;
     background:rgb(0,0,0);
     background: transparent\9;
     background:rgba(0,0,0,0.7);
@@ -246,6 +245,7 @@ footer a:focus {
 .btn-none:hover,
 .btn-none:focus {
 	opacity: .80;
+	color: #1a1a1a;
 }
 
 /* Small Devices, Tablets */
@@ -287,7 +287,6 @@ footer a:focus {
 		    max-width: 100%;
 		    margin: 0 auto;
 		    position: static;
-		    border-radius: 0;
 		}
 		#menu_background {
 			height: 285px;
@@ -311,7 +310,6 @@ footer a:focus {
 		#login_buttons .btn {
 			padding: 17px 15px 7px 15px;
 			line-height: 24px;
-			border-radius: 0;
 		}
     }
 

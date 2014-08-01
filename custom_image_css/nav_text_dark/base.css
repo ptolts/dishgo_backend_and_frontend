@@ -7,3 +7,11 @@
 #dishgo_logo {
 	background-image: url('/logo_black.png');
 }
+#left_menu .nav a:hover,
+#left_menu .language_select a:hover,
+#left_menu span:hover {
+  	color: #8C8C8C;
+}
+#left_menu .logo:hover {
+	color: #000;
+}
