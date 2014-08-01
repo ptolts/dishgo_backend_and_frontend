@@ -9,7 +9,8 @@ class NetworkController < ApplicationController
   end
 
   def restaurant
-    restaurant = Restaurant.where(name:/cunningham/i).first
+    restaurant = Restaurant.find(params[:id])
+    restaurant ||= Restaurant.where(name:/cunningham/i).first
     @restaurant = restaurant
 
     @lat = restaurant.lat

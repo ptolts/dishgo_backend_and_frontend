@@ -58,6 +58,7 @@
 		<div class="row" data-bind="foreach: restaurants">
 			<div class="col-md-4">
 				<div class="dish_container">
+					<a data-bind="attr:{href:'/app/network/restaurant/'+id}" class="full_dish_link"></a>
 					<div class="col-xs-12 dish-picture">
 						<img class="img-responsive" data-bind="attr:{src:logo}">
 						<span class="dish_title_bar">
