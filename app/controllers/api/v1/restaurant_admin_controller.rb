@@ -49,7 +49,7 @@ class Api::V1::RestaurantAdminController < ApplicationController
       resto
     end
 
-    render :json => {success:true}.as_json
+    render :json => {url:img.img_url_original}.as_json
   end  
 
 end

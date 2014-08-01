@@ -1,10 +1,26 @@
 <div class="network_header">
 	<div class="container">
-		<div id="logo">
+
+		<div id="logo" data-bind="visible: !top_search()">
 			<a href="#">
 				<img src="https://58900edd332817a2d530-6caa6fe89e7dac3eaf12230f0985b957.ssl.cf5.rackcdn.com/DishGo-black-red.png" class="img-responsive">
 			</a>
 		</div>
+
+		<form class="form-inline col-xs-4" role="form" data-bind="visible: top_search">
+			<div class="form-group">
+				<div class="controls">
+					<div class="input-group input-group-lg">
+						<div class="input-group-addon"><i class="fa fa-search"></i></div>
+						<input id="#" name="#" type="text" placeholder="Search" class="form-control" data-bind="hasFocus: top_search, value: restaurant_search_term, valueUpdate: 'afterkeydown'" />
+						<span class="input-group-btn">
+							<button class="btn btn-lg btn-search">Search</button>
+						</span>
+					</div>
+				</div>
+			</div>
+		</form>
+	
 		<div id="login_buttons">
 			<ul>
 				<li><a href="/app/users/sign_in" class="btn btn-none" style="margin-right:-3px;">Log In</a></li>
@@ -14,7 +30,8 @@
 	</div>
 </div>
 <div id="menu_background">
-	<div class="container_small letsdishgomeat">
+
+	<div class="container_small letsdishgomeat"  data-bind="visible: !top_search()">
 		<div class="row">
 			<div class="col-xs-12 text-center">
 				<h1>Search Restaurant Menus</h1>
@@ -23,9 +40,9 @@
 						<div class="controls">
 							<div class="input-group input-group-lg">
 								<div class="input-group-addon"><i class="fa fa-search"></i></div>
-								<input id="#" name="#" type="text" placeholder="Search" data-bind="#" class="form-control"/>
+								<input id="#" name="#" type="text" placeholder="Search" class="form-control" data-bind="hasFocus: !top_search(), value: restaurant_search_term, valueUpdate: 'afterkeydown'" />
 								<span class="input-group-btn">
-									<button class="btn btn-lg btn-search" data-bind="click: search_for_restaurant">Search</button>
+									<button class="btn btn-lg btn-search">Search</button>
 								</span>
 							</div>
 						</div>
@@ -34,6 +51,9 @@
 			</div>
 		</div>
 	</div>
+
+	<!-- SEARCH RESULTS WILL APPEAR HERE -->
+
 </div>
 <div id="white_background">
 	<div class="container">
@@ -131,6 +151,7 @@
 	var scripts = [
 		"<%= javascript_path 'application' %>",
     	"<%= javascript_path 'menu_editor' %>",
+    	"<%= javascript_path 'network_index_javascript' %>",
 	];
 	var src;
 	var script;
