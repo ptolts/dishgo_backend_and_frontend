@@ -58,7 +58,7 @@ body {
 }
 
 #menu_background {
-	height: 500px;
+	min-height: 500px;
   position: relative;
 }
 
@@ -299,7 +299,7 @@ footer a:focus {
 		    position: static;
 		}
 		#menu_background {
-			height: 285px;
+			min-height: 285px;
 			padding: 40px 0;
 		}
 		.network_header {
