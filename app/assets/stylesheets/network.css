@@ -25,7 +25,7 @@
 .network_header.fixed {
   position: fixed;
   width: 100%;
-  z-index: 10000;
+  z-index: 995;
 }
 
 .container_small.letsdishgomeat .form-inline {
@@ -372,11 +372,15 @@ span.play-icon{position: absolute; left: 31%; top: 32%; display: none;}
   position: relative;
   width: 200px;
 }
+
+.padme {
+  padding: 5px 15px;
+}
 .restaurant-data{width:100%; padding-bottom: 25px;}
 .restaurant-pic span.restaurant-like{position: absolute; left: 11%; bottom: 10px;}
 .restaurant-pic span.restaurant-share{position: absolute; left:46%; bottom: 10px;}
 .restaurant-pic span.restaurant-plus{position: absolute; right: 9%; bottom: 10px;}
-.counter-tab{float: left; width: 100%; padding-top: 20px;}
+.counter-tab{float: left; width: 100%;}
 .counter-tab div{float: left; width: 25%; color: #aaa; font-size: 14px;}
 
 .resto_details {
@@ -389,10 +393,27 @@ span.play-icon{position: absolute; left: 31%; top: 32%; display: none;}
 .resto_details .restaurant-title {
   color:#231f20; 
   font-size:28px; 
-  font-weight:700; 
-  margin: 5px 0 0 0;
+  font-weight:700;
 }
 
 .resto_details address {
   margin: -5px 0 5px 0;
+}
+
+.menu_sections {
+  position: relative;
+  width: 100%
+}
+.each_section {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+.btn-default {
+  border-radius: 0 !important;
+  border-bottom: 0 !important;
+}
+.btn-default:focus {
+  outline:0px !important;
+    -webkit-appearance:none;
 }

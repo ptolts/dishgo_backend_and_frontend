@@ -65,7 +65,7 @@
 							<li><a data-bind="click: function() { $parent.goto_and_kill_menu($data.page_link()) }, lText: name"></a></li>
 						<!-- /ko -->					
 						<div class="language_select" data-bind="foreach: languages">
-							<li data-bind="css:{selected: $data === $root.lang()}, click: function(){ $root.lang($data); $root.display_menu(false) }"><a data-bind="text: $root.getFullLangName($data)"></a>
+							<li data-bind="css:{selected: $data === $root.lang()}, click: function(){ $root.lang($data); $root.display_menu(false) }"><a data-bind="text: $root.getFullLangName($data)"></a></li>
 						</div>						
 					</div>
 				</ul>		
