@@ -219,33 +219,40 @@ var opts = {
 
 ko.bindingHandlers.file_upload = {
     update: function(element, valueAccessor, allBindingsAccessor, viewModel, bindingContext) {
-        var self = this;
-        viewModel.imageModel;
+
+        var value = valueAccessor();
+
         $(element).fileupload({
             dropZone: $(element),
-            formData: {restaurant_id: restaurant_id},
+            formData: {
+                restaurant_id: restaurant_id,
+            },           
             url: image_upload_url,
             dataType: 'json',
             progressInterval: 50,
+            add: function(e,data){
+                image = viewModel.addImage();
+                data.image = image;
+                data.submit();
+            },
+            submit: function(e, data){
+                console.log(data);
+            },
             send: function (e, data) {
-                $.each(data.files, function (index, file) {
-                    viewModel.imageModel = viewModel.addImage();
-                    //console.log(viewModel.imageModel);
-                    viewModel.imageModel.filename(file.name);
-                });                
+                data.image.started(true);
             },
             done: function (e, data) {
-                var file = data.result.files[0];
-                viewModel.imageModel.update_info(file);                
+                var file = data.result.files[0];                 
+                data.image.update_info(file);                                               
             },
-            progressall: function (e, data) {
+            progress: function (e, data) {
                 var progress = parseInt(data.loaded / data.total * 100, 10);
-                viewModel.imageModel.progressValue(progress);
+                data.image.progressValue(progress);
             },
             fail: function (e, data) {
-                viewModel.imageModel.failed(true);
-            },      
-        });
+                data.image.failed(true);
+            },                       
+        });    
     }
 };
 

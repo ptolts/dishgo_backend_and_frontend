@@ -8,6 +8,7 @@ ko.bindingHandlers.datepicker = {
             defaultDate: value(),
         });
         $(element).val(jdate.strftime(value(),"%m/%d/%Y"));
+        value(jdate.strftime(value(),"%m/%d/%Y"));
     }    
 }
 
@@ -103,12 +104,13 @@ function Prize(data) {
             prize:ko.toJSON(self),
           },
           success: function(data, textStatus, jqXHR){
+            self.id(data.id);
         		self.spin(false);
         		self.saved(true);
           },
           error: function(data){
-    		self.spin(false);
-    		alert("There was an issue saving this prize.");
+        		self.spin(false);
+        		alert("There was an issue saving this prize.");
           },
           dataType: "json"
         });		    	

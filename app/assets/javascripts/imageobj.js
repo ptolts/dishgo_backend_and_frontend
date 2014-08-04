@@ -1,3 +1,32 @@
+ ImageObj.prototype.fastJSON = function(){
+    var fast = {};
+    for (var property in this) {
+        if (this.hasOwnProperty(property)) {
+            var result = this[property];
+            while(ko.isObservable(result)){
+                result = result.peek();
+            }
+            if(typeof result == "function"){
+                continue;
+            }
+            if(typeof result == "object"){
+                if(result == null){
+                    fast[property] = result;
+                    continue;
+                }                              
+                if(Array.isArray(result)){
+                    continue;
+                }
+                if(result.fastJSON){
+                    continue;
+                }
+            }         
+            fast[property] = result;
+        }
+    } 
+    return fast;
+}
+
  function ImageObj(data) {
     var self = this;
     self.progressValue = ko.observable(1);
@@ -101,13 +130,13 @@
         }); 
     }     
 
-    self.update_info = function(item){
+    self.update_info = function(item){      
         self.url(item.thumbnailUrl);
         self.small(item.small);
-        self.id(item.image_id);
         self.original(item.original);
         self.image_width = ko.observable(item.width);
         self.image_height = ko.observable(item.height); 
         self.completed(true);
+        self.id(item.image_id);        
     }
 }

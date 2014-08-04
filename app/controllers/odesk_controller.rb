@@ -48,14 +48,16 @@ class OdeskController < ApplicationController
               individual_options.save            
             end
           end
-          dish_size = dish.draft_size
-          dish_size.odesk = nil
-          dish_size.restaurant = restaurant
-          dish_size.save
-          dish_size.draft_individual_options.each do |individual_options|
-            individual_options.odesk = nil
-            individual_options.restaurant = restaurant
-            individual_options.save            
+          if dish.draft_sizes
+            dish_size = dish.draft_sizes
+            dish_size.odesk = nil
+            dish_size.restaurant = restaurant
+            dish_size.save
+            dish_size.draft_individual_options.each do |individual_options|
+              individual_options.odesk = nil
+              individual_options.restaurant = restaurant
+              individual_options.save            
+            end
           end
         end
         next section

@@ -30,13 +30,13 @@ class PrizesController < ApplicationController
     end
     prize.restaurant = restaurant
     prize.name_translations = data["name"]
-    prize.start_date = Date.strptime(data["start_date"], "%Y-%m-%dT%H:%M:%S.%L%z")
-    prize.end_date = Date.strptime(data["end_date"], "%Y-%m-%dT%H:%M:%S.%L%z")
+    prize.start_date = Date.strptime(data["start_date"], "%m/%d/%Y")
+    prize.end_date = Date.strptime(data["end_date"], "%m/%d/%Y")
     prize.amount = data["amount"]
     prize.quantity = data["quantity"]
     prize.description_translations = data["description"]
     prize.save
-    render json: {success:true}.as_json
+    render json: {success:true, id: prize.id}.as_json
   end  
 
   def create

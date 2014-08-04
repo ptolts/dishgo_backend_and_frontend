@@ -13,7 +13,7 @@ Dish.prototype.fastJSON = function(){
         if (this.hasOwnProperty(property)) {
             var result = this[property];
             while(ko.isObservable(result)){
-                result = result();
+                result = result.peek();
             }
             if(typeof result == "function"){
                 continue;
@@ -24,7 +24,7 @@ Dish.prototype.fastJSON = function(){
                     continue;
                 }                
                 if(property == "images"){
-                    fast[property] = ko.toJS(result);
+                    fast[property] = _.collect(result,function(res){ return res.fastJSON() });
                     continue;
                 }                
                 if(Array.isArray(result)){
@@ -405,27 +405,9 @@ function Dish(data, topmodel) {
         };   
     }
 
-    self.dirty = ko.observable(false);
-    self.dirtyTrack = ko.computed(function(){
-        self.id();
-        self.name();
-        self.description();
-        self.price();
-        self.sizes();
-        self.position();
-        _.each(self.images(),function(image){
-            image.id();
-        });
-        self.topmodel.id();
-        self.track_saving();
-        self.dirty(true);
-    });
-    self.dirty(false);
+    // self.dirty = ko.observable(false).extend({ notify: 'always', rateLimit: 5000 });
 
-    self.update_when_dirty = ko.computed(function(){
-        if(!self.dirty()){
-            return;
-        }
+    self.update_when_dirty = function(){
         if(self.id.peek() && editing_mode){
             $.ajax({
               type: "POST",
@@ -438,16 +420,37 @@ function Dish(data, topmodel) {
                 data: self.fastJSON(),
               },
               success: function(data, textStatus, jqXHR){
-                    console.log("Dirty saved");
+                    // console.log("[" + self.id() + "] Dirty saved [" + self.update_when_dirty.getDependenciesCount() + "]");
+                    // _.each(self.images.peek(),function(image){            
+                    //     console.log(image.id.peek());
+                    // });                    
+                    // console.log("-----");
                     self.stop_track_saving();                         
-                    self.dirty(false);
                 },
                 error: function(XMLHttpRequest, textStatus, errorThrown) { 
                     self.stop_track_saving();                                           
-                    self.dirty(true);
+                    self.id.valueHasMutated();
                 },
                 dataType: "json"
             });
         }
-    }).extend({ rateLimit: { timeout: 5000, method: "notifyWhenChangesStop" } });    
+    }
+
+    self.dirtyTrack = ko.computed(function(){
+        self.id();
+        self.name();
+        self.description();
+        self.price();
+        self.sizes();
+        self.position();
+        _.each(self.images(),function(image){            
+            image.id();
+        });
+        self.topmodel.id();
+        self.track_saving();
+        if(!ko.computedContext.isInitial()){
+            self.update_when_dirty();    
+        }
+    }).extend({ notify: 'always', rateLimit: 5000 });
+        
 }

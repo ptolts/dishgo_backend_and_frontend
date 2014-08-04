@@ -287,6 +287,7 @@ class AdministrationController < ApplicationController
       img.restaurant = Restaurant.find(params[:restaurant_id])
       img.update_attributes({:img => file})
       img.manual_img_fingerprint = md5_sum
+      img.unverified = false
       img.save
       images = [img]
     end
