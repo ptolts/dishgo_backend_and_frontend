@@ -180,9 +180,21 @@ footer a:focus {
   background:rgba(255,255,255,0.9);
   filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#e5ffffff,endColorstr=#e5ffffff);
   zoom: 1;
+  -o-transition: all 300ms ease-in-out;
+  -ms-transition: all 300ms ease-in-out;
+  -moz-transition: all 300ms ease-in-out;
+  -webkit-transition: all 300ms ease-in-out;
+  transition: all 300ms ease-in-out;
+  box-shadow: inset 0px 0px 2px 1px transparent,
+    inset 0px 0px 30px 15px transparent,
+    0px 0px 1px 1px transparent;
 }
 .dish_container:nth-child(n) {
   filter: none;
+}
+.dish_container:hover {
+  background-color: rgba(255, 255, 255, 0.9);
+  box-shadow: inset 0px 0px 2px 1px rgba(0, 0, 0, 0.4), inset 0px 0px 30px 15px rgba(0, 0, 0, 0.05), 0px 0px 1px 1px #add8e6;
 }
 
 .dish_container .dish-description p {
@@ -453,6 +465,9 @@ span.play-icon{position: absolute; left: 31%; top: 32%; display: none;}
 }
 .dish_container .restaurant_logo_wrap {
   top: 60px;
+}
+.dish_container .restaurant_logo_wrap a {
+  color: #cf2f28;
 }
 .dish_container .restaurant_logo {
   height: 100px;
