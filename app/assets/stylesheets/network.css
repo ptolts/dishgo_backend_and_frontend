@@ -162,7 +162,7 @@ footer a:focus {
   filter: none;
 }
 
-.dish_container p {
+.dish_container .dish-description p {
   margin: 5px 0;
   height: 40px;
   overflow: hidden;
