@@ -6,14 +6,14 @@
 			</a>
 		</div>
 
-		<form class="form-inline col-xs-4" role="form" data-bind="visible: top_search">
+		<form class="form-inline" role="form" data-bind="visible: top_search">
 			<div class="form-group">
 				<div class="controls">
 					<div class="input-group input-group-lg">
 						<div class="input-group-addon"><i class="fa fa-search"></i></div>
 						<input id="#" name="#" type="text" placeholder="Search" class="form-control" data-bind="hasFocus: top_search, value: restaurant_search_term, valueUpdate: 'afterkeydown'" />
 						<span class="input-group-btn">
-							<button class="btn btn-lg btn-search">Search</button>
+							<button class="btn btn-lg btn-search hidden-xs">Search</button>
 						</span>
 					</div>
 				</div>
@@ -53,26 +53,70 @@
 
 	<!-- SEARCH RESULTS WILL APPEAR HERE -->
 
-	<div class="container"  data-bind="visible: top_search">
+	<div class="container search_results"  data-bind="visible: top_search">
 		<div class="row" data-bind="foreach: restaurants">
-			<div class="col-md-4">
+			<div class="col-md-4 col-sm-6 col-xs-12">
 				<div class="dish_container">
-					<a data-bind="attr:{href:'/app/network/restaurant/'+id}" class="full_dish_link"></a>
-					<div class="col-xs-12 dish-picture">
-						<img class="img-responsive" data-bind="attr:{src:logo}">
-						<span class="dish_title_bar">
-							<span class="dishgo_icon">
-								<img src="https://58900edd332817a2d530-6caa6fe89e7dac3eaf12230f0985b957.ssl.cf5.rackcdn.com/icon.png" class="img-responsive">
+					<div class="row">
+						<!-- <a data-bind="attr:{href:'/app/network/restaurant/'+id}" class="full_dish_link"></a> -->
+						<div class="dish_title_bar">
+							<span class="restaurant_name">
+								<!-- ko text: name --><!-- /ko -->
 							</span>
-							<!-- ko text: name --><!-- /ko -->
-						</span>
-						<span class="dish_rating">
-								<img src="https://58900edd332817a2d530-6caa6fe89e7dac3eaf12230f0985b957.ssl.cf5.rackcdn.com/five-stars.png" class="img-responsive">
-						</span>
+						</div>
+						<div class="restaurant_logo_wrap">
+	                        <div class="restaurant_logo">
+	                            <div class="restaurant-data pull-left">
+	                                <div class="restaurant-pic pull-left">
+	                                    <span class="restaurant-like"><a href="#"><i class="glyphicon glyphicon-heart-empty"></i></a></span>
+	                                    <span class="restaurant-share"><a href="#"><i class="glyphicon glyphicon-share"></i></a></span>
+	                                    <span class="restaurant-plus"><a href="#"><i class="glyphicon glyphicon-plus-sign"></i></a></span>
+	                                    <a href="#">
+	                                        <img src="http://placehold.it/600x600" alt="" class="img-responsive" />
+	                                    </a>
+	                                </div>
+	                            </div>
+	                        </div>
+	                        <span class="resto_rating">
+									<img src="https://58900edd332817a2d530-6caa6fe89e7dac3eaf12230f0985b957.ssl.cf5.rackcdn.com/five-stars.png" class="img-responsive">
+							</span>
+                    	</div>
+						<!-- <div class="dish-picture">
+							<img class="img-responsive" data-bind="attr:{src:logo}">
+						</div> -->
+						<div class="col-xs-8 col-xs-offset-4" style="top: 60px;">
+							<div class="contact_details">
+								<div class="row">
+									<div class="col-xs-2" style="padding-right:5px;">
+										<i class="fa fa-map-marker"></i>
+									</div>
+									<div class="col-xs-10" style="padding-left:0;">
+										<address>
+					                        1697 Rue des Veroniques <!-- address line 1 -->
+					                        <br>
+					                        St-Lazare <!-- City -->
+					                        QC <!-- province -->
+				                		</address>
+				                	</div>
+			                	</div>
+			                	<div class="row">
+			                		<a href="tel:514-591-9387"> <!-- phone number -->
+										<div class="col-xs-2" style="padding-right:5px;">
+											<i class="fa fa-phone"></i>
+										</div>
+										<div class="col-xs-10" style="padding-left:0;">
+											<span>514-591-9387 <!-- phone number --></span>
+										</div>
+									</a>
+								</div>
+							</div>
+							<div class="dish-description">
+								<p>Bla bla bla bla restaurant description. Bla bla bla bla restaurant description.Bla bla bla bla restaurant description.</p>
+							</div>
+						</div>
 					</div>
-					<div class="col-xs-12">
-						<div class="dish-description">
-							<p>Bla bla bla bla restaurant description.</p>
+					<div class="row">
+						<div class="col-xs-12">
 						</div>
 					</div>
 				</div>
@@ -115,7 +159,7 @@
 <footer>
 	<div class="container">
 		<div class="row">
-			<div class="col-sm-3">
+			<div class="col-sm-3 col-xs-12">
 				<h3>About Us</h3>
 				<ul style="list-style: none; float: left; padding-left:0px; font-size: 14px;">
 					<li><a href="https://dishgo.io" target="_blank">Website Builder</a>
@@ -126,7 +170,7 @@
 					<li><a href="index_fr.html">Français</a></li>
 				</ul>
 			</div>
-			<div class="col-sm-3">
+			<div class="col-sm-3 col-xs-12">
 				<h3>Restaurants</h3>
 				<ul style="list-style: none; float: left; padding-left:0px; font-size: 14px;">
 					<li><a href="http://www.letsdishgo.com" target="_blank">Get Listed</a></li>
@@ -134,7 +178,7 @@
 					<li><a href="#" target="_blank">Menu Optimization</a></li>
 				</ul>
 			</div>
-			<div class="col-sm-3">
+			<div class="col-sm-3 col-xs-12">
 				<h3>Earn Rewards</h3>
 				<ul style="list-style: none; float: left; padding-left:0px; font-size: 14px;">
 					<li><a href="#">DishCoins</a></li>
@@ -142,7 +186,7 @@
 					<li><a href="#">Contests</a></li>
 				</ul>
 			</div>
-			<div class="col-sm-3">
+			<div class="col-sm-3 col-xs-12">
 				<h3>LATEST TWEETS</h3>
 				<a class="twitter-timeline" href="https://twitter.com/twitterapi" data-widget-id="435779578913497088" data-theme="dark" data-link-color="#2682a9"  data-related="twitterapi,twitter" data-chrome="nofooter noborders noheader noscrollbar transparent" data-aria-polite="assertive"  data-tweet-limit="2"  width="520" height="120" lang="EN"></a>
 				<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
