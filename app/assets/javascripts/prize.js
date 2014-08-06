@@ -1,21 +1,48 @@
 ko.bindingHandlers.datepicker = {
-    init: function (element, valueAccessor, allBindingsAccessor) {
-        var value = valueAccessor();    
+    update: function (element, valueAccessor, allBindingsAccessor) {
+        var value = valueAccessor();
         $(element).datepicker({
             onSelect:function(dateText,inst){
-              value(dateText);
+              var format = "%m/%d/%Y";
+              var d = jdate.strptime(dateText,format); 
+              console.log("Changing date to: " + d);
+              value(d);
             },
             defaultDate: value(),
         });
+
+        console.log(value());
+
         $(element).val(jdate.strftime(value(),"%m/%d/%Y"));
-        value(jdate.strftime(value(),"%m/%d/%Y"));
-    }    
+        // value(jdate.strftime(value(),"%m/%d/%Y"));
+
+        ko.utils.domNodeDisposal.addDisposeCallback(element, function() {
+          $(element).datepicker( "destroy" );
+        });
+    },
+}
+
+function IndividualPrize(data) {
+    var self = this;
+    self.id = (data.id || null);
+    self.prize_token = (data.prize_token || null);
+    self.user_id = ko.observable(data.user_id || null);
+
+    self.claimed = ko.computed({
+      read: function(){
+        if(self.user_id()){
+          return true;
+        }
+        return false;
+      }
+    });
 }
 
 function Prize(data) {
     var self = this;
     self.id = ko.observable(data.id || null);
     self.name = ko.observable(data.name || copyDefaultHash(default_language_hash));
+    self.restaurant_name = ko.observable(data.restaurant_name || "");
     self.amount = ko.observable(data.amount || 0);
     self.quantity = ko.observable(data.quantity || 2);
     self.number_of_bets = ko.observable();
@@ -28,12 +55,21 @@ function Prize(data) {
     self.spin = ko.observable(false);
     self.saved = ko.observable();
 
+    self.individual_prizes = ko.observable(_.map(data.individual_prizes,function(ind_pri){ return new IndividualPrize(ind_pri) }));
+
     self.lName = ko.computed({
     	read: function(){
             return self.name()[lang()];
     	},
     	deferEvaluation: true,
     });
+
+    self.lDescription = ko.computed({
+      read: function(){
+            return self.description()[lang()];
+      },
+      deferEvaluation: true,
+    });    
 
     self.computed_name = ko.computed({
     	read: function(){
@@ -66,6 +102,18 @@ function Prize(data) {
     	deferEvaluation: true,
     }); 
 
+    self.validate = function(){
+      if(self.lName() == ""){
+        alert("Gift certificates require a name!");
+        return false;
+      }
+      if(self.amount() < 5){
+        alert("Gift certificates cannot be worth less than $5");
+        return false
+      }
+      return true;
+    }
+
     self.bid = function(item){
       self.spin(true);
         $.ajax({
@@ -95,6 +143,9 @@ function Prize(data) {
     }
 
     self.save = function(item){
+      if(!self.validate()){
+        return;
+      }      
     	self.spin(true);
         $.ajax({
           type: "POST",

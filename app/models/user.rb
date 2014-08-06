@@ -8,7 +8,7 @@ class User
   has_many :notifications, :class_name => "Notification"
   has_many :orders, :class_name => "Order"
   has_one :owns_restaurants, :class_name => "Restaurant", inverse_of: :user, validate: false
-  has_and_belongs_to_many :prizes, :class_name => "Prize", inverse_of: :users, index: true
+  has_many :individual_prizes, :class_name => "IndividualPrize", inverse_of: :user
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,

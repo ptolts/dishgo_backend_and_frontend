@@ -410,21 +410,16 @@ function Dish(data, topmodel) {
     self.update_when_dirty = function(){
         if(self.id.peek() && editing_mode){
             $.ajax({
-              type: "POST",
-              url: "/app/menu_update/update_dish",
-              data: {
-                restaurant_id: restaurant_id,
-                odesk_id: odesk_id,
-                section_id: self.topmodel ? self.topmodel.id.peek() : null,
-                // data: ko.toJSON(self),
-                data: self.fastJSON(),
-              },
-              success: function(data, textStatus, jqXHR){
-                    // console.log("[" + self.id() + "] Dirty saved [" + self.update_when_dirty.getDependenciesCount() + "]");
-                    // _.each(self.images.peek(),function(image){            
-                    //     console.log(image.id.peek());
-                    // });                    
-                    // console.log("-----");
+                type: "POST",
+                url: "/app/menu_update/update_dish",
+                data: {
+                    restaurant_id: restaurant_id,
+                    odesk_id: odesk_id,
+                    section_id: self.topmodel ? self.topmodel.id.peek() : null,
+                    // data: ko.toJSON(self),
+                    data: self.fastJSON(),
+                },
+                success: function(data, textStatus, jqXHR){
                     self.stop_track_saving();                         
                 },
                 error: function(XMLHttpRequest, textStatus, errorThrown) { 
@@ -446,7 +441,9 @@ function Dish(data, topmodel) {
         _.each(self.images(),function(image){            
             image.id();
         });
-        self.topmodel.id();
+        if(self.topmodel){
+            self.topmodel.id();
+        }
         self.track_saving();
         if(!ko.computedContext.isInitial()){
             self.update_when_dirty();    

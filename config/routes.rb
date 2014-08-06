@@ -45,6 +45,8 @@ Foodcloud::Application.routes.draw do
       post '/save', to: "prizes#save"
       get '/list', to: "prizes#list"
       post '/bid', to: "prizes#bid"
+      post '/prize_list', to: "prizes#prize_list"
+      post '/won_prize_list', to: "prizes#won_prize_list"
     end
   end     
 

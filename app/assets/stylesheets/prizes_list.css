@@ -9,6 +9,7 @@
     background: #FFF;
     padding: 10px;
     border-bottom: 1px solid #000;
+    margin-bottom: 8px;
 }
 
 .dishcoin_count {
@@ -22,15 +23,25 @@
     background: #FFF;
     padding: 10px;
     border-bottom: 1px solid #000;   
-    border-top: 1px solid #000;   
+    border-top: 1px solid #000;
+    top: 50%;
+    left: 10px;
+    right: 10px;
+    position: absolute;
+    -webkit-transform:  translateY(-50%);
+    -moz-transform:     translateY(-50%);
+    -ms-transform:      translateY(-50%);
+    -o-transform:       translateY(-50%);  
+    transform:          translateY(-50%);
 }
 
 .close_prize {
     position: absolute;
     height: 40px;
-    width: 40px;
-    right: 5px;
-    top: 5px;
-    font-size: 3em;
+    width: 20px;
+    color: red;
+    right: 0px;
+    top: -40px;
+    font-size: 2em;
     z-index: 10;
 }

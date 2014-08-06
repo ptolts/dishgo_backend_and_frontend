@@ -12,6 +12,7 @@ gem 'oj', '~> 2.0.14'
 gem 'oj_mimic_json'
 gem 'instagram'
 gem 'thin'
+gem 'random-word'
 gem 'geoip'
 gem 'activeresource'
 gem "koala" #, "~> 1.8.0rc1"

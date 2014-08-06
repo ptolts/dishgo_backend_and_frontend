@@ -1,51 +1,129 @@
 <%= javascript_include_tag "fast_click" %>  
-
-<div class="prizes_list_controls" data-bind="visible: !selected_prize()">
-    <div class="row">
-        <div class="col-xs-12" data-bind="with: user">
-            <div class="dishcoin_count">
-                <p>You have <!-- ko text: dishcoins --><!-- /ko --> DishCoins to spend.</p>
-                <p>Below is a list of currently available gift certificates you can try to win.</p>
-                <p>Every attempt costs 1 DishCoin, and the chances of winning it are listed.</p>
-            </div>
-        </div>
-    </div>      
-    <div class="row">
-        <div class="col-xs-12">
-            <ul class="list-prizes" data-bind="foreach: prizes">
-                <li class="list-prizes-item" data-bind="text: computed_name, click: function(){ $root.selected_prize($data) }"></li>
-            </ul>
-        </div>
-    </div>  
-</div>
-
-<div class="prizes_control" data-bind="visible: selected_prize, with: selected_prize">
-    <i class="fa fa-times-circle close_prize" data-bind="click: function(){ $root.selected_prize(null) }"></i>
-    <div class="row">
-        <div class="col-xs-12">
-            <h4 data-bind="lText: name"></h4>
-            <p data-bind="lText: description"></p>
-            <div class="row" data-bind="visible: $root.user().dishcoins() > 0">
-                <div class="col-xs-6">
-                    <select class="form-control" data-bind="options: $root.user().dishcoin_list(), value: number_of_bets"></select>          
-                </div>                
-                <div class="col-xs-6">         
-                    <button class="btn btn-info" data-bind="click: function(){ $root.bid($data) }">Bid!</button>
+<div class="container" data-bind="visible: !your_prize()">
+    <div class="prizes_list_controls" data-bind="visible: !selected_prize()">          
+        <div class="row">
+            <div class="col-xs-12" data-bind="with: user">              
+                <div class="dishcoin_count">
+                    <p>You have <!-- ko text: dishcoins --><!-- /ko --> DishCoins to spend.</p>
+                    <p>Below is a list of currently available gift certificates you can try to win.</p>
+                    <p>Every attempt costs 1 DishCoin, and the chances of winning it are listed.</p>
+                    <h3 class="btn btn-primary" style="width: 100%" data-bind="click: function(){ $root.show_your_prizes() }">Your Prizes</h3>
                 </div>
             </div>
+        </div>      
+        <div class="row">
+            <div class="col-xs-12">
+                <ul class="list-prizes" data-bind="foreach: prizes">
+                    <li class="list-prizes-item" data-bind="click: function(){ $root.selected_prize($data) }">
+                        <div class="row">
+                            <div class="col-xs-12 text-center">
+                                <p data-bind="text: restaurant_name"></p>
+                            </div>                          
+                        </div>                        
+                        <div class="row">
+                            <div class="col-xs-8 text-left">
+                                <p data-bind="lText: name"></p>
+                            </div>
+                            <div class="col-xs-4 text-right">
+                                <p data-bind="text: amount"></p>
+                            </div>                            
+                        </div>
+                        <div class="row" data-bind="visible: lDescription().length > 0">
+                            <div class="col-xs-12 text-center">
+                                <p data-bind="lText: description"></p>
+                            </div>                          
+                        </div>                        
+                    </li>
+                </ul>
+            </div>
+        </div>  
+    </div>
+</div>
+
+<div class="container" data-bind="visible: selected_prize">
+    <div class="prizes_control" data-bind="with: selected_prize">
+        <i class="fa fa-times close_prize" data-bind="click: function(){ $root.selected_prize(null) }"></i>
+        <div class="row">
+            <div class="col-xs-12 text-left">
+                <h4 data-bind="lText: name"></h4>    
+            </div>                
+        </div>        
+        <div class="row">
+            <div class="col-xs-12 text-center">
+                <p data-bind="lText: description"></p> 
+            </div>                
+        </div>                          
+
+        <!-- ko if: !$root.your_prize() -->
+            <div class="row" data-bind="visible: $root.user().dishcoins() > 0">
+                <div class="col-xs-6 text-left">
+                    <select class="form-control" data-bind="options: $root.user().dishcoin_list(), value: number_of_bets"></select>          
+                </div>                
+                <div class="col-xs-6 text-right">         
+                    <button class="btn btn-info" data-bind="click: function(){ $root.bid($data) }">Bid!</button>
+                </div>
+            </div>        
             <div class="row" data-bind="visible: $root.user().dishcoins() == 0">
                 <div class="col-xs-12">
                     <p>You're out of DishCoins. Rate dishes or share photos to accumulate more!</p>
                     <p class="text-center">Click here to find out how to earn more.</p>
                 </div>
-            </div>            
-        </div>
-    </div>       
+            </div>         
+        <!-- /ko -->
+        <!-- ko if: $root.your_prize() -->
+            <div class="row">
+                <div class="col-xs-12 text-center">
+                    <!-- ko foreach: individual_prizes -->
+                        <p data-bind="text: prize_token"></p>
+                    <!-- /ko -->
+                </div>
+            </div>         
+        <!-- /ko -->             
+    </div>
+</div>
+
+<div class="container" data-bind="visible: your_prize">
+    <div class="prizes_list_controls" data-bind="visible: !selected_prize()">          
+        <div class="row">
+            <div class="col-xs-12" data-bind="with: user">              
+                <div class="dishcoin_count">
+                    <p>You have won the following gift certificates!</p>
+
+                    <h3 class="btn btn-primary" style="width: 100%" data-bind="click: function(){ $root.hide_your_prizes() }">All Prizes</h3>
+                </div>
+            </div>
+        </div>      
+        <div class="row">
+            <div class="col-xs-12">
+                <ul class="list-prizes" data-bind="foreach: your_prizes">
+                    <li class="list-prizes-item" data-bind="click: function(){ $root.selected_prize($data) }">
+                        <div class="row">
+                            <div class="col-xs-12 text-center">
+                                <p data-bind="text: restaurant_name"></p>
+                            </div>                          
+                        </div>                        
+                        <div class="row">
+                            <div class="col-xs-8 text-left">
+                                <p data-bind="lText: name"></p>
+                            </div>
+                            <div class="col-xs-4 text-right">
+                                <p data-bind="text: amount"></p>
+                            </div>                            
+                        </div>
+                        <div class="row" data-bind="visible: lDescription().length > 0">
+                            <div class="col-xs-12 text-center">
+                                <p data-bind="lText: description"></p>
+                            </div>                          
+                        </div>                        
+                    </li>
+                </ul>
+            </div>
+        </div>  
+    </div>
 </div>
 
 <script type='text/javascript'>//<![CDATA[ 
 
-    var prizes_data = <%= raw(@prizes.to_json) %>;
     var user_data = <%= raw(current_user.to_json) %>;
     var languages = <%= raw(@languages) %>;
     var default_language = <%= raw(@default_language) %>;
@@ -55,9 +133,58 @@
     function viewModel() {
         var self = this;
         self.selected_prize = ko.observable();
-        self.prizes = ko.observableArray(_.map(prizes_data,function(prize){ return new Prize(prize) }));
+        self.your_prize = ko.observable();
         self.user = ko.observable(new User(user_data));
         self.lang = lang;
+
+        self.prizes = ko.observableArray([]);
+
+        self.your_prizes = ko.computed({
+            read: function(){
+                return _.filter(self.prizes(),function(prize){
+                    if(prize.individual_prizes().length > 0){
+                        return true;
+                    } else {
+                        return false;
+                    }
+                });
+            },
+            deferEvaluation: true
+        });
+
+        self.fetch_prizes = function(){
+            $.ajax({
+                type: "POST",
+                url: "/app/prizes/won_prize_list",
+                data: {
+
+                },
+                success: function(data, textStatus, jqXHR){
+                    self.prizes(_.map(data,function(prize){ return new Prize(prize) }));
+                },
+                error: function(data){
+
+                },
+                dataType: "json"
+            });            
+        }
+
+        self.update_prizes = ko.computed({
+            read: function(){
+                if(self.selected_prize() == null){
+                    self.fetch_prizes();
+                }
+            }
+        });
+
+        self.show_your_prizes = function(){
+            self.your_prize(true);
+            self.selected_prize(null);
+        }
+        self.hide_your_prizes = function(){
+            self.your_prize(null);
+            self.selected_prize(null);
+        }        
 
         self.bid = function(prize){
             prize.bid();

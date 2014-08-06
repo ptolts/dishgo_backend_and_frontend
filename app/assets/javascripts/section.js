@@ -162,7 +162,7 @@ function Section(data,topmodel) {
               callback: function() {
                 topmodel.current_dish(null);
                 item.topmodel = null;
-                item.dirty(true);
+                item.id.valueHasMutated();
                 self.dishes.remove(item);
               }
             },

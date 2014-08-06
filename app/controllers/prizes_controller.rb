@@ -1,10 +1,10 @@
 class PrizesController < ApplicationController
-  before_filter :admin_or_user_with_resto!, :except => [:list, :bid] #, :only => [:create_section,:create_dish,:create_option,:create_individual_option]
-  before_filter :sign_in_user_for_prizes, only: [:list, :bid]
+  before_filter :admin_or_user_with_resto!, :except => [:list, :bid, :won_prize_list] #, :only => [:create_section,:create_dish,:create_option,:create_individual_option]
+  before_filter :sign_in_user_for_prizes, only: [:list, :bid, :won_prize_list]
   layout 'prizes'
   
   def index
-    @prizes = current_user.owns_restaurants.prizes
+    @prizes = current_user.owns_restaurants.prizes.collect{|e| e.serializable_hash({include_individual_prizes:true})}
     restaurant = current_user.owns_restaurants
     if restaurant
       @languages = restaurant.languages.to_json
@@ -30,8 +30,9 @@ class PrizesController < ApplicationController
     end
     prize.restaurant = restaurant
     prize.name_translations = data["name"]
-    prize.start_date = Date.strptime(data["start_date"], "%m/%d/%Y")
-    prize.end_date = Date.strptime(data["end_date"], "%m/%d/%Y")
+    format = "%Y-%m-%dT%H:%M:%S.%L%z";
+    prize.start_date = Date.strptime(data["start_date"], format).to_time.utc
+    prize.end_date = Date.strptime(data["end_date"], format).to_time.utc
     prize.amount = data["amount"]
     prize.quantity = data["quantity"]
     prize.description_translations = data["description"]
@@ -57,9 +58,21 @@ class PrizesController < ApplicationController
   def list
     @languages = ['en'].to_json
     @default_language = ['en'].to_json    
-    @prizes = Prize.all
     render 'list', layout: 'list_prizes'
   end
+
+  def prize_list
+    @prizes = Prize.ne(active:false)
+    # @prizes = Prize.nin(id:current_user.prize_ids)
+    render json: @prizes.as_json
+  end
+
+  def won_prize_list
+    user = current_user
+    # won_prizes = current_user.individual_prizes.only(:prize_id).collect{|e| e.prize_id}
+    @prizes = Prize.ne(active:false).collect{|e| e.serializable_hash({current_user:user.id})}
+    render json: @prizes.as_json
+  end  
 
   def bid
     data = JSON.parse(params[:prize])
@@ -69,6 +82,13 @@ class PrizesController < ApplicationController
       return
     end
     prize = Prize.find(data["id"])
+    individual_prize = prize.pop_prize
+
+    if !individual_prize
+      render json: {error: "This gift certificate has already been won!"}.as_json
+      return      
+    end
+
     attempt_count = 0
     attempt_record = []
     while attempt_count < data["number_of_bets"]
@@ -82,7 +102,7 @@ class PrizesController < ApplicationController
 
       user.dishcoins = user.dishcoins - 1
       if attempt == prize.winning_number
-        user.prizes << prize
+        user.individual_prizes << individual_prize
         user.save(validate: false)
         render json: {won: "Congratulations, you've won!"}.as_json
         return
