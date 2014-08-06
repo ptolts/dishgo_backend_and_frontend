@@ -239,6 +239,11 @@ Foodcloud::Application.routes.draw do
   # match 'administration/search_restaurants', to: 'administration#search_restaurants', via: [:get]
 
   namespace :api, :defaults => {:format => :json} do
+    namespace :v2 do
+      resources :tokens, :only => [:create, :destroy]
+      match 'tokens/create_from_facebook', to: 'tokens#create_from_facebook', via: [:post]
+      match 'tokens/load_user', to: 'tokens#load_user', via: [:post]
+    end
     namespace :v1 do
       # match 'api/v1/restaurants/menu' => :menu
       resources :restaurants do
@@ -249,6 +254,7 @@ Foodcloud::Application.routes.draw do
       resources :restotokens, :only => [:create, :destroy]      
       resources :tokens, :only => [:create, :destroy]
       match 'tokens/create_from_facebook', to: 'tokens#create_from_facebook', via: [:post]
+      match 'tokens/load_user', to: 'tokens#load_user', via: [:post]
       resources :registration, :only => [:create]
       match 'user/add_address', to: 'user#add_address', via: [:post]
       match 'order/submit_order', to: 'order#submit_order', via: [:post]

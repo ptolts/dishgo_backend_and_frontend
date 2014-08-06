@@ -9,15 +9,17 @@ class Api::V1::DishController < ApplicationController
     rating = user.ratings.where(dish_id:params["dish_id"]).first
     dish = Dish.find(params["dish_id"])
     if !rating
+      Rails.logger.warn "No Ratings Yet"
       rating = Rating.new
       rating.dish = dish
       restaurant = Restaurant.find(params["restaurant_id"])
+      user.dishcoins = user.dishcoins + 1
       rating.restaurant = restaurant
       user.ratings << rating
     end
     rating.rating = params[:rating]
     rating.save            
-    user.save
+    user.save!
     render json: {}.as_json
   end
 

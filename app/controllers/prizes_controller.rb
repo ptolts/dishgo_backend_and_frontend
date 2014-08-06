@@ -20,7 +20,7 @@ class PrizesController < ApplicationController
     restaurant = current_user.owns_restaurants
     data = JSON.parse(params[:prize])
     if data["id"].blank?
-      prize = Prize.create
+      prize = Prize.new
     else
       prize = Prize.find(data["id"])
     end

@@ -49,6 +49,16 @@ class ApplicationController < ActionController::Base
       redirect_to :controller => 'administration', :action => 'restaurant_setup'
     end
   end
+
+  def validate_auth_token
+    user = User.where(:authentication_token => params[:dishgo_token]).first
+    if user.nil?
+      render :status => 401, :json => {errors: [t('api.v1.token.invalid_token')]}
+      return
+    end
+    # Rails.logger.warn user.to_json
+    sign_in user
+  end  
   
   def authenticate_user_from_token!
     user_email = params[:email].presence

@@ -43,6 +43,12 @@ class Api::V1::RestaurantAdminController < ApplicationController
     dish.save 
     img.save
 
+    if !@admin
+      user = current_user
+      user.dishcoins = user.dishcoins + 1
+      user.save(verified: false)
+    end
+
     if @admin or @owner
       img.unverified = true
       img.save
