@@ -81,9 +81,6 @@
 									<img src="https://58900edd332817a2d530-6caa6fe89e7dac3eaf12230f0985b957.ssl.cf5.rackcdn.com/five-stars.png" class="img-responsive">
 							</span>
                     	</div>
-						<!-- <div class="dish-picture">
-							<img class="img-responsive" data-bind="attr:{src:logo}">
-						</div> -->
 						<div class="col-xs-8 col-xs-offset-4" style="top: 60px;">
 							<div class="contact_details">
 								<div class="row">
@@ -123,8 +120,20 @@
 							</div>
 						</div>
 					</div>
-					<div class="row">
-						<div class="col-xs-12">
+					<div class="restaurant_pics"> <!-- dish pictures from resto -->
+						<div class="row">
+							<div class="col-xs-3">
+								<img src="http://placehold.it/120x120" alt="" class="img-responsive" />
+							</div>
+							<div class="col-xs-3">
+								<img src="http://placehold.it/120x120" alt="" class="img-responsive" />
+							</div>
+							<div class="col-xs-3">
+								<img src="http://placehold.it/120x120" alt="" class="img-responsive" />
+							</div>
+							<div class="col-xs-3">
+								<img src="http://placehold.it/120x120" alt="" class="img-responsive" />
+							</div>
 						</div>
 					</div>
 				</div>
@@ -140,22 +149,24 @@
 			<% @dishes.each do |dish| %>
 				<div class="col-xs-12 col-sm-6 col-md-4">
 					<a href="/app/network/restaurant" class="full_dish_link"></a>
-					<div class="dish_container">
-						<div class="col-xs-12 dish-picture">
-							<img class="img-responsive" src="<%= dish.img_src %>">
-							<span class="dish_title_bar">
-								<span class="dishgo_icon">
-									<img src="https://58900edd332817a2d530-6caa6fe89e7dac3eaf12230f0985b957.ssl.cf5.rackcdn.com/icon.png" class="img-responsive">
+					<div class="top_dish_container">
+						<div class="row">
+							<div class="dish-picture">
+								<img class="img-responsive" src="<%= dish.img_src %>">
+								<span class="dish_title_bar">
+									<span class="dishgo_icon">
+										<img src="https://58900edd332817a2d530-6caa6fe89e7dac3eaf12230f0985b957.ssl.cf5.rackcdn.com/icon.png" class="img-responsive">
+									</span>
+									<%= dish.name %>
 								</span>
-								<%= dish.name %>
-							</span>
-							<span class="dish_rating">
-									<img src="https://58900edd332817a2d530-6caa6fe89e7dac3eaf12230f0985b957.ssl.cf5.rackcdn.com/five-stars.png" class="img-responsive">
-							</span>
-						</div>
-						<div class="col-xs-12">
-							<div class="dish-description">
-								<p><%= dish.description %></p>
+								<span class="dish_rating">
+										<img src="https://58900edd332817a2d530-6caa6fe89e7dac3eaf12230f0985b957.ssl.cf5.rackcdn.com/five-stars.png" class="img-responsive">
+								</span>
+							</div>
+							<div class="col-xs-12">
+								<div class="dish-description">
+									<p><%= dish.description %></p>
+								</div>
 							</div>
 						</div>
 					</div>
