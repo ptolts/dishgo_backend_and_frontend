@@ -24,6 +24,10 @@
     box-shadow: 0px 0px 10px 1px rgba(0,0,0,0.75);
 }
 
+.prizes_controls li:hover {
+    background-color: #cf2f28;
+}
+
 .prizes_controls .nav>li>a {
     position: relative;
     display: block;
