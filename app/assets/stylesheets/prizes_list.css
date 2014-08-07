@@ -32,6 +32,26 @@ h1, h2, h3, h4, h5 {
     color: #cf2f28;
 }
 
+.list-prizes-item i {
+    color:#cf2f28; 
+}
+
+.coupon_name {
+    color: #565a5c;
+    font-weight: 500;
+}
+
+.bidding {
+    border-top: 1px solid #dfe0df;
+    padding-top: 10px;
+    font-weight: 500;
+    color: #565a5c;
+}
+
+.prizes_control h4.restaurant_name {
+    color: #cf2f28;
+}
+
 .grey_bg {
     background-color: #f5f6f5;
     margin: 0 -15px;
