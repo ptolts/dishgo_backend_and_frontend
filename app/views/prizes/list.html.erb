@@ -1,42 +1,52 @@
-<%= javascript_include_tag "fast_click" %>  
+<%= javascript_include_tag "fast_click" %>
+<h1 class="head">DishGo Rewards</h1> 
 <div class="container" data-bind="visible: !your_prize()">
     <div class="prizes_list_controls" data-bind="visible: !selected_prize()">          
         <div class="row">
             <div class="col-xs-12" data-bind="with: user">              
                 <div class="dishcoin_count">
-                    <p>You have <!-- ko text: dishcoins --><!-- /ko --> DishCoins to spend.</p>
-                    <p>Below is a list of currently available gift certificates you can try to win.</p>
-                    <p>Every attempt costs 1 DishCoin, and the chances of winning it are listed.</p>
-                    <h3 class="btn btn-primary" style="width: 100%" data-bind="click: function(){ $root.show_your_prizes() }">Your Prizes</h3>
+                    <h4>Your Account</h4>
+                    <p>DishCoins remaining: <img src="https://58900edd332817a2d530-6caa6fe89e7dac3eaf12230f0985b957.ssl.cf5.rackcdn.com/dishcoin_grey.png" style="height: 18px;"/> <!-- ko text: dishcoins --><!-- /ko --></p>
+                    <a href="#"><i class="fa fa-question-circle"></i> Need more DishCoins? Learn how.</a>
+                    <div class="btn btn-rewards" style="width: 100%" data-bind="click: function(){ $root.show_your_prizes() }">Your Rewards</div>
+                    <h4 class="rewards">Rewards</h4>
+                    <p>Below is a list of rewards. Bet Dishcoins to win. The odds are listed.</p>
                 </div>
             </div>
-        </div>      
-        <div class="row">
-            <div class="col-xs-12">
-                <ul class="list-prizes" data-bind="foreach: prizes">
-                    <li class="list-prizes-item" data-bind="click: function(){ $root.selected_prize($data) }">
-                        <div class="row">
-                            <div class="col-xs-12 text-center">
-                                <p data-bind="text: restaurant_name"></p>
-                            </div>                          
-                        </div>                        
-                        <div class="row">
-                            <div class="col-xs-8 text-left">
-                                <p data-bind="lText: name"></p>
+        </div>
+        <div class="grey_bg">    
+            <div class="row">
+                <div class="col-xs-12">
+                    <ul class="list-prizes" data-bind="foreach: prizes">
+                        <li class="list-prizes-item" data-bind="click: function(){ $root.selected_prize($data) }">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <h4 class="restaurant_name" data-bind="text: restaurant_name"></h4>
+                                </div>                          
+                            </div>                        
+                            <div class="row">
+                                <div class="col-xs-8 text-left">
+                                    <p data-bind="lText: name"></p>
+                                </div>
+                                <div class="col-xs-4 text-right">
+                                    <p><img src="https://58900edd332817a2d530-6caa6fe89e7dac3eaf12230f0985b957.ssl.cf5.rackcdn.com/dishcoin_grey.png" style="height: 18px;"/> <!-- ko text: amount --><!-- /ko --></p>
+                                </div>                            
                             </div>
-                            <div class="col-xs-4 text-right">
-                                <p data-bind="text: amount"></p>
-                            </div>                            
-                        </div>
-                        <div class="row" data-bind="visible: lDescription().length > 0">
-                            <div class="col-xs-12 text-center">
-                                <p data-bind="lText: description"></p>
-                            </div>                          
-                        </div>                        
-                    </li>
-                </ul>
+                            <div class="row" data-bind="visible: lDescription().length > 0">
+                                <div class="col-xs-12">
+                                    <p data-bind="lText: description"></p>
+                                </div>                          
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12 text-center">
+                                    <i class="fa fa-info-circle" style="color:#cf2f28; font-size: 24px;"></i>
+                                </div>
+                            </div>                       
+                        </li>
+                    </ul>
+                </div>
             </div>
-        </div>  
+        </div> 
     </div>
 </div>
 
@@ -44,12 +54,12 @@
     <div class="prizes_control" data-bind="with: selected_prize">
         <i class="fa fa-times close_prize" data-bind="click: function(){ $root.selected_prize(null) }"></i>
         <div class="row">
-            <div class="col-xs-12 text-left">
+            <div class="col-xs-12">
                 <h4 data-bind="lText: name"></h4>    
             </div>                
         </div>        
         <div class="row">
-            <div class="col-xs-12 text-center">
+            <div class="col-xs-12">
                 <p data-bind="lText: description"></p> 
             </div>                
         </div>                          
@@ -74,7 +84,9 @@
             <div class="row">
                 <div class="col-xs-12 text-center">
                     <!-- ko foreach: individual_prizes -->
-                        <p data-bind="text: prize_token"></p>
+                        <h4>Coupon Code</h4>
+                        <p class="token" data-bind="text: prize_token"></p>
+                        <p class="text-center">Present this to the merchant to redeem your reward.</p>
                     <!-- /ko -->
                 </div>
             </div>         
@@ -87,38 +99,45 @@
         <div class="row">
             <div class="col-xs-12" data-bind="with: user">              
                 <div class="dishcoin_count">
+                    <div class="btn btn-rewards" style="width: 100%" data-bind="click: function(){ $root.hide_your_prizes() }">Back</div>
+                    <h4>Your Rewards</h4>
                     <p>You have won the following gift certificates!</p>
-
-                    <h3 class="btn btn-primary" style="width: 100%" data-bind="click: function(){ $root.hide_your_prizes() }">All Prizes</h3>
                 </div>
             </div>
-        </div>      
-        <div class="row">
-            <div class="col-xs-12">
-                <ul class="list-prizes" data-bind="foreach: your_prizes">
-                    <li class="list-prizes-item" data-bind="click: function(){ $root.selected_prize($data) }">
-                        <div class="row">
-                            <div class="col-xs-12 text-center">
-                                <p data-bind="text: restaurant_name"></p>
-                            </div>                          
-                        </div>                        
-                        <div class="row">
-                            <div class="col-xs-8 text-left">
-                                <p data-bind="lText: name"></p>
+        </div>
+        <div class="grey_bg">    
+            <div class="row">
+                <div class="col-xs-12">
+                    <ul class="list-prizes" data-bind="foreach: your_prizes">
+                        <li class="list-prizes-item" data-bind="click: function(){ $root.selected_prize($data) }">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <h4 class="restaurant_name" data-bind="text: restaurant_name"></h4>
+                                </div>                          
+                            </div>                        
+                            <div class="row">
+                                <div class="col-xs-8 text-left">
+                                    <p data-bind="lText: name"></p>
+                                </div>
+                                <div class="col-xs-4 text-right">
+                                    <p><img src="https://58900edd332817a2d530-6caa6fe89e7dac3eaf12230f0985b957.ssl.cf5.rackcdn.com/dishcoin_grey.png" style="height: 18px;"/> <!-- ko text: amount --><!-- /ko --></p>
+                                </div>                            
                             </div>
-                            <div class="col-xs-4 text-right">
-                                <p data-bind="text: amount"></p>
-                            </div>                            
-                        </div>
-                        <div class="row" data-bind="visible: lDescription().length > 0">
-                            <div class="col-xs-12 text-center">
-                                <p data-bind="lText: description"></p>
-                            </div>                          
-                        </div>                        
-                    </li>
-                </ul>
-            </div>
-        </div>  
+                            <div class="row" data-bind="visible: lDescription().length > 0">
+                                <div class="col-xs-12">
+                                    <p data-bind="lText: description"></p>
+                                </div>                          
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12 text-center">
+                                    <div class="btn btn-rewards" style="width: 100%">Claim Reward</div>
+                                </div>
+                            </div>                        
+                        </li>
+                    </ul>
+                </div>
+            </div>  
+        </div>
     </div>
 </div>
 

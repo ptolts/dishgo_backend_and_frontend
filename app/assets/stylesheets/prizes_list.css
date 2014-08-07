@@ -4,6 +4,18 @@
 *= require_self
 */
 
+* {
+    color: #82898d
+}
+h1, h2, h3, h4, h5 {
+    color: #565a5c
+}
+
+.head {
+    text-align: center;
+    font-size: 28px;
+}
+
 .list-prizes {
     list-style: none;
     width: 100%;
@@ -12,24 +24,56 @@
 }
 
 .list-prizes-item {
-    background: #FFF;
     padding: 10px;
-    border-bottom: 1px solid #000;
+    border-bottom: 1px solid #dfe0df;
     margin-bottom: 8px;
+}
+.list-prizes-item h4.restaurant_name {
+    color: #cf2f28;
+}
+
+.grey_bg {
+    background-color: #f5f6f5;
+    margin: 0 -15px;
+    padding: 15px;
 }
 
 .dishcoin_count {
     background: #FFF;
-    padding: 10px;
-    border-bottom: 1px solid #000;   
-    border-top: 1px solid #000;   
+    padding: 10px;  
+    border-top: 1px solid #dfe0df;   
+}
+
+.dishcoin_count a,
+.dishcoin_count a i {
+    color: #cf2f28;
+    text-decoration: none;
+    margin-bottom: 10px;
+    line-height: 1.428571429;
+}
+
+.btn-rewards {
+    background-color: #fff;
+    color: #cf2f28;
+    border-color: #cf2f28;
+    margin-bottom: 10px;
+}
+
+.btn-rewards:hover,
+.btn-rewards:focus {
+    color: #cf2f28;
+    border-color: #cf2f28;
+}
+
+.dishcoin_count .rewards {
+    border-top: 1px solid #dfe0df; 
+    padding-top: 20px;
 }
 
 .prizes_control {
     background: #FFF;
     padding: 10px;
-    border-bottom: 1px solid #000;   
-    border-top: 1px solid #000;
+    border: 3px dashed #82898d;   
     top: 50%;
     left: 10px;
     right: 10px;
@@ -41,11 +85,16 @@
     transform:          translateY(-50%);
 }
 
+.token {
+    color: #cf2f28;
+    font-size: 18px;
+}
+
 .close_prize {
     position: absolute;
     height: 40px;
     width: 20px;
-    color: red;
+    color: #cf2f28;
     right: 0px;
     top: -40px;
     font-size: 2em;
