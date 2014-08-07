@@ -21,7 +21,7 @@ class Api::V1::RegistrationController  < ApplicationController
 
     if sign_in @user
       @user.ensure_authentication_token
-      render :json => {:foodcloud_token=>@user.authentication_token}, :status=>201
+      render :json => {:foodcloud_token=>@user.authentication_token,:dishgo_token=>@user.authentication_token}, :status=>201
       return
     else
       render :json => {:error => "Error."}, :status=>422

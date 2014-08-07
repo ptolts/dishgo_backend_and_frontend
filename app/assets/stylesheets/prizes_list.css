@@ -1,3 +1,9 @@
+/*
+*= require bootstrap.min
+*= require font-awesome
+*= require_self
+*/
+
 .list-prizes {
     list-style: none;
     width: 100%;
