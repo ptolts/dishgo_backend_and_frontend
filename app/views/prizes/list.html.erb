@@ -1,28 +1,14 @@
 <%= javascript_include_tag "fast_click" %>
-<<<<<<< HEAD
-<!-- <h1 class="head">DishGo Rewards</h1>  -->
-<div class="container" data-bind="visible: !your_prize()">
-=======
-<h1 class="head">DishGo Rewards</h1> 
+
 <div class="container" data-bind="visible: page() == 'list'">
->>>>>>> 0db41ddf9bb7a22e7b63dc5eb88c3c742a2e1507
     <div class="prizes_list_controls" data-bind="visible: !selected_prize()">          
         <div class="row">
             <div class="col-xs-12" data-bind="with: user">              
                 <div class="dishcoin_count">
-<<<<<<< HEAD
                     <h1 class="head">Your Account</h1>
-                    <p>DishCoins remaining: <img src="https://58900edd332817a2d530-6caa6fe89e7dac3eaf12230f0985b957.ssl.cf5.rackcdn.com/dishcoin_grey.png" style="height: 18px; padding-bottom:1px;"/> <!-- ko text: dishcoins --><!-- /ko --></p>
-                    <a href="#"><i class="fa fa-question-circle"></i> Need more DishCoins? Learn how.</a>
-                    <div class="btn btn-rewards" style="width: 100%" data-bind="click: function(){ $root.show_your_prizes() }">Your Rewards</div>
-=======
-                    <h4>Your Account</h4>
                     <p>DishCoins remaining: <img src="https://58900edd332817a2d530-6caa6fe89e7dac3eaf12230f0985b957.ssl.cf5.rackcdn.com/dishcoin_grey.png" style="height: 18px;"/> <!-- ko text: dishcoins --><!-- /ko --></p>
                     <a data-bind="click: function(){ $root.show_help() }"><i class="fa fa-question-circle"></i> Need more DishCoins? Learn how.</a>
                     <div class="btn btn-rewards" style="width: 100%" data-bind="visible: $root.any_your_prizes, click: function(){ $root.show_your_prizes() }">Your Rewards</div>
-                    <h4 class="rewards">Rewards</h4>
-                    <p>Below is a list of rewards. Bet Dishcoins to win. The odds are listed.</p>
->>>>>>> 0db41ddf9bb7a22e7b63dc5eb88c3c742a2e1507
                 </div>
             </div>
         </div>
@@ -128,15 +114,9 @@
         <div class="row">
             <div class="col-xs-12" data-bind="with: user">              
                 <div class="dishcoin_count">
-<<<<<<< HEAD
-                    <div class="btn btn-rewards" style="width: 100%" data-bind="click: function(){ $root.hide_your_prizes() }">Back</div>
-                    <h1 class="head">Your Rewards</h1>
-                    <p>You've won the following gift certificates!</p>
-=======
                     <div class="btn btn-rewards" style="width: 100%" data-bind="click: function(){ $root.show_home() }">Back to Prize List</div>
-                    <h4>Your Rewards</h4>
+                    <h1 class="head">Your Rewards</h1>
                     <p>You have won the following gift certificates!</p>
->>>>>>> 0db41ddf9bb7a22e7b63dc5eb88c3c742a2e1507
                 </div>
             </div>
         </div>
