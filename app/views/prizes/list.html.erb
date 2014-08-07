@@ -1,14 +1,14 @@
 <%= javascript_include_tag "fast_click" %>
 <h1 class="head">DishGo Rewards</h1> 
-<div class="container" data-bind="visible: !your_prize()">
+<div class="container" data-bind="visible: page() == 'list'">
     <div class="prizes_list_controls" data-bind="visible: !selected_prize()">          
         <div class="row">
             <div class="col-xs-12" data-bind="with: user">              
                 <div class="dishcoin_count">
                     <h4>Your Account</h4>
                     <p>DishCoins remaining: <img src="https://58900edd332817a2d530-6caa6fe89e7dac3eaf12230f0985b957.ssl.cf5.rackcdn.com/dishcoin_grey.png" style="height: 18px;"/> <!-- ko text: dishcoins --><!-- /ko --></p>
-                    <a href="#"><i class="fa fa-question-circle"></i> Need more DishCoins? Learn how.</a>
-                    <div class="btn btn-rewards" style="width: 100%" data-bind="click: function(){ $root.show_your_prizes() }">Your Rewards</div>
+                    <a data-bind="click: function(){ $root.show_help() }"><i class="fa fa-question-circle"></i> Need more DishCoins? Learn how.</a>
+                    <div class="btn btn-rewards" style="width: 100%" data-bind="visible: $root.any_your_prizes, click: function(){ $root.show_your_prizes() }">Your Rewards</div>
                     <h4 class="rewards">Rewards</h4>
                     <p>Below is a list of rewards. Bet Dishcoins to win. The odds are listed.</p>
                 </div>
@@ -102,12 +102,12 @@
     </div>
 </div>
 
-<div class="container" data-bind="visible: your_prize">
+<div class="container" data-bind="visible: page() == 'your_prizes'">
     <div class="prizes_list_controls" data-bind="visible: !selected_prize()">          
         <div class="row">
             <div class="col-xs-12" data-bind="with: user">              
                 <div class="dishcoin_count">
-                    <div class="btn btn-rewards" style="width: 100%" data-bind="click: function(){ $root.hide_your_prizes() }">Back</div>
+                    <div class="btn btn-rewards" style="width: 100%" data-bind="click: function(){ $root.show_home() }">Back to Prize List</div>
                     <h4>Your Rewards</h4>
                     <p>You have won the following gift certificates!</p>
                 </div>
@@ -149,81 +149,16 @@
     </div>
 </div>
 
-<script type='text/javascript'>//<![CDATA[ 
 
-    var user_data = <%= raw(current_user.to_json) %>;
-    var languages = <%= raw(@languages) %>;
-    var default_language = <%= raw(@default_language) %>;
-    var lang = ko.observable(default_language);
-    var languages = ko.observableArray(languages);
+<div class="container" data-bind="visible: page() == 'help'">
+    <div class="prizes_list_controls">          
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="btn btn-rewards" style="width: 100%" data-bind="click: function(){ $root.show_home() }">Back to Prize List</div>             
+                <h1>Help Goes Here</h1>
+            </div>
+        </div>
+    </div>
+</div>
 
-    function viewModel() {
-        var self = this;
-        self.selected_prize = ko.observable();
-        self.your_prize = ko.observable();
-        self.user = ko.observable(new User(user_data));
-        self.lang = lang;
-
-        self.prizes = ko.observableArray([]);
-
-        self.your_prizes = ko.computed({
-            read: function(){
-                return _.filter(self.prizes(),function(prize){
-                    if(prize.individual_prizes().length > 0){
-                        return true;
-                    } else {
-                        return false;
-                    }
-                });
-            },
-            deferEvaluation: true
-        });
-
-        self.fetch_prizes = function(){
-            $.ajax({
-                type: "POST",
-                url: "/app/prizes/won_prize_list",
-                data: {
-
-                },
-                success: function(data, textStatus, jqXHR){
-                    self.prizes(_.map(data,function(prize){ return new Prize(prize) }));
-                },
-                error: function(data){
-
-                },
-                dataType: "json"
-            });            
-        }
-
-        self.update_prizes = ko.computed({
-            read: function(){
-                if(self.selected_prize() == null){
-                    self.fetch_prizes();
-                }
-            }
-        });
-
-        self.show_your_prizes = function(){
-            self.your_prize(true);
-            self.selected_prize(null);
-        }
-        self.hide_your_prizes = function(){
-            self.your_prize(null);
-            self.selected_prize(null);
-        }        
-
-        self.bid = function(prize){
-            prize.bid();
-            self.user().dishcoins(self.user().dishcoins() - prize.number_of_bets());
-        }
-    };
-
-    var viewmodel = new viewModel();            
-
-    $(function(){   
-        ko.applyBindings(viewmodel);                        
-    });
-
-//]]>  
-</script>    
+<%= render 'list_js' %>   
