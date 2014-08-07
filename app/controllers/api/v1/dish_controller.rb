@@ -18,6 +18,7 @@ class Api::V1::DishController < ApplicationController
       user.ratings << rating
     end
     rating.rating = params[:rating]
+    rating.review = params[:review]
     rating.save            
     user.save!
     render json: {}.as_json
