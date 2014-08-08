@@ -30,26 +30,28 @@ class Api::V1::RestaurantsController < ApplicationController
   end
 
   def menu
+
     if params[:id].empty?
       Rails.logger.warn "Empty ID"
       render :text => {}.to_json
       return
     end
+
     restaurant = Restaurant.find(params[:id])
+    language = params["language"] || 'en'
     if !restaurant.cache
       cache = Cache.create
       restaurant.cache = cache
       restaurant.save
     end
     cache = restaurant.cache
-    if cache and !cache.api_menu.blank?
-      @menu_data = "{ \"menu\" : #{cache.api_menu} }".as_json
+    if cache.api_menu[language]
+      @menu_data = "{ \"menu\" : #{cache.api_menu[language]} }".as_json
+    elsif m = cache.api_menu.detect{|e| cache.api_menu[e[0]] }
+      @menu_data = "{ \"menu\" : #{cache.api_menu[m[0]]} }".as_json
     else
-      menu_d = restaurant.api_menu_to_json
-      cache.api_menu = menu_d
-      cache.save
-      @menu_data = "{ \"menu\" : #{menu_d} }".as_json
-    end    
+      @menu_data = "{ \"menu\" : #{{}} }".as_json
+    end
 
     create_page_view restaurant
 

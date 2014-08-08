@@ -276,14 +276,14 @@ class Dish
     return dish_hash
   end 
 
-  def api_custom_to_hash
+  def api_custom_to_hash lang
     dish_hash = self.as_document
     dish_hash[:id] = self.id
-    dish_hash["name"] = self.name_translations["en"]
-    dish_hash["description"] = self.description_translations["en"]
-    dish_hash["sizes"] = self.sizes.api_custom_to_hash if self.sizes
+    dish_hash["name"] = self.name_translations[lang]
+    dish_hash["description"] = self.description_translations[lang]
+    dish_hash["sizes"] = self.sizes.api_custom_to_hash(lang) if self.sizes
     dish_hash["options"] = self.options.collect do |option|
-      next option.api_custom_to_hash
+      next option.api_custom_to_hash(lang)
     end
     dish_hash["image"] = self.image.collect do |image|
       img_hash = image.custom_to_hash
