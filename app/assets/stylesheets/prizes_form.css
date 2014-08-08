@@ -15,7 +15,7 @@
     margin-right: auto;
 }
 
-.prizes_controls .nav li {
+.prizes_controls .nav>li {
     float: none;
     display: block;
     margin-bottom: 5px;
@@ -24,17 +24,17 @@
     box-shadow: 0px 0px 10px 1px rgba(0,0,0,0.75);
 }
 
-.prizes_controls li:hover {
-    background-color: #cf2f28;
+.prizes_controls .nav>li:hover {
+    background-color: #cf2f28; 
 }
 
-.prizes_controls .nav>li>a {
+.prizes_controls .nav>li {
     position: relative;
     display: block;
     padding: 8px 5px;    
 }
 
-.prizes_controls .nav a {
+.prizes_controls .nav {
     font-family: "Helvetica Neue",Helvetica,Arial,sans-serif !important;
     font-size: 14px !important;
     color: #838383;
@@ -50,11 +50,11 @@
     background-image: -o-linear-gradient(hsla(0,0%,0%,.05), hsla(0,0%,100%,.05));
     background-image: linear-gradient(hsla(0,0%,0%,.05), hsla(0,0%,100%,.05));
 }
-.nav-pills>li.active>a, 
-.nav-pills>li.active>a:hover, 
-.nav-pills>li.active>a:focus,
-.prizes_controls .nav-pills>li>a:hover,
-.prizes_controls .nav-pills>li>a:focus {
+.nav-pills>li.active, 
+.nav-pills>li.active>:hover, 
+.nav-pills>li.active>:focus,
+.prizes_controls .nav-pills>li>:hover,
+.prizes_controls .nav-pills>li>:focus {
     background-color: #838383;
     color: #fff;
     background-image: -webkit-linear-gradient(hsla(0,0%,100%,.05), hsla(0,0%,0%,.1));
@@ -66,8 +66,8 @@
     border-radius: 3px;
     /*box-shadow: inset 0 0 0 1px hsla(0,0%,0%,.2), inset 0 2px 0 hsla(0,0%,100%,.1), inset 0 1.2em 0 hsla(0,0%,100%,0.1), inset 0 -.2em 0 hsla(0,0%,100%,.1), inset 0 -.25em 0 hsla(0,0%,0%,.25), 0 .25em .25em hsla(0,0%,0%,.05);*/
 }
-.prizes_controls .nav-pills>li.active>a:hover,
-.prizes_controls .nav-pills>li.active>a:focus {
+.prizes_controls .nav-pills>li.active>:hover,
+.prizes_controls .nav-pills>li.active>:focus {
     background-color: #838383;
     border-radius: 3px;
 }
@@ -187,6 +187,58 @@
 
 .profile_images img:hover {
     border: 3px solid blue;
+}
+
+.ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active {
+    border: 1px solid #cf2f28;
+    color: #fff;
+    background: #cf2f28;
+}
+
+input {
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    padding: 6px 12px;
+}
+
+label {
+    font-weight: 500;
+}
+
+.individual_prize_box {
+    border: 1px solid #838383;
+    margin: 3px;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.wrap {
+    padding: 0 15px;
+}
+
+.wrap a {
+    text-decoration: none;
+}
+
+#print_codes {
+    color: #838383;
+    -o-transition: all 300ms ease-in-out;
+    -ms-transition: all 300ms ease-in-out;
+    -moz-transition: all 300ms ease-in-out;
+    -webkit-transition: all 300ms ease-in-out;
+    transition: all 300ms ease-in-out;
+    box-shadow: inset 0px 0px 2px 1px transparent,
+    inset 0px 0px 30px 15px transparent,
+    0px 0px 1px 1px transparent;
+    padding: 15px 0;
+    border-radius: 4px;
+}
+
+#print_codes:hover,
+#print_codes:focus {
+    color: #838383;
+    background-color: rgba(255, 255, 255, 0.9);
+    box-shadow: inset 0px 0px 2px 1px rgba(0, 0, 0, 0.4), inset 0px 0px 30px 15px rgba(0, 0, 0, 0.05), 0px 0px 1px 1px #add8e6;
 }
 
 @media (max-width: 992px) {

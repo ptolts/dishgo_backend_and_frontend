@@ -1,26 +1,22 @@
-<div class="container">
-    <div class="prizes_controls">
+<div class="prizes_controls">
+    <div class="col-md-2 col-md-offset-1">
         <div class="row">
-            <div class="col-xs-3">
-                <div class="row">
-                    <div class="col-xs-12">
-                        <button class="btn btn-default" data-bind="click: create_prize" style="width: 100%">Create Prize</button>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-xs-12">
-                        <ul class="list-group" data-bind="foreach: prizes">
-                            <li class="list-group-item" data-bind="text: computed_name, click: function(){ $root.selected_prize($data) }"></li>
-                        </ul>
-                    </div>
-                </div>            
+            <div class="col-xs-12">
+                    <button class="btn btn-default" data-bind="click: create_prize" style="width: 100%">Create Prize</button>
             </div>
-            <div class="col-xs-9" data-bind="with: selected_prize">
-                <div class="prizes_form_wrapper">
-                    <%= render 'prizes_form' %>
-                </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <ul class="nav nav-pills" data-bind="foreach: prizes">
+                    <li data-bind="text: computed_name, click: function(){ $root.selected_prize($data) }"></li>
+                </ul>
             </div>
-        </div>  
+        </div>            
+    </div>
+    <div class="col-md-9" data-bind="with: selected_prize">
+        <div class="prizes_form_wrapper">
+            <%= render 'prizes_form' %>
+        </div>
     </div>
 </div>
 

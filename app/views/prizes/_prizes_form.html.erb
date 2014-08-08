@@ -5,7 +5,8 @@
     <div class="col-sm-6">
         <div class="form-group">
             <label>Prize Name</label>
-            <div class="input-group controls">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-tag"></i></span>
                 <input id="name" name="name" type="text" placeholder="Prize Name" data-bind="valueUpdate: 'afterkeydown', lValue: name" class="form-control">
             </div>
         </div>
@@ -13,9 +14,9 @@
 
     <div class="col-sm-6">
         <div class="form-group">
-            <label>Amount</label>
+            <label>Prize Value</label>
             <div class="input-group">
-                <span class="input-group-addon">$</span>
+                <span class="input-group-addon"><i class="fa fa-usd"></i></span>
                 <input id="amount" name="amount" type="text" placeholder="Prize Name" data-bind="price: amount" class="form-control">
             </div>            
         </div>
@@ -49,21 +50,21 @@
         </div>
     </div>        
 
-    <div class="col-sm-12">
-        <h4>Total Value: <!-- ko text: total_value --><!-- /ko --></h4>
+    <div class="col-xs-12">
+        <h4 style="color:#cf2f28;">Total Value: <!-- ko text: total_value --><!-- /ko --></h4>
     </div>
 
-    <div class="col-xs-12">
-        <div class="col-xs-12">
-            <h4>Individual Prizes</h4>
-        </div>
-        <!-- ko foreach: individual_prizes -->
-            <div class="col-xs-6">
-                <div class="individual_prize_box">
-                    <h4 data-bind="text: prize_token"></h4>
+    <div class="wrap">
+        <a href="#" class="col-xs-12" id="print_codes">
+                <h4 class="text-center">Coupon Codes</h4>
+            <!-- ko foreach: individual_prizes -->
+                <div class="col-xs-6">
+                    <div class="individual_prize_box">
+                        <h4 class="text-center" data-bind="text: prize_token"></h4>
+                    </div>
                 </div>
-            </div>
-        <!-- /ko -->
+            <!-- /ko -->
+        </a>
     </div>
 
 <!--     <div class="col-sm-6">
@@ -79,7 +80,8 @@
 
 <div class="row base_bar">
     <div class="col-xs-12">
-        <button class="btn btn-dish pull-right col-xs-5" data-bind="click: save">Save <i class="fa fa-spinner fa-spin pull-right" data-bind="visible: spin"></i><i class="fa fa-check pull-right" data-bind="visible: saved"></i></button>
+        <button class="btn btn-danger col-xs-5" data-bind="">Delete</button>
+        <button class="btn btn-dish col-xs-5 col-xs-offset-2" data-bind="click: save">Save <i class="fa fa-spinner fa-spin pull-right" data-bind="visible: spin"></i><i class="fa fa-check pull-right" data-bind="visible: saved"></i></button>
     </div>
 </div>
 
