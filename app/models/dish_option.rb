@@ -141,14 +141,14 @@ class DishOption
 		self.save		
 	end
 
-	def api_custom_to_hash
+	def api_custom_to_hash lang
 		option_hash = self.as_document
-		option_hash["name"] = self.name_translations['en']
+		option_hash["name"] = self.name_translations[lang]
 		option_hash[:id] = self.id
 		option_hash["individual_options"] = self.individual_options.collect do |ind_opt|
 			ind_opt_hash = ind_opt.api_as_document
 			ind_opt_hash[:id] = ind_opt.id
-			ind_opt_hash["name"] = ind_opt.name_translations['en']
+			ind_opt_hash["name"] = ind_opt.name_translations[lang]
 			ind_opt_hash["icon"] = ind_opt.icon.serializable_hash({}) if ind_opt.icon
 			next ind_opt_hash
 		end

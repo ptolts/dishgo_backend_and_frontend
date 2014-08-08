@@ -61,7 +61,8 @@ class Menu
 		icon_list = []  
 		menu_to_spit_out = self.published_menu.pub
 		if menu_to_spit_out.empty?
-			menu_to_spit_out = Restaurant.where(name:/tuckshop/i).first.published_menu.pub
+			# menu_to_spit_out = Restaurant.where(name:/tuckshop/i).first.published_menu.pub
+			return
 		end
 		menu = menu_to_spit_out.collect do |section|
 			hash = section.as_document

@@ -327,16 +327,21 @@ class Restaurant
         menu_to_spit_out = self.menus.first
         menu_to_spit_out = menu_to_spit_out.published_menu.pub
       end
-      menu = menu_to_spit_out.collect do |section|
-        hash = section.as_document
-        hash[:id] = section.id
-        hash["name"] = section.name_translations["en"]
-        hash["dishes"] = section.dishes.pub.collect do |dish|
-          dish.api_custom_to_hash
+
+      menu_hash = self.languages.inject({}) do |res,lang|
+        menu = menu_to_spit_out.collect do |section|
+          hash = section.as_document
+          hash[:id] = section.id
+          hash["name"] = section.name_translations[lang]
+          hash["dishes"] = section.dishes.pub.collect do |dish|
+            dish.api_custom_to_hash(lang)
+          end
+          next hash
         end
-        next hash
+        res[lang] = Oj.dump(menu)
+        next res
       end
-    return Oj.dump(menu)
+      return menu_hash
   end  
 
   #long running publish menu
