@@ -78,8 +78,27 @@
             self.your_prize(null);
             self.selected_prize(null);
             self.page("help");            
-        }        
-
+        }
+        self.show_collect = function(){
+            self.your_prize(null);
+            self.selected_prize(null);
+            self.page("collect");            
+        }
+        self.show_bid = function(){
+            self.your_prize(null);
+            self.selected_prize(null);
+            self.page("bid");            
+        }
+        self.show_odds = function(){
+            self.your_prize(null);
+            self.selected_prize(null);
+            self.page("odds");            
+        }
+        self.show_redeem = function(){
+            self.your_prize(null);
+            self.selected_prize(null);
+            self.page("redeem");            
+        }          
         self.bid = function(prize){
             prize.bid();
             self.user().dishcoins(self.user().dishcoins() - prize.number_of_bets());

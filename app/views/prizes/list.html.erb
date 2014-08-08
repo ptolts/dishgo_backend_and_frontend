@@ -2,35 +2,38 @@
 
 <div class="container" data-bind="visible: page() == 'list'">
     <div class="prizes_list_controls" data-bind="visible: !selected_prize()">          
-        <div class="row">
+        <div class="row" id="account">
             <div class="col-xs-12" data-bind="with: user">              
-                <div class="dishcoin_count">
-                    <h1 class="head">Your Account</h1>
-                    <p>DishCoins remaining: <img src="https://58900edd332817a2d530-6caa6fe89e7dac3eaf12230f0985b957.ssl.cf5.rackcdn.com/dishcoin_grey.png" style="height: 18px;"/> <!-- ko text: dishcoins --><!-- /ko --></p>
-                    <a data-bind="click: function(){ $root.show_help() }"><i class="fa fa-question-circle"></i> Need more DishCoins? Learn how.</a>
-                    <div class="btn btn-rewards" style="width: 100%" data-bind="visible: $root.any_your_prizes, click: function(){ $root.show_your_prizes() }">Your Rewards</div>
+                <div class="dishcoin_count row">
+                    <div class="col-xs-8">
+                        <h1 class="head" style="color: #fff;">Your Account</h1>
+                    </div>
+                    <div class="col-xs-4 text-center">
+                        <div class="btn btn-rewards" style="margin-top:3px;" data-bind="visible: $root.any_your_prizes, click: function(){ $root.show_your_prizes() }">Winnings</div>
+                    </div>
+                    <div class="col-xs-12">
+                        <p style="color: #fff;">DishCoins remaining: <img src="https://58900edd332817a2d530-6caa6fe89e7dac3eaf12230f0985b957.ssl.cf5.rackcdn.com/dishcoin-white.png" class="coin"/> <!-- ko text: dishcoins --><!-- /ko --></p>
+                        <a data-bind="click: function(){ $root.show_help() }"><i class="fa fa-question-circle"></i> How Do I Earn Rewards?</a>
+                    </div>
                 </div>
             </div>
         </div>
         <div class="grey_bg">    
             <div class="row">
                 <div class="col-xs-12">
-                    <h1 class="head">DishGo Rewards</h1>
+                    <h1 class="head">Available Rewards</h1>
                     <p>Below is a list of rewards. Bet Dishcoins to win.</p>
                     <ul class="list-prizes" data-bind="foreach: prizes">
                         <li class="list-prizes-item" data-bind="click: function(){ $root.selected_prize($data) }">
                             <div class="row">
-                                <div class="col-xs-12">
+                                <div class="col-xs-10">
                                     <h4 class="restaurant_name" data-bind="text: restaurant_name"></h4>
                                 </div>                          
                             </div>                        
                             <div class="row">
-                                <div class="col-xs-8 text-left">
+                                <div class="col-xs-10">
                                     <p class="coupon_name" data-bind="lText: name"></p>
-                                </div>
-                                <div class="col-xs-4 text-right">
-                                    <!-- <i class="fa fa-usd" style="font-size: 16px;" data-bind="text: amount"> </i> -->
-                                </div>                            
+                                </div>                           
                             </div>
                             <div class="row" data-bind="visible: lDescription().length > 0">
                                 <div class="col-xs-12">
@@ -89,8 +92,8 @@
             </div>        
             <div class="row" data-bind="visible: $root.user().dishcoins() == 0">
                 <div class="col-xs-12">
-                    <p>You're out of DishCoins. Rate dishes or share photos to accumulate more!</p>
-                    <p class="text-center">Click here to find out how to earn more.</p>
+                    <p class="bidding">You're out of DishCoins. Rate dishes or share photos to accumulate more!</p>
+                    <a style="color:#cf2f28;" data-bind="click: function(){ $root.show_help() }">Click here to find out how to earn more.</a>
                 </div>
             </div>         
         <!-- /ko -->
@@ -113,10 +116,12 @@
     <div class="prizes_list_controls" data-bind="visible: !selected_prize()">          
         <div class="row">
             <div class="col-xs-12" data-bind="with: user">              
-                <div class="dishcoin_count">
-                    <div class="btn btn-rewards" style="width: 100%" data-bind="click: function(){ $root.show_home() }">Back to Prize List</div>
-                    <h1 class="head">Your Rewards</h1>
-                    <p>You have won the following gift certificates!</p>
+                <div class="dishcoin_count row">
+                    <div class="col-xs-12">
+                        <div class="btn btn-rewards" style="width: 100%" data-bind="click: function(){ $root.show_home() }">Back to Prize List</div>
+                        <h1 class="head" style="color:#fff">Your Rewards</h1>
+                        <p style="color:#fff">You have won the following gift certificates!</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -126,17 +131,14 @@
                     <ul class="list-prizes" data-bind="foreach: your_prizes">
                         <li class="list-prizes-item" data-bind="click: function(){ $root.selected_prize($data) }">
                             <div class="row">
-                                <div class="col-xs-12">
+                                <div class="col-xs-10">
                                     <h4 class="restaurant_name" data-bind="text: restaurant_name"></h4>
                                 </div>                          
                             </div>                        
                             <div class="row">
-                                <div class="col-xs-8 text-left">
+                                <div class="col-xs-10">
                                     <p class="coupon_name" data-bind="lText: name"></p>
-                                </div>
-                                <div class="col-xs-4 text-right">
-                                    <i class="fa fa-usd" style="font-size: 16px;" data-bind="text: amount"></i>
-                                </div>                            
+                                </div>                          
                             </div>
                             <div class="row" data-bind="visible: lDescription().length > 0">
                                 <div class="col-xs-12">
@@ -147,7 +149,12 @@
                                 <div class="col-xs-12 text-center">
                                     <div class="btn btn-rewards" style="width: 100%">Claim Reward</div>
                                 </div>
-                            </div>                        
+                            </div>
+                            <div class="cnrflash">
+                                <div class="cnrflash-inner">
+                                <span class="cnrflash-label"><i class="fa fa-usd" style="font-size: 16px; color:#fff;" data-bind="text: amount"> </i></span>
+                                </div>
+                            </div>                       
                         </li>
                     </ul>
                 </div>
@@ -158,11 +165,111 @@
 
 
 <div class="container" data-bind="visible: page() == 'help'">
-    <div class="prizes_list_controls">          
-        <div class="row">
+    <div class="prizes_list_controls">
+        <div class="dishcoin_count row">         
             <div class="col-xs-12">
                 <div class="btn btn-rewards" style="width: 100%" data-bind="click: function(){ $root.show_home() }">Back to Prize List</div>             
-                <h1>Help Goes Here</h1>
+                <h1 class="head" style="color:#fff">FAQ</h1>
+            </div>
+        </div>
+    </div>
+    <div class="grey_bg" id="faq">    
+        <div class="row">
+            <div class="col-xs-12">
+                <h4>Collect DishCoins, Bid &amp Earn Rewards</h4> 
+            </div>
+        </div>
+        <div class="row" style="background-color: #fff;">
+            <div class="col-xs-12">
+                <a data-bind="click: function(){ $root.show_collect() }" style="line-height: 30px;">How do I collect DishCoins?</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <a data-bind="click: function(){ $root.show_bid() }" style="line-height: 30px;">How do I bid on rewards?</a>
+            </div>
+        </div>
+        <div class="row" style="background-color: #fff;">
+            <div class="col-xs-12">
+                <a data-bind="click: function(){ $root.show_odds() }" style="line-height: 30px;">What are my odds?</a>
+            </div>
+        </div>
+        <div class="row" style="margin-bottom:-15px;">
+            <div class="col-xs-12">
+                <a data-bind="click: function(){ $root.show_redeem() }" style="line-height: 30px;">How do I redeem my rewards?</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container" data-bind="visible: page() == 'collect'">
+    <div class="prizes_list_controls">
+        <div class="dishcoin_count row">         
+            <div class="col-xs-12">
+                <div class="btn btn-rewards" style="width: 100%" data-bind="click: function(){ $root.show_help() }">Back to FAQ</div>             
+                <h1 class="head" style="color:#fff">FAQ</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 answers">
+                <h4>How do I collect DishCoins?</h4>
+                <p>There are three ways in which you can earn DishCoins<p>
+                <ol>
+                    <li>While visiting a restaurant listed in the DishGo App you share photos of your meal by matching them to the correct dish within the restaurants menu.</li>
+                    <li>By rating dishes and providing feedback to the restaurant owner.</li>
+                    <li>Sharing the DishGo App with your friends and family.</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container" data-bind="visible: page() == 'bid'">
+    <div class="prizes_list_controls">
+        <div class="dishcoin_count row">         
+            <div class="col-xs-12">
+                <div class="btn btn-rewards" style="width: 100%" data-bind="click: function(){ $root.show_help() }">Back to FAQ</div>            
+                <h1 class="head" style="color:#fff">FAQ</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 answers">
+                <h4>How do I bid on rewards?</h4>
+                <p>Under <a data-bind="click: function(){ $root.show_home() }">Available Rewards</a> you'll see a list of gift certificates to choose from. Select one that appeals to you. Then you must choose how many DishCoins you're willing to bet. Click Bid and cross your fingers!<p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container" data-bind="visible: page() == 'odds'">
+    <div class="prizes_list_controls">
+        <div class="dishcoin_count row">         
+            <div class="col-xs-12">
+                <div class="btn btn-rewards" style="width: 100%" data-bind="click: function(){ $root.show_help() }">Back to FAQ</div>             
+                <h1 class="head" style="color:#fff">FAQ</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 answers">
+                <h4>What are my odds?</h4>
+                <p>The odds are set by the merchant given the value of the reward. With every additional DishCoin you bet your odds increase.<p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container" data-bind="visible: page() == 'redeem'">
+    <div class="prizes_list_controls">
+        <div class="dishcoin_count row">         
+            <div class="col-xs-12">
+                <div class="btn btn-rewards" style="width: 100%" data-bind="click: function(){ $root.show_help() }">Back to FAQ</div>             
+                <h1 class="head" style="color:#fff">FAQ</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 answers">
+                <h4>How do I redeem my rewards?</h4>
+                <p>Following a successful bid, your reward can be found in the <a data-bind="visible: $root.any_your_prizes, click: function(){ $root.show_your_prizes() }">Winnings</a> section. Click on the reward and present it to the merchant with the enclosed coupon code to redeem your reward.<p>
             </div>
         </div>
     </div>
