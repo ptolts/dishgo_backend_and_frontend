@@ -38,8 +38,17 @@
                 var self = this;
                 self.user = user;
                 self.last4 = data.last4;
+                self.default_card = ko.observable(data.default_card || false);
                 self.type = data.type;
                 self.id = data.id;
+
+                self.check_for_default = ko.computed(function(){
+                    if(self.user.default_card() == self){
+                        self.default_card(true);
+                    } else {
+                        self.default_card(false);
+                    }
+                })
 
             }
 
@@ -69,7 +78,19 @@
                 self.plan = ko.observable();
                 self.original_plan = data.plan ? data.plan : null;
 
-                _.each(data.cards,function(card){ self.cards.push(new Card(card,self)) });
+                self.default_card = ko.observable();
+
+                _.each(data.cards,function(card){ 
+                    var c = new Card(card,self);
+                    if(c.default){
+                        self.default_card(c);
+                    }
+                    self.cards.push(c) 
+                });
+
+                if(!self.default_card() && self.cards().length > 0){
+                    self.default_card(self.cards()[0]);
+                }
 
                 if(data.plan){
                     self.plan(_.find(model.plans(),function(plan){ return plan.id == data.plan.id }));

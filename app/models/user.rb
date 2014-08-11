@@ -79,7 +79,7 @@ class User
   before_save :setup_link_field
   before_save :sign_up_link_field
   before_save {|user| 
-                if !user.email.blank?
+                if !user.email.blank? and user.email.to_s =~ /[A-Z]/
                   user.email = user.email.downcase
                 end
               }
@@ -167,7 +167,7 @@ class User
 
   def password_required?
     if self.facebook_auth_token.blank?
-      return true
+      return !persisted? || !password.nil? || !password_confirmation.nil?
     else
       return false
     end

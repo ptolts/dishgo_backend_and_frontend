@@ -29,7 +29,7 @@ class ProfileController < ApplicationController
 			if !bad
 				@default_card = customer["default_card"]
 				user.cards = customer["cards"]["data"].collect{|e| e.to_hash}
-				user.save
+				user.save!
 			end
 		end
 		render 'billing'
@@ -63,12 +63,13 @@ class ProfileController < ApplicationController
 		if !bad
 			user = current_user
 			user.plan = data
-			user.save
+			user.save!
 		end
 		render json: {success:true}.as_json
 	end
 
 	def add_card
+		Rails.logger.warn params.to_s
 		user = current_user
 		data = JSON.parse(params[:data])
 		if user.stripe_token.blank?
@@ -84,12 +85,20 @@ class ProfileController < ApplicationController
 				return
 			end
 			user.stripe_token = customer.id
-		end
-		# if !user.cards.any?{|e| e["id"] == data["id"]}		
-		# 	user.cards << data["card"]
-		# end
+		else
+			begin
+				customer = Stripe::Customer.retrieve(current_user.stripe_token)
+				customer.card = data["id"]
+				customer.save
+			rescue Stripe::APIConnectionError => message
+				Rails.logger.warn "Error with stripe.\n#{msg.to_s}"
+				render json: {success:false}.as_json
+				return
+			end
+		end			
+
 		Rails.logger.warn "ID: #{user.to_json}"
-		user.save(validate:false)
+		user.save!
 		render json: {success:true}.as_json
 	end
 
