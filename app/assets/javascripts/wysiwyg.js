@@ -22,6 +22,36 @@
 			});
 
             var editor = $(element).summernote({
+				onImageUpload: function(files, editor, $editable) {
+			        $(element).fileupload({         
+			            url: "/app/website/upload_website_image",
+			            dataType: 'json',
+				        formData: {},    			            
+			            progressInterval: 50,
+			            add: function(e,data){
+			                data.img_element = $editable;
+			                data.img_editor = editor;
+			                data.submit();
+			            },
+			            submit: function(e, data){
+			                console.log(data);
+			            },
+			            send: function (e, data) {
+
+			            },
+			            done: function (e, data) {
+			                var file = data.result.files[0];                 
+							data.img_editor.insertImage(data.img_element, file.url);                                       
+			            },
+			            progress: function (e, data) {
+			                var progress = parseInt(data.loaded / data.total * 100, 10);
+			                console.log(progress);
+			            },
+			            fail: function (e, data) {
+			            	alert("There was an issue uploading your image.");
+			            },                       
+			        }); 
+				},            	
             	onkeyup: function (cm) {
 	                interceptor($(element).code());
 				},
@@ -59,64 +89,6 @@
 
             $(element).code(interceptor());
         }
-
-   //          editor.setValue(allBindingsAccessor().value());
-   //          editor.refresh();
-   //          var wrapperElement = $(editor.getWrapperElement()); 
-
-   //          ko.utils.domNodeDisposal.addDisposeCallback(element, function() {
-   //              wrapperElement.remove();
-   //          });
-
-			// ko.applyBindingsToNode(element, { value: interceptor, valueUpdate: 'afterkeydown'});
-			// ko.applyBindingsToNode(element, { attr: {placeholder:placeholder} });	
-		// 'extensions': {},
-		// 'init': function( element, valueAccessor, allBindings, viewModel, bindingContext ) {
-		// 	if ( !ko.isWriteableObservable( valueAccessor() ) ) {
-		// 		throw 'valueAccessor must be writeable and observable';
-		// 	}
-
-		// 	// Get custom configuration object from the 'wysiwygConfig' binding, more settings here... http://www.tinymce.com/wiki.php/Configuration
-		// 	var options = allBindings.has( 'wysiwygConfig' ) ? allBindings.get( 'wysiwygConfig' ) : {},
-
-		// 		// Get any extensions that have been enabled for this instance.
-		// 		ext = allBindings.has( 'wysiwygExtensions' ) ? allBindings.get( 'wysiwygExtensions' ) : [],
-
-		// 		// Set up a minimal default configuration
-		// 		defaults = {
-		// 			'browser_spellcheck': $( element ).prop( 'spellcheck' ),
-		// 			'plugins': [ 'link', 'paste' ],
-		// 			'toolbar': 'undo redo | bold italic | bullist numlist | link',
-		// 			'menubar': false,
-		// 			'statusbar': false,
-		// 			'setup': function( editor ) {
-		// 				// Ensure the valueAccessor state to achieve a realtime responsive UI.
-		// 				editor.on( 'change keyup nodechange', function( args ) {
-		// 					// Update the valueAccessor
-		// 					valueAccessor()( editor.getContent() );
-
-		// 					for (var name in ext) {
-		// 						ko.bindingHandlers['wysiwyg'].extensions[ ext[ name ] ]( editor, args, allBindings, bindingContext );
-		// 					}
-		// 				});
-		// 			}
-		// 		};
-
-		// 	// Apply custom configuration over the defaults
-		// 	defaults = $.extend( defaults, options );
-
-		// 	// Ensure the valueAccessor's value has been applied to the underlying element, before instanciating the tinymce plugin
-		// 	$( element ).text( valueAccessor()() ).tinymce( defaults );
-
-		// 	// To prevent a memory leak, ensure that the underlying element's disposal destroys it's associated editor.
-		// 	ko.utils.domNodeDisposal.addDisposeCallback(element, function() {
-		// 		$( element ).tinymce().remove();
-		// 	});
-		// },
-		// 'update': function( element, valueAccessor, allBindings, viewModel, bindingContext ) {
-		// 	// Implement the 'value' binding
-		// 	return ko.bindingHandlers['value'].update( element, valueAccessor, allBindings, viewModel, bindingContext );
-		// }
 	};
 
 })( jQuery, ko );

@@ -24,6 +24,7 @@ function NetworkIndexModel() {
 			},
 			success: function(data, textStatus, jqXHR){
 				self.restaurants(_.map(data.restaurants,function(restaurant){ return new Restaurant(restaurant) }));
+                console.log("Total count: " + data.count + " Received count: " + self.restaurants().length);
 			},
 			error: function(XMLHttpRequest, textStatus, errorThrown) { 
 

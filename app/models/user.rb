@@ -3,10 +3,12 @@ class User
   include Mongoid::Timestamps
 
   has_many :dish_images, :class_name => "Image", inverse_of: :user
+  has_many :website_images, :class_name => "WysiwygImage", inverse_of: :user
   has_many :ratings, :class_name => "Rating"
   has_many :addresses, :class_name => "Address"
   has_many :notifications, :class_name => "Notification"
   has_many :orders, :class_name => "Order"
+  has_many :dish_views, :class_name => "DishView", inverse_of: :user
   has_one :owns_restaurants, :class_name => "Restaurant", inverse_of: :user, validate: false
   has_many :individual_prizes, :class_name => "IndividualPrize", inverse_of: :user
   # Include default devise modules. Others available are:

@@ -1,7 +1,7 @@
 class Api::V1::DishController < ApplicationController
   include ApiHelper
   skip_before_filter :verify_authenticity_token
-  before_filter :validate_auth_token
+  before_filter :validate_auth_token, except: [:log_view]
   respond_to :json
 
   def set_rating
@@ -34,4 +34,17 @@ class Api::V1::DishController < ApplicationController
     end
     render json: json
   end
+
+  def log_view
+    dish_view = DishView.new
+    dish_view.dish = Dish.find(params[:dish_id])
+    if !params[:dishgo_token].blank? and user = User.where(authenticity_token:params[:dishgo_token]).first
+      dish_view.user = user
+    end
+    dish_view.ip = request.ip
+    dish_view.user_agent = request.user_agent
+    dish_view.end_point = "DishApiController"   
+    dish_view.save!
+    render json: {success:true}.as_json
+  end  
 end

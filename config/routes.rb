@@ -141,6 +141,7 @@ Foodcloud::Application.routes.draw do
       post 'upload_logo'
       post 'destroy_gallery_image'
       post 'upload_gallery'
+      post 'upload_website_image'
     end
   end
 
@@ -256,10 +257,12 @@ Foodcloud::Application.routes.draw do
       match 'tokens/create_from_facebook', to: 'tokens#create_from_facebook', via: [:post]
       match 'tokens/load_user', to: 'tokens#load_user', via: [:post]
       resources :registration, :only => [:create]
+      match 'registration/redirect', to: 'registration#redirect', via: [:get]
       match 'user/add_address', to: 'user#add_address', via: [:post]
       match 'order/submit_order', to: 'order#submit_order', via: [:post]
       match 'dish/set_rating', to: 'dish#set_rating', via: [:post] 
       match 'dish/get_ratings', to: 'dish#get_ratings', via: [:post] 
+      match 'dish/log_view', to: 'dish#log_view', via: [:post] 
       match 'order/confirm', to: 'order#confirm', via: [:post] 
       match 'order/status', to: 'order#status', via: [:post]  
       match 'order/fetch_orders', to: 'order#fetch_orders', via: [:post]                

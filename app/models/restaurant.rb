@@ -57,6 +57,7 @@ class Restaurant
   has_many :image, :class_name => "Image", inverse_of: :restaurant, validate: false
   has_many :icons, :class_name => "Icon", inverse_of: :restaurant
   has_many :gallery_images, :class_name => "Image", inverse_of: :restaurant_gallery
+  has_many :website_images, :class_name => "WysiwygImage", inverse_of: :restaurant
 
 
   has_many :pages, :class_name => "Page", inverse_of: :restaurant

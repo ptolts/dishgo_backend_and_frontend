@@ -149,6 +149,20 @@ class WebsiteController < ApplicationController
 		                }.as_json
 	end	
 
+	def upload_website_image
+		file = params[:files][0]
+		img = WysiwygImage.create
+		user = current_user 
+		img.restaurant = user.owns_restaurants
+		img.update_attributes({:img => file})
+		img.save
+
+		render :json => {files:[{
+		                    url:  img.url,
+		                  }]
+		                }.as_json
+	end
+
 	def upload_image
 		data = JSON.parse(params[:data])
 		file = params[:files]

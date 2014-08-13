@@ -19,6 +19,7 @@ class Dish
   belongs_to :odesk, index: true
 
   has_many :ratings, :class_name => 'Rating', inverse_of: :dish
+  has_many :dish_views, :class_name => 'DishView', inverse_of: :dish
 
   has_and_belongs_to_many :image, inverse_of: nil, index: true
   has_and_belongs_to_many :draft_image, class_name: "Image", inverse_of: nil, index: true

@@ -49,8 +49,9 @@ class NetworkController < ApplicationController
     end
     regex = /#{params[:restaurant_search_term]}/i
     restaurants = restaurants.where(name:regex)
+    count = restaurants.count
     restaurants = restaurants.collect{|e| e.as_document({pages:true, include_images:4})}.as_json
-    render json: {restaurants:restaurants}.to_json
+    render json: {restaurants:restaurants, count: count}.to_json
   end
 
   def create_page_view restaurant

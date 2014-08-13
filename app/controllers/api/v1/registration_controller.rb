@@ -15,18 +15,23 @@ class Api::V1::RegistrationController  < ApplicationController
     end
     
     @user = User.new({ :email => params[:email].downcase, :password => params[:password] })
-    @user.save
     @user.skip_confirmation!
     @user.skip_confirmation_notification!
+    @user.save!
+    @user.ensure_authentication_token
+    Email.verify_from_app(@user)
 
     if sign_in @user
-      @user.ensure_authentication_token
       render :json => {:foodcloud_token=>@user.authentication_token,:dishgo_token=>@user.authentication_token}, :status=>201
       return
     else
       render :json => {:error => "Error."}, :status=>422
       return
     end
+  end
+
+  def redirect
+    redirect_to "dishgo://?dishgo_token=#{params[:token]}", status: 301
   end
 
   def user_params 

@@ -19,6 +19,12 @@ class Email < ActionMailer::Base
     notify_admins user
   end
 
+  def verify_from_app user
+    @user = user
+    mail(:to => user.email, :subject => "Welcome to DishGo!").deliver  
+    # notify_admins user
+  end  
+
   def sign_up_link user
     @link = user.sign_up_link
     mail(:to => user.email, :subject => "Welcome to DishGo!").deliver  
