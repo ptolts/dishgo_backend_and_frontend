@@ -30,7 +30,7 @@ class Restaurant
   field :twitter, type: String
   field :urbanspoon, type: String
   field :instagram, type: String
-  field :languages, type: Array
+  field :languages, type: Array, default: ['en','fr']
   field :default_language, type: String
   field :category, type: Array
   field :listed, type: Boolean, default: false
