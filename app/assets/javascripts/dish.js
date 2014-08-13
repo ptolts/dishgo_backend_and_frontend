@@ -183,7 +183,16 @@ function Dish(data, topmodel) {
 
     self.pretty_price = ko.computed({
         read: function(){
-            return parseFloat(self.price()).toFixed(2);
+            var final_cost = parseFloat(self.price()).toFixed(2);
+            if(final_cost == "0.00"){
+                if(translations['ask'][lang()]){
+                    return translations['ask'][lang()];
+                } else {
+                    return 'Ask';
+                }
+            } else {
+                return final_cost;
+            }            
         },
         deferEvaluation: true,
     });      

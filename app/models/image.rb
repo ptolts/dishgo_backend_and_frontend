@@ -17,7 +17,7 @@ class Image
   field :source, type: String
   field :position, type: Integer
   field :rejected, type: Boolean, default: false
-  field :unverified, type: Boolean, default: false
+  field :unverified, type: Boolean, default: true
 
   field :img_url_medium, type: String
   field :img_url_original, type: String
@@ -92,8 +92,9 @@ class Image
   end
 
   def serializable_hash options
+    options ||= {}
     if options[:ios]
-      return super {}
+      return super({})
     end
     if self.img_file_size
       # This is for legacy images which didn't have their URL's saved.

@@ -6,7 +6,7 @@
 			</a>
 		</div>
 
-		<form class="form-inline" role="form" data-bind="visible: top_search">
+		<form class="form-inline" role="form" data-bind="visible: top_search" style="display: none">
 			<div class="form-group">
 				<div class="controls">
 					<div class="input-group input-group-lg">
@@ -30,7 +30,7 @@
 </div>
 <div id="menu_background">
 
-	<div class="container_small letsdishgomeat"  data-bind="visible: !top_search()">
+	<div class="container_small letsdishgomeat"  data-bind="visible: !top_search()" style="display: none">
 		<div class="row">
 			<div class="col-xs-12 text-center">
 				<h1>Search Restaurant Menus</h1>
@@ -53,7 +53,7 @@
 
 	<!-- SEARCH RESULTS WILL APPEAR HERE -->
 
-	<div class="container search_results"  data-bind="visible: top_search">
+	<div class="container search_results"  data-bind="visible: top_search" style="display: none">
 		<div class="row" data-bind="foreach: restaurants">
 			<div class="col-md-4 col-sm-6 col-xs-12">
 				<div class="dish_container">
@@ -89,20 +89,20 @@
 									</div>
 									<div class="col-xs-10" style="padding-left:0;">
 										<address>
-					                        1697 Rue des Veroniques <!-- address line 1 -->
+					                        <!-- ko text: address_line_1 --><!-- /ko -->
 					                        <br>
-					                        St-Lazare <!-- City -->
-					                        QC <!-- province -->
+					                        <!-- ko text: city --><!-- /ko -->
+					                        <!-- ko text: province --><!-- /ko -->
 				                		</address>
 				                	</div>
 			                	</div>
 			                	<div class="row">
-			                		<a href="tel:514-591-9387"> <!-- phone number -->
+			                		<a data-bind="attr:{ href: 'tel://' + phone() }"> <!-- phone number -->
 										<div class="col-xs-2" style="padding-right:5px;">
 											<i class="fa fa-phone"></i>
 										</div>
 										<div class="col-xs-10" style="padding-left:0;">
-											<span>514-591-9387 <!-- phone number --></span>
+											<span><!-- ko text: phone --><!-- /ko --></span>
 										</div>
 									</a>
 								</div>
@@ -110,29 +110,18 @@
 									<div class="col-xs-2" style="padding-right:5px;">
 										<i class="fa fa-cutlery"></i>
 									</div>
-									<div class="col-xs-10" style="padding-left:0;">
-										<span>Pub Food</span> <!-- Category -->
+									<div class="col-xs-10" style="padding-left:0;" data-bind="foreach: categories">
+										<span><!-- ko text: $data --><!-- /ko --></span> <!-- Category -->
 									</div>
 								</div>
-							</div>
-							<div class="dish-description">
-								<p>Bla bla bla bla restaurant description. Bla bla bla bla restaurant description.Bla bla bla bla restaurant description.</p>
 							</div>
 						</div>
 					</div>
 					<div class="restaurant_pics"> <!-- dish pictures from resto -->
-						<div class="row">
+						<div class="row" data-bind="foreach: images">
 							<div class="col-xs-3">
-								<img src="http://placehold.it/120x120" alt="" class="img-responsive" />
-							</div>
-							<div class="col-xs-3">
-								<img src="http://placehold.it/120x120" alt="" class="img-responsive" />
-							</div>
-							<div class="col-xs-3">
-								<img src="http://placehold.it/120x120" alt="" class="img-responsive" />
-							</div>
-							<div class="col-xs-3">
-								<img src="http://placehold.it/120x120" alt="" class="img-responsive" />
+								<div class="center-cropped" data-bind="style: { backgroundImage: 'url(' + $data.small() + ')' }"></div>​								
+								<!-- <img data-bind="attr:{ src: $data.small }" alt="" class="img-responsive" /> -->
 							</div>
 						</div>
 					</div>

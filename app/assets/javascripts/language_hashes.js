@@ -154,7 +154,11 @@ var translations = {
     'contact' : {
         'en':'Contact',
         'fr':'Contact'
-    },         
+    },
+    'ask' : {
+        'en':'Ask',
+        'fr':'Questionner',
+    }       
 };
 
 function copyDefaultHash(hash) {

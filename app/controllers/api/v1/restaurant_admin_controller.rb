@@ -50,7 +50,7 @@ class Api::V1::RestaurantAdminController < ApplicationController
     end
 
     if @admin or @owner
-      img.unverified = true
+      img.unverified = false
       img.save
       resto
     end

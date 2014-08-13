@@ -6,6 +6,13 @@
 *= require_self
 */
 
+.center-cropped {
+    width: 60px;  
+    height: 60px; 
+    background-position: center center;
+    background-repeat: no-repeat;
+}​
+
 .page-container {
   padding-top: 80px;
 }

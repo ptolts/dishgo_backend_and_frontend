@@ -336,6 +336,11 @@
                 self.pages(_.map(data.pages,function(page){ return new Page(page) }));
             }
 
+            self.categories = ko.observableArray([]);
+            if(data.category){
+                self.categories(_.map(data.category,function(cat){ return cat }));
+            }            
+
             self.setupProfileImages = function(images){
                 self.images(_.map(images,function(image){ return new ImageObj(image) }));
             }                   
