@@ -8,7 +8,7 @@ class Api::V2::TokensController  < ApplicationController
     password = params[:password]
 
     if email.nil? or password.nil?
-      render :status=>400, :json=>{:message=>"The request must contain the user email and password."}
+      render :status=>400, :json=>{:error=>"The request must contain the user email and password."}
       return
     end
 
@@ -16,7 +16,7 @@ class Api::V2::TokensController  < ApplicationController
 
     if @user.nil?
       logger.info("User #{email} failed signin, user cannot be found.")
-      render :status=>401, :json=>{:message=>"Invalid email or password."}
+      render :status=>401, :json=>{:error=>"Invalid email or password."}
       return
     end
 
@@ -25,7 +25,7 @@ class Api::V2::TokensController  < ApplicationController
 
     if !@user.valid_password?(password)
       logger.info("User #{email} failed signin, password [REDACTED] is invalid")
-      render :status=>401, :json=>{:message=>"Invalid email or password."}
+      render :status=>401, :json=>{:error=>"Invalid email or password."}
       return
     end
 
@@ -41,7 +41,7 @@ class Api::V2::TokensController  < ApplicationController
     fb_token = params[:facebook_token]
 
     if fb_token.nil?
-      render :status=>400, :json=>{:message=>"The request must contain the users facebook token."}
+      render :status=>400, :json=>{:error=>"The request must contain the users facebook token."}
       return
     end
 
@@ -70,7 +70,7 @@ class Api::V2::TokensController  < ApplicationController
 
   def load_user
     if params[:dishgo_token].blank?
-      render :status=>404, :json=>{:message=>"Invalid token."}
+      render :status=>404, :json=>{:error=>"Invalid token."}
       return
     end
 
@@ -96,7 +96,7 @@ class Api::V2::TokensController  < ApplicationController
     @user=User.where(:authentication_token => params[:id]).first
     if @user.nil?
       logger.info("Token not found.")
-      render :status=>404, :json=>{:message=>"Invalid token."}
+      render :status=>404, :json=>{:error=>"Invalid token."}
     else
       @user.generate_authentication_token
       render :status=>200, :json=>{:token=>params[:id]}

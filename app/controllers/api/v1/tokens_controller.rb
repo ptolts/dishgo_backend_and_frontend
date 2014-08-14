@@ -7,13 +7,13 @@ class Api::V1::TokensController  < ApplicationController
     email = params[:email]
     password = params[:password]
     if request.format != :json
-      render :status=>406, :json=>{:message=>"The request must be json"}
+      render :status=>406, :json=>{:error=>"The request must be json"}
       return
     end
 
     if email.nil? or password.nil?
       render :status=>400,
-        :json=>{:message=>"The request must contain the user email and password."}
+        :json=>{:error=>"The request must contain the user email and password."}
       return
     end
 
@@ -21,7 +21,7 @@ class Api::V1::TokensController  < ApplicationController
 
     if @user.nil?
       logger.info("User #{email} failed signin, user cannot be found.")
-      render :status=>401, :json=>{:message=>"Invalid email or password."}
+      render :status=>401, :json=>{:error=>"Invalid email or password."}
       return
     end
 
@@ -30,7 +30,7 @@ class Api::V1::TokensController  < ApplicationController
 
     if !@user.valid_password?(password)
       logger.info("User #{email} failed signin, password [REDACTED] is invalid")
-      render :status=>401, :json=>{:message=>"Invalid email or password."}
+      render :status=>401, :json=>{:error=>"Invalid email or password."}
     end
 
     build_data_and_respond
@@ -44,13 +44,13 @@ class Api::V1::TokensController  < ApplicationController
     fb_token = params[:facebook_token]
 
     if request.format != :json
-      render :status=>406, :json=>{:message=>"The request must be json"}
+      render :status=>406, :json=>{:error=>"The request must be json"}
       return
     end
 
     if fb_token.nil?
       render :status=>400,
-        :json=>{:message=>"The request must contain the users facebook token."}
+        :json=>{:error=>"The request must contain the users facebook token."}
       return
     end
 
@@ -120,7 +120,7 @@ class Api::V1::TokensController  < ApplicationController
     @user=User.where(:authentication_token => params[:id]).first
     if @user.nil?
       logger.info("Token not found.")
-      render :status=>404, :json=>{:message=>"Invalid token."}
+      render :status=>404, :json=>{:error=>"Invalid token."}
     else
       @user.generate_authentication_token
       render :status=>200, :json=>{:token=>params[:id]}
