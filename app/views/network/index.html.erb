@@ -1,7 +1,7 @@
 <div class="network_header">
 	<div class="container">
 		<div id="logo" data-bind="visible: !top_search()">
-			<a href="app/network">
+			<a href="/app/network">
 				<img src="https://58900edd332817a2d530-6caa6fe89e7dac3eaf12230f0985b957.ssl.cf5.rackcdn.com/DishGo-black-red.png" class="img-responsive">
 			</a>
 		</div>
@@ -11,7 +11,7 @@
 				<div class="controls">
 					<div class="input-group input-group-lg">
 						<div class="input-group-addon"><i class="fa fa-search"></i></div>
-						<input id="#" name="#" type="text" placeholder="Search" class="form-control" data-bind="hasFocus: top_search, value: restaurant_search_term, valueUpdate: 'afterkeydown'" />
+						<input id="#" name="#" type="text" placeholder="Restaurant Name" class="form-control" data-bind="hasFocus: top_search, value: restaurant_search_term, valueUpdate: 'afterkeydown'" />
 						<span class="input-group-btn">
 							<button class="btn btn-lg btn-search hidden-xs">Search</button>
 						</span>
@@ -39,7 +39,7 @@
 						<div class="controls">
 							<div class="input-group input-group-lg">
 								<div class="input-group-addon"><i class="fa fa-search"></i></div>
-								<input id="#" name="#" type="text" placeholder="Search" class="form-control" data-bind="hasFocus: !top_search(), value: restaurant_search_term, valueUpdate: 'afterkeydown'" />
+								<input id="#" name="#" type="text" placeholder="Restaurant Name" class="form-control" data-bind="hasFocus: !top_search(), value: restaurant_search_term, valueUpdate: 'afterkeydown'" />
 								<span class="input-group-btn">
 									<button class="btn btn-lg btn-search">Search</button>
 								</span>
