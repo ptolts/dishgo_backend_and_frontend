@@ -248,6 +248,8 @@ GEM
       rack (>= 1.0.0)
     warden (1.2.3)
       rack (>= 1.0)
+    wicked_pdf (0.11.0)
+      rails
 
 PLATFORMS
   ruby
@@ -283,3 +285,4 @@ DEPENDENCIES
   thin
   uglifier
   underscore-rails
+  wicked_pdf

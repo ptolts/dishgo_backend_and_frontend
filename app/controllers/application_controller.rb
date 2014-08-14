@@ -51,12 +51,15 @@ class ApplicationController < ActionController::Base
   end
 
   def validate_auth_token
-    user = User.where(:authentication_token => params[:dishgo_token]).first
-    if user.nil?
-      render :status => 401, :json => {errors: [t('api.v1.token.invalid_token')]}
+    if params[:dishgo_token].blank? 
+      render :status => 401, :json => {error: "Not Logged In"}
       return
     end
-    # Rails.logger.warn user.to_json
+    user = User.where(:authentication_token => params[:dishgo_token]).first    
+    if !user 
+      render :status => 401, :json => {error: "Not Logged In"}
+      return
+    end
     sign_in user
   end  
   
@@ -119,10 +122,12 @@ class ApplicationController < ActionController::Base
 
   def api_admin_or_owner_variable_only!
     if params["dishgo_token"].blank?
+      render :status => 401, :json => {error: "Not Logged In"}      
       return
     end
     user = User.where(authentication_token:params["dishgo_token"]).first
     if !user
+      render :status => 401, :json => {error: "Not Logged In"}      
       return
     end
     sign_in user

@@ -43,7 +43,7 @@ class PrizesController < ApplicationController
   def create
     data = JSON.parse(params[:prize])
     restaurant = current_user.owns_restaurants
-    prize = Prize.create(data)
+    prize = Prize.new(data)
     prize.restaurant = restaurant
     prize.save
     render json: {success:true}.as_json
@@ -112,5 +112,13 @@ class PrizesController < ApplicationController
     user.save(validate: false)      
     render json: {lost: "We are sorry, you didn't win this time."}.as_json
     return    
+  end
+
+  def print_list
+    @prize = Prize.first
+    render :pdf => "prize_list",
+      :template => 'prizes/prizes.pdf.erb',
+      :show_as_html => params[:debug].present?,
+      :page_size => 'Letter'
   end
 end

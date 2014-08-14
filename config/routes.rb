@@ -40,6 +40,7 @@ Foodcloud::Application.routes.draw do
   resources :prizes do
     collection do
       get '/', to: "prizes#index"
+      get '/print_list', to: "prizes#print_list"
       post '/destroy', to: "prizes#destroy"
       post '/create', to: "prizes#create"
       post '/save', to: "prizes#save"

@@ -22,7 +22,10 @@ class IndividualPrize
   	begin
 	    phrase = []
 	    (0..2).each do |word|
-	      phrase << RandomWord.adjs.next
+        begin
+          chosen_word = RandomWord.adjs.next
+        end while chosen_word.length > 5
+	      phrase << chosen_word
 	    end
 	    phrase = phrase.join("_")
 	end while IndividualPrize.where(prize_token:phrase).count > 0

@@ -1,0 +1,40 @@
+<style>
+body {
+	margin: 0;
+	padding: 0;
+	background-color: #fff;
+	font: 12pt "Tahoma";
+}
+* {
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+}
+.document {
+	background: white;
+	width: 216mm;
+	height: 279mm;
+	display: block;
+	margin: 0 auto;
+	padding-bottom: 0.7in;
+	padding-top: 0.7in;
+	/*text-align: center;*/
+}
+.prize {
+	height: 2in;
+	width: 2in;
+	/*margin: 7.5mm;*/
+	display: inline-block;
+	margin-left: 0.6in;
+	margin-bottom: 0.6in;
+	border: 1px black solid;
+}
+</style>
+
+<div class="document">
+	<% @prize.individual_prizes.each do |individual_prize| %>
+		<div class="prize">
+			<p><%= @prize.name_translations["en"] %></p>
+			<p><%= individual_prize.prize_token %></p>
+		</div>
+	<% end %>
+</div>

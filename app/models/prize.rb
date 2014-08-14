@@ -26,7 +26,7 @@ class Prize
 
   has_many :individual_prizes, class_name: "IndividualPrize", inverse_of: :prize
 
-  before_save :setup_winner
+  after_create :setup_winner
 
   index({ locs: "2dsphere" }, { name:"location_index"})
 
@@ -61,13 +61,14 @@ class Prize
       self.locs = [restaurant.lon,restaurant.lat]
     end
     if individual_prizes.empty?
-      self.individual_prizes = (1..quantity).collect do |t|
+      (1..quantity).collect do |t|
         ind = IndividualPrize.new
+        ind.prize = self
         ind.restaurant = restaurant
         ind.prize_token = ind.random_serial_number
         ind.save
-        ind
       end
     end
+    save
   end
 end
