@@ -64,6 +64,7 @@
                         <%= @restaurant.address_line_1 %>
                         <%= @restaurant.city %>
                         <%= @restaurant.postal_code %>
+                        <br/>
                         <a href="tel:<%= @restaurant.phone %>"><%= @restaurant.phone %></a>
                 </address>
                 </div>
@@ -73,9 +74,9 @@
                         <div class="counter_like"><i class="glyphicon glyphicon-heart"></i> 2256</div>
                     </div>
                     <div class="bot-links">
-                        <% @restaurant.category.each do |category| %>
+                        <i class="fa fa-cutlery"><% @restaurant.category.each do |category| %>
                                <a href="#"><%= category %></a>
-                        <% end %>
+                        <% end %></i>
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-6 col-md-4 padme">
