@@ -2,8 +2,8 @@
 
 class Icon
   include Mongoid::Document
-  # include Mongoid::Paperclip
-  extend Mongoid::PaperclipQueue
+  include Mongoid::Paperclip
+  # extend Mongoid::PaperclipQueue
 
   store_in collection: "Icon", database: "dishgo"
   field :url, type: String

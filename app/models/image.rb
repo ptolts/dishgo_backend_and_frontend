@@ -1,11 +1,10 @@
 #encoding: UTF-8
-require "mongoid_paperclip_queue"
 
 class Image
   include Mongoid::Document
-  # include Mongoid::Paperclip
+  include Mongoid::Paperclip
   include Mongoid::Timestamps
-  extend Mongoid::PaperclipQueue
+  # extend Mongoid::PaperclipQueue
 
   store_in collection: "image", database: "dishgo"
   field :local_file, type: String
@@ -66,6 +65,22 @@ class Image
   field :manual_img_fingerprint, type: String
   validates_attachment_content_type :img, :content_type => %w(image/jpeg image/jpg image/png), :message => 'file type is not allowed (only jpeg/png/gif images)'    
   after_post_process :img_post_process
+  before_post_process :fuck_you_paperclip
+
+  def fuck_you_paperclip
+    if @background_process
+      return true
+    else
+      Rails.logger.warn "Background work for #{self.id}"
+      ProcessImages.new.delay.process_image(self.id)
+      return false
+    end
+  end
+
+  def do_background_work
+    @background_process = true
+    img.reprocess!
+  end
 
   def img_url_medium
     return super.to_s.gsub(/http:\/\//,'https://').gsub(/\.r.{2}\./,'.ssl.')
