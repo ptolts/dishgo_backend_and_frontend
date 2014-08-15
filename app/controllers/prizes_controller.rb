@@ -119,6 +119,12 @@ class PrizesController < ApplicationController
     render :pdf => "prize_list",
       :template => 'prizes/prizes.pdf.erb',
       :show_as_html => params[:debug].present?,
-      :page_size => 'Letter'
+      :page_size => 'Letter',
+      :margin => {
+                    :top => 0,
+                    :bottom => 0,
+                    :left   => 0,
+                    :right  => 0
+                  }    
   end
 end
