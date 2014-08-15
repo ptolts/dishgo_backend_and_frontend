@@ -76,7 +76,8 @@ body {
 }
 
 #white_background {
-	background-color: #fff
+	background-color: #fff;
+  padding: 25px 0;
 }
 
 #menu_background {
