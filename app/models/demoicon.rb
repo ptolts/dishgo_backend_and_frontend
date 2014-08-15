@@ -2,8 +2,8 @@
 
 class Demoicon
   include Mongoid::Document
-  # include Mongoid::Paperclip
-  extend Mongoid::PaperclipQueue
+  include Mongoid::Paperclip
+  # extend Mongoid::PaperclipQueue
   
   store_in collection: "Demoicon", database: "demo"
 

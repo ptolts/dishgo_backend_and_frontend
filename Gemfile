@@ -24,8 +24,9 @@ gem 'delayed_job_mongoid'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 gem 'bootstrap_form'
-# gem "mongoid-paperclip", :require => "mongoid_paperclip"
-gem 'mongoid_paperclip_queue', git: "https://github.com/ptolts/mongoid_paperclip_queue.git" #path: "/Users/philiptolton/Ruby/mongoid_paperclip_queue" #,
+# gem 'paperclip', :path => "/Users/philiptolton/Ruby/paperclip"
+gem "mongoid-paperclip", :require => "mongoid_paperclip"
+# gem 'mongoid_paperclip_queue', git: "https://github.com/ptolts/mongoid_paperclip_queue.git" #path: "/Users/philiptolton/Ruby/mongoid_paperclip_queue" #,
 gem 'fog'
 gem 'ruby-prof'
 gem 'phantomjs'

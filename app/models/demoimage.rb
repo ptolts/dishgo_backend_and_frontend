@@ -2,9 +2,9 @@
 
 class Demoimage
   include Mongoid::Document
-  # include Mongoid::Paperclip
+  include Mongoid::Paperclip
   include Mongoid::Timestamps
-  extend Mongoid::PaperclipQueue  
+  # extend Mongoid::PaperclipQueue  
 
   store_in collection: "demoimage", database: "demo"
 
