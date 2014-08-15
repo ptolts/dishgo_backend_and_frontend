@@ -68,12 +68,7 @@
 	                        <div class="restaurant_logo">
 	                            <div class="restaurant-data pull-left">
 	                                <div class="restaurant-pic pull-left">
-	                                    <span class="restaurant-like"><a href="#"><i class="glyphicon glyphicon-heart-empty"></i></a></span>
-	                                    <span class="restaurant-share"><a href="#"><i class="glyphicon glyphicon-share"></i></a></span>
-	                                    <span class="restaurant-plus"><a href="#"><i class="glyphicon glyphicon-plus-sign"></i></a></span>
-	                                    <a href="#">
-	                                        <img src="http://placehold.it/600x600" alt="" class="img-responsive" />
-	                                    </a>
+	                                    <img src="http://placehold.it/600x600" alt="" class="img-responsive" />
 	                                </div>
 	                            </div>
 	                        </div>
@@ -134,27 +129,20 @@
 <div id="white_background" data-bind="slideVisible: !top_search()">
 	<div class="container">
 		<div class="row">
-			<h2 class="text-center" style="margin-top:0;">Top dishes of the day</h2>
+			<h2 class="text-center" style="margin-top:0; color:#565a5c;">Top dishes of the day</h2>
 			<hr>
 			<% @dishes.each do |dish| %>
-				<div class="col-xs-12 col-sm-6 col-md-4">
-					<div class="top_dish_container coo_hover">
+				<div class="col-xs-12 col-sm-6 col-md-4" style="padding:0;">
+					<div class="top_dish_container">
 						<a href="/app/network/restaurant" class="full_dish_link"></a>
 						<div class="row">
 							<div class="dish-picture">
 								<img class="img-responsive" src="<%= dish.img_src %>">
-								<span class="dish_title_bar">
-									<span class="dishgo_icon">
-										<img src="https://58900edd332817a2d530-6caa6fe89e7dac3eaf12230f0985b957.ssl.cf5.rackcdn.com/icon.png" class="img-responsive">
-									</span>
-									<%= dish.name %>
-								</span>
 								<span class="dish_rating">
 										<img src="https://58900edd332817a2d530-6caa6fe89e7dac3eaf12230f0985b957.ssl.cf5.rackcdn.com/five-stars.png" class="img-responsive">
 								</span>
-							</div>
-							<div class="col-xs-12">
 								<div class="dish-description">
+									<span><%= dish.name %></span>
 									<p><%= dish.description %></p>
 								</div>
 							</div>
