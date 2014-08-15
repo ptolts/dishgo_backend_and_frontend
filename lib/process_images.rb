@@ -1,7 +1,7 @@
 class ProcessImages
 
   def process_image image_id
-    image = Image.find(image_id)
+    image = Image.unscoped.find(image_id)
     image.do_background_work
   end
 
@@ -13,5 +13,5 @@ class ProcessImages
     duration = ((Time.now - @start) * 1_000).round
     Rails.logger.info "ProcessImages time: #{duration}ms"
   end
-  
+
 end
