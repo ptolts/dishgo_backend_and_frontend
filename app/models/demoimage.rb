@@ -13,7 +13,7 @@ class Demoimage
   field :height, type: Integer
   field :width, type: Integer
 
-  has_queued_mongoid_attached_file :img, {
+  has_mongoid_attached_file :img, {
       :path           => ':hash_:style.png',
       :hash_secret => "we_like_food",
       :styles => {
