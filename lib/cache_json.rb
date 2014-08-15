@@ -18,6 +18,7 @@ class CacheJson
       end
       menu.save
     end
+    restaurant.cache_job
   end
 
   def before

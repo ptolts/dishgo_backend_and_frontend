@@ -351,7 +351,6 @@ class Restaurant
   #long running publish menu
   def publish_menu
     CacheJson.new.delay.publish_menu(self.id)
-    cache_job
   end  
 
   def cache_job
