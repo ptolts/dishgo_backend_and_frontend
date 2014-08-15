@@ -56,7 +56,7 @@
 	<div class="container search_results"  data-bind="visible: top_search" style="display: none">
 		<div class="row" data-bind="foreach: restaurants">
 			<div class="col-md-4 col-sm-6 col-xs-12">
-				<div class="dish_container">
+				<div class="dish_container coo_hover">
 					<div class="row">
 						<a data-bind="attr:{href:'/app/network/restaurant/'+id}" class="full_dish_link"></a>
 						<div class="dish_title_bar">
@@ -68,12 +68,7 @@
 	                        <div class="restaurant_logo">
 	                            <div class="restaurant-data pull-left">
 	                                <div class="restaurant-pic pull-left">
-	                                    <span class="restaurant-like"><a href="#"><i class="glyphicon glyphicon-heart-empty"></i></a></span>
-	                                    <span class="restaurant-share"><a href="#"><i class="glyphicon glyphicon-share"></i></a></span>
-	                                    <span class="restaurant-plus"><a href="#"><i class="glyphicon glyphicon-plus-sign"></i></a></span>
-	                                    <a href="#">
-	                                        <img src="http://placehold.it/600x600" alt="" class="img-responsive" />
-	                                    </a>
+	                                    <img src="http://placehold.it/600x600" alt="" class="img-responsive" />
 	                                </div>
 	                            </div>
 	                        </div>
@@ -134,26 +129,20 @@
 <div id="white_background" data-bind="slideVisible: !top_search()">
 	<div class="container">
 		<div class="row">
-			<h2 class="text-center">Top dishes of the day</h2>
+			<h2 class="text-center" style="margin-top:0; color:#565a5c;">Top dishes of the day</h2>
+			<hr>
 			<% @dishes.each do |dish| %>
-				<div class="col-xs-12 col-sm-6 col-md-4">
-					<a href="/app/network/restaurant" class="full_dish_link"></a>
+				<div class="col-xs-12 col-sm-6 col-md-4" style="padding:0;">
 					<div class="top_dish_container">
+						<a href="/app/network/restaurant" class="full_dish_link"></a>
 						<div class="row">
 							<div class="dish-picture">
 								<img class="img-responsive" src="<%= dish.img_src %>">
-								<span class="dish_title_bar">
-									<span class="dishgo_icon">
-										<img src="https://58900edd332817a2d530-6caa6fe89e7dac3eaf12230f0985b957.ssl.cf5.rackcdn.com/icon.png" class="img-responsive">
-									</span>
-									<%= dish.name %>
-								</span>
 								<span class="dish_rating">
 										<img src="https://58900edd332817a2d530-6caa6fe89e7dac3eaf12230f0985b957.ssl.cf5.rackcdn.com/five-stars.png" class="img-responsive">
 								</span>
-							</div>
-							<div class="col-xs-12">
 								<div class="dish-description">
+									<span><%= dish.name %></span>
 									<p><%= dish.description %></p>
 								</div>
 							</div>
@@ -168,7 +157,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-20">
-				<a href="http://dishgo.io">About Us</a>
+				<a class="twocolors" href="http://dishgo.io"><span class="white">Dish</span><span class="red">Go</span><span class="white"> App</a>
 			</div>
 			<div class="col-sm-20">
 				<a href="http://dishgo.io">Get Listed</a>
