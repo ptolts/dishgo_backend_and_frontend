@@ -76,8 +76,13 @@ body {
 }
 
 #white_background {
-	background-color: #fff;
+	background-color: #f5f6f5;
   padding: 25px 0;
+}
+#white_background hr {
+  border: 0;
+  border-top: 1px solid #DCDCDC;
+  margin: 10px 25% 20px;
 }
 
 #menu_background {
@@ -209,7 +214,7 @@ footer a:focus {
 .dish_container:nth-child(n) {
   filter: none;
 }
-.dish_container:hover {
+.coo_hover:hover {
   background-color: rgba(255, 255, 255, 0.9);
   box-shadow: inset 0px 0px 2px 1px rgba(0, 0, 0, 0.4), inset 0px 0px 30px 15px rgba(0, 0, 0, 0.05), 0px 0px 1px 1px #add8e6;
 }
@@ -578,6 +583,18 @@ span.play-icon{position: absolute; left: 31%; top: 32%; display: none;}
 }
 .col-sm-20 a:hover,
 .col-sm-20 a:focus {
+  color: #cf2f28;
+}
+.twocolors span.red {
+  color:#cf2f28;
+}
+.twocolors span.white {
+  color:#fff;
+}
+.twocolors:hover span.red {
+  color: #fff;
+}
+.twocolors:hover span.white {
   color: #cf2f28;
 }
 .social_media {

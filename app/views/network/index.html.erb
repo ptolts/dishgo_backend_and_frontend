@@ -56,7 +56,7 @@
 	<div class="container search_results"  data-bind="visible: top_search" style="display: none">
 		<div class="row" data-bind="foreach: restaurants">
 			<div class="col-md-4 col-sm-6 col-xs-12">
-				<div class="dish_container">
+				<div class="dish_container coo_hover">
 					<div class="row">
 						<a data-bind="attr:{href:'/app/network/restaurant/'+id}" class="full_dish_link"></a>
 						<div class="dish_title_bar">
@@ -135,10 +135,11 @@
 	<div class="container">
 		<div class="row">
 			<h2 class="text-center" style="margin-top:0;">Top dishes of the day</h2>
+			<hr>
 			<% @dishes.each do |dish| %>
 				<div class="col-xs-12 col-sm-6 col-md-4">
-					<a href="/app/network/restaurant" class="full_dish_link"></a>
-					<div class="top_dish_container">
+					<div class="top_dish_container coo_hover">
+						<a href="/app/network/restaurant" class="full_dish_link"></a>
 						<div class="row">
 							<div class="dish-picture">
 								<img class="img-responsive" src="<%= dish.img_src %>">
@@ -168,7 +169,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-20">
-				<a href="http://dishgo.io">About Us</a>
+				<a class="twocolors" href="http://dishgo.io"><span class="white">Dish</span><span class="red">Go</span><span class="white"> App</a>
 			</div>
 			<div class="col-sm-20">
 				<a href="http://dishgo.io">Get Listed</a>
