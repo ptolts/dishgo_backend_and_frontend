@@ -311,7 +311,6 @@ footer a:focus {
 .letsdishgo-bottom li a {
   color: white;
   font-family: 'Oswald', sans-serif;
-  font-size: 20px;
   font-weight: 700;
   text-shadow: 1px 2px 3px #000;
   text-decoration: none;
@@ -366,6 +365,9 @@ footer a:focus {
         .social_media {
           padding: 0 25%
         }
+        .letsdishgo-bottom li a {
+          font-size: 20px;
+      }
     }
 
 /* Medium Devices, Desktops */
@@ -446,6 +448,9 @@ footer a:focus {
     }
     .social_media {
       padding: 0 20%;
+    }
+    .letsdishgo-bottom li a {
+      font-size: 16px;
     }
   }
 
