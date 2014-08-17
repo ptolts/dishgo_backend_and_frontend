@@ -2,6 +2,8 @@ class ProcessImages
 
   def process_image image_id
     image = Image.unscoped.find(image_id)
+    image.background_processed = true
+    image.save
     image.do_background_work
   end
 

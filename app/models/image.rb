@@ -21,6 +21,7 @@ class Image
   field :img_url_medium, type: String
   field :img_url_original, type: String
   field :img_url_small, type: String
+  field :background_processed, type: Boolean, default: false  
 
   field :text_found, type: String
   field :local_file_face, type: String
@@ -71,8 +72,6 @@ class Image
     if @background_process
       return true
     else
-      Rails.logger.warn "Background work for #{self.id}"
-      ProcessImages.new.delay.process_image(self.id)
       return false
     end
   end
@@ -123,6 +122,7 @@ class Image
   end
 
   def img_post_process
+    Rails.logger.warn "img_post_process"
     # if self.img_post_process_complete
       self.img_url_medium = img.url(:medium) 
       self.img_url_small = img.url(:small) 

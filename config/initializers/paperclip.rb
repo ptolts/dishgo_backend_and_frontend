@@ -44,3 +44,19 @@ module Paperclip
 
 	end
 end
+
+module AttachmentExtensions
+  def after_flush_writes
+    super
+	if @queued_for_write[:original] and !@instance.background_processed
+      Rails.logger.warn "Background work on #{@queued_for_write[:original]}"
+      ProcessImages.new.delay.process_image(@instance.id)		
+    end
+  end
+end
+
+module Paperclip
+  class Attachment
+  	prepend AttachmentExtensions
+  end
+end
