@@ -61,10 +61,11 @@ class Prize
       self.locs = [restaurant.lon,restaurant.lat]
     end
     if individual_prizes.empty?
-      (1..quantity).collect do |t|
+      (1..quantity).collect.with_index do |index,t|
         ind = IndividualPrize.new
         ind.prize = self
         ind.restaurant = restaurant
+        ind.number = index
         ind.prize_token = ind.random_serial_number
         ind.save
       end

@@ -9,6 +9,7 @@ class IndividualPrize
   belongs_to :user, class_name: "User", inverse_of: :individual_prizes, index: true #, validate: false
 
   field :prize_token, type: String
+  field :number, type: Integer
 
   after_save :all_done?
 
@@ -18,17 +19,24 @@ class IndividualPrize
     return hash
   end
 
+  # def random_serial_number
+  # 	begin
+	 #    phrase = []
+	 #    (0..2).each do |word|
+  #       begin
+  #         chosen_word = RandomWord.adjs.next
+  #       end while chosen_word.length > 5
+	 #      phrase << chosen_word
+	 #    end
+	 #    phrase = phrase.join("_")
+	 #  end while IndividualPrize.where(prize_token:phrase).count > 0
+  #   return phrase
+  # end 
+
   def random_serial_number
-  	begin
-	    phrase = []
-	    (0..2).each do |word|
-        begin
-          chosen_word = RandomWord.adjs.next
-        end while chosen_word.length > 5
-	      phrase << chosen_word
-	    end
-	    phrase = phrase.join("_")
-	end while IndividualPrize.where(prize_token:phrase).count > 0
+    begin
+      phrase = (0..4).map { (65 + rand(26)).chr }.join("_")
+    end while IndividualPrize.where(prize_token:phrase).count > 0
     return phrase
   end 
 
