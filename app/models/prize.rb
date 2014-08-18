@@ -30,6 +30,8 @@ class Prize
 
   index({ locs: "2dsphere" }, { name:"location_index"})
 
+  scope :available_to_win, -> { where(:start_date.gt => DateTime.now, :end_date.lt => DateTime.now, :quantity.gt => 0) }  
+
   def serializable_hash options
     options ||= {}
     hash = super(options)
