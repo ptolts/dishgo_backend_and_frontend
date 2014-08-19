@@ -220,16 +220,23 @@ h1 {
     font-weight:bold;
     text-align:center;
 }
-#faq a {
+#faq a,
+#faq a i {
     color: #cf2f28;
+    font-size: 18px;
+    text-decoration: none;
 }
 .answers h4 {
     margin-top: 20px;
 }
-.answers a {
+.answers a,
+.answers a i {
     color: #cf2f28;
+    text-decoration: none;
 }
-
+.answers ol li {
+    margin-bottom: 10px;
+}
 
 
 
