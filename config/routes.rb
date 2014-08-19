@@ -62,6 +62,8 @@ Foodcloud::Application.routes.draw do
       get '/', to: "network#index"
       get '/restaurant/:id', to: "network#restaurant"
       get '/restaurant', to: "network#restaurant"
+      get '/redirect', to: "network#redirect"
+      get '/proxy', to: "network#proxy"
       post '/search', to: "network#search"
     end
   end   

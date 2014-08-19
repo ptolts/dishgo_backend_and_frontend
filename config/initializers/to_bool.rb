@@ -27,3 +27,9 @@ end
 class NilClass
   def to_bool; false; end
 end
+
+class Float
+  def round_half
+    (self*2).round / 2.0
+  end
+end 

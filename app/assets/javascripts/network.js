@@ -12,6 +12,17 @@ ko.bindingHandlers.slideVisible = {
     }
 };
 
+ko.bindingHandlers.mobileSearchTop = {
+    update: function (element, valueAccessor, allBindings, viewModel, bindingContext) {
+        var value = valueAccessor();
+        if(value){
+            $(element).addClass("mobileTopSearchBar");
+        } else {
+            $(element).removeClass("mobileTopSearchBar");
+        }
+    }
+};
+
 ko.bindingHandlers.menuVisibleImage = {
     update: function (element, valueAccessor, allBindings, viewModel, bindingContext) {
         var underlyingObservable = valueAccessor();
@@ -22,6 +33,30 @@ ko.bindingHandlers.menuVisibleImage = {
         }
     }
 };
+
+ko.bindingHandlers.starRating = {
+    update: function (element, valueAccessor, allBindings, viewModel, bindingContext) {
+        var value = valueAccessor()();
+        var full = "<i class=\"fa fa-star\"></i>";
+        var half = "<i class=\"fa fa-star-half-o\"></i>"
+        var rating = value;
+        var result = "";
+        while(rating > 0){
+            if(rating >= 1){
+                rating--;
+                result = result + full;
+                continue;
+            }
+            if(rating >= 0.5){
+                rating = rating - 0.5;
+                result = result + half;
+                continue;
+            }
+        }
+        ko.utils.setHtml(element, result);        
+    }
+};
+
 
 ko.bindingHandlers.networkMaxHeight = {
     update: function (element, valueAccessor, allBindingsAccessor, viewModel, bindingContext) {
@@ -66,6 +101,7 @@ function NetworkModel() {
     var self = this;
     self.loading = ko.observable(true);
     self.newDomCounter = 0;
+    self.network_sign_in = ko.observable(false);
     self.preview = ko.observable(true);
     self.restaurant = ko.observable(new Restaurant(resto_data));
     self.languages = self.restaurant().languages; 
@@ -208,4 +244,59 @@ function NetworkModel() {
         }
     };        
 
+};
+
+//
+// Client IDS
+// Defines the CLIENT_ID (AppID's) of the OAuth2 providers
+// relative to the domain host where this code is presented.
+
+// Register your domain with Facebook at  and add here
+// var FACEBOOK_CLIENT_ID = '886480311381787';
+var FACEBOOK_CLIENT_ID = '886479778048507';
+
+
+var GOOGLE_CLIENT_ID = '656984324806-sr0q9vq78tlna4hvhlmcgp2bs2ut8uj8.apps.googleusercontent.com';
+
+
+var DROPBOX_CLIENT_ID = '1lkagy1bz7h2uhl';
+
+var LINKEDIN_CLIENT_ID = 'bixrjszkfk0j';
+
+var YAHOO_CLIENT_ID = 'dj0yJmk9TTNoTWV6eE5ObW5NJmQ9WVdrOWVtSmhVbk5pTm1VbWNHbzlNVFUxT0RNeU16UTJNZy0tJnM9Y29uc3VtZXJzZWNyZXQmeD0yZQ--';
+
+
+var TWITTER_CLIENT_ID = 'OIaEFYGvvfvoqcoakQ5OyePzJ';
+
+
+var SOUNDCLOUD_CLIENT_ID = '8a4a19f86cdab097fa71a15ab26a01d6';
+
+
+var FOURSQUARE_CLIENT_ID = '3HEXMBQVH2SV0VXUKXOGQRPWH1PUTEIZN4KBDY5L54ZDXCDP';
+
+
+var GITHUB_CLIENT_ID = 'ca7e06a718b2e8eef737';
+
+
+var INSTAGRAM_CLIENT_ID = 'bfbbf362ac3148aeb1150e5b8256bbe9';
+
+
+var BOX_CLIENT_ID = 'rdyb5se2fcuioryle3qdw2wcrps959x4';
+
+
+var FLICKR_CLIENT_ID = '46dfea40b0f9d3765bc598966b5955d3';
+
+// To make it a little easier
+var CLIENT_IDS_ALL = {
+    // google : GOOGLE_CLIENT_ID,
+    facebook : FACEBOOK_CLIENT_ID,
+    // dropbox : DROPBOX_CLIENT_ID,
+    twitter : TWITTER_CLIENT_ID,
+    // yahoo : YAHOO_CLIENT_ID,
+    instagram : INSTAGRAM_CLIENT_ID,
+    // linkedin : LINKEDIN_CLIENT_ID,
+    // soundcloud : SOUNDCLOUD_CLIENT_ID,
+    // foursquare : FOURSQUARE_CLIENT_ID,
+    // github : GITHUB_CLIENT_ID,
+    // flickr: FLICKR_CLIENT_ID
 };

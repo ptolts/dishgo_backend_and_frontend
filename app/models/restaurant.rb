@@ -42,6 +42,8 @@ class Restaurant
 
   field :does_delivery, type: Boolean, default: false
 
+  field :rating, type: Float
+
   field :hours, type: Hash 
 
   belongs_to :font, class_name: "Font", index: true
@@ -289,6 +291,14 @@ class Restaurant
     enough = false if self.phone.blank?
     enough = false if self.name.blank? or self.name == "New Restaurant"
     return enough
+  end 
+
+  def calculate_rating
+    rating_total = 0
+    ratings.each do |rate|
+      rating_total += rate.rating
+    end
+    rating = (rating_total.to_f / ratings.count.to_f).round_half
   end
 
   def serializable_hash options = {}

@@ -14,6 +14,7 @@ gem 'instagram'
 gem 'thin'
 gem 'random-word'
 gem 'geoip'
+gem 'omniauth-twitter'
 gem 'wicked_pdf'
 gem 'activeresource'
 gem "koala" #, "~> 1.8.0rc1"

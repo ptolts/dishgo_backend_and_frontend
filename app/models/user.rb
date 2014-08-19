@@ -53,6 +53,10 @@ class User
   field :facebook_auth_token,    :type => String
   field :facebook_user_id,       :type => String  
 
+  field :twitter_user_id,       :type => String  
+  field :twitter_auth_token,       :type => String  
+
+
   field :phone_number,           :type => String 
   field :last_name,              :type => String 
   field :is_admin,               :type => Boolean, :default => false   

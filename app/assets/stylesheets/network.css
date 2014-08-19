@@ -21,6 +21,17 @@ input[type]:focus,
   font-family: 'Oswald', sans-serif;
 }
 
+.mobileTopSearchBar {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+}
+
+.mobileTopSearchBar form, .mobileTopSearchBar .form-group {
+  margin-bottom: 0px !important;
+}
+
 .center-cropped {
   width: 50px;  
   height: 50px; 
@@ -633,4 +644,33 @@ span.play-icon{position: absolute; left: 31%; top: 32%; display: none;}
 .social_media a .fa-instagram:hover,
 .social_media a .fa-instagram:focus {
   color: #675144;
+}
+
+#bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1050;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.8);
+}
+
+#sign_in_modal {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  z-index: 1051;
+  width: 500px; 
+  height: 385px;
+  -webkit-transform:  translate(-50%, -50%);
+  -moz-transform:   translate(-50%, -50%);
+  -ms-transform:    translate(-50%, -50%);
+  -o-transform:   translate(-50%, -50%);  
+  transform:      translate(-50%, -50%);
+  -webkit-backface-visibility: hidden;
+}
+
+#sign_in {
+  background-color: rgba(255,255,255,0.8);
 }

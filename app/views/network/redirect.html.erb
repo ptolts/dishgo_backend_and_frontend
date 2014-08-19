@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<!--
+
+FACILITATES OAuth 1,1a,2 AUTHENTICATION
+
+To link to this page in HelloJS define the redirect_uri.
+
+This page is used for authentication as well as POST using the Iframe+form+hash communication hack.
+
+
+-->
+<html>
+<head>
+	<title>DishGo, redirecting...</title>
+</head>
+<body>
+	<%= javascript_include_tag "application" %>	
+	<script>
+		document.body.appendChild(document.createTextNode("Failed to recognize URL query: "+window.location.href));
+	</script>
+</body>
+</html>

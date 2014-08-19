@@ -20,7 +20,35 @@
 	</head>
     <body>
 
-    	<%= yield %>
+	    <div data-bind="visible: network_sign_in" style="display:none">
+	        <div id="bg"></div>
+	        <div id="sign_in_modal">	        	
+	          <div id="sign_in">
+	            <div class="row">
+	                <div class="col-xs-12 text-center">
+						<!-- ko foreach: social_networks -->
+							<span data-bind="click:function(){ $data.login();}" class="btn btn-none">
+								<i class="fa" data-bind="css:'fa-' + name, style:{'color': online() ? 'red' : 'black'}"></i>
+							</span>
+						<!-- /ko -->
+	                </div>                
+	            </div>
+	            <div class="row">
+	                <div class="col-xs-12 text-center">
+						<!-- ko foreach: active_social_networks -->
+							<span class="btn btn-none">
+								
+							</span>
+						<!-- /ko -->
+	                </div>                
+	            </div>	            
+	          </div>
+	        </div>
+	    </div>       	
+
+    	<div data-bind="visible: true" style="display: none">
+    		<%= yield %>
+    	</div>
     								    	
     </body>
 </html>

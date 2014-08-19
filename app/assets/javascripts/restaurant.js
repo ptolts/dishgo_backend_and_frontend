@@ -274,6 +274,7 @@
             self.available_languages = ko.observableArray(_.map(_.pairs(fullLanguageName),function(lang){ return new Language(lang[1],lang[0]) }));
             self.lat = ko.observable(data.lat ? data.lat : "");
             self.lon = ko.observable(data.lon ? data.lon : "");
+            self.rating = ko.observable(data.rating ? data.rating : "");
             self.website = ko.observable(data.website ? data.website : "");
             self.email = ko.observable(data.email ? data.email : "");
             self.subdomain = ko.observable(data.subdomain ? data.subdomain : "");

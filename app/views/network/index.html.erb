@@ -1,4 +1,24 @@
 <div class="network_header">
+	<!-- MOBILE -->
+	<!-- ko if: isMobile -->
+	<div class="container" data-bind="if: isMobile">
+		<div id="logo">
+			<a href="/app/network">
+				<img src="https://58900edd332817a2d530-6caa6fe89e7dac3eaf12230f0985b957.ssl.cf5.rackcdn.com/DishGo_Logo_Network.png" class="img-responsive">
+			</a>
+		</div>
+	
+		<div id="login_buttons">
+			<ul>
+				<li><span class="btn btn-none" style="margin-right:-3px;" data-bind="click: function(){ $root.network_sign_in(true); }">Log In</span></li>
+            	<li><a href="/app/letsdishgo" class="sign_up_button btn btn-search">Get Listed</a></li>
+			</ul>
+		</div>
+	</div>
+	<!-- /ko -->	
+
+	<!-- DESKTOP -->
+	<!-- ko if: !isMobile -->
 	<div class="container">
 		<div id="logo" data-bind="visible: !top_search()">
 			<a href="/app/network">
@@ -22,14 +42,41 @@
 	
 		<div id="login_buttons">
 			<ul>
-				<li><a href="/app/users/sign_in" class="btn btn-none" style="margin-right:-3px;">Log In</a></li>
+				<li><span class="btn btn-none" style="margin-right:-3px;" data-bind="click: function(){ $root.network_sign_in(true); }">Log In</span></li>
             	<li><a href="/app/letsdishgo" class="sign_up_button btn btn-search">Get Listed</a></li>
 			</ul>
 		</div>
 	</div>
+	<!-- /ko -->	
 </div>
 <div id="menu_background">
 
+	<!-- MOBILE -->
+	<!-- ko if: isMobile -->
+	<div class="container_small letsdishgomeat"  data-bind="mobileSearchTop: top_search()">
+		<div class="row">
+			<div class="col-xs-12 text-center">
+				<h1 data-bind="visible: !top_search()">Search Restaurant Menus</h1>
+				<form class="form-inline" role="form" data-bind="#">
+					<div class="form-group">
+						<div class="controls">
+							<div class="input-group input-group-lg">
+								<div class="input-group-addon"><i class="fa fa-search"></i></div>
+								<input id="#" name="#" type="text" placeholder="Restaurant Name" class="form-control" data-bind="value: restaurant_search_term, valueUpdate: 'afterkeydown'" />
+								<span class="input-group-btn">
+									<button class="btn btn-lg btn-search">Search</button>
+								</span>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<!-- /ko -->
+
+	<!-- DESKTOP -->
+	<!-- ko if: !isMobile -->
 	<div class="container_small letsdishgomeat"  data-bind="visible: !top_search()" style="display: none">
 		<div class="row">
 			<div class="col-xs-12 text-center">
@@ -50,6 +97,7 @@
 			</div>
 		</div>
 	</div>
+	<!-- /ko -->
 
 	<!-- SEARCH RESULTS WILL APPEAR HERE -->
 
@@ -72,9 +120,7 @@
 	                                </div>
 	                            </div>
 	                        </div>
-	                        <span class="resto_rating">
-									<img src="https://58900edd332817a2d530-6caa6fe89e7dac3eaf12230f0985b957.ssl.cf5.rackcdn.com/five-stars.png" class="img-responsive">
-							</span>
+	                        <span class="resto_rating" data-bind="starRating: rating"></span>
                     	</div>
 						<div class="col-xs-8 col-xs-offset-4" style="top: 60px;">
 							<div class="contact_details">
