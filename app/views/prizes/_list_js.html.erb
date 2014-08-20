@@ -2,6 +2,7 @@
 
 
     var user_data = <%= raw(current_user.to_json) %>;
+    var restaurant_id = "<%= @restaurant_id %>";
     var languages = <%= raw(@languages) %>;
     var default_language = <%= raw(@default_language) %>;
     var lang = ko.observable(default_language);
@@ -45,7 +46,7 @@
                 type: "POST",
                 url: "/app/prizes/won_prize_list",
                 data: {
-
+                    restaurant_id: restaurant_id,
                 },
                 success: function(data, textStatus, jqXHR){
                     self.prizes(_.map(data,function(prize){ return new Prize(prize) }));

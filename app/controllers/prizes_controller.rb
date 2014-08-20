@@ -57,6 +57,10 @@ class PrizesController < ApplicationController
   end
 
   def list
+    @restaurant_id = params[:restaurant]
+    if Prize.where(restaurant_id:@restaurant_id).count == 0
+      @restaurant_id = nil
+    end
     @languages = ['en'].to_json
     @default_language = ['en'].to_json    
     render 'list', layout: 'list_prizes'
@@ -70,8 +74,11 @@ class PrizesController < ApplicationController
 
   def won_prize_list
     user = current_user
-    # won_prizes = current_user.individual_prizes.only(:prize_id).collect{|e| e.prize_id}
-    @prizes = Prize.ne(active:false).collect{|e| e.serializable_hash({current_user:user.id})}
+    @prizes = Prize.ne(active:false)
+    if !params[:restaurant_id].blank?
+      @prizes = @prizes.where(restaurant_id:params[:restaurant_id])
+    end
+    @prizes = @prizes.collect{|e| e.serializable_hash({current_user:user.id})}
     render json: @prizes.as_json
   end  
 
