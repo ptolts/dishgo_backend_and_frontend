@@ -154,7 +154,11 @@ h1 {
 
 .token {
     color: #cf2f28;
-    font-size: 18px;
+    font-size: 22px;
+    background-color: #fff;
+    padding: 6px 12px;
+    border: 1px solid #cf2f28;
+    border-radius: 0 4px 4px 0;
 }
 
 .close_prize {
@@ -237,6 +241,13 @@ h1 {
 .answers ol li {
     margin-bottom: 10px;
 }
-
+.coupon_number {
+    font-size: 22px;
+    color: #fff;
+    background-color: #cf2f28;
+    padding: 6px 12px;
+    border-radius: 4px 0 0 4px;
+    border: 1px solid #cf2f28;
+}
 
 
