@@ -546,7 +546,7 @@ footer a:focus {
       height: auto;
     }*/
     #sign_in_modal {
-      width: 320px;   }
+      width: 285px;   }
   }
 
 /*.restaurant-title{color:#231f20; font-size:20px; font-weight:700;}
@@ -721,6 +721,17 @@ span.play-icon{position: absolute; left: 31%; top: 32%; display: none;}
   -o-transform:   translate(-50%, -50%);  
   transform:      translate(-50%, -50%);
   -webkit-backface-visibility: hidden;
+}
+
+#sign_in_modal .close {
+  position: absolute;
+  font-size: 38px;
+  right: -15px;
+  top: -40px;
+  opacity: 1;
+  color: #fff;
+  text-shadow:0 1px 0 #000;
+  filter: aplpha(opacity=100);
 }
 
 #sign_in {
