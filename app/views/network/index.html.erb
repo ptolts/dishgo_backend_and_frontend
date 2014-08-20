@@ -111,7 +111,6 @@
 						<div class="row" data-bind="foreach: images">
 							<div class="col-xs-3">
 								<div class="center-cropped" data-bind="style: { backgroundImage: 'url(' + $data.small() + ')' }"></div>​								
-								<!-- <img data-bind="attr:{ src: $data.small }" alt="" class="img-responsive" /> -->
 							</div>
 						</div>
 					</div>
@@ -130,16 +129,13 @@
 				<div class="col-xs-12 col-sm-6 col-md-4" style="padding:0;">
 					<div class="top_dish_container">
 						<a href="/app/network/restaurant" class="full_dish_link"></a>
-						<div class="row">
-							<div class="dish-picture">
-								<img class="img-responsive" src="<%= dish.img_src %>">
-								<span class="dish_rating">
-									<%= raw(stars dish.rating) %>
-								</span>
-								<div class="dish-description">
-									<span><%= dish.name %></span>
-									<p><%= dish.description %></p>
-								</div>
+						<div class="dish-picture center-cropped-full" style="background-image: url(<%= dish.img_src %>)">							
+							<span class="dish_rating">
+								<%= raw(stars dish.rating) %>
+							</span>
+							<div class="dish-description">
+								<span><%= dish.name %></span>
+								<p><%= dish.description %></p>
 							</div>
 						</div>
 					</div>
