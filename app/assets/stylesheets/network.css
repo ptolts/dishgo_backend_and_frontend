@@ -81,7 +81,7 @@ input[type]:focus,
   width: 100%;  
   height: 100%; 
   background-position: center center;
-  background-repeat: no-repeat;
+  background-size: cover;
   margin: auto;
 }​
 
@@ -233,7 +233,7 @@ footer a:focus {
 
 .top_dish_container {
   position: relative;
-  height: 258px; /*temporary set to auto once background-image set*/
+  height: 400px; /*temporary set to auto once background-image set*/
   overflow: hidden;
   color: #000;
   border: solid 1px #e9e9e9;
@@ -329,6 +329,11 @@ footer a:focus {
     width: 100%;
     height: 100%;
     overflow: hidden;
+    -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
 }
 .dish_title_bar {
     position: absolute;
@@ -533,9 +538,9 @@ footer a:focus {
     #white_background h2 {
       font-size: 26px;
     }
-    .top_dish_container {
+   /* .top_dish_container {
       height: auto;
-    }
+    }*/
   }
 
 /*.restaurant-title{color:#231f20; font-size:20px; font-weight:700;}
