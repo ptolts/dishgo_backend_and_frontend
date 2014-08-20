@@ -333,7 +333,7 @@ footer a:focus {
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-}
+  background-position: center center;
 }
 .dish_title_bar {
     position: absolute;
@@ -445,6 +445,10 @@ footer a:focus {
         .letsdishgo-bottom li a {
           font-size: 20px;
         }
+        #sign_in_modal {
+          width: 400px;
+          height: 400px;
+        }
     }
 
 /* Medium Devices, Desktops */
@@ -541,6 +545,8 @@ footer a:focus {
    /* .top_dish_container {
       height: auto;
     }*/
+    #sign_in_modal {
+      width: 320px;   }
   }
 
 /*.restaurant-title{color:#231f20; font-size:20px; font-weight:700;}
@@ -709,8 +715,6 @@ span.play-icon{position: absolute; left: 31%; top: 32%; display: none;}
   left: 50%;
   top: 50%;
   z-index: 1051;
-  width: 400px; 
-  height: 400px;
   -webkit-transform:  translate(-50%, -50%);
   -moz-transform:   translate(-50%, -50%);
   -ms-transform:    translate(-50%, -50%);

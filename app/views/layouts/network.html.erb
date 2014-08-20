@@ -25,32 +25,30 @@
 	    <div data-bind="visible: network_sign_in" style="display:none">
 	        <div id="bg" data-bind="click: function(){ network_sign_in(false) }"></div>
 	        <div id="sign_in_modal">	        	
-	          <div id="sign_in">
-	            <div class="row">
-	                <div class="col-xs-12 text-center">
-	                	<!-- ko foreach: social_networks -->
-	                		<span class="btn btn-none" data-bind="click: function(){ login(); }"><i class="fa" data-bind="css:'fa-'+name"></i></span>
-	                	<!-- /ko -->
-	                </div>                
-	            </div>
-	            <div class="row">
-	                <div class="col-xs-12 text-center">
-	                	<h3>Restaurant Sign In</h3>
-	                	<div class="col-md-6 col-md-offset-3">
+	         	<div id="sign_in">
+		            <div class="row">
+		                <div class="col-xs-12 text-center">
+		                	<!-- ko foreach: social_networks -->
+		                		<span class="btn btn-none" data-bind="click: function(){ login(); }"><i class="fa" data-bind="css:'fa-'+name"></i></span>
+		                	<!-- /ko -->
+		                </div>                
+		            </div>
+		            <div class="row">
+		                <div class="col-xs-12 text-center">
+		                	<h3>Restaurant Sign In</h3>
 							<div class="row">
 								<div class="col-sm-10 col-sm-offset-1">
 									<input type="email" class="form-control" id="user_email" name="user[email]" placeholder="Email">
 								</div>
 							</div>
-							<div class="row">
+							<div class="row" style="margin-top:5px;">
 								<div class="col-sm-10 col-sm-offset-1">
 									<input type="password" class="form-control" id="user_password" name="user[password]" placeholder="Password">
 								</div>
 							</div>
-	                	</div>
-	                </div>                
-	            </div>	                        
-	          </div>
+		                </div>                
+		            </div>	                        
+	          	</div>
 	        </div>
 	    </div>       	
 
