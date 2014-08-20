@@ -385,7 +385,7 @@ border-color: #6D6D6D;
 .dish .dish_picture {
   margin-bottom: 2em;
 }
-.dish .dish_picture .img-responsive {
+.dish .dish_picture .img-responsive, .dish .dish_picture .bg_img {
   text-align: center;
   margin: 0 auto;
   border-radius: 0.5em;

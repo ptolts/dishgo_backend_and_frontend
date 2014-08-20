@@ -1,4 +1,7 @@
 <h2 class="text-center">Prize</h2>
+<div class="language_selector_prize" data-bind="visible: languages().length > 1">
+    <select data-bind="options: languages, value: $root.lang"></select>                
+</div>
 <!-- full-name input-->
 <div class="row">
 
@@ -55,8 +58,9 @@
     </div>
 
     <div class="wrap">
-        <a href="#" class="col-xs-12" id="print_codes">
+        <a target="_blank" data-bind="attr:{href:'/app/prizes/print_list?prize_id='+id()}" class="col-xs-12" id="print_codes">
                 <h4 class="text-center">Coupon Codes</h4>
+                <h3 class="prize_print"><i class="fa fa-print"></i></h3>
             <!-- ko foreach: individual_prizes -->
                 <div class="col-xs-6">
                     <div class="individual_prize_box">

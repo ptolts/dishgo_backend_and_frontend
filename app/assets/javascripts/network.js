@@ -50,9 +50,7 @@ ko.bindingHandlers.starRating = {
         var left_half = "<i class=\"fa fa-star-half-o left_over fa-flip-horizontal\"></i>";
         var half = "<i class=\"fa fa-star-half-o\"></i>"        
         var rating = value;
-        console.log("rating: " + rating);
         var left_over = 5 - value;
-        console.log("left_over: " + left_over);
         var result = "";
         while(rating > 0){
             if(rating >= 1){

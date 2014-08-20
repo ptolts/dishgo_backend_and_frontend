@@ -1,4 +1,15 @@
 /*user form*/
+.language_selector_prize {
+    position: absolute;
+    top: 10px;
+}
+
+.prize_print {
+    position: absolute;
+    right: 10px;
+    top: 0;    
+}
+
 .prizes_controls {
     margin-top: 40px;
 }

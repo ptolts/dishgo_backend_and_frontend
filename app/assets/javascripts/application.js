@@ -30,6 +30,7 @@
 // = require jquery.textfill.js
 // = require card_validator.js
 // = require chart.min.js
+// = require star-rating.js
 
 
 

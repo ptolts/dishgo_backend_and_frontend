@@ -1,6 +1,7 @@
 class PrizesController < ApplicationController
   before_filter :admin_or_user_with_resto!, :except => [:list, :bid, :won_prize_list] #, :only => [:create_section,:create_dish,:create_option,:create_individual_option]
   before_filter :sign_in_user_for_prizes, only: [:list, :bid, :won_prize_list]
+  before_filter :admin_or_prize_owner, only: :print_list
   layout 'prizes'
   
   def index
@@ -115,7 +116,6 @@ class PrizesController < ApplicationController
   end
 
   def print_list
-    @prize = Prize.first
     render :pdf => "prize_list",
       :template => 'prizes/prizes.pdf.erb',
       :show_as_html => params[:debug].present?,
@@ -126,5 +126,15 @@ class PrizesController < ApplicationController
                     :left   => 0,
                     :right  => 0
                   }    
+  end
+
+  def admin_or_prize_owner
+    if !current_user
+      redirect_to 'https://dishgo.io/app/users/sign_in'
+    end
+    @prize = Prize.find(params[:prize_id])
+    if !current_user.is_admin and current_user.owns_restaurants != @prize.restaurant
+      redirect_to 'https://dishgo.io/app/users/sign_in'
+    end
   end
 end
