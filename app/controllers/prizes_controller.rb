@@ -1,7 +1,7 @@
 class PrizesController < ApplicationController
   before_filter :admin_or_user_with_resto!, :except => [:list, :bid, :won_prize_list] #, :only => [:create_section,:create_dish,:create_option,:create_individual_option]
   before_filter :sign_in_user_for_prizes, only: [:list, :bid, :won_prize_list]
-  before_filter :admin_or_prize_owner, only: :print_list
+  before_filter :admin_or_prize_owner, only: [:print_list, :destroy]
   layout 'prizes'
   
   def index
@@ -113,6 +113,17 @@ class PrizesController < ApplicationController
     user.save(validate: false)      
     render json: {lost: "We are sorry, you didn't win this time."}.as_json
     return    
+  end
+
+  def destroy
+    individual_prizes = @prize.individual_prizes.where(user_id:nil)
+    individual_prizes.destroy_all
+    if @prize.individual_prizes.count > 0
+      render json: @prize.as_json
+      return
+    end
+    @prize.destroy
+    render json: {success:true}.as_json
   end
 
   def print_list
