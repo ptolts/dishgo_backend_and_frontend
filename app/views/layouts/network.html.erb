@@ -24,7 +24,8 @@
     	</script>
 	    <div data-bind="visible: network_sign_in" style="display:none">
 	        <div id="bg" data-bind="click: function(){ network_sign_in(false) }"></div>
-	        <div id="sign_in_modal">	        	
+	        <div id="sign_in_modal">
+	        	<a class="close" data-bind="click: function(){ network_sign_in(false) }">×</a>	        	
 	         	<div id="sign_in">
 		            <div class="row">
 		                <div class="col-xs-12 text-center">
