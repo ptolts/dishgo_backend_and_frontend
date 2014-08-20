@@ -6,9 +6,24 @@
 *= require_self
 */
 
+
+/* main page star ratings */
 .dish_rating i {
   color: #cf2f28;
   font-size: 20px;
+}
+
+.dish_rating .left_over {
+  color: #dcdcdc;
+  font-size: 20px;
+}
+
+.resto_rating .left_over {
+  color: #dcdcdc;
+}
+
+.resto_rating i {
+  color: #cf2f28;
 }
 
 textarea:focus,

@@ -46,8 +46,13 @@ ko.bindingHandlers.starRating = {
     update: function (element, valueAccessor, allBindings, viewModel, bindingContext) {
         var value = valueAccessor()();
         var full = "<i class=\"fa fa-star\"></i>";
-        var half = "<i class=\"fa fa-star-half-o\"></i>"
+        var left_full = "<i class=\"fa fa-star left_over fa-flip-horizontal\"></i>";
+        var left_half = "<i class=\"fa fa-star-half-o left_over fa-flip-horizontal\"></i>";
+        var half = "<i class=\"fa fa-star-half-o\"></i>"        
         var rating = value;
+        console.log("rating: " + rating);
+        var left_over = 5 - value;
+        console.log("left_over: " + left_over);
         var result = "";
         while(rating > 0){
             if(rating >= 1){
@@ -61,6 +66,18 @@ ko.bindingHandlers.starRating = {
                 continue;
             }
         }
+        while(left_over > 0){
+            if(left_over >= 1){
+                left_over--;
+                result = result + left_full;
+                continue;
+            }
+            if(left_over >= 0.5){
+                left_over = left_over - 0.5;
+                result = result + left_half;
+                continue;
+            }
+        }        
         ko.utils.setHtml(element, result);        
     }
 };
