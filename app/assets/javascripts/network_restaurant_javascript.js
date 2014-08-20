@@ -1,4 +1,3 @@
-
 editing_mode = false;    
 var viewmodel = new NetworkModel();
 

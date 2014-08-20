@@ -1,9 +1,19 @@
 Foodcloud::Application.routes.draw do
 
-  devise_for :users, :controllers => { :registrations => "users/registration", :sessions => "users/sessions" }
+  devise_for :users, :controllers => { :registrations => "users/registration", :sessions => "users/sessions", omniauth_callbacks: 'omniauth_callbacks' }
 
   devise_scope :user do
     get "users/registration/confirm" => "users/registration#confirm"
+    match "/users/auth/:provider",
+      constraints: { provider: /twitter|facebook/ },
+      to: "omniauth_callbacks#passthru",
+      as: :users_omniauth_authorize,
+      via: [:get, :post]
+    match "/users/auth/:action/callback",
+      constraints: { action: /twitter|facebook/ },
+      to: "omniauth_callbacks",
+      as: :users_omniauth_callback,
+      via: [:get, :post]   
   end
 
   constraints(Letsdishgo) do
@@ -63,8 +73,9 @@ Foodcloud::Application.routes.draw do
       get '/restaurant/:id', to: "network#restaurant"
       get '/restaurant', to: "network#restaurant"
       get '/redirect', to: "network#redirect"
-      get '/proxy', to: "network#proxy"
       post '/search', to: "network#search"
+      post '/fetch_user', to: "network#fetch_user"
+      get '/fetch_user', to: "network#fetch_user"
     end
   end   
 

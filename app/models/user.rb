@@ -15,7 +15,7 @@ class User
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, 
-         :validatable, :confirmable 
+         :validatable, :confirmable, :omniauthable
 
 
   field :sign_up_progress, type: Hash, :default => {}
@@ -55,6 +55,7 @@ class User
 
   field :twitter_user_id,       :type => String  
   field :twitter_auth_token,       :type => String  
+  field :twitter_auth_secret,       :type => String  
 
 
   field :phone_number,           :type => String 
@@ -145,6 +146,44 @@ class User
     welcome_message
     super
   end 
+
+  def self.find_for_oauth auth, current_user = nil
+
+    Rails.logger.warn "AUTH: #{auth}"
+
+    user = current_user
+
+    uid = auth.uid
+
+    if auth.provider == 'twitter'
+      user ||= User.where(twitter_user_id:uid).first
+      if !user
+        user = User.new
+      end        
+      user.twitter_user_id = uid
+      user.twitter_auth_secret = auth.credentials.secret
+      user.twitter_auth_token = auth.credentials.token        
+    end
+
+    if auth.provider == 'facebook'
+      user ||= User.where(facebook_user_id:uid).first
+      if !user
+        user = User.new
+      end
+      user.facebook_user_id = uid
+      user.facebook_auth_token = auth.credentials.token        
+    end
+
+    if !user.persisted?
+      user.skip_confirmation!
+      user.skip_confirmation_notification!
+    end
+    
+    user.save!
+
+    return user
+
+  end  
  
   private
   def generate_authentication_token

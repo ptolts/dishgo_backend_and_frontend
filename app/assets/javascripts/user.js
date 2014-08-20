@@ -1,3 +1,56 @@
+        var updateUser = ko.observable(false);
+
+        function Facebook(data){
+            var self = this;
+            self.name = "facebook";
+            self.link = "/app/users/auth/facebook"
+
+            self.login = function(){
+                var popupWidth=500;
+                var popupHeight=500;
+                var xPosition = parseInt((window.screen.availWidth - popupWidth) / 2);
+                var yPosition = parseInt((window.screen.availHeight - popupHeight) / 2);
+                var params = "status=no, location=yes, scrollbars=yes, resizable=yes, width="+popupWidth+", height="+popupHeight+", top="+yPosition+", left="+xPosition;
+                window.popup_scope = self;               
+                self.facebook_window = window.open(self.link, '_blank', params);
+                self.facebook_window.focus();
+            };
+
+            self.close_popup = function(){
+                if(self.facebook_window){
+                    self.facebook_window.close();
+                    updateUser(true);
+                }
+            }
+
+        }
+
+        function Twitter(data){
+            var self = this;
+            self.name = "twitter";
+            self.link = "/app/users/auth/twitter";
+
+
+            self.login = function(){
+                var popupWidth=500;
+                var popupHeight=500;
+                var xPosition = parseInt((window.screen.availWidth - popupWidth) / 2);
+                var yPosition = parseInt((window.screen.availHeight - popupHeight) / 2);
+                var params = "status=no, location=yes, scrollbars=yes, resizable=yes, width="+popupWidth+", height="+popupHeight+", top="+yPosition+ ", left="+xPosition;
+                window.popup_scope = self;
+                console.log(params);
+                self.twitter_window = window.open(self.link, '_blank', params);
+                self.twitter_window.focus();
+            };
+
+            self.close_popup = function(){
+                if(self.twitter_window){
+                    self.twitter_window.close();
+                    updateUser(true);
+                }
+            }
+        }
+
         function User(data) {
             var self = this;
             self.id = ko.observable(data._id ? data._id : null);
@@ -6,6 +59,17 @@
             self.setup_link = ko.observable(window.location.protocol + "//" + window.location.host + "/app/profile/set_password/" + data.setup_link);
             self.sign_up_link = ko.observable(data.sign_up_link ? window.location.protocol + "//" + window.location.host + "/app/profile/set_password/" + data.sign_up_link : null);
             self.dishcoins = ko.observable(data.dishcoins ? data.dishcoins : 0);
+
+            self.twitter = ko.observable(new Twitter());
+            self.facebook = ko.observable(new Facebook());
+
+            if(data.facebook_user_id){
+
+            }
+
+            if(data.twitter_user_id){
+
+            }
 
             self.created = ko.computed({
                 read: function(){

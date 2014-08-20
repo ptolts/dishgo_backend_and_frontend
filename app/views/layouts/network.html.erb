@@ -19,34 +19,93 @@
 		<![endif]-->	
 	</head>
     <body>
-
+    	<script>
+			var user_data = <%= current_user ? raw(current_user.to_json) : {}%>;
+    	</script>
 	    <div data-bind="visible: network_sign_in" style="display:none">
-	        <div id="bg"></div>
+	        <div id="bg" data-bind="click: function(){ network_sign_in(false) }"></div>
 	        <div id="sign_in_modal">	        	
 	          <div id="sign_in">
 	            <div class="row">
 	                <div class="col-xs-12 text-center">
-						<!-- ko foreach: social_networks -->
-							<span data-bind="click:function(){ $data.login();}" class="btn btn-none">
-								<i class="fa" data-bind="css:'fa-' + name, style:{'color': online() ? 'red' : 'black'}"></i>
-							</span>
-						<!-- /ko -->
+	                	<!-- ko foreach: social_networks -->
+	                		<span class="btn btn-none" data-bind="click: function(){ login(); }"><i class="fa" data-bind="css:'fa-'+name"></i></span>
+	                	<!-- /ko -->
 	                </div>                
 	            </div>
 	            <div class="row">
 	                <div class="col-xs-12 text-center">
-						<!-- ko foreach: active_social_networks -->
-							<span class="btn btn-none">
-								
-							</span>
-						<!-- /ko -->
+	                	<h3>Restaurant Sign In</h3>
+	                	<div class="col-md-6 col-md-offset-3">
+							<div class="row">
+								<div class="col-sm-10 col-sm-offset-1">
+									<input type="email" class="form-control" id="user_email" name="user[email]" placeholder="Email">
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-10 col-sm-offset-1">
+									<input type="password" class="form-control" id="user_password" name="user[password]" placeholder="Password">
+								</div>
+							</div>
+	                	</div>
 	                </div>                
-	            </div>	            
+	            </div>	                        
 	          </div>
 	        </div>
 	    </div>       	
 
     	<div data-bind="visible: true" style="display: none">
+			<div class="network_header">
+				<!-- MOBILE -->
+				<!-- ko if: isMobile -->
+				<div class="container" data-bind="if: isMobile">
+					<div id="logo">
+						<a href="/app/network">
+							<img src="https://58900edd332817a2d530-6caa6fe89e7dac3eaf12230f0985b957.ssl.cf5.rackcdn.com/DishGo_Logo_Network.png" class="img-responsive">
+						</a>
+					</div>
+				
+					<div id="login_buttons">
+						<ul>
+							<li><span class="btn btn-none" style="margin-right:-3px;" data-bind="click: function(){ $root.network_sign_in(true); }, text: login_text">Log In</span></li>
+			            	<li><a href="/app/letsdishgo" class="sign_up_button btn btn-search">Get Listed</a></li>
+						</ul>
+					</div>
+				</div>
+				<!-- /ko -->	
+
+				<!-- DESKTOP -->
+				<!-- ko if: !isMobile -->
+				<div class="container">
+					<div id="logo" data-bind="visible: !top_search()">
+						<a href="/app/network">
+							<img src="https://58900edd332817a2d530-6caa6fe89e7dac3eaf12230f0985b957.ssl.cf5.rackcdn.com/DishGo_Logo_Network.png" class="img-responsive">
+						</a>
+					</div>
+
+					<form class="form-inline" role="form" data-bind="visible: top_search" style="display: none">
+						<div class="form-group">
+							<div class="controls">
+								<div class="input-group input-group-lg">
+									<div class="input-group-addon"><i class="fa fa-search"></i></div>
+									<input id="#" name="#" type="text" placeholder="Restaurant Name" class="form-control" data-bind="hasFocus: top_search, value: restaurant_search_term, valueUpdate: 'afterkeydown'" />
+									<span class="input-group-btn">
+										<button class="btn btn-lg btn-search hidden-xs">Search</button>
+									</span>
+								</div>
+							</div>
+						</div>
+					</form>
+				
+					<div id="login_buttons">
+						<ul>
+							<li><span class="btn btn-none" style="margin-right:-3px;" data-bind="click: function(){ $root.network_sign_in(true); }, text: login_text">Log In</span></li>
+			            	<li><a href="/app/letsdishgo" class="sign_up_button btn btn-search">Get Listed</a></li>
+						</ul>
+					</div>
+				</div>
+				<!-- /ko -->	
+			</div>    		
     		<%= yield %>
     	</div>
     								    	

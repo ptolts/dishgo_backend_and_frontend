@@ -6,6 +6,11 @@
 *= require_self
 */
 
+.dish_rating i {
+  color: #cf2f28;
+  font-size: 20px;
+}
+
 textarea:focus,
 input:focus,
 input[type]:focus,
@@ -661,8 +666,8 @@ span.play-icon{position: absolute; left: 31%; top: 32%; display: none;}
   left: 50%;
   top: 50%;
   z-index: 1051;
-  width: 500px; 
-  height: 385px;
+  width: 400px; 
+  height: 400px;
   -webkit-transform:  translate(-50%, -50%);
   -moz-transform:   translate(-50%, -50%);
   -ms-transform:    translate(-50%, -50%);
@@ -673,4 +678,5 @@ span.play-icon{position: absolute; left: 31%; top: 32%; display: none;}
 
 #sign_in {
   background-color: rgba(255,255,255,0.8);
+  padding: 25px;
 }

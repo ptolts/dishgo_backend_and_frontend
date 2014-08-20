@@ -1,5 +1,5 @@
 class NetworkController < ApplicationController
-  skip_before_filter :verify_authenticity_token, only: [:search]
+  skip_before_filter :verify_authenticity_token, only: [:search, :fetch_user]
   layout 'network'
   
   def index
@@ -69,57 +69,11 @@ class NetworkController < ApplicationController
     headers['Access-Control-Allow-Methods'] = 'POST, PUT, DELETE, GET, OPTIONS'
     headers['Access-Control-Request-Method'] = '*'
     headers['Access-Control-Allow-Headers'] = 'Origin, X-Requested-With, Content-Type, Accept, Authorization'
-    if params[:access_token].blank? and !(request.original_url =~ /access_token/)
-      access_token = session[:request_token].get_access_token(:oauth_verifier => params[:oauth_verifier])
-      session[:access_token] = access_token
-      redirect_to (request.original_url + "&access_token=#{access_token.token}&state={}")
-      return
-    end
-
-
-
-    render 'redirect', layout: false, fuck_you: true
+    render 'redirect', layout: false
   end
 
-  def proxy
-    headers['Access-Control-Allow-Origin'] = '*'
-    headers['Access-Control-Allow-Methods'] = 'POST, PUT, DELETE, GET, OPTIONS'
-    headers['Access-Control-Request-Method'] = '*'
-    headers['Access-Control-Allow-Headers'] = 'Origin, X-Requested-With, Content-Type, Accept, Authorization'    
-
-    id = params[:client_id]
-    secret = "RHgKIG8eIptBoZMfXDxWTxucLmbBgYFUHuHVDznseDLDnu0pNs"
-    if params[:access_token].blank?
-      state = JSON.parse(params["state"])
-      oauth = state["oauth"]
-      url = oauth["auth"]      
-      @consumer = OAuth::Consumer.new(id,secret,site:"https://twitter.com")
-      state.delete("oauth")
-      @callback_url = "http://127.0.0.1:3000/app/network/redirect" + "?#{state.to_query}"
-      token = @consumer.get_request_token(:oauth_callback => @callback_url)
-      session[:request_token] = token
-      redirect_to token.authorize_url(:oauth_callback => @callback_url)
-      return
-    else
-        # consumer = OAuth::Consumer.new(id,secret,site:"https://twitter.com")
-        # token_hash = { 
-        #   :oauth_token => session[:access_token].token,
-        #   :oauth_token_secret => session[:access_token].secret
-        # }
-        # access_token = OAuth::AccessToken.from_hash(consumer, token_hash)
-
-        # r = consumer.create_signed_request(:get,params[:path],access_token)
-        
-        # Rails.logger.warn r["body"]
-        parsed_url = URI.parse( params[:path] )
-        o = OauthSucks.new
-        o.consumer_key = session[:access_token].token
-        o.consumer_secret = session[:access_token].secret
-        o.token = id
-        r = parsed_url.scheme + "://" + parsed_url.host + parsed_url.path + "?" + o.sign(parsed_url).query_string + "&access_token=#{params[:access_token]}"
-        Rails.logger.warn r
-        redirect_to r
-    end
+  def fetch_user
+    render json: (current_user || {}).as_json
   end
 
 end
