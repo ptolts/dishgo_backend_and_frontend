@@ -7,6 +7,8 @@
     var lang = ko.observable(default_language);
     var languages = ko.observableArray(languages);
 
+    var winner_winner_chicken_dinner = ko.observable();
+
     function viewModel() {
         var self = this;
         self.selected_prize = ko.observable();
@@ -54,6 +56,23 @@
                 dataType: "json"
             });            
         }
+
+        self.fetch_user = function(){
+            $.ajax({
+                type: "POST",
+                url: "/app/network/fetch_user",
+                data: {
+
+                },
+                success: function(data, textStatus, jqXHR){
+                    self.user(new User(data));
+                },
+                error: function(data){
+
+                },
+                dataType: "json"
+            });  
+        }               
 
         self.update_prizes = ko.computed({
             read: function(){
@@ -103,6 +122,21 @@
             prize.bid();
             self.user().dishcoins(self.user().dishcoins() - prize.number_of_bets());
         }
+
+        self.monitor_winner = ko.computed({
+            read: function(){
+                if(winner_winner_chicken_dinner()){
+                    self.show_your_prizes();
+                    self.fetch_user();
+                    return;                
+                }
+                if(winner_winner_chicken_dinner() == false){
+                    self.show_home();
+                    self.fetch_user();
+                    return;
+                }
+            }
+        })
     };
 
     var viewmodel = new viewModel();            

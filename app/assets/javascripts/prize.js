@@ -27,6 +27,7 @@ function IndividualPrize(data) {
     self.id = (data.id || null);
     self.prize_token = (data.prize_token || null);
     self.user_id = ko.observable(data.user_id || null);
+    self.number = ko.observable(data.number || null);
 
     self.claimed = ko.computed({
       read: function(){
@@ -128,10 +129,16 @@ function Prize(data) {
             self.saved(true);
             if(data.won){
               alert(data.won);
+              if("winner_winner_chicken_dinner" in window){
+                winner_winner_chicken_dinner(true);
+              }
             } else if(data.error){
               alert(data.error);
             } else {
               alert(data.lost);
+              if("winner_winner_chicken_dinner" in window){
+                winner_winner_chicken_dinner(false);
+              }              
             }
           },
           error: function(data){
