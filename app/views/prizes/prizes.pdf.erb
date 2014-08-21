@@ -12,7 +12,7 @@ body {
 }
 .document {
 	background: white;
-	border: 1px #DCDCDC solid;
+/*	border: 1px #DCDCDC solid;*/
 	width: 216mm;
 	height: 279mm;
 	display: block;
@@ -27,8 +27,8 @@ body {
 	float: left;
 	margin-left: 15.9mm;
 	margin-bottom: 15.16mm;
-	border: 1px #DCDCDC solid;
 	position: relative;
+/*	border: 1px #DCDCDC solid;*/
 }
 /* ^^^^^^^^^^^^ DONT TOUCH ABOVE  ^^^^^^^^^^^^^^^ */
 .number {
@@ -39,7 +39,7 @@ body {
 }
 .token_cell {
 	position: absolute;
-	top: 40%;
+	top: 60%;
 	right: 25px;
 	left: 0;
 	text-align: center;
@@ -51,8 +51,13 @@ body {
 }
 .name_cell {
 	position: absolute;
+	top: 15%;
+	left: 0;
 	right: 0;
-	left: 45px;
+	text-align: center;
+}
+.name_cell h3 {
+	font-size: 18px;
 }
 .dates_cell {
 	position: absolute;
@@ -61,7 +66,7 @@ body {
 	right: 0;
 	text-align: center;
 }
-.dates_cell h4 {
+.dates_cell h5 {
 	margin: 0;
 }
 .token:after{
@@ -73,26 +78,43 @@ body {
 	right: -5px;	
 	border: 1px solid black;
 }
+.logo {
+	position: absolute;
+	top: 8%;
+	left: 45px;
+	height: 25px;
+}
+.value_cell {
+	position: absolute;
+	top: 33%;
+	right: 0;
+	left: 0;
+	text-align: center;
+	color: #cf2f28;
+}
 </style>
 
 <div class="document">
 	<% @prize.individual_prizes.each do |individual_prize| %>
 		<div class="prize">
 			<div class="number"><%= individual_prize.number %></div>
+			<img class="logo" src="https://58900edd332817a2d530-6caa6fe89e7dac3eaf12230f0985b957.ssl.cf5.rackcdn.com/DishGo-black-red_small.jpg">
 			<div class="name_cell">
 				<h3 class="name"><%= @prize.name_translations["en"] %></h3>
 			</div>
-			<div class="token_cell">
-				<h3 class="token"><%= individual_prize.prize_token[0...-1] %></h3>
+			<div class="value_cell">
 				<% if @prize.prize_type == "$" %>
 					<h3><%= @prize.prize_type %><%= @prize.amount %></h3>
 				<% else %>
 					<h3><%= @prize.amount %><%= @prize.prize_type %></h3>
 				<% end %>
 			</div>
+			<div class="token_cell">
+				<h3 class="token"><%= individual_prize.prize_token[0...-1] %></h3>
+			</div>
 			<div class="dates_cell">
-				<h4>From: <%= @prize.start_date.strftime("%m/%d/%Y") %></h4>
-				<h4>To: <%= @prize.end_date.strftime("%m/%d/%Y") %></h4>
+				<h5>From: <%= @prize.start_date.strftime("%m/%d/%Y") %></h5>
+				<h5>To: <%= @prize.end_date.strftime("%m/%d/%Y") %></h5>
 			</div>			
 		</div>
 	<% end %>
