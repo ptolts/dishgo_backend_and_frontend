@@ -82,19 +82,19 @@
 						</a>
 					</div>
 
-					<form class="form-inline" role="form" data-bind="visible: top_search" style="display: none">
+					<div class="form-inline form" data-bind="visible: top_search" style="display: none">
 						<div class="form-group">
 							<div class="controls">
 								<div class="input-group input-group-lg">
 									<div class="input-group-addon"><i class="fa fa-search"></i></div>
-									<input id="#" name="#" type="text" placeholder="Restaurant Name" class="form-control" data-bind="hasFocus: top_search, value: restaurant_search_term, valueUpdate: 'afterkeydown'" />
+									<input type="text" placeholder="Restaurant Name" class="form-control" data-bind="hasFocus: top_search, value: restaurant_search_term, valueUpdate: 'afterkeydown'" />
 									<span class="input-group-btn">
-										<button class="btn btn-lg btn-search hidden-xs">Search</button>
+										<span class="btn btn-lg btn-search hidden-xs" data-bind="click: function(){ $root.ajax_search(); }">Search</span>
 									</span>
 								</div>
 							</div>
 						</div>
-					</form>
+					</div>
 				
 					<div id="login_buttons">
 						<ul>
@@ -104,8 +104,59 @@
 					</div>
 				</div>
 				<!-- /ko -->	
-			</div>    		
+			</div>    
+
     		<%= yield %>
+    		
+			<footer>
+			    <div class="container">
+			        <div class="row">
+			            <div class="col-sm-20">
+			                <a class="twocolors" href="http://dishgo.io"><span class="white">Dish</span><span class="red">Go</span><span class="white"> App</a>
+			            </div>
+			            <div class="col-sm-20">
+			                <a href="http://dishgo.io">Get Listed</a>
+			            </div>
+			            <div class="col-sm-20">
+			                <a href="http://dishgo.io">Web Design</a>
+			            </div>
+			            <div class="col-sm-20">
+			                <a href="http://dishgo.io">Blog</a>
+			            </div>
+			            <div class="col-sm-20">
+			                <a href="http://dishgo.io">Sign Up</a>
+			            </div>
+			        </div>
+			        <div class="row">
+			            <div class="col-sm-6 col-sm-offset-3">
+			                <div class="row social_media">
+			                    <div class="col-xs-4">
+			                        <a href="https://www.facebook.com/DishGoInc" target="_data"><i class="fa fa-facebook"></i></a>
+			                    </div>
+			                    <div class="col-xs-4">
+			                        <a href="https://www.twitter.com/dishgo" target="_data"><i class="fa fa-twitter"></i></a>
+			                    </div>
+			                    <div class="col-xs-4">
+			                        <a href="https://instagram.com/dishgo" target="_data"><i class="fa fa-instagram"></i></a>
+			                    </div>
+			                </div>
+			            </div>
+			        </div>
+			    </div>
+			    <div class="letsdishgo-bottom">
+			        <ul>
+			            <li class="first">
+			                <a href="https://dishgo.io/privacy-policy.html" target="_blank">Legal</a>
+			            </li>
+			            <li>
+			                <a href="mailto:info@dishgo.io">Contact Us</a>
+			            </li>
+			            <li class="last">
+			                <a href="https://dishgo.io">©DishGo</a>
+			            </li>
+			        </ul>
+			    </div>
+			</footer>    		
     	</div>
     								    	
     </body>

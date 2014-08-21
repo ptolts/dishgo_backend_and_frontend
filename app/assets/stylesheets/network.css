@@ -1,7 +1,7 @@
 /*
 *= require bootstrap.min
 *= require font-awesome
-*= require dish_modal
+*= require network_dish_modal
 *= require network_menu_base
 *= require_self
 */
@@ -19,9 +19,17 @@
   font-size: 20px;
 }
 
+.menu_dish_rating .hoverChosen {
+  color: #cf2f28 !important;
+}
+
 .menu_dish_rating .left_over {
   color: #dcdcdc;
   font-size: 20px;
+}
+
+.menu_dish_rating .hoverLeftOver {
+  color: #dcdcdc !important;
 }
 
 .dish_rating i {
@@ -115,7 +123,7 @@ input[type]:focus,
   width: 100%;
   z-index: 995;
 }
-.network_header form {
+.network_header .form {
   margin-top: 17px;
   width: 45%;
 }
@@ -460,7 +468,7 @@ footer a:focus {
 /* Large Devices, Wide Screens */
     @media only screen and (min-width : 1200px) {
         
-         .network_header form {
+         .network_header .form {
             width: 33%;
         }
 
@@ -511,7 +519,7 @@ footer a:focus {
 			padding: 17px 10px 7px 10px;
 			line-height: 24px;
 		}
-    .network_header form {
+    .network_header .form {
       margin-top: 15px;
       margin-left: -10px;
     }
@@ -638,20 +646,43 @@ span.play-icon{position: absolute; left: 31%; top: 32%; display: none;}
   text-decoration: none;
 }
 
-.menu_sections {
-  position: relative;
-  width: 100%
+.expand {
+  position: absolute;
+  bottom: 10px;
+  left: 25px;
 }
+
+/* modal replacement */
+.fullWidth {
+  background-color: rgba(255, 255, 255, 0.9);
+  max-height: none;
+  z-index: 2000;
+  border-radius: 5px
+}
+.fullWidth .dish_picture{
+  width: 100% !important;
+  max-height: none;
+}
+.fullWidth .dish_info{
+  width: 100% !important;
+}
+
+.menu_sections {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
+.each_section {
+  margin-right: 10px;
+}
+
 .bot-links .fa,
 .bot-links .fa a {
   color: #cf2f28;
   text-decoration: none;
 }
-.each_section {
-  position: absolute;
-  bottom: 0;
-  right: -15px;
-}
+
 .btn-default {
   border-radius: 0 !important;
   border-bottom: 0 !important;

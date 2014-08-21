@@ -24,9 +24,7 @@
                   </li>             
                   <li class="<%= active_link('website','index') %>"><a href="/app/website/index">Edit Website</a></li>            
                   <li class="<%= active_link('administration','edit_menu') %>"><a href="/app/administration/edit_menu?restaurant_id=<%= current_user.owns_restaurants.id %>">Edit Menu</a></li>
-                  <% if !Rails.env.production? %>
-                    <li class="<%= active_link('prizes','index') %>"><a href="/app/prizes">Prizes</a></li>                  
-                  <% end %>
+                  <li class="<%= active_link('prizes','index') %>"><a href="/app/prizes">Prizes</a></li>                  
                 <% if !current_user.cash_money %>
                   <li class="<%= active_link('profile','billing') %>"><a href="/app/profile/billing">Billing</a></li>
                 <% end %>

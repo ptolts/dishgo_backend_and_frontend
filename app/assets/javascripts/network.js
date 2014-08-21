@@ -34,7 +34,7 @@ ko.bindingHandlers.mobileSearchTop = {
 ko.bindingHandlers.menuVisibleImage = {
     update: function (element, valueAccessor, allBindings, viewModel, bindingContext) {
         var underlyingObservable = valueAccessor();
-        if(bindingContext['$menu']){
+        if(bindingContext['$menu']()){
             element.setAttribute('src', underlyingObservable());
         } else {
             element.setAttribute('src', "");
@@ -80,6 +80,52 @@ ko.bindingHandlers.starRating = {
     }
 };
 
+ko.bindingHandlers.fullWidthToTop = {
+    update: function (element, valueAccessor) {
+        var value = valueAccessor()();
+        if(value){
+            $('html,body').animate({scrollTop: $(element).offset().top}, 800);
+        }
+    }
+};
+
+ko.bindingHandlers.writableStarRating = {
+    init: function(element, valueAccessor) {
+        var value = valueAccessor();
+        $(element).addClass("starRating");
+        for (var i = 0; i < value(); i++)
+           $("<i class='fa fa-star chosen'>").appendTo(element);
+        for (var i = 0; i < (5-value()); i++)
+           $("<i class='fa fa-star'>").appendTo(element);       
+       
+        // Handle mouse events on the stars
+        $("i", element).each(function(index) {
+            $(this).hover(
+                function() { 
+                    $(this).prevAll().add(this).addClass("hoverChosen");
+                    $(this).nextAll().addClass("hoverLeftOver");
+                }, 
+                function() { 
+                    $(this).prevAll().add(this).removeClass("hoverChosen");
+                    $(this).nextAll().removeClass("hoverLeftOver");
+                }                
+            ).click(function() { 
+                value(index+1);               // Write the new rating to it
+            });
+        });            
+    },
+    update: function(element, valueAccessor) {
+        // Give the first x stars the "chosen" class, where x <= rating
+        var observable = valueAccessor()();
+        $("i", element).each(function(index) {
+            if(index >= observable){
+                $(this).addClass("left_over");
+            } else {
+                $(this).removeClass("left_over");
+            }
+        });
+    }    
+};
 
 ko.bindingHandlers.networkMaxHeight = {
     update: function (element, valueAccessor, allBindingsAccessor, viewModel, bindingContext) {

@@ -28,7 +28,7 @@
     </div>
     <div class="resto_details">
         <div class="container">
-            <div class="row">
+            <div class="row" style="position: relative">
                 <div class="col-xs-12 col-sm-6 col-md-4 padme">
                     <div class="restaurant-title">
                         <%= @restaurant.name %>
@@ -47,25 +47,20 @@
                         <div class="counter_like"><i class="glyphicon glyphicon-heart"></i> 2256</div>
                     </div>
                     <div class="bot-links">
-                       
+                        <div id="opened_or_closed_footer" data-bind="with: restaurant">
+                            <h4 data-bind="visible: showHourSign">
+                            <span class="currently_open_tag"  data-bind="lStaticText: 'currently'"> </span>
+                            <span class="currently_open" data-bind="css:{'hours_opened':areWeOpened(),'hours_closed':!areWeOpened()}, lStaticText: areWeOpenedText"></span></h4>
+                        </div>                       
                     </div>
                 </div>
-                <div class="col-xs-12 col-sm-6 col-md-4 padme">
-                    <div id="opened_or_closed_footer" data-bind="with: restaurant, click: function() { goto_and_kill_menu('contact') }">
-                        <h4 data-bind="visible: showHourSign">
-                        <span class="currently_open_tag"  data-bind="lStaticText: 'currently'"> </span>
-                        <span class="currently_open" data-bind="css:{'hours_opened':areWeOpened(),'hours_closed':!areWeOpened()}, lStaticText: areWeOpenedText"></span></h4>
-                    </div>
+                <div class="menu_sections">
+                    <!-- ko foreach: menus -->
+                        <button class="btn btn-default each_section" data-bind="click: function(){ $root.selected_menu($data) }, lText: name"></button>
+                    <!-- /ko -->
                 </div>
-            </div>
-        </div>
-    </div>
-    <div class="container">
-        <div class="menu_sections">
-            <!-- ko foreach: menus -->
-            <button class="btn btn-default each_section" data-bind="click: function(){ $root.selected_menu($data) }, lText: name"></button>
-            <!-- /ko -->
-        </div>
+            </div>           
+        </div>       
     </div>
 
     <div data-bind="visible: true" style="display:none">
@@ -74,55 +69,6 @@
         <!-- /ko -->
     </div>
 </div>
-<footer>
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-20">
-                <a class="twocolors" href="http://dishgo.io"><span class="white">Dish</span><span class="red">Go</span><span class="white"> App</a>
-            </div>
-            <div class="col-sm-20">
-                <a href="http://dishgo.io">Get Listed</a>
-            </div>
-            <div class="col-sm-20">
-                <a href="http://dishgo.io">Web Design</a>
-            </div>
-            <div class="col-sm-20">
-                <a href="http://dishgo.io">Blog</a>
-            </div>
-            <div class="col-sm-20">
-                <a href="http://dishgo.io">Sign Up</a>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-6 col-sm-offset-3">
-                <div class="row social_media">
-                    <div class="col-xs-4">
-                        <a href="https://www.facebook.com/DishGoInc" target="_data"><i class="fa fa-facebook"></i></a>
-                    </div>
-                    <div class="col-xs-4">
-                        <a href="https://www.twitter.com/dishgo" target="_data"><i class="fa fa-twitter"></i></a>
-                    </div>
-                    <div class="col-xs-4">
-                        <a href="https://instagram.com/dishgo" target="_data"><i class="fa fa-instagram"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="letsdishgo-bottom">
-        <ul>
-            <li class="first">
-                <a href="https://dishgo.io/privacy-policy.html" target="_blank">Legal</a>
-            </li>
-            <li>
-                <a href="mailto:info@dishgo.io">Contact Us</a>
-            </li>
-            <li class="last">
-                <a href="https://dishgo.io">©DishGo</a>
-            </li>
-        </ul>
-    </div>
-</footer>
 
 <script>
     var restaurant_id = "<%= params[:restaurant_id]%>";

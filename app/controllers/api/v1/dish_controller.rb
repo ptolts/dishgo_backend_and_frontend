@@ -12,9 +12,8 @@ class Api::V1::DishController < ApplicationController
       Rails.logger.warn "No Ratings Yet"
       rating = Rating.new
       rating.dish = dish
-      restaurant = Restaurant.find(params["restaurant_id"])
       user.dishcoins = user.dishcoins + 1
-      rating.restaurant = restaurant
+      rating.restaurant = dish.restaurant
       user.ratings << rating
     end
     rating.rating = params[:rating]
