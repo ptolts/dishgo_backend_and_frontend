@@ -110,7 +110,7 @@ function Prize(data) {
         alert("Gift certificates require a name!");
         return false;
       }
-      if(self.amount() =< 2){
+      if(self.amount() <= 2){
         alert("Gift certificates cannot be worth less than $5");
         return false
       }
