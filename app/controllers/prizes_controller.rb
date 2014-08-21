@@ -35,6 +35,7 @@ class PrizesController < ApplicationController
     prize.start_date = Date.strptime(data["start_date"], format).to_time.utc
     prize.end_date = Date.strptime(data["end_date"], format).to_time.utc
     prize.amount = data["amount"]
+    prize.prize_type = data["prize_type"]
     prize.quantity = data["quantity"]
     prize.description_translations = data["description"]
     prize.save

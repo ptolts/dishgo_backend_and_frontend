@@ -84,7 +84,11 @@ body {
 			</div>
 			<div class="token_cell">
 				<h3 class="token"><%= individual_prize.prize_token[0...-1] %></h3>
-				<h3>$<%= @prize.amount %></h3>
+				<% if @prize.prize_type == "$" %>
+					<h3><%= @prize.prize_type %><%= @prize.amount %></h3>
+				<% else %>
+					<h3><%= @prize.amount %><%= @prize.prize_type %></h3>
+				<% end %>
 			</div>
 			<div class="dates_cell">
 				<h4>From: <%= @prize.start_date.strftime("%m/%d/%Y") %></h4>

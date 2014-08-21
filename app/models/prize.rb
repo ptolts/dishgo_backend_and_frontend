@@ -16,6 +16,7 @@ class Prize
   field :end_date, type: DateTime
   field :active, type: Boolean
   field :amount, type: Float
+  field :prize_type, type: String, default: "$"
   field :chance, type: Integer, default: 25
   field :winning_number, type: Integer
   field :lat, type: Float
