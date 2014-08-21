@@ -5,7 +5,6 @@
 */
 
 * {
-    /*color: #82898d;*/
     font-family:'Lato', sans-serif;
     font-size: 16px;
 }
@@ -57,7 +56,7 @@ h1 {
     color: #565a5c;
     font-weight: 600;
     text-transform: uppercase;
-    margin: 0;
+    margin: 0 0 10px 0;
     letter-spacing: normal;
 }
 
@@ -71,6 +70,8 @@ h1 {
     padding-top: 10px;
     font-weight: 600;
     color: #565a5c;
+    margin-bottom: 10px;
+    display: inline-block;
 }
 
 #account {
@@ -86,6 +87,10 @@ h1 {
     background-color: #f5f6f5;
     margin: 0 -15px;
     padding: 15px;
+}
+
+.grey_bg p {
+    color: #82898d;
 }
 
 .dishcoin_count {
@@ -152,6 +157,10 @@ h1 {
     -o-transform:       translateY(-50%);  
     transform:          translateY(-50%);
     text-align: center;
+}
+
+.prizes_control p {
+    color: #82898d;
 }
 
 .token {
@@ -242,6 +251,10 @@ h1 {
 }
 .answers ol li {
     margin-bottom: 10px;
+    color: #82898d;
+}
+.answers p {
+    color: #82898d;
 }
 .coupon_number {
     font-size: 22px;
