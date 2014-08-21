@@ -48,7 +48,7 @@
                             </div>
                             <div class="cnrflash">
                                 <div class="cnrflash-inner">
-                                <span class="cnrflash-label"><i class="fa fa-usd" style="font-size: 16px; color:#fff;" data-bind="text: amount"> </i></span>
+                                <span class="cnrflash-label"><span data-bind="visible: prize_type() == '$'">$</span><!-- ko text: amount --><!-- /ko --><span data-bind="visible: prize_type() == '%'">%</span></span>
                                 </div>
                             </div>                       
                         </li>
@@ -78,8 +78,8 @@
             </div>                
         </div>
         <div class="row">
-            <div class="col-xs-12">
-                <span class="value">Value: $<!-- ko text: amount --><!-- /ko --> off</spam>  
+            <div class="col-xs-12" style="color: white">
+                <span class="value">Value: <span data-bind="visible: prize_type() == '$'">$</span><!-- ko text: amount --><!-- /ko --><span data-bind="visible: prize_type() == '%'">%</span> off</span>  
             </div>
         </div>                          
 
