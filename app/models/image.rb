@@ -105,24 +105,38 @@ class Image
     end
   end
 
+  # def serializable_hash options
+  #   options ||= {}
+  #   if options[:ios]
+  #     return super({})
+  #   end
+  #   if self.img_file_size
+  #     # This is for legacy images which didn't have their URL's saved.
+  #     if self.img_url_medium.nil?
+  #       img_post_process
+  #     end   
+  #     return {_id: self._id, id: self._id, local_file: img_url_medium, medium: self.img_url_medium, small: self.img_url_small, rejected: self.rejected, original: self.img_url_original}
+  #   else
+  #     return {_id: self._id, id: self._id, local_file: self.local_file, medium: self.img_url_medium, small: self.img_url_small, rejected: self.rejected, original: self.img_url_original}
+  #   end
+  # end
+
   def serializable_hash options
-    options ||= {}
-    if options[:ios]
-      return super({})
+    start = super {}
+    start[:id] = self._id
+    start[:_id] = self._id
+    start[:local_file] = self.img_url_original
+    start[:medium] = self.img_url_medium
+    start[:small] = self.img_url_small
+    start[:original] = self.original
+    if options[:dish]
+      start[:dish] = self.dish.name
     end
-    if self.img_file_size
-      # This is for legacy images which didn't have their URL's saved.
-      if self.img_url_medium.nil?
-        img_post_process
-      end   
-      return {_id: self._id, id: self._id, local_file: img_url_medium, medium: self.img_url_medium, small: self.img_url_small, rejected: self.rejected, original: self.img_url_original}
-    else
-      return {_id: self._id, id: self._id, local_file: self.local_file, medium: self.img_url_medium, small: self.img_url_small, rejected: self.rejected, original: self.img_url_original}
-    end
-  end
+    start
+  end  
 
   def img_post_process
-    Rails.logger.warn "img_post_process"
+    # Rails.logger.warn "img_post_process"
     # if self.img_post_process_complete
       self.img_url_medium = img.url(:medium) 
       self.img_url_small = img.url(:small) 

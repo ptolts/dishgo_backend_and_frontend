@@ -78,7 +78,13 @@ Foodcloud::Application.routes.draw do
       post '/fetch_user', to: "network#fetch_user"
       get '/fetch_user', to: "network#fetch_user"
     end
-  end   
+  end 
+
+  resources :image_screening do
+    collection do
+      get 'index', to: "image_screening#index"
+    end
+  end     
 
   resources :analytics do
     collection do

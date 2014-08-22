@@ -44,6 +44,7 @@
     self.destroyed = ko.observable(false);
     self.coordinates = [];
     self.failed = ko.observable(false);
+    self.dish_name = data.dish_name || "Not Found";
 
     if(data){
         if(data.local_file || data.url){

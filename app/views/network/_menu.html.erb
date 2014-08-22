@@ -8,23 +8,34 @@
                             <h2 data-bind="lText: description, lVisible: description"></h2>
                         </div>
                         <div class="row" data-bind="foreach: dishes, networkMaxHeight: 'dish_min_height'">
-                            <!-- dish on screen -->
+
+                            <!-- BACKGROUND WHICH BECOMES VISIBLE WHEN POPUP IS VISIBLE -->
                             <div id="bg" data-bind="visible: fullWidth, click: function(){ fullWidth(false) }"></div>                                
+
+                            
                             <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 dish_min_height dish_cursor dish" data-bind="fadeVisible: !$root.showDetails(), css: { fullWidth: fullWidth, 'col-md-offset-3':fullWidth, 'col-lg-offset-3':fullWidth }, fullWidthToTop: fullWidth">
                                 
+                                <!-- THIS IS THE SHOW DETAILS/HIDE DETAILS -->
                                 <div class="expand" data-bind="click: function(){ fullWidth(!fullWidth()); }"><!-- ko if: !fullWidth() -->Show Details <i class="fa fa-expand"></i><!-- /ko --><!-- ko if: fullWidth -->Hide Details <i class="fa fa-compress"></i><!-- /ko --></div>
+                                <!-- ^^^^^^^^^^^^^ -->
 
+
+                                <!-- THIS IS THE IMAGE AND STAR RATING FOR THE DISH WHEN IT IS PART OF THE MENU -->
                                 <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 dish_picture"  data-bind="visible: large_title_image, visible: !fullWidth()">
                                     <img class="img-responsive" data-bind="menuVisibleImage: lazyLoadMediumImage">
                                     <div class="menu_dish_rating" data-bind="starRating: rating"></div>
                                 </div>
+                                <!-- ^^^^^^^^^^^^^ -->
 
                                 <!-- THIS IS THE IMAGE AND STAR RATING FOR THE POPUP -->
                                 <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 dish_picture"  data-bind="visible: large_title_image, visible: fullWidth">
                                     <img class="img-responsive" data-bind="menuVisibleImage: lazyLoadMediumImage">
                                     <div class="menu_dish_rating" data-bind="writableStarRating: rating"></div>
-                                </div>                                
+                                </div> 
+                                <!-- ^^^^^^^^^^^^^ -->
 
+
+                                <!-- THIS IS THE DISH DESCRIPTION AND NAME ETC WHEN IT IS PART OF THE MENU -->
                                 <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 dish_info" data-bind="css: { dish_full : !large_title_image() }, visible: !fullWidth()">
                                     <div class="dish_title">
                                         <h2 data-bind="lText: name"></h2>
@@ -48,6 +59,9 @@
                                         </script>                                                           
                                     </div>
                                 </div>
+                                <!-- ^^^^^^^^^^^^^ -->
+
+                                <!-- THIS IS THE DISH DESCRIPTION AND BUTTONS NAME ETC FOR WHEN ITS POPPED UP -->
                                 <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 dish_info" data-bind="css: { dish_full : !large_title_image() }, visible: fullWidth">
 
                                     <div class="row">
@@ -97,6 +111,7 @@
                                     <!-- /ko -->
                                 </div>                                
                             </div>
+                            <!-- ^^^^^^^^^^^^^^^^ -->                            
 
                         </div>
                     </div>
