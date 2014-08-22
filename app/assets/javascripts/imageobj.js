@@ -28,10 +28,11 @@
 }
 
  function ImageObj(data) {
+    data = data || {};
     var self = this;
     self.progressValue = ko.observable(1);
     self.filename = ko.observable("");
-    self.id = ko.observable("");
+    self.id = ko.observable(data.id || "");
     self.url = ko.observable("");
     self.original = ko.observable("");
     self.medium = ko.observable("");

@@ -32,7 +32,7 @@ Foodcloud::Application.routes.draw do
      get '500', :to => 'application#server_error'
   end  
 
-  root :to => 'administration#index'
+  root :to => 'network#index'
 
   resources :token_authentications, :only => [:create, :destroy]
 
@@ -82,7 +82,10 @@ Foodcloud::Application.routes.draw do
 
   resources :image_screening do
     collection do
-      get 'index', to: "image_screening#index"
+      get '/', to: "image_screening#index"
+      post '/load_more', to: "image_screening#load_more"
+      post '/accept', to: "image_screening#accept"
+      post '/reject', to: "image_screening#reject"
     end
   end     
 

@@ -40,7 +40,8 @@ class Api::V1::RestaurantAdminController < ApplicationController
     dish = Dish.find(params[:dish_id])
     dish.image << img
     dish.draft_image << img
-    dish.save 
+    dish.save
+    img.dish_id = dish.id
     img.save
 
     user = current_user

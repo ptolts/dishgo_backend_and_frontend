@@ -17,6 +17,7 @@ class Image
   field :position, type: Integer
   field :rejected, type: Boolean, default: false
   field :unverified, type: Boolean, default: true
+  field :garbage, type: Boolean, default: false
 
   field :img_url_medium, type: String
   field :img_url_original, type: String
@@ -122,15 +123,21 @@ class Image
   # end
 
   def serializable_hash options
+    options ||= {}    
     start = super {}
     start[:id] = self._id
     start[:_id] = self._id
     start[:local_file] = self.img_url_original
     start[:medium] = self.img_url_medium
     start[:small] = self.img_url_small
-    start[:original] = self.original
+    start[:original] = self.img_url_original
     if options[:dish]
-      start[:dish] = self.dish.name
+      if self.dish_id
+        start[:dish_name] = (self.dish.name_translations['en'] || self.dish.name_translations['fr'])
+      else
+        n = Dish.find(dish_ids:self.id).first
+        start[:dish_name] = (n.name_translations['en'] || n.name_translations['fr']) if n
+      end
     end
     start
   end  

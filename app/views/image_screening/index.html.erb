@@ -1,0 +1,107 @@
+<style>
+  .topm {
+    margin-top: 25px;
+  }
+
+  .thumbnail {
+    width: 100%;
+  }
+
+  .thumbnail img {
+    max-height: 250px;
+    overflow: hidden;
+    min-height: 250px;  
+  }
+</style>
+
+<div class="container topm">
+  <div class="row" data-bind="foreach: image_list">
+    <div class="col-md-4">
+      <div class="thumbnail">
+        <img data-src="holder.js/300x300" alt="..." data-bind="attr:{src:medium}">
+        <div class="caption text-center">
+          <h3 data-bind="text: dish_name"></h3>
+          <p><a href="#" class="btn btn-danger" role="button" data-bind="click: function(){ $root.reject($data) }">Reject</a> <a href="#" class="btn btn-info" role="button" data-bind="click: function(){ $root.accept($data) }">Accept</a></p>
+        </div>
+      </div>      
+    </div>
+  </div>
+</div>
+
+<script type='text/javascript'>//<![CDATA[ 
+
+    function viewModel() {
+        var self = this;
+        self.images = ko.observableArray([]);
+        self.no_more_images_available = false;
+
+        self.image_list = ko.computed({
+          read: function(){
+            var new_array = self.images();
+            if(new_array.length < 10 && !self.no_more_images_available){
+              self.load();
+            }
+            return new_array.slice(0,9);
+          },
+          deferEvaluation: true,
+        }).extend({ notify: 'always', rateLimit: 1000 });
+
+        self.image_id_list = ko.computed(function(){
+          return _.map(self.images(),function(img){return img.id()});
+        });
+
+        self.load = function(){
+            $.ajax({
+              type: "POST",
+              url: "/app/image_screening/load_more",
+              data: {
+              },
+              success: function(data, textStatus, jqXHR){
+                if(data.length < 15){
+                  self.no_more_images_available = true;
+                }
+                _.each(data,function(image){
+                  if(!!self.image_id_list().indexOf(image.id)){
+                    self.images.push(new ImageObj(image));
+                  }
+                });
+              },
+              dataType: "json"
+            });
+        }
+
+        self.accept = function(image){
+            $.ajax({
+              type: "POST",
+              url: "/app/image_screening/accept",
+              data: {
+                image_id: image.id(),
+              },
+              success: function(data, textStatus, jqXHR){
+                self.images.remove(image);
+              },
+              dataType: "json"
+            });
+        }
+
+        self.reject = function(image){
+            $.ajax({
+              type: "POST",
+              url: "/app/image_screening/reject",
+              data: {
+                image_id: image.id(),
+              },
+              success: function(data, textStatus, jqXHR){
+                self.images.remove(image);
+              },
+              dataType: "json"
+            });
+        }                 
+
+    };
+
+    ko.applyBindings(new viewModel());
+
+
+//]]>  
+</script>
