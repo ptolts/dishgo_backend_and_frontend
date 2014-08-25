@@ -92,9 +92,6 @@ p, address {
     margin: auto;
     border-radius: 4px;
 }
-.page-container {
-    padding-top: 80px;
-}
 .network_header {
     background-color: #fff;
     color: #cf2f28;
