@@ -151,6 +151,18 @@ ko.bindingHandlers.networkMaxHeight = {
     }    
 }
 
+ko.bindingHandlers.backgroundImage = {
+    update: function (element, valueAccessor, allBindingsAccessor, viewModel, bindingContext) {
+        var src = "";
+        if(viewModel.images().length > 0){
+            src = viewModel.images()[0].medium();
+            $(element).css("background-image","url('" + src + "')");
+        } else {
+            $(element).hide();
+        }
+    }    
+}
+
 ko.bindingHandlers.currentMenu = {
     init: function(element, valueAccessor, allBindings, viewModel, bindingContext) {
         bindingContext['$menu'] = ko.observable(bindingContext['$root'].selected_menu() == bindingContext['$data']);

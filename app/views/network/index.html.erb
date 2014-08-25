@@ -110,7 +110,7 @@
 					<div class="restaurant_pics"> <!-- dish pictures from resto -->
 						<div class="row" data-bind="foreach: images">
 							<div class="col-xs-3">
-								<div class="center_cropped" data-bind="style: { backgroundImage: 'url(' + $data.small() + ')' }"></div>​								
+								<div class="image-cropped" data-bind="style: { backgroundImage: 'url(' + $data.small() + ')' }"></div>						
 							</div>
 						</div>
 					</div>
@@ -129,7 +129,7 @@
 				<div class="col-xs-12 col-sm-6 col-md-4" style="padding:0;">
 					<div class="top_dish_container">
 						<a href="/app/network/restaurant" class="full_dish_link"></a>
-						<div class="dish-picture center_cropped_full" style="background-image: url(<%= dish.img_src %>)">							
+						<div class="dish-picture imageCroppedFull" style="background-image: url(<%= dish.img_src %>)">							
 							<span class="dish_rating">
 								<%= raw(stars dish.rating) %>
 							</span>

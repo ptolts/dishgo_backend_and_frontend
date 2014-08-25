@@ -24,18 +24,28 @@
 
 
                                 <!-- THIS IS THE IMAGE AND STAR RATING FOR THE DISH WHEN IT IS PART OF THE MENU -->
-                                <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 dish_picture" style="padding: 0;" data-bind="visible: large_title_image, visible: !fullWidth()">
-                                   <!--  <img class="img-responsive" data-bind="menuVisibleImage: lazyLoadMediumImage"> -->
-                                   <img src="http://placehold.it/600x600" class="center_cropped_home">
+                                    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 dish_picture" style="padding: 0;" data-bind="visible: large_title_image() && !fullWidth()">
+                                        <div class="image-cropped-home" data-bind="backgroundImage"></div>
                                         <div class="menu_dish_rating" data-bind="starRating: rating"></div>
-                                </div>
+                                    </div>
+
+                                    <!-- This rating is visible if there is no picture and the dish isn't in modal form -->
+                                    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 solo_rating" style="padding: 0;" data-bind="visible: !large_title_image() && !fullWidth()">
+                                        <div class="menu_dish_rating" data-bind="starRating: rating"></div>
+                                    </div>                                
                                 <!-- ^^^^^^^^^^^^^ -->
 
                                 <!-- THIS IS THE IMAGE AND STAR RATING FOR THE POPUP -->
-                                <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 dish_picture"  data-bind="visible: large_title_image, visible: fullWidth">
-                                    <img class="img-responsive" data-bind="menuVisibleImage: lazyLoadMediumImage">
-                                    <div class="pop_up_menu_dish_rating" data-bind="writableStarRating: rating"></div>
-                                </div>
+                                    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 dish_picture" data-bind="visible: large_title_image() && fullWidth">
+                                        <div class="imageCroppedFull" data-bind="backgroundImage">&nbsp;</div>
+                                        <div class="pop_up_menu_dish_rating" data-bind="writableStarRating: rating"></div>
+                                    </div>
+                                    
+                                    <!-- This rating is visible if there is no picture and the dish is in modal form -->
+                                    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 dish_picture"  data-bind="visible: !large_title_image() && fullWidth">
+                                        <i class="fa fa-camera"></i>
+                                        <div class="pop_up_menu_dish_rating" data-bind="writableStarRating: rating"></div>
+                                    </div>                                
                                 <!-- ^^^^^^^^^^^^^ -->
 
 
