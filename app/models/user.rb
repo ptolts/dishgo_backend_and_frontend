@@ -116,10 +116,12 @@ class User
     end
   end  
 
-  def serializable_hash options = {}
+  def serializable_hash(options = {})
     hash = super options
-    # hash.delete("authentication_token")
     hash.delete("setup_link")
+    if options[:restaurant]
+      hash[:restaurant_id] = self.owns_restaurants.id if self.owns_restaurants
+    end    
     hash
   end  
 

@@ -4,6 +4,7 @@
             var self = this;
             self.name = "facebook";
             self.link = "/app/users/auth/facebook"
+            self.online = ko.observable(false);
 
             self.login = function(){
                 var popupWidth=500;
@@ -29,7 +30,7 @@
             var self = this;
             self.name = "twitter";
             self.link = "/app/users/auth/twitter";
-
+            self.online = ko.observable(false);
 
             self.login = function(){
                 var popupWidth=500;
@@ -63,13 +64,14 @@
 
             self.twitter = ko.observable(new Twitter());
             self.facebook = ko.observable(new Facebook());
+            self.restaurant_id = ko.observable(data.restaurant_id || null);
 
             if(data.facebook_user_id){
-
+                self.facebook().online(true);
             }
 
             if(data.twitter_user_id){
-
+                self.twitter().online(true);
             }
 
             self.created = ko.computed({

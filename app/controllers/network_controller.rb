@@ -32,7 +32,7 @@ class NetworkController < ApplicationController
       @menu_data = menu_d
     end
 
-    @resto_data = restaurant.as_document
+    @resto_data = restaurant.as_document({pages:true})
 
     @resto_data = @resto_data.as_json
 
@@ -74,7 +74,17 @@ class NetworkController < ApplicationController
   end
 
   def fetch_user
-    render json: (current_user || {}).as_json
+    # Sign in user if creds are supplied.
+    if email = params[:email] and password = params[:password] and !email.blank?
+      user = User.where(email:email).first
+      if user.valid_password?(password)
+        sign_in user
+      else
+        render status: 401, json: {}
+        return
+      end
+    end
+    render json: current_user.serializable_hash({:restaurant => true}) || {}.as_json
   end
 
 end

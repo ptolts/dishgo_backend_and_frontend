@@ -21,7 +21,7 @@
 	</head>
     <body>
     	<script>
-			var user_data = <%= current_user ? raw(current_user.to_json) : {}%>;
+			var user_data = <%= current_user ? raw(current_user.serializable_hash({restaurant:true}).to_json) : {}%>;
     	</script>
 	    <div data-bind="visible: network_sign_in" style="display:none">
 	        <div id="sign_in_bg" data-bind="click: function(){ network_sign_in(false) }"></div>
@@ -30,26 +30,46 @@
 	         	<div id="sign_in">
 		            <div class="row">
 		                <div class="col-xs-12 text-center">
+		                	<h3 style="margin-top: 0px">User Sign In</h3>
 		                	<!-- ko foreach: social_networks -->
-		                		<span class="btn btn-none" data-bind="click: function(){ login(); }"><i class="fa" data-bind="css:'fa-'+name"></i></span>
+		                		<span class="btn btn-none social_network_button" data-bind="click: function(){ login(); }, css: {online:online}"><i class="fa" data-bind="css:'fa-'+name"></i></span>
 		                	<!-- /ko -->
 		                </div>                
 		            </div>
-		            <div class="row">
+
+		            <!-- if the user is not logged in, show them this -->
+		            <div class="row" data-bind="visible: !loggedInWithRestaurant()">
 		                <div class="col-xs-12 text-center">
 		                	<h3>Restaurant Sign In</h3>
 							<div class="row">
 								<div class="col-sm-10 col-sm-offset-1">
-									<input type="email" class="form-control" id="user_email" name="user[email]" placeholder="Email">
+									<input type="email" class="form-control" data-bind="value: email" placeholder="Email">
 								</div>
 							</div>
 							<div class="row" style="margin-top:5px;">
 								<div class="col-sm-10 col-sm-offset-1">
-									<input type="password" class="form-control" id="user_password" name="user[password]" placeholder="Password">
+									<input type="password" class="form-control" data-bind="value: password" placeholder="Password">
 								</div>
 							</div>
+							<div class="row" style="margin-top:5px;">
+								<div class="col-sm-10 col-sm-offset-1">
+									<button class="btn btn-none" style="width: 100%" data-bind="click: signInWithUserPass">Submit<i class="fa fa-spinner fa-spin pull-right" data-bind="visible: signInSpin"></i></button>
+								</div>
+							</div>							
 		                </div>                
-		            </div>	                        
+		            </div>
+
+		            <!-- if the user is logged in, show them this -->
+		            <div class="row" data-bind="visible: loggedInWithRestaurant">
+		                <div class="col-xs-12 text-center">
+		                	<h3>Restaurant Dashboard</h3>
+							<div class="row" style="margin-top:5px;">
+								<div class="col-sm-10 col-sm-offset-1">
+									<a class="btn btn-none" style="width: 100%" href="/app/administration">Dashboard</a>
+								</div>
+							</div>							
+		                </div>                
+		            </div>		                                    
 	          	</div>
 	        </div>
 	    </div>       	

@@ -197,6 +197,8 @@ function NetworkModel() {
     self.restaurants = ko.observableArray([]);
     self.restaurant_search_term = ko.observable("");
     self.isMobile = isMobile.any();
+    self.email = ko.observable();
+    self.password = ko.observable();
 
     if("resto_data" in window){
         self.restaurant = ko.observable(new Restaurant(resto_data));
@@ -291,11 +293,43 @@ function NetworkModel() {
         }
     });
 
+    self.signInSpin = ko.observable(false);
+    self.signInWithUserPass = function(){
+        self.signInSpin(true);
+        $.ajax({
+            type: "POST",
+            url: "/app/network/fetch_user",
+            data: {
+                email: self.email(),
+                password: self.password(),
+            },
+            success: function(data, textStatus, jqXHR){
+                updateUser(true);
+                self.password("");
+                self.email("");
+                self.signInSpin(false);
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+                alert("Bad Email or Password.");
+                self.password("");
+                self.email("");
+                self.signInSpin(false);
+            },
+            dataType: "json"
+        });
+    };
+
     self.loggedIn = ko.computed({
         read: function(){
             return !!self.user().id();
         }
     });
+
+    self.loggedInWithRestaurant = ko.computed({
+        read: function(){
+            return self.loggedIn() && !!self.user().restaurant_id();
+        }
+    });    
 
     self.ajax_search = function(){
         $.ajax({

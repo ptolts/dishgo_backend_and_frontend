@@ -6,8 +6,8 @@
 *= require_self
 */
 
-/* main page star ratings */
 
+/* main page star ratings */
 .menu_dish_rating i {
     color: #cf2f28;
     font-size: 20px;
@@ -780,4 +780,22 @@ footer a:hover, footer a:focus {
 #sign_in {
     background-color: rgba(255, 255, 255, 0.8);
     padding: 25px;
+}
+
+.social_network_button {
+    width: 75px;
+    margin-left: 10px;
+    height: 40px;
+    line-height: 24px;
+    font-size: 28px;
+    color: #1a1a1a;
+}
+
+.social_network_button.online {
+    color: #cf2f28;
+}
+
+.social_network_button:hover, .social_network_button:focus {
+    opacity: .80;
+    color: #cf2f28;
 }
