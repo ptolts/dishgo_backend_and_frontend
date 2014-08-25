@@ -416,7 +416,21 @@ function Dish(data, topmodel) {
         };   
     }
 
-    // self.dirty = ko.observable(false).extend({ notify: 'always', rateLimit: 5000 });
+    self.rate = function(){
+        $.ajax({
+            type: "POST",
+            url: "/app/api/v1/dish/set_rating",
+            data: {
+                dish_id: self.id(),
+                rating: self.rating(),
+            },
+            success: function(data, textStatus, jqXHR){                       
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) {                                          
+            },
+            dataType: "json"
+        });
+    }
 
     self.update_when_dirty = function(){
         if(self.id.peek() && editing_mode){

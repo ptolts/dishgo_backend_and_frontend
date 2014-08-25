@@ -1,5 +1,7 @@
 Foodcloud::Application.routes.draw do
 
+  root :to => 'network#index'
+
   devise_for :users, :controllers => { :registrations => "users/registration", :sessions => "users/sessions", omniauth_callbacks: 'omniauth_callbacks' }
 
   devise_scope :user do
@@ -31,8 +33,6 @@ Foodcloud::Application.routes.draw do
      get '422', :to => 'application#server_error'
      get '500', :to => 'application#server_error'
   end  
-
-  root :to => 'network#index'
 
   resources :token_authentications, :only => [:create, :destroy]
 
@@ -86,6 +86,7 @@ Foodcloud::Application.routes.draw do
       post '/load_more', to: "image_screening#load_more"
       post '/accept', to: "image_screening#accept"
       post '/reject', to: "image_screening#reject"
+      post '/update_restaurants', to: "image_screening#update_restaurants"
     end
   end     
 

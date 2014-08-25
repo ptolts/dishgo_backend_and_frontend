@@ -741,11 +741,21 @@ span.play-icon{position: absolute; left: 31%; top: 32%; display: none;}
   background: rgba(0,0,0,0.8);
 }
 
+#sign_in_bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 3000;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.8);
+}
+
 #sign_in_modal {
   position: fixed;
   left: 50%;
   top: 50%;
-  z-index: 1051;
+  z-index: 3001;
   -webkit-transform:  translate(-50%, -50%);
   -moz-transform:   translate(-50%, -50%);
   -ms-transform:    translate(-50%, -50%);

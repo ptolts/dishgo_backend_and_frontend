@@ -51,6 +51,7 @@ class ApplicationController < ActionController::Base
   end
 
   def validate_auth_token
+    return if current_user
     if params[:dishgo_token].blank? 
       render :status => 401, :json => {error: "Not Logged In"}
       return

@@ -47,7 +47,8 @@ class NetworkController < ApplicationController
       coords = [result.coordinates[1],result.coordinates[0]]
       restaurants = restaurants.where(:locs => { "$near" => { "$geometry" => { "type" => "Point", :coordinates => coords }, "$maxDistance" => 100000}})
     end
-    regex = /#{params[:restaurant_search_term]}/i
+    search_term = params[:restaurant_search_term].gsub(/[^[:alnum:]]/,'.').gsub(/s\b/,'.?s')
+    regex = /#{search_term}/i
     restaurants = restaurants.where(name:regex)
     count = restaurants.count
     restaurants = restaurants.collect{|e| e.as_document({pages:true, include_images:4})}.as_json

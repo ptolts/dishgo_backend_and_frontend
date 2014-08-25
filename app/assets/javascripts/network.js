@@ -90,7 +90,7 @@ ko.bindingHandlers.fullWidthToTop = {
 };
 
 ko.bindingHandlers.writableStarRating = {
-    init: function(element, valueAccessor) {
+    init: function(element, valueAccessor, allBindingsAccessor, viewModel, bindingContext) {
         var value = valueAccessor();
         $(element).addClass("starRating");
         for (var i = 0; i < value(); i++)
@@ -110,7 +110,10 @@ ko.bindingHandlers.writableStarRating = {
                     $(this).nextAll().removeClass("hoverLeftOver");
                 }                
             ).click(function() { 
-                value(index+1);               // Write the new rating to it
+                if(bindingContext["$loggedin"]()){
+                    value(index+1);
+                    viewModel.rate();
+                }
             });
         });            
     },
@@ -155,6 +158,19 @@ ko.bindingHandlers.currentMenu = {
     update: function(element, valueAccessor, allBindings, viewModel, bindingContext) {
         bindingContext['$menu'](bindingContext['$root'].selected_menu() == bindingContext['$data']);
     }
+};
+
+ko.bindingHandlers.loggedInChecker = {
+    init: function(element, valueAccessor, allBindings, viewModel, bindingContext) {
+        bindingContext['$loggedin'] = function(){ 
+            if(valueAccessor()()){
+                return true;
+            } else {
+                viewmodel.network_sign_in(true);
+                return false;
+            }
+        }
+    },
 };
 
 function NetworkModel() {
@@ -260,6 +276,12 @@ function NetworkModel() {
             } else {
                 return "Log In";
             }
+        }
+    });
+
+    self.loggedIn = ko.computed({
+        read: function(){
+            return !!self.user().id();
         }
     });
 

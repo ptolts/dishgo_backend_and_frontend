@@ -59,6 +59,7 @@
             self.setup_link = ko.observable(window.location.protocol + "//" + window.location.host + "/app/profile/set_password/" + data.setup_link);
             self.sign_up_link = ko.observable(data.sign_up_link ? window.location.protocol + "//" + window.location.host + "/app/profile/set_password/" + data.sign_up_link : null);
             self.dishcoins = ko.observable(data.dishcoins ? data.dishcoins : 0);
+            self.name = ko.observable(data.name ? data.name : "");
 
             self.twitter = ko.observable(new Twitter());
             self.facebook = ko.observable(new Facebook());

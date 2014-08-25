@@ -33,6 +33,7 @@ class User
   field :cards,               :type => Array, :default => [] 
   field :plan,                :type => Hash, :default => {}
   field :cash_money,          :type => Boolean, :default => false   
+  field :name,                type: String
 
   ## Recoverable
   field :reset_password_token,   :type => String
@@ -162,7 +163,8 @@ class User
       end        
       user.twitter_user_id = uid
       user.twitter_auth_secret = auth.credentials.secret
-      user.twitter_auth_token = auth.credentials.token        
+      user.twitter_auth_token = auth.credentials.token
+      user.name ||= auth.info.nickname        
     end
 
     if auth.provider == 'facebook'
@@ -171,7 +173,9 @@ class User
         user = User.new
       end
       user.facebook_user_id = uid
-      user.facebook_auth_token = auth.credentials.token        
+      user.facebook_auth_token = auth.credentials.token       
+      user.name ||= auth.info.name
+      user.email ||= auth.info.email
     end
 
     if !user.persisted?
@@ -203,7 +207,7 @@ class User
   end  
 
   def email_required?
-    if self.facebook_auth_token.blank?
+    if self.facebook_auth_token.blank? and self.twitter_auth_token.blank?
       return true
     else
       return false
@@ -211,7 +215,7 @@ class User
   end
 
   def password_required?
-    if self.facebook_auth_token.blank?
+    if self.facebook_auth_token.blank? and self.twitter_auth_token.blank?
       return !persisted? || !password.nil? || !password_confirmation.nil?
     else
       return false

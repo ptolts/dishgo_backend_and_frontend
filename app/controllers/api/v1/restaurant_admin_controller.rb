@@ -34,6 +34,7 @@ class Api::V1::RestaurantAdminController < ApplicationController
 
     img = Image.new
     img.restaurant = resto
+    img.api_upload = true
     img.user = current_user
     img.update_attributes({:img => file})
     img.manual_img_fingerprint = md5_sum

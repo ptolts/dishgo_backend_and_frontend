@@ -19,6 +19,9 @@
                                 <div class="expand" data-bind="click: function(){ fullWidth(!fullWidth()); }"><!-- ko if: !fullWidth() -->Show Details <i class="fa fa-expand"></i><!-- /ko --><!-- ko if: fullWidth -->Hide Details <i class="fa fa-compress"></i><!-- /ko --></div>
                                 <!-- ^^^^^^^^^^^^^ -->
 
+                                <!-- THIS LETS THE USER CLICK ANYWHERE, AND THEN DISAPPEARS ONCE ITS FULL WIDTH -->
+                                <div class="fullClick" data-bind="click: function(){ fullWidth(true); }, visible: !fullWidth()"></div>
+
 
                                 <!-- THIS IS THE IMAGE AND STAR RATING FOR THE DISH WHEN IT IS PART OF THE MENU -->
                                 <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 dish_picture"  data-bind="visible: large_title_image, visible: !fullWidth()">

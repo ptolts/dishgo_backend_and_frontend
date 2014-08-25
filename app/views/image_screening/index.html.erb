@@ -12,6 +12,11 @@
     overflow: hidden;
     min-height: 250px;  
   }
+  #update_restaurants {
+    position: fixed;
+    bottom:25px;
+    left:25px;
+  }
 </style>
 
 <div class="container topm">
@@ -20,13 +25,18 @@
       <div class="thumbnail">
         <img data-src="holder.js/300x300" alt="..." data-bind="attr:{src:medium}">
         <div class="caption text-center">
-          <h3 data-bind="text: dish_name"></h3>
+          <h5>Dish: <!-- ko text: dish_name --><!-- /ko --></h5>
+          <h5>Restaurant: <a target="_blank" data-bind="attr:{href:'/app/administration/edit_menu?restaurant_id='+restaurant_id}"><!-- ko text: restaurant_name --><!-- /ko --></a></h5>
+          <h5>User: <!-- ko text: user_name --><!-- /ko --></h5>
+          <h5>ID: <!-- ko text: id --><!-- /ko --></h5>
           <p><a href="#" class="btn btn-danger" role="button" data-bind="click: function(){ $root.reject($data) }">Reject</a> <a href="#" class="btn btn-info" role="button" data-bind="click: function(){ $root.accept($data) }">Accept</a></p>
         </div>
       </div>      
     </div>
   </div>
 </div>
+
+<button id="update_restaurants" data-bind="click: update_restaurants" class="btn btn-info">REBUILD ALL MENUS</button>
 
 <script type='text/javascript'>//<![CDATA[ 
 
@@ -37,14 +47,10 @@
 
         self.image_list = ko.computed({
           read: function(){
-            var new_array = self.images();
-            if(new_array.length < 10 && !self.no_more_images_available){
-              self.load();
-            }
-            return new_array.slice(0,9);
+            return self.images().slice(0,9);
           },
           deferEvaluation: true,
-        }).extend({ notify: 'always', rateLimit: 1000 });
+        })
 
         self.image_id_list = ko.computed(function(){
           return _.map(self.images(),function(img){return img.id()});
@@ -69,6 +75,14 @@
               dataType: "json"
             });
         }
+
+        self.load_more_autonomously = ko.computed({
+          read: function(){
+            if(self.images().length < 10 && !self.no_more_images_available){
+              self.load();
+            }
+          }
+        }).extend({ notify: 'always', rateLimit: 1000 });        
 
         self.accept = function(image){
             $.ajax({
@@ -96,7 +110,18 @@
               },
               dataType: "json"
             });
-        }                 
+        }  
+
+        self.update_restaurants = function(image){
+            $.ajax({
+              type: "POST",
+              url: "/app/image_screening/update_restaurants",
+              success: function(data, textStatus, jqXHR){
+                alert("Rebuilding is done in the background, so be patient.");
+              },
+              dataType: "json"
+            });
+        }                        
 
     };
 

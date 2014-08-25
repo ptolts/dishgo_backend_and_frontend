@@ -17,7 +17,7 @@ class Image
   field :position, type: Integer
   field :rejected, type: Boolean, default: false
   field :unverified, type: Boolean, default: true
-  field :garbage, type: Boolean, default: false
+  field :api_upload, type: Boolean, default: false
 
   field :img_url_medium, type: String
   field :img_url_original, type: String
@@ -40,7 +40,9 @@ class Image
   index({ _id:1 }, { unique: true, name:"id_index" })
 
   scope :rejected, -> { ne(rejected: true) }
-  default_scope -> { ne(unverified: true) } 
+  scope :unverified, -> { where(unverified: true) }
+  scope :with_user, -> { ne(user_id: nil) }
+  default_scope -> { ne(rejected: true) } 
 
   has_mongoid_attached_file :img, {
       :path           => ':hash_:style.png',
@@ -106,22 +108,6 @@ class Image
     end
   end
 
-  # def serializable_hash options
-  #   options ||= {}
-  #   if options[:ios]
-  #     return super({})
-  #   end
-  #   if self.img_file_size
-  #     # This is for legacy images which didn't have their URL's saved.
-  #     if self.img_url_medium.nil?
-  #       img_post_process
-  #     end   
-  #     return {_id: self._id, id: self._id, local_file: img_url_medium, medium: self.img_url_medium, small: self.img_url_small, rejected: self.rejected, original: self.img_url_original}
-  #   else
-  #     return {_id: self._id, id: self._id, local_file: self.local_file, medium: self.img_url_medium, small: self.img_url_small, rejected: self.rejected, original: self.img_url_original}
-  #   end
-  # end
-
   def serializable_hash options
     options ||= {}    
     start = super {}
@@ -131,11 +117,20 @@ class Image
     start[:medium] = self.img_url_medium
     start[:small] = self.img_url_small
     start[:original] = self.img_url_original
+    if options[:user]
+      start[:user_name] = self.user.email || self.user.facebook_user_id if self.user
+    end    
+    if options[:restaurant]
+      start[:restaurant_name] = self.restaurant.name if self.restaurant
+    end
     if options[:dish]
       if self.dish_id
         start[:dish_name] = (self.dish.name_translations['en'] || self.dish.name_translations['fr'])
       else
-        n = Dish.find(dish_ids:self.id).first
+        begin
+          n = Dish.find_by(image_ids:self.id)
+        rescue =>msg
+        end
         start[:dish_name] = (n.name_translations['en'] || n.name_translations['fr']) if n
       end
     end

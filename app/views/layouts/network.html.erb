@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
-		<% if current_page?(controller: "network", action: "index") %>
+		<% if controller_name == "network" && action_name == "index" %>
 			<%= render 'index_meta' %>
 		<% else %>
 			<%= render 'restaurant_meta' %>
@@ -23,7 +23,7 @@
 			var user_data = <%= current_user ? raw(current_user.to_json) : {}%>;
     	</script>
 	    <div data-bind="visible: network_sign_in" style="display:none">
-	        <div id="bg" data-bind="click: function(){ network_sign_in(false) }"></div>
+	        <div id="sign_in_bg" data-bind="click: function(){ network_sign_in(false) }"></div>
 	        <div id="sign_in_modal">
 	        	<a class="close" data-bind="click: function(){ network_sign_in(false) }">×</a>	        	
 	         	<div id="sign_in">
@@ -60,7 +60,7 @@
 				<div class="container" data-bind="if: isMobile">
 					<div id="logo">
 						<a href="/app/network">
-							<img src="https://58900edd332817a2d530-6caa6fe89e7dac3eaf12230f0985b957.ssl.cf5.rackcdn.com/DishGo_Logo_Network.png" class="img-responsive">
+							<img src="https://d5ca3b0520fac45026ad-6caa6fe89e7dac3eaf12230f0985b957.ssl.cf5.rackcdn.com/DishGo_Logo_Network_Beta.png" class="img-responsive">
 						</a>
 					</div>
 				
@@ -78,7 +78,7 @@
 				<div class="container">
 					<div id="logo" data-bind="visible: !top_search()">
 						<a href="/app/network">
-							<img src="https://58900edd332817a2d530-6caa6fe89e7dac3eaf12230f0985b957.ssl.cf5.rackcdn.com/DishGo_Logo_Network.png" class="img-responsive">
+							<img src="https://d5ca3b0520fac45026ad-6caa6fe89e7dac3eaf12230f0985b957.ssl.cf5.rackcdn.com/DishGo_Logo_Network_Beta.png" class="img-responsive">
 						</a>
 					</div>
 
@@ -106,7 +106,9 @@
 				<!-- /ko -->	
 			</div>    
 
-    		<%= yield %>
+			<div data-bind="loggedInChecker: loggedIn">
+    			<%= yield %>
+    		</div>
     		
 			<footer>
 			    <div class="container">

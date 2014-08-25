@@ -46,6 +46,9 @@
     self.coordinates = [];
     self.failed = ko.observable(false);
     self.dish_name = data.dish_name || "Not Found";
+    self.restaurant_name = data.restaurant_name || "Not Found";
+    self.restaurant_id = data.restaurant_id || "";
+    self.user_name = data.user_name || "Not Found";
 
     if(data){
         if(data.local_file || data.url){

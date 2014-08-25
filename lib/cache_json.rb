@@ -25,6 +25,16 @@ class CacheJson
     restaurant.cache_job
   end
 
+  def rebuild_restaurants_with_rejected_images
+    tracker = TrackRestaurantsToRebuild.first
+    tracker.restaurant_ids.each do |e|
+      restaurant = Restaurant.find(e)
+      restaurant.cache_job
+    end
+    tracker.restaurant_ids = []
+    tracker.save
+  end  
+
   def before
     @start = Time.now
   end

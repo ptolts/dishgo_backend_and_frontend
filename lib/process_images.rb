@@ -5,6 +5,9 @@ class ProcessImages
     image.background_processed = true
     image.save
     image.do_background_work
+    if image.restaurant
+      image.restaurant.cache_job
+    end
   end
 
   def before

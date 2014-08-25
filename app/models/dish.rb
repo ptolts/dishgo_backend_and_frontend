@@ -293,4 +293,12 @@ class Dish
     return dish_hash
   end        
 
+  def self.missing_connection
+    Dish.each do |e|
+      e.image.each do |i|
+        i.dish = e
+        i.save
+      end
+    end
+  end
 end
