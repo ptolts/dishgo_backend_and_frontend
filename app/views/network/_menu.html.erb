@@ -21,17 +21,18 @@
 
 
                                 <!-- THIS IS THE IMAGE AND STAR RATING FOR THE DISH WHEN IT IS PART OF THE MENU -->
-                                <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 dish_picture"  data-bind="visible: large_title_image, visible: !fullWidth()">
-                                    <img class="img-responsive" data-bind="menuVisibleImage: lazyLoadMediumImage">
-                                    <div class="menu_dish_rating" data-bind="starRating: rating"></div>
+                                <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 dish_picture" style="padding: 0;" data-bind="visible: large_title_image, visible: !fullWidth()">
+                                   <!--  <img class="img-responsive" data-bind="menuVisibleImage: lazyLoadMediumImage"> -->
+                                   <img src="http://placehold.it/600x600" class="center_cropped_home">
+                                        <div class="menu_dish_rating" data-bind="starRating: rating"></div>
                                 </div>
                                 <!-- ^^^^^^^^^^^^^ -->
 
                                 <!-- THIS IS THE IMAGE AND STAR RATING FOR THE POPUP -->
                                 <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 dish_picture"  data-bind="visible: large_title_image, visible: fullWidth">
                                     <img class="img-responsive" data-bind="menuVisibleImage: lazyLoadMediumImage">
-                                    <div class="menu_dish_rating" data-bind="writableStarRating: rating"></div>
-                                </div> 
+                                    <div class="pop_up_menu_dish_rating" data-bind="writableStarRating: rating"></div>
+                                </div>
                                 <!-- ^^^^^^^^^^^^^ -->
 
 
@@ -64,49 +65,55 @@
                                 <!-- THIS IS THE DISH DESCRIPTION AND BUTTONS NAME ETC FOR WHEN ITS POPPED UP -->
                                 <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 dish_info" data-bind="css: { dish_full : !large_title_image() }, visible: fullWidth">
 
-                                    <div class="row">
-                                        <div class="col-xs-6">
+                                    <div class="row" style="margin:0 -15px;">
+                                        <div class="col-xs-8">
                                             <div class="dish_title">
                                                 <h2 data-bind="lText: name"></h2>
                                             </div>
                                         </div>
-                                        <div class="col-xs-6">                                        
-                                            <div class="dish_price">
-                                                <span class="text">Price: </span>
+                                        <div class="col-xs-4">                                        
+                                            <div class="pop_up_dish_price ">
+                                                <span class="text"></span>
                                                 <span class="currency-symbol">$</span>
                                                 <span class="number" data-bind="text: computed_price"></span>
                                             </div>
                                         </div>
                                     </div>
-
-                                    <div class="dish-description">
-                                        <p data-bind="lText: description"></p>
+                                    <div class="row" style="margin:0 -15px;">
+                                        <div class="col-xs-12">
+                                            <div class="pop_up_dish-description">
+                                                <p data-bind="lText: description"></p>
+                                            </div>
+                                        </div>
                                     </div>
-
-                                    <div data-bind="visible: sizes, with: sizes_object" class="demo_options">
-                                        <h3>Select Size</h3>
-                                        <!-- ko forEachWithLength: individual_options -->
-                                            <label class="button lightText square grey float_option_size col-xs-12 col-sm-12 col-md-12 col-lg-5" data-bind="css: {'active': $parents[1].sizeSelectedOptionValue() === $data, 'dish_modal_full_width': dish_modal_full_width($length, $index)}"><input name="sizes_radio" type="radio" data-bind="checkedValue: $data, checked: $parents[1].sizeSelectedOptionValue" style="opacity: 0; width: 0px"/>
-                                                <span class="text"><!-- ko lText: name --><!-- /ko --></span>
-                                                <!-- ko if: price --><span class="number"><span class="currency-symbol">$</span><!-- ko text: price--><!-- /ko --></span><!-- /ko -->
-                                            </label>
-                                        <!-- /ko -->
+                                    <div class="row" style="margin:0 -15px;">
+                                        <div data-bind="visible: sizes, with: sizes_object" class="demo_options">
+                                            <h3 style="margin-bottom:10px;">Select Size</h3>
+                                            <!-- ko forEachWithLength: individual_options -->
+                                                <label class="button square float_option_size col-xs-12 col-sm-12 col-md-12 col-lg-5" data-bind="css: {'active': $parents[1].sizeSelectedOptionValue() === $data, 'dish_modal_full_width': dish_modal_full_width($length, $index)}"><input name="sizes_radio" type="radio" data-bind="checkedValue: $data, checked: $parents[1].sizeSelectedOptionValue" style="opacity: 0; width: 0px"/>
+                                                    <span class="text"><!-- ko lText: name --><!-- /ko --></span>
+                                                    <!-- ko if: price --><span class="number"><span class="currency-symbol">$</span><!-- ko text: price--><!-- /ko --></span><!-- /ko -->
+                                                </label>
+                                            <!-- /ko -->
+                                        </div>
                                     </div>
 
                                     <!-- ko foreach: options -->
-                                        <div class="demo_options">
-                                            <h3 data-bind="lText: name"></h3>
-                                            <!-- ko forEachWithLength: individual_options -->
-                                                <label class="button lightText square red float_option col-xs-12 col-sm-12 col-md-12 col-lg-5" data-bind="css: {'active': $parent.selectedOptionValue().indexOf($data) >= 0, 'dish_modal_full_width': dish_modal_full_width($length, $index)}">
-                                                    <input name="sizes_radio" type="checkbox" data-bind="checkedValue: $data, checked: $parent.selectedOptionValue, attr:{disabled: clickable}" style="opacity: 0; width: 0px">
-                                                    <span class="text"><!-- ko lText: name --><!-- /ko --></span>
-                                                    <!-- ko if: computed_price() != "" && $parent.extra_cost() --><span class="number"><span class="currency-symbol">$</span><!-- ko text: computed_price--><!-- /ko --></span><!-- /ko -->
-                                                    <!-- ko if: $data.icon -->
-                                                        <img class="col-xs-12 thumbnail" data-bind="attr: {src: icon().url()}"/>
-                                                    <!-- /ko -->
-                                                </label>
-                                            <!-- /ko -->
-                                            <h6 data-bind="visible: advanced"><!-- ko if: min_selections() > 0 -->* Select at least <!-- ko text: min_selections() --><!-- /ko --><!-- /ko --> <!-- ko if: max_selections() > 0 -->* Select at most <!-- ko text: max_selections() --><!-- /ko --><!-- /ko --></h6>
+                                        <div class="row" style="margin:0 -15px;">
+                                            <div class="demo_options">
+                                                <h3 data-bind="lText: name" style="margin-bottom:10px;"></h3>
+                                                <!-- ko forEachWithLength: individual_options -->
+                                                    <label class="button lightText square red float_option col-xs-12 col-sm-12 col-md-12 col-lg-5" data-bind="css: {'active': $parent.selectedOptionValue().indexOf($data) >= 0, 'dish_modal_full_width': dish_modal_full_width($length, $index)}">
+                                                        <input name="sizes_radio" type="checkbox" data-bind="checkedValue: $data, checked: $parent.selectedOptionValue, attr:{disabled: clickable}" style="opacity: 0; width: 0px">
+                                                        <span class="text"><!-- ko lText: name --><!-- /ko --></span>
+                                                        <!-- ko if: computed_price() != "" && $parent.extra_cost() --><span class="number"><span class="currency-symbol">$</span><!-- ko text: computed_price--><!-- /ko --></span><!-- /ko -->
+                                                        <!-- ko if: $data.icon -->
+                                                            <img class="col-xs-12 thumbnail" data-bind="attr: {src: icon().url()}"/>
+                                                        <!-- /ko -->
+                                                    </label>
+                                                <!-- /ko -->
+                                                <h6 data-bind="visible: advanced"><!-- ko if: min_selections() > 0 -->* Select at least <!-- ko text: min_selections() --><!-- /ko --><!-- /ko --> <!-- ko if: max_selections() > 0 -->* Select at most <!-- ko text: max_selections() --><!-- /ko --><!-- /ko --></h6>
+                                            </div>
                                         </div>
                                     <!-- /ko -->
                                 </div>                                
