@@ -8,15 +8,11 @@
 
 
 /* main page star ratings */
-.menu_dish_rating {
-  position: absolute;
-  left: 0;
-  bottom: 0;
-}
 
 .menu_dish_rating i {
   color: #cf2f28;
   font-size: 20px;
+  text-shadow: 1px 2px 3px #000;
 }
 
 .menu_dish_rating .hoverChosen {
@@ -60,9 +56,15 @@ input[type]:focus,
     box-shadow: 0 1px 1px rgba(207, 47, 40, 0.075) inset, 0 0 8px rgba(207, 47, 40, 0.6);
     outline: 0 none;
 }
-
 * {
   font-family: 'Oswald', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6, span {
+  font-family: 'Oswald', sans-serif;
+}
+p, address {
+  font-family: 'Lato', sans-serif;
 }
 
 .mobileTopSearchBar {
@@ -434,7 +436,7 @@ footer a:focus {
 	color: #1a1a1a;
 }
 
-/* Small Devices, Tablets */
+/* Weird Rules*/
     @media only screen and (min-width : 601px) {
         .counter-tab{
           margin-top: 13px;
@@ -457,11 +459,30 @@ footer a:focus {
           width: 400px;
           height: 400px;
         }
+        .menu_dish_rating {
+          position: absolute;
+          left: 5px;
+          bottom: 5px;
+      }
+    }
+
+/* Small Devices, Tablets */
+    @media only screen and (min-width : 768px) {
+      .center_cropped_home {
+        width: 100px;
+        height: 70px;
+      }
+      .menu_dish_rating {
+        font-size: 16px;
+      }
     }
 
 /* Medium Devices, Desktops */
     @media only screen and (min-width : 992px) {
-        
+        .center_cropped_home {
+            width: 140px;
+            height: 95px;
+        }
 
     }
 
@@ -471,7 +492,16 @@ footer a:focus {
          .network_header .form {
             width: 33%;
         }
-
+        .center_cropped_home {
+            width: 160px;
+            height: 110px;
+            float: left;
+        }
+        .menu_dish_rating {
+          left: 5px;
+          bottom: -10px;
+          font-size: 18px;
+      }
     }
 /* small rules */
     @media only screen and (max-width : 600px) {
@@ -554,7 +584,20 @@ footer a:focus {
       height: auto;
     }*/
     #sign_in_modal {
-      width: 285px;   }
+      width: 285px;
+    }
+    .center_cropped_home {
+      width: 100%;
+      height: 100%;
+      background-position: center center;
+      background-size: cover;
+      margin: auto;
+    }
+    .menu_dish_rating {
+      position: absolute;
+      left: 5px;
+      bottom: 5px;
+    }
   }
 
 /*.restaurant-title{color:#231f20; font-size:20px; font-weight:700;}
@@ -648,8 +691,17 @@ span.play-icon{position: absolute; left: 31%; top: 32%; display: none;}
 
 .expand {
   position: absolute;
-  bottom: 10px;
+  bottom: 20px;
+  left: 30px;
+  color: #cf2f28;
+  z-index: 1;
+}
+.fullWidth .expand {
   left: 25px;
+  bottom: 10px;
+}
+.expand:hover {
+  opacity: .8
 }
 
 /* modal replacement */
