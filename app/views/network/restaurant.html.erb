@@ -10,16 +10,11 @@
                 <div class="col-xs-12">
                     <div class="restaurant_logo_wrap">
                         <div class="restaurant_logo">
-                            <div class="restaurant-data pull-left">
-                                <div class="restaurant-pic pull-left">
-                                    <span class="restaurant-like"><a href="#"><i class="glyphicon glyphicon-heart-empty"></i></a></span>
-                                    <span class="restaurant-share"><a href="#"><i class="glyphicon glyphicon-share"></i></a></span>
-                                    <span class="restaurant-plus"><a href="#"><i class="glyphicon glyphicon-plus-sign"></i></a></span>
-                                    <a href="#">
-                                        <img src="http://placehold.it/600x600" alt="" class="img-responsive" />
-                                    </a>
-                                </div>
-                            </div>
+                            <% if @restaurant.logo %>
+                                <div class="imageCroppedOneHundredPercent" style="background-image: url('<%= @restaurant.logo.img_url_original %>')">&nbsp;</div>                                                                                                                                  
+                            <% elsif @restaurant.images.length > 0 %>
+                                <div class="imageCroppedOneHundredPercent" style="background-image: url('<%= @restaurant.images.first.img_url_original %>')">&nbsp;</div>                                                                                                                                  
+                            <% end %>
                         </div>
                     </div>
                 </div>
@@ -56,7 +51,7 @@
                 </div>
                 <div class="menu_sections">
                     <!-- ko foreach: menus -->
-                        <button class="btn btn-default each_section" data-bind="click: function(){ $root.selected_menu($data) }, lText: name"></button>
+                        <button class="btn btn-default each_section" data-bind="click: function(){ $root.selected_menu($data) }, lText: name, css: {active: $data==$root.selected_menu()}"></button>
                     <!-- /ko -->
                 </div>
             </div>           

@@ -13,6 +13,8 @@ class IndividualPrize
 
   after_save :all_done?
 
+  scope :remaining, -> { where(user_id:nil) }
+
   def serializable_hash options = {}
     hash = super(options)
     hash[:id] = self.id

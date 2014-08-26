@@ -291,7 +291,7 @@ class Restaurant
     enough = false if self.phone.blank?
     enough = false if self.name.blank? or self.name == "New Restaurant"
     return enough
-  end 
+  end
 
   def calculate_rating
     rating_total = 0

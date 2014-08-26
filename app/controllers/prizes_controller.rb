@@ -117,6 +117,7 @@ class PrizesController < ApplicationController
       if attempt == prize.winning_number
         user.individual_prizes << individual_prize
         user.save(validate: false)
+        prize.update_quantity
         render json: {won: "Congratulations, you've won!"}.as_json
         return
       end      

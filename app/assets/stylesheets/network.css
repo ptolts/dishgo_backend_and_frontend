@@ -86,6 +86,17 @@ p, address,
   margin: auto;
   border-radius: 4px;
 }
+
+.imageCroppedOneHundredPercent {
+  width: 100%;
+  color: #ffffff;
+  height: 100%;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin: auto;
+  border-radius: 4px;
+}
 .image-cropped-home {
     background-position: center center;
     background-repeat: no-repeat;
@@ -229,7 +240,7 @@ footer a:hover, footer a:focus {
     color: #000;
     border: solid 1px #e9e9e9;
 }
-.full_dish_link:after {
+/*.full_dish_link:after {
     content: "";
     display: block;
     height: 100%;
@@ -239,11 +250,11 @@ footer a:hover, footer a:focus {
     -moz-transition: all .5s;
     -webkit-transition: all .5s;
     transition: all .5s;
-}
+}*/
 
-.full_dish_link:hover:after {
+/*.full_dish_link:hover:after {
     opacity: 1;
-}
+}*/
 .top_dish_container .dish-description {
     background-color: #fff;
     bottom: 0;
@@ -279,7 +290,10 @@ footer a:hover, footer a:focus {
     filter: none;
 }
 .coo_hover:hover {
-    background-color: rgba(0, 0, 0, 0.3);
+    background-color: rgba(0, 0, 0, 0.5);
+    -moz-transition: all .5s;
+    -webkit-transition: all .5s;
+    transition: all .5s;    
     color: #fff !important;
 }
 .dish_container .dish-description p {
@@ -631,20 +645,21 @@ footer a:hover, footer a:focus {
     }
 }
 .network_menu_header {
-    background: url('http://placehold.it/1900x1080/cf2f28/ffffff');
+/*    background: url('http://placehold.it/1900x1080/cf2f28/ffffff');
     background-attachment: fixed;
     background-position: center;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
-    background-size: cover;
+    background-size: cover;*/
+    background-color: #cf2f28;
     margin: 0;
     padding-top: 0;
-    height: 400px;
+    height: 250px;
     position: relative;
 }
 .restaurant_logo_wrap {
-    top: 175px;
+    top: 28px;
     left: 10px;
     position: absolute;
     transition: bottom .3s;

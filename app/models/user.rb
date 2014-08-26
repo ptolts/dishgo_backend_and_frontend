@@ -192,6 +192,10 @@ class User
     return user
 
   end  
+
+  def create_x_dishcoins x
+    (0..x).each{|e| Dishcoin.create(user:self)}
+  end
  
   private
   def generate_authentication_token

@@ -5,11 +5,11 @@
         <div class="row" id="account">
             <div class="col-xs-12" data-bind="with: user">              
                 <div class="dishcoin_count row">
-                    <div class="col-xs-8">
-                        <h1 class="head" style="color: #fff;">Your Account</h1>
-                    </div>
-                    <div class="col-xs-4 text-center">
+                    <div class="col-xs-12">
                         <div class="btn btn-rewards" style="margin-top:3px;" data-bind="visible: $root.any_your_prizes, click: function(){ $root.show_your_prizes() }">Winnings</div>
+                    </div>
+                    <div class="col-xs-12">
+                        <h1 class="head" style="color: #fff;">Your Account</h1>
                     </div>
                     <div class="col-xs-12">
                         <p style="color: #fff;">DishCoins remaining: <img src="https://58900edd332817a2d530-6caa6fe89e7dac3eaf12230f0985b957.ssl.cf5.rackcdn.com/dishcoin-white.png" class="coin"/> <!-- ko text: dishcoins --><!-- /ko --></p>
@@ -122,11 +122,11 @@
         <div class="row">
             <div class="col-xs-12" data-bind="with: user">              
                 <div class="dishcoin_count row">
-                    <div class="col-xs-8">
-                        <h1 class="head" style="color:#fff">Your Rewards</h1>
-                    </div>
-                    <div class="col-xs-4 text-right">
+                    <div class="col-xs-12">
                         <div class="btn btn-rewards" data-bind="click: function(){ $root.show_home() }">Back</div>
+                    </div>                    
+                    <div class="col-xs-12">
+                        <h1 class="head" style="color:#fff">Your Rewards</h1>
                     </div>
                     <div class="col-xs-12">
                         <p style="color:#fff">You have won the following gift certificates!</p>
