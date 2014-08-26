@@ -5,7 +5,7 @@
                     <div class="section">
                         <div class="section_title">
                             <h1 data-bind="lText: name"></h1>
-                            <h2 data-bind="lText: description, lVisible: description"></h2>
+                            <h3 data-bind="lText: description, lVisible: description"></h3>
                         </div>
                         <div class="row" data-bind="foreach: dishes, networkMaxHeight: 'dish_min_height'">
 
@@ -13,11 +13,9 @@
                             <div id="bg" data-bind="visible: fullWidth, click: function(){ fullWidth(false) }"></div>                                
 
                             
-                            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 dish_min_height dish_cursor dish" data-bind="fadeVisible: !$root.showDetails(), css: { fullWidth: fullWidth, 'col-md-offset-3':fullWidth, 'col-lg-offset-3':fullWidth }, fullWidthToTop: fullWidth">
+                            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 dish_min_height dish_cursor dish" data-bind="fadeVisible: !$root.showDetails(), css: { fullWidth: fullWidth, 'col-md-offset-3':fullWidth, 'col-lg-offset-3':fullWidth, 'col-sm-offset-3':fullWidth }, fullWidthToTop: fullWidth">
                                 
-                                <!-- THIS IS THE SHOW DETAILS/HIDE DETAILS -->
-                                <div class="expand" data-bind="click: function(){ fullWidth(!fullWidth()); }"><!-- ko if: !fullWidth() -->Show Details <i class="fa fa-expand"></i><!-- /ko --><!-- ko if: fullWidth -->Hide Details <i class="fa fa-compress"></i><!-- /ko --></div>
-                                <!-- ^^^^^^^^^^^^^ -->
+                               
 
                                 <!-- THIS LETS THE USER CLICK ANYWHERE, AND THEN DISAPPEARS ONCE ITS FULL WIDTH -->
                                 <div class="fullClick" data-bind="click: function(){ fullWidth(true); }, visible: !fullWidth()"></div>
@@ -31,26 +29,26 @@
 
                                     <!-- This rating is visible if there is no picture and the dish isn't in modal form -->
                                     <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 solo_rating" style="padding: 0;" data-bind="visible: !large_title_image() && !fullWidth()">
-                                        <div class="menu_dish_rating" data-bind="starRating: rating"></div>
+                                        <div class="menu_dish_rating nopic" data-bind="starRating: rating"></div>
                                     </div>                                
                                 <!-- ^^^^^^^^^^^^^ -->
 
                                 <!-- THIS IS THE IMAGE AND STAR RATING FOR THE POPUP -->
-                                    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 dish_picture" data-bind="visible: large_title_image() && fullWidth">
-                                        <div class="imageCroppedFull" data-bind="backgroundImage">&nbsp;</div>
+                                    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 dish_picture" style="padding: 0;" data-bind="visible: large_title_image() && fullWidth">
                                         <div class="pop_up_menu_dish_rating" data-bind="writableStarRating: rating"></div>
+                                        <div class="imageCroppedFull" data-bind="backgroundImage">&nbsp;</div>
                                     </div>
                                     
                                     <!-- This rating is visible if there is no picture and the dish is in modal form -->
                                     <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 dish_picture"  data-bind="visible: !large_title_image() && fullWidth">
-                                        <i class="fa fa-camera"></i>
-                                        <div class="pop_up_menu_dish_rating" data-bind="writableStarRating: rating"></div>
+                                        <i class="fa fa-camera nopic"></i>
+                                        <div class="pop_up_menu_dish_rating nopic" data-bind="writableStarRating: rating"></div>
                                     </div>                                
                                 <!-- ^^^^^^^^^^^^^ -->
 
 
                                 <!-- THIS IS THE DISH DESCRIPTION AND NAME ETC WHEN IT IS PART OF THE MENU -->
-                                <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 dish_info" data-bind="css: { dish_full : !large_title_image() }, visible: !fullWidth()">
+                                <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 dish_info" style="padding: 0;" data-bind="css: { dish_full : !large_title_image() }, visible: !fullWidth()">
                                     <div class="dish_title">
                                         <h2 data-bind="lText: name"></h2>
                                     </div>
@@ -72,13 +70,16 @@
                                             <!-- /ko -->
                                         </script>                                                           
                                     </div>
+                                    <!-- THIS IS THE SHOW DETAILS/HIDE DETAILS -->
+                                    <div class="expand" data-bind="click: function(){ fullWidth(!fullWidth()); }"><!-- ko if: !fullWidth() -->Show Details <i class="fa fa-expand"></i><!-- /ko --></div>
+                                    <!-- ^^^^^^^^^^^^^ -->
                                 </div>
                                 <!-- ^^^^^^^^^^^^^ -->
 
                                 <!-- THIS IS THE DISH DESCRIPTION AND BUTTONS NAME ETC FOR WHEN ITS POPPED UP -->
                                 <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 dish_info" data-bind="css: { dish_full : !large_title_image() }, visible: fullWidth">
 
-                                    <div class="row" style="margin:0 -15px;">
+                                    <div class="row" style="margin:0 -30px;">
                                         <div class="col-xs-8">
                                             <div class="dish_title">
                                                 <h2 data-bind="lText: name"></h2>
@@ -92,14 +93,14 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="row" style="margin:0 -15px;">
+                                    <div class="row" style="margin:0 -30px;">
                                         <div class="col-xs-12">
                                             <div class="pop_up_dish-description">
                                                 <p data-bind="lText: description"></p>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="row" style="margin:0 -15px;">
+                                    <div class="row" style="margin:0 -30px;">
                                         <div data-bind="visible: sizes, with: sizes_object" class="demo_options">
                                             <h3 style="margin-bottom:10px;">Select Size</h3>
                                             <!-- ko forEachWithLength: individual_options -->
@@ -112,11 +113,11 @@
                                     </div>
 
                                     <!-- ko foreach: options -->
-                                        <div class="row" style="margin:0 -15px;">
+                                        <div class="row" style="margin:0 -30px;">
                                             <div class="demo_options">
                                                 <h3 data-bind="lText: name" style="margin-bottom:10px;"></h3>
                                                 <!-- ko forEachWithLength: individual_options -->
-                                                    <label class="button lightText square red float_option col-xs-12 col-sm-12 col-md-12 col-lg-5" data-bind="css: {'active': $parent.selectedOptionValue().indexOf($data) >= 0, 'dish_modal_full_width': dish_modal_full_width($length, $index)}">
+                                                    <label class="button square float_option col-xs-12 col-sm-12 col-md-12 col-lg-5" data-bind="css: {'active': $parent.selectedOptionValue().indexOf($data) >= 0, 'dish_modal_full_width': dish_modal_full_width($length, $index)}">
                                                         <input name="sizes_radio" type="checkbox" data-bind="checkedValue: $data, checked: $parent.selectedOptionValue, attr:{disabled: clickable}" style="opacity: 0; width: 0px">
                                                         <span class="text"><!-- ko lText: name --><!-- /ko --></span>
                                                         <!-- ko if: computed_price() != "" && $parent.extra_cost() --><span class="number"><span class="currency-symbol">$</span><!-- ko text: computed_price--><!-- /ko --></span><!-- /ko -->
@@ -129,7 +130,9 @@
                                             </div>
                                         </div>
                                     <!-- /ko -->
-                                </div>                                
+                                </div>
+                                <div class="expand" data-bind="click: function(){ fullWidth(!fullWidth()); }"><!-- /ko --><!-- ko if: fullWidth -->Hide Details <i class="fa fa-compress"></i><!-- /ko --></div>
+                                <!-- ^^^^^^^^^^^^^ -->                                
                             </div>
                             <!-- ^^^^^^^^^^^^^^^^ -->                            
 

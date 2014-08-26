@@ -48,7 +48,8 @@ body {
 h1, h2, h3, h4, h5, h6, span {
     font-family: 'Oswald', sans-serif;
 }
-p, address {
+p, address,
+.contact_details span {
     font-family: 'Lato', sans-serif;
 }
 .mobileTopSearchBar {
@@ -77,12 +78,14 @@ p, address {
   background-repeat: no-repeat;
   background-size: cover;
   margin: auto;
+  border-radius: 4px;
 }
 .image-cropped-home {
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
     margin: auto;
+    border-radius: 4px;
 }
 .dish_tile {
     width: 300px;
@@ -327,8 +330,7 @@ footer a:hover, footer a:focus {
     position: absolute;
     bottom: 0;
     left: 0;
-    width: 33%;
-    margin: 0 15px;
+    width: 35%;
     padding: 5px;
 }
 .dishgo_icon {
@@ -391,6 +393,10 @@ footer a:hover, footer a:focus {
     opacity: .80;
     color: #1a1a1a;
 }
+.solo_rating {
+  margin-top: 10px;
+}
+
 /* Weird Rules*/
 
 @media only screen and (min-width: 601px) {
@@ -418,34 +424,54 @@ footer a:hover, footer a:focus {
     .menu_dish_rating {
         position: absolute;
         left: 5px;
-        bottom: 5px;
+        bottom: 0px;
+    }
+    .image-cropped-home {
+      height: 250px;
+    }
+    .expand {
+      text-align: center;
+    }
+    .menu_sections {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      float: none;
+    }
+    .menu_dish_rating.nopic {
+      left: 0 !important;
     }
 }
 /* Small Devices, Tablets */
 
 @media only screen and (min-width: 768px) {
     .image-cropped-home {
-        width: 100px;
-        height: 70px;
-        background-position: center center;
-        background-repeat: no-repeat;
-        background-size: cover;
-        margin: auto;
-    }
-    .menu_dish_rating {
-        font-size: 16px;
-    }
-}
-/* Medium Devices, Desktops */
-
-@media only screen and (min-width: 992px) {
-    .image-cropped-home {
-        width: 140px;
+        width: 95px;
         height: 95px;
         background-position: center center;
         background-repeat: no-repeat;
         background-size: cover;
         margin: auto;
+        float: left;
+    }
+    .menu_dish_rating {
+        font-size: 16px;
+    }
+    .menu_dish_rating .left_over {
+        font-size: 16px;
+  }
+}
+/* Medium Devices, Desktops */
+
+@media only screen and (min-width: 992px) {
+    .image-cropped-home {
+        width: 130px;
+        height: 100px;
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        margin: auto;
+        float: left;
     }
 }
 /* Large Devices, Wide Screens */
@@ -467,6 +493,13 @@ footer a:hover, footer a:focus {
         bottom: -10px;
         font-size: 18px;
     }
+    .solo_rating .menu_dish_rating {
+        left: 0;
+        bottom: 5px;
+    }
+     .menu_dish_rating .left_over {
+        font-size: 18px;
+  }
 }
 /* small rules */
 
@@ -551,13 +584,24 @@ footer a:hover, footer a:focus {
     }
     .image-cropped-home {
         width: 100%;
-        height: 100%;
+        min-height: 200px;
         margin: auto;
     }
     .menu_dish_rating {
         position: absolute;
         left: 5px;
         bottom: 5px;
+    }
+    .expand {
+      text-align: center;
+      float: none !important;
+    }
+    .menu_sections {
+      position: relative;
+      float: left;
+    }
+    .menu_dish_rating.nopic {
+      left: 0 !important;
     }
 }
 .network_menu_header {
@@ -654,11 +698,10 @@ footer a:hover, footer a:focus {
     text-decoration: none;
 }
 .expand {
-    position: absolute;
-    bottom: 20px;
-    left: 30px;
+    float: right;
     color: #cf2f28;
     z-index: 1;
+    margin-bottom: -20px;
 }
 .fullWidth .expand {
     left: 25px;
@@ -682,13 +725,8 @@ footer a:hover, footer a:focus {
 .fullWidth .dish_info {
     width: 100% !important;
 }
-.menu_sections {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-}
 .each_section {
-    margin-right: 10px;
+    margin-right: 5px;
 }
 .bot-links .fa, .bot-links .fa a {
     color: #cf2f28;
