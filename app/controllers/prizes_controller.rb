@@ -86,7 +86,7 @@ class PrizesController < ApplicationController
   def bid
     data = JSON.parse(params[:prize])
     user = current_user
-    if user.dishcoins < data["number_of_bets"]
+    if user.metal_dishcoins.count < data["number_of_bets"]
       render json: {error: "You don't have enough DishCoins!"}.as_json
       return
     end
@@ -109,7 +109,11 @@ class PrizesController < ApplicationController
       end while attempt_record.include?(attempt)
       attempt_record << attempt
 
-      user.dishcoins = user.dishcoins - 1
+      dc = user.metal_dishcoins.first
+      dc.spent = true
+      dc.individual_prize = individual_prize
+      dc.save
+
       if attempt == prize.winning_number
         user.individual_prizes << individual_prize
         user.save(validate: false)

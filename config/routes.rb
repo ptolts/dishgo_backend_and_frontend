@@ -260,6 +260,7 @@ Foodcloud::Application.routes.draw do
       post 'update_dish'
       post 'update_section'
       post 'update_menu'
+      post 'update_image'
     end
   end     
 

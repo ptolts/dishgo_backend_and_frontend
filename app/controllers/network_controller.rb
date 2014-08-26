@@ -24,7 +24,7 @@ class NetworkController < ApplicationController
     cache = restaurant.cache 
 
     if !cache.menu.blank?
-      @menu_data = cache.menu
+      @menu_data = cache.network_menu
     else
       menu_d = restaurant.onlinesite_json
       cache.menu = menu_d

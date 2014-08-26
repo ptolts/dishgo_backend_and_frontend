@@ -49,18 +49,18 @@
                 </div> 
                 <div class="completed_image" data-bind="visible: completed">
                     <div class="col-xs-12 text-center">
-                        <div class="thumbnail">
+                        <div class="thumbnail" data-bind="style:{borderColor: official_site_image() ? 'green' : 'red'}">
                             <img class="img-rounded" data-bind="attr: {src: url}" />
                             <div class="caption">
                                 <div class="pull-left">
-                                    <span class="btn btn-dish" data-bind="click: $root.showModal">
-                                        <i class="glyphicon glyphicon-edit"></i> Crop
+                                    <span class="btn btn-dish" data-bind="click: function(){ $data.official_site_image(true); $data.setProperties(); }">
+                                        <i class="glyphicon glyphicon-edit"></i> Show
                                     </span>                     
                                 </div>
 
                                 <div class="pull-right">
-                                    <span class="btn btn-warning" data-bind="click: $parent.removeImage">
-                                        <i class="glyphicon glyphicon-remove"></i> Remove
+                                    <span class="btn btn-warning" data-bind="click: function(){ $data.official_site_image(false); $data.setProperties(); }">
+                                        <i class="glyphicon glyphicon-remove"></i> Dont Show
                                     </span>                     
                                 </div>                                
                             </div>

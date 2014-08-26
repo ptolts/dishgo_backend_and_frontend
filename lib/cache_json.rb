@@ -4,7 +4,15 @@ class CacheJson
     cache = restaurant.cache
     cache ||= Cache.new
     cache.api_menu = restaurant.api_menu_to_json
+
+    Image.set_default_scope "{ ne(rejected: true).where(official_site_image:true) }"
+    
     cache.menu = restaurant.onlinesite_json
+
+    Image.set_default_scope "{ ne(rejected: true) }"
+
+    cache.network_menu = restaurant.onlinesite_json 
+
     cache.save
     restaurant.calculate_rating
     restaurant.save!(verified:false)

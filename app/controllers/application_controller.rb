@@ -106,6 +106,9 @@ class ApplicationController < ActionController::Base
   end
 
   def api_admin_or_owner!
+    if current_user
+      return
+    end
     if params["dishgo_token"].blank?
       redirect_to :controller => 'administration', :action => 'index'
     end
@@ -122,6 +125,9 @@ class ApplicationController < ActionController::Base
   end
 
   def api_admin_or_owner_variable_only!
+    if current_user
+      return
+    end    
     if params["dishgo_token"].blank?
       render :status => 401, :json => {error: "Not Logged In"}      
       return

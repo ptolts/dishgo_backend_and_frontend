@@ -80,11 +80,54 @@ ko.bindingHandlers.starRating = {
     }
 };
 
+ko.bindingHandlers.network_file_upload = {
+    update: function(element, valueAccessor, allBindingsAccessor, viewModel, bindingContext) {
+        var value = valueAccessor();
+        if(!bindingContext["$loggedin"]()){
+            return;
+        }        
+        $(element).fileupload({
+            dropZone: $(element),
+            formData: {
+                restaurant_id: global_restaurant_id,
+                dish_id: viewModel.id(),
+            },           
+            url: "/app/api/v1/restaurant_admin/upload_image_file",
+            dataType: 'json',
+            progressInterval: 50,
+            add: function(e,data){
+                image = viewModel.addImage();
+                data.image = image;
+                data.submit();
+            },
+            submit: function(e, data){
+                console.log(data);
+            },
+            send: function (e, data) {
+                data.image.started(true);
+            },
+            done: function (e, data) {
+                var file = data.result;                 
+                data.image.update_info(file);                                               
+            },
+            progress: function (e, data) {
+                var progress = parseInt(data.loaded / data.total * 100, 10);
+                data.image.progressValue(progress);
+            },
+            fail: function (e, data) {
+                data.image.failed(true);
+            },                       
+        });    
+    }
+};
+
 ko.bindingHandlers.fullWidthToTop = {
     update: function (element, valueAccessor) {
         var value = valueAccessor()();
         if(value){
-            $('html,body').animate({scrollTop: $(element).offset().top}, 800);
+            setTimeout(function(){
+                $('html,body').animate({scrollTop: $(element).offset().top - 10}, 800);
+            }, 500);
         }
     }
 };
@@ -153,13 +196,8 @@ ko.bindingHandlers.networkMaxHeight = {
 
 ko.bindingHandlers.backgroundImage = {
     update: function (element, valueAccessor, allBindingsAccessor, viewModel, bindingContext) {
-        var src = "";
-        if(viewModel.images().length > 0){
-            src = viewModel.images()[0].medium();
-            $(element).css("background-image","url('" + src + "')");
-        } else {
-            $(element).hide();
-        }
+        var src = viewModel.medium();
+        $(element).css("background-image","url('" + src + "')");
     }    
 }
 
@@ -185,6 +223,8 @@ ko.bindingHandlers.loggedInChecker = {
     },
 };
 
+var global_restaurant_id;
+
 function NetworkModel() {
 
     var self = this;
@@ -202,6 +242,7 @@ function NetworkModel() {
 
     if("resto_data" in window){
         self.restaurant = ko.observable(new Restaurant(resto_data));
+        global_restaurant_id = self.restaurant().id;
         self.lang = ko.observable(self.restaurant().default_language() ? self.restaurant().default_language() : 'en');
         self.languages = self.restaurant().languages;  
         self.getFullLangName = function(l){ 
@@ -286,7 +327,7 @@ function NetworkModel() {
     self.login_text = ko.computed({
         read: function(){
             if(self.user().id()){
-                return "Log Out";
+                return "Profile";
             } else {
                 return "Log In";
             }

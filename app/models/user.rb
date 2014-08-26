@@ -7,6 +7,7 @@ class User
   has_many :ratings, :class_name => "Rating"
   has_many :addresses, :class_name => "Address"
   has_many :notifications, :class_name => "Notification"
+  has_many :metal_dishcoins, :class_name => "Dishcoin", inverse_of: :user
   has_many :orders, :class_name => "Order"
   has_many :dish_views, :class_name => "DishView", inverse_of: :user
   has_one :owns_restaurants, :class_name => "Restaurant", inverse_of: :user, validate: false
@@ -121,7 +122,8 @@ class User
     hash.delete("setup_link")
     if options[:restaurant]
       hash[:restaurant_id] = self.owns_restaurants.id if self.owns_restaurants
-    end    
+    end
+    hash[:dishcoins] = self.metal_dishcoins.count  
     hash
   end  
 

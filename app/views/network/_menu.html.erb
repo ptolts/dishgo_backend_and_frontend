@@ -23,7 +23,9 @@
 
                                 <!-- THIS IS THE IMAGE AND STAR RATING FOR THE DISH WHEN IT IS PART OF THE MENU -->
                                     <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 dish_picture" style="padding: 0;" data-bind="visible: large_title_image() && !fullWidth()">
-                                        <div class="image-cropped-home" data-bind="backgroundImage"></div>
+                                    <!-- ko with: images()[0] -->
+                                        <div class="image-cropped-home" data-bind="backgroundImage"></div>                                                                                                                                
+                                    <!-- /ko -->                                        
                                         <div class="menu_dish_rating" data-bind="starRating: rating"></div>
                                     </div>
 
@@ -36,13 +38,22 @@
                                 <!-- THIS IS THE IMAGE AND STAR RATING FOR THE POPUP -->
                                     <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 dish_picture" style="padding: 0;" data-bind="visible: large_title_image() && fullWidth">
                                         <div class="pop_up_menu_dish_rating" data-bind="writableStarRating: rating"></div>
-                                        <div class="imageCroppedFull" data-bind="backgroundImage">&nbsp;</div>
+                                        <!-- ko with: images()[0] -->
+                                            <div class="imageCroppedFull" data-bind="backgroundImage">&nbsp;</div>                                                                                                                                  
+                                        <!-- /ko -->
                                     </div>
                                     
                                     <!-- This rating is visible if there is no picture and the dish is in modal form -->
-                                    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 dish_picture"  data-bind="visible: !large_title_image() && fullWidth">
-                                        <i class="fa fa-camera nopic"></i>
-                                        <div class="pop_up_menu_dish_rating nopic" data-bind="writableStarRating: rating"></div>
+                                    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 dish_picture "  data-bind="visible: !large_title_image() && fullWidth">
+                                        <div class="pop_up_menu_dish_rating" data-bind="writableStarRating: rating"></div>
+                                        <div class="dish_no_picture">
+                                            <i class="fa fa-camera nopic"></i>
+                                            <!-- The file input field used as target for the file upload widget -->
+                                            <input data-bind="network_file_upload: images" id="fileupload" type="file" name="image"  class="file_upload_input" accept="images/*" capture="camera">
+                                        </div>
+                                        <div class="progress" style="height: 10px" data-bind="visible: images().length > 0, with: images()[0]">
+                                            <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" data-bind="style: {width:progressValue()+'%'}"></div>
+                                        </div>                                     
                                     </div>                                
                                 <!-- ^^^^^^^^^^^^^ -->
 
@@ -141,5 +152,5 @@
             <!-- /ko -->
         </div>
     </div>
-</div>
+</div> 
                 

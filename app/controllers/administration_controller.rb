@@ -288,6 +288,7 @@ class AdministrationController < ApplicationController
       img.update_attributes({:img => file})
       img.manual_img_fingerprint = md5_sum
       img.unverified = false
+      img.official_site_image = true
       img.save
       images = [img]
     end

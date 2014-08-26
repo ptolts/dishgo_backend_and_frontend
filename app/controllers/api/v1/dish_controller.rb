@@ -12,7 +12,7 @@ class Api::V1::DishController < ApplicationController
       Rails.logger.warn "No Ratings Yet"
       rating = Rating.new
       rating.dish = dish
-      user.dishcoins = user.dishcoins + 1
+      dishcoin = Dishcoin.create(user:user,rating:rating)
       rating.restaurant = dish.restaurant
       user.ratings << rating
     end

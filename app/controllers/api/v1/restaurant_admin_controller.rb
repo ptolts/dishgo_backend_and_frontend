@@ -46,7 +46,7 @@ class Api::V1::RestaurantAdminController < ApplicationController
     img.save
 
     user = current_user
-    user.dishcoins = user.dishcoins + 1
+    dishcoin = Dishcoin.create(user:user,image:img)
     user.save(verified: false)
 
     if @admin or @owner

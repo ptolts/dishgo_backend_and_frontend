@@ -1,6 +1,14 @@
 class MenuUpdateController < ApplicationController
   before_filter :admin_or_owner_or_odesk! #, :only => [:create_section,:create_dish,:create_option,:create_individual_option]
   
+  def update_image
+    data = JSON.parse(params[:image])    
+    image = Image.find(data["id"])
+    image.official_site_image = data["official_site_image"].to_bool
+    image.save
+    render json: {success:true}.as_json
+  end
+
   def update_menu
     data = JSON.parse(params[:data])    
     menu = Menu.find(data["id"])

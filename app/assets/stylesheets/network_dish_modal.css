@@ -164,18 +164,13 @@
 
 .pop_up_menu_dish_rating {
     position: relative;
-    z-index: 1000000;
+    z-index: 10;
     margin-bottom: 10px;
     margin-top: -15px;
 }
-.pop_up_menu_dish_rating.nopic {
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 50px;
-}
+
 .fa-camera.nopic {
-    margin-top: 45px;
+    margin-top: 15px;
     font-size: 40px;
 }
 .pop_up_menu_dish_rating i {

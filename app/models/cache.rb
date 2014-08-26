@@ -8,6 +8,7 @@ class Cache
 
 	field :website, type: String
 	field :menu, type: String
+	field :network_menu, type: String
 	field :api_menu, type: Hash, default: {}
 
 	belongs_to :restaurant, index: true

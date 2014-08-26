@@ -18,6 +18,7 @@ class Image
   field :rejected, type: Boolean, default: false
   field :unverified, type: Boolean, default: true
   field :api_upload, type: Boolean, default: false
+  field :official_site_image, type: Boolean, default: false
 
   field :img_url_medium, type: String
   field :img_url_original, type: String
@@ -70,6 +71,11 @@ class Image
   validates_attachment_content_type :img, :content_type => %w(image/jpeg image/jpg image/png), :message => 'file type is not allowed (only jpeg/png/gif images)'    
   after_post_process :img_post_process
   before_post_process :fuck_you_paperclip
+
+  def self.set_default_scope opts
+    self.default_scoping = nil
+    eval("default_scope -> #{opts}")
+  end
 
   def fuck_you_paperclip
     if @background_process

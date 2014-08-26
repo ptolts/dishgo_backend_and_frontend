@@ -33,6 +33,7 @@
     self.progressValue = ko.observable(1);
     self.filename = ko.observable("");
     self.id = ko.observable(data.id || "");
+    self.official_site_image = ko.observable(data.official_site_image || false);
     self.url = ko.observable("");
     self.original = ko.observable("");
     self.medium = ko.observable("");
@@ -81,6 +82,24 @@
             dataType: "json"
         }); 
     }
+
+    self.setProperties = function(){
+        $.ajax({
+            type: "POST",
+            url: "/app/menu_update/update_image",
+            data: {
+                image: ko.toJSON(self),
+                restaurant_id: restaurant_id,                
+            },
+            success: function(data, textStatus, jqXHR){
+
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) { 
+
+            },
+            dataType: "json"
+        }); 
+    }    
 
     self.destroyGalleryImage = function(){
         bootbox.dialog({
@@ -137,8 +156,9 @@
 
     self.update_info = function(item){      
         self.url(item.thumbnailUrl);
+        self.medium(item.medium || item.url);
         self.small(item.small);
-        self.original(item.original);
+        self.original(item.original || item.url);
         self.image_width = ko.observable(item.width);
         self.image_height = ko.observable(item.height); 
         self.completed(true);
