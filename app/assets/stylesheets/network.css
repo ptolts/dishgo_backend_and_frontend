@@ -599,6 +599,7 @@ footer a:hover, footer a:focus {
     .menu_sections {
       position: relative;
       float: left;
+      margin-left: 15px;
     }
     .menu_dish_rating.nopic {
       left: 0 !important;
