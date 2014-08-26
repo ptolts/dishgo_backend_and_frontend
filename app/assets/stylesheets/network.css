@@ -173,6 +173,7 @@ body {
     filter: progid: DXImageTransform.Microsoft.gradient(startColorstr=#b2000000, endColorstr=#b2000000);
     zoom: 1;
     color: #fff;
+    z-index: 4;
 }
 .container_small:nth-child(n) {
     filter: none;
@@ -559,10 +560,7 @@ footer a:hover, footer a:focus {
     .network_header #logo {
         height: 40px;
         width: 140px;
-        margin: 10px 0 0 -10px;
-    }
-    .search_results {
-        margin-top: -15px;
+        margin: 10px 0 0 -10px; 
     }
     #login_buttons ul {
         height: 50px;
