@@ -47,14 +47,14 @@
     background-color: #000;
     width: 600px;
 }
-.menu_container h1:before {
+/*.menu_container h1:before {
     right: 110%;
     margin-right: 15px;
 }
 .menu_container h1:after {
     left: 110%;
     margin-left: 15px;
-}
+}*/
 .menu_header .img-responsive {
     min-width: 100%;
 }
