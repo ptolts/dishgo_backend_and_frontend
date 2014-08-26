@@ -454,7 +454,7 @@ footer a:hover, footer a:focus {
         margin: auto;
         float: left;
     }
-    .menu_dish_rating {
+    .menu_dish_rating i {
         font-size: 16px;
     }
     .menu_dish_rating .left_over {
@@ -498,7 +498,7 @@ footer a:hover, footer a:focus {
         bottom: 5px;
     }
      .menu_dish_rating .left_over {
-        font-size: 18px;
+        font-size: 20px;
   }
 }
 /* small rules */
