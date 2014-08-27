@@ -299,6 +299,10 @@ class Dish
         i.dish = e
         i.save
       end
+      e.draft_image.each do |i|
+        i.dish = e
+        i.save
+      end
     end
   end
 end
