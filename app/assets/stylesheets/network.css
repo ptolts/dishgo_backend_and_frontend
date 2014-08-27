@@ -281,7 +281,7 @@ footer a:hover, footer a:focus {
     padding: 0 15px;
     margin-bottom: 15px;
     background: rgb(255, 255, 255);
-    background: transparent\9;
+    background: transparent;
     background: rgba(255, 255, 255, 0.9);
     filter: progid: DXImageTransform.Microsoft.gradient(startColorstr=#e5ffffff, endColorstr=#e5ffffff);
     zoom: 1;
