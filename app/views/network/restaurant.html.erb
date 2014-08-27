@@ -12,7 +12,7 @@
                         <div class="restaurant_logo">
                             <% if @restaurant.logo %>
                                 <div class="imageCroppedOneHundredPercent" style="background-image: url('<%= @restaurant.logo.img_url_original %>')">&nbsp;</div>                                                                                                                                  
-                            <% elsif @restaurant.images.length > 0 %>
+                            <% elsif @restaurant.image.length > 0 %>
                                 <div class="imageCroppedOneHundredPercent" style="background-image: url('<%= @restaurant.images.first.img_url_original %>')">&nbsp;</div>                                                                                                                                  
                             <% end %>
                         </div>
