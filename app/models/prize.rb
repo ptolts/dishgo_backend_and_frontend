@@ -60,6 +60,11 @@ class Prize
     end
   end
 
+  def update_quantity
+    self.quantity = self.individual_prizes.remaining.count
+    self.save!
+  end
+
   private
   def setup_winner
     self.winning_number = SecureRandom.random_number(self.chance) if !self.winning_number
