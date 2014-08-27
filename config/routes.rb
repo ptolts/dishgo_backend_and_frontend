@@ -1,7 +1,7 @@
 Foodcloud::Application.routes.draw do
 
-  root :to => 'administration#index'
-  # root :to => 'network#index'
+  # root :to => 'administration#index'
+  root :to => 'network#index'
 
   devise_for :users, :controllers => { :registrations => "users/registration", :sessions => "users/sessions", omniauth_callbacks: 'omniauth_callbacks' }
 
