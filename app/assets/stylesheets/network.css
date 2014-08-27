@@ -181,7 +181,7 @@ body {
     background: rgb(0, 0, 0);
     background: transparent;
     background: rgba(0, 0, 0, 0.7);
-    filter: progid: DXImageTransform.Microsoft.gradient(startColorstr=#b2000000, endColorstr=#b2000000);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#b2000000, endColorstr=#b2000000);
     zoom: 1;
     color: #fff;
     z-index: 4;
@@ -283,7 +283,7 @@ footer a:hover, footer a:focus {
     background: rgb(255, 255, 255);
     background: transparent;
     background: rgba(255, 255, 255, 0.9);
-    filter: progid: DXImageTransform.Microsoft.gradient(startColorstr=#e5ffffff, endColorstr=#e5ffffff);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#e5ffffff, endColorstr=#e5ffffff);
     zoom: 1;
 }
 .dish_container:nth-child(n) {
