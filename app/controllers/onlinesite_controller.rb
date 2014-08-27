@@ -19,7 +19,7 @@ class OnlinesiteController < ApplicationController
     end
     
     if !restaurant
-      redirect_to "http://dishgo.io"
+      redirect_to "https://dishgo.io"
       return
     end
 
