@@ -43,6 +43,7 @@
     self.image_height = ko.observable(0);
     self.started = ko.observable(false);
     self.rejected = ko.observable(false);
+    self.not_profile_image = ko.observable(false);
     self.destroyed = ko.observable(false);
     self.coordinates = [];
     self.failed = ko.observable(false);
@@ -62,6 +63,7 @@
             self.image_height = ko.observable(data.height);            
         }
         self.rejected(data.rejected ? data.rejected : false);
+        self.not_profile_image(data.not_profile_image ? data.not_profile_image : false);
         self.small = ko.observable(data.small ? data.small : "");
     }
 
@@ -145,7 +147,7 @@
                 image_id: self.id(),
             },
             success: function(data, textStatus, jqXHR){
-                self.rejected(data.rejected);
+                self.not_profile_image(data.not_profile_image);
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) { 
                 console.log(textStatus);

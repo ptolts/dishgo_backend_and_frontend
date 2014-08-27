@@ -13,7 +13,7 @@ class Api::V1::RestaurantsController < ApplicationController
     restaurants = Restaurant.new.by_loc [params[:lat].to_f,params[:lon].to_f]
     restaurants = restaurants.collect do | restaurant |
       hash = restaurant.as_document({pages: true})
-      hash[:image] = restaurant.image.rejected.collect do |image|
+      hash[:image] = restaurant.image.profile_images.collect do |image|
         next image.custom_to_hash
       end
       hash[:image] = hash[:image][0..5]

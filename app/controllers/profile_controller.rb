@@ -138,9 +138,9 @@ class ProfileController < ApplicationController
 
 	def reject_image
 		image = Image.find(params["image_id"])
-		image.rejected = !image.rejected
+		image.not_profile_image = !image.not_profile_image
 		image.save
-		render json: {rejected: image.rejected}.as_json
+		render json: {not_profile_image: image.not_profile_image}.as_json
 	end
 
 	def set_password_form

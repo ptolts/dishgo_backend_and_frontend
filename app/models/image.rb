@@ -16,6 +16,7 @@ class Image
   field :source, type: String
   field :position, type: Integer
   field :rejected, type: Boolean, default: false
+  field :not_profile_image, type: Boolean, default: false
   field :unverified, type: Boolean, default: true
   field :api_upload, type: Boolean, default: false
   field :official_site_image, type: Boolean, default: false
@@ -41,6 +42,7 @@ class Image
   index({ _id:1 }, { unique: true, name:"id_index" })
 
   scope :rejected, -> { ne(rejected: true) }
+  scope :profile_images, -> { ne(not_profile_image: true) }
   scope :unverified, -> { where(unverified: true) }
   scope :with_user, -> { ne(user_id: nil) }
   default_scope -> { ne(rejected: true) } 
