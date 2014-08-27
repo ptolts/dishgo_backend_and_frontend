@@ -13,7 +13,7 @@ class Cache
 
 	belongs_to :restaurant, index: true
 
-	def rebuild_all
+	def self.rebuild_all
 		Cache.all.each do |cache|
 			restaurant = cache.restaurant
 			if !restaurant

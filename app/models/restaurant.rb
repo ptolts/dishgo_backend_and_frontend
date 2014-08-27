@@ -294,11 +294,13 @@ class Restaurant
   end
 
   def calculate_rating
+    rating_count = ratings.count
+    return 0 if rating_count == 0
     rating_total = 0
     ratings.each do |rate|
       rating_total += rate.rating
     end
-    rating = (rating_total.to_f / ratings.count.to_f).round_half
+    rating = (rating_total.to_f / rating_count.to_f).round_half
   end
 
   def serializable_hash options = {}
@@ -334,28 +336,28 @@ class Restaurant
   end
 
   def api_menu_to_json
-      menu_to_spit_out = self.menus.def.first
-      if menu_to_spit_out
-        menu_to_spit_out = menu_to_spit_out.published_menu.pub
-      else
-        menu_to_spit_out = self.menus.first
-        menu_to_spit_out = menu_to_spit_out.published_menu.pub
-      end
-
-      menu_hash = self.languages.inject({}) do |res,lang|
-        menu = menu_to_spit_out.collect do |section|
-          hash = section.as_document
-          hash[:id] = section.id
-          hash["name"] = section.name_translations[lang]
-          hash["dishes"] = section.dishes.pub.collect do |dish|
-            dish.api_custom_to_hash(lang)
-          end
-          next hash
+    default_menu = self.menus.def.first
+    sections = []
+    sections = default_menu.published_menu.pub if default_menu
+    other_sections = self.menus.not_def.collect do |more_sections|
+      next more_sections.published_menu.pub
+    end
+    section_ids = [sections, other_sections].flatten.compact.collect{|e| e.id}    
+    menu_hash = self.languages.inject({}) do |res,lang|
+      sections = Section.find(section_ids).sort_by{|m| section_ids.index(m.id) }
+      menu = sections.collect do |section|
+        hash = section.as_document
+        hash[:id] = section.id
+        hash["name"] = section.name_translations[lang]
+        hash["dishes"] = section.dishes.pub.collect do |dish|
+          dish.api_custom_to_hash(lang)
         end
-        res[lang] = Oj.dump(menu)
-        next res
+        next hash
       end
-      return menu_hash
+      res[lang] = Oj.dump(menu)
+      next res
+    end
+    return menu_hash
   end  
 
   #long running publish menu
@@ -367,35 +369,6 @@ class Restaurant
     CacheJson.new.delay.rebuild_cache(self.id)
   end
 
-
-  # def fix_menus
-  #   ['530bcd5b80410efe30000c78'].each do |id|
-  #     r = Restaurant.find(id)
-  #     rr = Restaurant.find("530bd69180410efe30006a61")
-  #     r.menus.destroy_all
-  #     r.section.each{|e| e.restaurant_id = rr.id; e.save}
-  #     r.options.each{|e| e.restaurant_id = rr.id; e.save}
-  #     r.dishes.each{|e| e.restaurant_id = rr.id; e.save}
-  #     r.individual_options.each{|e| e.restaurant_id = rr.id; e.save}
-  #     r.image.each{|e| e.restaurant_id = rr.id; e.save}
-  #   end
-
-  #   ['530bcd6e80410efe30000dab','530bcd5b80410efe30000c78','530bce2a80410efe30001a02'].each do |id|
-  #     r = Restaurant.find(id)
-  #     r.menus.destroy_all
-  #     r.section.destroy_all
-  #     r.options.destroy_all
-  #     r.dishes.destroy_all
-  #     r.individual_options.destroy_all
-  #   end
-
-  #   rr = Restaurant.find("530bd69180410efe30006a61")
-  #   rr.dishes.each do |dish|
-  #     if Dish.where("name.en" => dish.name_translations['en'], "name.fr" => dish.name_translations['fr'], restaurant_id: rr.id).count > 1
-  #       dish.destroy
-  #     end
-  #   end
-  # end
 end
 
 

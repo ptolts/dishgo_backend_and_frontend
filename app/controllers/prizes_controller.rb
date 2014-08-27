@@ -59,7 +59,7 @@ class PrizesController < ApplicationController
 
   def list
     @restaurant_id = params[:restaurant]
-    if Prize.where(restaurant_id:@restaurant_id).count == 0
+    if Prize.available_to_win.where(restaurant_id:@restaurant_id).count == 0
       @restaurant_id = nil
     end
     @languages = ['en'].to_json
@@ -68,14 +68,14 @@ class PrizesController < ApplicationController
   end
 
   def prize_list
-    @prizes = Prize.ne(active:false)
+    @prizes = Prize.available_to_win.ne(active:false)
     # @prizes = Prize.nin(id:current_user.prize_ids)
     render json: @prizes.as_json
   end
 
   def won_prize_list
     user = current_user
-    @prizes = Prize.ne(active:false)
+    @prizes = Prize.available_to_win.ne(active:false)
     if !params[:restaurant_id].blank?
       @prizes = @prizes.where(restaurant_id:params[:restaurant_id])
     end

@@ -31,7 +31,7 @@ class Prize
 
   index({ locs: "2dsphere" }, { name:"location_index"})
 
-  scope :available_to_win, -> { where(:start_date.gt => DateTime.now, :end_date.lt => DateTime.now, :quantity.gt => 0) }  
+  scope :available_to_win, -> { where(:start_date.lt => DateTime.now, :end_date.gt => DateTime.now, :quantity.gt => 0) }  
 
   def serializable_hash options
     options ||= {}
@@ -53,9 +53,11 @@ class Prize
     return prize
   end
 
-  def update_quantity
-    self.quantity = self.individual_prizes.remaining.count
-    self.save
+  def self.update_quantity
+    Prize.each do |prize|
+      prize.quantity = prize.individual_prizes.remaining.count
+      prize.save
+    end
   end
 
   private

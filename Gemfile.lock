@@ -1,11 +1,11 @@
 GIT
   remote: https://github.com/mongoid/mongoid.git
-  revision: a3cc085baba24b878778a190664b27fb746704ec
-  tag: v4.0.0.beta2
+  revision: 124c600930fd05dc75e5ef4a77a4b5ae12e64825
+  tag: v4.0.0.rc2
   specs:
-    mongoid (4.0.0.beta2)
-      activemodel (>= 4.0.0)
-      moped (~> 2.0.beta6)
+    mongoid (4.0.0.rc2)
+      activemodel (~> 4.0)
+      moped (~> 2.0.0.rc2)
       origin (~> 2.1)
       tzinfo (>= 0.3.37)
 
@@ -141,7 +141,7 @@ GEM
     mongoid-paperclip (0.0.9)
       paperclip (>= 2.3.6)
     mono_logger (1.1.0)
-    moped (2.0.0.rc1)
+    moped (2.0.0)
       bson (~> 2.2)
       connection_pool (~> 2.0)
       optionable (~> 0.2.0)

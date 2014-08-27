@@ -22,6 +22,7 @@ class Menu
   	scope :draft, -> {asc(:draft_position)} 	
 	scope :pub, -> {asc(:position)}
 	scope :def, -> { where( default_menu:true ).asc(:position) }
+	scope :not_def, -> { where( default_menu:false ).asc(:position) }
 
 	index({ _id:1 }, { unique: true, name:"id_index" })
 
