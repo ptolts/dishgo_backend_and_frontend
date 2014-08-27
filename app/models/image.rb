@@ -186,7 +186,11 @@ class Image
   # def reprocess_img
   #   img.assign(img)
   #   img.save
-  # end  
+  # end
+
+  def self.set_old_pics_good
+    Image.unscoped.where(user_id:nil).update_all(official_site_image:true)
+  end
 
 end
 
