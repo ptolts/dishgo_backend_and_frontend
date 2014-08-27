@@ -80,12 +80,26 @@ ko.bindingHandlers.starRating = {
     }
 };
 
+ko.bindingHandlers.stopBubbleUpload = {
+  init: function(element, valueAccessor, allBindingsAccessor, viewModel, bindingContext) {
+    ko.utils.registerEventHandler(element, "click", function(event) {
+        event.cancelBubble = true;
+        if(!bindingContext["$loggedin"]()){
+            if (event.stopPropagation) {
+                event.stopPropagation(); 
+            }
+            if(event.preventDefault){
+                event.preventDefault();
+            }          
+            return;
+        }           
+    });
+  }
+};
+
 ko.bindingHandlers.network_file_upload = {
     update: function(element, valueAccessor, allBindingsAccessor, viewModel, bindingContext) {
-        var value = valueAccessor();
-        if(!bindingContext["$loggedin"]()){
-            return;
-        }        
+        var value = valueAccessor();      
         $(element).fileupload({
             dropZone: $(element),
             formData: {
@@ -96,6 +110,9 @@ ko.bindingHandlers.network_file_upload = {
             dataType: 'json',
             progressInterval: 50,
             add: function(e,data){
+                if(!bindingContext["$loggedin"]()){
+                    return;
+                }                  
                 image = viewModel.addImage();
                 data.image = image;
                 data.submit();
