@@ -1,4 +1,4 @@
-cunnclass CacheJson
+class CacheJson
   def rebuild_cache restaurant_id
     restaurant = Restaurant.find(restaurant_id)
     cache = restaurant.cache
