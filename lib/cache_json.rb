@@ -1,4 +1,4 @@
-class CacheJson
+cunnclass CacheJson
   def rebuild_cache restaurant_id
     restaurant = Restaurant.find(restaurant_id)
     cache = restaurant.cache
@@ -16,8 +16,8 @@ class CacheJson
     cache.save
     restaurant.calculate_rating
     restaurant.save!(verified:false)
-    Rails.logger.info "Setting rating to #{restaurant.rating}"
-    puts "Setting rating to #{restaurant.rating}"
+    # Rails.logger.info "Setting rating to #{restaurant.rating}"
+    # puts "Setting rating to #{restaurant.rating}"
   end
 
   def publish_menu restaurant_id

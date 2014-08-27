@@ -1,7 +1,23 @@
 Foodcloud::Application.routes.draw do
 
+  constraints(Letsdishgo) do
+    get '/' => 'letsdishgo#index'
+  end
+
+  constraints(Subdomain) do
+    get '/' => 'onlinesite#index'
+    get '/robots.txt' => 'robots#index'
+    get '/sitemap.xml' => 'robots#sitemap'
+  end
+
   # root :to => 'administration#index'
-  root :to => 'network#index'
+  root :to => 'network#index'  
+
+  if Rails.env.production?
+     get '404', :to => 'application#page_not_found'
+     get '422', :to => 'application#server_error'
+     get '500', :to => 'application#server_error'
+  end
 
   devise_for :users, :controllers => { :registrations => "users/registration", :sessions => "users/sessions", omniauth_callbacks: 'omniauth_callbacks' }
 
@@ -17,22 +33,6 @@ Foodcloud::Application.routes.draw do
       to: "omniauth_callbacks",
       as: :users_omniauth_callback,
       via: [:get, :post]   
-  end
-
-  constraints(Letsdishgo) do
-    get '/' => 'letsdishgo#index'
-  end
-
-  constraints(Subdomain) do
-    get '/' => 'onlinesite#index'
-    get '/robots.txt' => 'robots#index'
-    get '/sitemap.xml' => 'robots#sitemap'
-  end
-
-  if Rails.env.production?
-     get '404', :to => 'application#page_not_found'
-     get '422', :to => 'application#server_error'
-     get '500', :to => 'application#server_error'
   end  
 
   resources :token_authentications, :only => [:create, :destroy]
