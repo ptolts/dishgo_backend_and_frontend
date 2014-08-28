@@ -13,7 +13,7 @@
 								<div class="input-group-addon"><i class="fa fa-search"></i></div>
 								<input id="#" name="#" type="text" placeholder="Restaurant Name" class="form-control" data-bind="value: restaurant_search_term, valueUpdate: 'afterkeydown'" />
 								<span class="input-group-btn">
-									<button class="btn btn-lg btn-search">Search</button>
+									<button class="btn btn-lg btn-search" data-bind="disable: searching"><i class="fa fa-spinner fa-spin" data-bind="visible: searching"></i><span data-bind="visible: !searching()">Search</span></button>
 								</span>
 							</div>
 						</div>
@@ -37,7 +37,7 @@
 								<div class="input-group-addon"><i class="fa fa-search"></i></div>
 								<input id="#" name="#" type="text" placeholder="Restaurant Name" class="form-control" data-bind="hasFocus: !top_search(), value: restaurant_search_term, valueUpdate: 'afterkeydown'" />
 								<span class="input-group-btn">
-									<button class="btn btn-lg btn-search">Search</button>
+									<button class="btn btn-lg btn-search" data-bind="disable: searching"><i class="fa fa-spinner fa-spin" data-bind="visible: searching"></i><span data-bind="visible: !searching()">Search</span></button>
 								</span>
 							</div>
 						</div>

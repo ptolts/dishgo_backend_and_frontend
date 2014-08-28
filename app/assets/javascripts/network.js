@@ -389,6 +389,8 @@ function NetworkModel() {
         }
     });    
 
+    self.searchArray = ko.observableArray([]);
+    self.searching = ko.computed(function(){ return self.searchArray().length > 0 }).extend({ rateLimit: { method: "notifyWhenChangesStop", timeout: 100 } });
     self.ajax_search = function(){
         $.ajax({
             type: "POST",
@@ -396,12 +398,16 @@ function NetworkModel() {
             data: {
                 restaurant_search_term: self.restaurant_search_term(),
             },
+            beforeSend: function(){
+                self.searchArray.push(this);
+            },
             success: function(data, textStatus, jqXHR){
+                self.searchArray.remove(this);
                 self.restaurants(_.map(data.restaurants,function(restaurant){ return new Restaurant(restaurant) }));
                 console.log("Total count: " + data.count + " Received count: " + self.restaurants().length);
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) { 
-
+                self.searchArray.remove(this);
             },
             dataType: "json"
         });     

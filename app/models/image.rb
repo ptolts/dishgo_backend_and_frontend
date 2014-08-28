@@ -21,6 +21,9 @@ class Image
   field :api_upload, type: Boolean, default: false
   field :official_site_image, type: Boolean, default: false
 
+  #Not used, but legacy.
+  field :garbage, type: Boolean, default: false
+
   field :img_url_medium, type: String
   field :img_url_original, type: String
   field :img_url_small, type: String

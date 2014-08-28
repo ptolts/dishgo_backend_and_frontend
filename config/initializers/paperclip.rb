@@ -48,7 +48,7 @@ end
 module AttachmentExtensions
   def after_flush_writes
     super
-	if @queued_for_write[:original] and !@instance.background_processed
+	if @queued_for_write[:original] and @instance.respond_to?(:background_processed) and !@instance.background_processed
       Rails.logger.warn "Background work on #{@queued_for_write[:original]}"
       ProcessImages.new.delay.process_image(@instance.id)		
     end

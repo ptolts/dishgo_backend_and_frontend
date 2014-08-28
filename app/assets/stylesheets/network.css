@@ -411,6 +411,9 @@ footer a:hover, footer a:focus {
     background: #cf2f28;
     color: #fff;
 }
+.search_button {
+    width: 90px;
+}
 .btn-search:hover, .btn-search:focus {
     color: #fff;
     opacity: .80;

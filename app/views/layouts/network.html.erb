@@ -119,7 +119,7 @@
 									<div class="input-group-addon"><i class="fa fa-search"></i></div>
 									<input type="text" placeholder="Restaurant Name" class="form-control" data-bind="hasFocus: top_search, value: restaurant_search_term, valueUpdate: 'afterkeydown'" />
 									<span class="input-group-btn">
-										<span class="btn btn-lg btn-search hidden-xs" data-bind="click: function(){ $root.ajax_search(); }">Search</span>
+										<span class="btn btn-lg btn-search search_button" data-bind="disable: searching, click: function(){ $root.ajax_search(); }"><i class="fa fa-spinner fa-spin" data-bind="visible: searching"></i><span data-bind="visible: !searching()">Search</span></span>
 									</span>
 								</div>
 							</div>
