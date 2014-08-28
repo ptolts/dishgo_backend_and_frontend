@@ -184,7 +184,7 @@ body {
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#b2000000, endColorstr=#b2000000);
     zoom: 1;
     color: #fff;
-    z-index: 4;
+    z-index: 11;
 }
 .container_small:nth-child(n) {
     filter: none;
