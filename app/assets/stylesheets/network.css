@@ -414,6 +414,9 @@ footer a:hover, footer a:focus {
     background: #cf2f28;
     color: #fff;
 }
+.fade_visible {
+    transition:visibility 0.5s
+}
 .search_button {
     width: 90px;
 }

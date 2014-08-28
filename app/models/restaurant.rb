@@ -193,6 +193,7 @@ class Restaurant
       menu_dup.reload    
       menu_dup.reset_draft_menu
     end
+    self.listed = true
     self.save
     self.reload
     self.publish_menu
