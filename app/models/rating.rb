@@ -2,6 +2,8 @@
 
 class Rating
   include Mongoid::Document
+  include Mongoid::Timestamps
+  
   field :rating, type: Integer, default: 0
   field :review, type: String
   belongs_to :user, class_name: "User", index: true
