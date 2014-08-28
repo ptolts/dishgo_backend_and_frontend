@@ -68,13 +68,16 @@ p, address,
     margin-bottom: 0px !important;
 }
 .image-cropped {
-    width: 50px;
-    height: 50px;
+    width: 75px;
+    height: 75px;
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
     margin: auto;
     border-radius: 4px;
+}
+.dish_container .restaurant_pics .col-xs-3 {
+  padding: 0;
 }
 .imageCroppedFull {
   width: 100%;
@@ -328,7 +331,7 @@ footer a:hover, footer a:focus {
     bottom: 15px;
     left: 0;
     width: 100%;
-    height: 70px;
+    height: 100px;
     padding: 15px;
 }
 .dish_container .restaurant_pics img {
@@ -512,6 +515,10 @@ footer a:hover, footer a:focus {
         margin: auto;
         float: left;
     }
+    .image-cropped {
+      width: 70px;
+      height: 70px;
+    }
 }
 /* Large Devices, Wide Screens */
 
@@ -545,6 +552,10 @@ footer a:hover, footer a:focus {
     .dish_rating .left_over {
         font-size: 38px;
     }
+    .image-cropped {
+      width: 75px;
+      height: 75px;
+  }
 }
 /* small rules */
 
@@ -646,6 +657,10 @@ footer a:hover, footer a:focus {
     .menu_dish_rating.nopic {
       left: 0 !important;
     }
+    .image-cropped {
+      width: 65px;
+      height: 65px;
+  }
 }
 .network_menu_header {
 /*    background: url('http://placehold.it/1900x1080/cf2f28/ffffff');
