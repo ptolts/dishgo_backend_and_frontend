@@ -35,6 +35,9 @@ class User
   field :plan,                :type => Hash, :default => {}
   field :cash_money,          :type => Boolean, :default => false   
   field :name,                type: String
+  field :promo_code,          type: String
+
+  field :claimed_promo_code,   type: String
 
   ## Recoverable
   field :reset_password_token,   :type => String
@@ -85,6 +88,7 @@ class User
   index({ email:1 }, { name:"email_index" })
   index({ _id:1 }, { unique: true, name:"id_index" })
 
+  before_save :set_promo_code
   before_save :setup_link_field
   before_save :sign_up_link_field
   before_save {|user| 
@@ -92,6 +96,15 @@ class User
                   user.email = user.email.downcase
                 end
               }
+#
+  def set_promo_code 
+    if self.promo_code.blank?
+      self.promo_code = loop do
+        token = SecureRandom.hex[0..3].upcase
+        break token unless User.where(promo_code: token).count > 0
+      end
+    end
+  end
 
   def setup_link_field
     if !self.email.blank? and password.blank? and setup_link.blank?
@@ -194,7 +207,7 @@ class User
   end  
 
   def create_x_dishcoins x
-    (0..x).each{|e| Dishcoin.create(user:self)}
+    (1..x).each{|e| Dishcoin.create(user:self)}
   end
  
   private

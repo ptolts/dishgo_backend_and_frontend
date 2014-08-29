@@ -144,7 +144,7 @@ function Menu(data, topmodel) {
 		console.log("----------------");
 	});
 
-	self.menu($.map(data.menu, function(item) { 
+	self.menu($.map((data.menu || []), function(item) { 
 									return new Section(item,self) 
 								}
 	));

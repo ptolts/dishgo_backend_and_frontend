@@ -60,6 +60,7 @@ Foodcloud::Application.routes.draw do
       post '/prize_list', to: "prizes#prize_list"
       post '/won_prize_list', to: "prizes#won_prize_list"
       post '/destroy', to: "prizes#destroy"
+      post '/promo_code', to: "prizes#promo_code"
     end
   end     
 

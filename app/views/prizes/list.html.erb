@@ -205,11 +205,22 @@
                 <a data-bind="click: function(){ $root.show_odds() }" style="line-height: 30px;">What are my odds?</a>
             </div>
         </div> -->
-        <div class="row" style="background-color: #fff;margin-bottom:-15px;">
+        <div class="row" style="background-color: #fff">
             <div class="col-xs-12">
                 <a data-bind="click: function(){ $root.show_redeem() }" style="line-height: 60px;">3. Redeem rewards <i class="fa fa-question-circle"></i></a>
             </div>
         </div>
+        <div class="row" style="margin-bottom:-15px;" data-bind="with: $root.user">
+            <div class="col-xs-12">
+                <h3>Free Dishcoins</h3>
+                <p>Have one of your friends install the DishGo app and navigate to this page. Once here, have them enter your promo code and you will each earn 5 additional Dishcoins to bid on great prizes!</p>
+                <h5>Your Promo Code <span style="color: #cf2f28" data-bind="text: promo_code"></span></h5>
+                <!-- ko if: promo_code() != claimed_promo_code() -->
+                    <h5>Claim Coins</h5>
+                    <p><input data-bind="value: claimed_promo_code" /><button class="btn btn-search" data-bind="click: function(){ $root.claim_promo($data) }">claim</button></p>
+                <!-- /ko -->
+            </div>
+        </div>        
     </div>
 </div>
 

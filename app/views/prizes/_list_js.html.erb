@@ -124,6 +124,23 @@
             self.user().dishcoins(self.user().dishcoins() - prize.number_of_bets());
         }
 
+        self.claim_promo = function(user){
+            $.ajax({
+                type: "POST",
+                url: "/app/prizes/promo_code",
+                data: {
+                    user: ko.toJSON(user)
+                },
+                success: function(data, textStatus, jqXHR){
+                    self.user(new User(data));
+                },
+                error: function(data){
+
+                },
+                dataType: "json"
+            });  
+        }
+
         self.monitor_winner = ko.computed({
             read: function(){
                 if(winner_winner_chicken_dinner()){
