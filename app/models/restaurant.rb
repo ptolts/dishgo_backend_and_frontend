@@ -325,7 +325,10 @@ class Restaurant
     end
     if self.image and options[:include_images]
       hash["image"] = self.image.profile_images.limit(options[:include_images]).as_json
-    end        
+    end  
+    if options[:prizes]
+      hash["prizes"] = self.prizes.count
+    end         
     hash["multi_name"] = self.multi_name_translations
     return hash
   end
