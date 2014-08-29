@@ -194,7 +194,7 @@
         <div class="row" style="margin:-15px; background-color: #fff;" data-bind="with: $root.user">
             <div class="col-xs-12">
                 <h3>Share to Win!</h3>
-                <p>Share promo code <span style="color: #cf2f28;" data-bind="text: promo_code"></span> with a friend, or enter theirs. Both of you win 5 DishCoins to bid on great coupons!</p>
+                <p>Share promo code <span style="color: #cf2f28;" data-bind="text: promo_code, click: function(){ $root.send_sms($data.promo_code()) }"></span> with a friend, or enter theirs. Both of you win 5 DishCoins to bid on great coupons!</p>
                 <!-- ko if: promo_code() != claimed_promo_code() -->
                     <div class="input-group" style="width:60%;margin-bottom:10px;">
                         <input class="form-control" placeholder="Enter Promo Code" data-bind="value: claimed_promo_code" />

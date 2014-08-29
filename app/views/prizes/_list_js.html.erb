@@ -93,6 +93,10 @@
             global_bridge.send('sign_in');
         };
 
+        self.send_sms = function(promo){
+            global_bridge.send({sendSMS:"Download DishGo at http://appstore.com/dishgo and enter my promo code '"+promo+"' to win great prizes!"});
+        };
+
         self.page = ko.observable("list");
         self.show_your_prizes = function(){
             self.your_prize(true);           
