@@ -166,7 +166,6 @@
     position: relative;
     z-index: 10;
     margin-bottom: 10px;
-    margin-top: -15px;
 }
 
 .fa-camera.nopic {
@@ -205,6 +204,7 @@
 .pop_up_dish-description p {
     text-align: left;
     font-family: 'Lato', sans-serif;
+    color: #5B5B5B;
 }
 @media (max-width: 1200px) {
     .fullWidth .lightText:hover {
