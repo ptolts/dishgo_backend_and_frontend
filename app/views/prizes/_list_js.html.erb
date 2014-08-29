@@ -20,6 +20,12 @@
 
         self.prizes = ko.observableArray([]);
 
+        self.loggedIn = ko.computed({
+            read: function(){
+                return !!self.user().id();
+            }
+        });        
+
         self.your_prizes = ko.computed({
             read: function(){
                 return _.filter(self.prizes(),function(prize){
@@ -82,6 +88,10 @@
                 }
             }
         });
+
+        self.sign_in = function(){
+            global_bridge.send('sign_in');
+        };
 
         self.page = ko.observable("list");
         self.show_your_prizes = function(){
@@ -159,33 +169,35 @@
 
     var viewmodel = new viewModel();            
 
-        // ios communication stuff
-        function connectWebViewJavascriptBridge(callback) {
-            if (window.WebViewJavascriptBridge) {
+    // ios communication stuff
+    function connectWebViewJavascriptBridge(callback) {
+        if (window.WebViewJavascriptBridge) {
+            callback(WebViewJavascriptBridge)
+        } else {
+            document.addEventListener('WebViewJavascriptBridgeReady', function() {
                 callback(WebViewJavascriptBridge)
-            } else {
-                document.addEventListener('WebViewJavascriptBridgeReady', function() {
-                    callback(WebViewJavascriptBridge)
-                }, false)
-            }
+            }, false)
         }
+    }
 
-        connectWebViewJavascriptBridge(function(bridge) {
+    var global_bridge;
 
-            /* Init your app here */
+    connectWebViewJavascriptBridge(function(bridge) {
 
-            bridge.init(function(message, responseCallback) {
-                alert('Received message: ' + message)   
-                if (responseCallback) {
-                    responseCallback("Right back atcha")
-                }
-            })
-            bridge.send('Hello from the javascript')
-            bridge.send('Please respond to this', function responseCallback(responseData) {
-                console.log("Javascript got its response", responseData);
-                alert(responseData);
-            })
-        }) 
+        global_bridge = bridge;
+
+        bridge.init(function(message, responseCallback) {
+            // alert('Received message: ' + message)   
+            // if (responseCallback) {
+            //     responseCallback("Right back atcha")
+            // }
+        });
+        // bridge.send('Hello from the javascript')
+        // bridge.send('Please respond to this', function responseCallback(responseData) {
+        //     console.log("Javascript got its response", responseData);
+        //     alert(responseData);
+        // })
+    }) 
 
     $(function(){   
         ko.applyBindings(viewmodel);                             

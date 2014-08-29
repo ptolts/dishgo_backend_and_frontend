@@ -79,7 +79,11 @@ class PrizesController < ApplicationController
     if !params[:restaurant_id].blank?
       @prizes = @prizes.where(restaurant_id:params[:restaurant_id])
     end
-    @prizes = @prizes.collect{|e| e.serializable_hash({current_user:user.id})}
+    if user
+      @prizes = @prizes.collect{|e| e.serializable_hash({current_user:user.id})}
+    else
+      @prizes = @prizes.collect{|e| e.serializable_hash({}) }
+    end
     render json: @prizes.as_json
   end
 

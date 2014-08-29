@@ -54,6 +54,7 @@
 
         function User(data) {
             var self = this;
+            data = data || {};
             self.id = ko.observable(data._id ? data._id : null);
             self.email = ko.observable(data.email);
             self.phone = ko.observable(data.phone);
