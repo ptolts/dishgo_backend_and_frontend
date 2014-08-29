@@ -85,7 +85,7 @@ p, address,
   height: 300px;
   background-position: center center;
   background-repeat: no-repeat;
-  background-size: contain;
+  background-size: cover;
   margin: auto;
   border-radius: 4px;
 }
