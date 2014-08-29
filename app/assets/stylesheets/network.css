@@ -85,7 +85,7 @@ p, address,
   height: 300px;
   background-position: center center;
   background-repeat: no-repeat;
-  background-size: contain;
+  background-size: cover;
   margin: auto;
   border-radius: 4px;
 }
@@ -501,14 +501,6 @@ footer a:hover, footer a:focus {
     }
     .menu_dish_rating .left_over {
         font-size: 16px;
-    }
-    .claim {
-        position: absolute;
-        top: -50px;
-        right: 0px;
-    }
-    #main_head {
-        position: relative;
     }
 }
 /* Medium Devices, Desktops */

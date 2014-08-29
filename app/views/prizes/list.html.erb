@@ -184,22 +184,10 @@
             </div>
         </div>
     </div>
-    <div class="grey_bg" id="faq">
-        <div class="row" style="margin:-15px; background-color: #fff;" data-bind="with: $root.user">
-            <div class="col-xs-12">
-                <h3>Share to Win!</h3>
-                <p>Share promo code <span style="color: #cf2f28;" data-bind="text: promo_code"></span> with a friend, or enter theirs. Both of you win 5 DishCoins to bid on great coupons!</p>
-                <!-- ko if: promo_code() != claimed_promo_code() -->
-                    <div class="input-group" style="width:60%;margin-bottom:10px;">
-                        <input class="form-control" placeholder="Enter Promo Code" data-bind="value: claimed_promo_code" />
-                        <span class="input-group-addon btn btn-search" style="background-color:#cf2f28;color:#fff;border:1px solid #cf2f28;" data-bind="click: function(){ $root.claim_promo($data) }">claim</span>
-                    </div>
-                <!-- /ko -->
-            </div>
-        </div>     
+    <div class="grey_bg" id="faq">    
         <div class="row">
             <div class="col-xs-12">
-                <h4 style="margin-top:10px;">How Do I Earn Rewards?</h4> 
+                <h4 style="margin-top:0;">How Do I Earn Rewards?</h4> 
             </div>
         </div>
         <div class="row" style="background-color: #fff;">
@@ -221,7 +209,18 @@
             <div class="col-xs-12">
                 <a data-bind="click: function(){ $root.show_redeem() }" style="line-height: 60px;">3. Redeem rewards <i class="fa fa-question-circle"></i></a>
             </div>
-        </div>       
+        </div>
+        <div class="row" style="margin-bottom:-15px;" data-bind="with: $root.user">
+            <div class="col-xs-12">
+                <h3>Free Dishcoins</h3>
+                <p>Have one of your friends install the DishGo app and navigate to this page. Once here, have them enter your promo code and you will each earn 5 additional Dishcoins to bid on great prizes!</p>
+                <h5>Your Promo Code <span style="color: #cf2f28" data-bind="text: promo_code"></span></h5>
+                <!-- ko if: promo_code() != claimed_promo_code() -->
+                    <h5>Claim Coins</h5>
+                    <p><input data-bind="value: claimed_promo_code" /><button class="btn btn-search" data-bind="click: function(){ $root.claim_promo($data) }">claim</button></p>
+                <!-- /ko -->
+            </div>
+        </div>        
     </div>
 </div>
 
