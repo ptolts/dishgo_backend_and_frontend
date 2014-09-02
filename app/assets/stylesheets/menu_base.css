@@ -451,14 +451,14 @@ border-color: #6D6D6D;
 }
 .custom_modal .custom_modal_content .custom_modal_header .dish-price span.number {
   font-style: italic;
-  font-family: 'Josefin Sans', Georgia, serif !important;
+/*  font-family: 'Josefin Sans', Georgia, serif !important;*/
   font-size: 2em;
   font-weight: bold;
   margin-right: 0.5em;
   line-height: 1em;
 }
 .custom_modal .custom_modal_content .custom_modal_header .custom_modal-title {
-  font-family: 'Josefin Sans', Georgia, serif !important;
+/*  font-family: 'Josefin Sans', Georgia, serif !important;*/
   font-size: 2em;
   line-height: 1em;
   margin: 0;
@@ -477,7 +477,7 @@ border-color: #6D6D6D;
   font-size: 1.5em;
 }
 .custom_modal .button span {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+/*  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;*/
 }
 .custom_modal .img-responsive {
   text-align: center;

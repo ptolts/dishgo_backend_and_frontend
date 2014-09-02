@@ -54,7 +54,7 @@
                                             <!-- The file input field used as target for the file upload widget -->
                                             <input data-bind="stopBubbleUpload, network_file_upload: images" id="fileupload" type="file" name="image"  class="file_upload_input" style="z-index:1;" accept="images/*" capture="camera">
                                         </div>
-                                        <div class="progress" style="height: 10px" data-bind="visible: images().length > 0, with: images()[0]">
+                                        <div class="progress" style="height: 20px" data-bind="visible: images().length > 0, with: images()[0]">
                                             <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" data-bind="style: {width:progressValue()+'%'}"></div>
                                         </div>                                     
                                     </div>                                
