@@ -10,6 +10,7 @@ class IndividualPrize
 
   field :prize_token, type: String
   field :number, type: Integer
+  field :dont_open_before, type: DateTime   
 
   after_save :all_done?
 
@@ -18,22 +19,11 @@ class IndividualPrize
   def serializable_hash options = {}
     hash = super(options)
     hash[:id] = self.id
+    if dont_open_before and DateTime.now < dont_open_before
+      hash[:prize_token] = nil
+    end
     return hash
   end
-
-  # def random_serial_number
-  # 	begin
-	 #    phrase = []
-	 #    (0..2).each do |word|
-  #       begin
-  #         chosen_word = RandomWord.adjs.next
-  #       end while chosen_word.length > 5
-	 #      phrase << chosen_word
-	 #    end
-	 #    phrase = phrase.join("_")
-	 #  end while IndividualPrize.where(prize_token:phrase).count > 0
-  #   return phrase
-  # end 
 
   def random_serial_number
     begin

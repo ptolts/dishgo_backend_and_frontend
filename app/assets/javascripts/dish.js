@@ -47,6 +47,9 @@ function Dish(data, topmodel) {
     self.price = ko.observable(data.price);
     self.topmodel = topmodel;
     self.position = ko.observable(data.position ? data.position : 0);
+    self.restaurant_id = data.restaurant_id;
+    self.restaurant_name = data.restaurant_name;
+    self.top_image = data.top_image;
     self.rating = ko.observable(data.rating ? data.rating : 0);
     self.images = ko.observableArray([]);
     self.sizeSelectedOptionValue = ko.observable();

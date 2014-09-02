@@ -34,6 +34,7 @@ class Restaurant
   field :default_language, type: String
   field :category, type: Array
   field :listed, type: Boolean, default: false
+  field :with_menu, type: Boolean, default: false
   field :show_hours, type: Boolean, default: true
   field :show_map, type: Boolean, default: true
   field :show_menu, type: Boolean, default: true
@@ -98,11 +99,23 @@ class Restaurant
   index({ _id:1 }, { unique: true, name:"id_index" })
   index({ locs: "2dsphere" }, { name:"location_index"})
   index({ subdomain: 1}, {name: "subdomain_index"})
+  index({ with_menu: 1}, {name: "with_menu_index"})
   index({ host: 1}, {name: "host_index"})
   index({ facebook_page_id: 1}, {name: "facebook_page_id_index"})
   index({ preview_token: 1}, {name: "preview_token_index"})
 
   scope :has_menu, -> { any_in(:_id => includes(:section).select{ |w| w.section.size > 0 }.map{ |r| r.id }) }
+  scope :only_with_menu, -> { where(with_menu:true) }
+
+  before_save :set_with_menu
+
+  def set_with_menu
+    if !with_menu
+      if menus.count > 0
+        self.with_menu = true
+      end
+    end
+  end
 
   def by_loc loc=nil
     if loc
@@ -192,6 +205,11 @@ class Restaurant
       end
       menu_dup.reload    
       menu_dup.reset_draft_menu
+    end
+    self.listed = true
+    if logo_copy = restaurant.logo and logo_copy = logo_copy.dup
+      logo_copy .restaurant_id = self.id
+      logo_copy.save
     end
     self.save
     self.reload

@@ -10,8 +10,11 @@ Foodcloud::Application.routes.draw do
     get '/sitemap.xml' => 'robots#sitemap'
   end
 
-  # root :to => 'administration#index'
-  root :to => 'network#index'  
+  constraints(Ownsrestaurant) do
+    root :to => 'administration#index', as: "restaurant_root"
+  end 
+
+  root :to => 'network#index'   
 
   if Rails.env.production?
      get '404', :to => 'application#page_not_found'
@@ -77,6 +80,7 @@ Foodcloud::Application.routes.draw do
       get '/restaurant', to: "network#restaurant"
       get '/redirect', to: "network#redirect"
       post '/search', to: "network#search"
+      post '/dish_search', to: "network#dish_search"
       post '/fetch_user', to: "network#fetch_user"
       get '/fetch_user', to: "network#fetch_user"
     end

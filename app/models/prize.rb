@@ -21,7 +21,7 @@ class Prize
   field :winning_number, type: Integer
   field :lat, type: Float
   field :lon, type: Float
-  field :locs, type: Array    
+  field :locs, type: Array
 
   belongs_to :restaurant, class_name: "Restaurant", inverse_of: :prizes, index: true
 

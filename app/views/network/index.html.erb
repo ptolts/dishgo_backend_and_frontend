@@ -49,73 +49,8 @@
 	<!-- /ko -->
 
 	<!-- SEARCH RESULTS WILL APPEAR HERE -->
-
-	<div class="container search_results"  data-bind="visible: top_search" style="display: none">
-		<div class="row" data-bind="foreach: restaurants">
-			<div class="col-md-4 col-sm-6 col-xs-12">
-				<div class="dish_container coo_hover">
-					<div class="row">
-						<a data-bind="attr:{href:'/app/network/restaurant/'+id}" class="full_dish_link"></a>
-						<div class="dish_title_bar">
-							<span class="restaurant_name">
-								<!-- ko text: name --><!-- /ko -->
-							</span>
-						</div>
-<!-- 						<div class="restaurant_logo_wrap">
-	                        <div class="restaurant_logo">
-	                            <div class="restaurant-data pull-left">
-	                                <div class="restaurant-pic pull-left">
-	                                    <img src="" alt="" class="img-responsive" />
-	                                </div>
-	                            </div>
-	                        </div>
-	                        <span class="resto_rating" data-bind="starRating: rating"></span>
-                    	</div> -->
-						<div class="col-xs-12" style="top: 60px;">
-							<div class="contact_details">
-								<div class="row">
-									<div class="col-xs-2" style="text-align:right;">
-										<i class="fa fa-map-marker"></i>
-									</div>
-									<div class="col-xs-10" style="">
-										<address>
-					                        <!-- ko text: address_line_1 --><!-- /ko -->
-					                        <br>
-					                        <!-- ko text: city --><!-- /ko -->
-					                        <!-- ko text: province --><!-- /ko -->
-				                		</address>
-				                	</div>
-			                	</div>
-			                	<div class="row">
-									<div class="col-xs-2" style="text-align:right;">
-										<i class="fa fa-phone"></i>
-									</div>
-									<div class="col-xs-10" style="">
-										<span><!-- ko text: phone --><!-- /ko --></span>
-									</div>
-								</div>
-								<div class="row">
-									<div class="col-xs-2" style="text-align:right;">
-										<i class="fa fa-cutlery"></i>
-									</div>
-									<div class="col-xs-10" style="" data-bind="foreach: categories">
-										<span><!-- ko text: $data --><!-- /ko --></span> <!-- Category -->
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="restaurant_pics"> <!-- dish pictures from resto -->
-						<div class="row" data-bind="foreach: images">
-							<div class="col-xs-3">
-								<div class="image-cropped" data-bind="style: { backgroundImage: 'url(' + $data.small() + ')' }"></div>						
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+	<%= render 'restaurant_search_results' %>
+	<%= render 'dish_search_results' %>
 
 </div>
 <div id="white_background" data-bind="slideVisible: !top_search()">

@@ -112,10 +112,24 @@
             <div class="row">
                 <div class="col-xs-12 text-center">
                     <!-- ko foreach: individual_prizes -->
-                        <h4>Coupon Code</h4>
-                        <p><span class="coupon_number" data-bind="text: number"> </span><span class="token" data-bind="text: prize_token"></span></p>
-                        <p class="fine">Present this to the merchant to redeem your reward.</p>
-                        <p class="fine">Cannot be combined with another offer or promotion.</p>
+
+                        <!-- if the token is available right now, display it. Otherwise tell them when it will be available -->
+                        <!-- ko if: prize_token -->
+                            <h4>Coupon Code</h4>
+                            <p><span class="coupon_number" data-bind="text: number"> </span><span class="token" data-bind="text: prize_token"></span></p>
+                            <p class="fine">Present this to the merchant to redeem your reward.</p>
+                            <p class="fine">Cannot be combined with another offer or promotion.</p>                            
+                        <!-- /ko -->
+
+                        <!-- token will be available in.... -->
+                        <!-- ko if: !prize_token -->
+                            <h4>Coupon Code Available On</h4>
+                            <p><span class="token" data-bind="text: dont_open_before"></span></p>
+                            <p class="fine">In order to prevent abuse, this coupon</p>
+                            <p class="fine">is only redeemable 24 hours after winning.</p>                            
+                        <!-- /ko -->
+
+
                     <!-- /ko -->
                 </div>
             </div>         

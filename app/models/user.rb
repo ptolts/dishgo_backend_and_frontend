@@ -131,6 +131,7 @@ class User
   end  
 
   def serializable_hash(options = {})
+    options ||= {}    
     hash = super options
     hash.delete("setup_link")
     if options[:restaurant]
