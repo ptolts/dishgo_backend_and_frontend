@@ -181,12 +181,9 @@
 
 <div class="container" data-bind="visible: page() == 'help'">
     <div class="prizes_list_controls">
-        <div class="dishcoin_count row">
-            <div class="col-xs-6">
-                <h1 class="head" style="color:#fff">FAQ</h1>
-            </div>       
-            <div class="col-xs-6">
-                <div class="btn btn-rewards" style="width: 100%" data-bind="click: function(){ $root.show_home() }">Back to Prize List</div>             
+        <div class="dishcoin_count row">      
+            <div class="col-xs-12">
+                <div class="btn btn-rewards" style="margin-bottom: 10px;" data-bind="click: function(){ $root.show_home() }">Back to Prize List</div>             
             </div>
         </div>
     </div>
@@ -196,7 +193,7 @@
                 <h3>Share to Win!</h3>
                 <p>Share promo code <span style="color: #cf2f28;" data-bind="text: promo_code, click: function(){ $root.send_sms($data.promo_code()) }"></span> with a friend, or enter theirs. Both of you win 5 DishCoins to bid on great coupons!</p>
                 <!-- ko if: promo_code() != claimed_promo_code() -->
-                    <div class="input-group" style="width:60%;margin-bottom:10px;">
+                    <div class="input-group" style="width:75%; margin-bottom:10px;">
                         <input class="form-control" placeholder="Enter Promo Code" data-bind="value: claimed_promo_code" />
                         <span class="input-group-addon btn btn-search" style="background-color:#cf2f28;color:#fff;border:1px solid #cf2f28;" data-bind="click: function(){ $root.claim_promo($data) }">claim</span>
                     </div>
