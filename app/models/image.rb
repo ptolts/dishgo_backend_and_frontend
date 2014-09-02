@@ -47,6 +47,7 @@ class Image
   index({ rejected:1 }, { name:"rejected_index" })
 
   scope :rejected, -> { ne(rejected: true) }
+  scope :app_version, -> { only(:id, :img_url_medium) }
   scope :profile_images, -> { ne(not_profile_image: true) }
   scope :unverified, -> { where(unverified: true) }
   scope :with_user, -> { ne(user_id: nil) }
@@ -107,18 +108,22 @@ class Image
 
   def img_url_small
     return super.to_s.gsub(/http:\/\//,'https://').gsub(/\.r.{2}\./,'.ssl.')
-  end    
+  end
+
+  def tiny_hash
+      return {id: _id, local_file: self.img_url_medium}
+  end 
 
   def custom_to_hash
-    if img_file_size
+    # if img_file_size
       # This is for legacy images which didn't have their URL's saved.
       if self.img_url_medium.nil?
         img_post_process
       end      
       return {_id: _id, id: _id, local_file: self.img_url_medium, medium: self.img_url_medium, rejected: false, original: self.img_url_original}
-    else
-      return {_id: self._id, id: self._id, local_file: self.local_file, medium: self.img_url_medium, rejected: self.rejected, original: self.img_url_original}
-    end
+    # else
+    #   return {_id: self._id, id: self._id, local_file: self.local_file, medium: self.img_url_medium, rejected: self.rejected, original: self.img_url_original}
+    # end
   end
 
   def serializable_hash options

@@ -332,16 +332,16 @@ class Restaurant
 
   def as_document options = {}
     hash = super()
-    if self.logo
+    if !options[:skip_logo] and self.logo 
       hash["logo"] = self.logo.as_json
     end
-    if self.pages and !options[:pages]
+    if !options[:pages] and self.pages
       hash["pages"] = self.pages.as_json
     end
-    if self.gallery_images and !options[:pages]
+    if !options[:pages] and self.gallery_images
       hash["gallery_images"] = self.gallery_images.as_json
     end
-    if self.image and options[:include_images]
+    if options[:include_images] and self.image 
       hash["image"] = self.image.profile_images.limit(options[:include_images]).as_json
     end  
     if options[:prizes]
