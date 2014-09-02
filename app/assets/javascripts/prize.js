@@ -28,6 +28,8 @@ function IndividualPrize(data) {
     self.prize_token = (data.prize_token || null);
     self.user_id = ko.observable(data.user_id || null);
     self.number = ko.observable(data.number || null);
+    var format = "%Y-%m-%dT%H:%M:%S.%L%z";
+    self.dont_open_before = ko.observable(data.dont_open_before ? jdate.strftime(jdate.strptime(data.dont_open_before,format),"%c") : null);    
 
     self.claimed = ko.computed({
       read: function(){

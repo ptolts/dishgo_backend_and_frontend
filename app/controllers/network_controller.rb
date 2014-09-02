@@ -1,5 +1,5 @@
 class NetworkController < ApplicationController
-  skip_before_filter :verify_authenticity_token, only: [:search, :fetch_user]
+  skip_before_filter :verify_authenticity_token, only: [:search, :fetch_user, :dish_search]
   layout 'network'
   
   def index
@@ -42,7 +42,7 @@ class NetworkController < ApplicationController
   end
 
   def search
-    restaurants = Restaurant.limit(25)
+    restaurants = Restaurant.only_with_menu.limit(25)
     if result = request.location    
       coords = [result.coordinates[1],result.coordinates[0]]
       restaurants = restaurants.where(:locs => { "$near" => { "$geometry" => { "type" => "Point", :coordinates => coords }, "$maxDistance" => 100000}})
@@ -54,6 +54,21 @@ class NetworkController < ApplicationController
     restaurants = restaurants.collect{|e| e.as_document({pages:true, include_images:4})}.as_json
     render json: {restaurants:restaurants, count: count}.to_json
   end
+
+  def dish_search
+    dishes = Dish.limit(25)
+    if result = request.location    
+      coords = [result.coordinates[1],result.coordinates[0]]
+      restaurant_ids = Restaurant.where(:locs => { "$near" => { "$geometry" => { "type" => "Point", :coordinates => coords }, "$maxDistance" => 100000}}).only(:id).collect{|e| e.id}
+      dishes.where(restaurant_id:restaurant_ids)
+    end
+    search_term = params[:dish_search_term].gsub(/[^[:alnum:]]/,'.').gsub(/s\b/,'.?s')
+    regex = /#{search_term}/i
+    dishes = dishes.where(search_terms:regex)
+    count = dishes.count
+    dishes = dishes.collect{|e| e.serializable_hash(export_localized:true)}.as_json
+    render json: {dishes:dishes, count: count}.to_json
+  end  
 
   def create_page_view restaurant
     page_view = PageView.new

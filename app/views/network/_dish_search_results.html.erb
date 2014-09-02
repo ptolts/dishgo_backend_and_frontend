@@ -1,0 +1,36 @@
+	<div class="container search_results"  data-bind="visible: top_search() && $root.search_type() == 'dish'" style="display: none">
+		<div class="row">
+		<!-- ko foreach: dishes -->
+			<div class="col-md-4 col-sm-6 col-xs-12">
+				<div class="top_dish_container coo_hover">
+					<a data-bind="attr:{href:'/app/network/restaurant/'+restaurant_id}" class="full_dish_link"></a>
+					<div class="dish_title_bar">
+						<span class="restaurant_name">
+							<!-- ko text: restaurant_name --><!-- /ko -->
+						</span>
+					</div>					
+					<div class="dish-picture imageCroppedFull" data-bind="backgroundImage">						
+						<span class="dish_rating">
+                            <div class="menu_dish_rating" data-bind="starRating: rating"></div>
+						</span>
+						<div class="dish-description">
+							<span data-bind="lText: name"></span>
+							<p data-bind="lText: description"></p>
+						</div>
+					</div>
+				</div>
+			</div>
+		<!-- /ko -->			
+		</div>	
+		<div class="row">
+			<div class="col-md-4 col-md-offset-4 col-sm-offset-3 col-sm-6 col-xs-12" data-bind="visible: top_search">
+				<div class="dish_container coo_hover">
+					<div class="row">
+						<a href="/app/letsdishgo" class="full_dish_link"></a>
+						<h3>Can't find your dish?</h3>
+						<h4>Get listed today!</h4>
+					</div>
+				</div>
+			</div>
+		</div>		
+	</div>

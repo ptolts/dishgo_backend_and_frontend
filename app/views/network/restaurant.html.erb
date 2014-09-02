@@ -13,7 +13,7 @@
                             <% if @restaurant.logo %>
                                 <div class="imageCroppedOneHundredPercent" style="background-image: url('<%= @restaurant.logo.img_url_original %>')">&nbsp;</div>                                                                                                                                  
                             <% elsif @restaurant.image.length > 0 %>
-                                <div class="imageCroppedOneHundredPercent" style="background-image: url('<%= @restaurant.image.first.img_url_original %>')">&nbsp;</div>                                                                                                                                  
+                                <div class="imageCroppedOneHundredPercent" style="background-image: url('<%= @restaurant.image.profile_images.first.img_url_original %>')">&nbsp;</div>                                                                                                                                  
                             <% end %>
                         </div>
                     </div>
@@ -24,6 +24,9 @@
     <div class="resto_details">
         <div class="container">
             <div class="row" style="position: relative">
+                <div class="claim">
+                    <a href="/app/letsdishgo" class="btn btn-none">Claim this page</a>
+                </div>
                 <div class="col-xs-12 col-sm-6 col-md-4 padme">
                     <div class="restaurant-title">
                         <%= @restaurant.name %>

@@ -13,6 +13,11 @@ class Dish
   field :has_multiple_sizes, type: Boolean
   field :draft, type: Hash
 
+  # For dish search, lets totally denormalize stuff
+  field :search_terms, type: String
+  field :top_image, type: String
+  field :restaurant_name, type: String
+
   field :rating, type: Integer, default: 0
   # belongs_to :subsection, index: true
   belongs_to :restaurant, index: true
@@ -38,8 +43,22 @@ class Dish
   scope :pub, -> {asc(:position)}  
 
   index({ _id:1 }, { unique: true, name:"id_index" })
+  index({ search_terms:1 }, { name:"search_index" })
+
+  before_save :set_search_terms
 
   # accepts_nested_attributes_for :options, :draft_options, :sizes, :draft_sizes
+  def set_search_terms
+    self.search_terms = self.name_translations.collect do |key,value|
+      next value
+    end.join(" ")
+    if self.restaurant
+      self.restaurant_name = self.restaurant.name
+    end
+    if img = self.image.first
+      self.top_image = img.img_url_medium
+    end
+  end
 
   def load_data_from_json dish, request_restaurant
     draft = {}
@@ -276,6 +295,15 @@ class Dish
     end
     return dish_hash
   end 
+
+  def serializable_hash options = {}
+    hash = super()
+    if options[:export_localized]
+      hash[:name] = self.name_translations
+      hash[:description] = self.description_translations
+    end    
+    return hash
+  end  
 
   def api_custom_to_hash lang
     dish_hash = self.as_document

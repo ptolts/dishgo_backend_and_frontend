@@ -505,6 +505,14 @@ footer a:hover, footer a:focus {
     .menu_dish_rating .left_over {
         font-size: 16px;
     }
+    .claim {
+        position: absolute;
+        top: -50px;
+        right: 0px;
+    }
+    #main_head {
+        position: relative;
+    }
 }
 /* Medium Devices, Desktops */
 

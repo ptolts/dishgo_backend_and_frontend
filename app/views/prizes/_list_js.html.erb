@@ -20,6 +20,12 @@
 
         self.prizes = ko.observableArray([]);
 
+        self.loggedIn = ko.computed({
+            read: function(){
+                return !!self.user().id();
+            }
+        });        
+
         self.your_prizes = ko.computed({
             read: function(){
                 return _.filter(self.prizes(),function(prize){
@@ -83,6 +89,14 @@
             }
         });
 
+        self.sign_in = function(){
+            global_bridge.send('sign_in');
+        };
+
+        self.send_sms = function(promo){
+            global_bridge.send({sendSMS:"Download DishGo at http://appstore.com/dishgo and enter my promo code '"+promo+"' to win great prizes!"});
+        };
+
         self.page = ko.observable("list");
         self.show_your_prizes = function(){
             self.your_prize(true);           
@@ -124,6 +138,23 @@
             self.user().dishcoins(self.user().dishcoins() - prize.number_of_bets());
         }
 
+        self.claim_promo = function(user){
+            $.ajax({
+                type: "POST",
+                url: "/app/prizes/promo_code",
+                data: {
+                    user: ko.toJSON(user)
+                },
+                success: function(data, textStatus, jqXHR){
+                    self.user(new User(data));
+                },
+                error: function(data){
+
+                },
+                dataType: "json"
+            });  
+        }
+
         self.monitor_winner = ko.computed({
             read: function(){
                 if(winner_winner_chicken_dinner()){
@@ -142,8 +173,38 @@
 
     var viewmodel = new viewModel();            
 
+    // ios communication stuff
+    function connectWebViewJavascriptBridge(callback) {
+        if (window.WebViewJavascriptBridge) {
+            callback(WebViewJavascriptBridge)
+        } else {
+            document.addEventListener('WebViewJavascriptBridgeReady', function() {
+                callback(WebViewJavascriptBridge)
+            }, false)
+        }
+    }
+
+    var global_bridge;
+
+    connectWebViewJavascriptBridge(function(bridge) {
+
+        global_bridge = bridge;
+
+        bridge.init(function(message, responseCallback) {
+            // alert('Received message: ' + message)   
+            // if (responseCallback) {
+            //     responseCallback("Right back atcha")
+            // }
+        });
+        // bridge.send('Hello from the javascript')
+        // bridge.send('Please respond to this', function responseCallback(responseData) {
+        //     console.log("Javascript got its response", responseData);
+        //     alert(responseData);
+        // })
+    }) 
+
     $(function(){   
-        ko.applyBindings(viewmodel);                        
+        ko.applyBindings(viewmodel);                             
     });
 
 //]]>  

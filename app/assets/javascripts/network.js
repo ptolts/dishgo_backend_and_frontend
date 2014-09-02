@@ -213,8 +213,14 @@ ko.bindingHandlers.networkMaxHeight = {
 
 ko.bindingHandlers.backgroundImage = {
     update: function (element, valueAccessor, allBindingsAccessor, viewModel, bindingContext) {
-        var src = viewModel.medium();
-        $(element).css("background-image","url('" + src + "')");
+        if(viewModel.constructor.name == "Dish"){
+            var src = viewModel.top_image;
+        } else {
+            var src = viewModel.medium();
+        }
+        if(src){
+            $(element).css("background-image","url('" + src + "')");            
+        }
     }    
 }
 
@@ -241,6 +247,7 @@ ko.bindingHandlers.loggedInChecker = {
 };
 
 var global_restaurant_id;
+var lang;
 
 function NetworkModel() {
 
@@ -252,15 +259,20 @@ function NetworkModel() {
     self.selected_dish = ko.observable();
     self.user = ko.observable(new User(user_data));
     self.restaurants = ko.observableArray([]);
+    self.dishes = ko.observableArray([]);
     self.restaurant_search_term = ko.observable("");
     self.isMobile = isMobile.any();
     self.email = ko.observable();
     self.password = ko.observable();
+    self.search_type = ko.observable("dish");
+    self.lang = ko.observable('en');
+    lang = self.lang;
+
 
     if("resto_data" in window){
         self.restaurant = ko.observable(new Restaurant(resto_data));
         global_restaurant_id = self.restaurant().id;
-        self.lang = ko.observable(self.restaurant().default_language() ? self.restaurant().default_language() : 'en');
+        self.lang(self.restaurant().default_language() ? self.restaurant().default_language() : 'en');
         self.languages = self.restaurant().languages;  
         self.getFullLangName = function(l){ 
           return ko.observable(self.languages_full[l]) 
@@ -391,7 +403,8 @@ function NetworkModel() {
 
     self.searchArray = ko.observableArray([]);
     self.searching = ko.computed(function(){ return self.searchArray().length > 0 }).extend({ rateLimit: { method: "notifyWhenChangesStop", timeout: 100 } });
-    self.ajax_search = function(){
+
+    self.restaurant_search_request = function(){
         $.ajax({
             type: "POST",
             url: "/app/network/search",
@@ -410,13 +423,41 @@ function NetworkModel() {
                 self.searchArray.remove(this);
             },
             dataType: "json"
-        });     
-    }
+        });         
+    };
+
+    self.dish_search_request = function(){
+        $.ajax({
+            type: "POST",
+            url: "/app/network/dish_search",
+            data: {
+                dish_search_term: self.restaurant_search_term(),
+            },
+            beforeSend: function(){
+                self.searchArray.push(this);
+            },
+            success: function(data, textStatus, jqXHR){
+                self.searchArray.remove(this);
+                self.dishes(_.map(data.dishes,function(dish){ return new Dish(dish) }));
+                console.log("Total count: " + data.count + " Received count: " + self.dishes().length);
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) { 
+                self.searchArray.remove(this);
+            },
+            dataType: "json"
+        });         
+    };    
 
     self.search_restaurants = ko.computed({
         read: function(){
             if(self.restaurant_search_term().length > 0){
-                self.ajax_search();
+                if(self.search_type() == "restaurant"){
+                    self.dishes([]);
+                    self.restaurant_search_request();
+                } else {
+                    self.restaurants([]);
+                    self.dish_search_request();
+                }
             }
         }
     }).extend({rateLimit: 500});

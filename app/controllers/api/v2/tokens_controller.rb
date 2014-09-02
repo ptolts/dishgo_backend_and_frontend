@@ -59,6 +59,11 @@ class Api::V2::TokensController  < ApplicationController
       Rails.logger.warn "CREATING ACCOUNT\nUser.create(:facebook_user_id => #{profile["id"]}, :providor => \"Facebook\", :facebook_auth_token => #{fb_token})"
       @user = User.create(:facebook_user_id => profile["id"], :providor => "Facebook", :facebook_auth_token => fb_token)
       @user.skip_confirmation!
+      begin
+        Email.notify_admins(@user)
+      rescue => msg
+      end      
+      @user.create_x_dishcoins 5      
       sign_in @user
     end
 
@@ -82,7 +87,7 @@ class Api::V2::TokensController  < ApplicationController
             :phone_number => @user.phone_number,
             :last_name => @user.last_name,
             :first_name => @user.first_name,
-            :dishcoins => @user.dishcoins,
+            :dishcoins => @user.metal_dishcoins.count,
           }.merge(@user.serializable_hash {})
 
     if @user.owns_restaurants

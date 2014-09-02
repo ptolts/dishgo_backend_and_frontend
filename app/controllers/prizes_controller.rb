@@ -1,6 +1,6 @@
 class PrizesController < ApplicationController
-  before_filter :admin_or_user_with_resto!, :except => [:list, :bid, :won_prize_list] #, :only => [:create_section,:create_dish,:create_option,:create_individual_option]
-  before_filter :sign_in_user_for_prizes, only: [:list, :bid, :won_prize_list]
+  before_filter :admin_or_user_with_resto!, :except => [:list, :bid, :won_prize_list, :promo_code] #, :only => [:create_section,:create_dish,:create_option,:create_individual_option]
+  before_filter :sign_in_user_for_prizes, only: [:list, :bid, :won_prize_list, :promo_code]
   before_filter :admin_or_prize_owner, only: [:print_list, :destroy]
   layout 'prizes'
   
@@ -79,8 +79,41 @@ class PrizesController < ApplicationController
     if !params[:restaurant_id].blank?
       @prizes = @prizes.where(restaurant_id:params[:restaurant_id])
     end
-    @prizes = @prizes.collect{|e| e.serializable_hash({current_user:user.id})}
+    if user
+      @prizes = @prizes.collect{|e| e.serializable_hash({current_user:user.id})}
+    else
+      @prizes = @prizes.collect{|e| e.serializable_hash({}) }
+    end
     render json: @prizes.as_json
+  end
+
+  def promo_code
+    data = JSON.parse(params[:user])
+    code = data["promo_code"]
+    if code.blank?
+      render json: {error: "Code can't be blank!"}.as_json
+      return
+    end    
+    user = current_user
+    if user.claimed_promo_code
+      render json: {error: "You've already gained promo coins!"}.as_json
+      return
+    end
+    promo_user = User.where(promo_code:code).first
+    if !promo_user or promo_user == user
+      render json: {error: "Invalid Code!"}.as_json
+      return
+    end
+    user.create_x_dishcoins 5
+    promo_user.create_x_dishcoins 5
+    if promo_user.claimed_promo_code.blank?
+      promo_user.claimed_promo_code = promo_user.promo_code
+      promo_user.save!
+    end
+    user.claimed_promo_code = promo_user.promo_code
+    user.save!
+    render json: user.serializable_hash.as_json
+    return
   end  
 
   def bid
@@ -96,6 +129,21 @@ class PrizesController < ApplicationController
     if !individual_prize
       render json: {error: "This gift certificate has already been won!"}.as_json
       return      
+    end
+
+    #If the user hasn't yet bid on any prizes, let them win right away.
+    if prize.amount <= 10.50 and user.individual_prizes.count == 0
+      user.individual_prizes << individual_prize
+      user.save(validate: false)
+      dc = user.metal_dishcoins.first
+      dc.spent = true
+      dc.individual_prize = individual_prize
+      dc.save      
+      prize.update_quantity
+      individual_prize.dont_open_before = DateTime.now + 1.day
+      individual_prize.save!
+      render json: {won: "Congratulations, you've won!"}.as_json
+      return
     end
 
     attempt_count = 0

@@ -43,6 +43,8 @@ class Image
   belongs_to :dish, index: true
   
   index({ _id:1 }, { unique: true, name:"id_index" })
+  index({ not_profile_image:1 }, { name:"not_profile_index" })
+  index({ rejected:1 }, { name:"rejected_index" })
 
   scope :rejected, -> { ne(rejected: true) }
   scope :profile_images, -> { ne(not_profile_image: true) }

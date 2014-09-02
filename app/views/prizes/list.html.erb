@@ -2,7 +2,7 @@
 
 <div class="container" data-bind="visible: page() == 'list'">
     <div class="prizes_list_controls" data-bind="visible: !selected_prize()">          
-        <div class="row" id="account">
+        <div class="row" id="account" data-bind="visible: loggedIn">
             <div class="col-xs-12" data-bind="with: user">              
                 <div class="dishcoin_count row">
                     <div class="col-xs-12">
@@ -84,6 +84,12 @@
         </div>                          
 
         <!-- ko if: !$root.your_prize() -->
+            <div class="row" data-bind="visible: !$root.loggedIn()">
+                <div class="col-xs-12">
+                    <p style="margin:0;">You need to create an account to claim prizes. You are guaranteed to win the first prize you select.</p>
+                    <p><button class="btn btn-rewards" style="width:100%; margin-top:0;" data-bind="click: function(){ $root.sign_in() }">Sign Up</button></p>
+                </div>  
+            </div>        
             <div class="row" data-bind="visible: $root.user().dishcoins() > 0">
                 <div class="col-xs-12">
                     <span class="bidding">Select the number DishCoins to wager on this reward.</span>
@@ -95,7 +101,7 @@
                     <button class="btn btn-rewards" style="width:100%; margin-top:0;" data-bind="click: function(){ $root.bid($data) }">Bid!</button>
                 </div>
             </div>        
-            <div class="row" data-bind="visible: $root.user().dishcoins() == 0">
+            <div class="row" data-bind="visible: $root.loggedIn() && $root.user().dishcoins() == 0">
                 <div class="col-xs-12">
                     <span class="bidding">You're out of DishCoins. Rate dishes or share photos to accumulate more!</span>
                     <a style="color:#cf2f28;font-size:16px;" data-bind="click: function(){ $root.show_help() }">Learn how <i class="fa fa-question-circle" style="color:#cf2f28;font-size:16px;"></i></a>
@@ -106,10 +112,24 @@
             <div class="row">
                 <div class="col-xs-12 text-center">
                     <!-- ko foreach: individual_prizes -->
-                        <h4>Coupon Code</h4>
-                        <p><span class="coupon_number" data-bind="text: number"> </span><span class="token" data-bind="text: prize_token"></span></p>
-                        <p class="fine">Present this to the merchant to redeem your reward.</p>
-                        <p class="fine">Cannot be combined with another offer or promotion.</p>
+
+                        <!-- if the token is available right now, display it. Otherwise tell them when it will be available -->
+                        <!-- ko if: prize_token -->
+                            <h4>Coupon Code</h4>
+                            <p><span class="coupon_number" data-bind="text: number"> </span><span class="token" data-bind="text: prize_token"></span></p>
+                            <p class="fine">Present this to the merchant to redeem your reward.</p>
+                            <p class="fine">Cannot be combined with another offer or promotion.</p>                            
+                        <!-- /ko -->
+
+                        <!-- token will be available in.... -->
+                        <!-- ko if: !prize_token -->
+                            <h4>Coupon Code Available On</h4>
+                            <p><span class="token" data-bind="text: dont_open_before"></span></p>
+                            <p class="fine">In order to prevent abuse, this coupon</p>
+                            <p class="fine">is only redeemable 24 hours after winning.</p>                            
+                        <!-- /ko -->
+
+
                     <!-- /ko -->
                 </div>
             </div>         
@@ -184,10 +204,22 @@
             </div>
         </div>
     </div>
-    <div class="grey_bg" id="faq">    
+    <div class="grey_bg" id="faq">
+        <div class="row" style="margin:-15px; background-color: #fff;" data-bind="with: $root.user">
+            <div class="col-xs-12">
+                <h3>Share to Win!</h3>
+                <p>Share promo code <span style="color: #cf2f28;" data-bind="text: promo_code, click: function(){ $root.send_sms($data.promo_code()) }"></span> with a friend, or enter theirs. Both of you win 5 DishCoins to bid on great coupons!</p>
+                <!-- ko if: promo_code() != claimed_promo_code() -->
+                    <div class="input-group" style="width:60%;margin-bottom:10px;">
+                        <input class="form-control" placeholder="Enter Promo Code" data-bind="value: claimed_promo_code" />
+                        <span class="input-group-addon btn btn-search" style="background-color:#cf2f28;color:#fff;border:1px solid #cf2f28;" data-bind="click: function(){ $root.claim_promo($data) }">claim</span>
+                    </div>
+                <!-- /ko -->
+            </div>
+        </div>     
         <div class="row">
             <div class="col-xs-12">
-                <h4 style="margin-top:0;">How Do I Earn Rewards?</h4> 
+                <h4 style="margin-top:10px;">How Do I Earn Rewards?</h4> 
             </div>
         </div>
         <div class="row" style="background-color: #fff;">
@@ -205,11 +237,11 @@
                 <a data-bind="click: function(){ $root.show_odds() }" style="line-height: 30px;">What are my odds?</a>
             </div>
         </div> -->
-        <div class="row" style="background-color: #fff;margin-bottom:-15px;">
+        <div class="row" style="background-color: #fff">
             <div class="col-xs-12">
                 <a data-bind="click: function(){ $root.show_redeem() }" style="line-height: 60px;">3. Redeem rewards <i class="fa fa-question-circle"></i></a>
             </div>
-        </div>
+        </div>       
     </div>
 </div>
 
