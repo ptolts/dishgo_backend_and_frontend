@@ -206,6 +206,9 @@
     font-family: 'Lato', sans-serif;
     color: #5B5B5B;
 }
+.progress-bar {
+    background-color: #cf2f28;
+}
 @media (max-width: 1200px) {
     .fullWidth .lightText:hover {
         box-shadow: none;

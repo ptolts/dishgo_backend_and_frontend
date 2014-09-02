@@ -17,13 +17,12 @@ p,
 .nav li,
 #footer .powered_by_dishgo,
 .menu_container .language_selector,
-address {
-    font-family: 'Special Elite';
+.contact_wrapper {
+    font-family: 'Special Elite'!important;
 }
 h2,
 h3 {
-    font-family: 'Josefin Slab';
-    font-style: italic;
+    font-family: 'Special Elite';
 }
 #footer #opened_or_closed_footer {
     text-transform: uppercase;
@@ -31,6 +30,7 @@ h3 {
 .menu_container h1 {
     line-height: 46px;
     font-size: 43px;
+    font-family: 'Special Elite'!important;
 }
 .menu_container h2 {
     font-size: 20px;
@@ -39,8 +39,8 @@ h3 {
     font-style: italic;
 }
 .menu_container p {
-    font-family: 'Josefin Slab';
-    font-size: 17px;
+    font-family: 'Josefin Slab'!important;
+    font-size: 17px !important;
     line-height: 23px;
     font-weight: normal;
     font-style: italic;
@@ -75,6 +75,9 @@ address {
 }
 .content_wrapper p {
     font-size: 18px;
+}
+.contact_wrapper a {
+    font-size: 17px;
 }
 /*.note-editor .note-editable {
     font-family: 'Special Elite';
