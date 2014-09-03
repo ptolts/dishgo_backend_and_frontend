@@ -38,6 +38,21 @@
 .menu_dish_rating .hoverLeftOver {
     color: #dcdcdc !important;
 }
+.menu_dish_rating_search i {
+    color: #cf2f28;
+    font-size: 20px;
+    text-shadow: 1px 2px 3px #000;
+}
+.menu_dish_rating_search .hoverChosen {
+    color: #cf2f28 !important;
+}
+.menu_dish_rating_search .left_over {
+    color: #dcdcdc;
+    font-size: 20px;
+}
+.menu_dish_rating_search .hoverLeftOver {
+    color: #dcdcdc !important;
+}
 .dish_rating i {
     color: #cf2f28;
     font-size: 28px;
@@ -450,6 +465,18 @@ footer a:hover, footer a:focus {
 .solo_rating {
   margin-top: 10px;
 }
+.btn-rewards {
+    color: #cf2f28;
+    border: 2px solid #cf2f28;
+    border-radius: 4px;
+    padding: 12px 24px;
+    font-size: 34px;
+}
+.btn-rewards:hover,
+.btn-rewards:focus {
+    color: #fff;
+    background-color: #cf2f28;
+}
 
 /* Weird Rules*/
 
@@ -498,8 +525,14 @@ footer a:hover, footer a:focus {
     .dish_rating i {
         font-size: 30px;
     }
+    .menu_dish_rating_search i {
+        font-size: 28px;
+    }
     .dish_rating .left_over {
         font-size: 30px;
+    }
+    .menu_dish_rating_search .left_over {
+        font-size: 28px;
     }
 }
 /* Small Devices, Tablets */
@@ -565,6 +598,11 @@ footer a:hover, footer a:focus {
         bottom: -10px;
         font-size: 18px;
     }
+    .menu_dish_rating_search {
+        left: 5px;
+        bottom: 5px;
+        font-size: 18px;
+    }
     .solo_rating .menu_dish_rating {
         left: 0;
         bottom: 5px;
@@ -572,15 +610,24 @@ footer a:hover, footer a:focus {
      .menu_dish_rating .left_over {
         font-size: 20px;
     }
-    .dish_rating i {
-        font-size: 38px;
+     .menu_dish_rating_search .left_over {
+        font-size: 20px;
     }
-    .dish_rating .left_over {
-        font-size: 38px;
+    .dish_rating i {
+        font-size: 36px;
     }
     .image-cropped {
       width: 75px;
       height: 75px;
+  }
+  .menu_dish_rating_search .left_over {
+    font-size: 36px;
+  }
+  .dish_rating .left_over {
+    font-size: 38px;
+  }
+  .menu_dish_rating i {
+    font-size: 20px;
   }
 }
 /* small rules */
