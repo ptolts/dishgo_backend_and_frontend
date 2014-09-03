@@ -240,6 +240,9 @@ h1 {
     font-size: 18px;
     text-decoration: none;
 }
+.answers {
+    background-color: #f5f6f5;
+}
 .answers h4 {
     margin-top: 20px;
 }
