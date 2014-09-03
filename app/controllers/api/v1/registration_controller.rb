@@ -38,7 +38,7 @@ class Api::V1::RegistrationController  < ApplicationController
   end
 
   def redirect
-    if !params[:token].blank? and user = User.where(authenticity_token:params[:token]).first and !user.api_confirmation
+    if !params[:token].blank? and user = User.where(authentication_token:params[:token]).first and !user.api_confirmation
       user.api_confirmation = true
       user.save
     end

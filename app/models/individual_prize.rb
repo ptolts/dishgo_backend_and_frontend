@@ -16,14 +16,23 @@ class IndividualPrize
 
   scope :remaining, -> { where(user_id:nil) }
 
-  def serializable_hash options = {}
-    hash = super(options)
+  def api_hash options = {}
+    hash = serializable_hash
     hash[:id] = self.id
     if dont_open_before and DateTime.now < dont_open_before
       hash[:prize_token] = nil
     end
+    if hash[:prize_token] and !self.user.api_confirmation
+      hash[:prize_token] = nil
+    end
     return hash
   end
+
+  def serializable_hash options = {}
+    hash = super(options)
+    hash[:id] = self.id
+    return hash
+  end  
 
   def random_serial_number
     begin

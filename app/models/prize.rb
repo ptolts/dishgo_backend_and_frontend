@@ -43,7 +43,7 @@ class Prize
       hash[:individual_prizes] = self.individual_prizes.collect{|e| e.as_json}
     end
     if options[:current_user]
-      hash[:individual_prizes] = self.individual_prizes.where(user_id:options[:current_user]).collect{|e| e.as_json}
+      hash[:individual_prizes] = self.individual_prizes.where(user_id:options[:current_user]).collect{|e| e.api_hash }
     end    
     return hash
   end

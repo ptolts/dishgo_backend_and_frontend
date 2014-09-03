@@ -139,10 +139,6 @@
             self.page("modify_email");            
         }                
         self.bid = function(prize){
-            if(!self.user().api_confirmation()){
-                self.show_modify_email();
-                return;
-            }
             prize.bid();
             self.user().dishcoins(self.user().dishcoins() - prize.number_of_bets());
         }

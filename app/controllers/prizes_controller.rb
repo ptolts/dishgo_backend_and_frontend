@@ -119,6 +119,7 @@ class PrizesController < ApplicationController
   def bid
     data = JSON.parse(params[:prize])
     user = current_user
+
     if user.metal_dishcoins.count < data["number_of_bets"]
       render json: {error: "You don't have enough DishCoins!"}.as_json
       return

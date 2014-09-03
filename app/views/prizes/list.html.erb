@@ -123,10 +123,17 @@
 
                         <!-- token will be available in.... -->
                         <!-- ko if: !prize_token -->
-                            <h4>Coupon Code Available On</h4>
-                            <p><span class="token" data-bind="text: dont_open_before"></span></p>
-                            <p class="fine">In order to prevent abuse, this coupon</p>
-                            <p class="fine">is only redeemable 24 hours after winning.</p>                            
+                            <!-- ko if: !$root.user().api_confirmation() -->
+                                <h4>Verify Email</h4>
+                                <p>We need you to verify your email address. Even after verification, this coupon may only be valid in 24 hours.</p>
+                                <span class="value" data-bind="click: function(){ $root.show_modify_email(); }">Click here for more information.</span> 
+                            <!-- /ko -->
+                            <!-- ko if: $root.user().api_confirmation() -->
+                                <h4>Coupon Code Available On</h4>
+                                <p><span class="token" data-bind="text: dont_open_before"></span></p>
+                                <p class="fine">In order to prevent abuse, this coupon</p>
+                                <p class="fine">is only redeemable 24 hours after winning.</p>                            
+                            <!-- /ko -->
                         <!-- /ko -->
 
 
@@ -335,8 +342,7 @@
         </div>
         <div class="row">
             <div class="col-xs-12 answers">
-                <h4>How do I redeem my rewards?</h4>
-                <p>Following a successful bid, your reward can be found in the <a data-bind="visible: $root.any_your_prizes, click: function(){ $root.show_your_prizes() }">Winnings</a> section. Click on the reward and present it to the merchant with the enclosed coupon code to redeem your reward.<p>
+                <p>Unfortunately due to abuse, we need you to verify that the email you used to sign up is real. We automatically sent you an email with a button you need to click before you can redeem prizes. The email you used to sign up is "<!-- ko text: $root.user().email() --><!-- /ko -->". If this was entered incorrectly, please contact support at phil@dishgo.io.<p>
             </div>
         </div>
     </div>
