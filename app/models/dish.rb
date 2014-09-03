@@ -46,19 +46,22 @@ class Dish
   index({ _id:1 }, { unique: true, name:"id_index" })
   index({ search_terms:1 }, { name:"search_index" })
 
-  before_save :set_search_terms
-
   # accepts_nested_attributes_for :options, :draft_options, :sizes, :draft_sizes
   def set_search_terms
-    self.search_terms = self.name_translations.collect do |key,value|
-      next value
-    end.join(" ")
-    if self.restaurant
-      self.restaurant_name = self.restaurant.name
+    if relevent_dish
+      self.search_terms = self.name_translations.collect do |key,value|
+        next value
+      end.join(" ")
+      if self.restaurant
+        self.restaurant_name = self.restaurant.name
+      end
+      if img = self.image.first
+        self.top_image = img.img_url_medium
+      end
+    else
+      self.search_terms = nil
     end
-    if img = self.image.first
-      self.top_image = img.img_url_medium
-    end
+    save
   end
 
   def load_data_from_json dish, request_restaurant
@@ -333,5 +336,16 @@ class Dish
         i.save
       end
     end
+  end
+
+  def relevent_dish
+    if self.section_id
+      if sec = self.section and sec.published_menu_id and pub_menu = sec.published_menu
+        if pub_menu.restaurant_id == self.restaurant_id
+          return true
+        end
+      end
+    end
+    return false  
   end
 end

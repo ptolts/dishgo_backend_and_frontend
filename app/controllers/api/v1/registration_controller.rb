@@ -26,7 +26,7 @@ class Api::V1::RegistrationController  < ApplicationController
     rescue => msg
     end
 
-    @user.create_x_dishcoins 5
+    @user.create_x_dishcoins 1
 
     if sign_in @user
       render :json => {:foodcloud_token=>@user.authentication_token,:dishgo_token=>@user.authentication_token}, :status=>201
