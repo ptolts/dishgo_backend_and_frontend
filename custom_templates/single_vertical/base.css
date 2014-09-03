@@ -359,6 +359,9 @@
 	}
 
 	.powered_by_dishgo {
-	display: none;
+		position: fixed;
+		float: left;
+		right: auto;
+		bottom: 5px;
 }
 }
