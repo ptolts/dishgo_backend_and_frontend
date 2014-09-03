@@ -86,8 +86,8 @@
         <!-- ko if: !$root.your_prize() -->
             <div class="row" data-bind="visible: !$root.loggedIn()">
                 <div class="col-xs-12">
-                    <p style="margin:0;">You need to create an account to claim prizes. You are guaranteed to win the first prize you select.</p>
-                    <p><button class="btn btn-rewards" style="width:100%; margin-top:0;" data-bind="click: function(){ $root.sign_in() }">Sign Up</button></p>
+                    <p style="margin:0;">You need to create an account to claim prizes. <span data-bind="visible: amount() <= 10">You are guaranteed to win the first prize you select.</span></p>
+                    <p><button class="btn btn-rewards" style="width:100%; margin-top:10px;" data-bind="click: function(){ $root.sign_in() }">Sign Up</button></p>
                 </div>  
             </div>        
             <div class="row" data-bind="visible: $root.user().dishcoins() > 0">

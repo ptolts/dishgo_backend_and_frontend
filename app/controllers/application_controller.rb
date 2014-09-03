@@ -51,6 +51,7 @@ class ApplicationController < ActionController::Base
   end
 
   def validate_auth_token
+    Rails.logger.warn current_user.to_json
     return if current_user
     if params[:dishgo_token].blank? 
       render :status => 401, :json => {error: "Not Logged In"}
