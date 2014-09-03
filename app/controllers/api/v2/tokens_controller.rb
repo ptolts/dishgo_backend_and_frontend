@@ -87,7 +87,6 @@ class Api::V2::TokensController  < ApplicationController
             :phone_number => @user.phone_number,
             :last_name => @user.last_name,
             :first_name => @user.first_name,
-            :dishcoins => @user.metal_dishcoins.count,
           }.merge(@user.serializable_hash {})
 
     if @user.owns_restaurants

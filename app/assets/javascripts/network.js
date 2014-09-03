@@ -268,6 +268,17 @@ function NetworkModel() {
     self.lang = ko.observable('en');
     lang = self.lang;
 
+    self.searchPlaceholder = ko.computed({
+        read: function(){
+            if(self.search_type() == "dish"){
+                return "Dish Name";
+            } else {
+                return "Restaurant Name";
+            }
+        },
+        deferEvaluation: true,
+    });
+
 
     if("resto_data" in window){
         self.restaurant = ko.observable(new Restaurant(resto_data));

@@ -116,7 +116,13 @@
 						<div class="form-group">
 							<div class="controls">
 								<div class="input-group input-group-lg">
-									<div class="input-group-addon"><i class="fa fa-search"></i></div>
+									<div class="input-group-addon searchSelectorContainer">
+										<span class="dropdown-toggle searchDropdownSelector" data-toggle="dropdown"><i class="fa fa-search"></i> <span class="caret"></span></span>
+										<ul class="dropdown-menu" role="menu">
+											<li><a href="#" data-bind="click: function(){ $root.search_type('dish') }">Search by Dish</a></li>
+											<li><a href="#" data-bind="click: function(){ $root.search_type('restaurant') }">Search by Restaurant Name</a></li>
+										</ul>
+									</div>	
 									<input type="text" placeholder="Restaurant Name" class="form-control" data-bind="hasFocus: top_search, value: restaurant_search_term, valueUpdate: 'afterkeydown'" />
 									<span class="input-group-btn">
 										<span class="btn btn-lg btn-search search_button" data-bind="disable: searching, click: function(){ $root.ajax_search(); }"><i class="fa fa-spinner fa-spin fade_visible" data-bind="visible: searching"></i><span class="fade_visible" data-bind="visible: !searching()">Search</span></span>
