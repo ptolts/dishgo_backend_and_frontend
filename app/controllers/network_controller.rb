@@ -56,7 +56,7 @@ class NetworkController < ApplicationController
   end
 
   def dish_search
-    dishes = Dish.with_a_section.limit(25)
+    dishes = Dish.dish_is_active.limit(25)
     if result = request.location    
       coords = [result.coordinates[1],result.coordinates[0]]
       restaurant_ids = Restaurant.where(:locs => { "$near" => { "$geometry" => { "type" => "Point", :coordinates => coords }, "$maxDistance" => 100000}}).only(:id).collect{|e| e.id}

@@ -1,4 +1,3 @@
-task :page_views => :environment do
-	PageViewHour.new.build
-	PageViewDay.new.build	
+task :dish_search => :environment do
+	Dish.each {|e| e.set_search_terms }
 end

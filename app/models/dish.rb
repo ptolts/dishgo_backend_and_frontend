@@ -41,7 +41,7 @@ class Dish
   # default_scope ->{ where(:name.nin => ["", nil]) }
   scope :draft, -> {asc(:draft_position)}   
   scope :pub, -> {asc(:position)}  
-  scope :with_a_section, -> { ne(section_id:nil) }  
+  scope :dish_is_active, -> { ne(search_terms:nil) }  
 
   index({ _id:1 }, { unique: true, name:"id_index" })
   index({ search_terms:1 }, { name:"search_index" })
