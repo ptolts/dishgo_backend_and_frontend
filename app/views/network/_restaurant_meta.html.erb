@@ -1,2 +1,12 @@
 		<title><%= @resto_data['name'] %></title>
 		<meta name="description" content="DishGo listing for <%= @resto_data['name'] %>.">
+		<meta property="fb:app_id"          content="886479778048507" /> 
+		<meta property="og:url"             content="https://dishgo.io/app/network/restaurant/<%= @resto_data['id'] %>" /> 
+		<meta property="og:title"           content="<%= @resto_data['name'] %> on DishGo." /> 
+    <% if @restaurant.logo %>
+		<meta property="og:image"           content="<%= @restaurant.logo.img_url_original %>" />                                                                                                                               
+    <% elsif @restaurant.image.length > 0 %>
+		<meta property="og:image"           content="<%= @restaurant.image.profile_images.first.img_url_original %>" />                                                                                                                                                                                                                                                            
+    <% end %>		
+	 	<meta property="restaurant:restaurant" content="<%= @resto_data['name'] %>" />
+		<meta property="og:type"               content="restaurant.menu" />	 	
