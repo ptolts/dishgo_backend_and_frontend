@@ -38,6 +38,7 @@ class User
   field :promo_code,          type: String
 
   field :claimed_promo_code,   type: String
+  field :api_confirmation,     type: Boolean, default: true
 
   ## Recoverable
   field :reset_password_token,   :type => String

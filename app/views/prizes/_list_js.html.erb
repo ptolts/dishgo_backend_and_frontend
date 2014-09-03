@@ -132,8 +132,17 @@
             self.your_prize(null);
             self.selected_prize(null);
             self.page("redeem");            
-        }          
+        }
+        self.show_modify_email = function(){
+            self.your_prize(null);
+            self.selected_prize(null);
+            self.page("modify_email");            
+        }                
         self.bid = function(prize){
+            if(!self.user().api_confirmation()){
+                self.show_modify_email();
+                return;
+            }
             prize.bid();
             self.user().dishcoins(self.user().dishcoins() - prize.number_of_bets());
         }

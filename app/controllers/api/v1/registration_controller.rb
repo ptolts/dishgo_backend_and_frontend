@@ -17,6 +17,7 @@ class Api::V1::RegistrationController  < ApplicationController
     @user = User.new({ :email => params[:email].downcase, :password => params[:password] })
     @user.skip_confirmation!
     @user.skip_confirmation_notification!
+    @user.api_confirmation = false
     @user.save!
     @user.ensure_authentication_token
     Email.verify_from_app(@user)
@@ -37,6 +38,10 @@ class Api::V1::RegistrationController  < ApplicationController
   end
 
   def redirect
+    if !params[:token].blank? and user = User.where(authenticity_token:params[:token]).first and !user.api_confirmation
+      user.api_confirmation = true
+      user.save
+    end
     redirect_to "dishgo://?dishgo_token=#{params[:token]}", status: 301
   end
 

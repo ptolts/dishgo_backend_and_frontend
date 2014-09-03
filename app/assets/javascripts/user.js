@@ -63,6 +63,7 @@
             self.dishcoins = ko.observable(data.dishcoins ? data.dishcoins : 0);
             self.name = ko.observable(data.name ? data.name : "");
             self.promo_code = ko.observable(data.promo_code ? data.promo_code : "");
+            self.api_confirmation = ko.observable(data.api_confirmation ? data.api_confirmation : false);
             self.claimed_promo_code = ko.observable(data.claimed_promo_code ? data.claimed_promo_code : null);
 
             self.twitter = ko.observable(new Twitter());
