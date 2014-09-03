@@ -264,7 +264,7 @@ function NetworkModel() {
     self.isMobile = isMobile.any();
     self.email = ko.observable();
     self.password = ko.observable();
-    self.search_type = ko.observable("dish");
+    self.search_type = ko.observable("restaurant");
     self.lang = ko.observable('en');
     lang = self.lang;
 
