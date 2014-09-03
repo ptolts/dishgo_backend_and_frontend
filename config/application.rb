@@ -78,6 +78,7 @@ module Foodcloud
                                     'strictly_menu.css',
                                     'website.css',
                                     'picker.js',
+                                    'prize_page.js',
                                     'prizes_list.css',
                                     'fast_click.js',
                                     'wysiwyg.js',

@@ -1,7 +1,9 @@
 class PrizesController < ApplicationController
-  before_filter :admin_or_user_with_resto!, :except => [:list, :bid, :won_prize_list, :promo_code] #, :only => [:create_section,:create_dish,:create_option,:create_individual_option]
-  before_filter :sign_in_user_for_prizes, only: [:list, :bid, :won_prize_list, :promo_code]
+  app_methods = [:list, :bid, :won_prize_list, :promo_code]
+  before_filter :admin_or_user_with_resto!, :except => app_methods
+  before_filter :sign_in_user_for_prizes, only: app_methods
   before_filter :admin_or_prize_owner, only: [:print_list, :destroy]
+  skip_before_filter :verify_authenticity_token, only: app_methods
   layout 'prizes'
   
   def index
@@ -89,7 +91,7 @@ class PrizesController < ApplicationController
 
   def promo_code
     data = JSON.parse(params[:user])
-    code = data["promo_code"]
+    code = data["claimed_promo_code"]
     if code.blank?
       render json: {error: "Code can't be blank!"}.as_json
       return
@@ -100,6 +102,7 @@ class PrizesController < ApplicationController
       return
     end
     promo_user = User.where(promo_code:code).first
+    Rails.logger.warn "#{!promo_user} or #{promo_user == user} ---- user: #{user}"
     if !promo_user or promo_user == user
       render json: {error: "Invalid Code!"}.as_json
       return

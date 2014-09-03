@@ -151,6 +151,11 @@
                     user: ko.toJSON(user)
                 },
                 success: function(data, textStatus, jqXHR){
+                    if(data.error){
+                        alert(data.error);
+                        self.user().claimed_promo_code("");
+                        return;
+                    }
                     self.user(new User(data));
                 },
                 error: function(data){
