@@ -111,32 +111,32 @@
         <!-- ko if: $root.your_prize() -->
             <div class="row">
                 <div class="col-xs-12 text-center">
-                    <!-- ko foreach: individual_prizes -->
+                    <!-- ko if: !$root.user().api_confirmation() -->
+                        <h4>Verify Email</h4>
+                        <p>We need you to verify your email address. Even after verification, this coupon may only be valid in 24 hours.</p>
+                        <span class="value" data-bind="click: function(){ $root.show_modify_email(); }">Click here for more information.</span> 
+                    <!-- /ko -->  
+                    <!-- ko if: $root.user().api_confirmation() -->                  
+                        <!-- ko foreach: individual_prizes -->
 
-                        <!-- if the token is available right now, display it. Otherwise tell them when it will be available -->
-                        <!-- ko if: prize_token -->
-                            <h4>Coupon Code</h4>
-                            <p><span class="coupon_number" data-bind="text: number"> </span><span class="token" data-bind="text: prize_token"></span></p>
-                            <p class="fine">Present this to the merchant to redeem your reward.</p>
-                            <p class="fine">Cannot be combined with another offer or promotion.</p>                            
-                        <!-- /ko -->
-
-                        <!-- token will be available in.... -->
-                        <!-- ko if: !prize_token -->
-                            <!-- ko if: !$root.user().api_confirmation() -->
-                                <h4>Verify Email</h4>
-                                <p>We need you to verify your email address. Even after verification, this coupon may only be valid in 24 hours.</p>
-                                <span class="value" data-bind="click: function(){ $root.show_modify_email(); }">Click here for more information.</span> 
+                            <!-- if the token is available right now, display it. Otherwise tell them when it will be available -->
+                            <!-- ko if: prize_token -->
+                                <h4>Coupon Code</h4>
+                                <p><span class="coupon_number" data-bind="text: number"> </span><span class="token" data-bind="text: prize_token"></span></p>
+                                <p class="fine">Present this to the merchant to redeem your reward.</p>
+                                <p class="fine">Cannot be combined with another offer or promotion.</p>                            
                             <!-- /ko -->
-                            <!-- ko if: $root.user().api_confirmation() -->
+
+                            <!-- token will be available in.... -->
+                            <!-- ko if: !prize_token -->
                                 <h4>Coupon Code Available On</h4>
                                 <p><span class="token" data-bind="text: dont_open_before"></span></p>
                                 <p class="fine">In order to prevent abuse, this coupon</p>
                                 <p class="fine">is only redeemable 24 hours after winning.</p>                            
                             <!-- /ko -->
+
+
                         <!-- /ko -->
-
-
                     <!-- /ko -->
                 </div>
             </div>         

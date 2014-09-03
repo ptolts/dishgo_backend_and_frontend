@@ -20,10 +20,10 @@ class IndividualPrize
     hash = serializable_hash
     hash[:id] = self.id
     if dont_open_before and DateTime.now < dont_open_before
-      hash[:prize_token] = nil
+      hash['prize_token'] = nil
     end
-    if hash[:prize_token] and !self.user.api_confirmation
-      hash[:prize_token] = nil
+    if hash['prize_token'] and !self.user.api_confirmation
+      hash['prize_token'] = nil
     end
     return hash
   end
