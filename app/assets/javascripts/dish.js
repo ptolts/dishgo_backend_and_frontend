@@ -463,6 +463,13 @@ function Dish(data, topmodel) {
         }
     });
 
+    self.shareFB = function(){
+        FB.ui({
+          method: 'share',
+          href: 'https://dishgo.io/app/network/dish/' + self.id(),
+        }, function(response){});     
+    }
+
     self.update_when_dirty = function(){
         if(self.id.peek() && editing_mode){
             $.ajax({

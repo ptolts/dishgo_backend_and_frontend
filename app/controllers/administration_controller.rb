@@ -20,7 +20,7 @@ class AdministrationController < ApplicationController
     dish = Dish.find(params[:dish_id])
     top_dish = TopDish.first || TopDish.create
     top_dish.dish_ids.unshift(dish.id)
-    top_dish.dish_ids = top_dish.dish_ids.uniq[0..2]
+    top_dish.dish_ids = top_dish.dish_ids.uniq[0..top_dish.number_of_dishes]
     top_dish.save
     render json: true.as_json
   end

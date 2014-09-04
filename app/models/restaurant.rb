@@ -104,7 +104,8 @@ class Restaurant
   index({ facebook_page_id: 1}, {name: "facebook_page_id_index"})
   index({ preview_token: 1}, {name: "preview_token_index"})
 
-  scope :has_menu, -> { any_in(:_id => includes(:section).select{ |w| w.section.size > 0 }.map{ |r| r.id }) }
+  scope :has_menu, -> { ne(with_menu:false) }
+  # scope :has_menu, -> { any_in(:_id => includes(:section).select{ |w| w.section.size > 0 }.map{ |r| r.id }) }
   scope :only_with_menu, -> { where(with_menu:true) }
 
   before_save :set_with_menu

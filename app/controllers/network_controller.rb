@@ -107,4 +107,15 @@ class NetworkController < ApplicationController
     render json: current_user.serializable_hash({:restaurant => true}) || {}.as_json
   end
 
+  def dish
+    @dish = Dish.find(params[:id])
+    @restaurant = dish.restaurant    
+    if request.user_agent =~ /bot/i
+      render layout: 'network_dish'
+      return
+    else
+      redirect_to "https://dishgo.io/app/network/restaurant/#{@restaurant.id}"
+    end
+  end
+
 end

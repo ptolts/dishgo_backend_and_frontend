@@ -793,11 +793,11 @@ ko.bindingHandlers.lText = {
         var value = valueAccessor();
         var result = ko.observable(value()[lang()]);
 
-        var length = ko.utils.unwrapObservable(allBindingsAccessor().maxTextLength) || false;
+        var length = allBindingsAccessor().maxTextLength || false;
 
         if(length){
-            if(result.length > length){
-                result = result.substring(0, length) + "...";
+            if(result().length > length){
+                result(result().substring(0, length) + "...");
             }
         }
 

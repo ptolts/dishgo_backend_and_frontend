@@ -20,11 +20,8 @@ class Api::V1::RegistrationController  < ApplicationController
     @user.api_confirmation = false
     @user.save!
     @user.ensure_authentication_token
-    Email.verify_from_app(@user)
-    begin
-      Email.notify_admins(@user)
-    rescue => msg
-    end
+    Email.delay.verify_from_app(@user)
+    Email.delay.notify_admins(@user)
 
     @user.create_x_dishcoins 1
 

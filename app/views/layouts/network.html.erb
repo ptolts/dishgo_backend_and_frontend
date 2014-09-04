@@ -27,7 +27,24 @@
 		})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 		ga('create', 'UA-48865823-3', 'auto');
 		ga('send', 'pageview');
-	</script>    	
+
+	      window.fbAsyncInit = function() {
+	        FB.init({
+	          appId      : '886480311381787',
+	          xfbml      : true,
+	          version    : 'v2.0'
+	        });
+	      };
+
+	      (function(d, s, id){
+	         var js, fjs = d.getElementsByTagName(s)[0];
+	         if (d.getElementById(id)) {return;}
+	         js = d.createElement(s); js.id = id;
+	         js.src = "//connect.facebook.net/en_US/sdk.js";
+	         fjs.parentNode.insertBefore(js, fjs);
+	       }(document, 'script', 'facebook-jssdk'));
+
+	</script>  	
     	<script>
 			var user_data = <%= current_user ? raw(current_user.serializable_hash({restaurant:true}).to_json) : {}%>;
     	</script>
@@ -117,10 +134,10 @@
 							<div class="controls">
 								<div class="input-group input-group-lg">
 									<div class="input-group-addon searchSelectorContainer">
-										<span class="dropdown-toggle searchDropdownSelector" data-toggle="dropdown"><i class="fa fa-search" style="display:none;"></i> <span class="caret"></span></span>
+										<span class="dropdown-toggle searchDropdownSelector" data-toggle="dropdown"><span class="caret"></span></span>
 										<ul class="dropdown-menu" role="menu" style="text-align:left;">
-											<li><a href="#" data-bind="click: function(){ $root.search_type('dish') }">Search by Dish</a></li>
-											<li><a href="#" data-bind="click: function(){ $root.search_type('restaurant') }">Search by Restaurant Name</a></li>
+											<li><a href="#" data-bind="click: function(){ $root.search_type('dish') }">Dish</a></li>
+											<li><a href="#" data-bind="click: function(){ $root.search_type('restaurant') }">Restaurant Name</a></li>
 										</ul>
 									</div>	
 									<input type="text" placeholder="Restaurant Name" class="form-control" data-bind="hasFocus: top_search, value: restaurant_search_term, valueUpdate: 'afterkeydown'" />

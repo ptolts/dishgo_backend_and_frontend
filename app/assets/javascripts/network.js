@@ -271,9 +271,9 @@ function NetworkModel() {
     self.searchPlaceholder = ko.computed({
         read: function(){
             if(self.search_type() == "dish"){
-                return "Dish Name";
+                return "Search Dish Name";
             } else {
-                return "Restaurant Name";
+                return "Search Restaurant Name";
             }
         },
         deferEvaluation: true,

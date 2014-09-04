@@ -37,6 +37,7 @@
                         <th>Edit Restaurant</th>
                         <th>Assume Control</th>
                         <th>Check Page</th>
+                        <th>View Menu</th>
                         <th>List in App</th>
                     </tr>
                 </thead>
@@ -64,7 +65,10 @@
             </td>
             <td>
                 <a data-bind="attr: { href: '/app/onlinesite/live/' + preview_token()}, visible: preview_token" class="btn btn-default btn-sm" target="_blank">Visit Site</a>
-            </td>            
+            </td> 
+            <td>
+                <a data-bind="attr: { href: '/app/administration/edit_menu?restaurant_id=' + id}" class="btn btn-default btn-sm" target="_blank">Visit Site</a>
+            </td>                        
             <td>
                 <button class="btn btn-sm" data-bind="click: listInApp, css: {'btn-success':listed, 'btn-danger':!listed()}"><!-- ko text: listInAppText --><!-- /ko --> <i class="fa fa-spinner fa-spin" data-bind="visible: spin"></i><i class="fa fa-check" data-bind="visible: saved"></i></button>
             </td>                                                           
