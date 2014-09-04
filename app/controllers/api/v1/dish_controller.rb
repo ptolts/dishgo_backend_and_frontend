@@ -36,10 +36,27 @@ class Api::V1::DishController < ApplicationController
 
   def log_view
     dish_view = DishView.new
-    dish_view.dish = Dish.find(params[:dish_id])
+    dish = Dish.find(params[:dish_id])
+    dish_view.dish = dish
     if !params[:dishgo_token].blank? and user = User.where(authenticity_token:params[:dishgo_token]).first
       dish_view.user = user
     end
+    if current_user
+      dish_view.user = current_user
+    end
+    if description = dish.description_translations and description.any?{|e| e[0].length > 0}
+      dish_view.had_description = true
+    end
+    if !dish.top_image.blank?
+      dish_view.had_image = true
+    end 
+    if dish.rating > 0
+      dish_view.had_rating = true
+    end
+    if section = dish.section
+      dish_view.had_section_position = section.position
+    end
+    dish_view.had_position = dish.position   
     dish_view.ip = request.ip
     dish_view.user_agent = request.user_agent
     dish_view.end_point = "DishApiController"   

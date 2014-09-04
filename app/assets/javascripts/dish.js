@@ -435,6 +435,23 @@ function Dish(data, topmodel) {
         });
     }
 
+    self.trackClick = ko.computed(function(){
+        if(self.fullWidth()){
+            $.ajax({
+                type: "POST",
+                url: "/app/api/v1/dish/log_view",
+                data: {
+                    dish_id: self.id(),
+                },
+                success: function(data, textStatus, jqXHR){                       
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown) {                                          
+                },
+                dataType: "json"
+            });
+        }
+    });
+
     self.update_when_dirty = function(){
         if(self.id.peek() && editing_mode){
             $.ajax({

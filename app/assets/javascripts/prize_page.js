@@ -11,4 +11,13 @@
 *= require individual_option.js
 *= require size_prices.js
 *= require restaurant
+*= require_self
 */
+
+ko.bindingHandlers.lText = {
+    update: function (element, valueAccessor) {       
+        var value = valueAccessor();
+        var result = ko.observable(value()[lang()]);
+        ko.bindingHandlers.text.update(element, result);     
+    }
+}; 
