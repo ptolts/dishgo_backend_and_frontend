@@ -111,7 +111,7 @@ class NetworkController < ApplicationController
     @dish = Dish.find(params[:id])
     @restaurant = @dish.restaurant
     Rails.logger.warn "Facebook Useragent: #{request.user_agent}"
-    if request.user_agent =~ /bot/i
+    if request.user_agent =~ /facebook/i
       render layout: 'network_dish'
       return
     else
