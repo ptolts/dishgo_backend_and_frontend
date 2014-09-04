@@ -11,7 +11,7 @@ class Api::V1::RestaurantsController < ApplicationController
     Rails.logger.warn params.to_s
 
     restaurants = Restaurant.new.by_loc [params[:lat].to_f,params[:lon].to_f]
-    restaurants = restaurants.only(:id,:hours,:lat,:lon,:name)
+    restaurants = restaurants.only(:id,:hours,:lat,:lon,:name, :address_line_1, :city, :postal_code, :does_delivery, :phone)
     restaurants = restaurants.collect do | restaurant |
       hash = restaurant.as_document({pages: true, prizes: true, skip_logo: true})
       hash[:image] = restaurant.image.app_version.profile_images.collect do |image|
