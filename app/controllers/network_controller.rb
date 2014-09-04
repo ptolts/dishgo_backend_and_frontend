@@ -62,11 +62,11 @@ class NetworkController < ApplicationController
 
   def dish_search
     dishes = Dish.dish_is_active.limit(60)
-    if result = request.location    
-      coords = [result.coordinates[1],result.coordinates[0]]
-      restaurant_ids = Restaurant.where(:locs => { "$near" => { "$geometry" => { "type" => "Point", :coordinates => coords }, "$maxDistance" => 100000}}).only(:id).collect{|e| e.id}
-      dishes = dishes.where(restaurant_id:restaurant_ids)
-    end
+    # if result = request.location    
+    #   coords = [result.coordinates[1],result.coordinates[0]]
+    #   restaurant_ids = Restaurant.where(:locs => { "$near" => { "$geometry" => { "type" => "Point", :coordinates => coords }, "$maxDistance" => 100000}}).only(:id).collect{|e| e.id}
+    #   dishes = dishes.where(restaurant_id:restaurant_ids)
+    # end
     search_term = params[:dish_search_term].gsub(/[^[:alnum:]]/,'.').gsub(/s\b/,'.?s')
     regex = /#{search_term}/i
     dishes = dishes.where(search_terms:regex)
