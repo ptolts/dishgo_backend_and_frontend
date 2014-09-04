@@ -110,12 +110,11 @@ class NetworkController < ApplicationController
   def dish
     @dish = Dish.find(params[:id])
     @restaurant = @dish.restaurant
-    Rails.logger.warn "Facebook Useragent: #{request.user_agent}"
     if request.user_agent =~ /facebook/i
       render layout: 'network_dish'
       return
     else
-      redirect_to "http://dishgo.ca/app/network/restaurant/#{@restaurant.id}"
+      redirect_to "https://dishgo.io/app/network/restaurant/#{@restaurant.id}"
     end
   end
 
