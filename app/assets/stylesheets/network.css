@@ -136,6 +136,12 @@ p, address,
     left: 0 !important;
     right: 0 !important;
 }
+.mobileTopSearchBar .tab-menu {
+    display: none;
+}
+.mobileTopSearchBar .main-controls {
+    padding: 0;
+}
 .mobileTopSearchBar form, .mobileTopSearchBar .form-group {
     margin-bottom: 0px !important;
 }
