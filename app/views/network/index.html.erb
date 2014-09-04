@@ -11,7 +11,7 @@
 						<div class="controls">
 							<div class="input-group input-group-lg">
 								<div class="input-group-addon searchSelectorContainer">
-									<span class="dropdown-toggle searchDropdownSelector" data-toggle="dropdown"><i class="fa fa-search"></i> <span class="caret"></span></span>
+									<span class="dropdown-toggle searchDropdownSelector" data-toggle="dropdown"><span class="caret"></span></span>
 									<ul class="dropdown-menu" role="menu" style="text-align:left;">
 										<li><a href="#" data-bind="click: function(){ $root.search_type('dish') }">Search by Dish</a></li>
 										<li><a href="#" data-bind="click: function(){ $root.search_type('restaurant') }">Search by Restaurant Name</a></li>
@@ -19,7 +19,7 @@
 								</div>	
 								<input id="#" name="#" type="text" placeholder="Restaurant Name" class="form-control" data-bind="value: restaurant_search_term, valueUpdate: 'afterkeydown'" />
 								<span class="input-group-btn">
-									<button class="btn btn-lg btn-search" data-bind="disable: searching"><i class="fa fa-spinner fa-spin" data-bind="visible: searching"></i><span data-bind="visible: !searching()">Search</span></button>
+									<button class="btn btn-lg btn-search" data-bind="disable: searching"><i class="fa fa-spinner fa-spin" data-bind="visible: searching"></i><span data-bind="visible: !searching()"><i class="fa fa-search"></i></span></button>
 								</span>
 							</div>
 						</div>
@@ -41,7 +41,7 @@
 						<div class="controls">
 							<div class="input-group input-group-lg">
 								<div class="input-group-addon searchSelectorContainer">
-									<span class="dropdown-toggle searchDropdownSelector" data-toggle="dropdown"><i class="fa fa-search"></i> <span class="caret"></span></span>
+									<span class="dropdown-toggle searchDropdownSelector" data-toggle="dropdown"><i class="fa fa-search" style="display:none;"></i> <span class="caret"></span></span>
 									<ul class="dropdown-menu" role="menu" style="text-align:left;">
 										<li><a href="#" data-bind="click: function(){ $root.search_type('dish') }">Search by Dish</a></li>
 										<li><a href="#" data-bind="click: function(){ $root.search_type('restaurant') }">Search by Restaurant Name</a></li>
@@ -49,7 +49,7 @@
 								</div>							
 								<input id="#" name="#" type="text" class="form-control" data-bind="attr:{placeholder:searchPlaceholder}, hasFocus: !top_search(), value: restaurant_search_term, valueUpdate: 'afterkeydown'" />
 								<span class="input-group-btn">
-									<button class="btn btn-lg btn-search" data-bind="disable: searching"><i class="fa fa-spinner fa-spin" data-bind="visible: searching"></i><span data-bind="visible: !searching()">Search</span></button>
+									<button class="btn btn-lg btn-search" data-bind="disable: searching"><i class="fa fa-spinner fa-spin" data-bind="visible: searching"></i><span data-bind="visible: !searching()"><i class="fa fa-search"></i></span></button>
 								</span>
 							</div>
 						</div>
