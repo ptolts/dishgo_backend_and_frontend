@@ -7,6 +7,7 @@
 		<meta property="og:type"            content="restaurant.menu_item" />
 		<meta property="og:url"             content="https://dishgo.io/app/network/dish/<%= @dish.id %>" />
 		<meta property="og:title"           content="<%= first_non_empty(@dish.name_translations) %>" />
+		<meta property="restaurant:section"	content="<%= first_non_empty(@dish.section.name_translations) %>" /> 		
     <% if @dish.top_image %>
 		<meta property="og:image"           content="<%= @dish.top_image %>" />
     <% elsif @restaurant.logo %>
