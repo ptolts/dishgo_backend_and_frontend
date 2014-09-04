@@ -85,7 +85,7 @@
                                         </script>                                                           
                                     </div>
                                     <!-- THIS IS THE SHOW DETAILS/HIDE DETAILS -->
-                                    <div class="expand" data-bind="click: function(){ fullWidth(!fullWidth()); }"><!-- ko if: !fullWidth() -->Show Details <i class="fa fa-expand"></i><!-- /ko --></div>
+                                    <div class="expand" data-bind="click: function(){ fullWidth(!fullWidth()); }">Show Details <i class="fa fa-expand"></i></div>
                                     <!-- ^^^^^^^^^^^^^ -->
                                 </div>
                                 <!-- ^^^^^^^^^^^^^ -->
@@ -144,8 +144,9 @@
                                             </div>
                                         </div>
                                     <!-- /ko -->
+                                    <div class="btn pull-left" data-bind="click: shareFB">Share  <i class="fa fa-facebook"></i></div>
+                                    <div class="expand" data-bind="click: function(){ fullWidth(!fullWidth()); }">Hide Details <i class="fa fa-compress"></i></div>
                                 </div>
-                                <div class="expand" data-bind="click: function(){ fullWidth(!fullWidth()); }"><!-- /ko --><!-- ko if: fullWidth -->Hide Details <i class="fa fa-compress"></i><!-- /ko --></div>
                                 <!-- ^^^^^^^^^^^^^ -->                                
                             </div>
                             <!-- ^^^^^^^^^^^^^^^^ -->                            
