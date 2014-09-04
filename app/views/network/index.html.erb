@@ -79,8 +79,8 @@
 								<%= raw(stars dish.rating) %>
 							</span>
 							<div class="dish-description">
-								<span><%= dish.name %></span>
-								<p><%= dish.description[0..110] %><%= dish.description.length > 110 ? "..." : nil %></p>
+								<span><%= first_non_empty(dish.name_translations) %></span>
+								<p><%= first_non_empty_truncated(dish.description_translations) %></p>
 							</div>
 						</div>
 					</div>

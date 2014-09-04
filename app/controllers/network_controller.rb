@@ -3,8 +3,13 @@ class NetworkController < ApplicationController
   layout 'network'
   
   def index
-    restaurant = Restaurant.where(name:/cunningham/i).first
-    @dishes = restaurant.dishes.to_a.reject{|e| e.image.count == 0}[0..2]
+    if top_dish = TopDish.first
+      @dishes = Dish.find(top_dish.dish_ids).to_a
+      Rails.logger.warn @dishes.first.to_json
+    else
+      restaurant = Restaurant.where(name:/cunningham/i).first
+      @dishes = restaurant.dishes.to_a.reject{|e| e.image.count == 0}[0..2]
+    end
     render 'index'
   end
 
@@ -56,17 +61,17 @@ class NetworkController < ApplicationController
   end
 
   def dish_search
-    dishes = Dish.dish_is_active.limit(25)
+    dishes = Dish.dish_is_active.limit(60)
     if result = request.location    
       coords = [result.coordinates[1],result.coordinates[0]]
       restaurant_ids = Restaurant.where(:locs => { "$near" => { "$geometry" => { "type" => "Point", :coordinates => coords }, "$maxDistance" => 100000}}).only(:id).collect{|e| e.id}
-      dishes.where(restaurant_id:restaurant_ids)
+      dishes = dishes.where(restaurant_id:restaurant_ids)
     end
     search_term = params[:dish_search_term].gsub(/[^[:alnum:]]/,'.').gsub(/s\b/,'.?s')
     regex = /#{search_term}/i
     dishes = dishes.where(search_terms:regex)
     count = dishes.count
-    dishes = dishes.collect{|e| e.serializable_hash(export_localized:true)}.as_json
+    dishes = dishes.sort_by{|x| x.top_image.blank? ? 1 : 0 }.collect{|e| e.serializable_hash(export_localized:true)}.as_json
     render json: {dishes:dishes, count: count}.to_json
   end  
 

@@ -6,8 +6,9 @@
                         </div>
                         <div class="option_title">
                             <span data-bind="click: printJson">Dish Builder</span>      
-                        </div>                          
-                        <span class="dish_close_icon glyphicon glyphicon glyphicon-remove" data-bind="click: function(){ topmodel.remove($data) }"></span>                        
+                        </div>
+                        <span class="top_dish_icon glyphicon glyphicon-star" data-bind="visible: admin, click: set_as_top_dish"></span>                                             
+                        <span class="dish_close_icon glyphicon glyphicon-remove" data-bind="click: function(){ topmodel.remove($data) }"></span>                        
                     </div>                        
                     <div class="dish">
                         <div class="col-xs-12 push_down">

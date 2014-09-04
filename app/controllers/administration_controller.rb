@@ -5,7 +5,7 @@ class AdministrationController < ApplicationController
   before_filter :authenticate_user!
   before_filter :create_notifications!
   before_filter :admin_or_user_with_resto!, :except => [:restaurant_setup, :free_search_restaurants, :set_restaurant, :create_restaurant, :help_me]
-  before_filter :admin_user!, :only => [:users_csv, :load_profile_images, :create_user_for_restaurant, :load_user, :users, :restaurants, :add_user, :user_destroy, :update_user, :search_restaurants, :become, :become_user, :list_in_app]
+  before_filter :admin_user!, :only => [:top_dish, :users_csv, :load_profile_images, :create_user_for_restaurant, :load_user, :users, :restaurants, :add_user, :user_destroy, :update_user, :search_restaurants, :become, :become_user, :list_in_app]
   before_filter :admin_or_owner!, :only => [:edit_menu, :update_menu, :crop_image, :crop_icon, :publish_menu, :reset_draft_menu, :update_restaurant]
   before_filter :admin_or_user_without_resto!, :only => [:restaurant_setup]
   layout 'administration'
@@ -14,6 +14,15 @@ class AdministrationController < ApplicationController
   def set_access_control_headers 
     # headers['Access-Control-Allow-Origin'] = '*' 
     # headers['Access-Control-Allow-Origin'] = 'http://dev.foodcloud.ca' 
+  end
+
+  def top_dish
+    dish = Dish.find(params[:dish_id])
+    top_dish = TopDish.first || TopDish.create
+    top_dish.dish_ids.unshift(dish.id)
+    top_dish.dish_ids = top_dish.dish_ids.uniq[0..2]
+    top_dish.save
+    render json: true.as_json
   end
 
   def index

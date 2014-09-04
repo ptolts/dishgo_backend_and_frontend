@@ -235,6 +235,7 @@ Foodcloud::Application.routes.draw do
       post 'helpme'       
       post 'load_user' 
       post 'load_profile_images'      
+      post 'top_dish'      
     end
   end
 

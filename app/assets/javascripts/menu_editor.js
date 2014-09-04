@@ -789,16 +789,19 @@ ko.bindingHandlers.price = {
 };
 
 ko.bindingHandlers.lText = {
-    update: function (element, valueAccessor) {
-        //console.log("DEBUG: lText firing on: " + element);        
+    update: function (element, valueAccessor, allBindingsAccessor) {      
         var value = valueAccessor();
         var result = ko.observable(value()[lang()]);
-        ko.bindingHandlers.text.update(element, result);
-        
-        // $(element).fadeOut(250, function() {
-        //     ko.bindingHandlers.text.update(element, result);
-        //     $(element).fadeIn(250);
-        // });        
+
+        var length = ko.utils.unwrapObservable(allBindingsAccessor().maxTextLength) || false;
+
+        if(length){
+            if(result.length > length){
+                result = result.substring(0, length) + "...";
+            }
+        }
+
+        ko.bindingHandlers.text.update(element, result);    
     }
 }; 
 

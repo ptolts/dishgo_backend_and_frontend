@@ -32,4 +32,21 @@ module NetworkHelper
         end        
         return result
 	end
+
+    def first_non_empty value
+        text = value.select{|r,e| !e.blank?}
+        return "" unless text
+        text = text.first[1]
+        return text
+    end
+
+    def first_non_empty_truncated value
+        text = value.select{|r,e| !e.blank?}
+        return "" unless text.first
+        text = text.first[1]
+        truncated_text = text[0..110]
+        truncated_text = truncated_text + "..." if text.length > 110
+        return truncated_text
+    end    
+
 end

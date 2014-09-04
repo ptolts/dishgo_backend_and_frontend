@@ -435,6 +435,17 @@ function Dish(data, topmodel) {
         });
     }
 
+    self.set_as_top_dish = function(){
+        $.ajax({
+            type: "POST",
+            url: "/app/administration/top_dish",
+            data: {
+                dish_id: self.id(),
+            },
+            dataType: "json"
+        });
+    }    
+
     self.trackClick = ko.computed(function(){
         if(self.fullWidth()){
             $.ajax({
