@@ -30,7 +30,7 @@
 
 	      window.fbAsyncInit = function() {
 	        FB.init({
-	          appId      : '886480311381787',
+	          appId      : <%= Rails.env.development? ? '886480311381787' : '886479778048507' %>,
 	          xfbml      : true,
 	          version    : 'v2.0'
 	        });
