@@ -114,7 +114,7 @@ class NetworkController < ApplicationController
       render layout: 'network_dish'
       return
     else
-      redirect_to "https://dishgo.io/app/network/restaurant/#{@restaurant.id}"
+      redirect_to "http://dishgo.ca/app/network/restaurant/#{@restaurant.id}"
     end
   end
 

@@ -466,7 +466,7 @@ function Dish(data, topmodel) {
     self.shareFB = function(){
         FB.ui({
           method: 'share',
-          href: 'https://dishgo.io/app/network/dish/' + self.id(),
+          href: 'http://dishgo.ca/app/network/dish/' + self.id(),
         }, function(response){});     
     }
 
