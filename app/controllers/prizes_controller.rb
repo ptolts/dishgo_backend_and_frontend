@@ -102,7 +102,6 @@ class PrizesController < ApplicationController
       return
     end
     promo_user = User.where(promo_code:code).first
-    Rails.logger.warn "#{!promo_user} or #{promo_user == user} ---- user: #{user}"
     if !promo_user or promo_user == user
       render json: {error: "Invalid Code!"}.as_json
       return
