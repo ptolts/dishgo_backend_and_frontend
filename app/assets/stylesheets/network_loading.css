@@ -11,7 +11,7 @@
 }
 
 .loading-bg{
-  background: linear-gradient(to bottom, rgb(255,255,255), rgb(251,251,521));
+  background: linear-gradient(to bottom, rgb(255,255,255), rgb(251,251,251));
   position: fixed;
   top: 0;
   bottom: 0;
