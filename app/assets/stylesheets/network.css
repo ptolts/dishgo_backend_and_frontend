@@ -5,6 +5,14 @@
 *= require network_menu_base
 *= require_self
 */
+.clear-search {
+    position: absolute;
+    right: 78px;
+    top: 22px;
+    font-size: 21px;
+    color: #cf2f28;
+    z-index: 10;
+}
 
 .main-controls {
     padding-top: 25px;
@@ -290,7 +298,8 @@ body {
 }
 footer {
     padding: 25px;
-    background-color: #373737;
+    /*background-color: #373737;*/
+    background: linear-gradient(to bottom, rgb(55,55,55), rgb(51,51,51));    
     letter-spacing: 0.8px;
 }
 footer a {
@@ -540,7 +549,7 @@ footer a:hover, footer a:focus {
         padding: 0 25%
     }
     .letsdishgo-bottom li a {
-        font-size: 20px;
+        font-size: 18px;
     }
     #sign_in_modal {
         width: 400px;
@@ -925,7 +934,7 @@ footer a:hover, footer a:focus {
 }
 .col-sm-20 a {
     color: #fff;
-    font-size: 24px;
+    font-size: 21px;
     font-weight: 700;
 }
 .col-sm-20 a:hover, .col-sm-20 a:focus {

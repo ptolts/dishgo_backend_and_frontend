@@ -265,7 +265,7 @@ function NetworkModel() {
     self.email = ko.observable();
     self.password = ko.observable();
     self.search_type = ko.observable("restaurant");
-    self.lang = ko.observable('en');
+    self.lang = ko.observable((navigator.language || navigator.userLanguage || 'en').replace(/\-.*/,''));
     lang = self.lang;
 
     self.searchPlaceholder = ko.computed({

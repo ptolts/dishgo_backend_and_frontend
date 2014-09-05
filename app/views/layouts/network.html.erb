@@ -79,8 +79,8 @@
 	         	<div id="sign_in">
 		            <div class="row">
 		                <div class="col-xs-12 text-center">
-		                	<h3 style="margin-top: 0px" data-bind="visible: !loggedIn()">User Sign In</h3>
-		                	<h3 style="margin-top: 0px" data-bind="visible: loggedIn">Connected Accounts</h3>
+		                	<h3 style="margin-top: 0px" data-bind="visible: !loggedIn(), localize">User Sign In</h3>
+		                	<h3 style="margin-top: 0px" data-bind="visible: loggedIn, localize">Connected Accounts</h3>
 		                	<!-- ko foreach: social_networks -->
 		                		<span class="btn btn-none social_network_button" data-bind="click: function(){ login(); }, css: {online:online}"><i class="fa" data-bind="css:'fa-'+name"></i></span>
 		                	<!-- /ko -->
@@ -90,7 +90,7 @@
 		            <!-- if the user is not logged in, show them this -->
 		            <div class="row" data-bind="visible: !loggedInWithRestaurant()">
 		                <div class="col-xs-12 text-center">
-		                	<h3>Restaurant Sign In</h3>
+		                	<h3 data-bind="localize">Restaurant Sign In</h3>
 							<div class="row">
 								<div class="col-sm-10 col-sm-offset-1">
 									<input type="email" class="form-control" data-bind="value: email" placeholder="Email">
@@ -103,7 +103,7 @@
 							</div>
 							<div class="row" style="margin-top:5px;">
 								<div class="col-sm-10 col-sm-offset-1">
-									<button class="btn btn-none" style="width: 100%; background-color:#cf2f28; color:#fff;" data-bind="click: signInWithUserPass">Submit<i class="fa fa-spinner fa-spin pull-right" data-bind="visible: signInSpin"></i></button>
+									<button class="btn btn-none" style="width: 100%; background-color:#cf2f28; color:#fff;" data-bind="click: signInWithUserPass"><span data-bind="localize">Submit</span><i class="fa fa-spinner fa-spin pull-right" data-bind="visible: signInSpin"></i></button>
 								</div>
 							</div>							
 		                </div>                
@@ -112,10 +112,10 @@
 		            <!-- if the user is logged in, show them this -->
 		            <div class="row" data-bind="visible: loggedInWithRestaurant">
 		                <div class="col-xs-12 text-center">
-		                	<h3>Restaurant Dashboard</h3>
+		                	<h3 data-bind="localize">Restaurant Dashboard</h3>
 							<div class="row" style="margin-top:5px;">
 								<div class="col-sm-10 col-sm-offset-1">
-									<a class="btn btn-none" style="width: 100%; background-color:#cf2f28; color:#fff;" href="/app/administration">Dashboard</a>
+									<a class="btn btn-none" style="width: 100%; background-color:#cf2f28; color:#fff;" href="/app/administration" data-bind="localize">Dashboard</a>
 								</div>
 							</div>							
 		                </div>                
@@ -137,8 +137,8 @@
 				
 					<div id="login_buttons">
 						<ul>
-							<li><span class="btn btn-none" style="margin-right:-3px;" data-bind="click: function(){ $root.network_sign_in(true); }, text: login_text">Log In</span></li>
-			            	<li><a href="/app/letsdishgo" class="sign_up_button btn btn-search">Get Listed</a></li>
+							<li><span class="btn btn-none" style="margin-right:-3px;" data-bind="click: function(){ $root.network_sign_in(true); }, localize: login_text">Log In</span></li>
+			            	<li><a href="/app/letsdishgo" class="sign_up_button btn btn-search" data-bind="localize">Get Listed</a></li>
 						</ul>
 					</div>
 				</div>
@@ -160,8 +160,8 @@
 									<div class="input-group-addon searchSelectorContainer">
 										<span class="dropdown-toggle searchDropdownSelector" data-toggle="dropdown"><span class="caret"></span></span>
 										<ul class="dropdown-menu" role="menu" style="text-align:left;">
-											<li><a href="#" data-bind="click: function(){ $root.search_type('dish') }">Dish</a></li>
-											<li><a href="#" data-bind="click: function(){ $root.search_type('restaurant') }">Restaurant Name</a></li>
+											<li><a href="#" data-bind="click: function(){ $root.search_type('dish') }, localize">Dish</a></li>
+											<li><a href="#" data-bind="click: function(){ $root.search_type('restaurant') }, localize">Restaurant Name</a></li>
 										</ul>
 									</div>	
 									<input type="text" placeholder="Restaurant Name" class="form-control" data-bind="hasFocus: top_search, value: restaurant_search_term, valueUpdate: 'afterkeydown'" />
@@ -175,8 +175,8 @@
 				
 					<div id="login_buttons">
 						<ul>
-							<li><span class="btn btn-none" style="margin-right:-3px;" data-bind="click: function(){ $root.network_sign_in(true); }, text: login_text">Log In</span></li>
-			            	<li><a href="/app/letsdishgo" class="sign_up_button btn btn-search">Get Listed</a></li>
+							<li><span class="btn btn-none" style="margin-right:-3px;" data-bind="click: function(){ $root.network_sign_in(true); }, localize: login_text">Log In</span></li>
+			            	<li><a href="/app/letsdishgo" class="sign_up_button btn btn-search" data-bind="localize">Get Listed</a></li>
 						</ul>
 					</div>
 				</div>
@@ -191,19 +191,19 @@
 			    <div class="container">
 			        <div class="row">
 			            <div class="col-sm-20">
-			                <a class="twocolors" href="https://dishgo.io/business/index.html"><span class="white">Dish</span><span class="red">Go</span><span class="white"> App</a>
+			                <a class="twocolors" href="https://dishgo.io/business/index.html"><span class="white">Dish</span><span class="red">Go </span><span class="white" data-bind="localize">App</a>
 			            </div>
 			            <div class="col-sm-20">
-			                <a href="/app/letsdishgo">Get Listed</a>
+			                <a href="/app/letsdishgo" data-bind="localize">Get Listed</a>
 			            </div>
 			            <div class="col-sm-20">
-			                <a href="https://dishgo.io/business/restaurant-website-builder.html">Web Design</a>
+			                <a href="https://dishgo.io/business/restaurant-website-builder.html" data-bind="localize">Web Design</a>
 			            </div>
 			            <div class="col-sm-20">
-			                <a href="https://dishgo.io/blog/">Blog</a>
+			                <a href="https://dishgo.io/blog/" data-bind="localize">Blog</a>
 			            </div>
 			            <div class="col-sm-20">
-			                <a href="https://dishgo.io">Sign Up</a>
+			                <a href="https://dishgo.io" data-bind="localize">Sign Up</a>
 			            </div>
 			        </div>	
 			        <div class="row">
@@ -228,7 +228,7 @@
 			                <a href="https://dishgo.io/privacy-policy.html" target="_blank">Legal</a>
 			            </li>
 			            <li>
-			                <a href="mailto:info@dishgo.io">Contact Us</a>
+			                <a href="mailto:info@dishgo.io" data-bind="localize">Contact Us</a>
 			            </li>
 			            <li class="last">
 			                <a href="https://dishgo.io">©DishGo</a>

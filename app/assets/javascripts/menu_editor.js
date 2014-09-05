@@ -16,6 +16,7 @@
 *= require restaurant
 *= require lightbox.js
 *= require network.js
+*= require network_localize.js
 */
 
 var internet_connection_error = ko.observable(false);
