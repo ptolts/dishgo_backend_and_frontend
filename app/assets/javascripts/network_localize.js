@@ -10,10 +10,16 @@ var network_localize = {
         "Search Dish Name":"Recherche par Plat",
         "Sign Up":"Inscription",
         "Submit":"Soumettre",
-        "Web Design":"Design Web",
+        "Web Design":"Conception de site web",
         "App":"Appli",
         "Top Dishes of the Day":"Meilleurs Plats du jour",
         "Contact Us":"Contactez Nous",
+        "Legal":"Légal",
+        "Claim this page":"Revendiquer cette page",
+        "Show Details":"Voir les détails",
+        "Hide Details":"Cacher les détails"
+        "Rate This Dish":"Évaluer ce plat",
+        "Add Photo":"Ajouter une photo",
     },    
 }
 
