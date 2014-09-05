@@ -385,6 +385,23 @@ footer a:hover, footer a:focus {
 .dish_container:nth-child(n) {
     filter: none;
 }
+.dish_container_none {
+    position: relative;
+    height: 275px;
+    overflow: hidden;
+    color: #000;
+    padding: 0 15px;
+    margin-bottom: 15px;
+    background: rgb(0, 0, 0);
+    background: transparent;
+    background: rgba(0, 0, 0, 0.7);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#e5ffffff, endColorstr=#e5ffffff);
+    zoom: 1;
+}
+.dish_container_none:nth-child(n) {
+    filter: none;
+}
+}
 .coo_hover:hover {
     background-color: rgba(0, 0, 0, 0.5);
     -moz-transition: all .5s;
