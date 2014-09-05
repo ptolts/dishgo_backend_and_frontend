@@ -540,6 +540,9 @@ footer a:hover, footer a:focus {
 /* Weird Rules*/
 
 @media only screen and (min-width: 601px) {
+    .mobile_logo {
+        display: none;
+    }
     .counter-tab {
         margin-top: 13px;
     }
@@ -695,6 +698,12 @@ footer a:hover, footer a:focus {
     body {
         background-position: center;
     }
+    .mobile_logo {
+        margin-left: -15px;
+    }
+    .mobile_logo .btn-search {
+        padding: 17px 15px 7px 15px !important;
+    }
     .search_results {
         margin-top: -20px;
     }
@@ -735,9 +744,9 @@ footer a:hover, footer a:focus {
         width: 140px;
         margin: 10px 0 0 -10px; 
     }
-    #login_buttons {
+/*    #login_buttons {
         position: relative;
-    }    
+    }   */ 
     #login_buttons ul {
         height: 50px;
         margin: 0;
