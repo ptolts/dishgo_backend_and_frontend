@@ -255,7 +255,6 @@ function NetworkModel() {
     self.loading = ko.observable(true);
     self.network_sign_in = ko.observable(false);
     self.preview = ko.observable(true);
-    lang = self.lang;
     self.selected_dish = ko.observable();
     self.user = ko.observable(new User(user_data));
     self.restaurants = ko.observableArray([]);
@@ -265,8 +264,6 @@ function NetworkModel() {
     self.email = ko.observable();
     self.password = ko.observable();
     self.search_type = ko.observable("restaurant");
-    self.lang = ko.observable((navigator.language || navigator.userLanguage || 'en').replace(/\-.*/,''));
-    lang = self.lang;
 
     self.searchPlaceholder = ko.computed({
         read: function(){
@@ -279,27 +276,9 @@ function NetworkModel() {
         deferEvaluation: true,
     });
 
-    // Switch Languages
-    self.language = ko.computed(function(){
-        if(self.lang() == 'en'){
-            return "Français";
-        } else {
-            return "English";
-        }
-    });
-
-    self.flip_language = function(){
-        if(self.lang() == "en"){
-            self.lang("fr");
-        } else {
-            self.lang("en");
-        }
-    }
-
     if("resto_data" in window){
         self.restaurant = ko.observable(new Restaurant(resto_data));
         global_restaurant_id = self.restaurant().id;
-        self.lang(self.restaurant().default_language() ? self.restaurant().default_language() : 'en');
         self.languages = self.restaurant().languages;  
         self.getFullLangName = function(l){ 
           return ko.observable(self.languages_full[l]) 
@@ -332,8 +311,29 @@ function NetworkModel() {
 
         if(!self.selected_menu() && self.menus().length > 0){
             self.selected_menu(self.menus()[0].menu());
-        }                                   
+        }
+        self.lang = lang;                                  
+    } else {
+        self.lang = ko.observable((navigator.language || navigator.userLanguage || 'en').replace(/\-.*/,''));
+        lang = self.lang;
     }
+
+    // Switch Languages
+    self.language = ko.computed(function(){
+        if(self.lang() == 'en'){
+            return "Français";
+        } else {
+            return "English";
+        }
+    });
+
+    self.flip_language = function(){
+        if(self.lang() == "en"){
+            self.lang("fr");
+        } else {
+            self.lang("en");
+        }
+    }    
 
     self.showDetails = ko.observable(false);
     self.toggleDetails =  function(){

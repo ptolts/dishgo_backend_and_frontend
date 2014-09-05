@@ -735,9 +735,13 @@ footer a:hover, footer a:focus {
         width: 140px;
         margin: 10px 0 0 -10px; 
     }
+    #login_buttons {
+        position: relative;
+    }    
     #login_buttons ul {
         height: 50px;
         margin: 0;
+        padding: 0;
     }
     #login_buttons ul li {
         line-height: 24px;
