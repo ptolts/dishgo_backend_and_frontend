@@ -1,0 +1,117 @@
+@import url(http://fonts.googleapis.com/css?family=Raleway:900,700,500,300,100);
+
+.loading *{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.loading {
+  width: 320px;
+}
+
+.loading-bg{
+  background: linear-gradient(to bottom, rgb(255,255,255), rgb(251,251,521));
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.center{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+}
+
+.bouncywrap{
+  position: relative;
+  width: 60px; 
+  display: block;
+  margin: 0 auto;
+  margin-top: 20px; 
+
+}
+
+.loading-logo {
+  width: 150px;
+  display: block;
+  margin: 0 auto;
+}
+
+.cenetered {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.dotcon{
+  display: block;
+  float: left;
+  width: 40px;
+  position: absolute;
+}
+
+.dc1{
+  -webkit-animation: bouncy1 1.5s infinite;
+  left: 0px;
+  animation: bouncy1 1.5s infinite;
+}
+
+.dc2{
+  -webkit-animation: bouncy2 1.5s infinite;
+  animation: bouncy2 1.5s infinite;
+  left: 30px;
+}
+
+.dc3{
+  -webkit-animation: bouncy3 1.5s infinite;
+  animation: bouncy3 1.5s infinite;
+  left: 60px;
+}
+
+.dot{
+  height: 8px;
+  width: 8px;
+  border-radius: 50%;
+  background: rgba(207,47,40,0.8);
+}
+
+
+@-webkit-keyframes bouncy1{
+  0% {-webkit-transform: translate(0px,0px) rotate(0deg);}
+  50% {-webkit-transform: translate(0px,0px) rotate(180deg);}
+  100% {-webkit-transform: translate(30px,0px) rotate(-180deg);}
+}
+
+@keyframes bouncy1{
+  0% {transform: translate(0px,0px) rotate(0deg);}
+  50% {transform: translate(0px,0px) rotate(180deg);}
+  100% {transform: translate(30px,0px) rotate(-180deg);}
+}
+
+@-webkit-keyframes bouncy2{
+  0% {-webkit-transform: translateX(0px);}
+  50% {-webkit-transform: translateX(-30px);}
+  100% {-webkit-transform: translateX(-30px);}
+}
+
+@keyframes bouncy2{
+  0% {transform: translateX(0px);}
+  50% {transform: translateX(-30px);}
+  100% {transform: translateX(-30px);}
+}
+
+@-webkit-keyframes bouncy3{
+  0% {-webkit-transform: translateX(0px);}
+  50% {-webkit-transform: translateX(0px);}
+  100% {-webkit-transform: translateX(-30px);}
+}
+
+@keyframes bouncy3{
+  0% {transform: translateX(0px);}
+  50% {transform: translateX(0px);}
+  100% {transform: translateX(-30px);}
+}
