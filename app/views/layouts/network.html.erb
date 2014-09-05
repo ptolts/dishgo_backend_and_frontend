@@ -46,31 +46,32 @@
 
 				var user_data = <%= current_user ? raw(current_user.serializable_hash({restaurant:true}).to_json) : {}%>;
 
-		</script> 
+		</script> 		 	
 
-		<style type="text/css">
-			<%= raw(Rails.application.assets.find_asset('network_loading').to_s) %>
-		</style>		 	
-
-		<div data-bind="fadeVisible: false">
-			<div class="loading-bg"></div>
-			<div class="center">
-				<div class="loading">
-					<img src="https://d5ca3b0520fac45026ad-6caa6fe89e7dac3eaf12230f0985b957.ssl.cf5.rackcdn.com/DishGo_Logo_Network_Beta.png" class="loading-logo">
-					<div class="centered bouncywrap">
-						<div class="dotcon dc1">
-							<div class="dot"></div>
-						</div>
-						<div class="dotcon dc2">
-							<div class="dot"></div>
-						</div>
-						<div class="dotcon dc3">
-							<div class="dot"></div>
+		<% if controller_name == "network" && action_name == "restaurant" %>
+			<style type="text/css">
+				<%= raw(Rails.application.assets.find_asset('network_loading').to_s) %>
+			</style>		
+			<div data-bind="fadeVisible: false">
+				<div class="loading-bg"></div>
+				<div class="center">
+					<div class="loading">
+						<img src="https://d5ca3b0520fac45026ad-6caa6fe89e7dac3eaf12230f0985b957.ssl.cf5.rackcdn.com/DishGo_Logo_Network_Beta.png" class="loading-logo">
+						<div class="centered bouncywrap">
+							<div class="dotcon dc1">
+								<div class="dot"></div>
+							</div>
+							<div class="dotcon dc2">
+								<div class="dot"></div>
+							</div>
+							<div class="dotcon dc3">
+								<div class="dot"></div>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>
+		<% end %>
 
 	    <div data-bind="visible: network_sign_in" style="display:none">
 	        <div id="sign_in_bg" data-bind="click: function(){ network_sign_in(false) }"></div>
@@ -139,6 +140,7 @@
 						<ul>
 							<li><span class="btn btn-none" style="margin-right:-3px;" data-bind="click: function(){ $root.network_sign_in(true); }, localize: login_text">Log In</span></li>
 			            	<li><a href="/app/letsdishgo" class="sign_up_button btn btn-search" data-bind="localize">Get Listed</a></li>
+			            	<li><span class="btn btn-none" data-bind="text: language, click: flip_language">Français</span></li>
 						</ul>
 					</div>
 				</div>
@@ -177,6 +179,7 @@
 						<ul>
 							<li><span class="btn btn-none" style="margin-right:-3px;" data-bind="click: function(){ $root.network_sign_in(true); }, localize: login_text">Log In</span></li>
 			            	<li><a href="/app/letsdishgo" class="sign_up_button btn btn-search" data-bind="localize">Get Listed</a></li>
+			            	<li><span class="btn btn-none" data-bind="text: language, click: flip_language">Français</span></li>
 						</ul>
 					</div>
 				</div>

@@ -279,6 +279,22 @@ function NetworkModel() {
         deferEvaluation: true,
     });
 
+    // Switch Languages
+    self.language = ko.computed(function(){
+        if(self.lang() == 'en'){
+            return "Français";
+        } else {
+            return "English";
+        }
+    });
+
+    self.flip_language = function(){
+        if(self.lang() == "en"){
+            self.lang("fr");
+        } else {
+            self.lang("en");
+        }
+    }
 
     if("resto_data" in window){
         self.restaurant = ko.observable(new Restaurant(resto_data));

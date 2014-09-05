@@ -17,17 +17,18 @@ var network_localize = {
         "Legal":"Légal",
         "Claim this page":"Revendiquer cette page",
         "Show Details":"Voir les détails",
-        "Hide Details":"Cacher les détails"
+        "Hide Details":"Cacher les détails",
         "Rate This Dish":"Évaluer ce plat",
         "Add Photo":"Ajouter une photo",
-    },    
+    },        
 }
 
 ko.bindingHandlers.localize = {
     update: function (element, valueAccessor, allBindingsAccessor) {
         var language = lang() || 'en';
-        if(language == 'en'){
-            return;
+        var el = $(element);
+        if(!el.data("language_key")){
+            el.data("language_key",el.text());
         }
         if(valueAccessor()){
             var text = valueAccessor()();
@@ -37,9 +38,11 @@ ko.bindingHandlers.localize = {
         if(network_localize[language] && network_localize[language][text]){
             text = network_localize[language][text];
         } else {
-            console.log(language + " translation for " + text + " not found.");
+            if(language != 'en')
+                console.log(language + " translation for " + text + " not found.");
+            el.text(el.data("language_key"));
+            return;
         }
-        // ko.applyBindingsToNode(element, { text: text });
         $(element).text(text);
     }
 };
