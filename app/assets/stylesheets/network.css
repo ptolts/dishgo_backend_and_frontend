@@ -41,14 +41,14 @@
     border-bottom: 0px;
     z-index: 1;
     cursor: pointer;
-    top: -80px;
+    top: -78px;
     left: 0;
     width: 140px;
 }
 
 .tab-menu li:hover {
     background: rgba(0,0,0,0.6);
-    border-top: 4px solid #cf2f28;
+    border-top: 2px solid #cf2f28;
 }
 
 .tab-menu li.active {
@@ -58,7 +58,7 @@
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#b2000000, endColorstr=#b2000000);
     zoom: 1;
     color: #fff;
-    border-top: 4px solid #cf2f28;
+    border-top: 2px solid #cf2f28;
 }
 
 /* search thing settings */
@@ -712,7 +712,7 @@ footer a:hover, footer a:focus {
         margin-left: -16px;
     }
     .tab-menu li {
-        top: -78px;
+        top: -76px;
         border-radius: 0;
         width: 120px;
     }
