@@ -408,7 +408,6 @@ footer a:hover, footer a:focus {
 .dish_container_none:nth-child(n) {
     filter: none;
 }
-}
 .coo_hover:hover {
     background-color: rgba(0, 0, 0, 0.5);
     -moz-transition: all .5s;
