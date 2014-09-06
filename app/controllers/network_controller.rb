@@ -1,5 +1,5 @@
 class NetworkController < ApplicationController
-  skip_before_filter :verify_authenticity_token, only: [:search, :fetch_user, :dish_search]
+  skip_before_filter :verify_authenticity_token, only: [:search, :fetch_user, :dish_search, :menus_served]
   layout 'network'
   
   def index
@@ -118,4 +118,7 @@ class NetworkController < ApplicationController
     end
   end
 
+  def menus_served
+    render json: {count:PageView.count}.as_json
+  end
 end

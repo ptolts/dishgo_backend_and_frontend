@@ -83,6 +83,7 @@ Foodcloud::Application.routes.draw do
       post '/search', to: "network#search"
       post '/dish_search', to: "network#dish_search"
       post '/fetch_user', to: "network#fetch_user"
+      post '/menus_served', to: "network#menus_served"
       get '/fetch_user', to: "network#fetch_user"
     end
   end 

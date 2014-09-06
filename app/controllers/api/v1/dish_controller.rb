@@ -56,6 +56,9 @@ class Api::V1::DishController < ApplicationController
     if section = dish.section
       dish_view.had_section_position = section.position
     end
+    if current_user
+      dish_view.user = current_user
+    end
     dish_view.had_position = dish.position   
     dish_view.ip = request.ip
     dish_view.user_agent = request.user_agent

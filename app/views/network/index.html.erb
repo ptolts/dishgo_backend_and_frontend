@@ -56,7 +56,11 @@
 	<%= render 'restaurant_search_results' %>
 	<%= render 'dish_search_results' %>
 
-</div>
+
+<!-- <div class="odometer" data-bind="odometer">
+
+</div> -->
+
 <div id="white_background" data-bind="slideVisible: !top_search()">
 	<div class="container">
 		<div class="row">
@@ -96,6 +100,7 @@
 		"<%= javascript_path 'application' %>",
     	"<%= javascript_path 'menu_editor' %>",
     	"<%= javascript_path 'network_index_javascript' %>",
+    	"<%= javascript_path 'network_odometer' %>",
 	];
 	var src;
 	var script;

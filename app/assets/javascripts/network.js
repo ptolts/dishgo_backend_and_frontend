@@ -279,10 +279,19 @@ function NetworkModel() {
     if("resto_data" in window){
         self.restaurant = ko.observable(new Restaurant(resto_data));
         global_restaurant_id = self.restaurant().id;
-        self.languages = self.restaurant().languages;  
+        self.languages = self.restaurant().languages; 
+
         self.getFullLangName = function(l){ 
           return ko.observable(self.languages_full[l]) 
         }
+
+        self.shareFB = function(){
+            FB.ui({
+              method: 'share',
+              href: 'https://dishgo.io/app/network/restaurant/' + global_restaurant_id,
+            }, function(response){});     
+        }
+
         self.show_lang = ko.computed(function(){
             if(self.languages().length > 1){
                 return true;

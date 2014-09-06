@@ -3,6 +3,7 @@
 *= require font-awesome
 *= require network_dish_modal
 *= require network_menu_base
+*= require network_odometer
 *= require_self
 */
 .clear-search {
@@ -158,6 +159,12 @@ p, address,
 }
 .mobileTopSearchBar form, .mobileTopSearchBar .form-group {
     margin-bottom: 0px !important;
+}
+.resto-fb-share {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    color: blue !important;
 }
 .image-cropped {
     width: 75px;

@@ -14,6 +14,7 @@ class PageView
   field :processed_daily, type: Boolean
 
   belongs_to :restaurant, class_name: "Restaurant", inverse_of: :page_views, index: true
+  belongs_to :user, class_name: "User", index: true
 
   scope :unprocessed_hourly, -> { ne(processed_hourly:true) }
   scope :unprocessed_daily, -> { ne(processed_daily:true) }

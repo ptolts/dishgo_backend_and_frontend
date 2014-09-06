@@ -88,6 +88,7 @@ module Foodcloud
                                     'network_restaurant_javascript.js',
                                     'network_index_javascript.js',
                                     'loading_widget.css',
+                                    'network_odometer.js',
                                 ]
 
     config.exceptions_app = self.routes
