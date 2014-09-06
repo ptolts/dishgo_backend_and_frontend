@@ -130,10 +130,15 @@
 				<!-- MOBILE -->
 				<!-- ko if: isMobile -->
 				<div class="container" data-bind="if: isMobile">
+					<div id="logo">
+						<a href="/app/network">
+							<img src="https://d5ca3b0520fac45026ad-6caa6fe89e7dac3eaf12230f0985b957.ssl.cf5.rackcdn.com/DishGo_Logo_Network_Beta.png" class="img-responsive">
+						</a>
+					</div>
 					<div id="login_buttons">
 						<ul>
 							<li><span class="btn btn-none" style="margin-right:-3px;" data-bind="click: function(){ $root.network_sign_in(true); }, localize: login_text">Log In</span></li>
-			            	<li><a href="/app/letsdishgo" class="sign_up_button btn btn-search" data-bind="localize">Get Listed</a></li>
+			            	<!-- <li><a href="/app/letsdishgo" class="sign_up_button btn btn-search" data-bind="localize">Get Listed</a></li> -->
 			            	<li><span class="btn btn-none" data-bind="text: language, click: flip_language">Français</span></li>
 						</ul>
 					</div>

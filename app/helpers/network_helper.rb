@@ -44,8 +44,8 @@ module NetworkHelper
         text = value.select{|r,e| !e.blank?}
         return "" unless text.first
         text = text.first[1]
-        truncated_text = text[0..110]
-        truncated_text = truncated_text + "..." if text.length > 110
+        truncated_text = text[0..88]
+        truncated_text = truncated_text + "..." if text.length > 88
         return truncated_text
     end    
 
