@@ -14,6 +14,7 @@
   position: absolute;
   right: 10px;
   bottom: 10px;
+  border-top: 2px solid #cf2f28;
 }
 .odometer .menus_served {
   text-transform: uppercase;

@@ -213,7 +213,6 @@ p, address,
     position: absolute;
     right: 0;
     bottom: 0;
-    color: black !important;
 }
 .image-cropped {
     width: 75px;
@@ -1132,4 +1131,57 @@ footer a:hover, footer a:focus {
     border-right: 8px solid transparent;
     border-left: 8px solid transparent;
     color: #cf2f28;
+}
+.btn-menu-sections {
+    background: rgb(0, 0, 0);
+    background: transparent;
+    background: rgba(0,0,0,0.4);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#b2000000, endColorstr=#b2000000);
+    zoom: 1;
+    padding: 12px;
+    color: white;
+    text-align: center;
+    border: 1px solid rgba(0,0,0,0.4);
+    border-bottom: 0px;
+    border-radius: 0;
+    margin-bottom: -1px;
+}
+.btn-menu-sections:hover,
+.btn-menu-sections:focus {
+    background: rgb(0, 0, 0);
+    background: transparent;
+    background: rgba(0, 0, 0, 0.7);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#b2000000, endColorstr=#b2000000);
+    zoom: 1;
+    color: #fff;
+    border-top: 2px solid #cf2f28;
+}
+.btn-menu-sections.active {
+    background: rgb(0, 0, 0);
+    background: transparent;
+    background: rgba(0, 0, 0, 0.7);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#b2000000, endColorstr=#b2000000);
+    zoom: 1;
+    color: #fff;
+    border-top: 2px solid #cf2f28;
+    border-bottom: 0px;
+}
+.btn-fb {
+    border: 1px solid #3B5998;
+    color: #3B5998;
+}
+.btn-fb:hover {
+    background-color: #3B5998;
+    color: white;
+}
+.btn-fb-share {
+    border: 1px solid #3B5998;
+    color: #3B5998;
+    border-radius: 4px 0 4px 0;
+    border-right: 0;
+    border-bottom: 0;
+}
+.btn-fb-share:hover {
+    background-color: #3B5998;
+    color: white;
 }
