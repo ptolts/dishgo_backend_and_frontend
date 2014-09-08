@@ -21,16 +21,67 @@
     position: relative;
 }
 
+.main-tab-menu {
+    margin-left: -15px;
+    position: absolute;
+}
+
+.main-tab-menu li{
+    top: -78px;
+    left: 0;
+}
+
+.search-tab-menu {
+    margin-right: 5px;
+}
+
 .tab-menu {
     list-style: none;
     text-align: left;
     margin: 0;
-    margin-left: -15px;
     padding: 0;
-    position: absolute;
 }
 
-.tab-menu li {
+.section-tab-menu li .clicker {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+}
+
+.section-tab-menu li {
+    display: inline-block;
+    background: rgba(255,255,255,0.4);
+    padding: 12px;
+    color: black;
+    width: 95px;
+    text-align: center;
+    position: relative;
+    border: 1px solid rgba(255,255,255,0.4);
+    border-bottom: 0px;
+    z-index: 1;
+    cursor: pointer;
+    width: 140px;
+}
+
+.section-tab-menu li:hover {
+    background: rgba(255,255,255,0.6);
+    border-top: 2px solid #cf2f28; 
+}
+
+.section-tab-menu li.active {
+    background: transparent;
+    z-index:-1;
+    outline:2000px solid white;    
+    background: rgba(255,255,255,0.7);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#b2000000, endColorstr=#b2000000);
+    zoom: 1;
+    color: black;
+    border-top: 2px solid #cf2f28;
+}
+
+.main-tab-menu li {
     display: inline-block;
     background: rgba(0,0,0,0.4);
     padding: 12px;
@@ -42,17 +93,15 @@
     border-bottom: 0px;
     z-index: 1;
     cursor: pointer;
-    top: -78px;
-    left: 0;
     width: 140px;
 }
 
-.tab-menu li:hover {
+.main-tab-menu li:hover {
     background: rgba(0,0,0,0.6);
     border-top: 2px solid #cf2f28;
 }
 
-.tab-menu li.active {
+.main-tab-menu li.active {
     background: rgb(0, 0, 0);
     background: transparent;
     background: rgba(0, 0, 0, 0.7);
@@ -923,7 +972,7 @@ footer a:hover, footer a:focus {
     font-size: 14px;
 }
 .resto_details {
-    background-color: #fff;
+    overflow:hidden;
     border-bottom: 1px solid #e1e8ed;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
@@ -968,9 +1017,6 @@ footer a:hover, footer a:focus {
 }
 .fullWidth .dish_info {
     width: 100% !important;
-}
-.each_section {
-    margin-right: 5px;
 }
 .bot-links .fa, .bot-links .fa a {
     color: #cf2f28;

@@ -40,10 +40,6 @@
                 </address>
                 </div>
                 <div class="col-xs-12 col-sm-6 col-md-4 padme">
-                    <!-- <div class="counter-tab">
-                        <div class="counter_comnt"><i class="glyphicon glyphicon-comment"></i> 359</div>
-                        <div class="counter_like"><i class="glyphicon glyphicon-heart"></i> 2256</div>
-                    </div> -->
                     <div class="bot-links">
                         <div id="opened_or_closed_footer" data-bind="with: restaurant">
                             <h4 data-bind="visible: showHourSign">
@@ -53,9 +49,9 @@
                     </div>
                 </div>
                 <div class="menu_sections">
-                    <!-- ko foreach: menus -->
-                        <button class="btn btn-default each_section" data-bind="click: function(){ $root.selected_menu($data) }, lText: name, css: {active: $data==$root.selected_menu()}"></button>
-                    <!-- /ko -->
+                    <ul class="section-tab-menu tab-menu" data-bind="foreach: menus">
+                        <li data-bind="css:{active: $data==$root.selected_menu()}"><span class="clicker" data-bind="click: function(){ $root.selected_menu($data); console.log('hi') }"></span><span data-bind="lText:name"></span></li>
+                    </ul>                       
                 </div>
             </div>           
         </div>       
