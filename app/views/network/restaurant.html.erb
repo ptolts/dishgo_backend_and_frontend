@@ -15,7 +15,7 @@
                                 <div class="imageCroppedOneHundredPercent" style="background-image: url('<%= @restaurant.image.profile_images.first.img_url_original %>')">&nbsp;</div>                                                                                                                                  
                             <% end %>
                         </div>
-                        <span class="btn btn-none resto-fb-share" data-bind="click: function(){ $root.shareFb }"><span data-bind="localize">Share</span> <i class="fa fa-facebook"></i></span>
+                        <span class="btn btn-fb-share resto-fb-share" data-bind="click: function(){ $root.shareFb }"><span data-bind="localize">Share</span> <i class="fa fa-facebook"></i></span>
                     </div>
                 </div>
             </div>
@@ -54,7 +54,7 @@
                 </div>
                 <div class="menu_sections">
                     <!-- ko foreach: menus -->
-                        <button class="btn btn-default each_section" data-bind="click: function(){ $root.selected_menu($data) }, lText: name, css: {active: $data==$root.selected_menu()}"></button>
+                        <button class="btn btn-menu-sections each_section" data-bind="click: function(){ $root.selected_menu($data) }, lText: name, css: {active: $data==$root.selected_menu()}"></button>
                     <!-- /ko -->
                 </div>
             </div>           
