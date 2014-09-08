@@ -40,7 +40,15 @@ ko.bindingHandlers.localize = {
         } else {
             if(language != 'en')
                 console.log(language + " translation for " + text + " not found.");
-            el.text(el.data("language_key"));
+                // if this is computed text, refer to it instead of the bound data
+                if(valueAccessor()){
+                    text = valueAccessor()();
+                    el.text(text);
+                    return;
+                } else {
+                    el.text(el.data("language_key"));
+                    return;
+                }            
             return;
         }
         $(element).text(text);

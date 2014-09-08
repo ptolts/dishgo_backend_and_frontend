@@ -1,0 +1,119 @@
+@import url('//fonts.googleapis.com/css?family=Jura:400,500&subset=latin,latin-ext');
+@import url('//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css');
+
+.odometer ul.animated {
+  -webkit-transition: all 250ms cubic-bezier(0, 1.2, 1, 1.2) !important;
+  transition: all 250ms cubic-bezier(0, 1.2, 1, 1.2) !important;
+}
+.odometer {
+  color: #fff;
+  text-align: center;
+  display: inline-block;
+  vertical-align: middle;
+  background: rgba(0, 0, 0, 0.7);
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+}
+.odometer .menus_served {
+  text-transform: uppercase;
+  font-size: 10px;
+}
+.odometer ul.digits {
+  list-style: none;
+  padding: 0px;
+  margin: 0px;
+  overflow: hidden;
+}
+.odometer ul.digits li.digit {
+  position: relative;
+  float: left;
+  background-color: transparent;
+  font-size: 12px;
+  min-width: 2em;
+  min-height: 2em;
+  line-height: 2em;
+}
+.odometer ul.digits li.digit .cou-item ul {
+  position: absolute;
+  list-style: none;
+  padding: 0px;
+  margin: 0px;
+  left: 0px;
+  top: 0px;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-transform-origin: 50% 50%;
+  -ms-transform-origin: 50% 50%;
+  transform-origin: 50% 50%;
+  -webkit-transform: translate(0, 0em);
+  -ms-transform: translate(0, 0em);
+  transform: translate(0, 0em);
+}
+.odometer ul.digits li.digit .cou-item ul.goto-5 {
+  -webkit-transform: translateY(-10em);
+  -ms-transform: translateY(-10em);
+  transform: translateY(-10em);
+}
+.odometer ul.digits li.digit .cou-item ul li {
+  display: block;
+  background-color: ;
+  min-width: 2em;
+  min-height: 2em;
+  line-height: 2em;
+}
+.goto-0 {
+  -webkit-transform: translateY(-22em) !important;
+  -ms-transform: translateY(-22em) !important;
+  transform: translateY(-22em) !important;
+}
+.no-animation-0 {
+  -webkit-transform: translateY(-2em) !important;
+  -ms-transform: translateY(-2em) !important;
+  transform: translateY(-2em) !important;
+}
+.goto-1 {
+  -webkit-transform: translateY(-4em) !important;
+  -ms-transform: translateY(-4em) !important;
+  transform: translateY(-4em) !important;
+}
+.goto-2 {
+  -webkit-transform: translateY(-6em) !important;
+  -ms-transform: translateY(-6em) !important;
+  transform: translateY(-6em) !important;
+}
+.goto-3 {
+  -webkit-transform: translateY(-8em) !important;
+  -ms-transform: translateY(-8em) !important;
+  transform: translateY(-8em) !important;
+}
+.goto-4 {
+  -webkit-transform: translateY(-10em) !important;
+  -ms-transform: translateY(-10em) !important;
+  transform: translateY(-10em) !important;
+}
+.goto-5 {
+  -webkit-transform: translateY(-12em) !important;
+  -ms-transform: translateY(-12em) !important;
+  transform: translateY(-12em) !important;
+}
+.goto-6 {
+  -webkit-transform: translateY(-14em) !important;
+  -ms-transform: translateY(-14em) !important;
+  transform: translateY(-14em) !important;
+}
+.goto-7 {
+  -webkit-transform: translateY(-16em) !important;
+  -ms-transform: translateY(-16em) !important;
+  transform: translateY(-16em) !important;
+}
+.goto-8 {
+  -webkit-transform: translateY(-18em) !important;
+  -ms-transform: translateY(-18em) !important;
+  transform: translateY(-18em) !important;
+}
+.goto-9 {
+  -webkit-transform: translateY(-20em) !important;
+  -ms-transform: translateY(-20em) !important;
+  transform: translateY(-20em) !important;
+}

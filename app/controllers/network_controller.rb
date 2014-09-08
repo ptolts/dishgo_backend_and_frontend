@@ -5,7 +5,6 @@ class NetworkController < ApplicationController
   def index
     if top_dish = TopDish.first
       @dishes = Dish.find(top_dish.dish_ids).to_a
-      Rails.logger.warn @dishes.first.to_json
     else
       restaurant = Restaurant.where(name:/cunningham/i).first
       @dishes = restaurant.dishes.to_a.reject{|e| e.image.count == 0}[0..2]

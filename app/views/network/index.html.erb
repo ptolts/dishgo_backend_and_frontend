@@ -44,12 +44,39 @@
 						<input id="#" name="#" type="text" class="form-control" data-bind="localizePlaceholder:searchPlaceholder, hasFocus: !top_search(), value: restaurant_search_term, valueUpdate: 'afterkeydown'" />
 						<span class="input-group-btn">
 							<button class="btn btn-lg btn-search" style="border-radius:0;" data-bind="disable: searching"><i class="fa fa-spinner fa-spin" data-bind="visible: searching"></i><span data-bind="visible: !searching()"><i class="fa fa-search"></i></span></button>
-						</span>
+						</span>						
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+
+	<div class="odometer">
+		<ul class="digits" data-bind="foreach: odo">
+		  <li class="digit">
+		    <span class="cou-item cou-item-anim">
+		      <ul data-bind="odometer_animate: $data">
+		        <li>9</li>
+		        <li>0</li>
+		        <li>1</li>
+		        <li>2</li>
+		        <li>3</li>
+		        <li>4</li>
+		        <li>5</li>
+		        <li>6</li>
+		        <li>7</li>
+		        <li>8</li>
+		        <li>9</li>
+		        <li>0</li>
+		      </ul>
+		    </span>
+		  </li>
+		</ul>
+		<div class="menus_served">
+			<p data-bind="localize">Menus Served</p>
+		</div>
+	</div>			
+
 	<!-- /ko -->
 
 	<!-- SEARCH RESULTS WILL APPEAR HERE -->
@@ -96,6 +123,7 @@
 		"<%= javascript_path 'application' %>",
     	"<%= javascript_path 'menu_editor' %>",
     	"<%= javascript_path 'network_index_javascript' %>",
+    	"<%= javascript_path 'network_odometer' %>",
 	];
 	var src;
 	var script;
