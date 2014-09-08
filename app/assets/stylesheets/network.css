@@ -1179,12 +1179,13 @@ footer a:hover, footer a:focus {
 }
 .btn-fb-share {
     border: 1px solid #3B5998;
-    color: #3B5998;
+    background-color: #3B5998;
+    color: white;
     border-radius: 4px 0 4px 0;
     border-right: 0;
     border-bottom: 0;
 }
 .btn-fb-share:hover {
-    background-color: #3B5998;
-    color: white;
+    background-color: white;
+    color: #3B5998;
 }
