@@ -73,117 +73,13 @@
 			</div>
 		<% end %>
 
-	    <div data-bind="visible: network_sign_in" style="display:none">
-	        <div id="sign_in_bg" data-bind="click: function(){ network_sign_in(false) }"></div>
-	        <div id="sign_in_modal">
-	        	<a class="close" data-bind="click: function(){ network_sign_in(false) }">×</a>	        	
-	         	<div id="sign_in">
-		            <div class="row">
-		                <div class="col-xs-12 text-center">
-		                	<h3 style="margin-top: 0px" data-bind="visible: !loggedIn(), localize">User Sign In</h3>
-		                	<h3 style="margin-top: 0px" data-bind="visible: loggedIn, localize">Connected Accounts</h3>
-		                	<!-- ko foreach: social_networks -->
-		                		<span class="btn btn-none social_network_button" data-bind="click: function(){ login(); }, css: {online:online}"><i class="fa" data-bind="css:'fa-'+name"></i></span>
-		                	<!-- /ko -->
-		                </div>                
-		            </div>
+		<%= render 'network_sign_in' %>      	
 
-		            <!-- if the user is not logged in, show them this -->
-		            <div class="row" data-bind="visible: !loggedInWithRestaurant()">
-		                <div class="col-xs-12 text-center">
-		                	<h3 data-bind="localize">Restaurant Sign In</h3>
-							<div class="row">
-								<div class="col-sm-10 col-sm-offset-1">
-									<input type="email" class="form-control" data-bind="value: email" placeholder="Email">
-								</div>
-							</div>
-							<div class="row" style="margin-top:5px;">
-								<div class="col-sm-10 col-sm-offset-1">
-									<input type="password" class="form-control" data-bind="value: password" placeholder="Password">
-								</div>
-							</div>
-							<div class="row" style="margin-top:5px;">
-								<div class="col-sm-10 col-sm-offset-1">
-									<button class="btn btn-none" style="width: 100%; background-color:#cf2f28; color:#fff;" data-bind="click: signInWithUserPass"><span data-bind="localize">Submit</span><i class="fa fa-spinner fa-spin pull-right" data-bind="visible: signInSpin"></i></button>
-								</div>
-							</div>							
-		                </div>                
-		            </div>
-
-		            <!-- if the user is logged in, show them this -->
-		            <div class="row" data-bind="visible: loggedInWithRestaurant">
-		                <div class="col-xs-12 text-center">
-		                	<h3 data-bind="localize">Restaurant Dashboard</h3>
-							<div class="row" style="margin-top:5px;">
-								<div class="col-sm-10 col-sm-offset-1">
-									<a class="btn btn-none" style="width: 100%; background-color:#cf2f28; color:#fff;" href="/app/administration" data-bind="localize">Dashboard</a>
-								</div>
-							</div>							
-		                </div>                
-		            </div>		                                    
-	          	</div>
-	        </div>
-	    </div>       	
-
-    	<div data-bind="visible: true" style="display: none">
-			<div class="network_header">
-				<!-- MOBILE -->
-				<!-- ko if: isMobile -->
-				<div class="container" data-bind="if: isMobile">
-					<div id="logo">
-						<a href="/app/network">
-							<img src="https://d5ca3b0520fac45026ad-6caa6fe89e7dac3eaf12230f0985b957.ssl.cf5.rackcdn.com/DishGo_Logo_Network_Beta.png" class="img-responsive">
-						</a>
-					</div>
-					<div id="login_buttons">
-						<ul>
-							<li><span class="btn btn-none" style="margin-right:-3px;" data-bind="click: function(){ $root.network_sign_in(true); }, localize: login_text">Log In</span></li>
-			            	<!-- <li><a href="/app/letsdishgo" class="sign_up_button btn btn-search" data-bind="localize">Get Listed</a></li> -->
-			            	<li><span class="btn btn-none" data-bind="text: language, click: flip_language">Français</span></li>
-						</ul>
-					</div>
-				</div>
-				<!-- /ko -->	
-
-				<!-- DESKTOP -->
-				<!-- ko if: !isMobile -->
-				<div class="container" id="main_head">
-					<div id="logo" data-bind="visible: !top_search()">
-						<a href="/app/network">
-							<img src="https://d5ca3b0520fac45026ad-6caa6fe89e7dac3eaf12230f0985b957.ssl.cf5.rackcdn.com/DishGo_Logo_Network_Beta.png" class="img-responsive">
-						</a>
-					</div>
-
-					<div class="form-inline form" data-bind="visible: top_search" style="display: none">
-						<div class="form-group">
-							<div class="controls">
-								<div class="input-group input-group-lg">
-									<div class="input-group-addon searchSelectorContainer">
-										<span class="dropdown-toggle searchDropdownSelector" data-toggle="dropdown"><span class="caret"></span></span>
-										<ul class="dropdown-menu" role="menu" style="text-align:left;">
-											<li><a href="#" data-bind="click: function(){ $root.search_type('dish') }, localize">Dish</a></li>
-											<li><a href="#" data-bind="click: function(){ $root.search_type('restaurant') }, localize">Restaurant Name</a></li>
-										</ul>
-									</div>	
-									<input type="text" placeholder="Restaurant Name" class="form-control" data-bind="hasFocus: top_search, value: restaurant_search_term, valueUpdate: 'afterkeydown'" />
-									<span class="input-group-btn">
-										<span class="btn btn-lg btn-search search_button" data-bind="disable: searching, click: function(){ $root.ajax_search(); }"><i class="fa fa-spinner fa-spin fade_visible" data-bind="visible: searching"></i><span class="fade_visible" data-bind="visible: !searching()"><i class="fa fa-search"></i></span></span>
-									</span>
-								</div>
-							</div>
-						</div>
-					</div>
-				
-					<div id="login_buttons">
-						<ul>
-							<li><span class="btn btn-none" style="margin-right:-3px;" data-bind="click: function(){ $root.network_sign_in(true); }, localize: login_text">Log In</span></li>
-			            	<li><a href="/app/letsdishgo" class="sign_up_button btn btn-search" data-bind="localize">Get Listed</a></li>
-			            	<li><span class="btn btn-none" data-bind="text: language, click: flip_language">Français</span></li>
-						</ul>
-					</div>
-				</div>
-				<!-- /ko -->	
-			</div>    
+		<% if controller_name == "network" && action_name == "restaurant" %>
+			<%= render 'restaurant_network_header' %>
+		<% else %>
+			<%= render 'network_header' %>
+		<% end %>   
 
 			<div data-bind="loggedInChecker: loggedIn">
     			<%= yield %>

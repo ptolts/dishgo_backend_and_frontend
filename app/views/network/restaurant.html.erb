@@ -1,9 +1,8 @@
-<style type="text/css">
-/*body {
-    background: #f5f6f5;
-}*/
-</style>
-<div class="page-container">
+<!-- SEARCH RESULTS WILL APPEAR HERE -->
+<%= render 'restaurant_search_results' %>
+<%= render 'dish_search_results' %>
+
+<div class="page-container" data-bind="slideVisible: !top_search()">
     <div class="network_menu_header">
         <div class="container">
             <div class="row">

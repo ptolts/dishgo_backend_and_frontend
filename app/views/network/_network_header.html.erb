@@ -1,0 +1,59 @@
+    	<div data-bind="visible: true" style="display: none">
+			<div class="network_header">
+				<!-- MOBILE -->
+				<!-- ko if: isMobile -->
+				<div class="container" data-bind="if: isMobile">
+					<div id="logo">
+						<a href="/app/network">
+							<img src="https://d5ca3b0520fac45026ad-6caa6fe89e7dac3eaf12230f0985b957.ssl.cf5.rackcdn.com/DishGo_Logo_Network_Beta.png" class="img-responsive">
+						</a>
+					</div>
+					<div id="login_buttons">
+						<ul>
+							<li><span class="btn btn-none" style="margin-right:-3px;" data-bind="click: function(){ $root.network_sign_in(true); }, localize: login_text">Log In</span></li>
+			            	<!-- <li><a href="/app/letsdishgo" class="sign_up_button btn btn-search" data-bind="localize">Get Listed</a></li> -->
+			            	<li><span class="btn btn-none" data-bind="text: language, click: flip_language">Français</span></li>
+						</ul>
+					</div>
+				</div>
+				<!-- /ko -->	
+
+				<!-- DESKTOP -->
+				<!-- ko if: !isMobile -->
+				<div class="container" id="main_head">
+					<div id="logo" data-bind="visible: !top_search()">
+						<a href="/app/network">
+							<img src="https://d5ca3b0520fac45026ad-6caa6fe89e7dac3eaf12230f0985b957.ssl.cf5.rackcdn.com/DishGo_Logo_Network_Beta.png" class="img-responsive">
+						</a>
+					</div>
+
+					<div class="form-inline form" data-bind="visible: top_search" style="display: none">
+						<div class="form-group">
+							<div class="controls">
+								<div class="input-group input-group-lg">
+									<div class="input-group-addon searchSelectorContainer">
+										<span class="dropdown-toggle searchDropdownSelector" data-toggle="dropdown"><span class="caret"></span></span>
+										<ul class="dropdown-menu" role="menu" style="text-align:left;">
+											<li><a href="#" data-bind="click: function(){ $root.search_type('dish') }, localize">Dish</a></li>
+											<li><a href="#" data-bind="click: function(){ $root.search_type('restaurant') }, localize">Restaurant Name</a></li>
+										</ul>
+									</div>	
+									<input type="text" placeholder="Restaurant Name" class="form-control" data-bind="localizePlaceholder:searchPlaceholder, hasFocus: top_search, value: restaurant_search_term, valueUpdate: 'afterkeydown'" />
+									<span class="input-group-btn">
+										<span class="btn btn-lg btn-search search_button" data-bind="disable: searching, click: function(){ $root.ajax_search(); }"><i class="fa fa-spinner fa-spin fade_visible" data-bind="visible: searching"></i><span class="fade_visible" data-bind="visible: !searching()"><i class="fa fa-search"></i></span></span>
+									</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				
+					<div id="login_buttons">
+						<ul>
+							<li><span class="btn btn-none" style="margin-right:-3px;" data-bind="click: function(){ $root.network_sign_in(true); }, localize: login_text">Log In</span></li>
+			            	<li><a href="/app/letsdishgo" class="sign_up_button btn btn-search" data-bind="localize">Get Listed</a></li>
+			            	<li><span class="btn btn-none" data-bind="text: language, click: flip_language">Français</span></li>
+						</ul>
+					</div>
+				</div>
+				<!-- /ko -->	
+			</div>

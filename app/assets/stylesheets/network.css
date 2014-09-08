@@ -164,7 +164,7 @@ p, address,
     position: absolute;
     right: 0;
     bottom: 0;
-    color: blue !important;
+    color: black !important;
 }
 .image-cropped {
     width: 75px;

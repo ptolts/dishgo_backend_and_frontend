@@ -1,0 +1,51 @@
+	    <div data-bind="visible: network_sign_in" style="display:none">
+	        <div id="sign_in_bg" data-bind="click: function(){ network_sign_in(false) }"></div>
+	        <div id="sign_in_modal">
+	        	<a class="close" data-bind="click: function(){ network_sign_in(false) }">×</a>	        	
+	         	<div id="sign_in">
+		            <div class="row">
+		                <div class="col-xs-12 text-center">
+		                	<h3 style="margin-top: 0px" data-bind="visible: !loggedIn(), localize">User Sign In</h3>
+		                	<h3 style="margin-top: 0px" data-bind="visible: loggedIn, localize">Connected Accounts</h3>
+		                	<!-- ko foreach: social_networks -->
+		                		<span class="btn btn-none social_network_button" data-bind="click: function(){ login(); }, css: {online:online}"><i class="fa" data-bind="css:'fa-'+name"></i></span>
+		                	<!-- /ko -->
+		                </div>                
+		            </div>
+
+		            <!-- if the user is not logged in, show them this -->
+		            <div class="row" data-bind="visible: !loggedInWithRestaurant()">
+		                <div class="col-xs-12 text-center">
+		                	<h3 data-bind="localize">Restaurant Sign In</h3>
+							<div class="row">
+								<div class="col-sm-10 col-sm-offset-1">
+									<input type="email" class="form-control" data-bind="value: email" placeholder="Email">
+								</div>
+							</div>
+							<div class="row" style="margin-top:5px;">
+								<div class="col-sm-10 col-sm-offset-1">
+									<input type="password" class="form-control" data-bind="value: password" placeholder="Password">
+								</div>
+							</div>
+							<div class="row" style="margin-top:5px;">
+								<div class="col-sm-10 col-sm-offset-1">
+									<button class="btn btn-none" style="width: 100%; background-color:#cf2f28; color:#fff;" data-bind="click: signInWithUserPass"><span data-bind="localize">Submit</span><i class="fa fa-spinner fa-spin pull-right" data-bind="visible: signInSpin"></i></button>
+								</div>
+							</div>							
+		                </div>                
+		            </div>
+
+		            <!-- if the user is logged in, show them this -->
+		            <div class="row" data-bind="visible: loggedInWithRestaurant">
+		                <div class="col-xs-12 text-center">
+		                	<h3 data-bind="localize">Restaurant Dashboard</h3>
+							<div class="row" style="margin-top:5px;">
+								<div class="col-sm-10 col-sm-offset-1">
+									<a class="btn btn-none" style="width: 100%; background-color:#cf2f28; color:#fff;" href="/app/administration" data-bind="localize">Dashboard</a>
+								</div>
+							</div>							
+		                </div>                
+		            </div>		                                    
+	          	</div>
+	        </div>
+	    </div> 
