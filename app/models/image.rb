@@ -111,7 +111,7 @@ class Image
   end
 
   def tiny_hash
-      return {id: _id, local_file: self.img_url_medium}
+      return {id: _id, medium: self.img_url_medium}
   end 
 
   def custom_to_hash
