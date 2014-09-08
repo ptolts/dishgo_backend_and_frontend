@@ -6,6 +6,10 @@
 *= require network_odometer
 *= require_self
 */
+.form-group {
+    width: 100%;
+}
+
 .clear-search {
     position: absolute;
     right: 78px;
