@@ -12,7 +12,7 @@ var network_localize = {
         "Submit":"Soumettre",
         "Web Design":"Conception de site web",
         "App":"Appli",
-        "Top Dishes of the Day":"Meilleurs Plats du jour",
+        "What's Trending":"Meilleurs Plats du jour",
         "Contact Us":"Contactez Nous",
         "Legal":"Légal",
         "Claim this page":"Revendiquer cette page",
@@ -20,6 +20,7 @@ var network_localize = {
         "Hide Details":"Cacher les détails",
         "Rate This Dish":"Évaluer ce plat",
         "Add Photo":"Ajouter une photo",
+        "Opening Hours":"Heurs d'ouverture",
     },        
 }
 

@@ -630,7 +630,7 @@
               
             });  
 
-            self.areWeOpenedText = ko.computed(function(){ return self.areWeOpened() ? 'open' : 'closed'});        
+            self.areWeOpenedText = ko.computed(function(){ return self.areWeOpened() ? 'open now' : 'closed'});        
 
             self.socialVisible = function(type){
                 return ko.computed(function(){
