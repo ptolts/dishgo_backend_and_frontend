@@ -157,7 +157,7 @@ var translations = {
     },
     'ask' : {
         'en':'Ask',
-        'fr':'Questionner',
+        'fr':'Sur Demande',
     }    
 };
 
