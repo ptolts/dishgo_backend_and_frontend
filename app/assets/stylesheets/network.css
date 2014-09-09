@@ -786,7 +786,7 @@ footer a:hover, footer a:focus {
         font-size: 14px;
         margin-left: -16px;
     }
-    .tab-menu li {
+    .main-tab-menu.tab-menu li {
         top: -76px;
         border-radius: 0;
         width: 120px;
