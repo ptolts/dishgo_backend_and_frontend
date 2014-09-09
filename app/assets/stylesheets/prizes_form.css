@@ -1,3 +1,5 @@
+@import url(http://fonts.googleapis.com/css?family=Lato|Oswald:400,700);
+
 /*user form*/
 .language_selector_prize {
     position: absolute;
@@ -11,7 +13,7 @@
 }
 
 .prizes_controls {
-    margin-top: 40px;
+    margin-top: 80px;
 }
 
 
@@ -20,87 +22,74 @@
     width: 100%;
 }
 
-.prizes_controls .col-md-6 {
-    float: none !important;
-    margin-left: auto;
-    margin-right: auto;
-}
-
 .prizes_controls .nav>li {
     float: none;
     display: block;
     margin-bottom: 5px;
-    -webkit-box-shadow: 0px 0px 10px 1px rgba(0,0,0,0.75);
-    -moz-box-shadow: 0px 0px 10px 1px rgba(0,0,0,0.75);
-    box-shadow: 0px 0px 10px 1px rgba(0,0,0,0.75);
+    font-family: 'Oswald', sans-serif;
+    font-size: 16px !important;
+    color: #565a5c;
 }
 
-.prizes_controls .nav>li:hover {
-    background-color: #cf2f28; 
+.prizes_controls .nav a {
+    font-family:'Oswald', sans-serif;
+    font-size: 16px !important;
+    color: #565a5c;
 }
 
-.prizes_controls .nav>li {
+.prizes_controls .nav>li>a {
     position: relative;
     display: block;
     padding: 8px 5px;    
 }
 
 .prizes_controls .nav {
-    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif !important;
+    font-family:'Oswald', sans-serif;
     font-size: 14px !important;
-    color: #838383;
+    color: #3B5998;
 }
 
 .prizes_controls .nav-pills>li {
-    border-radius: 3px;
-    color: #000;
-    background-color: #fff;
-    background-image: -webkit-linear-gradient(hsla(0,0%,0%,.05), hsla(0,0%,100%,.05));
-    background-image: -moz-linear-gradient(hsla(0,0%,0%,.05), hsla(0,0%,100%,.05));
-    background-image: -ms-linear-gradient(hsla(0,0%,0%,.05), hsla(0,0%,100%,.05));
-    background-image: -o-linear-gradient(hsla(0,0%,0%,.05), hsla(0,0%,100%,.05));
-    background-image: linear-gradient(hsla(0,0%,0%,.05), hsla(0,0%,100%,.05));
+    border-radius: 4px;
+    color: #565a5c;
+    background-color: #f5f6f5;
+    padding: 8px 5px;
 }
+
 .nav-pills>li.active, 
-.nav-pills>li.active>:hover, 
-.nav-pills>li.active>:focus,
-.prizes_controls .nav-pills>li>:hover,
-.prizes_controls .nav-pills>li>:focus {
-    background-color: #838383;
+.nav-pills>li.active:hover, 
+.nav-pills>li.active:focus,
+.prizes_controls .nav-pills>li:hover,
+.prizes_controls .nav-pills>li:focus {
+    background-color: #cf2f28;
     color: #fff;
-    background-image: -webkit-linear-gradient(hsla(0,0%,100%,.05), hsla(0,0%,0%,.1));
-    background-image: -moz-linear-gradient(hsla(0,0%,100%,.05), hsla(0,0%,0%,.1));
-    background-image: -ms-linear-gradient(hsla(0,0%,100%,.05), hsla(0,0%,0%,.1));
-    background-image: -o-linear-gradient(hsla(0,0%,100%,.05), hsla(0,0%,0%,.1));
-    background-image: linear-gradient(hsla(0,0%,100%,.05), hsla(0,0%,0%,.1));
     border: none;
-    border-radius: 3px;
-    /*box-shadow: inset 0 0 0 1px hsla(0,0%,0%,.2), inset 0 2px 0 hsla(0,0%,100%,.1), inset 0 1.2em 0 hsla(0,0%,100%,0.1), inset 0 -.2em 0 hsla(0,0%,100%,.1), inset 0 -.25em 0 hsla(0,0%,0%,.25), 0 .25em .25em hsla(0,0%,0%,.05);*/
+    border-radius: 4px;
 }
-.prizes_controls .nav-pills>li.active>:hover,
-.prizes_controls .nav-pills>li.active>:focus {
-    background-color: #838383;
-    border-radius: 3px;
+
+.prizes_controls .nav-pills>li.active:hover,
+.prizes_controls .nav-pills>li.active:focus {
+    background-color: #cf2f28;
+    border-radius: 4px;
 }
+
 .nav-pills>li+li {
     margin-left: 0px;
 }
 /*profile form*/ 
 
 .prizes_form_wrapper {
-    border-radius: 5px;
+    border-radius: 4px;
     padding: 15px;
     padding-bottom: 0px;
     margin-bottom: 15px;
-    background-color: #fff;
-    -webkit-box-shadow: 0px 0px 10px 1px rgba(0,0,0,0.75);
-    -moz-box-shadow: 0px 0px 10px 1px rgba(0,0,0,0.75);
-    box-shadow: 0px 0px 10px 1px rgba(0,0,0,0.75);
+    background-color: #f5f6f5;
     max-width: 700px;
 
 }
 .prizes_form_wrapper label {
-    color: #838383;
+    color: #565a5c;
+    font-family: 'Lato', sans-serif;
 
 }
 .prizes_form_wrapper .form-horizontal .form-group {
@@ -108,21 +97,11 @@
     margin-left: 0px;
 }
 .prizes_form_wrapper h2 {
-    background-color: #cf2f28;
     border-radius: 4px 4px 0 0;
-    color: #fff;
+    color: #565a5c;
     text-transform: uppercase;
-    margin-top: -15px;
-    margin-right: -15px;
-    margin-left: -15px;
-    padding: 15px;
-    margin-bottom: 20px;
-    text-shadow: #000 0px 1px 5px;
-        background-image: -webkit-linear-gradient(hsla(0,0%,100%,.05), hsla(0,0%,0%,.1));
-    background-image:    -moz-linear-gradient(hsla(0,0%,100%,.05), hsla(0,0%,0%,.1));
-    background-image:     -ms-linear-gradient(hsla(0,0%,100%,.05), hsla(0,0%,0%,.1));
-    background-image:      -o-linear-gradient(hsla(0,0%,100%,.05), hsla(0,0%,0%,.1));
-    background-image:         linear-gradient(hsla(0,0%,100%,.05), hsla(0,0%,0%,.1));
+    font-family: 'Oswald', sans-serif;
+    margin-top: 0;
 }
 .prizes_form_wrapper .form-horizontal .form-group .help-block {
     color: #838383;
@@ -142,9 +121,12 @@
     margin-top: 10px;
 }
 
-.prizes_form_wrapper select {
+.prizes_form_wrapper .language_selector_prize select {
     margin: auto;
     display: block;
+    background-color: #fff;
+    color: #cf2f28;
+    border: 1px solid#cf2f28;
 }
 .base_bar {
     background: rgba(248,248,248,.9);
@@ -257,4 +239,36 @@ label {
         margin-left: auto;
         margin-right: auto;
     }
+}
+/*changes*/
+.btn-rewards {
+    color: #cf2f28;
+    border: 1px solid #cf2f28;
+}
+.btn-rewards:hover,
+.btn-rewards:focus {
+    color: #fff;
+    background-color: #cf2f28;
+}
+.btn-save {
+    color: #329C0F;
+    border: 1px solid #329C0F;
+    background-color: #fff;
+}
+.btn-save:hover,
+.btn-save:focus {
+    background-color: #329C0F;
+    color: #fff;
+}
+.prizes_form_wrapper input {
+    font-family: 'Lato', sans-serif;
+}
+.prizes_form_wrapper textarea.form-control {
+    font-family: 'Lato', sans-serif;
+}
+.prizes_form_wrapper .input-group-addon:first-child {
+    background-color: #fff;
+}
+.prizes_form_wrapper .caret {
+    color: #cf2f28;
 }

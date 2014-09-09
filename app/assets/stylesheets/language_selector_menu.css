@@ -3,3 +3,8 @@
   right: 32px;
   top: 4px;
 }
+.language_selector_menu_edit select {
+    background-color: #fff;
+    color: #cf2f28;
+    border: 1px solid#cf2f28;
+}

@@ -1,53 +1,37 @@
- <div class="intro-splash">
-	<div class="row intro-splash-top">
-		<img src="/app/dishgo_logo.png" id="dishgo_logo_intro" />
-	</div>
-
-	<div class="row text-center">
-		<div class="col-sm-10 col-sm-offset-1">
-			<h4>In order to provide the best experience for your users, you should complete each of the following steps. If you have any questions or comments, please don't hesitate to contact us! Click on the red question mark in the bottom right corner and fill out your question and we'll get back to you as soon as possible. Thank you for using DishGo!</h4>
-		</div>
-	</div>
-
-	<div class="row">
-		<div class="col-sm-12 text-center">
-			<div class="col-sm-4">
-				<div class="wizard_button">
-					<a href="/app/profile/edit"></a>
-					<h1 class=""><i class="fa fa-building-o"></i></h1>
-					<h2>Restaurant Details</h2>
-					<p>First you need to fill out essential details about your restaurant such as the phone number and address.</p>
-					<div class="row">
-						<div class="btn btn-sm btn-dish col-xs-6 col-xs-offset-3">Get Started</div>
-					</div>
-				</div>
+  <div class="container">
+ 	<div class="intro-splash">
+<!-- 		<div class="row text-center">
+			<div class="col-xs-12">
+				<h1>Please complete each of the following steps.</h1>
 			</div>
-		
-			<div class="col-sm-4">
-				<div class="wizard_button">
-					<a href="/app/website/index"></a>
-					<h1><i class="fa fa-laptop"></i></h1>
-					<h2>Setup Your Website</h2>
-					<p>Now design your website. You can choose different looks and upload custom background pictures.</p>
-					<div class="row">
-						<div class="btn btn-sm btn-dish col-xs-6 col-xs-offset-3">Get Started</div>
-					</div>			
-				</div>
-			</div>
+		</div> -->
 
-			<% if current_user.owns_restaurants %>
-				<div class="col-sm-4">
+		<div class="row">
+				<div class="col-sm-4" style="border-right: 1px solid #ccc;">
 					<div class="wizard_button">
-						<a href="/app/administration/edit_menu?restaurant_id=<%= current_user.owns_restaurants.id %>"></a>
-						<h1><i class="fa fa-list-alt"></i></h1>
-						<h2>Build Your Menu</h2>
-						<p>Start building your beautiful interactive menu. Once you've created it, you can make changes at any time.</p>
-						<div class="row">
-							<div class="btn btn-sm btn-dish col-xs-6 col-xs-offset-3">Get Started</div>
-						</div>			
+						<h2>Restaurant Details</h2>
+						<p>Here you can edit essential details about your restaurant such as contact details and business hours.</p>
+						<a href="/app/profile/edit" class="btn btn-sm btn-rewards">Get Started</a>
 					</div>
 				</div>
-			<% end %>
+			
+				<div class="col-sm-4" style="border-right: 1px solid #ccc;">
+					<div class="wizard_button">
+						<h2>Website Builder</h2>
+						<p>Build or Edit your website. You can choose different looks and upload custom background pictures.</p>
+						<a href="/app/website/index" class="btn btn-sm btn-rewards">Get Started</a>		
+					</div>
+				</div>
+
+				<% if current_user.owns_restaurants %>
+					<div class="col-sm-4">
+						<div class="wizard_button">
+							<h2>Menu Builder</h2>
+							<p>Build or edit your beautiful interactive menu. When you're finished, publish it for the world to see.</p>
+							<a href="/app/administration/edit_menu?restaurant_id=<%= current_user.owns_restaurants.id %>" class="btn btn-sm btn-rewards">Get Started</a>		
+						</div>
+					</div>
+				<% end %>
 		</div>
 	</div>
 </div>

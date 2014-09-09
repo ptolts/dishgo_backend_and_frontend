@@ -1,4 +1,4 @@
-<h2 class="text-center">Prize</h2>
+<h2 class="text-center">Prize Details</h2>
 <div class="language_selector_prize" data-bind="visible: languages().length > 1">
     <select data-bind="options: languages, value: $root.lang"></select>                
 </div>
@@ -20,7 +20,7 @@
             <label>Prize Value</label>
             <div class="input-group">
                 <div class="input-group-btn">
-                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><!-- ko text: prize_type --><!-- /ko --> <span class="caret"></span></button>
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" style="border-right:0;"><!-- ko text: prize_type --><!-- /ko --> <span class="caret"></span></button>
                     <ul class="dropdown-menu text-center" role="menu" data-bind="foreach: prize_types">
                         <li data-bind="click: function(){ $parent.prize_type($data) }"><span data-bind="text: $data"></span></li>
                     </ul>
@@ -65,11 +65,11 @@
     <div class="wrap">
         <a target="_blank" data-bind="attr:{href:'/app/prizes/print_list?prize_id='+id()}" class="col-xs-12" id="print_codes">
                 <h4 class="text-center">Coupon Codes</h4>
-                <h3 class="prize_print"><i class="fa fa-print"></i></h3>
+                <h3 class="prize_print"><i class="fa fa-print" style="color:#cf2f28;"></i></h3>
             <!-- ko foreach: individual_prizes -->
                 <div class="col-xs-6">
                     <div class="individual_prize_box">
-                        <h4 class="text-center" data-bind="text: prize_token"></h4>
+                        <h4 class="text-center" style="font-family: 'Lato', sans-serif !important;" data-bind="text: prize_token"></h4>
                         <!-- ko if: user_id -->
                             <i class="fa fa-thumbs-o-up" style="position: absolute; right:30px; bottom: 15px"></i>
                         <!-- /ko -->
@@ -87,8 +87,8 @@
 
 <div class="row base_bar">
     <div class="col-xs-12">
-        <button class="btn btn-danger col-xs-5" data-bind="click: function(){ $root.destroy($data) }">Delete</button>
-        <button class="btn btn-dish col-xs-5 col-xs-offset-2" data-bind="click: save">Save <i class="fa fa-spinner fa-spin pull-right" data-bind="visible: spin"></i><i class="fa fa-check pull-right" data-bind="visible: saved"></i></button>
+        <button class="btn btn-rewards col-xs-5" data-bind="click: function(){ $root.destroy($data) }">Delete</button>
+        <button class="btn btn-save col-xs-5 col-xs-offset-2" data-bind="click: save">Save <i class="fa fa-spinner fa-spin pull-right" data-bind="visible: spin"></i><i class="fa fa-check pull-right" data-bind="visible: saved"></i></button>
     </div>
 </div>
 

@@ -1,10 +1,10 @@
 <script id="restaurant_localized_template" type="text/html">
-    <div class="col-md-6">
+    <div class="col-md-8">
         <div class="profile_form_wrapper">
             <form class="form-horizontal">
                 <fieldset>
                     <h2 class="text-center">Localized Name</h2>
-                    <p>If you would like your restaurant name to change according to the language the user has selected, enter them below.</p>
+                    <p>If you would like your restaurant name to change according to the language, enter them below.</p>
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="form-group">
@@ -22,10 +22,9 @@
                         </div>                        
                 </fieldset>
             </form>
-            <br />
-            <div class="base_bar">
-                <div style="width: 100%">
-                    <button class="btn btn-dish" data-bind="click: quick_save" style="width: 50%">Save</button>
+            <div class="row base_bar">
+                <div class="col-xs-6 col-xs-offset-6">
+                    <button class="btn btn-block btn-save" data-bind="click: save">Save</button>
                 </div>
             </div>
         </div>

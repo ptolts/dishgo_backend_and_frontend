@@ -1,5 +1,5 @@
 <script id="restaurant_template" type="text/html">
-    <div class="col-md-6">
+    <div class="col-md-9">
         <div class="profile_form_wrapper">
             <form class="form-horizontal">
                 <fieldset>
@@ -105,7 +105,7 @@
                             <!-- /ko -->
                             <!-- ko if: !dirty() -->
                                 <!-- ko if: lat -->
-                                    <a href="/app/profile/location" class="btn btn-sm btn-info col-xs-12">Change Location</a>
+                                    <a href="/app/profile/location" class="btn btn-sm btn-rewards col-xs-12">Change Location</a>
                                 <!-- /ko -->
                                 <!-- ko if: !lat() -->
                                     <a href="/app/profile/location" class="btn btn-sm btn-danger col-xs-12">Set Location</a>
@@ -126,8 +126,8 @@
                 </fieldset>
             </form>
             <div class="row base_bar">
-                <div class="col-xs-12">
-                    <button class="btn btn-dish pull-right col-xs-5" data-bind="click: save">Save</button>
+                <div class="col-xs-6 col-xs-offset-6">
+                    <button class="btn btn-block btn-save" data-bind="click: save">Save</button>
                 </div>
             </div>
         </div>

@@ -15,12 +15,14 @@
 	border-radius: 3px;	
 	margin-bottom: 5px;
 	min-height: 20px;
-	color: #000;
-	background-color: #dcdcdc;
+	color: #cf2f28;
+	background-color: #fff;
+	border: 1px solid #cf2f28;
+	cursor: pointer;
 }
 
 .navigation_controller li.active, .navigation_controller li:hover {
-	background-color: #838383;
+	background-color: #cf2f28;
 	color: white;
 }
 

@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Roboto);
+@import url(http://fonts.googleapis.com/css?family=Lato|Oswald:400,700);
 
 .intro-splash .btn {
   position: relative;
@@ -6,22 +6,26 @@
 
 .intro-splash {
   display: block;
+  background-color: #f5f6f5;
   margin-right: auto;
   margin-left: auto;
-  width: 90%;
-  background: rgba(233, 233, 233, 1);
   padding: 15px;
   overflow: hidden;
-  margin-top: 55px;
+  margin-top: 80px;
   border-radius: 5px;
-  padding-top: 0px;
-  font-family: 'Roboto', sans-serif;
+}
+.intro-splash h1,
+.intro-splash h2,
+.intro-splash h3,
+.intro-splash h4 {
+  font-family:'Oswald', sans-serif;
+  color: #565a5c;
 }
 
-.intro-splash-top {
-  /*background: rgba(0,0,0,0.85);*/
-  height: 80px;
-  margin-bottom: 20px;
+.intro-splash p {
+  font-family: 'Lato', sans-serif;
+  color: #82898d;
+  font-size: 16px;
 }
 
 #dishgo_logo_intro {
@@ -45,29 +49,25 @@
 
 .wizard_button {
   position: relative;
-  border: 1px solid rgb(211, 203, 203);
   border-radius: 5px;
   cursor: pointer;
   margin: 5px;
   padding: 10px;
-  background: rgba(228, 228, 228, 1);
 }
 
-.wizard_button:hover {
-  border: 1px solid rgb(0, 0, 0);
+.btn-rewards {
+    background-color: #fff;
+    color: #cf2f28;
+    border-color: #cf2f28;
+    margin-top: 5px;
+    padding: 5px 10px;
 }
 
-.wizard_button a {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    text-decoration: none; /* No underlines on the link */
-    z-index: 10; /* Places the link above everything else in the div */
-    background-color: #FFF; /* Fix to make div clickable in IE */
-    opacity: 0; /* Fix to make div clickable in IE */
-    filter: alpha(opacity=1); /* Fix to make div clickable in IE */
+.btn-rewards:hover,
+.btn-rewards:focus {
+    color: #fff;
+    border-color: #cf2f28;
+    background-color: #CF2F28;
 }
 
 /* BUTTONS */

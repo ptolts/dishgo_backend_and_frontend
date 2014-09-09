@@ -1,6 +1,7 @@
 <div class="layout_controls">
 
     <div class="col-md-3">
+        <div class="hidden-xs hidden-sm" style="margin-top: 30px;"></div>
         <div class="col-md-12">
             <ul class="nav nav-pills" data-bind="foreach: $page.children">
                 <li data-bind="css: {active: isVisible}"><a data-bind="text: $data.val('title'), page-href: $data"></a></li>
@@ -11,7 +12,7 @@
     <div data-bind="page: {id: 'start', title: 'Design'}" class="col-md-9 website_pages">
         <div class="rows">
             <div class="col-xs-12">
-                <h3>Select a design: </h3>
+                <h3 style="font-family:'Oswald', sans-serif !important;">Select a design: </h3>
                 <div data-bind="template: { name: 'pick_design_template', foreach: designs }" class="designs"></div>          
             </div>
         </div>
@@ -21,7 +22,7 @@
         <div data-bind="page: {id: 'langauges', title: 'Languages', role: 'start'}" class="col-md-9 website_pages">
             <div class="rows">
                 <div class="col-xs-12">
-                    <h3 class="text-center" style="margin-bottom: 20px;">Which languages would you like your menu/site in?</h3>
+                    <h3 class="text-center" style="margin-bottom: 20px; font-family:'Oswald', sans-serif !important;">Which languages would you like your menu/site in?</h3>
                     <div data-bind="template: { name: 'langauge_selection_template', data: $root.restaurant }"></div>                
                 </div>
             </div>
@@ -30,7 +31,7 @@
         <div data-bind="page: {id: 'image_page', title: 'Styling', with: current_design}" class="col-md-9 website_pages">
             <div class="rows">
                 <div class="col-xs-12">
-                    <h3 class="text-center" style="margin-bottom: 20px;">Choose your website pattern &amp menu header.</h3>
+                    <h3 class="text-center" style="margin-bottom: 20px; font-family:'Oswald', sans-serif !important;">Choose your website pattern &amp menu header.</h3>
                     <div data-bind="template: { name: 'customize_design_template', data: $root.current_design }"></div>                
                 </div>
             </div>
@@ -39,7 +40,7 @@
         <div data-bind="page: {id: 'font', title: 'Font', with: $root}" class="col-md-9 website_pages">
             <div class="rows">
                 <div class="col-xs-12">
-                    <h3 class="text-center" style="margin-bottom: 20px;">Choose your font package.</h3>
+                    <h3 class="text-center" style="margin-bottom: 20px; font-family:'Oswald', sans-serif !important;">Choose your font package.</h3>
                     <div data-bind="template: { name: 'customize_font_template', data: $root }"></div>                
                 </div>
             </div>
@@ -48,8 +49,8 @@
         <div data-bind="page: {id: 'carousel', title: 'Background Images', with: current_design}" class="col-md-9 website_pages">
             <div class="rows">
                 <div class="col-xs-12">
-                    <h3 class="text-center" style="margin-bottom: 20px;">Upload your background carousel images.</h3>
-                    <h4 style="margin-bottom: 20px;">These images will slowly scroll across the background of your site. Accepted file formats are JPEG and PNG. We advise compressing your images prior to upload, please use the <a href="http://compressor.io/compress" target="_blank" title="image compressor">Compressor</a> service.</h4>
+                    <h3 class="text-center" style="margin-bottom: 20px; font-family:'Oswald', sans-serif !important;">Upload your background carousel images.</h3>
+                    <p style="margin-bottom: 20px;font-family: 'Lato', sans-serif !important;">These images will slowly scroll across the background of your site. Accepted file formats are JPEG and PNG. We advise compressing your images prior to upload, please use the <a href="http://compressor.io/compress" target="_blank" title="image compressor">Compressor</a> service.</p>
                     <div data-bind="template: { name: 'customize_carousel_template', data: $root.current_design }"></div>                
                 </div>
             </div>
@@ -58,8 +59,8 @@
         <div data-bind="page: {id: 'logo', title: 'Logo', with: restaurant}" class="col-md-9 website_pages">
             <div class="rows">
                 <div class="col-xs-12">
-                    <h3 class="text-center" style="margin-bottom: 20px;">Upload your restaurant logo.</h3>
-                    <h4 style="margin-bottom: 20px;">These images will slowly scroll across the background of your site. Accepted file formats are JPEG and PNG. We advise compressing your images prior to upload, please use the <a href="http://compressor.io/compress" target="_blank" title="image compressor">Compressor</a> service.</h4>
+                    <h3 class="text-center" style="margin-bottom: 20px; font-family:'Oswald', sans-serif !important;">Upload your restaurant logo.</h3>
+                    <p style="margin-bottom: 20px;font-family: 'Lato', sans-serif !important;">Accepted file formats are JPEG and PNG. We advise compressing your images prior to upload, please use the <a href="http://compressor.io/compress" target="_blank" title="image compressor">Compressor</a> service.</p>
                     <div data-bind="template: { name: 'restaurant_logo', data: $root.restaurant }"></div>                
                 </div>
             </div>

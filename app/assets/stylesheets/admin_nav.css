@@ -22,11 +22,12 @@
 }
 
 #dishgo_bar {
-  background-image:url('/app/black@2x.png');
+  background-color: #fff;
 }
 
 #dishgo_bar.navbar {
-  max-height: 50px;
+  height: 80px;
+  margin-bottom: 30px;
 }
 #dishgo_bar.nav > li > a {
   max-height: 50px;
@@ -35,7 +36,8 @@
   text-transform: uppercase;
 }
 #dishgo_bar .nav > li {
-  background-image:url('/app/black@2x.png');
+  background-color: #fff;
+  color: #cf2f28;
 }
 #dishgo_bar.navbar-nav {
 margin: 0px 15px;
@@ -46,16 +48,16 @@ margin: 0px 15px;
   /*padding-bottom: 0px;*/
 }
 #dishgo_bar.navbar-inverse, #dishgo_bar .active a {
-  background-image:url('/app/black@2x.png');
+  background-color: #fff;
   /*background-color: initial;*/
 }
 #dishgo_bar.navbar-inverse .navbar-nav > li > a {
-  color: #fff;
+  color: #cf2f28;
   text-transform: uppercase;
   font-size: 12px;
-  -webkit-transition: all 0.4s ease-in-out;
-  -moz-transition: all 0.4s ease-in-out;
-  -o-transition: all 0.4s ease-in-out;
+  -webkit-transition: all 0.2s ease-in-out;
+  -moz-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;
 }
 
 #dishgo_bar.navbar-inverse .navbar-nav .open .dropdown-menu > li > a {
@@ -66,21 +68,26 @@ margin: 0px 15px;
     color: #149178;
   }
 #dishgo_bar.navbar-inverse .navbar-nav > li > a:hover, #dishgo_bar.navbar-inverse .navbar-nav > li > a:focus {
-  color: #cf2f28;
+  color: #fff;
+  background-color: #cf2f28;
 }
 
 #dishgo_bar.navbar-inverse .navbar-nav > .open > a, #dishgo_bar.navbar-inverse .navbar-nav > .open > a:hover, #dishgo_bar.navbar-inverse .navbar-nav > .open > a:focus {
   color: #cf2f28;
-  background-image:url('/app/black@2x.png');
+  background-color: #fff;
 }
 
 #dishgo_bar.navbar-inverse .navbar-nav > .active > a, #dishgo_bar.navbar-inverse .navbar-nav > .active > a:hover, #dishgo_bar.navbar-inverse .navbar-nav > .active > a:focus {
-  color: #cf2f28;
-  background-image:url('/app/black@2x.png');
+  color: #fff;
+  background-color: #cf2f28;
 }
 
 #dishgo_bar .navbar-inverse .navbar-toggle:hover, #dishgo_bar .navbar-inverse .navbar-toggle:focus {
   /*background-color: #cf2f28;*/
+}
+
+#dishgo_bar .navbar-toggle {
+  margin: 24px 15px 24px 0;
 }
 
 #dishgo_bar ul .dropdown-menu {
@@ -88,9 +95,23 @@ margin: 0px 15px;
 }
 
 #dishgo_bar.navbar-inverse .navbar-toggle {
-  border-color: #fff;
+  border-color: #cf2f28;
   outline: none;
 }
+#dishgo_bar.navbar-inverse .navbar-toggle span {
+  background-color: #cf2f28;
+}
+#dishgo_bar.navbar-inverse .navbar-toggle span.icon-bar:hover,
+#dishgo_bar.navbar-inverse .navbar-toggle span.icon-bar:focus {
+  background-color: #fff;
+}
+
+#dishgo_bar.navbar-inverse .navbar-toggle:hover,
+#dishgo_bar.navbar-inverse .navbar-toggle:focus {
+  border-color: #fff;
+  background-color: #cf2f28;
+}
+
 #dishgo_bar .nav > li > a:hover, #dishgo_bar .nav > li > a:focus {
   text-decoration: none;
   /*background-color: #ECF0F1;*/
@@ -124,7 +145,7 @@ margin: 0px 15px;
 #dishgo_bar .btn-primary:active, 
 #dishgo_bar .btn-primary.active, 
 #dishgo_bar.open .dropdown-toggle.btn-primary {
-  background-image:url('/app/black@2x.png');
+  background-color: #fff;
 }
 
 
@@ -134,15 +155,26 @@ margin: 0px 15px;
     margin: 0px -15px;
   }
 }
+@media (min-width: 1200px) {
+  .container {
+    width: 1190px;
+  }
+}
 
 #dishgo_bar.navbar {
   min-height: 40px;
 }
 
-#dishgo_bar .navbar-brand, #dishgo_bar .navbar-nav li a {
-    line-height: 40px;
-    height: 40px;
-    padding-top: 0;
+#dishgo_bar .navbar-nav li a {
+  padding: 34px 10px 20px 10px;
+  line-height: 26px;
+  border-radius: 0;
+  text-transform: uppercase;
+}
+#dishgo_bar .navbar-brand {
+  height: 60px;
+  width: 220px;
+  margin: 10px 0;
 }
 
 #dishgo_bar.navbar-fixed-top{
@@ -155,17 +187,13 @@ margin: 0px 15px;
 }
 
 #saveMenu {
-  background-color: #5cb85c;
-  background-image: -webkit-linear-gradient(hsla(0,0%,100%,.05), hsla(0,0%,0%,.1)) !important;
-    background-image:    -moz-linear-gradient(hsla(0,0%,100%,.05), hsla(0,0%,0%,.1)) !important;
-    background-image:     -ms-linear-gradient(hsla(0,0%,100%,.05), hsla(0,0%,0%,.1)) !important;
-    background-image:      -o-linear-gradient(hsla(0,0%,100%,.05), hsla(0,0%,0%,.1)) !important;
-    background-image:         linear-gradient(hsla(0,0%,100%,.05), hsla(0,0%,0%,.1)) !important;
+  background-color: #5cb85c !important;
+  color: #fff !important;
 }
-#saveMenu a:hover,
-#saveMenu a:focus,
-#saveMenu a .active {
-  background-color: #4F9E4F;
+#saveMenu:hover,
+#saveMenu:focus,
+#saveMenu .active {
+  background-color: #4F9E4F !important;
   color: #fff !important;
 }
 #saveDraft {

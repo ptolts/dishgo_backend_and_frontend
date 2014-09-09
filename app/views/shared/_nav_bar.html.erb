@@ -8,7 +8,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="/app/administration" style="margin-top: -3px;" title="<%= current_user.email %>"><img src="/app/public/logo_white_nav.png" height="25"/></a>
+          <a class="navbar-brand" href="/app/administration" style="margin-top: -3px;" title="<%= current_user.email %>"><img src="https://d5ca3b0520fac45026ad-6caa6fe89e7dac3eaf12230f0985b957.ssl.cf5.rackcdn.com/DishGo_Logo_Network_Beta.png" class="img-responsive"></a>
         </div>
 
         <div class="collapse navbar-collapse">
@@ -80,8 +80,8 @@
                   </li>
                 </ul>
               </li>              
-              <li data-bind="click: publishMenu" id="saveMenu">
-                <a>Publish <i class="glyphicon glyphicon-ok"></i> </a>
+              <li data-bind="click: publishMenu">
+                <a id="saveMenu">Publish <i class="glyphicon glyphicon-ok"></i> </a>
               </li>
             </ul>                          
           <% end %>

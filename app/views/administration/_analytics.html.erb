@@ -1,44 +1,41 @@
- <div class="intro-splash">
-	<div class="row intro-splash-top">
-		<div class="col-xs-12">
-			<div class="row">
-				<div class="col-xs-8"><h2>Website Statistics</h2></div>
-				<div class="col-xs-4"><h6 class="pull-right">*Experimental</h6></div>
-			</div>
-			<div class="row">
-				<div class="col-xs-12 text-center">
-					<p>You can checkout some statistics about your website on the chart below. Want more traffic? Contact us, we can help!</p>
-				</div>
-			</div>			
-			<br />
+<div class="container">
+	 <div class="intro-splash" style="margin-top:40px;">
+		<div class="row">
+			<h1 class="col-xs-6">Website Statistics</h1>
+			<h4 class="col-xs-6 text-right" style="color: #cf2f28;margin-top:0;">*Beta</h4>
 		</div>
-	</div>
-
-
-	<div class="row">
-		<div class="col-sm-5 text-center">
-			<div class="row">
-				<div class="col-xs-12">
-					<h3>Total Views: <%= @total_traffic %></h3>
-				</div>	
+		<div class="row">
+			<div class="col-xs-12">
+				<p>You can checkout some statistics about your website on the chart below. Want more traffic? Contact us, we can help!</p>
 			</div>
-			<div class="row">
-				<div class="col-xs-12">
-					<h3>Unique Visitors: <%= @unique %></h3>
-				</div>	
-			</div>				
-			<div class="row">
-				<div class="col-xs-12">
-					<h3>Users on page now: <%= @active %></h3>
-				</div>	
-			</div>				
-		</div>	
-		<div class="col-sm-6 text-center">
-			<div class="btn-group">
-				<button type="button" class="btn btn-default" data-bind="click: function(){ day_data(); }">24 Hours</button>
-				<button type="button" class="btn btn-default" data-bind="click: function(){ week_data(); }">7 Days</button>
-			</div>				
-			<canvas id="canvas" height="350" width="600"></canvas>
+		</div>		
+		<br />
+
+		<div class="row">
+			<div class="col-sm-4">
+				<div class="row">
+					<div class="col-xs-12">
+						<h3>Total Views: <%= @total_traffic %></h3>
+					</div>	
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<h3>Unique Visitors: <%= @unique %></h3>
+					</div>	
+				</div>				
+				<div class="row">
+					<div class="col-xs-12">
+						<h3>Users on page now: <%= @active %></h3>
+					</div>	
+				</div>				
+			</div>	
+			<div class="col-sm-8">
+				<div class="btn-group" style="margin-bottom: 10px;">
+					<button type="button" class="btn btn-rewards" data-bind="click: function(){ day_data(); }">24 Hours</button>
+					<button type="button" class="btn btn-rewards" data-bind="click: function(){ week_data(); }">7 Days</button>
+				</div>				
+				<canvas id="canvas" height="350" width="600"></canvas>
+			</div>
 		</div>
 	</div>
 </div>

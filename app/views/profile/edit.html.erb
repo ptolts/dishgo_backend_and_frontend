@@ -1,6 +1,7 @@
+<div class="container">
 <div class="profile_controls">
 
-    <div class="col-md-2 col-md-offset-1">
+    <div class="col-md-3">
         <ul class="nav nav-pills" data-bind="foreach: $__page__.children">
             <!-- ko if: $data.val('title').match(/notific/gi) -->
                 <li data-bind="css: {active: isVisible}"><a data-bind="page-href: $data"><!-- ko text: $data.val('title') --><!-- /ko --><span class="badge badge_note pull-right" data-bind="text: $root.user().notifications().length"></span></a></li>
@@ -160,4 +161,5 @@
     //]]>  
     </script>    
 
+</div>
 </div>

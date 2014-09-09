@@ -37,7 +37,6 @@
 
 .file_upload_button {
     position: relative;
-    overflow: hidden;
 }
 
 .file_upload_input {
@@ -76,14 +75,13 @@
 	transform:			translateX(-50%);
 	-webkit-backface-visibility: hidden;	
 	width: 1000px;
-	background-color: #fff;
-	border-radius: 5px;
 	padding: 15px;
-	color: #000;
+	color: #565a5c;
 	border: 1px solid rgba(0, 0, 0, 0.2);
 	border-radius: 6px;
 	-webkit-box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
-	box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);	
+	box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+	background-color: #f5f6f5;	
 }
 
 .website_pages .pull-left {
@@ -371,8 +369,8 @@
 .pages_controller {
 	position: absolute;
 	left: 10px;
-	top: 50%;
-	background-color: white;
+	top: 45%;
+	background-color: #f5f6f5;
 	border-radius: 5px;
 	padding: 15px;
 	z-index: 3;
@@ -389,19 +387,14 @@
 
 .pages_settings {
 	position: absolute;
-	/*left: 50%;*/
 	left:10px;
 	width: 280px;
-	bottom: 10px;
+	bottom: 0;
 	background-color: white;
 	border-radius: 5px;
 	padding: 15px;
 	z-index: 3;
-/*	-webkit-transform:	translateX(-50%);
-	-moz-transform:		translateX(-50%);
-	-ms-transform:		translateX(-50%);
-	-o-transform:		translateX(-50%);  
-	transform:			translateX(-50%);*/	
+	background-color: #f5f6f5;
 }
 @media (max-width: 992px) {
 	.layout_controls {

@@ -27,9 +27,9 @@
             <!-- /ko -->
             <div class="caption">
                 <!-- ko if: fresh() -->        
-                    <span class="btn btn-block btn-section btn-default file_upload_button col-xs-6">
+                    <span class="btn btn-block btn-dish file_upload_button col-xs-6">
                         <i class="glyphicon glyphicon-picture"></i>
-                        <span>Upload Image</span>
+                        <span style="font-family: 'Lato', sans-serif !important;">Upload Image</span>
                         <!-- The file input field used as target for the file upload widget -->
                         <input data-bind="file_upload_global_customize" id="fileupload" type="file" name="files"  class="file_upload_input" accept="images/*" capture="camera">
                     </span>                                                                                     
@@ -70,9 +70,9 @@
                 </div>
             <!-- /ko -->
             <div class="caption">        
-                <span class="btn btn-block btn-section btn-default file_upload_button col-xs-6">
+                <span class="btn btn-block btn-dish file_upload_button col-xs-6">
                     <i class="glyphicon glyphicon-picture"></i>
-                    <span data-bind="text: computedImageUpload">Upload Image</span>
+                    <span data-bind="text: computedImageUpload" style="font-family: 'Lato', sans-serif !important;">Upload Image</span>
                     <!-- The file input field used as target for the file upload widget -->
                     <input data-bind="file_upload_logo" id="fileupload" type="file" name="files"  class="file_upload_input" accept="images/*" capture="camera">
                 </span>                                                                                                   
@@ -82,7 +82,7 @@
     <div class="col-xs-12 col-md-6" data-bind="visible: logo().completed, with: logo_settings"> 
         <div class="row">
             <div class="col-xs-12">
-                <h3>Do you want your logo to appear at the top?</h3>
+                <h3 style="font-family:'Oswald', sans-serif !important;">Do you want your logo to appear at the top?</h3>
                 <div class="onoffswitch">
                     <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" data-bind="checked: logo_as_image">
                     <label class="onoffswitch-label" for="myonoffswitch">
@@ -94,15 +94,15 @@
         </div>
         <div class="row" data-bind="if: logo_as_image">
             <div class="col-xs-12">
-                <h3>Size</h3>
+                <h3 style="font-family:'Oswald', sans-serif !important;">Size:</h3>
                 <div data-bind="slider: [image_height,50,250]"></div>
-                <h3>Border Size</h3>
+                <h3 style="font-family:'Oswald', sans-serif !important;">Border Size:</h3>
                 <div data-bind="slider: [border_size,0,10]"></div>
-                <div class="row">
-                    <h3 class="col-xs-6">Border Color</h3>
+                <div class="row" style="margin: 0 -15px;">
+                    <h3 class="col-xs-6" style="font-family:'Oswald', sans-serif !important;">Border Color:</h3>
                     <div class="colorpicker_box col-xs-6" data-bind="colorpicker: border_color"></div>                
                 </div>                
-                <h3>Round Corners</h3>
+                <h3 style="font-family:'Oswald', sans-serif !important;">Round Corners:</h3>
                 <div data-bind="slider: [border_radius,0,150]"></div>
             </div>
         </div>        
