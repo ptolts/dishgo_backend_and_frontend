@@ -117,7 +117,7 @@ class NetworkController < ApplicationController
     end
   end
 
-  def dish
+  def prize
     @individual_prize = IndividualPrize.find(params[:id])
     @prize = @individual_prize.prize
     @user = @individual_prize.user
