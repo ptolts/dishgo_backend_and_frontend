@@ -26,7 +26,7 @@
 }
 
 .main-tab-menu {
-    margin-left: -15px;
+    margin-left: -15px !important;
     position: absolute;
 }
 
@@ -57,16 +57,15 @@
 .section-tab-menu li {
     display: inline-block;
     background: rgba(255,255,255,0.4);
-    padding: 12px;
+    padding: 6px;
     color: black;
-    width: 95px;
     text-align: center;
     position: relative;
     border: 1px solid rgba(255,255,255,0.4);
     border-bottom: 0px;
     z-index: 1;
     cursor: pointer;
-    width: 140px;
+    min-width: 75px; f
 }
 
 .section-tab-menu li:hover {
@@ -773,6 +772,11 @@ footer a:hover, footer a:focus {
     body {
         background-position: center;
     }
+    .section-tab-menu li {
+        margin-top: 10px;
+        padding: 6px;
+        width: auto;
+    }
     .mobile_logo {
         margin-left: -15px;
     }
@@ -1188,4 +1192,19 @@ footer a:hover, footer a:focus {
 .btn-fb-share:hover {
     background-color: white;
     color: #3B5998;
+}
+.hours_opened {
+    color: #69bc63;
+    border: 1px solid #69bc63;
+    padding: 1px 5px 2px;
+    border-radius: 4px;
+}
+.hours_closed {
+    color: #cf2f28;
+    border: 1px solid #cf2f28;
+    padding: 1px 5px 2px;
+    border-radius: 4px;
+}
+.resto_details span {
+    font-family: 'Lato', sans-serif;
 }

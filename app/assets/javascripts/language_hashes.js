@@ -135,9 +135,9 @@ var translations = {
         "en" : "Closed",
         "fr" : "Fermer"
     },    
-    "open" : {
-        "en" : "Open",
-        "fr" : "Ouvert"
+    "open now" : {
+        "en" : "open now",
+        "fr" : "ouvert"
     },        
     "currently" : {
         "en" : "Currently",
@@ -157,8 +157,8 @@ var translations = {
     },
     'ask' : {
         'en':'Ask',
-        'fr':'Questionner',
-    }       
+        'fr':'Sur Demande',
+    }    
 };
 
 function copyDefaultHash(hash) {

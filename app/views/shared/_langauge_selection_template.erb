@@ -2,7 +2,7 @@
     <div class="col-xs-12">
         <div data-bind="foreach: available_languages" class="available_languages">
             <div class="col-xs-3">
-                <h4><!-- ko text: name --><!-- /ko -->
+                <h4 style="font-family: 'Lato', sans-serif !important;"><!-- ko text: name --><!-- /ko -->
                     <div class="onoffswitch">
                         <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" data-bind="checked: $parent.languages, checkedValue: abbreviation, attr:{ id: 'lang_' + name }">
                         <label class="onoffswitch-label" data-bind="attr:{for: 'lang_' + name }">
@@ -11,7 +11,7 @@
                         </label>
                     </div>
                 </h4>
-                <h4 data-bind="visible: canBeDefault($parent)">
+                <h4 data-bind="visible: canBeDefault($parent)" style="font-family: 'Lato', sans-serif !important;">
                     Default
                     <div class="onoffswitch">
                         <input type="radio" name="onoffswitch" class="onoffswitch-checkbox" data-bind="checked: $parent.default_language, checkedValue: abbreviation, attr:{ id: 'lang_' + name + '_default' }">

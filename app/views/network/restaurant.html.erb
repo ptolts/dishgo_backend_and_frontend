@@ -27,7 +27,7 @@
                 <div class="claim">
                     <a href="/app/letsdishgo" class="btn btn-none">Claim this page</a>
                 </div>
-                <div class="col-xs-12 col-sm-6 col-md-4 padme">
+                <div class="col-xs-12 col-sm-6 col-md-4 padme" style="border-right: 1px solid #f4f4f2; border-right: 1px solid rgba(0,0,0,.03);">
                     <div class="restaurant-title">
                         <%= @restaurant.name %>
                     </div>
@@ -39,13 +39,25 @@
                         <a href="tel:<%= @restaurant.phone %>"><%= @restaurant.phone %></a>
                 </address>
                 </div>
-                <div class="col-xs-12 col-sm-6 col-md-4 padme">
-                    <div class="bot-links">
-                        <div id="opened_or_closed_footer" data-bind="with: restaurant">
-                            <h4 data-bind="visible: showHourSign">
-                            <span class="currently_open_tag"  data-bind="lStaticText: 'currently'"> </span>
-                            <span class="currently_open" data-bind="css:{'hours_opened':areWeOpened(),'hours_closed':!areWeOpened()}, lStaticText: areWeOpenedText"></span></h4>
-                        </div>                       
+                <div class="col-xs-12 col-sm-6 col-md-4 padme" style="border-right: 1px solid #f4f4f2; border-right: 1px solid rgba(0,0,0,.03);">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="bot-links">
+                                <div id="opened_or_closed_footer" data-bind="with: restaurant">
+                                    <p style="margin-top:10px;" data-bind="visible: showHourSign">
+                                    <span data-bind="localize">Opening Hours</span>
+                                    <span class="currently_open" data-bind="css:{'hours_opened':areWeOpened(),'hours_closed':!areWeOpened()}, lStaticText: areWeOpenedText"></span></p>
+                                </div>                       
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-1">
+                            <i class="fa fa-cutlery"></i>
+                        </div>
+                        <div class="col-xs-10">
+                            <span>Categories</span>
+                        </div>
                     </div>
                 </div>
                 <div class="menu_sections">
