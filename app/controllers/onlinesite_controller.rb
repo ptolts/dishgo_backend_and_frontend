@@ -28,7 +28,7 @@ class OnlinesiteController < ApplicationController
       restaurant.cache = cache
       restaurant.save
     end
-    cache = restaurant.cache   
+    cache = restaurant.cache
 
     if design = restaurant.design
       @design_css = design.template_base_css

@@ -11,6 +11,7 @@
 *= require individual_option.js
 *= require size_prices.js
 *= require restaurant
+*= require network_localize
 *= require_self
 */
 

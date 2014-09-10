@@ -1181,6 +1181,16 @@ footer a:hover, footer a:focus {
     background-color: #3B5998;
     color: white;
 }
+.btn-fb-network-share {
+    border: 1px solid #3B5998;
+    background-color: #3B5998;
+    color: white;
+    border-radius: 4px;
+}
+.btn-fb-network-share:hover {
+    background-color: white;
+    color: #3B5998;
+}
 .btn-fb-share {
     border: 1px solid #3B5998;
     background-color: #3B5998;

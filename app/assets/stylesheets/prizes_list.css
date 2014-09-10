@@ -120,10 +120,25 @@ h1 {
     padding: 5px 10px;
 }
 
+.btn-rewards i {
+    display: none;
+}
+
+.btn-rewards.active i {
+    display: inline-block !important;
+}
+
 .btn-rewards:hover,
-.btn-rewards:focus {
-    color: #cf2f28;
+.btn-rewards:focus{
+    color: #fff;
     border-color: #cf2f28;
+    background-color: #cf2f28;
+}
+
+.btn-rewards.active {
+    color: #fff !important;
+    border-color: #cf2f28 !important;
+    background-color: #cf2f28 !important;
 }
 
 .btn-return {

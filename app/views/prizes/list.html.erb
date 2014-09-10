@@ -17,13 +17,19 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="grey_bg">    
+        </div>       
+        <div class="grey_bg">         
             <div class="row">
                 <div class="col-xs-12">
                     <h1 class="head">Today's Rewards</h1>
                     <p>Here's a list of rewards. Bet Dishcoins to win.</p>
-                    <ul class="list-prizes" data-bind="foreach: prizes">
+                    <div class="row" style="margin-bottom: 10px">
+                        <div class="col-xs-12">
+                            <button class="btn btn-rewards col-xs-5" data-bind="click: function(){ $root.selected_sort_option('distance') }, css:{active:$root.selected_sort_option() == 'distance'}"><span data-bind="localize">Distance</span><i class="fa fa-sort-down pull-right"></i></button>
+                            <button class="btn btn-rewards col-xs-5 col-xs-offset-2" data-bind="click: function(){ $root.selected_sort_option('value') }, css:{active:$root.selected_sort_option() == 'value'}"><span data-bind="localize">Value</span><i class="fa fa-sort-down pull-right"></i></button>
+                        </div>
+                    </div>                      
+                    <ul class="list-prizes" data-bind="foreach: sorted_prizes">
                         <li class="list-prizes-item" data-bind="click: function(){ $root.selected_prize($data) }">
                             <div class="row">
                                 <div class="col-xs-10">
@@ -343,6 +349,18 @@
         <div class="row">
             <div class="col-xs-12 answers">
                 <p>Unfortunately due to abuse, we need you to verify that the email you used to sign up is real. We automatically sent you an email with a button you need to click before you can redeem prizes. The email you used to sign up is "<!-- ko text: $root.user().email() --><!-- /ko -->". If this was entered incorrectly, please contact support at phil@dishgo.io.<p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container" data-bind="visible: page() == 'winner'">
+    <div class="prizes_list_controls">
+        <div class="row">
+            <div class="col-xs-12 answers">
+                <button class="btn btn-search" data-bind="click: function(){ $root.shareNetworkFB(); }">Share On Facebook</button>
+                <p><p>
+                <button class="btn btn-search" data-bind="click: function(){ winner_winner_chicken_dinner(true); }">View your Winnings</button>
             </div>
         </div>
     </div>

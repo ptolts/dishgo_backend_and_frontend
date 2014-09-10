@@ -212,7 +212,7 @@ class Restaurant
     end
     self.listed = true
     if logo_copy = restaurant.logo and logo_copy = logo_copy.dup
-      logo_copy .restaurant_id = self.id
+      logo_copy.restaurant_logo_id = self.id
       logo_copy.save
     end
     self.save
@@ -349,7 +349,7 @@ class Restaurant
       hash["image"] = self.image.profile_images.limit(options[:include_images]).as_json
     end  
     if options[:prizes]
-      hash["prizes"] = self.prizes.count
+      hash["prizes"] = self.prizes.available_to_win.count
     end         
     hash["multi_name"] = self.multi_name_translations
     return hash

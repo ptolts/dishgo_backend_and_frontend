@@ -1,14 +1,17 @@
 <script type='text/javascript'>//<![CDATA[ 
 
+    var latitude = <%= params[:lat] || current_user.last_lat || 0 %>;
+    var longitude = <%= params[:lon] || current_user.last_lon || 0 %>;
 
     var user_data = <%= raw(current_user.to_json) %>;
     var restaurant_id = "<%= @restaurant_id %>";
     var languages = <%= raw(@languages) %>;
-    var default_language = <%= raw(@default_language) %>;
+    var default_language = <%= current_user.last_language ? current_user.last_language : raw(@default_language) %>;
     var lang = ko.observable(default_language);
     var languages = ko.observableArray(languages);
 
     var winner_winner_chicken_dinner = ko.observable();
+    var winner_winner_share_for_a_dinner;
 
     function viewModel() {
         var self = this;
@@ -17,8 +20,17 @@
         self.help = ko.observable();
         self.user = ko.observable(new User(user_data));
         self.lang = lang;
+        self.selected_sort_option = ko.observable('value');
 
         self.prizes = ko.observableArray([]);
+
+        self.sorted_prizes = ko.computed(function(){
+            if(self.selected_sort_option() == 'distance'){
+                return _.sortBy(self.prizes(),function(p){ return p.distance; });
+            } else {
+                return _.sortBy(self.prizes(),function(p){ return -p.amount(); });
+            }
+        });
 
         self.loggedIn = ko.computed({
             read: function(){
@@ -46,6 +58,14 @@
                 return false;
             }
         });
+
+        self.last_won_id;
+        self.shareNetworkFB = function(){
+            FB.ui({
+                method: 'share',
+                href: 'https://dishgo.io/app/network/prize/' + self.last_won_id,
+            }, function(response){});     
+        }           
 
         self.fetch_prizes = function(){
             $.ajax({
@@ -108,6 +128,13 @@
             self.selected_prize(null);
             self.page("list");
         }
+        self.show_winner = function(id){
+            self.your_prize(null);
+            self.selected_prize(null);
+            self.last_won_id = id;
+            self.page("winner");
+        }
+        winner_winner_share_for_a_dinner = self.show_winner;              
         self.show_help = function(){
             self.your_prize(null);
             self.selected_prize(null);

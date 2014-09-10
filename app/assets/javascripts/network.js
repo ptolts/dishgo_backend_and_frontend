@@ -248,12 +248,14 @@ ko.bindingHandlers.loggedInChecker = {
 
 var global_restaurant_id;
 var lang;
+var social_share = ko.observable(false);
 
 function NetworkModel() {
 
     var self = this;
     self.loading = ko.observable(true);
     self.network_sign_in = ko.observable(false);
+    self.social_share = social_share;
     self.preview = ko.observable(true);
     self.selected_dish = ko.observable();
     self.user = ko.observable(new User(user_data));
@@ -275,6 +277,13 @@ function NetworkModel() {
         },
         deferEvaluation: true,
     });
+
+    self.shareNetworkFB = function(){
+        FB.ui({
+          method: 'share',
+          href: 'https://dishgo.io/app/network/',
+        }, function(response){});     
+    }    
 
     if("resto_data" in window){
         self.restaurant = ko.observable(new Restaurant(resto_data));

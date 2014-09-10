@@ -10,6 +10,12 @@ class Api::V1::RestaurantsController < ApplicationController
   def index
     Rails.logger.warn params.to_s
 
+    if user = current_user
+      user.last_lat = params[:lat]
+      user.last_lon = params[:lon]
+      user.save
+    end
+
     restaurants = Restaurant.new.by_loc [params[:lat].to_f,params[:lon].to_f]
     restaurants = restaurants.only(:id,:hours,:lat,:lon,:name, :address_line_1, :city, :postal_code, :does_delivery, :phone)
     restaurants = restaurants.collect do | restaurant |
@@ -36,6 +42,11 @@ class Api::V1::RestaurantsController < ApplicationController
       render :text => {}.to_json
       return
     end
+
+    if user = current_user
+      user.last_language = params[:language] || 'en'
+      user.save
+    end    
 
     restaurant = Restaurant.find(params[:id])
     language = params["language"] || 'en'

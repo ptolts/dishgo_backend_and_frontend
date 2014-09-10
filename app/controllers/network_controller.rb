@@ -117,6 +117,19 @@ class NetworkController < ApplicationController
     end
   end
 
+  def dish
+    @individual_prize = IndividualPrize.find(params[:id])
+    @prize = @individual_prize.prize
+    @user = @individual_prize.user
+    @restaurant = @prize.restaurant
+    if request.user_agent =~ /facebook/i
+      render layout: 'network_prize'
+      return
+    else
+      redirect_to "https://dishgo.io/app/network/restaurant/#{@restaurant.id}"
+    end
+  end  
+
   def menus_served
     render json: {count:PageView.count}.as_json
   end

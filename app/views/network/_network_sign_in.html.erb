@@ -49,3 +49,23 @@
 	          	</div>
 	        </div>
 	    </div> 
+
+	    <div data-bind="visible: social_share" style="display:none">
+	        <div id="sign_in_bg" data-bind="click: function(){ social_share(false) }"></div>
+	        <div id="sign_in_modal">
+	        	<a class="close" data-bind="click: function(){ social_share(false) }">×</a>	        	
+	         	<div id="sign_in">
+		            <div class="row">
+		                <div class="col-xs-12 text-center">
+		                	<h3 style="margin-top: 0px" data-bind="localize">Thanks for using DishGo!</h3>
+		                	<p data-bind="localize">We are a small Montreal based startup. We're working very hard to bring you Montreal's best menus, but we cant do it alone. Help us out by sharing this page on Facebook!</p>
+		                </div>                
+		            </div>
+		            <div class="row">
+		                <div class="col-xs-12 text-center">
+							<span class="btn btn-fb-network-share" data-bind="click: function(){ $root.shareNetworkFB() }"><span data-bind="localize">Share</span> <i class="fa fa-facebook"></i></span>
+		                </div>                
+		            </div>                                   
+	          	</div>
+	        </div>
+	    </div> 	    

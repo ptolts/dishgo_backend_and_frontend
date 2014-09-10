@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<title>Win Gift Certificates</title>
+		<meta name="description" content="<%= I just won a <%= @prize.amount %> at <%= @restaurant.name %> with DishGo. Download the app and use my promo code <%= @user.promo_code %> to start winning!">
+		<meta property="fb:app_id"          content="<%= Rails.env.development? ? '886480311381787' : '886479778048507' %>" />
+		<meta property="og:type"            content="article" />
+		<meta property="og:url"             content="https://dishgo.io/app/network/prize/<%= @individual_prize.id %>" />
+		<meta property="og:title"           content="<%= @prize.amount %> at <%= @restaurant.name %>" />	
+		<meta property="og:image"           content="https://d5ca3b0520fac45026ad-6caa6fe89e7dac3eaf12230f0985b957.ssl.cf5.rackcdn.com/facebook_share.png" />
+	</head>
+    <body>
+    								    	
+    </body>
+</html>

@@ -169,7 +169,7 @@ class PrizesController < ApplicationController
         user.individual_prizes << individual_prize
         user.save(validate: false)
         prize.update_quantity
-        render json: {won: "Congratulations, you've won!"}.as_json
+        render json: {won: "Congratulations, you've won!", id: individual_prize.id}.as_json
         return
       end      
     end

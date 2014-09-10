@@ -37,6 +37,10 @@ class User
   field :name,                type: String
   field :promo_code,          type: String
 
+  field :last_lat,          type: String
+  field :last_lon,          type: String
+  field :last_language,          type: String
+
   field :claimed_promo_code,   type: String
   field :api_confirmation,     type: Boolean, default: true
 

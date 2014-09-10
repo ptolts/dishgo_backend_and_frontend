@@ -41,6 +41,25 @@ function IndividualPrize(data) {
     });
 }
 
+Number.prototype.toRad = function() {
+   return this * Math.PI / 180;
+}
+
+var haver = function(lat1,lon1,lat2,lon2){
+  var R = 6371; // km 
+  //has a problem with the .toRad() method below.
+  var x1 = lat2-lat1;
+  var dLat = x1.toRad();  
+  var x2 = lon2-lon1;
+  var dLon = x2.toRad();  
+  var a = Math.sin(dLat/2) * Math.sin(dLat/2) + 
+                  Math.cos(lat1.toRad()) * Math.cos(lat2.toRad()) * 
+                  Math.sin(dLon/2) * Math.sin(dLon/2);  
+  var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+  var d = R * c;
+  return d;
+}
+
 function Prize(data) {
     var self = this;
     self.id = ko.observable(data.id || null);
@@ -59,6 +78,16 @@ function Prize(data) {
     self.active = ko.observable(data.active || null);
     self.spin = ko.observable(false);
     self.saved = ko.observable();
+    self.lat = data.lat ? data.lat : 0.0;
+    self.lon = data.lon ? data.lon : 0.0;
+
+    self.distance;
+    self.set_distance = function(){
+      if("latitude" in window && latitude){
+        self.distance = haver(self.lat,self.lon,latitude,longitude);        
+      }
+    }
+    self.set_distance();
 
     self.individual_prizes = ko.observable(_.map(data.individual_prizes,function(ind_pri){ return new IndividualPrize(ind_pri) }));
 
@@ -132,10 +161,13 @@ function Prize(data) {
             self.spin(false);
             self.saved(true);
             if(data.won){
-              alert(data.won);
-              if("winner_winner_chicken_dinner" in window){
-                winner_winner_chicken_dinner(true);
-              }
+              // alert(data.won);
+              // if("winner_winner_chicken_dinner" in window){
+              //   winner_winner_chicken_dinner(true);
+              // }
+              if("winner_winner_share_for_a_dinner" in window){
+                winner_winner_share_for_a_dinner(data.id);
+              }              
             } else if(data.error){
               alert(data.error);
             } else {
