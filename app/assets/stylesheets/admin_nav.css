@@ -61,11 +61,13 @@ margin: 0px 15px;
 }
 
 #dishgo_bar.navbar-inverse .navbar-nav .open .dropdown-menu > li > a {
-    color: #FFF;
+    color: #cf2f28;
+    padding: 10px;
   }
 
 #dishgo_bar.navbar-inverse .navbar-nav .open .dropdown-menu > li > a:hover, #dishgo_bar.navbar-inverse .navbar-nav .open .dropdown-menu > li > a:focus {
-    color: #149178;
+    color: #fff;
+    background-color: #cf2f28;
   }
 #dishgo_bar.navbar-inverse .navbar-nav > li > a:hover, #dishgo_bar.navbar-inverse .navbar-nav > li > a:focus {
   color: #fff;
@@ -91,7 +93,7 @@ margin: 0px 15px;
 }
 
 #dishgo_bar ul .dropdown-menu {
-  background-color: #000;
+  background-color: #fff;
 }
 
 #dishgo_bar.navbar-inverse .navbar-toggle {
