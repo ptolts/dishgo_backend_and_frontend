@@ -119,6 +119,9 @@ class Restaurant
   end
 
   def by_loc loc=nil
+    # if kd = KdTree.new and ids = kd.find(loc[0],loc[1])
+    #   return Restaurant.where(id:ids,listed:true)
+    # end
     if loc
       cords = [loc[1],loc[0]]
     else

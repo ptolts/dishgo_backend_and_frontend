@@ -21,7 +21,7 @@ class Api::V1::RestaurantsController < ApplicationController
       hash
     end
 
-    respond_with restaurants.as_json
+    render json:restaurants.as_json
   end
 
   def unique_id restaurant
@@ -31,7 +31,6 @@ class Api::V1::RestaurantsController < ApplicationController
   end
 
   def menu
-
     if params[:id].empty?
       Rails.logger.warn "Empty ID"
       render :text => {}.to_json
