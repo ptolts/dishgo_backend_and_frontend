@@ -1,4 +1,11 @@
 module NetworkHelper
+    def percent_or_dollar prize
+        if prize.prize_type == '$'
+            return "$#{prize.amount}"
+        else
+            return "#{prize.amount}%"
+        end
+    end
 	def stars rating
         full = "<i class=\"fa fa-star\"></i>"
         half = "<i class=\"fa fa-star-half-o\"></i>"
