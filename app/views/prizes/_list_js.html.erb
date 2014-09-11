@@ -72,7 +72,7 @@
         self.shareNetworkFBPromo = function(){         
             FB.ui({
                 method: 'share',
-                display: 'page',
+                display: 'iframe',
                 href: 'https://dishgo.io/app/network/promo_code' + self.user().id(),
             }, function(response){});     
         }
