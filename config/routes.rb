@@ -80,6 +80,7 @@ Foodcloud::Application.routes.draw do
       get '/', to: "network#index"
       get '/restaurant/:id', to: "network#restaurant"
       get '/prize/:id', to: "network#prize"
+      get '/promo_code', to: "network#promo_code"
       get '/dish/:id', to: "network#dish"
       get '/restaurant', to: "network#restaurant"
       get '/redirect', to: "network#redirect"

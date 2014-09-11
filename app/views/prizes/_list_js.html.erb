@@ -67,7 +67,15 @@
                 display: 'popup',
                 href: 'https://dishgo.io/app/network/prize/' + self.last_won_id,
             }, function(response){});     
-        }           
+        }  
+
+        self.shareNetworkFBPromo = function(){         
+            FB.ui({
+                method: 'share',
+                display: 'popup',
+                href: 'https://dishgo.io/app/network/promo_code' + self.user().id(),
+            }, function(response){});     
+        }
 
         self.fetch_prizes = function(){
             $.ajax({

@@ -124,7 +124,13 @@ class NetworkController < ApplicationController
     @restaurant = @prize.restaurant
     render layout: 'network_prize'
     return
-  end  
+  end 
+
+  def promo_code
+    @user = User.find(params[:id])
+    render layout: 'network_promo_code'
+    return
+  end     
 
   def menus_served
     render json: {count:PageView.count}.as_json

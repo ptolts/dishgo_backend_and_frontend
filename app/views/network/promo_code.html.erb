@@ -1,0 +1,73 @@
+
+<div class="container letsdishgomeat promo_code_background" data-bind="visible: true" style="display: none">
+	<div class="row">
+		<div class="col-xs-12 text-center">
+	    	<iframe width="420" height="315" src="//www.youtube.com/embed/q-SwtfKBFbU" frameborder="0" allowfullscreen></iframe>							    	
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-xs-12 text-center">
+			<h3>Download DishGo on the <a href="http://appstore.com/dishgo" style="color: #cf2f28">app store.</a></h3>
+			<p>Afterwards, follow the tutorial above and enter your friends promo code <span style="color: #cf2f28; font-weight: bold"><%= @user.promo_code%></span> and you will both be given extra Dishcoins which can be redeemed for great prizes!</p>						    	
+		</div>
+	</div>		
+</div>
+
+<script>
+	[
+		"<%= stylesheet_path 'network'%>",
+	].forEach(function(src) {
+		var l = document.createElement('link'); 
+		l.rel = 'stylesheet';
+		l.href = src;
+		document.head.appendChild(l);
+	});
+
+	var scripts = [
+		"<%= javascript_path 'application' %>",
+    	"<%= javascript_path 'menu_editor' %>",
+    	"<%= javascript_path 'network_index_javascript' %>",
+    	"<%= javascript_path 'social_share' %>",
+	];
+	var src;
+	var script;
+	var pendingScripts = [];
+	var firstScript = document.scripts[0];
+
+	// Watch scripts load in IE
+	function stateChange() {
+	  // Execute as many scripts in order as we can
+	  var pendingScript;
+	  while (pendingScripts[0] && pendingScripts[0].readyState == 'loaded') {
+	    pendingScript = pendingScripts.shift();
+	    // avoid future loading events from this script (eg, if src changes)
+	    pendingScript.onreadystatechange = null;
+	    // can't just appendChild, old IE bug if element isn't closed
+	    firstScript.parentNode.insertBefore(pendingScript, firstScript);
+	  }
+	}
+
+	// loop through our script urls
+	while (src = scripts.shift()) {
+	  if ('async' in firstScript) { // modern browsers
+	    script = document.createElement('script');
+	    script.async = false;
+	    script.src = src;
+	    document.head.appendChild(script);
+	  }
+	  else if (firstScript.readyState) { // IE<10
+	    // create a script and add it to our todo pile
+	    script = document.createElement('script');
+	    pendingScripts.push(script);
+	    // listen for state changes
+	    script.onreadystatechange = stateChange;
+	    // must set src AFTER adding onreadystatechange listener
+	    // else we’ll miss the loaded event for cached scripts
+	    script.src = src;
+	  }
+	  else { // fall back to defer
+	    document.write('<script src="' + src + '" defer></'+'script>');
+	  }
+	}			
+
+</script>	
