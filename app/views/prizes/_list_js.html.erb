@@ -70,11 +70,14 @@
         }  
 
         self.shareNetworkFBPromo = function(){         
-            FB.ui({
-                method: 'share',
-                display: 'async',
-                href: 'https://dishgo.io/app/network/promo_code/' + self.user().id(),
-            }, function(response){});     
+            // FB.ui({
+            //     method: 'share',
+            //     display: 'async',
+            //     href: 'https://dishgo.io/app/network/promo_code/' + self.user().id(),
+            // }, function(response){});
+            var href = 'https://dishgo.io/app/network/promo_code/' + self.user().id();
+            var url = "https://www.facebook.com/dialog/share?app_id=886479778048507&display=async&href=" + href +"&redirect_uri=" + window.location.href;
+            window.location.assign(url);
         }
 
         self.fetch_prizes = function(){
