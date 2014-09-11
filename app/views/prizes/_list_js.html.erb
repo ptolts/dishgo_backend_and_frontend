@@ -64,7 +64,7 @@
         self.shareNetworkFB = function(){
             FB.ui({
                 method: 'share',
-                display: 'popup',
+                display: 'iframe',
                 href: 'https://dishgo.io/app/network/prize/' + self.last_won_id,
             }, function(response){});     
         }  
@@ -73,7 +73,7 @@
             FB.ui({
                 method: 'share',
                 display: 'iframe',
-                href: 'https://dishgo.io/app/network/promo_code' + self.user().id(),
+                href: 'https://dishgo.io/app/network/promo_code/' + self.user().id(),
             }, function(response){});     
         }
 
