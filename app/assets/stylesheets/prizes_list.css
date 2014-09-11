@@ -18,6 +18,13 @@ h1 {
     font-size: 28px;
 }
 
+.btn-fb-network-share {
+    border: 1px solid #3B5998;
+    background-color: #3B5998;
+    color: white;
+    border-radius: 4px;
+}
+
 .list-prizes {
     list-style: none;
     width: 100%;

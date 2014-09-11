@@ -322,6 +322,12 @@ body {
     min-height: 500px;
     position: relative;
 }
+.promo_code_background {
+    background: rgba(0, 0, 0, 0.7);
+    margin-top:25px;
+    padding: 10px;
+    color: white;
+}
 .container_small {
     position: absolute;
     margin-left: -260px;

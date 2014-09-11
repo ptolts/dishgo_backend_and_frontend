@@ -9,7 +9,7 @@
                         <div class="btn btn-rewards" style="margin-top:3px;" data-bind="visible: $root.any_your_prizes, click: function(){ $root.show_your_prizes() }">Winnings</div>
                     </div>
                     <div class="col-xs-12">
-                        <h1 class="head" style="color: #fff;">Your Account</h1>
+                        <h1 class="head" style="color: #fff;" data-bind="localize">Your Account</h1>
                     </div>
                     <div class="col-xs-12">
                         <p style="color: #fff;">DishCoins remaining: <img src="https://58900edd332817a2d530-6caa6fe89e7dac3eaf12230f0985b957.ssl.cf5.rackcdn.com/dishcoin-white.png" class="coin"/> <!-- ko text: dishcoins --><!-- /ko --></p>
@@ -22,7 +22,12 @@
             <div class="row">
                 <div class="col-xs-12">
                     <h1 class="head">Today's Rewards</h1>
-                    <p>Here's a list of rewards. Bet Dishcoins to win.</p>
+                    <!-- ko if: restaurant_name -->
+                        <p><span  data-bind="localize">Here's a list of rewards at</span> <span data-bind="text: restaurant_name"></span>. <span data-bind="localize">Bet Dishcoins to win. A full list of DishGo prizes is available from the settings pane from the main page of the app.</span></p>
+                    <!-- /ko -->
+                    <!-- ko ifnot: restaurant_name -->
+                        <p data-bind="localize">Here's a list of rewards. Bet Dishcoins to win.</p>
+                    <!-- /ko -->                    
                     <div class="row" style="margin-bottom: 10px">
                         <div class="col-xs-12">
                             <button class="btn btn-rewards col-xs-5" data-bind="click: function(){ $root.selected_sort_option('distance') }, css:{active:$root.selected_sort_option() == 'distance'}"><span data-bind="localize">Distance</span><i class="fa fa-sort-down pull-right"></i></button>
@@ -92,13 +97,13 @@
         <!-- ko if: !$root.your_prize() -->
             <div class="row" data-bind="visible: !$root.loggedIn()">
                 <div class="col-xs-12">
-                    <p style="margin:0;">You need to create an account to claim prizes. <span data-bind="visible: amount() <= 10">You are guaranteed to win the first prize you select.</span></p>
+                    <p style="margin:0;"><span data-bind="localize">You need to create an account to claim prizes.</span> <span data-bind="visible: amount() <= 10, localize">You are guaranteed to win the first prize you select.</span></p>
                     <p><button class="btn btn-rewards" style="width:100%; margin-top:10px;" data-bind="click: function(){ $root.sign_in() }">Sign Up</button></p>
                 </div>  
             </div>        
             <div class="row" data-bind="visible: $root.user().dishcoins() > 0">
                 <div class="col-xs-12">
-                    <span class="bidding">Select the number DishCoins to wager on this reward.</span>
+                    <span class="bidding" data-bind="localize">Select the number DishCoins to wager on this reward.</span>
                 </div>
                 <div class="col-xs-6 text-left">
                     <select class="form-control" data-bind="options: $root.user().dishcoin_list(), value: number_of_bets"></select>          
@@ -109,8 +114,8 @@
             </div>        
             <div class="row" data-bind="visible: $root.loggedIn() && $root.user().dishcoins() == 0">
                 <div class="col-xs-12">
-                    <span class="bidding">You're out of DishCoins. Rate dishes or share photos to accumulate more!</span>
-                    <a style="color:#cf2f28;font-size:16px;" data-bind="click: function(){ $root.show_help() }">Learn how <i class="fa fa-question-circle" style="color:#cf2f28;font-size:16px;"></i></a>
+                    <span class="bidding" data-bind="localize">You're out of DishCoins. Rate dishes or share photos to accumulate more!</span>
+                    <a style="color:#cf2f28;font-size:16px;" data-bind="click: function(){ $root.show_help() }, localize">Learn how <i class="fa fa-question-circle" style="color:#cf2f28;font-size:16px;"></i></a>
                 </div>
             </div>         
         <!-- /ko -->
@@ -118,27 +123,27 @@
             <div class="row">
                 <div class="col-xs-12 text-center">
                     <!-- ko if: !$root.user().api_confirmation() -->
-                        <h4>Verify Email</h4>
-                        <p>We need you to verify your email address. Even after verification, this coupon may only be valid in 24 hours.</p>
-                        <span class="value" data-bind="click: function(){ $root.show_modify_email(); }">Click here for more information.</span> 
+                        <h4 data-bind="localize">Verify Email</h4>
+                        <p data-bind="localize">We need you to verify your email address. Even after verification, this coupon may only be valid in 24 hours.</p>
+                        <span class="value" data-bind="click: function(){ $root.show_modify_email(); }, localize">Click here for more information.</span> 
                     <!-- /ko -->  
                     <!-- ko if: $root.user().api_confirmation() -->                  
                         <!-- ko foreach: individual_prizes -->
 
                             <!-- if the token is available right now, display it. Otherwise tell them when it will be available -->
                             <!-- ko if: prize_token -->
-                                <h4>Coupon Code</h4>
+                                <h4 data-bind="localize">Coupon Code</h4>
                                 <p><span class="coupon_number" data-bind="text: number"> </span><span class="token" data-bind="text: prize_token"></span></p>
-                                <p class="fine">Present this to the merchant to redeem your reward.</p>
-                                <p class="fine">Cannot be combined with another offer or promotion.</p>                            
+                                <p class="fine" data-bind="localize">Present this to the merchant to redeem your reward.</p>
+                                <p class="fine" data-bind="localize">Cannot be combined with another offer or promotion.</p>                            
                             <!-- /ko -->
 
                             <!-- token will be available in.... -->
                             <!-- ko if: !prize_token -->
-                                <h4>Coupon Code Available On</h4>
+                                <h4 data-bind="localize">Coupon Code Available On</h4>
                                 <p><span class="coupon_number" data-bind="text: number"> </span><span class="token" data-bind="text: dont_open_before"></span></p>
-                                <p class="fine">In order to prevent abuse, this coupon</p>
-                                <p class="fine">is only redeemable 24 hours after winning.</p>                            
+                                <p class="fine" data-bind="localize">In order to prevent abuse, this coupon</p>
+                                <p class="fine" data-bind="localize">is only redeemable 24 hours after winning.</p>                            
                             <!-- /ko -->
 
 
@@ -156,13 +161,18 @@
             <div class="col-xs-12" data-bind="with: user">              
                 <div class="dishcoin_count row">
                     <div class="col-xs-12">
-                        <div class="btn btn-rewards" data-bind="click: function(){ $root.show_home() }">Back</div>
+                        <div class="btn btn-rewards" data-bind="click: function(){ $root.show_home() }, localize">Back</div>
                     </div>                    
                     <div class="col-xs-12">
-                        <h1 class="head" style="color:#fff">Your Rewards</h1>
+                        <h1 class="head" style="color:#fff" data-bind="localize">Your Rewards</h1>
                     </div>
                     <div class="col-xs-12">
-                        <p style="color:#fff">You have won the following gift certificates!</p>
+                        <!-- ko if: restaurant_name -->
+                            <p><span  data-bind="localize">Here are your winnings at </span> <span data-bind="text: restaurant_name"></span>. <span data-bind="localize">The full list of your winnings is available from the settings pane on the main screen of the app.</span></p>
+                        <!-- /ko -->
+                        <!-- ko ifnot: restaurant_name -->
+                            <p style="color:#fff" data-bind="localize">You have won the following gift certificates!</p>
+                        <!-- /ko -->                             
                     </div>
                 </div>
             </div>
@@ -210,15 +220,15 @@
     <div class="prizes_list_controls">
         <div class="dishcoin_count row">      
             <div class="col-xs-12">
-                <div class="btn btn-rewards" style="margin-bottom: 10px;" data-bind="click: function(){ $root.show_home() }">Back to Prize List</div>             
+                <div class="btn btn-rewards" style="margin-bottom: 10px;" data-bind="click: function(){ $root.show_home() },localize">Back to Prize List</div>             
             </div>
         </div>
     </div>
     <div class="grey_bg" id="faq">
         <div class="row" style="margin:-15px; background-color: #fff;" data-bind="with: $root.user">
             <div class="col-xs-12">
-                <h3>Share to Win!</h3>
-                <p>Share promo code <span style="color: #cf2f28;" data-bind="text: promo_code, click: function(){ $root.send_sms($data.promo_code()) }"></span> with a friend, or enter theirs. Both of you win 5 DishCoins to bid on great coupons!</p>
+                <h3 data-bind="localize">Share to Win!</h3>
+                <p><span data-bind="localize">Share promo code</span> <span style="color: #cf2f28;" data-bind="text: promo_code, click: function(){ $root.send_sms($data.promo_code()) }"></span> <span data-bind="localize">with a friend, or enter theirs. Both of you win 5 DishCoins to bid on great coupons!</span></p>
                 <!-- ko if: promo_code() != claimed_promo_code() -->
                     <div class="input-group" style="width:75%; margin-bottom:10px;">
                         <input class="form-control" placeholder="Enter Promo Code" data-bind="value: claimed_promo_code" />
@@ -229,7 +239,7 @@
         </div>     
         <div class="row">
             <div class="col-xs-12">
-                <h4 style="margin-top:10px;">How Do I Earn Rewards?</h4> 
+                <h4 style="margin-top:10px;" data-bind="localize">How Do I Earn Rewards?</h4> 
             </div>
         </div>
         <div class="row" style="background-color: #fff;">
@@ -259,7 +269,7 @@
     <div class="prizes_list_controls">
         <div class="dishcoin_count row">
             <div class="col-xs-12">
-                <div class="btn btn-rewards" style="margin-bottom: 10px;" data-bind="click: function(){ $root.show_help() }">Back</div>
+                <div class="btn btn-rewards" style="margin-bottom: 10px;" data-bind="click: function(){ $root.show_help() },localize">Back</div>
             </div>        
             <div class="col-xs-12">             
                 <h1 class="head" style="color:#fff">FAQ</h1>
@@ -267,12 +277,12 @@
         </div>
         <div class="row">
             <div class="col-xs-12 answers">
-                <h4>How do I collect DishCoins?</h4>
-                <p>It's as easy as 1-2-3<p>
+                <h4 data-bind="localize">How do I collect DishCoins?</h4>
+                <p data-bind="localize">It's as easy as 1-2-3<p>
                 <ol>
-                    <li>Snap pictures of your meal and upload them to the correct menu item.<a href="https://youtu.be/WU9pn7gXs9k" target="_data"> Watch Demo Video <i class="fa fa-video-camera"></i></a></li>
-                    <li>Rate dishes and provide feedback to the restaurant owner. Just swipe the stars to submit your rating.<a href="http://youtu.be/zf6S8Etmkzw" target="_data"> Watch Demo Video <i class="fa fa-video-camera"></i></a></li>
-                    <li>Sharing the DishGo App with your friends and family.</li>
+                    <li><span data-bind="localize">Snap pictures of your meal and upload them to the correct menu item.</span><a href="https://youtu.be/WU9pn7gXs9k" target="_data"> Watch Demo Video <i class="fa fa-video-camera"></i></a></li>
+                    <li><span data-bind="localize">Rate dishes and provide feedback to the restaurant owner. Just swipe the stars to submit your rating.</span><a href="http://youtu.be/zf6S8Etmkzw" target="_data"> <span data-bind="localize">Watch Demo Video</span> <i class="fa fa-video-camera"></i></a></li>
+                    <li data-bind="localize">Sharing the DishGo App with your friends and family.</li>
                 </ol>
             </div>
         </div>
@@ -283,7 +293,7 @@
     <div class="prizes_list_controls">
         <div class="dishcoin_count row">         
             <div class="col-xs-12">
-                <div class="btn btn-rewards" style="margin-bottom: 10px;" data-bind="click: function(){ $root.show_help() }">Back</div>
+                <div class="btn btn-rewards" style="margin-bottom: 10px;" data-bind="click: function(){ $root.show_help() },localize">Back</div>
             </div>        
             <div class="col-xs-12">             
                 <h1 class="head" style="color:#fff">FAQ</h1>
@@ -291,8 +301,8 @@
         </div>
         <div class="row">
             <div class="col-xs-12 answers">
-                <h4>How do I bid on rewards?</h4>
-                <p>Under <a data-bind="click: function(){ $root.show_home() }">Today's Rewards</a> you'll see a list of gift certificates to choose from. Select one that appeals to you. Then you must choose how many DishCoins you're willing to bet. Click Bid and cross your fingers!<p>
+                <h4 data-bind="localize">How do I bid on rewards?</h4>
+                <p><span data-bind="localize">Under</span> <a data-bind="click: function(){ $root.show_home() },localize">Today's Rewards</a> <span data-bind="localize">you'll see a list of gift certificates to choose from. Select one that appeals to you. Then you must choose how many DishCoins you're willing to bet. Click Bid and cross your fingers!</span><p>
             </div>
         </div>
     </div>
@@ -302,7 +312,7 @@
     <div class="prizes_list_controls">
         <div class="dishcoin_count row">         
             <div class="col-xs-12">
-                <div class="btn btn-rewards" style="margin-bottom: 10px;" data-bind="click: function(){ $root.show_help() }">Back</div>
+                <div class="btn btn-rewards" style="margin-bottom: 10px;" data-bind="click: function(){ $root.show_help() }, localize">Back</div>
             </div>        
             <div class="col-xs-12">             
                 <h1 class="head" style="color:#fff">FAQ</h1>
@@ -310,8 +320,8 @@
         </div>
         <div class="row">
             <div class="col-xs-12 answers">
-                <h4>What are my odds?</h4>
-                <p>The odds are set by the merchant given the value of the reward. With every additional DishCoin you bet your odds increase.<p>
+                <h4 data-bind="localize">What are my odds?</h4>
+                <p data-bind="localize">The odds are set by the merchant given the value of the reward. With every additional DishCoin you bet your odds increase.<p>
             </div>
         </div>
     </div>
@@ -321,16 +331,16 @@
     <div class="prizes_list_controls">
         <div class="dishcoin_count row">         
             <div class="col-xs-12">
-                <div class="btn btn-rewards" style="margin-bottom: 10px;" data-bind="click: function(){ $root.show_help() }">Back</div>
+                <div class="btn btn-rewards" style="margin-bottom: 10px;" data-bind="click: function(){ $root.show_help() }, localize">Back</div>
             </div>        
             <div class="col-xs-12">             
-                <h1 class="head" style="color:#fff">FAQ</h1>
+                <h1 class="head" style="color:#fff" data-bind="localize">FAQ</h1>
             </div>
         </div>
         <div class="row">
             <div class="col-xs-12 answers">
-                <h4>How do I redeem my rewards?</h4>
-                <p>Following a successful bid, your reward can be found in the <a data-bind="visible: $root.any_your_prizes, click: function(){ $root.show_your_prizes() }">Winnings</a> section. Click on the reward and present it to the merchant with the enclosed coupon code to redeem your reward.<p>
+                <h4 data-bind="localize">How do I redeem my rewards?</h4>
+                <p><span data-bind="localize">Following a successful bid, your reward can be found in the</span> <a data-bind="visible: $root.any_your_prizes, click: function(){ $root.show_your_prizes() }">Winnings</a> <span data-bind="localize">section. Click on the reward and present it to the merchant with the enclosed coupon code to redeem your reward.</span><p>
             </div>
         </div>
     </div>
@@ -340,27 +350,29 @@
     <div class="prizes_list_controls">
         <div class="dishcoin_count row">         
             <div class="col-xs-6">             
-                <h1 class="head" style="color:#fff">Email Verification</h1>
+                <h1 class="head" style="color:#fff" data-bind="localize">Email Verification</h1>
             </div>
             <div class="col-xs-6 text-right">
-                <div class="btn btn-rewards" data-bind="click: function(){ $root.show_home() }">Back</div>
+                <div class="btn btn-rewards" data-bind="click: function(){ $root.show_home() }, localize">Back</div>
             </div>
         </div>
         <div class="row">
             <div class="col-xs-12 answers">
-                <p>Unfortunately due to abuse, we need you to verify that the email you used to sign up is real. We automatically sent you an email with a button you need to click before you can redeem prizes. The email you used to sign up is "<!-- ko text: $root.user().email() --><!-- /ko -->". If this was entered incorrectly, please contact support at phil@dishgo.io.<p>
+                <p><span  data-bind="localize">Unfortunately due to abuse, we need you to verify that the email you used to sign up is real. We automatically sent you an email with a button you need to click before you can redeem prizes. The email you used to sign up is </span>"<!-- ko text: $root.user().email() --><!-- /ko -->". <span data-bind="localize">If this was entered incorrectly, please contact support at phil@dishgo.io.</span><p>
             </div>
         </div>
     </div>
 </div>
 
 <div class="container" data-bind="visible: page() == 'winner'">
-    <div class="prizes_list_controls">
+    <div class="prizes_list_controls text-center">
         <div class="row">
-            <div class="col-xs-12 answers">
-                <button class="btn btn-search" data-bind="click: function(){ $root.shareNetworkFB(); }">Share On Facebook</button>
-                <p><p>
-                <button class="btn btn-search" data-bind="click: function(){ winner_winner_chicken_dinner(true); }">View your Winnings</button>
+            <div class="col-xs-12 answers" style="padding-bottom: 10px">
+                <h1 data-bind="localize">You've won!</h1>
+                <p data-bind="localize">Spread the news you've won on Facebook, and collect more DishCoins every time someone signs up using your promo code!</p>
+                <button class="btn btn-fb-network-share" data-bind="click: function(){ $root.shareNetworkFB(); }">Share On Facebook</button>
+                <p data-bind="localize" style="margin-top: 10px">If you'd rather view your winnings now, click below. You can always share later!</p>
+                <button class="btn btn-rewards" data-bind="click: function(){ winner_winner_chicken_dinner(true); }">View your Winnings</button>
             </div>
         </div>
     </div>

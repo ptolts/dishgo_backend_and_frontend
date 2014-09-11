@@ -122,12 +122,8 @@ class NetworkController < ApplicationController
     @prize = @individual_prize.prize
     @user = @individual_prize.user
     @restaurant = @prize.restaurant
-    if request.user_agent =~ /facebook/i
-      render layout: 'network_prize'
-      return
-    else
-      redirect_to "https://dishgo.io/app/network/restaurant/#{@restaurant.id}"
-    end
+    render layout: 'network_prize'
+    return
   end  
 
   def menus_served

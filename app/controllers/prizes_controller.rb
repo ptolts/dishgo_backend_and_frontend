@@ -60,9 +60,19 @@ class PrizesController < ApplicationController
   end
 
   def list
+    @default_language = 'en'
+    @lat = 0
+    @lon = 0
+    if current_user 
+      @default_language = current_user.last_language if current_user.last_language
+      @lat = current_user.last_lat if current_user.last_lat
+      @lon = current_user.last_lon if current_user.last_lon
+    end
     @restaurant_id = params[:restaurant]
     if Prize.available_to_win.where(restaurant_id:@restaurant_id).count == 0
       @restaurant_id = nil
+    else 
+      @restaurant_name = Restaurant.find(params[:restaurant]).name
     end
     @languages = ['en'].to_json
     @default_language = ['en'].to_json    

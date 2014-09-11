@@ -1,14 +1,15 @@
 <script type='text/javascript'>//<![CDATA[ 
 
-    var latitude = <%= params[:lat] || current_user.last_lat || 0 %>;
-    var longitude = <%= params[:lon] || current_user.last_lon || 0 %>;
+    var latitude = <%= @lat %>;
+    var longitude = <%= @lon %>;
 
     var user_data = <%= raw(current_user.to_json) %>;
     var restaurant_id = "<%= @restaurant_id %>";
     var languages = <%= raw(@languages) %>;
-    var default_language = <%= current_user.last_language ? current_user.last_language : raw(@default_language) %>;
+    var default_language = <%= raw(@default_language) %>;
     var lang = ko.observable(default_language);
     var languages = ko.observableArray(languages);
+    var restaurant_name <%= @restaurant_name ? raw("='#{escape_javascript(@restaurant_name)}'") : nil %>;
 
     var winner_winner_chicken_dinner = ko.observable();
     var winner_winner_share_for_a_dinner;
