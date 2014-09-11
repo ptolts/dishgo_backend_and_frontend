@@ -22,27 +22,17 @@ class RobotsController < ApplicationController
   end
 
   def dishgo
+    sitemapxml = %@<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\nCONTENTS_HERE_SITEMAP\n</urlset>@
+    sitemap = []
     Restaurant.only_with_menu.each do |restaurant|
-      sitemapxml = %@<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\nCONTENTS_HERE_SITEMAP\n</urlset>@
       sitemap_url = %@\t<url>
-        <loc>#{url}LOCATION_CHANGE</loc>
+        <loc>https://dishgo.io/app/network/#{restaurant.id}</loc>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
         </url>@
-      sitemap = []
-
-      pages = ['menu','contact']
-      restaurant.pages.each do |page|
-        pages << page.name.to_s.gsub(/\s/,'_')
-      end
-
-      pages.each do |page|
-        sitemap << sitemap_url.gsub(/LOCATION_CHANGE/,"#!/#{page}")
-      end
-
-      sitemapxml.gsub!(/CONTENTS_HERE_SITEMAP/,sitemap.join("\n"))
+        sitemap << sitemap_url
     end
-
+    sitemapxml.gsub!(/CONTENTS_HERE_SITEMAP/,sitemap.join("\n"))
     render text: sitemapxml
   end
 
