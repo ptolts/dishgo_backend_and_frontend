@@ -26,14 +26,19 @@ class RobotsController < ApplicationController
     sitemap = []
     Restaurant.only_with_menu.each do |restaurant|
       sitemap_url = %@\t<url>
-        <loc>https://dishgo.io/app/network/#{restaurant.id}</loc>
-        <changefreq>weekly</changefreq>
-        <priority>1.0</priority>
-        </url>@
+        \t\t<loc>https://dishgo.io/app/network/#{restaurant.id}</loc>
+        \t\t<changefreq>weekly</changefreq>
+        \t\t<priority>1.0</priority>
+        \t</url>@
         sitemap << sitemap_url
     end
     sitemapxml.gsub!(/CONTENTS_HERE_SITEMAP/,sitemap.join("\n"))
     render text: sitemapxml
+  end
+
+  def dishgo_robot
+    robot = "User-agent: *\nDisallow: /app/administration"
+    render text: robot
   end
 
   def sitemap

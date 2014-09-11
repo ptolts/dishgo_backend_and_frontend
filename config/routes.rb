@@ -11,6 +11,7 @@ Foodcloud::Application.routes.draw do
   end
 
   match "/sitemap.xml", to: "robots#dishgo", via: :get
+  match "/robots.txt", to: "robots#dishgo_robot", via: :get
 
   constraints(Ownsrestaurant) do
     root :to => 'administration#index', as: "restaurant_root"
