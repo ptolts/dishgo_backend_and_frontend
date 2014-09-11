@@ -10,6 +10,8 @@ Foodcloud::Application.routes.draw do
     get '/sitemap.xml' => 'robots#sitemap'
   end
 
+  match "/sitemap.xml", to: "robots#dishgo", via: :get
+
   constraints(Ownsrestaurant) do
     root :to => 'administration#index', as: "restaurant_root"
   end 
