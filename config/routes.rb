@@ -242,6 +242,7 @@ Foodcloud::Application.routes.draw do
       post 'set_restaurant'  
       post 'create_restaurant'  
       post 'upload_icon'
+      post 'upload_cover_photo'
       post 'create_user_for_restaurant'
       post 'crop_image'
       post 'crop_icon'       

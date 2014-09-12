@@ -36,13 +36,17 @@ class NetworkController < ApplicationController
       @menu_data = menu_d
     end
 
-    @resto_data = restaurant.as_document({pages:true})
+    @resto_data = restaurant.as_document({pages:true,cover_photos:false})
 
     @resto_data = @resto_data.as_json
 
     create_page_view restaurant
 
     if current_user and owned_resto = current_user.owns_restaurants and owned_resto = @restaurant
+      @owner = true
+    end
+
+    if current_user.is_admin
       @owner = true
     end
 

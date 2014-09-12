@@ -444,7 +444,21 @@
             self.subscribeMenu = ko.computed(function(){
                 self.menu_files().length;
                 self.menu_files.remove(function(img){ return img.destroyed() });
-            });                 
+            });   
+
+            // Cover Photo
+            self.cover_photos = ko.observableArray(_.map(data.cover_photos,function(cp){return new CoverPhoto(cp)}) || []);
+            self.addCoverPhoto = function(){
+                var i = new CoverPhoto({});
+                self.cover_photos.unshift(i);
+                return i;
+            }  
+
+            self.cover_photo = ko.computed({
+                read: function(){
+                    return self.cover_photos()[0];
+                }
+            })         
 
             // GALLERY IMAGES
 
@@ -458,18 +472,6 @@
             if(data.gallery_images){
                 self.gallery_images(_.map(data.gallery_images,function(img){ return new ImageObj(img) }))
             }
-
-            // self.created_gallery_image = new ImageObj({});
-
-            // self.created_gallery_image_subscription = ko.computed(function(){
-            //         if(self.created_gallery_image.started()){
-            //             var new_image = new ImageObj({});
-            //             self.gallery_images.push(self.created_gallery_image);                        
-            //             self.created_gallery_image = new_image;
-            //             self.created_gallery_image.started();
-            //         }
-            //     }
-            // );                     
 
             self.hours = ko.observableArray([]);
 

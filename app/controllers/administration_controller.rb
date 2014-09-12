@@ -282,6 +282,35 @@ class AdministrationController < ApplicationController
     render json: {success:true}.as_json
   end
 
+
+  def upload_cover_photo
+    file = params[:files]
+    resto = current_user.owns_restaurants
+    md5_sum = Digest::MD5.hexdigest(file.read)
+    if img = CoverPhoto.where(:manual_img_fingerprint => md5_sum, :restaurant_id => resto.id).first and img
+      Rails.logger.warn "Duplicate file. No need to upload twice."
+      images = [img]
+    else
+      img = CoverPhoto.create
+      img.restaurant = Restaurant.find(params[:restaurant_id])
+      img.update_attributes({:img => file})
+      img.manual_img_fingerprint = md5_sum
+      img.save
+      images = [img]
+    end
+
+    render :json => {files: images.collect{ |img|
+                      {
+                        image_id: img.id,
+                        name: img.img_file_name,
+                        size: img.img_file_size,
+                        original:  img.img_url_original,
+                        small:  img.img_url_original,
+                        thumbnailUrl:   img.img_url_original,
+                      }
+                    }}.as_json
+  end
+
   def upload_image
     file = params[:files]
 

@@ -3,10 +3,8 @@
 <%= render 'dish_search_results' %>
 
 <div class="page-container" data-bind="slideVisible: !top_search()">
-    <div class="network_menu_header">
-        <div class="container">
-            <div class="row">
-                <div class="col-xs-12">
+    <div class="network_menu_header" data-bind="cover_photo: $root.restaurant().cover_photo, event: { mouseover: function(){coverPhotoHover(true)}, mouseout: function(){coverPhotoHover(false)} }">
+
                     <div class="restaurant_logo_wrap">
                         <div class="restaurant_logo">
                             <% if @restaurant.logo %>
@@ -17,9 +15,14 @@
                         </div>
                         <span class="btn btn-fb-share resto-fb-share" data-bind="click: function(){ $root.shareFb }"><span data-bind="localize">Share</span> <i class="fa fa-facebook"></i></span>
                     </div>
-                </div>
-            </div>
-        </div>
+
+        <!-- ko if: isOwner -->
+            <i class="fa fa-spin fa-refresh cover-photo-upload-spin" data-bind="visible: $root.restaurant().cover_photo() && !$root.restaurant().cover_photo().completed()"></i>
+            <span class="cover-photo-upload">
+                <i class="fa fa-upload cover-photo-upload-icon" data-bind="css:{active:coverPhotoHover}"></i>
+                <input data-bind="upload_cover_photo: $root.restaurant" id="fileupload" type="file" name="files"  class="file_upload_input" accept="images/*" capture="camera">
+            </span>               
+        <!-- /ko -->
     </div>
     <div class="resto_details">
         <div class="container">
@@ -77,7 +80,7 @@
 </div>
 
 <script>
-    var restaurant_id = "<%= params[:restaurant_id]%>";
+    var restaurant_id = "<%= params[:id]%>";
     var menu_data = <%= @menu_data ? raw(@menu_data) : {} %>;
     var resto_data = <%= raw(@resto_data.to_json) %>;   
 

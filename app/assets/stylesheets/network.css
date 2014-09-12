@@ -4,8 +4,10 @@
 *= require network_dish_modal
 *= require network_menu_base
 *= require network_odometer
+*= require network_restaurant
 *= require_self
 */
+
 .form-group {
     width: 100%;
 }

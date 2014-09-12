@@ -6,6 +6,55 @@ Opera: function() { return navigator.userAgent.match(/Opera Mini/i); },
 Windows: function() { return navigator.userAgent.match(/IEMobile/i); }, 
 any: function() { return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows()); } };
 
+ko.bindingHandlers.upload_cover_photo = {
+    update: function(element, valueAccessor, allBindingsAccessor, viewModel, bindingContext) {
+        var value = valueAccessor()();
+        $(element).fileupload({
+            dropZone: $(element),
+            formData: {
+                restaurant_id: restaurant_id,
+            },           
+            url: "/app/administration/upload_cover_photo",
+            dataType: 'json',
+            progressInterval: 50,
+            add: function(e,data){
+                image = value.addCoverPhoto();
+                data.image = image;
+                data.submit();
+            },
+            submit: function(e, data){
+                console.log(data);
+            },
+            send: function (e, data) {
+                data.image.started(true);
+            },
+            done: function (e, data) {
+                var file = data.result.files[0];                 
+                data.image.update_info(file);                                               
+            },
+            progress: function (e, data) {
+                var progress = parseInt(data.loaded / data.total * 100, 10);
+                data.image.progressValue(progress);
+            },
+            fail: function (e, data) {
+                data.image.failed(true);
+            },                       
+        });    
+    }
+};
+
+ko.bindingHandlers.cover_photo = {
+    update: function (element, valueAccessor, allBindings, viewModel, bindingContext) {
+        var value = valueAccessor();
+        if(value() && value().original()){
+            $(element).addClass("cover-photo");
+            $(element).css('background-image', 'url(' + value().original() + ')');
+        } else {
+            $(element).removeClass("cover-photo");
+        }
+    }
+};
+
 ko.bindingHandlers.slideVisible = {
     update: function (element, valueAccessor, allBindings, viewModel, bindingContext) {
         var value = valueAccessor();
@@ -266,6 +315,7 @@ function NetworkModel() {
     self.email = ko.observable();
     self.password = ko.observable();
     self.search_type = ko.observable("restaurant");
+    self.coverPhotoHover = ko.observable(false);
 
     self.searchPlaceholder = ko.computed({
         read: function(){

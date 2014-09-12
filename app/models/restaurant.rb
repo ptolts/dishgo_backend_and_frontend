@@ -52,6 +52,8 @@ class Restaurant
   has_one :logo, class_name: "GlobalImage", inverse_of: :restaurant_logo, validate: false
   has_many :menu_images, class_name: "GlobalImage", inverse_of: :restaurant_menu_images
 
+  has_many :cover_photos, class_name: "CoverPhoto", inverse_of: :restaurant
+
   field :logo_settings, type: Hash 
 
   field :website_settings, type: Hash
@@ -345,6 +347,9 @@ class Restaurant
     if !options[:pages] and self.gallery_images
       hash["gallery_images"] = self.gallery_images.as_json
     end
+    if !options[:cover_photos]
+      hash["cover_photos"] = self.cover_photos.as_json
+    end    
     if options[:include_images] and self.image 
       hash["image"] = self.image.profile_images.limit(options[:include_images]).as_json
     end  

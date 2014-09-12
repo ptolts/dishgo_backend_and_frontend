@@ -9,27 +9,14 @@ class CoverPhoto
   store_in collection: "cover_photo", database: "dishgo"
 
   field :original_url, type: String
-
-
-
-
-
   field :position, type: Integer
-
-
-
-
-
-
   field :img_url_medium, type: String
   field :img_url_original, type: String
-
-
+  field :height, type: Integer
+  field :width, type: Integer  
 
   belongs_to :restaurant, class_name: "Restaurant", inverse_of: :cover_photos, index: true
   index({ _id:1 }, { unique: true, name:"id_index" })
-
-
 
   has_mongoid_attached_file :img, {
       :path           => ':hash_:style.png',
@@ -56,6 +43,8 @@ class CoverPhoto
   validates_attachment_content_type :img, :content_type => %w(image/jpeg image/jpg image/png), :message => 'file type is not allowed (only jpeg/png/gif images)'    
   after_post_process :img_post_process
   before_post_process :fuck_you_paperclip
+
+  default_scope -> {desc(:created_at)}
 
   def self.set_default_scope opts
     self.default_scoping = nil

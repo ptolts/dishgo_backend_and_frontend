@@ -15,6 +15,7 @@
 *= require size_prices.js
 *= require restaurant
 *= require lightbox.js
+*= require cover_photo.js
 *= require network.js
 *= require network_localize.js
 */

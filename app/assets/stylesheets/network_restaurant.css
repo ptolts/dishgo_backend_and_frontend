@@ -1,0 +1,18 @@
+.cover-photo-upload {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    color: white;
+}
+
+.cover-photo-upload-icon.active {
+    font-size: 24px;
+}
+
+.cover-photo {
+    height: 400px !important;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    overflow: hidden;
+}
