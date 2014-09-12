@@ -3,19 +3,17 @@
 <%= render 'dish_search_results' %>
 
 <div class="page-container" data-bind="slideVisible: !top_search()">
-    <div class="network_menu_header" data-bind="cover_photo: $root.restaurant().cover_photo, event: { mouseover: function(){coverPhotoHover(true)}, mouseout: function(){coverPhotoHover(false)} }">
-
-                    <div class="restaurant_logo_wrap">
-                        <div class="restaurant_logo">
-                            <% if @restaurant.logo %>
-                                <div class="imageCroppedOneHundredPercent" style="background-image: url('<%= @restaurant.logo.img_url_original %>')">&nbsp;</div>                                                                                                                                  
-                            <% elsif @restaurant.image.length > 0 %>
-                                <div class="imageCroppedOneHundredPercentCover" style="background-image: url('<%= @restaurant.image.profile_images.first.img_url_original %>')">&nbsp;</div>                                                                                                                                  
-                            <% end %>
-                        </div>
-                        <span class="btn btn-fb-share resto-fb-share" data-bind="click: function(){ $root.shareFb }"><span data-bind="localize">Share</span> <i class="fa fa-facebook"></i></span>
-                    </div>
-
+    <div class="network_menu_header" data-bind="cover_photo: $root.restaurant().cover_photo, event: { mouseover: function(){coverPhotoHover(true); return true;}, mouseout: function(){coverPhotoHover(false); return true;} }">
+        <div class="restaurant_logo_wrap">
+            <div class="restaurant_logo">
+                <% if @restaurant.logo %>
+                    <div class="imageCroppedOneHundredPercent" style="background-image: url('<%= @restaurant.logo.img_url_original %>')">&nbsp;</div>                                                                                                                                  
+                <% elsif @restaurant.image.length > 0 %>
+                    <div class="imageCroppedOneHundredPercentCover" style="background-image: url('<%= @restaurant.image.profile_images.first.img_url_original %>')">&nbsp;</div>                                                                                                                                  
+                <% end %>
+            </div>
+            <span class="btn btn-fb-share resto-fb-share" data-bind="click: function(){ $root.shareFB() }"><span data-bind="localize">Share</span> <i class="fa fa-facebook"></i></span>
+        </div>
         <!-- ko if: isOwner -->
             <i class="fa fa-spin fa-refresh cover-photo-upload-spin" data-bind="visible: $root.restaurant().cover_photo() && !$root.restaurant().cover_photo().completed()"></i>
             <span class="cover-photo-upload">
