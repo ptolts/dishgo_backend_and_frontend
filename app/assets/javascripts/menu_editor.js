@@ -137,7 +137,20 @@ ko.bindingHandlers.fitText = {
 ko.bindingHandlers.lTruncatedText = {
     update: function (element, valueAccessor, allBindingsAccessor) {
         var value = valueAccessor();
-        var result = ko.observable(value()[lang()]);     
+        var result = ko.observable(value()[lang()]);
+
+        // if no language data for the selected language
+        if(!result()){
+            var r;
+            for (var key in value()) {
+                var q = value()[key];
+                if(q != ''){
+                    break;
+                }
+            }
+            result = ko.observable(q);
+        }
+
         var length = 140;
         var truncatedText = ko.observable(result().length > length ? result().substring(0, length) + "..." : result());
         // updating text binding handler to show truncatedText
@@ -792,7 +805,19 @@ ko.bindingHandlers.price = {
 ko.bindingHandlers.lText = {
     update: function (element, valueAccessor, allBindingsAccessor) {      
         var value = valueAccessor();
+
         var result = ko.observable(value()[lang()]);
+
+        if(!result()){
+            var r;
+            for (var key in value()) {
+                var q = value()[key];
+                if(q != ''){
+                    break;
+                }
+            }
+            result = ko.observable(q);
+        }
 
         var length = allBindingsAccessor().maxTextLength || false;
 
