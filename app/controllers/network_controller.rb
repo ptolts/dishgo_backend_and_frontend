@@ -46,7 +46,7 @@ class NetworkController < ApplicationController
       @owner = true
     end
 
-    if current_user.is_admin
+    if current_user and current_user.is_admin
       @owner = true
     end
 
