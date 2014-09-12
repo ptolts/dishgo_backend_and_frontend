@@ -16,3 +16,11 @@
     background-size: cover;
     overflow: hidden;
 }
+
+ .cover-photo-upload-spin {
+    font-size: 38px;
+    color: white;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+ }

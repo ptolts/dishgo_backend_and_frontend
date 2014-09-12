@@ -23,7 +23,7 @@ ko.bindingHandlers.upload_cover_photo = {
                 data.submit();
             },
             submit: function(e, data){
-                console.log(data);
+
             },
             send: function (e, data) {
                 data.image.started(true);
@@ -51,6 +51,8 @@ ko.bindingHandlers.cover_photo = {
             $(element).css('background-image', 'url(' + value().original() + ')');
         } else {
             $(element).removeClass("cover-photo");
+            $(element).css('background-image', 'none');
+
         }
     }
 };

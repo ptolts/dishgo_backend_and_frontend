@@ -78,6 +78,8 @@ class OnlinesiteController < ApplicationController
     @resto_data[:images] = restaurant.image.reject{|e| e.img_url_medium.blank?}.collect{|e| e.serializable_hash({})}
     @resto_data = @resto_data.as_json
 
+    @restaurant = restaurant
+
     create_page_view restaurant
     # expires_in 10.minutes, :public => true
     render 'menu'

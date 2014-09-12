@@ -51,7 +51,9 @@
     if(data){
         self.id(data._id);
         self.url = ko.observable(data.local_file || data.url);
-        self.completed(true);
+        if(data.original){
+            self.completed(true);
+        }
         self.original = ko.observable(data.original);
         self.medium = ko.observable(data.medium);
         self.image_width = ko.observable(data.width);
