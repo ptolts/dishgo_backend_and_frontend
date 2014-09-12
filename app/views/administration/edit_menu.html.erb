@@ -269,7 +269,7 @@
         var image_upload_url = "/app/administration/upload_image"
         var viewmodel;
 
-        var admin = <%= current_user.is_admin %>;
+        var admin = <%= current_user ? current_user.is_admin : nil %>;
 
         $(document).ready(function () {  
             viewmodel = new MenuViewModel(); 
