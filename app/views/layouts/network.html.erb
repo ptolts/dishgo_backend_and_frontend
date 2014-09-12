@@ -45,6 +45,7 @@
 		       }(document, 'script', 'facebook-jssdk'));
 
 				var user_data = <%= current_user ? raw(current_user.serializable_hash({restaurant:true}).to_json) : {}%>;
+				var isOwner = <%= @owner ? @owner : false %>;
 
 		</script> 		 	
 

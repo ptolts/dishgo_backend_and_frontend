@@ -80,6 +80,7 @@ module Foodcloud
                                     'picker.js',
                                     'prize_page.js',
                                     'prizes_list.css',
+                                    'business.css',
                                     'fast_click.js',
                                     'wysiwyg.js',
                                     'signin.css',

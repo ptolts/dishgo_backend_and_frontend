@@ -42,6 +42,10 @@ class NetworkController < ApplicationController
 
     create_page_view restaurant
 
+    if current_user and owned_resto = current_user.owns_restaurants and owned_resto = @restaurant
+      @owner = true
+    end
+
     render 'restaurant'
   end
 
