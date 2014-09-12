@@ -1,11 +1,6 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
-		<% if controller_name == "network" && action_name == "restaurant" %>
-			<%= render 'restaurant_meta' %>
-		<% else %>
-			<%= render 'index_meta' %>
-		<% end %>
 		<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, minimum-scale=1, maximum-scale=1, minimal-ui" />
 		<meta name="fragment" content="!" />
 		<meta name="format-detection" content="telephone=no">
@@ -48,38 +43,10 @@
 
 		</script> 		 	
 
-	<% if controller_name == "network" && action_name == "restaurant" %>
-		<style type="text/css">
-			<%= raw(Rails.application.assets.find_asset('network_loading').to_s) %>
-		</style>		
-		<div data-bind="fadeVisible: false">
-			<div class="loading-bg"></div>
-			<div class="center">
-				<div class="loading">
-					<img src="https://d5ca3b0520fac45026ad-6caa6fe89e7dac3eaf12230f0985b957.ssl.cf5.rackcdn.com/DishGo_Logo_Network_Beta.png" class="loading-logo">
-					<div class="centered bouncywrap">
-						<div class="dotcon dc1">
-							<div class="dot"></div>
-						</div>
-						<div class="dotcon dc2">
-							<div class="dot"></div>
-						</div>
-						<div class="dotcon dc3">
-							<div class="dot"></div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	<% end %>
+		<%= render 'network/network_sign_in' %>      	
 
-	<%= render 'network_sign_in' %>      	
+		<%= render 'network/network_header' %>
 
-	<% if controller_name == "network" && action_name == "restaurant" %>
-		<%= render 'restaurant_network_header' %>
-	<% else %>
-		<%= render 'network_header' %>
-	<% end %>   
 
 		<div data-bind="loggedInChecker: loggedIn">
 			<%= yield %>
@@ -133,6 +100,6 @@
 		            </li>
 		        </ul>
 		    </div>
-		</footer>    							    	
+		</footer>    									    	
     </body>
 </html>

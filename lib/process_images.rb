@@ -10,6 +10,16 @@ class ProcessImages
     end
   end
 
+  def process_cover_image image_id
+    image = CoverImage.unscoped.find(image_id)
+    image.background_processed = true
+    image.save
+    image.do_background_work
+    if image.restaurant
+      image.restaurant.cache_job
+    end
+  end  
+
   def before
     @start = Time.now
   end

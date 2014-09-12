@@ -76,6 +76,12 @@ Foodcloud::Application.routes.draw do
     end
   end   
 
+  resources :business do
+    collection do
+      get '/', to: "business#index"
+    end
+  end   
+
   resources :network do
     collection do
       get '/', to: "network#index"

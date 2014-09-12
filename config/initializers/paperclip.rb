@@ -50,7 +50,11 @@ module AttachmentExtensions
     super
 	if @queued_for_write[:original] and @instance.respond_to?(:background_processed) and !@instance.background_processed
       Rails.logger.warn "Background work on #{@queued_for_write[:original]}"
-      ProcessImages.new.delay.process_image(@instance.id)		
+      if @instance.kind_of?(Image)
+      	ProcessImages.new.delay.process_image(@instance.id)		
+      else
+      	ProcessImages.new.delay.process_cover_image(@instance.id)		
+      end
     end
   end
 end
