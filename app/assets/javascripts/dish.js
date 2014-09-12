@@ -100,6 +100,10 @@ function Dish(data, topmodel) {
         }
     }
 
+    if("direct_dish_id" in window && direct_dish_id != "" && self.id() == direct_dish_id){
+        direct_dish_id = self;   
+    }        
+
     self.new_section = ko.observable();
     self.moveToSection = function(old_section){
         self.new_section().dishes.push(self);

@@ -21,6 +21,7 @@
 		<![endif]-->	
 	</head>
     <body>
+    	<div id="network_background"></div>
 		<script>
 			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -47,6 +48,7 @@
 
 				var user_data = <%= current_user ? raw(current_user.serializable_hash({restaurant:true}).to_json) : {}%>;
 				var isOwner = <%= @owner ? @owner : false %>;
+				var direct_dish_id = <%= @direct_dish_id ? raw("\"#{@direct_dish_id}\"") : false %>;
 
 		</script> 		 	
 

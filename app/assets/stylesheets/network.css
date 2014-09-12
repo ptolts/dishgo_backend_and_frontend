@@ -310,6 +310,10 @@ p, address,
     z-index: 10;
 }
 body {
+    margin: 0;
+    padding-top: 0;
+}
+#network_background {
     background: url(https://58900edd332817a2d530-6caa6fe89e7dac3eaf12230f0985b957.ssl.cf5.rackcdn.com/main_background.jpg) repeat;
     background-attachment: fixed;
     background-position: top left;
@@ -317,8 +321,12 @@ body {
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
-    margin: 0;
-    padding-top: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: -10;
 }
 #white_background {
     background-color: #f5f6f5;
@@ -539,7 +547,7 @@ footer a:hover, footer a:focus {
     color: #fff;
     font-size: 18px;
     line-height: 24px;
-    background: url("https://58900edd332817a2d530-6caa6fe89e7dac3eaf12230f0985b957.ssl.cf5.rackcdn.com/dark_background.png") repeat;
+    background-color: rgba(0,0,0,0.8);
 }
 .dish_rating {
     position: absolute;
@@ -728,8 +736,10 @@ footer a:hover, footer a:focus {
         float: left;
     }
     .image-cropped {
-      width: 70px;
-      height: 70px;
+      width: 100%;
+    }
+    .container_small.mobileTopSearchBar {
+        margin-left: 0;
     }
 }
 /* Large Devices, Wide Screens */
@@ -770,8 +780,7 @@ footer a:hover, footer a:focus {
         font-size: 36px;
     }
     .image-cropped {
-      width: 75px;
-      height: 75px;
+      width: 100%;
   }
   .menu_dish_rating_search .left_over {
     font-size: 36px !important;
@@ -786,13 +795,22 @@ footer a:hover, footer a:focus {
 /* small rules */
 
 @media only screen and (max-width: 600px) {
-    body {
-        background-position: center;
+    #network_background {
+        background-position: 50% 0;
+        background-repeat: no-repeat;
+        -webkit-background-size: initial;
+        -moz-background-size: initial;
+        -o-background-size: initial;
+        background-size: initial; 
+        background-attachment: initial; 
+        z-index: -1;    
     }
     .section-tab-menu li {
         margin-top: 10px;
-        padding: 6px;
+        padding: 15px;
         width: auto;
+        z-index: 0 !important;
+        outline: none !important;
     }
     .mobile_logo {
         margin-left: -15px;
@@ -912,11 +930,13 @@ footer a:hover, footer a:focus {
       left: 0 !important;
     }
     .image-cropped {
-      width: 65px;
-      height: 65px;
+      width: 100%;
   }
   .input-group-lg>.form-control {
     font-size: 14px;
+  }
+  .resto_details {
+    background: rgba(255,255,255,0.9);
   }
 }
 .network_menu_header {

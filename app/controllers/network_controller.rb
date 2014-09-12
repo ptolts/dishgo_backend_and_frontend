@@ -50,6 +50,8 @@ class NetworkController < ApplicationController
       @owner = true
     end
 
+    @direct_dish_id = params[:direct_dish_id]
+
     render 'restaurant'
   end
 

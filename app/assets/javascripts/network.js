@@ -257,6 +257,9 @@ ko.bindingHandlers.networkMaxHeight = {
                         maxHeight = elem.outerHeight();
                 });
                 $(element).children("."+value).css('min-height',maxHeight+'px');
+                if("direct_dish_id" in window && direct_dish_id.fullWidth){
+                    direct_dish_id.fullWidth(true);
+                }
             }, 0, element, value);
         }
     }    

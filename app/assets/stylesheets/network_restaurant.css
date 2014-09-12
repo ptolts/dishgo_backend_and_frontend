@@ -10,7 +10,7 @@
 }
 
 .cover-photo {
-    height: 400px !important;
+    height: 500px !important;
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -24,3 +24,9 @@
     left: 50%;
     top: 50%;
  }
+
+@media only screen and (max-width: 600px) {
+    .cover-photo {
+        height: 285px !important;
+    }
+}

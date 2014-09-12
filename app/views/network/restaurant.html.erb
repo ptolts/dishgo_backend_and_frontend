@@ -17,8 +17,10 @@
         <!-- ko if: isOwner -->
             <i class="fa fa-spin fa-refresh cover-photo-upload-spin" data-bind="visible: $root.restaurant().cover_photo() && !$root.restaurant().cover_photo().completed()"></i>
             <span class="cover-photo-upload">
-                <i class="fa fa-upload cover-photo-upload-icon" data-bind="css:{active:coverPhotoHover}"></i>
-                <input data-bind="upload_cover_photo: $root.restaurant" id="fileupload" type="file" name="files"  class="file_upload_input" accept="images/*" capture="camera">
+                <div style="position:relative">
+                    <i class="fa fa-upload cover-photo-upload-icon" data-bind="css:{active:coverPhotoHover}"></i>
+                    <input data-bind="upload_cover_photo: $root.restaurant" id="fileupload" type="file" name="files"  class="file_upload_input" accept="images/*" capture="camera">
+                </div>
             </span>               
         <!-- /ko -->
     </div>

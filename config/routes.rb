@@ -86,6 +86,7 @@ Foodcloud::Application.routes.draw do
     collection do
       get '/', to: "network#index"
       get '/restaurant/:id', to: "network#restaurant"
+      get '/restaurant/:id/:direct_dish_id', to: "network#restaurant"      
       get '/prize/:id', to: "network#prize"
       get '/promo_code/:id', to: "network#promo_code"
       get '/dish/:id', to: "network#dish"
