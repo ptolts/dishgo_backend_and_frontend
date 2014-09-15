@@ -136,6 +136,7 @@ class OnlinesiteController < ApplicationController
 
   def preview
     restaurant = Restaurant.where(preview_token:params[:id]).first
+    @restaurant = restaurant
 
     if !restaurant
       restaurant = Restaurant.where(name:/berges/i).first
