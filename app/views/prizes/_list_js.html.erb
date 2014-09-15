@@ -12,6 +12,7 @@
     var restaurant_name <%= @restaurant_name ? raw("='#{escape_javascript(@restaurant_name)}'") : nil %>;
 
     var winner_winner_chicken_dinner = ko.observable();
+    winner_winner_chicken_dinner.extend({ notify: 'always' });
     var winner_winner_share_for_a_dinner;
 
     function viewModel() {
@@ -60,21 +61,33 @@
             }
         });
 
+        self.showSharing = ko.computed({
+            read: function(){
+                if("app_version" in window){
+                    return app_version();
+                }
+            },
+            deferEvaluation: true,
+        })
+
         self.last_won_id;
         self.shareNetworkFB = function(){
-            FB.ui({
-                method: 'share',
-                display: 'async',
-                href: 'https://dishgo.io/app/network/prize/' + self.last_won_id,
-            }, function(response){});     
+            // FB.ui({
+            //     method: 'share',
+            //     display: 'async',
+            //     href: 'https://dishgo.io/app/network/prize/' + self.last_won_id,
+            // }, function(response){});
+            global_bridge.send({sharePromoCode:"https://www.facebook.com/sharer/sharer.php?u=https://dishgo.io/app/network/prize/" + self.selected_prize().id()});
+
         }  
 
         self.shareNetworkFBPromo = function(){         
-            FB.ui({
-                method: 'share',
-                display: 'async',
-                href: 'https://dishgo.io/app/network/promo_code/' + self.user().id(),
-            }, function(response){});
+            // FB.ui({
+            //     method: 'share',
+            //     display: 'async',
+            //     href: 'https://dishgo.io/app/network/promo_code/' + self.user().id(),
+            // }, function(response){});
+            global_bridge.send({sharePromoCode:"https://www.facebook.com/sharer/sharer.php?u=https://dishgo.io/app/network/promo_code/" + self.user().id()});            
         }
 
         self.fetch_prizes = function(){
@@ -142,7 +155,8 @@
             self.your_prize(null);
             self.selected_prize(null);
             self.last_won_id = id;
-            self.page("winner");
+            self.page("your_prizes");
+            // self.page("winner");
         }
         winner_winner_share_for_a_dinner = self.show_winner;              
         self.show_help = function(){
@@ -232,22 +246,19 @@
     }
 
     var global_bridge;
+    var app_version = ko.observable();
 
     connectWebViewJavascriptBridge(function(bridge) {
 
         global_bridge = bridge;
 
         bridge.init(function(message, responseCallback) {
-            // alert('Received message: ' + message)   
-            // if (responseCallback) {
-            //     responseCallback("Right back atcha")
-            // }
+
         });
-        // bridge.send('Hello from the javascript')
-        // bridge.send('Please respond to this', function responseCallback(responseData) {
-        //     console.log("Javascript got its response", responseData);
-        //     alert(responseData);
-        // })
+
+        bridge.send('app_version', function responseCallback(responseData) {
+            app_version(responseData);
+        });
     }) 
 
     $(function(){   

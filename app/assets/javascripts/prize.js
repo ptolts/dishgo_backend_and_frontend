@@ -161,7 +161,7 @@ function Prize(data) {
             self.spin(false);
             self.saved(true);
             if(data.won){
-              // alert(data.won);
+              alert(data.won);
               // if("winner_winner_chicken_dinner" in window){
               //   winner_winner_chicken_dinner(true);
               // }

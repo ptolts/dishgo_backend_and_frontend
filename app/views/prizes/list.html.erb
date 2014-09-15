@@ -135,7 +135,7 @@
                                 <h4 data-bind="localize">Coupon Code</h4>
                                 <p><span class="coupon_number" data-bind="text: number"> </span><span class="token" data-bind="text: prize_token"></span></p>
                                 <p class="fine" data-bind="localize">Present this to the merchant to redeem your reward.</p>
-                                <p class="fine" data-bind="localize">Cannot be combined with another offer or promotion.</p>                            
+                                <p class="fine" data-bind="localize">Cannot be combined with another offer or promotion.</p>
                             <!-- /ko -->
 
                             <!-- token will be available in.... -->
@@ -146,12 +146,15 @@
                                 <p class="fine" data-bind="localize">is only redeemable 24 hours after winning.</p>                            
                             <!-- /ko -->
 
-
                         <!-- /ko -->
                     <!-- /ko -->
                 </div>
             </div>         
         <!-- /ko -->             
+    </div>
+    <div class="fb_share_bottom" data-bind="with: selected_prize, visible: $root.showSharing && $root.your_prize()">
+        <p data-bind="localize">Share this on Facebook and you will receive five Dishcoins for every person who signs up with your promo code!</p>
+        <button class="btn btn-fb-network-share" data-bind="click: function(){ $root.shareNetworkFB(); }">Share On Facebook</button>
     </div>
 </div>
 
@@ -236,7 +239,7 @@
                     </div>
                 <!-- /ko -->
             </div>
-            <div class="col-xs-12 text-center" style="margin-top: 10px; margin-bottom: 10px">
+            <div class="col-xs-12 text-center" style="margin-top: 10px; margin-bottom: 10px" data-bind="visible: $root.showSharing">
                 <button class="btn btn-fb-network-share" data-bind="click: function(){ $root.shareNetworkFBPromo(); },localize">Share Your Promo Code on Facebook</button>
             </div>
         </div>     
