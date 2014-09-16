@@ -72,7 +72,7 @@ class Api::V1::TokensController  < ApplicationController
         Email.notify_admins(@user)
       rescue => msg
       end      
-      @user.create_x_dishcoins 1
+      @user.create_x_dishcoins 3
       sign_in @user
     end
 

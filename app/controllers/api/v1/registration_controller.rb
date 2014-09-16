@@ -23,7 +23,7 @@ class Api::V1::RegistrationController  < ApplicationController
     Email.delay.verify_from_app(@user)
     Email.delay.notify_admins(@user)
 
-    @user.create_x_dishcoins 1
+    @user.create_x_dishcoins 3
 
     if sign_in @user
       render :json => {:foodcloud_token=>@user.authentication_token,:dishgo_token=>@user.authentication_token}, :status=>201

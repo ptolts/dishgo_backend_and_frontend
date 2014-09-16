@@ -43,9 +43,21 @@
 								<div class="col-sm-10 col-sm-offset-1">
 									<a class="btn btn-none" style="width: 100%; background-color:#cf2f28; color:#fff;" href="/app/administration" data-bind="localize">Dashboard</a>
 								</div>
-							</div>							
+							</div>													
 		                </div>                
-		            </div>		                                    
+		            </div>
+
+		            <!-- if the user is logged in, show them this -->
+		            <div class="row" data-bind="visible: loggedIn" style="margin-top: 20px">
+		                <div class="col-xs-12 text-center">
+							<div class="row" style="margin-top:5px;">
+								<div class="col-sm-10 col-sm-offset-1">
+									<a data-method="delete" class="btn btn-none" style="width: 100%; background-color:#fff; color:#000;" href="/app/users/sign_out" data-bind="localize">Log Out</a>
+								</div>
+							</div>														
+		                </div>                
+		            </div>	
+
 	          	</div>
 	        </div>
 	    </div> 

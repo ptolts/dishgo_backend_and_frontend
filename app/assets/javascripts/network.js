@@ -196,7 +196,7 @@ ko.bindingHandlers.fullWidthToTop = {
             setTimeout(function(){
                 $('html,body').animate({scrollTop: $(element).offset().top - 10}, 800);
             }, 500);
-        }
+        } 
     }
 };
 
