@@ -2,9 +2,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 		<% if controller_name == "network" && action_name == "restaurant" %>
-			<%= render 'restaurant_meta' %>
+			<%= render 'network/restaurant_meta' %>
 		<% else %>
-			<%= render 'index_meta' %>
+			<%= render 'network/index_meta' %>
 		<% end %>
 		<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, minimum-scale=1, maximum-scale=1, minimal-ui" />
 		<meta name="fragment" content="!" />
@@ -78,17 +78,17 @@
 		</div>
 	<% end %>
 
-	<%= render 'network_sign_in' %>      	
+	<%= render 'network/network_sign_in' %>      	
 
 	<% if controller_name == "network" && action_name == "restaurant" %>
 		<%= render 'restaurant_network_header' %>
 	<% else %>
-		<%= render 'network_header' %>
+		<%= render 'network/network_header' %>
 	<% end %>   
 
-		<div data-bind="loggedInChecker: loggedIn">
+		<!-- ko loggedInChecker: loggedIn -->
 			<%= yield %>
-		</div>
+		<!-- /ko -->
     		
 		<footer>
 		    <div class="container">

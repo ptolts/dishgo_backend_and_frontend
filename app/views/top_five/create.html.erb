@@ -1,0 +1,105 @@
+<div class="container top_five_tool">
+	<div class="col-lg-6" data-bind="with: current_top_five">
+		<h3>Top Five List Details</h3>
+		<p>Write a catchy title and an introduction to your top five list</p>
+		<div class="row">
+			<div class="col-xs-12">
+				<h5>List Title:</h5>
+				<input data-bind="lValue: name, valueUpdate: 'afterkeydown'" class="form-control" title="Type the dish name into this box." placeholder="Add Dish Title"> 
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-12">
+				<h5>List Description:</h5>
+				<textarea rows="6" class="description form-control" placeholder="Add Dish Description" data-bind="lValue: description, valueUpdate: 'afterkeydown'"></textarea>
+			</div>
+		</div>
+		<div class="row" style="margin-top: 10px">
+			<div class="col-xs-12">
+				<button class="btn btn-search pull-right" data-bind="click: save">Save</button>
+			</div>
+		</div>		
+		<div class="row">
+			<h3>Top Five Dishes:</h3>
+			<%= render 'top_five/dish_search_results' %>
+		</div>		
+	</div>
+	<div class="col-lg-6">
+		<h3>Dish Search Tool</h3>
+		<p>Use this tool to find the dishes you'd like to include in your list.</p>		
+		<div class="row">
+			<div class="col-xs-6">
+				<h5>Dish Name:</h5>
+				<input data-bind="value: dish_search_term, valueUpdate: 'afterkeydown'" class="form-control" title="Type the dish name into this box." placeholder="Search Dish Title"> 
+			</div>
+			<div class="col-xs-6">
+				<h5>Restaurant Name:</h5>
+				<input data-bind="value: top_five_restaurant_search_term, valueUpdate: 'afterkeydown'" class="form-control" title="Type the dish name into this box." placeholder="Narrow by Restaurant"> 
+			</div>			
+		</div>
+					
+		<%= render 'top_five/dish_search_results' %>
+	</div>
+</div>
+
+
+<script>
+	var top_five = <%= raw(@top_five.serializable_hash({export_localized:true}).to_json) %>;
+
+    [
+        "<%= stylesheet_path 'network'%>",
+    ].forEach(function(src) {
+        var l = document.createElement('link'); 
+        l.rel = 'stylesheet';
+        l.href = src;
+        document.head.appendChild(l);
+    });
+
+    var scripts = [
+        "<%= javascript_path 'application' %>",
+        "<%= javascript_path 'menu_editor' %>",
+        "<%= javascript_path 'top_five_create_javascript' %>",
+        "<%= javascript_path 'social_share' %>",
+    ];
+    var src;
+    var script;
+    var pendingScripts = [];
+    var firstScript = document.scripts[0];
+
+    // Watch scripts load in IE
+    function stateChange() {
+      // Execute as many scripts in order as we can
+      var pendingScript;
+      while (pendingScripts[0] && pendingScripts[0].readyState == 'loaded') {
+        pendingScript = pendingScripts.shift();
+        // avoid future loading events from this script (eg, if src changes)
+        pendingScript.onreadystatechange = null;
+        // can't just appendChild, old IE bug if element isn't closed
+        firstScript.parentNode.insertBefore(pendingScript, firstScript);
+      }
+    }
+
+    // loop through our script urls
+    while (src = scripts.shift()) {
+      if ('async' in firstScript) { // modern browsers
+        script = document.createElement('script');
+        script.async = false;
+        script.src = src;
+        document.head.appendChild(script);
+      }
+      else if (firstScript.readyState) { // IE<10
+        // create a script and add it to our todo pile
+        script = document.createElement('script');
+        pendingScripts.push(script);
+        // listen for state changes
+        script.onreadystatechange = stateChange;
+        // must set src AFTER adding onreadystatechange listener
+        // else we’ll miss the loaded event for cached scripts
+        script.src = src;
+      }
+      else { // fall back to defer
+        document.write('<script src="' + src + '" defer></'+'script>');
+      }
+    }           
+
+</script>  

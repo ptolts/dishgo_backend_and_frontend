@@ -5,6 +5,7 @@
 *= require network_menu_base
 *= require network_odometer
 *= require network_restaurant
+*= require top_five
 *= require_self
 */
 

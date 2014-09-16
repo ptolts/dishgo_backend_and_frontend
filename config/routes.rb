@@ -68,7 +68,17 @@ Foodcloud::Application.routes.draw do
       post '/destroy', to: "prizes#destroy"
       post '/promo_code', to: "prizes#promo_code"
     end
-  end     
+  end
+
+  resources :top_five do
+    collection do
+      get '/', to: "top_five#index"
+      get '/:id', to: "top_five#top"
+      get '/create', to: "top_five#create"
+      get '/create/:id', to: "top_five#create"
+      post '/save', to: "top_five#save"
+    end
+  end       
 
   resources :jobs do
     collection do

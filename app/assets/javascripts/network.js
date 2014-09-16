@@ -299,6 +299,8 @@ ko.bindingHandlers.loggedInChecker = {
         }
     },
 };
+ko.virtualElements.allowedBindings.loggedInChecker = true;
+
 
 var global_restaurant_id;
 var lang;

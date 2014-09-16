@@ -1,0 +1,90 @@
+<div class="container top_five_tool">
+	<div class="col-lg-8">
+		<div class="row">
+			<div class="col-xs-12">
+				<h3>Popular Top Fives</h3>
+			</div>
+		</div>	
+	</div>
+	<div class="col-lg-4">
+		<div class="row">
+			<div class="col-xs-12">
+				<h3>Your Top Fives</h3>
+			</div>
+		</div>
+		<!-- ko foreach: top_fives -->
+			<div class="row">
+				<div class="col-xs-12">
+					<a data-bind="attr:{href:'/app/top_five/create/' + $data.id()}"><h4 data-bind="lText: name"></h4></a>
+				</div>
+			</div>
+		<!-- /ko -->
+		<div class="row">
+			<div class="col-xs-12">
+				<a class="btn btn-search" href="/app/top_five/create">Create New Top Five</a>
+			</div>
+		</div>		
+	</div>
+</div>
+
+
+<script>
+	var top_fives = <%= @top_fives ? raw(@top_fives.to_json) : [] %>;
+
+    [
+        "<%= stylesheet_path 'network'%>",
+    ].forEach(function(src) {
+        var l = document.createElement('link'); 
+        l.rel = 'stylesheet';
+        l.href = src;
+        document.head.appendChild(l);
+    });
+
+    var scripts = [
+        "<%= javascript_path 'application' %>",
+        "<%= javascript_path 'menu_editor' %>",
+        "<%= javascript_path 'top_five_list_javascript' %>",
+        "<%= javascript_path 'social_share' %>",
+    ];
+    var src;
+    var script;
+    var pendingScripts = [];
+    var firstScript = document.scripts[0];
+
+    // Watch scripts load in IE
+    function stateChange() {
+      // Execute as many scripts in order as we can
+      var pendingScript;
+      while (pendingScripts[0] && pendingScripts[0].readyState == 'loaded') {
+        pendingScript = pendingScripts.shift();
+        // avoid future loading events from this script (eg, if src changes)
+        pendingScript.onreadystatechange = null;
+        // can't just appendChild, old IE bug if element isn't closed
+        firstScript.parentNode.insertBefore(pendingScript, firstScript);
+      }
+    }
+
+    // loop through our script urls
+    while (src = scripts.shift()) {
+      if ('async' in firstScript) { // modern browsers
+        script = document.createElement('script');
+        script.async = false;
+        script.src = src;
+        document.head.appendChild(script);
+      }
+      else if (firstScript.readyState) { // IE<10
+        // create a script and add it to our todo pile
+        script = document.createElement('script');
+        pendingScripts.push(script);
+        // listen for state changes
+        script.onreadystatechange = stateChange;
+        // must set src AFTER adding onreadystatechange listener
+        // else we’ll miss the loaded event for cached scripts
+        script.src = src;
+      }
+      else { // fall back to defer
+        document.write('<script src="' + src + '" defer></'+'script>');
+      }
+    }           
+
+</script>  

@@ -1,0 +1,28 @@
+.top_five_tool {
+	background: rgba(255,255,255,0.9);
+	margin-top:25px;
+	margin-bottom:25px;
+}
+.top_five_dish_container {
+	position: relative;
+	height: 200px;
+	overflow: hidden;
+	color: #000;
+	border: solid 1px #e9e9e9;	
+}
+
+.dish_name_bar {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	padding: 5px;
+	width: 100%;
+	color: #fff;
+	font-size: 18px;
+	line-height: 24px;
+	background-color: rgba(0,0,0,0.8);
+}
+
+.top_five_border {
+	border: 2px dashed #dcdcdc;
+}

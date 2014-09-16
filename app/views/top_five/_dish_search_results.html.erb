@@ -1,0 +1,22 @@
+	<div class="search_results top_five_border">
+		<div class="row">
+		<!-- ko foreach: dishes -->
+			<div class="col-md-6 col-xs-12">
+				<div class="top_five_dish_container coo_hover" style="border:none; margin-bottom:10px;">
+					<span data-bind="click: function(){ $data.push() }" class="full_dish_link"></span>
+					<div class="dish_title_bar">
+						<span class="restaurant_name">
+							<!-- ko text: restaurant_name --><!-- /ko -->
+						</span>
+					</div>					
+					<div class="dish-picture imageCroppedFull" data-bind="backgroundImage">						
+
+					</div>
+					<div class="dish_name_bar">
+						<span data-bind="lText: name"></span>
+					</div>	
+				</div>
+			</div>
+		<!-- /ko -->	
+		</div>
+	</div>
