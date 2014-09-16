@@ -44,7 +44,7 @@
 
 
 <script>
-	var top_five = <%= raw(@top_five.serializable_hash({export_localized:true}).to_json) %>;
+	var top_five = <%= @top_five ? raw(@top_five.serializable_hash({export_localized:true}).to_json) : {} %>;
 
     [
         "<%= stylesheet_path 'network'%>",

@@ -7,7 +7,7 @@ class TopFiveController < ApplicationController
   end
 
   def create
-    @top_five = TopFive.where(id:params[:id]).first || TopFive.new
+    @top_five = TopFive.where(id:params[:id]).first || nil
     render 'create'
   end
 
