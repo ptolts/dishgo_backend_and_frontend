@@ -1,11 +1,33 @@
+/*.pop_up_menu_dish_rating {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	padding: 5px;
+	text-align: center;
+}*/
 .top_dish_rating_container {
 	margin-left: auto;
 	margin-right: auto;
-	width: 320px;
+	padding: 15px 0;
+}
+.top_dish_rating_container p {
+	font-size: 16px;
+}
+.top_dish_rating_container textarea {
+	margin: auto;
+	text-align: left;
+	display: block;
+	height: 100px;
+}
+.top_dish_rating_container .btn-rewards {
+	background-color: #fff;
+	padding: 6px 12px;
+	font-size: 16px;
+	margin-top: 20px;
 }
 .top_dish_rating {
 	z-index: 10;
-
 }
 .top_five_tool {
 	background: rgba(255,255,255,1);
@@ -41,16 +63,17 @@
 	text-align: center;
 	color: #565a5c;
 }
-.dish-description .restaurant_name,
-.dish-description .rank {
-	font-size: 18px;
-	color: #565a5c !important;
+.top_dish_rating_container .restaurant_name,
+.top_dish_rating_container .rank {
+	font-size: 22px;
+	color: #cf2f28 !important;
 }
-.dish-description .dish_title {
+.top_dish_rating_container .dish_title {
 	display: block;
-	margin-top: 10px;
+	color: #565a5c;
+	font-size: 22px;
 }
-.dish-description p {
+.top_dish_rating_container p {
 	color: #82898d !important;
 }
 .main-bar {
