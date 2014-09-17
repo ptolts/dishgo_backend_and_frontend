@@ -145,7 +145,7 @@ class PrizesController < ApplicationController
     end
 
     #If the user hasn't yet bid on any prizes, let them win right away.
-    if prize.amount <= 10.50 and user.individual_prizes.count == 0
+    if prize.amount <= 15 and user.individual_prizes.count == 0
       user.individual_prizes << individual_prize
       user.save(validate: false)
       dc = user.metal_dishcoins.first
