@@ -7,23 +7,19 @@
 			</div>
 		</div>	
 	</div>
+    <% @top_five.dish.each do |dish| %>    
 	<div class="col-lg-8">
-		<div class="row">
-			<% @top_five.dish.each do |dish| %>
-				<div class="col-xs-12">
-					<div class="top_dish_container">
-						<a href="/app/network/restaurant/<%= dish.restaurant.id %>" class="full_dish_link"></a>
-						<div class="dish-picture imageCroppedFull" style="background-image: url(<%= dish.img_src %>); border-radius: 0;">							
-							<div class="dish-description">
-								<span><%= first_non_empty(dish.name_translations) %></span>
-								<p><%= first_non_empty_truncated(dish.description_translations) %></p>
-							</div>
-						</div>
-					</div>
+		<div class="top_dish_container">
+			<a href="/app/network/restaurant/<%= dish.restaurant.id %>" class="full_dish_link"></a>
+			<div class="dish-picture imageCroppedFull" style="background-image: url(<%= dish.img_src %>); border-radius: 0;">							
+				<div class="dish-description">
+					<span><%= first_non_empty(dish.name_translations) %></span>
+					<p><%= first_non_empty_truncated(dish.description_translations) %></p>
 				</div>
-			<% end %>		
+			</div>
 		</div>		
 	</div>
+    <% end %>       
 </div>
 
 

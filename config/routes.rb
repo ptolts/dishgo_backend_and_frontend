@@ -73,8 +73,8 @@ Foodcloud::Application.routes.draw do
   resources :top_five do
     collection do
       get '/', to: "top_five#index"
+      get '/create/:id', to: "top_five#create"      
       get '/create', to: "top_five#create"
-      get '/create/:id', to: "top_five#create"
       post '/save', to: "top_five#save"      
       get '/:id', to: "top_five#top"      
     end
