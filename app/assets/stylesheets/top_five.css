@@ -1,7 +1,5 @@
 .top_five_tool {
-	background: rgba(255,255,255,0.9);
-	margin-top:25px;
-	margin-bottom:25px;
+	background: rgba(255,255,255,1);
 }
 .top_five_dish_container {
 	position: relative;
@@ -25,4 +23,43 @@
 
 .top_five_border {
 	border: 2px dashed #dcdcdc;
+}
+.top_five_description {
+	font-size: 16px;
+	color: #82898d;
+}
+.top_five_title {
+	text-align: center;
+	color: #565a5c;
+}
+.dish-description .restaurant_name,
+.dish-description .rank {
+	font-size: 18px;
+	color: #565a5c !important;
+}
+.dish-description .dish_title {
+	display: block;
+	margin-top: 10px;
+}
+.dish-description p {
+	color: #82898d !important;
+}
+.main-bar {
+	border-right: 1px solid #ccc;
+}
+.sidebar h2 {
+	text-transform: uppercase;
+	color: #cf2f28;
+}
+.sidebar .trending {
+	border-bottom: 1px solid #ccc;
+	padding: 0 15px 15px;
+}
+.sidebar_dish_link {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 10;
 }
