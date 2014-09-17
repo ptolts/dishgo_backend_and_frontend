@@ -11,6 +11,7 @@ class TopFive
 	field :beautiful_url, type: String
 
 	has_and_belongs_to_many :dish, class_name: "Dish", inverse_of: nil
+	has_many :dishcoins, class_name: "Dishcoin", inverse_of: :top_five
 	belongs_to :user
 
 	def number_of_dishes

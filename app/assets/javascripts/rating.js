@@ -1,17 +1,20 @@
 function Rating(data) {
     data = data || {};
     var self = this;
-    self.id = data.id ? data.id : null;
+    self.id = ko.observable(data.id ? data.id : null);
     self.review = ko.observable(data.review ? data.review : "");
     self.rating = ko.observable(data.rating ? data.rating : 0);
-    self.rate = function(){
+    self.rate = function(dish_id){
         $.ajax({
             type: "POST",
             url: "/app/api/v1/dish/set_rating",
             data: {
-                data: ko.toJSON(self),
+                dish_id: dish_id,
+                rating: self.rating(),
+                review: self.review(),
             },
-            success: function(data, textStatus, jqXHR){                        
+            success: function(data, textStatus, jqXHR){
+
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) {                                           
             },

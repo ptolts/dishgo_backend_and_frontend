@@ -3,6 +3,46 @@
 *= require_self
 */
 
+ko.bindingHandlers.writableStarRatingTopFive = {
+    init: function(element, valueAccessor, allBindingsAccessor, viewModel, bindingContext) {
+        var value = valueAccessor();
+        $(element).addClass("starRating");
+        for (var i = 0; i < value(); i++)
+           $("<i class='fa fa-star chosen'>").appendTo(element);
+        for (var i = 0; i < (5-value()); i++)
+           $("<i class='fa fa-star'>").appendTo(element);       
+       
+        // Handle mouse events on the stars
+        $("i", element).each(function(index) {
+            $(this).hover(
+                function() { 
+                    $(this).prevAll().add(this).addClass("hoverChosen");
+                    $(this).nextAll().addClass("hoverLeftOver");
+                }, 
+                function() { 
+                    $(this).prevAll().add(this).removeClass("hoverChosen");
+                    $(this).nextAll().removeClass("hoverLeftOver");
+                }                
+            ).click(function() { 
+                if(bindingContext["$loggedin"]()){
+                    value(index+1);
+                }
+            });
+        });            
+    },
+    update: function(element, valueAccessor) {
+        // Give the first x stars the "chosen" class, where x <= rating
+        var observable = valueAccessor()();
+        $("i", element).each(function(index) {
+            if(index >= observable){
+                $(this).addClass("left_over");
+            } else {
+                $(this).removeClass("left_over");
+            }
+        });
+    }    
+};
+
 ko.bindingHandlers.slideVisible = {
     update: function (element, valueAccessor, allBindings, viewModel, bindingContext) {
         var value = valueAccessor();

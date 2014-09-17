@@ -7,9 +7,11 @@ class Dishcoin
   store_in collection: "dishcoins", database: "dishgo"
 
   field :spent, type: Boolean, default: false
+  field :ip, type: String
 
   belongs_to :image, class_name: "Image", index: true
   belongs_to :user, class_name: "User", inverse_of: :metal_dishcoins, index: true
+  belongs_to :top_five, class_name: "TopFive", inverse_of: :dishcoins, index: true
   belongs_to :rating, class_name: "Rating", index: true
   belongs_to :individual_prize, class_name: "IndividualPrize", index: true
 

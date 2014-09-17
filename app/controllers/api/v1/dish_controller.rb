@@ -16,6 +16,10 @@ class Api::V1::DishController < ApplicationController
       rating.restaurant = dish.restaurant
       user.ratings << rating
     end
+    if top_five_id = params[:top_five_id] and top_five = TopFive.where(id:top_five_id).first
+      dishcoin = rating.dishcoin
+      top_five.dishcoins << dishcoin
+    end
     rating.rating = params[:rating]
     rating.review = params[:review]
     rating.save            
