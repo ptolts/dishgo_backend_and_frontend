@@ -294,6 +294,7 @@
             self.id = data._id;
             self.font_id = data.font_id ? data.font_id : "";
             self.user_id = data.user_id ? data.user_id : "";
+            self.beautiful_url = data.beautiful_url ? data.beautiful_url : data._id;
 
             self.does_delivery = ko.observable(data.does_delivery ? data.does_delivery : false);
 

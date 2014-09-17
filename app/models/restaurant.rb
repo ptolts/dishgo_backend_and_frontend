@@ -44,6 +44,7 @@ class Restaurant
   field :does_delivery, type: Boolean, default: false
 
   field :rating, type: Float
+  field :beautiful_url, type: String
 
   field :hours, type: Hash 
 
@@ -111,6 +112,7 @@ class Restaurant
   scope :only_with_menu, -> { where(with_menu:true) }
 
   before_save :set_with_menu
+  before_save :beautify_url  
 
   def set_with_menu
     if !with_menu
@@ -278,6 +280,25 @@ class Restaurant
 
   #   self.save
   # end
+
+  def beautify_url
+    return if self.beautiful_url.to_s.length > 0
+    string = []
+      begin
+          beauty = self.name.to_s.gsub(/[^[:alpha:] ]/,'').split(" ").join("_").downcase
+          
+          if !string.empty?
+            beauty = beauty + "_" + string.join("_").downcase
+          end
+
+          if string.empty?
+            string << self.city.to_s
+          else
+            string << (65 + rand(26)).chr
+          end
+      end while Restaurant.where(beautiful_url:beauty).count > 0
+      self.beautiful_url = beauty
+  end  
 
   def menu_to_json
     icon_list = self.icons.collect{|e| e.individual_option_id}   

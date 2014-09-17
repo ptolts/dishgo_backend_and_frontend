@@ -142,6 +142,9 @@ class User
     if options[:restaurant]
       hash[:restaurant_id] = self.owns_restaurants.id if self.owns_restaurants
     end
+    if top_five_id = options[:top_five_dishcoins]
+      hash[:top_five_dishcoins] = self.metal_dishcoins.unscoped.where(top_five_id:top_five_id).count
+    end
     hash[:dishcoins] = self.metal_dishcoins.count  
     hash
   end  

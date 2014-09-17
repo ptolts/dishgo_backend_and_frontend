@@ -80,8 +80,36 @@ function TopFiveModel(){
 	self.dishes = ko.observableArray([]);
 	self.dish_search_term = ko.observable("");
 	self.top_five_restaurant_search_term = ko.observable();
-	self.current_top_five = ko.observable(new TopFive(top_five));  
+	self.current_top_five = ko.observable(new TopFive(top_five)); 
 
+    self.updateUserMonitor.dispose();
+    self.updateUserMonitor = ko.computed({
+        read: function(){
+            if(updateUser()){
+                $.ajax({
+                    type: "POST",
+                    data: {
+                        top_five_id: self.current_top_five().id(),
+                    },
+                    url: "/app/top_five/fetch_user",
+                    success: function(data, textStatus, jqXHR){
+                        self.user(new User(data));
+                    },
+                    error: function(XMLHttpRequest, textStatus, errorThrown) { 
+
+                    },
+                    dataType: "json"
+                });
+            }
+        }
+    });
+
+    self.shareTopFiveFB = function(){
+        FB.ui({
+          method: 'share',
+          href: 'https://dishgo.io/top_five/' + top_five_id + "/" + user_id,
+        }, function(response){});     
+    }    
 }
 
 editing_mode = false;   

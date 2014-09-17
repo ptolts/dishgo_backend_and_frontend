@@ -12,9 +12,10 @@ function Rating(data) {
                 dish_id: dish_id,
                 rating: self.rating(),
                 review: self.review(),
+                top_five_id: top_five_id,
             },
             success: function(data, textStatus, jqXHR){
-
+                self.id(data.id);
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) {                                           
             },

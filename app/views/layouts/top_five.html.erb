@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<title><%= @top_five.name %></title>
+		<meta name="description" content="<%= @top_five.name %>. Vote for the best and win big.">
+		<meta property="fb:app_id"          content="886479778048507" /> 	
+		<meta property="og:url"             content="https://dishgo.io/top_five/<%= @top_five.beautiful_url %>" /> 
+		<meta property="og:title"           content="<%= @top_five.name %>" /> 
+		<meta property="og:image"           content="<%= @top_five.best_pic %>" />
+		<meta property="og:type"   content="website" />
+		<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, minimum-scale=1, maximum-scale=1, minimal-ui" />
+		<meta name="fragment" content="!" />
+		<meta name="format-detection" content="telephone=no">
+  		<meta name="apple-itunes-app" content="app-id=879213213">
+  		<link href='https://fonts.googleapis.com/css?family=Oswald:400,700,300' rel='stylesheet' type='text/css'>
+  		<link href='https://fonts.googleapis.com/css?family=Lato:300,400,700,400italic' rel='stylesheet' type='text/css'>
+		<%= csrf_meta_tags %>
+		<!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge'><![endif]-->
+
+		<!--[if lt IE 9]>
+			<script src="https://css3-mediaqueries-js.googlecode.com/files/css3-mediaqueries.js"></script>
+			<script src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]-->	
+	</head>
+    <body>
+    	<div id="network_background"></div>
+		<script>
+			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+			})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+			ga('create', 'UA-48865823-3', 'auto');
+			ga('require', 'displayfeatures');
+			ga('send', 'pageview');
+
+		      window.fbAsyncInit = function() {
+		        FB.init({
+		          appId      : <%= Rails.env.development? ? '886480311381787' : '886479778048507' %>,
+		          xfbml      : true,
+		          version    : 'v2.0'
+		        });
+		      };
+
+		      (function(d, s, id){
+		         var js, fjs = d.getElementsByTagName(s)[0];
+		         if (d.getElementById(id)) {return;}
+		         js = d.createElement(s); js.id = id;
+		         js.src = "//connect.facebook.net/en_US/sdk.js";
+		         fjs.parentNode.insertBefore(js, fjs);
+		       }(document, 'script', 'facebook-jssdk'));
+
+				var user_data = <%= current_user ? raw(current_user.serializable_hash({restaurant:true,top_five_dishcoins:@top_five.id}).to_json) : {}%>;
+				var isOwner = <%= @owner ? @owner : false %>;
+				var direct_dish_id = <%= @direct_dish_id ? raw("\"#{@direct_dish_id}\"") : false %>;
+
+		</script> 		 	
+
+	<% if controller_name == "network" && action_name == "restaurant" %>
+		<style type="text/css">
+			<%= raw(Rails.application.assets.find_asset('network_loading').to_s) %>
+		</style>		
+		<div data-bind="fadeVisible: false">
+			<div class="loading-bg"></div>
+			<div class="center">
+				<div class="loading">
+					<img src="https://d5ca3b0520fac45026ad-6caa6fe89e7dac3eaf12230f0985b957.ssl.cf5.rackcdn.com/DishGo_Logo_Network_Beta.png" class="loading-logo">
+					<div class="centered bouncywrap">
+						<div class="dotcon dc1">
+							<div class="dot"></div>
+						</div>
+						<div class="dotcon dc2">
+							<div class="dot"></div>
+						</div>
+						<div class="dotcon dc3">
+							<div class="dot"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	<% end %>
+
+	<%= render 'network/network_sign_in' %>      	
+
+	<% if controller_name == "network" && action_name == "restaurant" %>
+		<%= render 'restaurant_network_header' %>
+	<% else %>
+		<%= render 'network/network_header' %>
+	<% end %>   
+
+		<!-- ko loggedInChecker: loggedIn -->
+			<%= yield %>
+		<!-- /ko -->
+    		
+		<footer>
+		    <div class="container">
+		        <div class="row">
+		            <div class="col-sm-20">
+		                <a class="twocolors" href="https://dishgo.io/business/index.html"><span class="white">Dish</span><span class="red">Go </span><span class="white" data-bind="localize">App</a>
+		            </div>
+		            <div class="col-sm-20">
+		                <a href="/app/letsdishgo" data-bind="localize">Get Listed</a>
+		            </div>
+		            <div class="col-sm-20">
+		                <a href="https://dishgo.io/business/restaurant-website-builder.html" data-bind="localize">Web Design</a>
+		            </div>
+		            <div class="col-sm-20">
+		                <a href="https://dishgo.io/blog/" data-bind="localize">Blog</a>
+		            </div>
+		            <div class="col-sm-20">
+		                <a href="https://dishgo.io" data-bind="localize">Sign Up</a>
+		            </div>
+		        </div>	
+		        <div class="row">
+		            <div class="col-sm-6 col-sm-offset-3">
+		                <div class="row social_media">
+		                    <div class="col-xs-4">
+		                        <a href="https://www.facebook.com/DishGoInc" target="_data"><i class="fa fa-facebook"></i></a>
+		                    </div>
+		                    <div class="col-xs-4">
+		                        <a href="https://www.twitter.com/dishgo" target="_data"><i class="fa fa-twitter"></i></a>
+		                    </div>
+		                    <div class="col-xs-4">
+		                        <a href="https://instagram.com/dishgo" target="_data"><i class="fa fa-instagram"></i></a>
+		                    </div>
+		                </div>
+		            </div>
+		        </div>
+		    </div>
+		    <div class="letsdishgo-bottom">
+		        <ul>
+		            <li class="first">
+		                <a href="https://dishgo.io/privacy-policy.html" target="_blank">Legal</a>
+		            </li>
+		            <li>
+		                <a href="mailto:info@dishgo.io" data-bind="localize">Contact Us</a>
+		            </li>
+		            <li class="last">
+		                <a href="https://dishgo.io">©DishGo</a>
+		            </li>
+		        </ul>
+		    </div>
+		</footer>    							    	
+    </body>
+</html>

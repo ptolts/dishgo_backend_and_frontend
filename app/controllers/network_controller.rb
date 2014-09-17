@@ -13,8 +13,7 @@ class NetworkController < ApplicationController
   end
 
   def restaurant
-    restaurant = Restaurant.find(params[:id]) if params[:id]
-    restaurant ||= Restaurant.where(name:/cunningham/i).first
+    restaurant = Restaurant.where(beautiful_url:params[:id]) || Restaurant.find(params[:id])
     @restaurant = restaurant
 
     @lat = restaurant.lat
