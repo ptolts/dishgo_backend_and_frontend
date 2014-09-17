@@ -3,6 +3,37 @@
 *= require_self
 */
 
+ko.bindingHandlers.slideVisible = {
+    update: function (element, valueAccessor, allBindings, viewModel, bindingContext) {
+        var value = valueAccessor();
+        var jElement = $(element);
+        if(value && !jElement.is(":visible")){
+            jElement.toggle( "slide" );
+        }
+
+        if(!value && jElement.is(":visible")){
+            jElement.toggle( "slide" );
+        }
+    }
+};
+
+ko.bindingHandlers.with_dish = {
+    init: function(element, valueAccessor, allBindings, viewModel, bindingContext) {
+    	var id = valueAccessor();
+    	var dish_array = bindingContext["$parent"].current_top_five().dishes();
+		var model = _.find(dish_array, function(item) {
+		    return item.id() == id; 
+		});
+
+        var childBindingContext = bindingContext.createChildContext(model);
+        ko.applyBindingsToDescendants(childBindingContext, element);
+ 
+        // Also tell KO *not* to bind the descendants itself, otherwise they will be bound twice
+        return { controlsDescendantBindings: true };		
+
+    }
+};
+
 function TopFiveModel(){
 	var self = this;
 	NetworkModel.apply(self);
