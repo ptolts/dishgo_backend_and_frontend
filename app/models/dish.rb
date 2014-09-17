@@ -313,7 +313,10 @@ class Dish
     if options[:export_localized]
       hash[:name] = self.name_translations
       hash[:description] = self.description_translations
-    end    
+    end
+    if user = options[:include_reviews] 
+      hash[:ratingObject] = Rating.where(dish_id:self.id,user_id:user.id).first
+    end
     return hash
   end  
 

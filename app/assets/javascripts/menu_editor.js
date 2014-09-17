@@ -9,6 +9,7 @@
 *= require prize.js
 *= require strftime.js
 *= require section.js
+*= require rating.js
 *= require dish.js
 *= require option.js
 *= require individual_option.js

@@ -23,7 +23,7 @@ class TopFive
 		if options[:export_localized]
 			hash[:name] = self.name_translations
 			hash[:description] = self.description_translations
-			hash[:dishes] = self.dish.collect{|e| e.serializable_hash({export_localized:true})}
+			hash[:dishes] = self.dish.collect{|e| e.serializable_hash({export_localized:true, include_reviews:options[:include_reviews]})}
 		end    
 		return hash
 	end

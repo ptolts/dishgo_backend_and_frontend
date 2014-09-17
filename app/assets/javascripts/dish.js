@@ -54,7 +54,8 @@ function Dish(data, topmodel) {
     self.images = ko.observableArray([]);
     self.sizeSelectedOptionValue = ko.observable();
     self.modalVisible = ko.observable(false);
-    self.fullWidth = ko.observable(false);
+    self.fullWidth = ko.observable(false); 
+    self.ratingObject = ko.observable(data.ratingObject ? new Rating(data.ratingObject) : new Rating());
 
     self.printJson = function(){
         console.log(ko.toJSON(self));

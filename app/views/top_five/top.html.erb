@@ -9,11 +9,11 @@
             			<span class="full_dish_link" data-bind="click: function(){ $data.fullWidth(true); }, visible: !fullWidth()"></span>
             			<div class="dish-picture imageCroppedFull" style="background-image: url(<%= dish.img_src_orig %>); border-radius: 0;">
 
-                            <div class="top_dish_rating_container" data-bind="visible: fullWidth" style="display: none">
+                            <div class="top_dish_rating_container" data-bind="visible: fullWidth, with: ratingObject" style="display: none">
                                 <div class="pop_up_menu_dish_rating" data-bind="writableStarRating: rating"></div>
                                 <h5>Review:</h5>
-                                <textarea rows="6" class="description form-control" placeholder="Write your review here." data-bind="value: description, valueUpdate: 'afterkeydown'"></textarea>
-                                <button class="btn btn-search">Submit</button>
+                                <textarea rows="6" class="description form-control" placeholder="Write your review here." data-bind="value: review, valueUpdate: 'afterkeydown'"></textarea>
+                                <button class="btn btn-search" data-bind="click: function(){ rate(); }">Submit</button>
                             </div>
 
             				<div class="dish-description" data-bind="slideVisible: !fullWidth()">
@@ -58,7 +58,7 @@
 
 
 <script>
-	var top_five = <%= raw(@top_five.serializable_hash({export_localized:true}).to_json) %>;
+	var top_five = <%= raw(@top_five.serializable_hash({export_localized:true,include_reviews:current_user}).to_json) %>;
     [
         "<%= stylesheet_path 'network'%>",
     ].forEach(function(src) {
