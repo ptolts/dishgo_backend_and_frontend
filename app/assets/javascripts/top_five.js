@@ -17,7 +17,11 @@ TopFive.prototype.fastJSON = function(){
                 if(property == "dishes"){
                     fast[property] = _.collect(result,function(res){ return res.id() });
                     continue;
-                }                
+                }
+                if(property == "prizes"){
+                    fast[property] = _.collect(result,function(res){ return res.id() });
+                    continue;
+                }                              
                 if(Array.isArray(result)){
                     continue;
                 }
