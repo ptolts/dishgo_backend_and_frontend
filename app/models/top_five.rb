@@ -28,14 +28,15 @@ class TopFive
 		if options[:export_localized]
 			hash[:name] = self.name_translations
 			hash[:description] = self.description_translations
-			hash[:dishes] = self.dish.collect{|e| e.serializable_hash({export_localized:true, include_reviews:options[:include_reviews]})}
+			Rails.logger.warn "LOADING DISH ---------"
+			hash[:dishes] = self.dish.top_five.collect{|e| e.serializable_hash({export_localized:true, include_reviews:options[:include_reviews]})}
 			hash[:prizes] = self.prizes.collect{|e| e.serializable_hash({export_localized:true})}
 		end    
 		return hash
 	end
 
 	def best_pic
-		pic = self.dish.sort{|e| e.rating}.first.img_src_orig
+		pic = self.dish.top_five.sort{|e| e.rating}.first.img_src_orig
 		if pic
 			return pic
 		else

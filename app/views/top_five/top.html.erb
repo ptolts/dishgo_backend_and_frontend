@@ -5,7 +5,7 @@
             	<h2 class="top_five_title" data-bind="lText: name"><%= first_non_empty(@top_five.name_translations) %></h2>
             	<p class="top_five_description" data-bind="lText: description"><%= first_non_empty(@top_five.description_translations) %></p>
             </div>                
-            <% @top_five.dish.each do |dish| %>
+            <% @top_five.dish.top_five.each do |dish| %>
                 <div class="top_dish_container" data-bind="with_dish: '<%= dish.id %>'">
                     <div class="col-sm-4" style="padding:0 0 0 30px;">
                         <div class="top_dish_rating_container">

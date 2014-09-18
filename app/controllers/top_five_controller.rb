@@ -13,6 +13,7 @@ class TopFiveController < ApplicationController
 
   def top
     @top_five = TopFive.where(beautiful_url:params[:id]).first || TopFive.find(params[:id])
+    Rails.logger.warn "TopFive Loaded ---------"
     #create dishcoin for the referral
     if user_id = params[:user_id] and current_user.id.to_s != user_id.to_s and Dishcoin.where(top_five_id:@top_five.id,ip:request.ip).count == 0
       Rails.logger.warn "#{user_id} != #{current_user.id} -> #{current_user.id != user_id}"

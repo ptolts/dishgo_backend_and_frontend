@@ -19,6 +19,7 @@ class Dish
   field :restaurant_name, type: String
 
   field :rating, type: Integer, default: 0
+  field :contest_rating, type: Integer, default: 0
   # belongs_to :subsection, index: true
   belongs_to :restaurant, index: true
   belongs_to :odesk, index: true
@@ -41,6 +42,7 @@ class Dish
   # default_scope ->{ where(:name.nin => ["", nil]) }
   scope :draft, -> {asc(:draft_position)}   
   scope :pub, -> {asc(:position)}  
+  scope :top_five, -> {desc(:contest_rating)}  
   scope :dish_is_active, -> { ne(search_terms:nil).desc(:rating) }  
 
   index({ _id:1 }, { unique: true, name:"id_index" })
@@ -152,6 +154,7 @@ class Dish
     self.ratings.each do |rating|
       total += rating.rating.to_f
     end
+    self.contest_rating = total
     total = total / self.ratings.size
     self.rating = total.round
     self.save
