@@ -6,6 +6,22 @@
 	padding: 5px;
 	text-align: center;
 }*/
+
+.top_five_header .container {
+    height: 100%;
+    position: relative;
+    color: white;
+}
+.top_five_header .countdown {
+    position: absolute;
+    top:10px;
+    right: 10px;
+}
+.top_five_header .top_five_title {
+    position: absolute;
+    bottom:10px;
+    left: 10px; 
+}
 .top_dish_rating_container {
 	margin-left: auto;
 	margin-right: auto;
@@ -398,4 +414,16 @@
     border-radius: 4px;
     margin-bottom: 10px;
     display: inline-block;
+}
+@media only screen and (max-width: 600px) {
+    .top_five_header {
+        background-position: 50% 0 !important;
+        background-repeat: no-repeat !important;
+        -webkit-background-size: initial !important;
+        -moz-background-size: initial !important;
+        -o-background-size: initial !important;
+        background-size: initial !important; 
+        background-attachment: initial !important; 
+        z-index: -1;    
+    }
 }
