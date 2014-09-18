@@ -58,10 +58,11 @@
 .top_five_description {
 	font-size: 16px;
 	color: #82898d;
+	margin: 20px 0;
 }
 .top_five_title {
-	text-align: center;
-	color: #565a5c;
+	color: #fff;
+	margin-top: 300px;
 }
 .top_dish_rating_container .restaurant_name,
 .top_dish_rating_container .rank {
@@ -102,4 +103,312 @@
 	font-family: 'lato' sans-serif;
 	color: #82898d;
 	padding: 2px;
+}
+.top_five_header {
+	height: 350px;
+	width: 100%;
+	background: 
+    linear-gradient(
+      rgba(0, 0, 0, 0.6), 
+      rgba(0, 0, 0, 0.6)
+    ),
+    url(https://36ec5e865094a74ec4cb-2d8ae1874a396bdb82dfc36ab7e38695.ssl.cf5.rackcdn.com/e13260fe79c86c3ad47d3601cc19d00cd6b7bc98_original.png?1406556529);
+    background-position: bottom;
+ 	-webkit-background-size: cover;
+  	-moz-background-size: cover;
+  	-o-background-size: cover;
+  	background-size: cover; 
+  	background-attachment: fixed;
+  }
+  .top_dish_container:first-child {
+  	border-top: 0;
+  }
+  .fb_share_bottom{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    color: white;
+    text-align: center;
+    padding: 10px;
+}
+
+.btn-fb-network-share {
+    border: 1px solid #3B5998;
+    background-color: #3B5998;
+    color: white;
+    border-radius: 4px;
+}
+
+.list-prizes {
+    list-style: none;
+    width: 100%;
+    margin: 0px;
+    padding: 0px;
+}
+
+.list-prizes-item {
+    margin-bottom: 10px;
+    background-color: #fff;
+    padding: 0 10px;
+    border-radius: 4px;
+    position: relative;
+    min-height: 100px;
+    border: 1px solid #82898d;
+}
+
+.head {
+    margin-top: 5px;
+}
+
+.list-prizes-item h4.restaurant_name {
+    color: #cf2f28;
+}
+
+.list-prizes-item i {
+    color:#cf2f28; 
+}
+
+.list-prizes-item i:after {
+    content: "";
+    font-weight: bold; 
+}
+
+.coupon_name {
+    color: #565a5c;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin: 0 0 10px 0;
+    letter-spacing: normal;
+}
+
+.fine {
+    font-size: 11px;
+    margin-bottom: 0;
+}
+
+.bidding {
+    border-top: 1px solid #dfe0df;
+    padding-top: 10px;
+    font-weight: 600;
+    color: #565a5c;
+    margin-bottom: 10px;
+    display: inline-block;
+}
+
+#account {
+    background-color: #373737;
+}
+
+.prizes_control h3.restaurant_name {
+    color: #cf2f28;
+    margin-top: 5px;
+}
+
+.grey_bg {
+    background-color: #f5f6f5;
+    margin: 0 -15px;
+    padding: 15px;
+}
+
+.grey_bg p {
+    color: #82898d;
+}
+
+.dishcoin_count {
+    background: #373737;
+    color: #fff;   
+}
+
+.coin {
+    height: 20px;
+    padding-bottom: 5px;
+}
+
+.dishcoin_count a,
+.dishcoin_count a i {
+    color: #cf2f28;
+    text-decoration: none;
+    margin-bottom: 10px;
+    line-height: 1.428571429;
+    letter-spacing: .5px;
+}
+
+.btn-rewards {
+    background-color: #fff;
+    color: #cf2f28;
+    border-color: #cf2f28;
+    margin-top: 5px;
+    padding: 5px 10px;
+}
+
+.btn-rewards i {
+    display: none;
+}
+
+.btn-rewards.active i {
+    display: inline-block !important;
+}
+
+.btn-rewards:hover,
+.btn-rewards:focus{
+    color: #fff;
+    border-color: #cf2f28;
+    background-color: #cf2f28;
+}
+
+.btn-rewards.active {
+    color: #fff !important;
+    border-color: #cf2f28 !important;
+    background-color: #cf2f28 !important;
+}
+
+.btn-return {
+    background-color: #cf2f28;
+    border-color: #cf2f28;
+    color: #fff;
+}
+
+.btn-return:hover,
+.bth-return:focus {
+    color: #fff;
+    background-color: #cf2f28;
+}
+
+.dishcoin_count .rewards {
+    border-top: 1px solid #dfe0df; 
+    padding-top: 20px;
+}
+
+.prizes_control {
+    background: #FFF;
+    padding: 10px;
+    border: 3px dashed #82898d;   
+    top: 50%;
+    left: 10px;
+    right: 10px;
+    position: absolute;
+    -webkit-transform:  translateY(-50%);
+    -moz-transform:     translateY(-50%);
+    -ms-transform:      translateY(-50%);
+    -o-transform:       translateY(-50%);  
+    transform:          translateY(-50%);
+    text-align: center;
+}
+
+.prizes_control p {
+    color: #82898d;
+}
+
+.token {
+    color: #cf2f28;
+    font-size: 22px;
+    background-color: #fff;
+    padding: 6px 12px;
+    border: 1px solid #cf2f28;
+    border-radius: 0 4px 4px 0;
+}
+
+.close_prize {
+    position: absolute;
+    height: 40px;
+    width: 20px;
+    color: #cf2f28;
+    right: 0px;
+    top: -40px;
+    font-size: 2em;
+    z-index: 10;
+}
+.cnrflash{
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    z-index: 1;
+    overflow: hidden;
+    width: 75px;
+    height: 75px;
+    border-radius: 0px 3px 0px 0;
+}
+.cnrflash-inner{
+   position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 110px;
+    height: 110px;
+    -webkit-transform: rotate(45deg);
+    -webkit-transform-origin: 100% 100%;
+    background-color: #cf2f28;
+}
+.cnrflash-inner:before,
+.cnrflash-inner:after{
+    content:" ";
+    display:block;
+    position:absolute;
+    bottom:-12px;
+    width:0;
+    height:0;
+}
+.cnrflash-inner:before{             
+    left: -3px;
+    border-bottom-color:transparent;                
+    border-right-color: transparent;
+            }
+.cnrflash-inner:after{
+    right:0;
+    border-bottom-color: transparent;
+    border-left-color: transparent;
+}
+.cnrflash-label{
+    position:absolute;
+    bottom:0;
+    left:0;
+    display:block;
+    width:100%;
+    padding-bottom:5px;
+    color:#fff;
+    text-shadow:0 1px 1px rgba(1,1,1,.8);
+    font-size:0.95em;
+    font-weight:bold;
+    text-align:center;
+}
+#faq a,
+#faq a i {
+    color: #cf2f28;
+    font-size: 18px;
+    text-decoration: none;
+}
+.answers {
+    background-color: #f5f6f5;
+}
+.answers h4 {
+    margin-top: 20px;
+}
+.answers a,
+.answers a i {
+    color: #cf2f28;
+    text-decoration: none;
+}
+.answers ol li {
+    margin-bottom: 10px;
+    color: #82898d;
+}
+.answers p {
+    color: #82898d;
+}
+.coupon_number {
+    font-size: 22px;
+    color: #fff;
+    background-color: #cf2f28;
+    padding: 6px 12px;
+    border-radius: 4px 0 0 4px;
+    border: 1px solid #cf2f28;
+}
+.value {
+    color:#fff; 
+    font-size:18px;
+    background-color: #cf2f28;
+    padding: 6px 12px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    display: inline-block;
 }
