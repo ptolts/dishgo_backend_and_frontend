@@ -20,25 +20,55 @@
 			</div>
 		</div>		
 		<div class="row">
-			<h3>Top Five Dishes:</h3>
-			<%= render 'top_five/dish_search_results' %>
-		</div>		
+            <div class="col-xs-12">
+			 <h3>Top Five Dishes:</h3>
+			 <%= render 'top_five/dish_search_results' %>
+            </div>
+		</div>	
+        <div class="row">
+            <div class="col-xs-12">
+                <h3>Prizes:</h3>
+                <%= render 'top_five/prize_search_results' %>
+            </div>
+        </div>        	
 	</div>
 	<div class="col-lg-6">
-		<h3>Dish Search Tool</h3>
-		<p>Use this tool to find the dishes you'd like to include in your list.</p>		
-		<div class="row">
-			<div class="col-xs-6">
-				<h5>Dish Name:</h5>
-				<input data-bind="value: dish_search_term, valueUpdate: 'afterkeydown'" class="form-control" title="Type the dish name into this box." placeholder="Search Dish Title"> 
-			</div>
-			<div class="col-xs-6">
-				<h5>Restaurant Name:</h5>
-				<input data-bind="value: top_five_restaurant_search_term, valueUpdate: 'afterkeydown'" class="form-control" title="Type the dish name into this box." placeholder="Narrow by Restaurant"> 
-			</div>			
-		</div>
-					
-		<%= render 'top_five/dish_search_results' %>
+        <div class="row">
+            <div class="col-xs-12">
+                <button class="btn btn-search" data-bind="click: function(){ search_tool('dish') },css:{active: search_tool() == 'dish'}">Dish Search</button>
+                <button class="btn btn-search" data-bind="click: function(){ search_tool('prize') },css:{active: search_tool() == 'prize'}">prize Search</button>
+            </div>
+        </div>
+        <div class="row" data-bind="visible: search_tool() == 'dish'">
+            <div class="col-xs-12">        
+        		<h3>Dish Search Tool</h3>
+        		<p>Use this tool to find the dishes you'd like to include in your list.</p>		
+        		<div class="row">
+        			<div class="col-xs-6">
+        				<h5>Dish Name:</h5>
+        				<input data-bind="value: dish_search_term, valueUpdate: 'afterkeydown'" class="form-control" title="Type the dish name into this box." placeholder="Search Dish Title"> 
+        			</div>
+        			<div class="col-xs-6">
+        				<h5>Restaurant Name:</h5>
+        				<input data-bind="value: top_five_restaurant_search_term, valueUpdate: 'afterkeydown'" class="form-control" title="Type the restaurant name into this box." placeholder="Narrow by Restaurant"> 
+        			</div>			
+        		</div>
+        		<%= render 'top_five/dish_search_results' %>
+            </div>
+        </div>
+        <div class="row" data-bind="visible: search_tool() == 'prize'">
+            <div class="col-xs-12">        
+                <h3>Prize Search Tool</h3>
+                <p>Use this tool to find the prizes you'd like to include in your list.</p>     
+                <div class="row">
+                    <div class="col-xs-6">
+                        <h5>Restaurant Name:</h5>
+                        <input data-bind="value: prize_search_term, valueUpdate: 'afterkeydown'" class="form-control" title="Type the restaurant name into this box." placeholder="Narrow by Restaurant"> 
+                    </div>          
+                </div>
+                <%= render 'top_five/prize_search_results' %>
+            </div>        
+        </div>        
 	</div>
 </div>
 

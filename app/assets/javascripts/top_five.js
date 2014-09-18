@@ -39,6 +39,7 @@ function TopFive(data) {
     self.beautiful_url = ko.observable(data.beautiful_url ? data.beautiful_url : data.id);
     self.description = ko.observable(data.description ? data.description : copyDefaultHash(default_language_hash));
     self.dishes = ko.observableArray(data.dishes ? _.map(data.dishes,function(d){ return new Dish(d) }) : []);
+    self.prizes = ko.observableArray(data.prizes ? _.map(data.prizes,function(d){ return new Prize(d) }) : []);
 
     self.allow_more_dishes = ko.computed(function(){
         if(self.dishes().length < 5){
@@ -57,6 +58,15 @@ function TopFive(data) {
         }
     }
 
+    Prize.prototype.push = function(){
+        if(self.prizes().length < 5 && !!self.prizes().indexOf(this)){
+            self.prizes.unshift(this);
+            return;
+        } else {
+            self.prizes.remove(this);
+        }
+    }    
+
     Dish.prototype.active = ko.computed(function(){
         if(!self.dishes().indexOf(this)){
             return false;
@@ -64,6 +74,14 @@ function TopFive(data) {
             return true;
         }
     });
+
+    Prize.prototype.active = ko.computed(function(){
+        if(!self.prizes().indexOf(this)){
+            return false;
+        } else {
+            return true;
+        }
+    });    
 
     self.top_five_saving = ko.observable(false);
     self.save = function(){

@@ -6,10 +6,14 @@
 function TopFiveModel(){
 	var self = this;
 	NetworkModel.apply(self);
-	self.dishes = ko.observableArray([]);
+    self.dishes = ko.observableArray([]);
+	self.prizes = ko.observableArray([]);
 	self.dish_search_term = ko.observable("");
-	self.top_five_restaurant_search_term = ko.observable();
-	self.current_top_five = ko.observable(new TopFive(top_five));
+    self.top_five_restaurant_search_term = ko.observable();
+	self.prize_search_term = ko.observable("");
+    self.current_top_five = ko.observable(new TopFive(top_five));
+	self.search_tool = ko.observable('dish');
+
 
 	self.allow_more_dishes = ko.computed(function(){
 		if(self.current_top_five().allow_more_dishes){
@@ -51,7 +55,37 @@ function TopFiveModel(){
                 self.dish_search_request();
             }
         }
-    }).extend({rateLimit: 500});    
+    }).extend({rateLimit: 500}); 
+
+    self.prize_search_request = function(){
+        $.ajax({
+            type: "POST",
+            url: "/app/top_five/prize_search",
+            data: {
+                restaurant_name: self.prize_search_term(),
+            },
+            beforeSend: function(){
+                self.searchArray.push(this);
+            },
+            success: function(data, textStatus, jqXHR){
+                self.searchArray.remove(this);
+                self.prizes(_.map(data,function(dish){ return new Prize(dish) }));
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) { 
+                self.searchArray.remove(this);
+            },
+            dataType: "json"
+        });         
+    };
+
+    self.search_prizes = ko.computed({
+        read: function(){
+            if(self.prize_search_term().length > 0){
+                self.prizes([]);
+                self.prize_search_request();
+            }
+        }
+    }).extend({rateLimit: 500});         
 
 }
 
