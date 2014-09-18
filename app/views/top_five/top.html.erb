@@ -31,7 +31,7 @@
                             <!-- /ko -->
                         </div>
                     </div>
-                	<div class="col-sm-8">
+                	<div class="col-sm-8" style="padding: 0 0 0 15px;">
                 			<div class="dish-picture imageCroppedFull" style="background-image: url(<%= dish.img_src_orig %>); border-radius: 0; height: 400px"></div>
                     </div>
                 </div>
@@ -57,9 +57,10 @@
             <div class="col-xs-12">
                 <h2>Prizes</h2>
                 <!-- toss in a few coupons from the prize page -->
-                <h3 data-bind="with: $root.user">You have <span data-bind="text: top_five_dishcoins"></span> entries in this contest</h3>
-                <button data-bind="click: function(){ $root.shareTopFiveFB() }" class="btn btn-rewards">Share on <i class="fa fa-facebook"></i></button>
-                <input data-bind="value: 'https://dishgo.io/top_five/' + $root.current_top_five().beautiful_url() + '/' + $root.user().id()">
+                <h3 data-bind="with: $root.user">You have <span style="color:#cf2f28;" data-bind="text: top_five_dishcoins"></span> entries in this contest</h3>
+                <p>Share with your friends for more entries</p>
+                <button data-bind="click: function(){ $root.shareTopFiveFB() }" class="btn btn-fb-network-share">Share on <i class="fa fa-facebook"></i></button>
+                <input class="copybox" data-bind="value: 'https://dishgo.io/top_five/' + $root.current_top_five().beautiful_url() + '/' + $root.user().id()">
             </div>
         </div>
     </div>

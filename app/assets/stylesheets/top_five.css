@@ -77,14 +77,14 @@
 	color: #82898d !important;
 }
 .main-bar {
-	border-right: 1px solid #ccc;
+	border-right: 1px solid #DCDCDC;
 }
 .sidebar h2 {
 	text-transform: uppercase;
 	color: #cf2f28;
 }
 .sidebar .trending {
-	border-bottom: 1px solid #ccc;
+	border-bottom: 1px solid #DCDCDC;
 	padding: 0 15px 15px;
 }
 .sidebar_dish_link {
@@ -94,4 +94,12 @@
     left: 0;
     bottom: 0;
     z-index: 10;
+}
+.copybox {
+	display: block;
+	width: 100%;
+	margin-top: 10px;
+	font-family: 'lato' sans-serif;
+	color: #82898d;
+	padding: 2px;
 }
