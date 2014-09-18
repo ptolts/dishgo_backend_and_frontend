@@ -104,22 +104,6 @@
 	color: #82898d;
 	padding: 2px;
 }
-.top_five_header {
-	height: 350px;
-	width: 100%;
-	background: 
-    linear-gradient(
-      rgba(0, 0, 0, 0.6), 
-      rgba(0, 0, 0, 0.6)
-    ),
-    url(https://36ec5e865094a74ec4cb-2d8ae1874a396bdb82dfc36ab7e38695.ssl.cf5.rackcdn.com/e13260fe79c86c3ad47d3601cc19d00cd6b7bc98_original.png?1406556529);
-    background-position: bottom;
- 	-webkit-background-size: cover;
-  	-moz-background-size: cover;
-  	-o-background-size: cover;
-  	background-size: cover; 
-  	background-attachment: fixed;
-  }
   .top_dish_container:first-child {
   	border-top: 0;
   }
@@ -155,6 +139,9 @@
     position: relative;
     min-height: 100px;
     border: 1px solid #82898d;
+}
+#ui-datepicker-div {
+    z-index: 20 !important;
 }
 
 .head {

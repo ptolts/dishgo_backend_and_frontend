@@ -12,8 +12,8 @@ class TopFiveController < ApplicationController
   end
 
   def top
-    @top_five = TopFive.where(beautiful_url:params[:id]).first || TopFive.find(params[:id])
-    Rails.logger.warn "TopFive Loaded ---------"
+    # @top_five = TopFive.where(beautiful_url:params[:id]).first || TopFive.find(params[:id])
+    @top_five = TopFive.or({beautiful_url:params[:id]},{id:params[:id]}).first
     #create dishcoin for the referral
     if user_id = params[:user_id] and current_user.id.to_s != user_id.to_s and Dishcoin.where(top_five_id:@top_five.id,ip:request.ip).count == 0
       Rails.logger.warn "#{user_id} != #{current_user.id} -> #{current_user.id != user_id}"
@@ -37,6 +37,9 @@ class TopFiveController < ApplicationController
     top_five.dish_ids = data["dishes"]
 
     top_five.prizes = Prize.find(data["prizes"])
+
+    format = "%Y-%m-%dT%H:%M:%S.%L%z";
+    top_five.end_date = Date.strptime(data["end_date"], format).to_time.utc
 
     top_five.user = current_user
     top_five.save!

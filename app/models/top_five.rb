@@ -9,6 +9,7 @@ class TopFive
 	field :name, localize: true
 	field :description, localize: true
 	field :beautiful_url, type: String
+	field :end_date, type: DateTime
 
 	has_and_belongs_to_many :dish, class_name: "Dish", inverse_of: nil
 	has_many :dishcoins, class_name: "Dishcoin", inverse_of: :top_five
@@ -30,13 +31,13 @@ class TopFive
 			hash[:description] = self.description_translations
 			Rails.logger.warn "LOADING DISH ---------"
 			hash[:dishes] = self.dish.top_five.collect{|e| e.serializable_hash({export_localized:true, include_reviews:options[:include_reviews]})}
-			hash[:prizes] = self.prizes.collect{|e| e.serializable_hash({export_localized:true})}
+			hash[:prizes] = self.prizes.top_five.collect{|e| e.serializable_hash({export_localized:true})}
 		end    
 		return hash
 	end
 
 	def best_pic
-		pic = self.dish.top_five.sort{|e| e.rating}.first.img_src_orig
+		pic = self.dish.top_five.find_all{|e| !e.img_src_orig.blank?}.first.img_src_orig
 		if pic
 			return pic
 		else

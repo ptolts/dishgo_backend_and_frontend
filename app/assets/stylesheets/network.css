@@ -6,6 +6,7 @@
 *= require network_odometer
 *= require network_restaurant
 *= require top_five
+*= require jquery.ui.datepicker
 *= require_self
 */
 
@@ -191,7 +192,7 @@ textarea:focus, input:focus, input[type]:focus, #sign_in button, .uneditable-inp
 body {
     font-family: 'Oswald', sans-serif;
 }
-h1, h2, h3, h4, h5, h6, span {
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6, span {
     font-family: 'Oswald', sans-serif;
 }
 p, address,

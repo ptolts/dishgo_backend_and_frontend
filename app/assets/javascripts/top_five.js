@@ -44,6 +44,8 @@ function TopFive(data) {
     self.description = ko.observable(data.description ? data.description : copyDefaultHash(default_language_hash));
     self.dishes = ko.observableArray(data.dishes ? _.map(data.dishes,function(d){ return new Dish(d) }) : []);
     self.prizes = ko.observableArray(data.prizes ? _.map(data.prizes,function(d){ return new Prize(d) }) : []);
+    var format = "%Y-%m-%dT%H:%M:%S.%L%z";
+    self.end_date = ko.observable(data.end_date ? jdate.strptime(data.end_date,format) : new Date());
 
     self.allow_more_dishes = ko.computed(function(){
         if(self.dishes().length < 5){

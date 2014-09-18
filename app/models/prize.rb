@@ -34,6 +34,7 @@ class Prize
   index({ locs: "2dsphere" }, { name:"location_index"})
 
   scope :available_to_win, -> { where(:start_date.lt => DateTime.now, :end_date.gt => DateTime.now, :quantity.gt => 0) }  
+  scope :top_five, -> { desc(:amount) }  
 
   def set_individual_prize_for_top_five
     if top_five_id_changed?

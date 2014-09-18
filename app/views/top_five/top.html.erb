@@ -1,4 +1,23 @@
-<div class="top_five_header">
+<style>
+    .top_five_header {
+        height: 350px;
+        width: 100%;
+        background: 
+            linear-gradient(
+            rgba(0, 0, 0, 0.6), 
+            rgba(0, 0, 0, 0.6)
+            ),
+            url(<%= @top_five.best_pic %>);
+        background-position: bottom;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover; 
+        background-attachment: fixed;
+    }
+</style>
+
+<div class="top_five_header" data-bind="with: current_top_five">
     <div class="container">
         <div class="row">
             <div class="col-xs-12">
