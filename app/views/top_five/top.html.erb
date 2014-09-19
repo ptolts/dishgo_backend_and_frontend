@@ -19,6 +19,20 @@
         footer {
             display: none !important;
         }
+        .top_five_header {
+            background: 
+            linear-gradient(
+            rgba(0, 0, 0, 0.0), 
+            rgba(0, 0, 0, 0.0)
+            ),
+            url(<%= @top_five.best_pic %>);
+            background-position: center center;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover; 
+        background-attachment: fixed;
+        }
     }
 
 </style>
@@ -101,7 +115,6 @@
             </div>             
             <div class="row">
                 <div class="col-xs-12">
-                    <h2>Prizes</h2>
                     <!-- toss in a few coupons from the prize page -->
                     <h3 data-bind="with: $root.user">You have <span style="color:#cf2f28;" data-bind="text: top_five_dishcoins"></span> entries in this contest</h3>
                 </div>
@@ -110,23 +123,8 @@
                     <button data-bind="click: function(){ $root.shareTopFiveFB() }" class="btn btn-fb-network-share">Share on <i class="fa fa-facebook"></i></button>
                     <input class="copybox" data-bind="value: 'https://dishgo.io/top_five/' + $root.current_top_five().beautiful_url() + '/' + $root.user().id()">
                 </div>
-                <div class="col-xs-12 trending hidden-xs">
-                    <h2>What's Trending</h2> <!-- add 4 trending dishes from home page -->
-                    <div class="row">
-                       <!--  link dishes to menu -->
-                        <a href="/app/network/restaurant/530bd15180410efe300050be" class="sidebar_dish_link"></a>
-                        <div class="col-xs-6" data-bind="" style="">
-                            <div class="image-cropped" style="background-image: url(https://36ec5e865094a74ec4cb-2d8ae1874a396bdb82dfc36ab7e38695.ssl.cf5.rackcdn.com/1935c9a93cebd220150e69604948f1e9cc8b08c9_medium.png?1408412121);">
-                            </div>
-                        </div>
-                        <div class="col-xs-6">
-                            <div class="dish-title">
-                                <p>Creamed Spinach & Reggiano Cheese Dip</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 <div class="col-xs-12" data-bind="with: current_top_five">
+                    <h2>Up For Grabs</h2>
                     <ul class="list-prizes" data-bind="foreach: prizes">
                         <li class="list-prizes-item">
                             <div class="row">
@@ -146,6 +144,22 @@
                             </div>                       
                         </li>
                     </ul>
+                </div>
+                <div class="col-xs-12 trending hidden-xs">
+                    <h2>What's Trending</h2> <!-- add 4 trending dishes from home page -->
+                    <div class="row">
+                       <!--  link dishes to menu -->
+                        <a href="/app/network/restaurant/530bd15180410efe300050be" class="sidebar_dish_link"></a>
+                        <div class="col-xs-6" data-bind="" style="">
+                            <div class="image-cropped" style="background-image: url(https://36ec5e865094a74ec4cb-2d8ae1874a396bdb82dfc36ab7e38695.ssl.cf5.rackcdn.com/1935c9a93cebd220150e69604948f1e9cc8b08c9_medium.png?1408412121);">
+                            </div>
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="dish-title">
+                                <p>Creamed Spinach & Reggiano Cheese Dip</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div> 
