@@ -2,80 +2,82 @@
 <%= render 'restaurant_search_results' %>
 <%= render 'dish_search_results' %>
 
-<div class="page-container" data-bind="slideVisible: !top_search()">
-    <div class="network_menu_header" data-bind="cover_photo: $root.restaurant().cover_photo, event: { mouseover: function(){coverPhotoHover(true); return true;}, mouseout: function(){coverPhotoHover(false); return true;} }">
-        <div class="restaurant_logo_wrap">
-            <div class="restaurant_logo">
-                <% if @restaurant.logo %>
-                    <div class="imageCroppedOneHundredPercent" style="background-image: url('<%= @restaurant.logo.img_url_original %>')">&nbsp;</div>                                                                                                                                  
-                <% elsif @restaurant.image.length > 0 %>
-                    <div class="imageCroppedOneHundredPercentCover" style="background-image: url('<%= @restaurant.image.profile_images.first.img_url_original %>')">&nbsp;</div>                                                                                                                                  
-                <% end %>
+<div data-bind="visible: true" style="display: none">
+    <div class="page-container" data-bind="slideVisible: !top_search()">
+        <div class="network_menu_header" data-bind="cover_photo: $root.restaurant().cover_photo, event: { mouseover: function(){coverPhotoHover(true); return true;}, mouseout: function(){coverPhotoHover(false); return true;} }">
+            <div class="restaurant_logo_wrap">
+                <div class="restaurant_logo">
+                    <% if @restaurant.logo %>
+                        <div class="imageCroppedOneHundredPercent" style="background-image: url('<%= @restaurant.logo.img_url_original %>')">&nbsp;</div>                                                                                                                                  
+                    <% elsif @restaurant.image.length > 0 %>
+                        <div class="imageCroppedOneHundredPercentCover" style="background-image: url('<%= @restaurant.image.profile_images.first.img_url_original %>')">&nbsp;</div>                                                                                                                                  
+                    <% end %>
+                </div>
+                <span class="btn btn-fb-share resto-fb-share" data-bind="click: function(){ $root.shareFB() }"><span data-bind="localize">Share</span> <i class="fa fa-facebook"></i></span>
             </div>
-            <span class="btn btn-fb-share resto-fb-share" data-bind="click: function(){ $root.shareFB() }"><span data-bind="localize">Share</span> <i class="fa fa-facebook"></i></span>
-        </div>
-        <!-- ko if: isOwner -->
-            <i class="fa fa-spin fa-refresh cover-photo-upload-spin" data-bind="visible: $root.restaurant().cover_photo() && !$root.restaurant().cover_photo().completed()"></i>
-            <span class="cover-photo-upload">
-                <div style="position:relative">
-                    <i class="fa fa-upload cover-photo-upload-icon" data-bind="css:{active:coverPhotoHover}"></i>
-                    <input data-bind="upload_cover_photo: $root.restaurant" id="fileupload" type="file" name="files"  class="file_upload_input" accept="images/*" capture="camera">
-                </div>
-            </span>               
-        <!-- /ko -->
-    </div>
-    <div class="resto_details">
-        <div class="container">
-            <div class="row" style="position: relative">
-                <div class="claim">
-                    <a href="/app/letsdishgo" class="btn btn-none">Claim this page</a>
-                </div>
-                <div class="col-xs-12 col-sm-6 col-md-4 padme" style="border-right: 1px solid #f4f4f2; border-right: 1px solid rgba(0,0,0,.03);">
-                    <div class="restaurant-title">
-                        <%= @restaurant.name %>
+            <!-- ko if: isOwner -->
+                <i class="fa fa-spin fa-refresh cover-photo-upload-spin" data-bind="visible: $root.restaurant().cover_photo() && !$root.restaurant().cover_photo().completed()"></i>
+                <span class="cover-photo-upload">
+                    <div style="position:relative">
+                        <i class="fa fa-upload cover-photo-upload-icon" data-bind="css:{active:coverPhotoHover}"></i>
+                        <input data-bind="upload_cover_photo: $root.restaurant" id="fileupload" type="file" name="files"  class="file_upload_input" accept="images/*" capture="camera">
                     </div>
-                    <address class="hi">
-                        <%= @restaurant.address_line_1 %>,
-                        <%= @restaurant.city %>,
-                        <%= @restaurant.postal_code %>
-                        <br/>
-                        <a href="tel:<%= @restaurant.phone %>"><%= @restaurant.phone %></a>
-                </address>
-                </div>
-                <div class="col-xs-12 col-sm-6 col-md-4 padme" style="border-right: 1px solid #f4f4f2; border-right: 1px solid rgba(0,0,0,.03);">
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <div class="bot-links">
-                                <div id="opened_or_closed_footer" data-bind="with: restaurant">
-                                    <p style="margin-top:10px;" data-bind="visible: showHourSign">
-                                    <span data-bind="localize">Opening Hours</span>
-                                    <span class="currently_open" data-bind="css:{'hours_opened':areWeOpened(),'hours_closed':!areWeOpened()}, lStaticText: areWeOpenedText"></span></p>
-                                </div>                       
+                </span>               
+            <!-- /ko -->
+        </div>
+        <div class="resto_details">
+            <div class="container">
+                <div class="row" style="position: relative">
+                    <div class="claim">
+                        <a href="/app/letsdishgo" class="btn btn-none">Claim this page</a>
+                    </div>
+                    <div class="col-xs-12 col-sm-6 col-md-4 padme" style="border-right: 1px solid #f4f4f2; border-right: 1px solid rgba(0,0,0,.03);">
+                        <div class="restaurant-title">
+                            <%= @restaurant.name %>
+                        </div>
+                        <address class="hi">
+                            <%= @restaurant.address_line_1 %>,
+                            <%= @restaurant.city %>,
+                            <%= @restaurant.postal_code %>
+                            <br/>
+                            <a href="tel:<%= @restaurant.phone %>"><%= @restaurant.phone %></a>
+                        </address>
+                    </div>
+                    <div class="col-xs-12 col-sm-6 col-md-4 padme" style="border-right: 1px solid #f4f4f2; border-right: 1px solid rgba(0,0,0,.03);">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="bot-links">
+                                    <div id="opened_or_closed_footer" data-bind="with: restaurant">
+                                        <p style="margin-top:10px;" data-bind="visible: showHourSign">
+                                        <span data-bind="localize">Opening Hours</span>
+                                        <span class="currently_open" data-bind="css:{'hours_opened':areWeOpened(),'hours_closed':!areWeOpened()}, lStaticText: areWeOpenedText"></span></p>
+                                    </div>                       
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-1">
+                                <i class="fa fa-cutlery"></i>
+                            </div>
+                            <div class="col-xs-10">
+                                <span>Categories</span>
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-xs-1">
-                            <i class="fa fa-cutlery"></i>
-                        </div>
-                        <div class="col-xs-10">
-                            <span>Categories</span>
-                        </div>
+                    <div class="menu_sections">
+                        <ul class="section-tab-menu tab-menu" data-bind="foreach: menus">
+                            <li data-bind="css:{active: $data==$root.selected_menu()}"><span class="clicker" data-bind="click: function(){ $root.selected_menu($data); console.log('hi') }"></span><span data-bind="lText:name"></span></li>
+                        </ul>                       
                     </div>
-                </div>
-                <div class="menu_sections">
-                    <ul class="section-tab-menu tab-menu" data-bind="foreach: menus">
-                        <li data-bind="css:{active: $data==$root.selected_menu()}"><span class="clicker" data-bind="click: function(){ $root.selected_menu($data); console.log('hi') }"></span><span data-bind="lText:name"></span></li>
-                    </ul>                       
-                </div>
-            </div>           
-        </div>       
-    </div>
+                </div>           
+            </div>       
+        </div>
 
-    <div data-bind="visible: true" style="display:none">
-        <!-- ko foreach: menus -->
-            <%= render 'menu' %>
-        <!-- /ko -->
+        <div data-bind="visible: true" style="display:none">
+            <!-- ko foreach: menus -->
+                <%= render 'menu' %>
+            <!-- /ko -->
+        </div>
     </div>
 </div>
 

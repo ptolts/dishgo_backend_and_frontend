@@ -959,6 +959,10 @@ footer a:hover, footer a:focus {
   .resto_details {
     background: rgba(255,255,255,0.9);
   }
+    .wrapper_to_fix_footer {
+        margin: initial; /* the bottom margin is the negative value of the footer's height */
+    }
+
 }
 .network_menu_header {
 /*    background: url('http://placehold.it/1900x1080/cf2f28/ffffff');
