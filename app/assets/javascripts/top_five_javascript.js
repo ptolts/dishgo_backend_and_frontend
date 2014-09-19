@@ -3,6 +3,21 @@
 *= require_self
 */
 
+ko.bindingHandlers.mobileVisible = {
+    update: function (element, valueAccessor, allBindings, viewModel, bindingContext) {
+        var id = valueAccessor();       
+        var root = bindingContext["$root"];
+        if(!root.isMobile){
+            return;
+        }
+        if(root.current_page() != id){
+            $(element).hide();
+        } else {
+            $(element).show();
+        }
+    }
+};
+
 ko.bindingHandlers.countdown = {
     update: function (element, valueAccessor, allBindings, viewModel, bindingContext) {
         var value = valueAccessor();
@@ -146,7 +161,26 @@ function TopFiveModel(){
           method: 'share',
           href: 'https://dishgo.io/top_five/' + top_five_id + "/" + user_id,
         }, function(response){});     
-    }    
+    }
+
+    self.isMobile = isMobile.any();
+    self.dish_list = ko.computed({
+        read: function(){
+            return self.current_top_five().dishes();
+        }, 
+        deferEvaluation: true
+    });   
+    self.page = ko.observable(0);
+    self.current_numerical_page = ko.observable(0);
+    self.current_page = ko.computed({
+        read: function(){
+            var current_page = self.page() % self.current_top_five().dishes().length;
+            self.current_numerical_page(current_page);
+            var idizzle = self.dish_list()[current_page].id();
+            return idizzle;
+        },
+        deferEvaluation: true,
+    });
 }
 
 editing_mode = false;   

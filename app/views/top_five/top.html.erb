@@ -30,7 +30,7 @@
             	<p class="top_five_description" data-bind="lText: description"><%= first_non_empty(@top_five.description_translations) %></p>
             </div>                
             <% @top_five.dish.top_five.each do |dish| %>
-                <div class="top_dish_container" data-bind="with_dish: '<%= dish.id %>'">
+                <div class="top_dish_container" data-bind="with_dish: '<%= dish.id %>', mobileVisible: '<%= dish.id %>'">
                     <div class="col-sm-4" style="padding:0 0 0 30px;">
                         <div class="top_dish_rating_container">
                             <!-- <span class="rank">#1</span> -->
@@ -110,6 +110,16 @@
                 </ul>
             </div>
         </div>
+    </div>
+</div>
+
+<div class="top-five-paginate-controls" data-bind="visible: isMobile" style="display: none">
+    <div class="top-five-paginate-controls-container">
+        <span class="trigger-prev"><i class="fa fa-chevron-left" data-bind="click: function(){ page(page() - 1) }"></i></span>
+        <span class="trigger-next"><i class="fa fa-chevron-right" data-bind="click: function(){ page(page() + 1) }"></i></span>
+        <ul class="paginate-circles" data-bind="foreach: dish_list">
+            <li class="paginate-circle" data-bind="css:{active: $index() == $root.current_numerical_page()}"></li>
+        </ul>
     </div>
 </div>
 
