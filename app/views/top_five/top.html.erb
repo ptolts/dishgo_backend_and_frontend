@@ -38,7 +38,7 @@
             <% @top_five.dish.top_five.each do |dish| %>
                 <div class="top_dish_container" data-bind="with_dish: '<%= dish.id %>', mobileVisible: '<%= dish.id %>'">
                     <div class="visible-xs">
-                        <div class="dish-picture imageCroppedFull" style="background-image: url(<%= dish.img_src_orig %>); border-radius: 0; height: 400px"></div>
+                        <div class="dish-picture imageCroppedFull" style="background-image: url(<%= dish.img_src_orig %>); border-radius: 0; height: 250px"></div>
                     </div>
                     <div class="top-five-paginate-controls" data-bind="visible: $root.isMobile, with: $root" style="display: none">
                         <div class="top-five-paginate-controls-container">

@@ -420,7 +420,7 @@
 
 @media only screen and (max-width: 600px) {
     .top_five_header {
-    	height: 350px;
+    	height: 200px;
         background-position: 50% 0 !important;
         background-repeat: no-repeat !important;
         background-attachment: initial !important; 
@@ -430,8 +430,7 @@
         height: auto !important;
     }
     .top_dish_container .dish-picture{
-/*        max-height: 400px !important;
-        height: initial !important;*/
+    	height: 250px;
         background-position: 50% 0 !important;
         background-repeat: no-repeat !important;
         background-attachment: initial !important;
