@@ -80,15 +80,14 @@
 	color: #fff;
 	margin-top: 300px;
 }
-.top_dish_rating_container .restaurant_name,
-.top_dish_rating_container .rank {
+.top_dish_rating_container .restaurant_name {
 	font-size: 22px;
 	color: #cf2f28 !important;
 }
 .top_dish_rating_container .dish_title {
 	display: block;
 	color: #565a5c;
-	font-size: 22px;
+	font-size: 18px;
 }
 .top_dish_rating_container p {
 	color: #82898d !important;
@@ -456,6 +455,9 @@
 	.top_dish_container {
         height: auto !important;
     }
+    .top_dish_rating_container {
+    	text-align: center;
+    }
 }
 @media only screen and (min-width: 768px) {
 	.pop_up_menu_dish_rating i {
@@ -482,7 +484,7 @@
 		font-size: 34px;
 	}
 	.top_dish_container .col-sm-4 {
-		padding: 0 0 0 30px;
+		padding: 0 0 0 15px;
 	}
 }
 @media only screen and (min-width: 1200px) {
