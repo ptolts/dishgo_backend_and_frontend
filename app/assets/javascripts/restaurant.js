@@ -319,11 +319,16 @@
             self.show_map = ko.observable(data.show_map ? data.show_map : false);
             self.show_hours = ko.observable(data.show_hours ? data.show_hours : false);
             self.show_menu = ko.observable(data.show_menu ? data.show_menu : false);
+            self.show_ask = ko.observable(data.show_ask ? data.show_ask : false);
             self.show_gallery = ko.observable(data.show_gallery ? data.show_gallery : false);
             self.show_app_install = ko.observable(data.show_app_install ? data.show_app_install : false);
 
             self.logo = ko.observable(data.logo ? new GlobalImage(data.logo) : new GlobalImage({}));
             self.logo_settings = ko.observable(data.logo_settings ? new LogoSettings(data.logo_settings) : new LogoSettings());
+
+            if(!self.show_ask()){
+                Dish.prototype.show_ask = true;
+            }
 
             self.logo().url.subscribe(function(){
                 if(self.logo().url()){

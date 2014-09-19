@@ -38,6 +38,7 @@ class Restaurant
   field :show_hours, type: Boolean, default: true
   field :show_map, type: Boolean, default: true
   field :show_menu, type: Boolean, default: true
+  field :show_ask, type: Boolean, default: true
   field :show_gallery, type: Boolean, default: false
   field :show_app_install, type: Boolean, default: false
 

@@ -120,6 +120,7 @@ class WebsiteController < ApplicationController
 		restaurant.show_map = restaurant_data["show_map"].to_bool
 		restaurant.show_hours = restaurant_data["show_hours"].to_bool
 		restaurant.show_menu = restaurant_data["show_menu"].to_bool
+		restaurant.show_ask = restaurant_data["show_ask"].to_bool
 		restaurant.show_gallery = restaurant_data["show_gallery"].to_bool
 		restaurant.default_language = restaurant_data["default_language"].to_s
 		restaurant.save		

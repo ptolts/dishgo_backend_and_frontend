@@ -196,6 +196,9 @@ function Dish(data, topmodel) {
         read: function(){
             var final_cost = parseFloat(self.price()).toFixed(2);
             if(final_cost == "0.00"){
+                if(self.show_ask){
+                    return "-";
+                }
                 if(translations['ask'][lang()]){
                     return translations['ask'][lang()];
                 } else {
