@@ -29,13 +29,8 @@
             	<p class="top_five_description" data-bind="lText: description"><%= first_non_empty(@top_five.description_translations) %></p>
             </div>                
             <% @top_five.dish.top_five.each do |dish| %>
-<<<<<<< HEAD
                 <div class="top_dish_container" data-bind="with_dish: '<%= dish.id %>', mobileVisible: '<%= dish.id %>'">
-                    <div class="col-sm-4" style="padding:0 0 0 30px;">
-=======
-                <div class="top_dish_container" data-bind="with_dish: '<%= dish.id %>'">
                     <div class="col-sm-4">
->>>>>>> 73b273fccbdabb5f4df29bdde40ac6cfbcc62775
                         <div class="top_dish_rating_container">
                             <!-- <span class="rank">#1</span> -->
                             <span class="restaurant_name"><%= dish.restaurant_name %></span>
