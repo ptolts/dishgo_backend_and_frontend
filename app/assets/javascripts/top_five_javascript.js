@@ -174,9 +174,13 @@ function TopFiveModel(){
     self.current_numerical_page = ko.observable(0);
     self.current_page = ko.computed({
         read: function(){
-            var current_page = self.page() % self.current_top_five().dishes().length;
-            self.current_numerical_page(current_page);
-            var idizzle = self.dish_list()[current_page].id();
+            var current_page = self.page() % (self.current_top_five().dishes().length + 1);
+            if(current_page == 0){
+                self.current_numerical_page(999);
+                return 'header';
+            }
+            self.current_numerical_page(current_page - 1);
+            var idizzle = self.dish_list()[current_page - 1].id();
             return idizzle;
         },
         deferEvaluation: true,

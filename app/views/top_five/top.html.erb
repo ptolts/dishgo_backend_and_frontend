@@ -23,7 +23,7 @@
 
 </style>
 
-<div class="top_five_header" data-bind="with: current_top_five">
+<div class="top_five_header" data-bind="with: current_top_five, mobileVisible: 'header'">
     <div class="container">
         <h1 class="top_five_title" data-bind="lText: name"><%= first_non_empty(@top_five.name_translations) %></h1>
         <h4 class="countdown" data-bind="with: $root.current_top_five"><span data-bind="countdown: end_date"></span> until draw.</h4>
@@ -37,6 +37,9 @@
             </div>                
             <% @top_five.dish.top_five.each do |dish| %>
                 <div class="top_dish_container" data-bind="with_dish: '<%= dish.id %>', mobileVisible: '<%= dish.id %>'">
+                    <div class="visible-xs">
+                        <div class="dish-picture imageCroppedFull" style="background-image: url(<%= dish.img_src_orig %>); border-radius: 0; height: 400px"></div>
+                    </div>                    
                     <div class="col-sm-4">
                         <div class="top_dish_rating_container">
                             <!-- <span class="rank">#1</span> -->
@@ -61,74 +64,80 @@
                             <!-- /ko -->
                         </div>
                     </div>
-                	<div class="col-sm-8">
+                	<div class="col-sm-8 visible-sm">
                         <div class="dish-picture imageCroppedFull" style="background-image: url(<%= dish.img_src_orig %>); border-radius: 0; height: 400px"></div>
                     </div>
                 </div>
             <% end %>       
-        </div>		
-        <div class="col-sm-4 sidebar hidden-xs">
-            <div class="col-xs-12">
-                <h2>Prizes</h2>
-                <!-- toss in a few coupons from the prize page -->
-                <h3 data-bind="with: $root.user">You have <span style="color:#cf2f28;" data-bind="text: top_five_dishcoins"></span> entries in this contest</h3>
+        </div>  
+
+        <div class="top-five-paginate-controls" data-bind="visible: isMobile" style="display: none">
+            <div class="top-five-paginate-controls-container">
+                <span class="trigger-prev"><i class="fa fa-chevron-left" data-bind="click: function(){ page(page() - 1) }"></i></span>
+                <span class="trigger-next"><i class="fa fa-chevron-right" data-bind="click: function(){ page(page() + 1) }"></i></span>
+                <ul class="paginate-circles">
+                    <li class="paginate-home" data-bind="css:{active: 999 == $root.current_numerical_page()}"><i class="fa fa-home" data-bind="click: function(){ $root.page(0) }"></i></li>            
+                    <!-- ko foreach: dish_list -->
+                        <li class="paginate-circle" data-bind="css:{active: $index() == $root.current_numerical_page()}, click: function(){ $root.page($index() + 1) }"></li>
+                    <!-- /ko -->
+                </ul>
             </div>
-            <div class="col-xs-12" style="border-bottom:1px solid #DCDCDC; padding-bottom:15px;">
-                <p>Share with your friends for more entries</p>
-                <button data-bind="click: function(){ $root.shareTopFiveFB() }" class="btn btn-fb-network-share">Share on <i class="fa fa-facebook"></i></button>
-                <input class="copybox" data-bind="value: 'https://dishgo.io/top_five/' + $root.current_top_five().beautiful_url() + '/' + $root.user().id()">
-            </div>
-            <div class="col-xs-12 trending">
-                <h2>What's Trending</h2> <!-- add 4 trending dishes from home page -->
-                <div class="row">
-                   <!--  link dishes to menu -->
-                    <a href="/app/network/restaurant/530bd15180410efe300050be" class="sidebar_dish_link"></a>
-                    <div class="col-xs-6" data-bind="" style="">
-                        <div class="image-cropped" style="background-image: url(https://36ec5e865094a74ec4cb-2d8ae1874a396bdb82dfc36ab7e38695.ssl.cf5.rackcdn.com/1935c9a93cebd220150e69604948f1e9cc8b08c9_medium.png?1408412121);">
+        </div> 
+            	
+        <div class="col-sm-4 sidebar" data-bind="mobileVisible: 'header'">
+            <div class="row">
+                <div class="col-xs-12">
+                    <h2>Prizes</h2>
+                    <!-- toss in a few coupons from the prize page -->
+                    <h3 data-bind="with: $root.user">You have <span style="color:#cf2f28;" data-bind="text: top_five_dishcoins"></span> entries in this contest</h3>
+                </div>
+                <div class="col-xs-12" style="border-bottom:1px solid #DCDCDC; padding-bottom:15px;">
+                    <p>Share with your friends for more entries</p>
+                    <button data-bind="click: function(){ $root.shareTopFiveFB() }" class="btn btn-fb-network-share">Share on <i class="fa fa-facebook"></i></button>
+                    <input class="copybox" data-bind="value: 'https://dishgo.io/top_five/' + $root.current_top_five().beautiful_url() + '/' + $root.user().id()">
+                </div>
+                <div class="col-xs-12 trending visible-sm">
+                    <h2>What's Trending</h2> <!-- add 4 trending dishes from home page -->
+                    <div class="row">
+                       <!--  link dishes to menu -->
+                        <a href="/app/network/restaurant/530bd15180410efe300050be" class="sidebar_dish_link"></a>
+                        <div class="col-xs-6" data-bind="" style="">
+                            <div class="image-cropped" style="background-image: url(https://36ec5e865094a74ec4cb-2d8ae1874a396bdb82dfc36ab7e38695.ssl.cf5.rackcdn.com/1935c9a93cebd220150e69604948f1e9cc8b08c9_medium.png?1408412121);">
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-xs-6">
-                        <div class="dish-title">
-                            <p>Creamed Spinach & Reggiano Cheese Dip</p>
+                        <div class="col-xs-6">
+                            <div class="dish-title">
+                                <p>Creamed Spinach & Reggiano Cheese Dip</p>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-xs-12" data-bind="with: current_top_five">
-                <ul class="list-prizes" data-bind="foreach: prizes">
-                    <li class="list-prizes-item">
-                        <div class="row">
-                            <div class="col-xs-10">
-                                <h4 class="restaurant_name" data-bind="text: restaurant_name"></h4>
-                            </div>                          
-                        </div>                        
-                        <div class="row">
-                            <div class="col-xs-10">
-                                <span class="coupon_name" data-bind="lText: name"></span>
-                            </div>                           
-                        </div>
-                        <div class="cnrflash">
-                            <div class="cnrflash-inner">
-                            <span class="cnrflash-label"><span data-bind="visible: prize_type() == '$'">$</span><!-- ko text: amount --><!-- /ko --><span data-bind="visible: prize_type() == '%'">%</span></span>
+                <div class="col-xs-12" data-bind="with: current_top_five">
+                    <ul class="list-prizes" data-bind="foreach: prizes">
+                        <li class="list-prizes-item">
+                            <div class="row">
+                                <div class="col-xs-10">
+                                    <h4 class="restaurant_name" data-bind="text: restaurant_name"></h4>
+                                </div>                          
+                            </div>                        
+                            <div class="row">
+                                <div class="col-xs-10">
+                                    <span class="coupon_name" data-bind="lText: name"></span>
+                                </div>                           
                             </div>
-                        </div>                       
-                    </li>
-                </ul>
+                            <div class="cnrflash">
+                                <div class="cnrflash-inner">
+                                <span class="cnrflash-label"><span data-bind="visible: prize_type() == '$'">$</span><!-- ko text: amount --><!-- /ko --><span data-bind="visible: prize_type() == '%'">%</span></span>
+                                </div>
+                            </div>                       
+                        </li>
+                    </ul>
+                </div>
             </div>
-        </div>
+        </div> 
+
     </div>
 </div>
-
-<div class="top-five-paginate-controls" data-bind="visible: isMobile" style="display: none">
-    <div class="top-five-paginate-controls-container">
-        <span class="trigger-prev"><i class="fa fa-chevron-left" data-bind="click: function(){ page(page() - 1) }"></i></span>
-        <span class="trigger-next"><i class="fa fa-chevron-right" data-bind="click: function(){ page(page() + 1) }"></i></span>
-        <ul class="paginate-circles" data-bind="foreach: dish_list">
-            <li class="paginate-circle" data-bind="css:{active: $index() == $root.current_numerical_page()}"></li>
-        </ul>
-    </div>
-</div>
-
 
 <script>
 	var top_five = <%= raw(@top_five.serializable_hash({export_localized:true,include_reviews:current_user}).to_json) %>;
