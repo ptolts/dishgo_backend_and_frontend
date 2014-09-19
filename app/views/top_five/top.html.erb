@@ -32,7 +32,7 @@
 <div class="container top_five_tool">
     <div class="row">
     	<div class="col-sm-8 main-bar" data-bind="with: current_top_five">
-            <div class="col-xs-12">
+            <div class="hidden-xs">
             	<p class="top_five_description" data-bind="lText: description"><%= first_non_empty(@top_five.description_translations) %></p>
             </div>                
             <% @top_five.dish.top_five.each do |dish| %>
@@ -96,6 +96,9 @@
                     </ul>
                 </div>
             </div>
+            <div class="visible-xs" data-bind="with: $root.current_top_five">
+                <p class="top_five_description" data-bind="lText: description"><%= first_non_empty(@top_five.description_translations) %></p>
+            </div>             
             <div class="row">
                 <div class="col-xs-12">
                     <h2>Prizes</h2>
