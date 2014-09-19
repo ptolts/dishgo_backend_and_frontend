@@ -174,7 +174,7 @@ function TopFiveModel(){
     self.current_numerical_page = ko.observable(0);
     self.current_page = ko.computed({
         read: function(){
-            var current_page = self.page() % (self.current_top_five().dishes().length + 1);
+            var current_page = ((self.page() % (self.current_top_five().dishes().length + 1)) + (self.current_top_five().dishes().length + 1)) % (self.current_top_five().dishes().length + 1);
             if(current_page == 0){
                 self.current_numerical_page(999);
                 return 'header';

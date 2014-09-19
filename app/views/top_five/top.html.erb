@@ -40,7 +40,7 @@
                     <div class="visible-xs">
                         <div class="dish-picture imageCroppedFull" style="background-image: url(<%= dish.img_src_orig %>); border-radius: 0; height: 400px"></div>
                     </div>
-                    <div class="top-five-paginate-controls" data-bind="visible: isMobile, with: $root" style="display: none">
+                    <div class="top-five-paginate-controls" data-bind="visible: $root.isMobile, with: $root" style="display: none">
                         <div class="top-five-paginate-controls-container">
                             <span class="trigger-prev"><i class="fa fa-chevron-left" data-bind="click: function(){ page(page() - 1) }"></i></span>
                             <span class="trigger-next"><i class="fa fa-chevron-right" data-bind="click: function(){ page(page() + 1) }"></i></span>
@@ -76,7 +76,7 @@
                             <!-- /ko -->
                         </div>
                     </div>
-                	<div class="col-sm-8 visible-sm">
+                	<div class="col-sm-8 hidden-xs">
                         <div class="dish-picture imageCroppedFull" style="background-image: url(<%= dish.img_src_orig %>); border-radius: 0; height: 400px"></div>
                     </div>
                 </div>
@@ -84,7 +84,7 @@
         </div>   
 
         <div class="col-sm-4 sidebar" data-bind="mobileVisible: 'header'">
-            <div class="top-five-paginate-controls" data-bind="visible: isMobile, with: $root" style="display: none">
+            <div class="top-five-paginate-controls" data-bind="visible: $root.isMobile, with: $root" style="display: none">
                 <div class="top-five-paginate-controls-container">
                     <span class="trigger-prev"><i class="fa fa-chevron-left" data-bind="click: function(){ page(page() - 1) }"></i></span>
                     <span class="trigger-next"><i class="fa fa-chevron-right" data-bind="click: function(){ page(page() + 1) }"></i></span>
@@ -107,7 +107,7 @@
                     <button data-bind="click: function(){ $root.shareTopFiveFB() }" class="btn btn-fb-network-share">Share on <i class="fa fa-facebook"></i></button>
                     <input class="copybox" data-bind="value: 'https://dishgo.io/top_five/' + $root.current_top_five().beautiful_url() + '/' + $root.user().id()">
                 </div>
-                <div class="col-xs-12 trending visible-sm">
+                <div class="col-xs-12 trending hidden-xs">
                     <h2>What's Trending</h2> <!-- add 4 trending dishes from home page -->
                     <div class="row">
                        <!--  link dishes to menu -->
