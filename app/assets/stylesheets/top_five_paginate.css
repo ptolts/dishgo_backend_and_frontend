@@ -39,7 +39,7 @@
     width: 100%;
     text-align: center;
     height: 20px;
-    bottom: 10%;
+    bottom: 5px;
     position: absolute;
     margin-top: -10px;
 }
@@ -62,9 +62,14 @@
 }
 
 .top-five-paginate-controls-container .paginate-home.active {
-    color: rgba(255,255,255,1);
+    color: #cf2f28;
 }
 
 .top-five-paginate-controls-container .paginate-circle.active {
-    background-color: rgba(255,255,255,1);
+    background-color: rgba(207,42,47,1);
 }
+.top-five-paginate-controls-container .fa {
+    text-shadow: 1px 2px 3px #000;
+        text-rendering: optimizelegibility;
+}
+.top

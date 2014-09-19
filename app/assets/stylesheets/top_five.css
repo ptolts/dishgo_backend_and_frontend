@@ -16,11 +16,17 @@
     position: absolute;
     top:10px;
     right: 10px;
+    z-index: 1;
+    text-shadow: 1px 2px 3px #000;
+		text-rendering: optimizelegibility;
 }
 .top_five_header .top_five_title {
     position: absolute;
-    bottom:10px;
-    left: 10px; 
+    bottom: 20px;
+    left: 10px;
+    z-index: 1;
+    text-shadow: 1px 2px 3px #000;
+	text-rendering: optimizelegibility;
 }
 .top_dish_rating_container {
 	margin-left: auto;
@@ -429,16 +435,17 @@
     }
     .top_dish_container {
         height: auto !important;
+        border: 0 !important;
     }
     .top_dish_container .dish-picture{
     	height: 250px;
         background-position: 50% 0 !important;
         background-repeat: no-repeat !important;
-        background-attachment: initial !important;
-        margin-bottom: 15px;         
+        background-attachment: initial !important;       
     }
     .main-bar {
     	padding: 0;
+    	border: 0;
     }
     .main-bar .col-xs-12 {
     	padding: 0 15px;
@@ -448,6 +455,28 @@
     }
     .top_dish_container .col-sm-8 {
 		padding: 0;
+	}
+	.top_five_header .countdown {
+	    position: absolute;
+	    top:10px;
+	    right: 0;
+	    left: 0;
+	    width: 100%;
+	    text-align: center;
+	    z-index: 1;
+	    text-shadow: 1px 2px 3px #000;
+		text-rendering: optimizelegibility;
+	}
+	.top_five_header .top_five_title {
+	    position: absolute;
+	    bottom: 20px;
+	    right: 0;
+	    left: 0;
+	    width: 100%;
+	    text-align: center;
+	    z-index: 1;
+	    text-shadow: 1px 2px 3px #000;
+		text-rendering: optimizelegibility;
 	}
 
 }
