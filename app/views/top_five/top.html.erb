@@ -62,6 +62,16 @@
             <% end %>       
         </div>		
         <div class="col-sm-4 sidebar hidden-xs">
+            <div class="col-xs-12">
+                <h2>Prizes</h2>
+                <!-- toss in a few coupons from the prize page -->
+                <h3 data-bind="with: $root.user">You have <span style="color:#cf2f28;" data-bind="text: top_five_dishcoins"></span> entries in this contest</h3>
+            </div>
+            <div class="col-xs-12" style="border-bottom:1px solid #DCDCDC; padding-bottom:15px;">
+                <p>Share with your friends for more entries</p>
+                <button data-bind="click: function(){ $root.shareTopFiveFB() }" class="btn btn-fb-network-share">Share on <i class="fa fa-facebook"></i></button>
+                <input class="copybox" data-bind="value: 'https://dishgo.io/top_five/' + $root.current_top_five().beautiful_url() + '/' + $root.user().id()">
+            </div>
             <div class="col-xs-12 trending">
                 <h2>What's Trending</h2> <!-- add 4 trending dishes from home page -->
                 <div class="row">
@@ -77,11 +87,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-xs-12">
-                <h2>Prizes</h2>
-                <!-- toss in a few coupons from the prize page -->
-                <h3 data-bind="with: $root.user">You have <span style="color:#cf2f28;" data-bind="text: top_five_dishcoins"></span> entries in this contest</h3>
             </div>
             <div class="col-xs-12" data-bind="with: current_top_five">
                 <ul class="list-prizes" data-bind="foreach: prizes">
@@ -103,11 +108,6 @@
                         </div>                       
                     </li>
                 </ul>
-            </div>
-            <div class="col-xs-12">
-                <p>Share with your friends for more entries</p>
-                <button data-bind="click: function(){ $root.shareTopFiveFB() }" class="btn btn-fb-network-share">Share on <i class="fa fa-facebook"></i></button>
-                <input class="copybox" data-bind="value: 'https://dishgo.io/top_five/' + $root.current_top_five().beautiful_url() + '/' + $root.user().id()">
             </div>
         </div>
     </div>
