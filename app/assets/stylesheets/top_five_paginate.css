@@ -1,0 +1,61 @@
+.top-five-paginate-controls {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 65px;
+    z-index: 30;
+}
+
+.top-five-paginate-controls-container {
+    position: relative;
+    height: 100%;
+    background: rgba(0,0,0,0.5);    
+}
+
+
+.top-five-paginate-controls-container .trigger-prev {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    font-size: 24px;
+    margin-top:-17px;
+    color: white; 
+    z-index: 1;   
+}
+
+.top-five-paginate-controls-container .trigger-next {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    font-size: 24px;
+    margin-top:-17px;
+    color: white; 
+    z-index: 1;     
+}
+
+.top-five-paginate-controls-container .paginate-circles {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    text-align: center;
+    height: 20px;
+    top: 50%;
+    position: absolute;
+    margin-top: -10px;
+}
+
+.top-five-paginate-controls-container .paginate-circle {
+    background-color: rgba(255,255,255,0.5);
+    height: 10px;
+    width: 10px;
+    display: inline-block;
+    border-radius: 100%;
+    margin-left: 3px;
+    margin-right: 3px;
+}
+
+.top-five-paginate-controls-container .paginate-circle.active {
+    background-color: rgba(255,255,255,1);
+}
