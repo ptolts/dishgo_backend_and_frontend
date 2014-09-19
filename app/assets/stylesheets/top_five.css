@@ -7,6 +7,10 @@
 	text-align: center;
 }*/
 
+.form-control {
+	box-shadow: none;
+}
+
 .top_five_header .container {
     height: 100%;
     position: relative;
@@ -106,7 +110,6 @@
 	color: #cf2f28;
 }
 .sidebar .trending {
-	border-bottom: 1px solid #DCDCDC;
 	padding: 0 15px 15px;
 }
 .sidebar_dish_link {
