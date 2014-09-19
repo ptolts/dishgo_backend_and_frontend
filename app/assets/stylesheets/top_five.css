@@ -73,22 +73,21 @@
 }
 .top_five_description {
 	font-size: 16px;
-	color: #82898d;
+	color: #565a5c;
 	margin: 20px 0;
 }
 .top_five_title {
 	color: #fff;
 	margin-top: 300px;
 }
-.top_dish_rating_container .restaurant_name,
-.top_dish_rating_container .rank {
+.top_dish_rating_container .restaurant_name {
 	font-size: 22px;
 	color: #cf2f28 !important;
 }
 .top_dish_rating_container .dish_title {
 	display: block;
 	color: #565a5c;
-	font-size: 22px;
+	font-size: 18px;
 }
 .top_dish_rating_container p {
 	color: #82898d !important;
@@ -415,8 +414,13 @@
     margin-bottom: 10px;
     display: inline-block;
 }
+.top_five_header {
+    	height: 350px;
+}
+
 @media only screen and (max-width: 600px) {
     .top_five_header {
+    	height: 350px;
         background-position: 50% 0 !important;
         background-repeat: no-repeat !important;
         background-attachment: initial !important; 
@@ -430,7 +434,69 @@
         height: initial !important;*/
         background-position: 50% 0 !important;
         background-repeat: no-repeat !important;
-        background-attachment: initial !important;         
+        background-attachment: initial !important;
+        margin-bottom: 15px;         
     }
+    .main-bar {
+    	padding: 0;
+    }
+    .main-bar .col-xs-12 {
+    	padding: 0 15px;
+    }
+    .top_dish_rating_container {
+    	text-align: center;
+    }
+    .top_dish_container .col-sm-8 {
+		padding: 0;
+	}
 
 }
+@media only screen and (max-width: 767px) {
+	.top_dish_container {
+        height: auto !important;
+    }
+    .top_dish_rating_container {
+    	text-align: center;
+    }
+}
+@media only screen and (min-width: 768px) {
+	.pop_up_menu_dish_rating i {
+		font-size: 27px;
+	}
+	.pop_up_menu_dish_rating .left_over {
+		font-size: 27px;
+	}
+	.main-bar .col-xs-12 {
+		padding: 0;
+	}
+ 	.top_dish_rating_container {
+    	text-align: left;
+    }
+    .top_dish_container .col-sm-8 {
+		padding: 0 0 0 15px;
+	}
+}
+@media only screen and (min-width: 992px) {
+	.pop_up_menu_dish_rating i {
+		font-size: 34px;
+	}
+	.pop_up_menu_dish_rating .left_over {
+		font-size: 34px;
+	}
+	.top_dish_container .col-sm-4 {
+		padding: 0 0 0 15px;
+	}
+}
+@media only screen and (min-width: 1200px) {
+	.top_five_header {
+		height: 500px;
+	}
+	.pop_up_menu_dish_rating i {
+		font-size: 40px;
+	}
+	.pop_up_menu_dish_rating .left_over {
+		font-size: 40px;
+	}
+}
+
+

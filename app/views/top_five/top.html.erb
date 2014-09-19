@@ -1,14 +1,13 @@
 <style>
     .top_five_header {
-        height: 350px;
         width: 100%;
         background: 
             linear-gradient(
-            rgba(0, 0, 0, 0.6), 
-            rgba(0, 0, 0, 0.6)
+            rgba(0, 0, 0, 0.5), 
+            rgba(0, 0, 0, 0.5)
             ),
             url(<%= @top_five.best_pic %>);
-        background-position: bottom;
+        background-position: center center;
         -webkit-background-size: cover;
         -moz-background-size: cover;
         -o-background-size: cover;
@@ -26,12 +25,17 @@
 <div class="container top_five_tool">
     <div class="row">
     	<div class="col-sm-8 main-bar" data-bind="with: current_top_five">
-            <div class="col-xs-12" style="padding-left:0;">
+            <div class="col-xs-12">
             	<p class="top_five_description" data-bind="lText: description"><%= first_non_empty(@top_five.description_translations) %></p>
             </div>                
             <% @top_five.dish.top_five.each do |dish| %>
+<<<<<<< HEAD
                 <div class="top_dish_container" data-bind="with_dish: '<%= dish.id %>', mobileVisible: '<%= dish.id %>'">
                     <div class="col-sm-4" style="padding:0 0 0 30px;">
+=======
+                <div class="top_dish_container" data-bind="with_dish: '<%= dish.id %>'">
+                    <div class="col-sm-4">
+>>>>>>> 73b273fccbdabb5f4df29bdde40ac6cfbcc62775
                         <div class="top_dish_rating_container">
                             <!-- <span class="rank">#1</span> -->
                             <span class="restaurant_name"><%= dish.restaurant_name %></span>
@@ -48,15 +52,15 @@
                                 <!-- /ko -->
                                 <!-- IF THE REVIEW HAS BEEN SUBMITTED, WE MAKE IT LOOK DIFFERENT -->
                                 <!-- ko if: id() -->
-                                    <p>Your rating:</p>
+                                    <p>Submit your rating:</p>
                                     <div class="pop_up_menu_dish_rating" data-bind="starRating: rating"></div>
                                     <p data-bind="text: review"></p>
                                 <!-- /ko -->                                
                             <!-- /ko -->
                         </div>
                     </div>
-                	<div class="col-sm-8" style="padding: 0 0 0 15px;">
-                		<div class="dish-picture imageCroppedFull" style="background-image: url(<%= dish.img_src_orig %>); border-radius: 0; height: 400px"></div>
+                	<div class="col-sm-8">
+                        <div class="dish-picture imageCroppedFull" style="background-image: url(<%= dish.img_src_orig %>); border-radius: 0; height: 400px"></div>
                     </div>
                 </div>
             <% end %>       
