@@ -18,7 +18,7 @@
     right: 10px;
     z-index: 1;
     text-shadow: 1px 2px 3px #000;
-		text-rendering: optimizelegibility;
+	text-rendering: optimizelegibility;
 }
 .top_five_header .top_five_title {
     position: absolute;
