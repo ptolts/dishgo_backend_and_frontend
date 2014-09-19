@@ -80,15 +80,18 @@
 
 	<%= render 'network/network_sign_in' %>      	
 
-	<% if controller_name == "network" && action_name == "restaurant" %>
-		<%= render 'restaurant_network_header' %>
-	<% else %>
-		<%= render 'network/network_header' %>
-	<% end %>   
+		<!-- The div below fixes the floating footer -->
+		<div class="wrapper_to_fix_footer">
+				<% if controller_name == "network" && action_name == "restaurant" %>
+					<%= render 'restaurant_network_header' %>
+				<% else %>
+					<%= render 'network/network_header' %>
+				<% end %>   
 
-		<!-- ko loggedInChecker: loggedIn -->
-			<%= yield %>
-		<!-- /ko -->
+				<!-- ko loggedInChecker: loggedIn -->
+					<%= yield %>
+				<!-- /ko -->
+		</div>
     		
 		<footer>
 		    <div class="container">

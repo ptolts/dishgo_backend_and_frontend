@@ -11,6 +11,24 @@
 *= require_self
 */
 
+/* FOOTER FIX \/\/\/ */
+
+
+html, body {
+    height: 100%;
+}
+.wrapper_to_fix_footer {
+    min-height: 100%;
+    height: auto !important; /* This line and the next line are not necessary unless you need IE6 support */
+    height: 100%;
+    margin: 0 auto -166px; /* the bottom margin is the negative value of the footer's height */
+}
+.footer, .push {
+    height: 166px; /* .push must be the same height as .footer */
+}
+
+/* FOOTER FIX ^^^ */
+
 .form-group {
     width: 100%;
 }
