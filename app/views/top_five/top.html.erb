@@ -84,16 +84,18 @@
         </div>   
 
         <div class="col-sm-4 sidebar" data-bind="mobileVisible: 'header'">
-            <div class="top-five-paginate-controls" data-bind="visible: $root.isMobile, with: $root" style="display: none">
-                <div class="top-five-paginate-controls-container">
-                    <span class="trigger-prev"><i class="fa fa-chevron-left" data-bind="click: function(){ page(page() - 1) }"></i></span>
-                    <span class="trigger-next"><i class="fa fa-chevron-right" data-bind="click: function(){ page(page() + 1) }"></i></span>
-                    <ul class="paginate-circles">
-                        <li class="paginate-home" data-bind="css:{active: 999 == $root.current_numerical_page()}"><i class="fa fa-home" data-bind="click: function(){ $root.page(0) }"></i></li>            
-                        <!-- ko foreach: dish_list -->
-                            <li class="paginate-circle" data-bind="css:{active: $index() == $root.current_numerical_page()}, click: function(){ $root.page($index() + 1) }"></li>
-                        <!-- /ko -->
-                    </ul>
+            <div class="row" data-bind="visible: $root.isMobile, with: $root" style="display: none">
+                <div class="top-five-paginate-controls">
+                    <div class="top-five-paginate-controls-container">
+                        <span class="trigger-prev"><i class="fa fa-chevron-left" data-bind="click: function(){ page(page() - 1) }"></i></span>
+                        <span class="trigger-next"><i class="fa fa-chevron-right" data-bind="click: function(){ page(page() + 1) }"></i></span>
+                        <ul class="paginate-circles">
+                            <li class="paginate-home" data-bind="css:{active: 999 == $root.current_numerical_page()}"><i class="fa fa-home" data-bind="click: function(){ $root.page(0) }"></i></li>            
+                            <!-- ko foreach: dish_list -->
+                                <li class="paginate-circle" data-bind="css:{active: $index() == $root.current_numerical_page()}, click: function(){ $root.page($index() + 1) }"></li>
+                            <!-- /ko -->
+                        </ul>
+                    </div>
                 </div>
             </div>
             <div class="visible-xs" data-bind="with: $root.current_top_five">
