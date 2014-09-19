@@ -859,7 +859,7 @@ footer a:hover, footer a:focus {
     .network_header #logo {
         height: 40px;
         width: 140px;
-        margin: 10px 0 0 -10px; 
+        margin: 5px 0 0 -10px; 
     }
 /*    #login_buttons {
         position: relative;
