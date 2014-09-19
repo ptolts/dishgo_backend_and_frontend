@@ -147,6 +147,11 @@
     color: white;
     border-radius: 4px;
 }
+.btn-fb-network-share:hover,
+.btn-fb-network-share:focus {
+    background-color: #fff;
+    color: #3B5998;
+}
 
 .list-prizes {
     list-style: none;
@@ -425,6 +430,9 @@
 }
 .top_five_header {
     	height: 350px;
+}
+.btn:focus {
+  outline: none;
 }
 
 @media only screen and (max-width: 600px) {
