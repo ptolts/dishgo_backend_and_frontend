@@ -420,11 +420,12 @@
 
 @media only screen and (max-width: 600px) {
     .top_five_header {
-    	height: 200px;
+    	height: 250px;
         background-position: 50% 0 !important;
         background-repeat: no-repeat !important;
         background-attachment: initial !important; 
-        z-index: -1;    
+        /*z-index: -1; */
+        position: relative;   
     }
     .top_dish_container {
         height: auto !important;
