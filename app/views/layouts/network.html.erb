@@ -50,6 +50,8 @@
 				var user_data = <%= current_user ? raw(current_user.serializable_hash({restaurant:true}).to_json) : {}%>;
 				var isOwner = <%= @owner ? @owner : false %>;
 				var direct_dish_id = <%= @direct_dish_id ? raw("\"#{@direct_dish_id}\"") : false %>;
+				var direct_section_id = <%= @section_id ? raw("\"#{@section_id}\"") : false %>;
+				var direct_menu_id = <%= @menu_id ? raw("\"#{@menu_id}\"") : false %>;
 
 		</script> 		 	
 
@@ -93,7 +95,7 @@
 				<!-- /ko -->
 		</div>
     		
-		<footer>
+		<footer data-bind="visible: true" style="display:none">
 		    <div class="container">
 		        <div class="row">
 		            <div class="col-sm-20">

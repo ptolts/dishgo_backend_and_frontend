@@ -50,6 +50,10 @@ class NetworkController < ApplicationController
     end
 
     @direct_dish_id = params[:direct_dish_id]
+    if !@direct_dish_id.blank? and direct_dish = Dish.find(@direct_dish_id)
+      @section_id = direct_dish.section_id
+      @menu_id = direct_dish.section.published_menu_id
+    end
 
     render 'restaurant'
   end
