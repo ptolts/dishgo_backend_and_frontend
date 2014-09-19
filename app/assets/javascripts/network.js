@@ -245,11 +245,8 @@ ko.bindingHandlers.networkMaxHeight = {
     update: function (element, valueAccessor, allBindingsAccessor, viewModel, bindingContext) {
         var value = valueAccessor();
         var page = bindingContext['$menu']();
-        if(page){
-            console.log("Menu Visible");
-        }
         if($(window).width() > 768){
-            setTimeout(function (element, value) {
+            setTimeout(function (element, value, viewModel) {
                 var maxHeight = 0;
                 $(element).children("."+value).each(function(index,elem){
                     var elem = $(elem);
@@ -259,7 +256,7 @@ ko.bindingHandlers.networkMaxHeight = {
                 $(element).children("."+value).css('min-height',maxHeight+'px');
                 if("direct_dish_id" in window && direct_dish_id && direct_dish_id.fullWidth){
                     direct_dish_id.fullWidth(true);
-                    direct_dish_id = null;
+                    // direct_dish_id = null;
                 }
             }, 0, element, value);
         }
