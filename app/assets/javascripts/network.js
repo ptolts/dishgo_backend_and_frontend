@@ -395,10 +395,21 @@ function NetworkModel() {
             self.selected_menu(self.menus()[0].menu());
         }
         self.lang = lang;                                  
+    } 
+
+    if(!$.cookie("language")){
+        $.cookie('language', 'en', { expires: 365, path: '/' });
+        var def_lang = 'en';
     } else {
-        self.lang = ko.observable((navigator.language || navigator.userLanguage || 'en').replace(/\-.*/,''));
-        lang = self.lang;
+        var def_lang = $.cookie("language");
     }
+
+    if(typeof lang == 'function'){
+        lang(def_lang);
+    } else {
+        self.lang = ko.observable(def_lang);
+        lang = self.lang; 
+    }   
 
     // Switch Languages
     self.language = ko.computed(function(){
@@ -415,6 +426,7 @@ function NetworkModel() {
         } else {
             self.lang("en");
         }
+        $.cookie('language', self.lang(), { expires: 365, path: '/' });        
     }    
 
     self.showDetails = ko.observable(false);

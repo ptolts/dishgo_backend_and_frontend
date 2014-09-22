@@ -291,7 +291,7 @@ class Dish
       next option.custom_to_hash_draft 
     end
     dish_hash["image"] = self.draft_image.collect do |image|
-      img_hash = image.custom_to_hash
+      img_hash = image.serializable_hash({})
       next img_hash
     end
     return dish_hash

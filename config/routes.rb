@@ -93,6 +93,7 @@ Foodcloud::Application.routes.draw do
     resources :business, only: []  do
       collection do
         get '/', to: "business#index"
+        post '/submit', to: "business#submit"
       end
     end
   end
@@ -224,7 +225,7 @@ Foodcloud::Application.routes.draw do
 
   resources :copymenu, only: []  do
     collection do
-      get 'index'
+      get '/', to: "copymenu#index"
       post 'search'
       post 'initiate_copy'    
     end
@@ -232,6 +233,7 @@ Foodcloud::Application.routes.draw do
 
   resources :administration, only: []  do
     collection do
+      get '/', to: "administration#index"
       get 'restaurants'
       get 'edit_menu'      
       get 'users'    

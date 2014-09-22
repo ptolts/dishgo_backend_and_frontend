@@ -1,5 +1,4 @@
 /*
-*= require jquery_cookie.js
 *= require_self
 */
 

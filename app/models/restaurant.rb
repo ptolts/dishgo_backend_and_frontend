@@ -394,12 +394,13 @@ class Restaurant
     other_sections = self.menus.not_def.collect do |more_sections|
       next more_sections.published_menu.pub
     end
-    section_ids = [sections, other_sections].flatten.compact.collect{|e| e.id}    
+    section_ids = [sections, other_sections].flatten.compact.collect{|e| e.id}
     menu_hash = self.languages.inject({}) do |res,lang|
       sections = Section.find(section_ids).sort_by{|m| section_ids.index(m.id) }
       menu = sections.collect do |section|
         hash = section.as_document
         hash[:id] = section.id
+        hash["position"] = section_ids.index(section.id)
         hash["name"] = section.name_translations[lang]
         hash["dishes"] = section.dishes.pub.collect do |dish|
           dish.api_custom_to_hash(lang)

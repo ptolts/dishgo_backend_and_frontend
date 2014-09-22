@@ -14,6 +14,12 @@ class Email < ActionMailer::Base
     mail(:to => "tim@dishgo.io", :from => @from, :subject => "Dishgo Help").deliver
   end
 
+  def send_tim_an_email text
+    @text = text
+    mail(:to => "phil@dishgo.io", :subject => "New Restaurant", template_name: 'send_tim_an_email').deliver
+    mail(:to => "tim@dishgo.io", :subject => "New Restaurant", template_name: 'send_tim_an_email').deliver
+  end  
+
   def welcome user
     mail(:to => user.email, :subject => "Welcome to DishGo!").deliver  
     notify_admins user

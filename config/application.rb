@@ -86,6 +86,7 @@ module Foodcloud
                                     'signin.css',
                                     'letsdishgo.css',
                                     'onlinesite_javascript.js',
+                                    'bidness_javascript.js',
                                     'network_restaurant_javascript.js',
                                     'top_five_list_javascript.js',
                                     'top_five_create_javascript.js',

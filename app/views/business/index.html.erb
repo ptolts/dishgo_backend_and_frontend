@@ -40,7 +40,7 @@
 		</div>
 	</div>
 </div>
-<div class="bg-dark-1">
+<div class="bg-dark-1" data-bind="visible: !sent()">
 	<div class="container">
 		<div class="row">
 			<div class="col-xs-12 text-center">
@@ -53,7 +53,7 @@
                     <div class="controls">
                     	<div class="input-group input-group-lg">
 		                	<div class="input-group-addon"><i class="fa fa-building-o"></i></div>
-                        	<input id="resturant_name" name="resturant_name" type="text" placeholder="Restaurant Name" data-bind="value: name" class="form-control">
+                        	<input id="resturant_name" name="resturant_name" type="text" placeholder="Restaurant Name" data-bind="value: restaurant_name" class="form-control">
                         </div>
                     </div>
                 </div>
@@ -80,7 +80,7 @@
                     <div class="controls">
                     	<div class="input-group input-group-lg">
 		                	<div class="input-group-addon"><i class="fa fa-envelope"></i></div>
-                        	<input id="" name="" type="text" placeholder="Email Address" data-bind="value: name" class="form-control">
+                        	<input id="" name="" type="text" placeholder="Email Address" data-bind="value: email" class="form-control">
                         </div>
                     </div>
                 </div>
@@ -90,7 +90,7 @@
                     <div class="controls">
                     	<div class="input-group input-group-lg">
 		                	<div class="input-group-addon"><i class="fa fa-phone"></i></div>
-                        	<input id="" name="" type="text" placeholder="555-555-5555" data-bind="value: name" class="form-control">
+                        	<input id="" name="" type="text" placeholder="555-555-5555" data-bind="value: phone" class="form-control">
                         </div>
                     </div>
                 </div>
@@ -98,7 +98,7 @@
 		</div>
 		<div class="row">
 			<div class="col-xs-12">
-				<button class="btn btn-rewards center-block" data-bind="">Submit</button>
+				<button class="btn btn-rewards center-block" data-bind="click: function(){ $root.submit() }">Submit</button>
 			</div>
 		</div>
 	</div>
@@ -118,7 +118,7 @@
 	var scripts = [
 		"<%= javascript_path 'application' %>",
     	"<%= javascript_path 'menu_editor' %>",
-    	"<%= javascript_path 'network_index_javascript' %>",
+    	"<%= javascript_path 'bidness_javascript' %>",
 	];
 	var src;
 	var script;

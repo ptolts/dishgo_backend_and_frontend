@@ -34,6 +34,7 @@
     self.filename = ko.observable("");
     self.id = ko.observable(data.id || "");
     self.official_site_image = ko.observable(data.official_site_image || false);
+    self.api_upload = ko.observable(data.api_upload || false);
     self.url = ko.observable("");
     self.original = ko.observable("");
     self.medium = ko.observable("");

@@ -52,17 +52,29 @@
                         <div class="thumbnail" data-bind="style:{borderColor: official_site_image() ? 'green' : 'red'}">
                             <img class="img-rounded" data-bind="attr: {src: url}" />
                             <div class="caption">
-                                <div class="pull-left">
+                                <div class="col-xs-4 pull-left">
                                     <span class="btn btn-dish" data-bind="click: function(){ $data.official_site_image(true); $data.setProperties(); }">
                                         <i class="glyphicon glyphicon-edit"></i> Show
                                     </span>                     
                                 </div>
-
-                                <div class="pull-right">
-                                    <span class="btn btn-warning" data-bind="click: function(){ $data.official_site_image(false); $data.setProperties(); }">
-                                        <i class="glyphicon glyphicon-remove"></i> Dont Show
-                                    </span>                     
-                                </div>                                
+                                <!-- these if else are for user uploaded images, or for restauratns uploaded -->
+                                <!-- ko if: api_upload -->
+                                    <div class="col-xs-4 user_image">
+                                        <p>User Uploaded Image.</p>
+                                    </div>
+                                    <div class="col-xs-4 pull-right">
+                                        <span class="btn btn-warning" data-bind="click: function(){ $data.official_site_image(false); $data.setProperties(); }">
+                                            <i class="glyphicon glyphicon-remove"></i> Dont Show
+                                        </span>                     
+                                    </div>
+                                <!-- /ko --> 
+                                <!-- ko ifnot: api_upload -->
+                                    <div class="col-xs-4 pull-right">
+                                        <span class="btn btn-warning" data-bind="click: function(){ $parent.removeImage($data) }">
+                                            <i class="glyphicon glyphicon-remove"></i> Delete
+                                        </span>                     
+                                    </div>
+                                <!-- /ko -->                                                             
                             </div>
                         </div>
                     </div>
