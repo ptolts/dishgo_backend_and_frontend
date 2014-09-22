@@ -504,6 +504,7 @@ input {
   min-height: 100%;
   margin-top: 35px;
   background-color: #373737;
+  margin-left: 10px;
 }
 
 .page-content {
