@@ -43,7 +43,7 @@ Foodcloud::Application.routes.draw do
 
   resources :token_authentications, :only => [:create, :destroy]
 
-  resources :facebook do
+  resources :facebook, only: []  do
     collection do
       post '/', to: "facebook#index"
       get '/', to: "facebook#index"
@@ -54,7 +54,7 @@ Foodcloud::Application.routes.draw do
     end
   end
 
-  resources :prizes do
+  resources :prizes, only: []  do
     collection do
       get '/', to: "prizes#index"
       get '/print_list', to: "prizes#print_list"
@@ -70,7 +70,7 @@ Foodcloud::Application.routes.draw do
     end
   end
 
-  resources :top_five do
+  resources :top_five, only: []  do
     collection do
       get '/', to: "top_five#index"
       get '/create/:id', to: "top_five#create"      
@@ -83,19 +83,21 @@ Foodcloud::Application.routes.draw do
     end
   end       
 
-  resources :jobs do
+  resources :jobs, only: []  do
     collection do
       get '/', to: "jobs#index"
     end
   end   
 
-  resources :business do
-    collection do
-      get '/', to: "business#index"
+  scope '/dishgo' do
+    resources :business, only: []  do
+      collection do
+        get '/', to: "business#index"
+      end
     end
-  end   
+  end
 
-  resources :network do
+  resources :network, only: []  do
     collection do
       get '/', to: "network#index"
       get '/restaurant/:id', to: "network#restaurant"
@@ -113,7 +115,7 @@ Foodcloud::Application.routes.draw do
     end
   end 
 
-  resources :image_screening do
+  resources :image_screening, only: []  do
     collection do
       get '/', to: "image_screening#index"
       post '/load_more', to: "image_screening#load_more"
@@ -123,14 +125,14 @@ Foodcloud::Application.routes.draw do
     end
   end     
 
-  resources :analytics do
+  resources :analytics, only: []  do
     collection do
       post 'day_data', to: "analytics#day_data"
       post 'week_data', to: "analytics#week_data"
     end
   end    
 
-  resources :letsdishgo do
+  resources :letsdishgo, only: []  do
     collection do
       get '/', to: "letsdishgo#index"
       post 'create_user_and_restaurant', to: "letsdishgo#create_user_and_restaurant"
@@ -141,7 +143,7 @@ Foodcloud::Application.routes.draw do
     end
   end  
 
-  resources :odesk do
+  resources :odesk, only: []  do
     collection do
       get '/', to: "odesk#index"
       get 'files/:id', to: "odesk#files"
@@ -157,19 +159,19 @@ Foodcloud::Application.routes.draw do
     end
   end    
 
-  resources :injected do
+  resources :injected, only: []  do
     collection do
       get '/:id', to: "injected#index"
     end
   end 
 
-  resources :robots do
+  resources :robots, only: []  do
     collection do
       get '/sitemap.xml' => "robots#sitemap"
     end
   end   
 
-  resources :onlinesite do
+  resources :onlinesite, only: []  do
     collection do
       get 'index'
       get 'preview/:id', to: "onlinesite#preview"
@@ -177,7 +179,7 @@ Foodcloud::Application.routes.draw do
     end
   end  
 
-  resources :profile do
+  resources :profile, only: []  do
     collection do
       get 'edit'
       get 'billing'
@@ -191,7 +193,7 @@ Foodcloud::Application.routes.draw do
     end
   end
 
-  resources :website do
+  resources :website, only: []  do
     collection do
       get 'index'
       post 'submit_design'
@@ -203,7 +205,7 @@ Foodcloud::Application.routes.draw do
     end
   end
 
-  resources :design do
+  resources :design, only: []  do
     collection do
       get 'list'
       get 'fonts'
@@ -220,7 +222,7 @@ Foodcloud::Application.routes.draw do
     end
   end  
 
-  resources :copymenu do
+  resources :copymenu, only: []  do
     collection do
       get 'index'
       post 'search'
@@ -228,7 +230,7 @@ Foodcloud::Application.routes.draw do
     end
   end
 
-  resources :administration do
+  resources :administration, only: []  do
     collection do
       get 'restaurants'
       get 'edit_menu'      
@@ -267,7 +269,7 @@ Foodcloud::Application.routes.draw do
     end
   end
 
-  resources :demo do
+  resources :demo, only: []  do
     collection do
       get 'index' 
       post 'upload_image'        
@@ -277,7 +279,7 @@ Foodcloud::Application.routes.draw do
     end
   end
 
-  resources :menucrud do
+  resources :menucrud, only: []  do
     collection do
       post 'create_individual_option'
       post 'create_option'
@@ -287,7 +289,7 @@ Foodcloud::Application.routes.draw do
     end
   end 
 
-  resources :menu_update do
+  resources :menu_update, only: []  do
     collection do
       post 'update_individual_option'
       post 'update_option'
