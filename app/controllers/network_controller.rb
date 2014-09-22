@@ -60,10 +60,10 @@ class NetworkController < ApplicationController
 
   def search
     restaurants = Restaurant.only_with_menu.limit(25)
-    if result = request.location    
-      coords = [result.coordinates[1],result.coordinates[0]]
-      restaurants = restaurants.where(:locs => { "$near" => { "$geometry" => { "type" => "Point", :coordinates => coords }, "$maxDistance" => 100000}})
-    end
+    # if result = request.location    
+    #   coords = [result.coordinates[1],result.coordinates[0]]
+    #   restaurants = restaurants.where(:locs => { "$near" => { "$geometry" => { "type" => "Point", :coordinates => coords }, "$maxDistance" => 100000}})
+    # end
     search_term = params[:restaurant_search_term].gsub(/[^[:alnum:]]/,'.').gsub(/s\b/,'.?s').gsub(/áéíóú/i,'.')
     regex = /#{search_term}/i
     restaurants = restaurants.where(name:regex)

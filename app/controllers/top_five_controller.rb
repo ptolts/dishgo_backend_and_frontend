@@ -19,7 +19,12 @@ class TopFiveController < ApplicationController
       Rails.logger.warn "#{user_id} != #{current_user.id} -> #{current_user.id != user_id}"
       Dishcoin.create(user_id:user_id,top_five_id:@top_five.id,ip:request.ip)
     end
-
+    if top_dish = TopDish.first
+      @click_bait_dishes = Dish.find(top_dish.dish_ids).to_a
+    else
+      restaurant = Restaurant.where(name:/cunningham/i).first
+      @click_bait_dishes = restaurant.dishes.to_a.reject{|e| e.image.count == 0}[0..2]
+    end
     render 'top', layout: 'top_five'
   end
 

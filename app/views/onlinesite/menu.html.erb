@@ -53,7 +53,7 @@
 															<p data-bind="lTruncatedText: description"></p>
 														</div>
 														<div class="dish_price">
-															<div data-bind="template: { name: price_template }"></div>
+															<div data-bind="template: { name: price_template }, visible: pretty_price() != '-'"></div>
 															<script id="single_price" type="text/x-jQuery-tmpl">
 																<span class="text">Price: </span>
 																<span class="currency-symbol">$</span>

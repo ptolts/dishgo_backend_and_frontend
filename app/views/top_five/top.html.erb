@@ -27,11 +27,11 @@
             ),
             url(<%= @top_five.best_pic %>);
             background-position: center center;
-        -webkit-background-size: cover;
-        -moz-background-size: cover;
-        -o-background-size: cover;
-        background-size: cover; 
-        background-attachment: fixed;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover; 
+            background-attachment: fixed;
         }
     }
 
@@ -95,9 +95,9 @@
                                 <!-- /ko -->
                                 <!-- IF THE REVIEW HAS BEEN SUBMITTED, WE MAKE IT LOOK DIFFERENT -->
                                 <!-- ko if: id() -->
-                                    <p>Submit your rating:</p>
+                                    <p>Your rating:</p>
                                     <div class="pop_up_menu_dish_rating" data-bind="starRating: rating"></div>
-                                    <p data-bind="text: review"></p>
+                                    <p>"<!-- ko text: review --><!-- /ko -->"</p>
                                 <!-- /ko -->                                
                             <!-- /ko -->
                         </div>
@@ -115,6 +115,10 @@
             </div>             
             <div class="row">
                 <div class="col-xs-12">
+                    <h3 data-bind="localize">Contest Details</h3>
+                    <p>For every rating you submit, you will receive one contest entry. Share this page with your friends and earn another entry for every friend that visits using the Facebook button or link below.</p>
+                </div>                
+                <div class="col-xs-12">
                     <!-- toss in a few coupons from the prize page -->
                     <h3 data-bind="with: $root.user">You have <span style="color:#cf2f28;" data-bind="text: top_five_dishcoins"></span> entries in this contest</h3>
                 </div>
@@ -127,6 +131,7 @@
                     <h2>Up For Grabs</h2>
                     <ul class="list-prizes" data-bind="foreach: prizes">
                         <li class="list-prizes-item">
+                            <a target="_blank" class="prize_full_div_link" data-bind="attr:{href:'/app/network/restaurant/' + restaurant_id()}"></a>
                             <div class="row">
                                 <div class="col-xs-10">
                                     <h4 class="restaurant_name" data-bind="text: restaurant_name"></h4>
@@ -153,19 +158,19 @@
                 </div>
                 <div class="col-xs-12 trending hidden-xs">
                     <h2>What's Trending</h2> <!-- add 4 trending dishes from home page -->
-                    <div class="row">
-                       <!--  link dishes to menu -->
-                        <a href="/app/network/restaurant/530bd15180410efe300050be" class="sidebar_dish_link"></a>
-                        <div class="col-xs-6" data-bind="">
-                            <div class="image-cropped" style="background-image: url(https://36ec5e865094a74ec4cb-2d8ae1874a396bdb82dfc36ab7e38695.ssl.cf5.rackcdn.com/1935c9a93cebd220150e69604948f1e9cc8b08c9_medium.png?1408412121);">
+                    <% @click_bait_dishes.each do |dish| %>
+                        <div class="row" style="margin-bottom: 5px">
+                            <a href="/app/network/restaurant/<%= dish.restaurant.id %>" class="sidebar_dish_link"></a>                            
+                            <div class="col-xs-6">
+                                <div class="image-cropped" style="background-image: url(<%= dish.img_src %>); border-radius: 0;"></div>
                             </div>
+                            <div class="col-xs-6">
+                                <div class="dish-title">
+                                    <p><%= first_non_empty(dish.name_translations) %></p>
+                                </div>
+                            </div>                            
                         </div>
-                        <div class="col-xs-6">
-                            <div class="dish-title">
-                                <p>Creamed Spinach & Reggiano Cheese Dip</p>
-                            </div>
-                        </div>
-                    </div>
+                    <% end %>                  
                 </div>
             </div>
         </div> 

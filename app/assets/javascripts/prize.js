@@ -65,6 +65,7 @@ function Prize(data) {
     self.id = ko.observable(data.id || null);
     self.name = ko.observable(data.name || copyDefaultHash(default_language_hash));
     self.restaurant_name = ko.observable(data.restaurant_name || "");
+    self.restaurant_id = ko.observable(data.restaurant_id || "");
     self.amount = ko.observable(data.amount || 0);
     self.prize_type = ko.observable(data.prize_type || "$");
     self.prize_types = ["$","%"];
