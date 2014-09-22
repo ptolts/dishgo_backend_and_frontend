@@ -254,14 +254,16 @@ ko.bindingHandlers.networkMaxHeight = {
                         maxHeight = elem.outerHeight();
                 });
                 $(element).children("."+value).css('min-height',maxHeight+'px');
-                if("direct_dish_id" in window && "direct_section_id" in window && viewModel.id() == direct_section_id){
-                    if(direct_dish_id.fullWidth){
-                        direct_dish_id.fullWidth(true);
-                    }
-                    // direct_dish_id = null;
-                }
             }, 0, element, value, viewModel);
         }
+        setTimeout(function (element, value, viewModel) {
+            if("direct_dish_id" in window && "direct_section_id" in window && viewModel.id() == direct_section_id){
+                if(direct_dish_id.fullWidth){
+                    direct_dish_id.fullWidth(true);
+                }
+                // direct_dish_id = null;
+            }
+        }, 0, element, value, viewModel);
     }    
 }
 
