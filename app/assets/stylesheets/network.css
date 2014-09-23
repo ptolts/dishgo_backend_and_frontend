@@ -1264,8 +1264,9 @@ footer a:hover, footer a:focus {
     border-right: 0;
     border-bottom: 0;
 }
-.btn-fb-share:hover {
-    background-color: white;
+.btn-fb-network-share:hover,
+.btn-fb-network-share:focus {
+    background-color: #fff;
     color: #3B5998;
 }
 .hours_opened {

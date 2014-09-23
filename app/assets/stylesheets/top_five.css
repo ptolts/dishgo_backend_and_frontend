@@ -14,6 +14,18 @@
     right: 15px;
 }*/
 
+.view_full_menu {
+    margin: 10px 0;
+}
+.view_full_menu a {
+    color: #cf2f28;
+    text-decoration: none;
+}
+.view_full_menu a:hover.
+.view_full_menu a:focus {
+    opacity: 0.7;
+}
+
 .prize_full_div_link {
     position: absolute;
     top: 0;
@@ -100,7 +112,6 @@
 .top_five_description {
 	font-size: 16px;
 	color: #565a5c;
-	margin: 20px 0;
 }
 .top_five_title {
 	color: #fff;
@@ -158,15 +169,7 @@
 }
 
 .btn-fb-network-share {
-    border: 1px solid #3B5998;
-    background-color: #3B5998;
-    color: white;
-    border-radius: 4px;
-}
-.btn-fb-network-share:hover,
-.btn-fb-network-share:focus {
-    background-color: #fff;
-    color: #3B5998;
+    border-radius: 0px !important;
 }
 
 .list-prizes {
@@ -180,7 +183,7 @@
     margin-bottom: 10px;
     background-color: #fff;
     padding: 0 10px;
-    border-radius: 4px;
+    border-radius: 0px;
     position: relative;
     min-height: 100px;
     border: 1px solid #82898d;
@@ -359,7 +362,7 @@
     overflow: hidden;
     width: 75px;
     height: 75px;
-    border-radius: 0px 3px 0px 0;
+    border-radius: 0px;
 }
 .cnrflash-inner{
    position: absolute;
@@ -450,6 +453,22 @@
 .btn:focus {
   outline: none;
 }
+.col-custom-70 {
+        width: 100%;
+        position: relative;
+        min-height: 1px;
+        padding-left: 15px;
+        padding-right: 15px;
+        float: left;
+}
+.col-custom-30 {
+        width: 100%;
+        position: relative;
+        min-height: 1px;
+        padding-left: 15px;
+        padding-right: 15px;
+        float: left;
+}
 
 @media only screen and (max-width: 600px) {
     .top_five_header {
@@ -528,9 +547,31 @@
  	.top_dish_rating_container {
     	text-align: left;
     }
+    .top_dish_container {
+        height: 450px !important;
+    }
+    .dish-picture {
+        height: 450px !important;
+    }
     .top_dish_container .col-sm-8 {
 		padding: 0 0 0 15px;
 	}
+    .col-custom-70 {
+        width: 67%;
+        position: relative;
+        min-height: 1px;
+        padding-left: 15px;
+        padding-right: 15px;
+        float: left;
+    }
+    .col-custom-30 {
+        width: 33%;
+        position: relative;
+        min-height: 1px;
+        padding-left: 15px;
+        padding-right: 15px;
+        float: left;
+    }
 }
 @media only screen and (min-width: 992px) {
 	.pop_up_menu_dish_rating i {
@@ -539,9 +580,21 @@
 	.pop_up_menu_dish_rating .left_over {
 		font-size: 34px;
 	}
+    .top_dish_container {
+        height: 400px !important;
+    }
+    .dish-picture {
+        height: 400px !important;
+    }
 	.top_dish_container .col-sm-4 {
 		padding: 0 0 0 15px;
 	}
+    .col-custom-30 {
+        width: 30%;
+    }
+    .col-custom-70 {
+        width: 70%;
+    }
 }
 @media only screen and (min-width: 1200px) {
 	.top_five_header {
