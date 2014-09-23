@@ -952,16 +952,19 @@ footer a:hover, footer a:focus {
     }
     .image-cropped {
       width: 100%;
-  }
-  .input-group-lg>.form-control {
-    font-size: 14px;
-  }
-  .resto_details {
-    background: rgba(255,255,255,0.9);
-  }
+    }
+    .input-group-lg>.form-control {
+        font-size: 14px;
+    }
+    .resto_details {
+        background: rgba(255,255,255,0.9);
+    }
     .wrapper_to_fix_footer {
         margin: initial; /* the bottom margin is the negative value of the footer's height */
     }
+    .fullWidth .expand {
+
+    }    
 
 }
 .network_menu_header {
@@ -1065,8 +1068,8 @@ footer a:hover, footer a:focus {
     margin-bottom: -20px;
 }
 .fullWidth .expand {
-    left: 25px;
-    bottom: 10px;
+    height: 52px;
+    line-height: 36px;
 }
 .expand:hover {
     opacity: .8

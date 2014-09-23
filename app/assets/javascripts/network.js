@@ -202,12 +202,11 @@ ko.bindingHandlers.fullWidthToTop = {
 
 ko.bindingHandlers.writableStarRating = {
     init: function(element, valueAccessor, allBindingsAccessor, viewModel, bindingContext) {
-        var value = valueAccessor();
+        var value = valueAccessor()().rating;
         $(element).addClass("starRating");
-        for (var i = 0; i < value(); i++)
-           $("<i class='fa fa-star chosen'>").appendTo(element);
-        for (var i = 0; i < (5-value()); i++)
-           $("<i class='fa fa-star'>").appendTo(element);       
+
+        for (var i = 0; i < 5; i++)
+           $("<i class='fa fa-star left_over'>").appendTo(element);       
        
         // Handle mouse events on the stars
         $("i", element).each(function(index) {
@@ -223,21 +222,31 @@ ko.bindingHandlers.writableStarRating = {
             ).click(function() { 
                 if(bindingContext["$loggedin"]()){
                     value(index+1);
-                    viewModel.rate();
+                    valueAccessor()().rate(bindingContext["$data"].id());
                 }
             });
         });            
     },
-    update: function(element, valueAccessor) {
+    update: function(element, valueAccessor, allBindingsAccessor, viewModel, bindingContext) {
         // Give the first x stars the "chosen" class, where x <= rating
         var observable = valueAccessor()();
-        $("i", element).each(function(index) {
-            if(index >= observable){
-                $(this).addClass("left_over");
-            } else {
-                $(this).removeClass("left_over");
-            }
-        });
+        var fullWidth = allBindingsAccessor().fw;
+        var rating = observable.rating();
+
+        if(fullWidth() && !observable.id() && bindingContext["$root"].user().id()){
+            observable.fetch_rating(bindingContext["$data"].id());
+            return;
+        }
+
+        if(observable.id()){
+            $("i", element).each(function(index) {
+                if(index >= rating){
+                    $(this).addClass("left_over");
+                } else {
+                    $(this).removeClass("left_over");
+                }
+            });
+        }
     }    
 };
 

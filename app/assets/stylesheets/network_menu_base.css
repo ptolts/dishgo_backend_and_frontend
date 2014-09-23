@@ -471,7 +471,7 @@
         border-top: 0;
     }
     .dish .dish_info {
-        float: none;
+        /*float: none;*/
         margin: 0 auto;
         max-width: 768px;
     }

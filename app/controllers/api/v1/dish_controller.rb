@@ -16,7 +16,7 @@ class Api::V1::DishController < ApplicationController
       rating.restaurant = dish.restaurant
       user.ratings << rating
     end
-    if top_five_id = params[:top_five_id] and top_five = TopFive.where(id:top_five_id).first
+    if top_five_id = params[:top_five_id] and !top_five_id.blank? and top_five = TopFive.where(id:top_five_id).first
       dishcoin = rating.dishcoin
       top_five.dishcoins << dishcoin
     end
@@ -37,6 +37,17 @@ class Api::V1::DishController < ApplicationController
     end
     render json: json
   end
+
+  def get_rating
+    rating = current_user.ratings.where(dish_id:params["dish_id"]).first
+    if rating
+      render json: {id: rating.id, rating: rating.rating}.as_json
+      return
+    else
+      render json: {id: nil, rating: 0}.as_json
+      return
+    end
+  end  
 
   def log_view
     dish_view = DishView.new

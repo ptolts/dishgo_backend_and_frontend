@@ -326,6 +326,7 @@ Foodcloud::Application.routes.draw do
       match 'user/add_address', to: 'user#add_address', via: [:post]
       match 'order/submit_order', to: 'order#submit_order', via: [:post]
       match 'dish/set_rating', to: 'dish#set_rating', via: [:post] 
+      match 'dish/get_rating', to: 'dish#get_rating', via: [:post] 
       match 'dish/get_ratings', to: 'dish#get_ratings', via: [:post] 
       match 'dish/log_view', to: 'dish#log_view', via: [:post] 
       match 'order/confirm', to: 'order#confirm', via: [:post] 

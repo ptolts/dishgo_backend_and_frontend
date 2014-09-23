@@ -38,7 +38,7 @@
                                 <!-- THIS IS THE IMAGE AND STAR RATING FOR THE POPUP -->
                                     <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 dish_picture" style="padding: 0;" data-bind="visible: large_title_image() && fullWidth">
                                         <h4 style="margin-top:-15px;color:#5B5B5B;">Rate This Dish</h4>
-                                        <div class="pop_up_menu_dish_rating" data-bind="writableStarRating: rating"></div>
+                                        <div class="pop_up_menu_dish_rating" data-bind="writableStarRating: ratingObject, fw: fullWidth"></div>
                                         <!-- ko with: images()[0] -->
                                             <div class="imageCroppedFull" data-bind="backgroundImage">&nbsp;</div>                                                                                                                                  
                                         <!-- /ko -->
@@ -47,7 +47,7 @@
                                     <!-- This rating is visible if there is no picture and the dish is in modal form -->
                                     <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 dish_picture "  data-bind="visible: !large_title_image() && fullWidth">
                                         <h4 style="margin-top:-15px;color:#5B5B5B;">Rate This Dish</h4>
-                                        <div class="pop_up_menu_dish_rating" data-bind="writableStarRating: rating"></div>
+                                        <div class="pop_up_menu_dish_rating" data-bind="writableStarRating: ratingObject, fw: fullWidth"></div>
                                         <div class="dish_no_picture">
                                             <i class="fa fa-camera nopic"></i>
                                             <h4 style="margin-top:0;">Add Photo</h4>
@@ -145,8 +145,12 @@
                                         </div>
                                     <!-- /ko -->
                                     <div class="row">
-                                        <div class="btn btn-fb pull-left" data-bind="click: shareFB">Share  <i class="fa fa-facebook"></i></div>
-                                        <div class="expand" data-bind="click: function(){ fullWidth(!fullWidth()); }">Hide Details <i class="fa fa-compress"></i></div>
+                                        <div class="col-xs-6">
+                                            <div class="btn btn-fb pull-left" data-bind="click: shareFB">Share  <i class="fa fa-facebook"></i></div>
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <div class="expand pull-right" data-bind="click: function(){ fullWidth(!fullWidth()); }">Hide Details <i class="fa fa-compress"></i></div>
+                                        </div>
                                     </div>
                                 </div>
                                 <!-- ^^^^^^^^^^^^^ -->                                
