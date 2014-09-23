@@ -57,9 +57,11 @@
 </div>
 <div class="container top_five_tool">
     <div class="row">
-    	<div class="col-sm-8 main-bar" data-bind="with: current_top_five">
+    	<div class="col-custom-70 main-bar" data-bind="with: current_top_five">
             <div class="hidden-xs">
-            	<p class="top_five_description" data-bind="lText: description"><%= first_non_empty(@top_five.description_translations) %></p>
+            	<p class="top_five_description" style="margin-top:20px;" data-bind="lText: description"><%= first_non_empty(@top_five.description_translations) %></p>
+<!--                     <h3 data-bind="localize">Contest Details</h3> -->
+                    <p class="top_five_description" style="margin-bottom:20px;">For every rating you submit, you'll receive one contest entry. Share this page with your friends and earn another entry for every friend that visits.</p>
             </div>                
             <% @top_five.dish.top_five.each do |dish| %>
                 <div class="top_dish_container" data-bind="with_dish: '<%= dish.id %>', mobileVisible: '<%= dish.id %>'">
@@ -92,7 +94,7 @@
                                         <div class="pop_up_menu_dish_rating" data-bind="writableStarRatingTopFive: rating"></div>
                                         <p>Add some comments:</p>
                                         <textarea rows="6" class="description form-control" placeholder="Write your review here." data-bind="value: review, valueUpdate: 'afterkeydown'"></textarea>
-                                        <button class="btn btn-rewards" data-bind="click: function(){ $data.rate($parent.id()); }">Submit</button>
+                                        <button class="btn btn-rewards btn-block" data-bind="click: function(){ $data.rate($parent.id()); }">Submit</button>
                                     <!-- /ko -->
                                     <!-- IF THE REVIEW HAS BEEN SUBMITTED, WE MAKE IT LOOK DIFFERENT -->
                                     <!-- ko if: id() -->
@@ -102,8 +104,8 @@
                                     <!-- /ko -->                                
                                 <!-- /ko -->
                             </div>
-                            <div class="col-xs-12">
-                                <a hrep="/app/network/restaurant/<%= dish.restaurant_id %>"><i class="fa fa-file-text-o"></i> View Full Menu</a><p>
+                            <div class="col-xs-12 view_full_menu">
+                                <a href="/app/network/restaurant/<%= dish.restaurant_id %>"><i class="fa fa-file-text-o"></i> View Full Menu</a>
                             </div>
                         </div>
                     </div>
@@ -114,11 +116,26 @@
             <% end %>       
         </div>   
 
-        <div class="col-sm-4 sidebar" data-bind="mobileVisible: 'header'">
+        <div class="col-custom-30 sidebar" data-bind="mobileVisible: 'header'">
             <div class="visible-xs" data-bind="with: $root.current_top_five">
-                <p class="top_five_description" data-bind="lText: description"><%= first_non_empty(@top_five.description_translations) %></p>
+                <p class="top_five_description" style="margin-top:20px;" data-bind="lText: description"><%= first_non_empty(@top_five.description_translations) %></p>
             </div>             
-            <div class="row">
+            <div class="row">                           
+                <div class="col-xs-12">
+                    <!-- toss in a few coupons from the prize page -->
+                    <h3 data-bind="with: $root.user">You have <span style="color:#cf2f28;" data-bind="text: top_five_dishcoins"></span> contest entries</h3>
+                </div>
+                <div class="col-xs-12" style="border-bottom:1px solid #DCDCDC; padding-bottom:15px;">
+                    <p style="color:#565a5c;">Share with your friends for more entries</p>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <button data-bind="click: function(){ $root.shareTopFiveFB() }" class="btn btn-fb-network-share" style="width: 100%">Share on <i class="fa fa-facebook"></i></button>
+                        </div>
+                        <div class="col-xs-12">
+                            <input class="copybox" data-bind="value: 'https://dishgo.io/top_five/' + $root.current_top_five().beautiful_url() + '/' + $root.user().id()">
+                        </div>
+                    </div>
+                </div>
                 <div class="col-xs-12" data-bind="with: current_top_five" style="border-bottom:1px solid #DCDCDC; padding-bottom:15px;">
                     <h2>Up For Grabs</h2>
                     <ul class="list-prizes" data-bind="foreach: prizes">
@@ -147,23 +164,6 @@
                             </div>                       
                         </li>
                     </ul>
-                </div>                
-                <div class="col-xs-12">
-                    <h3 data-bind="localize">Contest Details</h3>
-                    <p>For every rating you submit, you will receive one contest entry. Share this page with your friends and earn another entry for every friend that visits using the Facebook button or link below.</p>
-                </div>                
-                <div class="col-xs-12">
-                    <!-- toss in a few coupons from the prize page -->
-                    <h3 data-bind="with: $root.user">You have <span style="color:#cf2f28;" data-bind="text: top_five_dishcoins"></span> entries in this contest</h3>
-                </div>
-                <div class="col-xs-12" style="border-bottom:1px solid #DCDCDC; padding-bottom:15px;">
-                    <p>Share with your friends for more entries</p>
-                    <div class="col-xs-12">
-                        <button data-bind="click: function(){ $root.shareTopFiveFB() }" class="btn btn-fb-network-share" style="width: 100%">Share on <i class="fa fa-facebook"></i></button>
-                    </div>
-                    <div class="col-xs-12">
-                        <input class="copybox" data-bind="value: 'https://dishgo.io/top_five/' + $root.current_top_five().beautiful_url() + '/' + $root.user().id()">
-                    </div>
                 </div>
                 <div class="col-xs-12 trending hidden-xs">
                     <h2>What's Trending</h2> <!-- add 4 trending dishes from home page -->
