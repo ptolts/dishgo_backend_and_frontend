@@ -39,7 +39,10 @@
 
 <div class="top_five_header" data-bind="with: current_top_five, mobileVisible: 'header'">
     <div class="container">
-        <h1 class="top_five_title" data-bind="lText: name"><%= first_non_empty(@top_five.name_translations) %></h1>
+        <div class="top_five_title">
+            <span><h1 style="display:inline" data-bind="lText: name"><%= first_non_empty(@top_five.name_translations) %></h1>
+            <button class="instructions" data-bind="click: function(){ instructions(true) }">How to win</button> <i class="fa fa-question-circle"></i></span>
+        </div>
         <h4 class="countdown" data-bind="with: $root.current_top_five"><span data-bind="countdown: end_date"></span> until draw.</h4>
     </div>
     <div class="top-five-paginate-controls" data-bind="visible: $root.isMobile, with: $root" style="display: none">
@@ -121,9 +124,9 @@
                 <p class="top_five_description" style="margin-top:20px;" data-bind="lText: description"><%= first_non_empty(@top_five.description_translations) %></p>
             </div>             
             <div class="row">
-                <div class="col-xs-12">
+                <!-- <div class="col-xs-12">
                     <button class="btn btn-search" data-bind="click: function(){ instructions(true) }">Instructions</button>
-                </div>                                     
+                </div>   -->                                   
                 <div class="col-xs-12">
                     <!-- toss in a few coupons from the prize page -->
                     <h3 data-bind="with: $root.user">You have <span style="color:#cf2f28;" data-bind="text: top_five_dishcoins"></span> contest entries</h3>

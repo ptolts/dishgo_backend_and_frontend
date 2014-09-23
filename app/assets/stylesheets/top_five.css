@@ -13,7 +13,26 @@
     left: 15px;
     right: 15px;
 }*/
-
+.instructions {
+    background: transparent;
+    border: 0;
+    color: #fff;
+    padding: 0;
+    font-family: 'lato' sans-serif;
+    font-size: 18px;
+    margin-left: 10px;
+    text-shadow: 1px 2px 3px #000;
+}
+.instructions:hover,
+.instructions:focus {
+    color: #cf2f28;
+    border: 0;
+    outline: none;
+}
+.top_five_title i {
+    color: #cf2f28;
+    text-shadow: 1px 2px 3px #000;
+}
 .view_full_menu {
     margin: 10px 0;
 }
@@ -59,6 +78,8 @@
     z-index: 1;
     text-shadow: 1px 2px 3px #000;
 	text-rendering: optimizelegibility;
+    color: #fff;
+    border-bottom: 1px solid rgba(255,255,255,0.5)
 }
 .top_dish_rating_container {
 	margin-left: auto;
@@ -112,10 +133,6 @@
 .top_five_description {
 	font-size: 16px;
 	color: #565a5c;
-}
-.top_five_title {
-	color: #fff;
-	margin-top: 300px;
 }
 .top_dish_rating_container .restaurant_name {
 	font-size: 22px;
@@ -515,7 +532,7 @@
 	}
 	.top_five_header .top_five_title {
 	    position: absolute;
-	    bottom: 20px;
+	    bottom: 25px;
 	    right: 0;
 	    left: 0;
 	    width: 100%;
@@ -523,6 +540,8 @@
 	    z-index: 1;
 	    text-shadow: 1px 2px 3px #000;
 		text-rendering: optimizelegibility;
+        color: #fff;
+        border: 0;
 	}
 
 }
