@@ -63,7 +63,7 @@
 <!--                     <h3 data-bind="localize">Contest Details</h3> -->
                     <p class="top_five_description" style="margin-bottom:20px;">For every rating you submit, you'll receive one contest entry. Share this page with your friends and earn another entry for every friend that visits.</p>
             </div>                
-            <% @top_five.dish.top_five.each do |dish| %>
+            <% @top_five.ordered_dishes.each do |dish| %>
                 <div class="top_dish_container" data-bind="with_dish: '<%= dish.id %>', mobileVisible: '<%= dish.id %>'">
                     <div class="visible-xs">
                         <div class="dish-picture imageCroppedFull" style="background-image: url(<%= dish.img_src_orig %>); border-radius: 0; height: 250px"></div>
@@ -120,7 +120,10 @@
             <div class="visible-xs" data-bind="with: $root.current_top_five">
                 <p class="top_five_description" style="margin-top:20px;" data-bind="lText: description"><%= first_non_empty(@top_five.description_translations) %></p>
             </div>             
-            <div class="row">                           
+            <div class="row">
+                <div class="col-xs-12">
+                    <button class="btn btn-search" data-bind="click: function(){ instructions(true) }">Instructions</button>
+                </div>                                     
                 <div class="col-xs-12">
                     <!-- toss in a few coupons from the prize page -->
                     <h3 data-bind="with: $root.user">You have <span style="color:#cf2f28;" data-bind="text: top_five_dishcoins"></span> contest entries</h3>
@@ -186,6 +189,21 @@
 
     </div>
 </div>
+
+<div data-bind="visible: instructions" style="display:none">
+    <div id="sign_in_bg" data-bind="click: function(){ instructions(false) }"></div>
+    <div id="sign_in_modal">
+        <a class="close" data-bind="click: function(){ instructions(false) }">×</a>             
+        <div id="sign_in">
+            <div class="row">
+                <div class="col-xs-12 text-center">
+                    <h3 style="margin-top: 0px" data-bind="localize">How this works.</h3>
+                    <p data-bind="localize">Instructions!!!</p>
+                </div>                
+            </div>                                
+        </div>
+    </div>
+</div>   
 
 <script>
 	var top_five = <%= raw(@top_five.serializable_hash({export_localized:true,include_reviews:current_user}).to_json) %>;

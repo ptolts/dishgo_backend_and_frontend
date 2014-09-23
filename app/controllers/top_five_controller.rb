@@ -40,6 +40,7 @@ class TopFiveController < ApplicationController
     top_five.name_translations = data["name"]
     top_five.description_translations = data["description"]
     top_five.dish_ids = data["dishes"]
+    Rails.logger.warn "Dishes dirty? #{top_five.dish_ids_changed?}"
 
     top_five.prizes = Prize.find(data["prizes"])
 

@@ -23,14 +23,22 @@ class TopFive
 		return 4
 	end
 
+	def ordered_dishes
+		# Order it according to result, or according to our set list. Fuck Blackstrap.
+		if end_date <= DateTime.now
+			return self.dish.top_five
+		else		
+			return self.dish.sort_by{|e| dish_ids.index(e.id) }
+		end
+	end
+
 	def serializable_hash options = {}
 		hash = super()
 		hash[:id] = self.id
 		if options[:export_localized]
 			hash[:name] = self.name_translations
 			hash[:description] = self.description_translations
-			Rails.logger.warn "LOADING DISH ---------"
-			hash[:dishes] = self.dish.top_five.collect{|e| e.serializable_hash({export_localized:true, include_reviews:options[:include_reviews]})}
+			hash[:dishes] = self.ordered_dishes.collect{|e| e.serializable_hash({export_localized:true, include_reviews:options[:include_reviews]})}
 			hash[:prizes] = self.prizes.top_five.collect{|e| e.serializable_hash({export_localized:true})}
 		end    
 		return hash

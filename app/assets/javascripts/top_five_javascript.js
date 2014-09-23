@@ -130,7 +130,8 @@ function TopFiveModel(){
 	var self = this;
 	NetworkModel.apply(self);
 	self.dishes = ko.observableArray([]);
-	self.dish_search_term = ko.observable("");
+    self.dish_search_term = ko.observable("");
+	self.instructions = ko.observable(false);
 	self.top_five_restaurant_search_term = ko.observable();
 	self.current_top_five = ko.observable(new TopFive(top_five)); 
 
