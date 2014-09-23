@@ -25,7 +25,7 @@ class TopFive
 
 	def ordered_dishes
 		# Order it according to result, or according to our set list. Fuck Blackstrap.
-		if end_date <= DateTime.now
+		if end_date and end_date <= DateTime.now
 			return self.dish.top_five
 		else		
 			return self.dish.sort_by{|e| dish_ids.index(e.id) }
