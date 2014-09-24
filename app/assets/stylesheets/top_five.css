@@ -23,26 +23,18 @@
     margin-left: 10px;
     text-shadow: 1px 2px 3px #000;
 }
-.instructions:hover,
+/*.instructions:hover,
 .instructions:focus {
     color: #cf2f28;
     border: 0;
     outline: none;
-}
+}*/
 .top_five_title i {
     color: #cf2f28;
     text-shadow: 1px 2px 3px #000;
 }
-.view_full_menu {
-    margin: 10px 0;
-}
-.view_full_menu a {
-    color: #cf2f28;
+.top_dish_rating_container a {
     text-decoration: none;
-}
-.view_full_menu a:hover,
-.view_full_menu a:focus {
-    opacity: 0.7;
 }
 
 .prize_full_div_link {
@@ -79,7 +71,11 @@
     text-shadow: 1px 2px 3px #000;
 	text-rendering: optimizelegibility;
     color: #fff;
-    border-bottom: 1px solid rgba(255,255,255,0.5)
+    border-bottom: 1px solid rgba(255,255,255,0.5);
+    cursor: pointer;
+}
+.top_five_header .top_five_title:hover .instructions {
+    color: #cf2f28;
 }
 .top_dish_rating_container {
 	margin-left: auto;
@@ -141,7 +137,7 @@
 .top_dish_rating_container .dish_title {
 	display: block;
 	color: #565a5c;
-	font-size: 18px;
+	font-size: 16px;
 }
 .top_dish_rating_container p {
 	color: #82898d !important;
@@ -600,10 +596,10 @@
 		font-size: 34px;
 	}
     .top_dish_container {
-        height: 400px !important;
+        height: 350px !important;
     }
     .dish-picture {
-        height: 400px !important;
+        height: 350px !important;
     }
 	.top_dish_container .col-sm-4 {
 		padding: 0 0 0 15px;
