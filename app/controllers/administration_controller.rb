@@ -521,4 +521,17 @@ class AdministrationController < ApplicationController
     render :text => csv_string    
   end
 
+  def patrons_csv
+    csv_string = CSV.generate do |csv|
+      csv << ["email"]
+      User.ne(email:nil).each do |user|
+        next if user.owns_restaurants
+        csv << [user.email]
+      end
+    end
+    response.headers['Content-Type'] = 'text/csv'
+    response.headers['Content-Disposition'] = 'attachment; filename=patrons.csv'    
+    render :text => csv_string    
+  end
+
 end

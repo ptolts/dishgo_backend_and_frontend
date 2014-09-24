@@ -239,6 +239,7 @@ Foodcloud::Application.routes.draw do
       get 'users'    
       get 'become'    
       get 'users_csv'    
+      get 'patrons_csv'    
       get 'become_user'    
       get 'search_restaurants'
       post 'search_restaurants'
