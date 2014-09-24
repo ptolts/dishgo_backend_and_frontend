@@ -40,7 +40,7 @@
     color: #cf2f28;
     text-decoration: none;
 }
-.view_full_menu a:hover.
+.view_full_menu a:hover,
 .view_full_menu a:focus {
     opacity: 0.7;
 }
