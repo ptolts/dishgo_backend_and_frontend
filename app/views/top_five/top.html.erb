@@ -97,7 +97,7 @@
                                         <div class="pop_up_menu_dish_rating" data-bind="writableStarRatingTopFive: rating"></div>
                                         <p>Add some comments:</p>
                                         <textarea rows="6" class="description form-control" placeholder="Write your review here." data-bind="value: review, valueUpdate: 'afterkeydown'"></textarea>
-                                        <button class="btn btn-rewards btn-block" data-bind="click: function(){ $data.rate($parent.id()); }">Submit</button>
+                                        <button class="btn btn-rewards btn-block" data-bind="loginClick: function(){ $data.rate($parent.id()); }">Submit</button>
                                     <!-- /ko -->
                                     <!-- IF THE REVIEW HAS BEEN SUBMITTED, WE MAKE IT LOOK DIFFERENT -->
                                     <!-- ko if: id() -->

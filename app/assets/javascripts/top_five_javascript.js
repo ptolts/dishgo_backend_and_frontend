@@ -3,6 +3,17 @@
 *= require_self
 */
 
+ko.bindingHandlers.loginClick = {
+    'init': function (element, valueAccessor, allBindingsAccessor, viewModel, bindingContext) {
+        var originalFunction = valueAccessor();
+        $(element).click(function() {
+            if (bindingContext["$loggedin"]()){
+                originalFunction();
+            }
+        });
+    }
+}
+
 ko.bindingHandlers.mobileVisible = {
     update: function (element, valueAccessor, allBindings, viewModel, bindingContext) {
         var id = valueAccessor();       

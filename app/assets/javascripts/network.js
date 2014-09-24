@@ -322,6 +322,7 @@ function NetworkModel() {
     var self = this;
     self.loading = ko.observable(true);
     self.network_sign_in = ko.observable(false);
+    self.register = ko.observable(false);
     self.social_share = social_share;
     self.preview = ko.observable(true);
     self.selected_dish = ko.observable();
@@ -520,6 +521,31 @@ function NetworkModel() {
             dataType: "json"
         });
     };
+
+    self.registerWithUserPass = function(){
+        self.signInSpin(true);
+        $.ajax({
+            type: "POST",
+            url: "/app/network/register_user",
+            data: {
+                email: self.email(),
+                password: self.password(),
+            },
+            success: function(data, textStatus, jqXHR){
+                updateUser(true);
+                self.password("");
+                self.email("");
+                self.signInSpin(false);
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+                alert("Bad Email or Password.");
+                self.password("");
+                self.email("");
+                self.signInSpin(false);
+            },
+            dataType: "json"
+        });
+    };    
 
     self.loggedIn = ko.computed({
         read: function(){
