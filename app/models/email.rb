@@ -29,16 +29,22 @@ class Email < ActionMailer::Base
     @user = user
     mail(:to => user.email, :subject => "Welcome to DishGo!").deliver  
     # notify_admins user
-  end  
+  end
+
+  def verify_from_network user
+    @user = user
+    mail(:to => user.email, :subject => "Welcome to DishGo!").deliver  
+    notify_admins user, "New Network User"
+  end   
 
   def sign_up_link user
     @link = user.sign_up_link
     mail(:to => user.email, :subject => "Welcome to DishGo!").deliver  
   end  
 
-  def notify_admins user
+  def notify_admins user, message = "New App User"
     @user = user
-    mail(:to => "phil@dishgo.io", :subject => "New User", template_name: 'notify_admins').deliver
-    mail(:to => "tim@dishgo.io", :subject => "New User", template_name: 'notify_admins').deliver
+    mail(:to => "phil@dishgo.io", :subject => message, template_name: 'notify_admins').deliver
+    mail(:to => "tim@dishgo.io", :subject => message, template_name: 'notify_admins').deliver
   end
 end

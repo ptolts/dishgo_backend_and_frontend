@@ -81,7 +81,14 @@ Foodcloud::Application.routes.draw do
       get '/:id/:user_id', to: "top_five#top"      
       get '/:id', to: "top_five#top"      
     end
-  end       
+  end    
+
+  resources :user_reg, only: []  do
+    collection do
+      post '/create', to: "user_reg#create"
+      get '/redirect/:id', to: "user_reg#redirect"           
+    end
+  end      
 
   resources :jobs, only: []  do
     collection do

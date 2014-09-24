@@ -526,12 +526,18 @@ function NetworkModel() {
         self.signInSpin(true);
         $.ajax({
             type: "POST",
-            url: "/app/network/register_user",
+            url: "/app/user_reg/create",
             data: {
                 email: self.email(),
                 password: self.password(),
             },
             success: function(data, textStatus, jqXHR){
+                if(data.error){
+                    alert("Bad Email or Password.");
+                    self.password("");
+                    self.signInSpin(false);
+                    return;                    
+                }
                 updateUser(true);
                 self.password("");
                 self.email("");
@@ -540,7 +546,6 @@ function NetworkModel() {
             error: function(XMLHttpRequest, textStatus, errorThrown) {
                 alert("Bad Email or Password.");
                 self.password("");
-                self.email("");
                 self.signInSpin(false);
             },
             dataType: "json"
