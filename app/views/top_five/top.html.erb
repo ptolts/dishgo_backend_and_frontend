@@ -155,8 +155,8 @@
                             </div>
                             <div class="row" data-bind="visible: lDescription().length > 0">
                                 <div class="col-xs-12">
-                                    <p style="margin:0;" data-bind="lText: description"></p>
-                                    <p>Quantity: <!-- ko text: quantity --><!-- /ko --></p>
+                                    <p style="margin:0;color: #82898d;" data-bind="lText: description"></p>
+                                    <p style="color: #82898d;">Quantity: <!-- ko text: quantity --><!-- /ko --></p>
                                 </div>                          
                             </div>
                             <div class="cnrflash">
@@ -177,7 +177,7 @@
                             </div>
                             <div class="col-xs-6">
                                 <div class="dish-title">
-                                    <p><%= first_non_empty(dish.name_translations) %></p>
+                                    <p style="color: #82898d;"><%= first_non_empty(dish.name_translations) %></p>
                                 </div>
                             </div>                            
                         </div>
