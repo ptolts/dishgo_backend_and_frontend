@@ -39,9 +39,9 @@
 
 <div class="top_five_header" data-bind="with: current_top_five, mobileVisible: 'header'">
     <div class="container">
-        <div class="top_five_title">
+        <div class="top_five_title" data-bind="click: function(){ instructions(true) }">
             <span><h1 style="display:inline" data-bind="lText: name"><%= first_non_empty(@top_five.name_translations) %></h1>
-            <button class="instructions" data-bind="click: function(){ instructions(true) }">How to win</button> <i class="fa fa-question-circle"></i></span>
+            <button class="instructions">How to win</button> <i class="fa fa-question-circle"></i></span>
         </div>
         <h4 class="countdown" data-bind="with: $root.current_top_five"><span data-bind="countdown: end_date"></span> until draw.</h4>
     </div>
@@ -86,7 +86,7 @@
                     <div class="col-sm-4" style="height: 100%">
                         <div class="top_dish_rating_container">
                             <!-- <span class="rank">#1</span> -->
-                            <span class="restaurant_name"><%= dish.restaurant_name %></span>
+                             <a href="/app/network/restaurant/<%= dish.restaurant_id %>"><span class="restaurant_name"><%= dish.restaurant_name %> <i class="fa fa-info-circle"></i></span></a>
                             <span class="dish_title"><%= first_non_empty(dish.name_translations) %></span>
                             <!-- <p><%= first_non_empty_truncated(dish.description_translations) %></p> -->
                             <div class="rating-bottom">
@@ -95,7 +95,6 @@
                                     <!-- ko if: !id() -->
                                         <p>Rate this dish to win</p>
                                         <div class="pop_up_menu_dish_rating" data-bind="writableStarRatingTopFive: rating"></div>
-                                        <p>Add some comments:</p>
                                         <textarea rows="6" class="description form-control" placeholder="Write your review here." data-bind="value: review, valueUpdate: 'afterkeydown'"></textarea>
                                         <button class="btn btn-rewards btn-block" data-bind="click: function(){ $data.rate($parent.id()); }">Submit</button>
                                     <!-- /ko -->
@@ -106,9 +105,6 @@
                                         <p>"<!-- ko text: review --><!-- /ko -->"</p>
                                     <!-- /ko -->                                
                                 <!-- /ko -->
-                            </div>
-                            <div class="col-xs-12 view_full_menu">
-                                <a href="/app/network/restaurant/<%= dish.restaurant_id %>"><i class="fa fa-file-text-o"></i> View Full Menu</a>
                             </div>
                         </div>
                     </div>
