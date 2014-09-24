@@ -138,8 +138,7 @@ class NetworkController < ApplicationController
   end
 
   def prize
-    @individual_prize = IndividualPrize.find(params[:id])
-    @prize = @individual_prize.prize
+    @prize = Prize.find(params[:id])
     @user = @individual_prize.user
     @restaurant = @prize.restaurant
     render layout: 'network_prize'
