@@ -13,7 +13,8 @@ p,
 .nav li,
 #footer .powered_by_dishgo,
 .menu_container .language_selector,
-address {
+address,
+.extra-contact {
     font-family: 'Lato', sans-serif;
     font-weight: 300;
 }
@@ -41,8 +42,9 @@ h3 {
 }
 address {
 	font-size: 18px;
-    line-height: 23px;
-    letter-spacing: 2px;
+}
+.extra-contact {
+    font-size: 18px;
 }
 .hours p {
      font-size: 18px;

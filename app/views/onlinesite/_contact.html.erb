@@ -16,8 +16,8 @@
 			    <!-- ko if: email_addresses().length > 0 -->
 					<h3 class="hours_header" data-bind="lStaticText: 'contact'"></h3>
 					<!-- ko foreach: email_addresses -->
-						<strong><!-- ko text: name --><!-- /ko --> <a data-bind="attr: {href:'mailto:'+email()+'?subject=' + subject()}, text: email"></a></strong><br />
-						<strong><a data-bind="text: phone, attr:{href:'tel:'+phone()}"></a></strong><br />
+						<strong class="extra-contact"><span style="display:block;"><!-- ko text: name --><!-- /ko --></span> <a data-bind="attr: {href:'mailto:'+email()+'?subject=' + subject()}, text: email"></a></strong><br />
+						<strong class="extra-contact"><a data-bind="text: phone, attr:{href:'tel:'+phone()}"></a></strong><br />
 					<!-- /ko -->
 			    <!-- /ko -->
 			</div>
