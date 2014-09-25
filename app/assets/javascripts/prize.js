@@ -120,7 +120,7 @@ function Prize(data) {
     self.quantity_list = ko.computed({
     	read: function(){
     		var list = [];
-    		for(i=2;i<13;i++){
+    		for(i=1;i<13;i++){
     			list.push(i);
     		}
     		return list;
