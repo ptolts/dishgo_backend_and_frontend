@@ -21,8 +21,7 @@ function Rating(data) {
             success: function(data, textStatus, jqXHR){
                 self.id(data.id);
                 if("updateUser" in window){
-                    var u = updateUser();
-                    u = true;
+                    updateUser(true);
                     updateUser.valueHasMutated();
                 }
             },
