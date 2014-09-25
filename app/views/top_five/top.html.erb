@@ -40,8 +40,11 @@
 <div class="top_five_header" data-bind="with: current_top_five, mobileVisible: 'header'">
     <div class="container">
         <div class="top_five_title" data-bind="click: function(){ $root.instructions(true) }">
-            <span><h1 style="display:inline" data-bind="lText: name"><%= first_non_empty(@top_five.name_translations) %></h1>
+            <span class="underline_dat"><h1 style="display:inline" data-bind="lText: name"><%= first_non_empty(@top_five.name_translations) %></h1>
             <span class="hidden-xs"><button class="instructions">How to win</button> <i class="fa fa-question-circle"></i></span></span>
+            <div class="hidden-xs">
+                <p style="margin:10px 0;font-size:18px;" data-bind="lText: description"><%= first_non_empty(@top_five.description_translations) %></p>
+            </div>         
         </div>
         <h4 class="countdown" data-bind="with: $root.current_top_five"><span data-bind="countdown: end_date"></span> until draw.</h4>
     </div>
@@ -60,10 +63,7 @@
 </div>
 <div class="container top_five_tool">
     <div class="row">
-    	<div class="col-custom-70 main-bar" data-bind="with: current_top_five">
-            <div class="hidden-xs">
-            	<p class="top_five_description" style="margin-top:20px;" data-bind="lText: description"><%= first_non_empty(@top_five.description_translations) %></p>
-            </div>                
+    	<div class="col-custom-70 main-bar" data-bind="with: current_top_five">               
             <% @top_five.ordered_dishes.each do |dish| %>
                 <div class="top_dish_container" data-bind="with_dish: '<%= dish.id %>', mobileVisible: '<%= dish.id %>'">
                     <div class="visible-xs">
@@ -124,7 +124,7 @@
                 </div>   -->                                   
                 <div class="col-xs-12">
                     <!-- toss in a few coupons from the prize page -->
-                    <h3 data-bind="with: $root.user">You have <span style="color:#cf2f28;" data-bind="text: top_five_dishcoins"></span> contest entries. <span class="hidden-xs" data-bind="click: function(){ $root.instructions(true) }" style="font-size:16px; color:#cf2f28;cursor:pointer;">why <i class="fa fa-question-circle"></i></span></h3>                                     
+                    <h3 class="pierrich" data-bind="with: $root.user">You have <span style="color:#cf2f28;" data-bind="text: top_five_dishcoins"></span> contest entries. <span class="hidden-xs" data-bind="click: function(){ $root.instructions(true) }" style="font-size:16px; color:#cf2f28;cursor:pointer;">why <i class="fa fa-question-circle"></i></span></h3>                                     
                 </div>
                 <div class="col-xs-12" style="border-bottom:1px solid #DCDCDC; padding-bottom:15px;">
                     <p class="top_five_description" style="margin-bottom:20px;">For every rating you submit, you'll receive one contest entry. Share this page with your friends and earn another entry for every one that visits.</p>

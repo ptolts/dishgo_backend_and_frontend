@@ -78,14 +78,16 @@
 }
 .top_five_header .top_five_title {
     position: absolute;
-    bottom: 20px;
+    bottom: 10px;
     left: 10px;
     z-index: 1;
     text-shadow: 1px 2px 3px #000;
 	text-rendering: optimizelegibility;
     color: #fff;
-    border-bottom: 1px solid rgba(255,255,255,0.5);
     cursor: pointer;
+}
+.underline_dat {
+    border-bottom: 1px solid rgba(255,255,255,0.5);
 }
 .top_five_header .top_five_title:hover .instructions {
     color: #cf2f28;
@@ -143,6 +145,12 @@
 	font-size: 16px;
 	color: #565a5c;
 }
+.top_five_description_header {
+    color: #fff;
+    text-shadow: 1px 2px 3px #000;
+    text-rendering: optimizelegibility;
+    font-size: 16px;
+}
 .top_dish_rating_container .restaurant_name {
 	font-size: 22px;
 	color: #cf2f28 !important;
@@ -181,9 +189,6 @@
 	color: #82898d;
 	padding: 2px;
 }
-  .top_dish_container:first-child {
-  	border-top: 0;
-  }
   .fb_share_bottom{
     position: absolute;
     bottom: 0;
@@ -600,6 +605,12 @@
         padding-right: 15px;
         float: left;
     }
+    .top_five_tool {
+        padding-top: 40px;
+    }
+    .pierrich {
+        margin-top: 0px;
+    }
 }
 @media only screen and (min-width: 992px) {
 	.pop_up_menu_dish_rating i {
@@ -626,7 +637,7 @@
 }
 @media only screen and (min-width: 1200px) {
 	.top_five_header {
-		height: 450px;
+		height: 475px;
 	}
 	.pop_up_menu_dish_rating i {
 		font-size: 40px;
