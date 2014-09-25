@@ -13,6 +13,9 @@
     left: 15px;
     right: 15px;
 }*/
+.top_dish_container {
+    border-bottom: 0 !important;
+}
 .instructions {
     background: transparent;
     border: 0;
