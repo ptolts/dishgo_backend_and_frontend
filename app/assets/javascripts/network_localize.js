@@ -12,7 +12,7 @@ var network_localize = {
         "Submit":"Soumettre",
         "Web Design":"Conception de site web",
         "App":"Appli",
-        "What's Trending":"Meilleurs Plats du jour",
+        "What's Trending in Montreal":"Les Vedettes de Montréal",
         "Contact Us":"Contactez Nous",
         "Legal":"Légal",
         "Claim this page":"Revendiquer cette page",

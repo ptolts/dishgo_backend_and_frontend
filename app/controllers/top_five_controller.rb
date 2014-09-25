@@ -1,4 +1,5 @@
 class TopFiveController < ApplicationController
+  before_filter :admin_user!, except: [:top, :fetch_user]
   layout 'network'
   
   def index

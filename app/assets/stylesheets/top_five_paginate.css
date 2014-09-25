@@ -45,7 +45,7 @@
 }
 
 .top-five-paginate-controls-container .paginate-circle {
-    background-color: rgba(255,255,255,0.5);
+    background-color: rgba(255,255,255,0.75);
     height: 10px;
     width: 10px;
     display: inline-block;
@@ -55,7 +55,7 @@
 }
 
 .top-five-paginate-controls-container .paginate-home {
-    color: rgba(255,255,255,0.5);
+    color: rgba(255,255,255,0.75);
     display: inline-block;
     margin-left: 6px;
     margin-right: 6px;

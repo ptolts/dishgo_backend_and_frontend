@@ -39,9 +39,9 @@
 
 <div class="top_five_header" data-bind="with: current_top_five, mobileVisible: 'header'">
     <div class="container">
-        <div class="top_five_title" data-bind="click: function(){ instructions(true) }">
+        <div class="top_five_title" data-bind="click: function(){ $root.instructions(true) }">
             <span><h1 style="display:inline" data-bind="lText: name"><%= first_non_empty(@top_five.name_translations) %></h1>
-            <button class="instructions">How to win</button> <i class="fa fa-question-circle"></i></span>
+            <span class="hidden-xs"><button class="instructions">How to win</button> <i class="fa fa-question-circle"></i></span></span>
         </div>
         <h4 class="countdown" data-bind="with: $root.current_top_five"><span data-bind="countdown: end_date"></span> until draw.</h4>
     </div>
@@ -63,8 +63,6 @@
     	<div class="col-custom-70 main-bar" data-bind="with: current_top_five">
             <div class="hidden-xs">
             	<p class="top_five_description" style="margin-top:20px;" data-bind="lText: description"><%= first_non_empty(@top_five.description_translations) %></p>
-<!--                     <h3 data-bind="localize">Contest Details</h3> -->
-                    <p class="top_five_description" style="margin-bottom:20px;">For every rating you submit, you'll receive one contest entry. Share this page with your friends and earn another entry for every friend that visits.</p>
             </div>                
             <% @top_five.ordered_dishes.each do |dish| %>
                 <div class="top_dish_container" data-bind="with_dish: '<%= dish.id %>', mobileVisible: '<%= dish.id %>'">
@@ -125,10 +123,10 @@
                 </div>   -->                                   
                 <div class="col-xs-12">
                     <!-- toss in a few coupons from the prize page -->
-                    <h3 data-bind="with: $root.user">You have <span style="color:#cf2f28;" data-bind="text: top_five_dishcoins"></span> contest entries</h3>
+                    <h3 data-bind="with: $root.user">You have <span style="color:#cf2f28;" data-bind="text: top_five_dishcoins"></span> contest entries <i class="fa fa-info-circle" style="color:#cf2f28" data-bind="click: function(){ $root.instructions(true) }"></i></h3>                                     
                 </div>
                 <div class="col-xs-12" style="border-bottom:1px solid #DCDCDC; padding-bottom:15px;">
-                    <p style="color:#565a5c;">Share with your friends for more entries</p>
+                    <p class="top_five_description" style="margin-bottom:20px;">For every rating you submit, you'll receive one contest entry. Share this page with your friends and earn another entry for every friend that visits.</p>
                     <div class="row">
                         <div class="col-xs-12">
                             <button data-bind="click: function(){ $root.shareTopFiveFB() }" class="btn btn-fb-network-share" style="width: 100%">Share on <i class="fa fa-facebook"></i></button>
