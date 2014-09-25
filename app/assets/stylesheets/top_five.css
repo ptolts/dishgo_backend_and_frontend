@@ -106,11 +106,17 @@
 	display: block;
 	height: 100px;
 }
-.top_dish_rating_container .btn-rewards {
+.top_dish_rating_container .btn-rewards,
+#sign_in .btn-rewards {
 	background-color: #fff;
 	padding: 6px 12px;
 	font-size: 16px;
 	margin-top: 20px;
+}
+.top_dish_rating_container .btn-rewards:hover,
+#sign_in .btn-rewards:hover {
+    background-color: #cf2f28;
+    color: #fff;
 }
 .top_dish_rating {
 	z-index: 10;
