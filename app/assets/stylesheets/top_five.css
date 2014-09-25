@@ -23,12 +23,25 @@
     margin-left: 10px;
     text-shadow: 1px 2px 3px #000;
 }
-/*.instructions:hover,
+.instructions:hover,
 .instructions:focus {
     color: #cf2f28;
     border: 0;
     outline: none;
-}*/
+}
+.instructions-xs {
+    text-align: center;
+    color: #cf2f28;
+    margin: 10px 0 -10px 0;
+}
+.form-control:focus {
+    border: 1px solid #ccc;
+    overflow: auto;
+    outline: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+}
 .top_five_title i {
     color: #cf2f28;
     text-shadow: 1px 2px 3px #000;
@@ -613,7 +626,7 @@
 }
 @media only screen and (min-width: 1200px) {
 	.top_five_header {
-		height: 500px;
+		height: 450px;
 	}
 	.pop_up_menu_dish_rating i {
 		font-size: 40px;
