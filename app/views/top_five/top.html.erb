@@ -127,6 +127,8 @@
                     <h3 class="instructions-xs hidden-xs" data-bind="click: function(){ $root.instructions(true) }">How to win <i class="fa fa-question-circle"></i></h3>
                     <h3 class="pierrich" data-bind="with: $root.user">You have <span style="color:#cf2f28;" data-bind="text: top_five_dishcoins"></span> contest entries.</h3>
                     <p data-bind="visible: $root.threeRated">You've reached the limit of entries you can receive by rating. To obtain more, click here.</p>
+                    <button data-bind="click: function(){ $root.shareTopFiveFB() }" class="btn btn-fb-network-share" style="width: 100%;font-size: 16px;box-shadow:none;"><i class="fa fa-facebook-square"> Share for more entries</i></button>
+                    <input class="copybox" data-bind="value: 'https://dishgo.io/top_five/' + $root.current_top_five().beautiful_url() + '/' + $root.user().id()">
                 </div>
                 <div class="col-xs-12" data-bind="with: current_top_five" style="border-bottom:1px solid #DCDCDC; padding-bottom:15px;">
                     <h2>Up For Grabs</h2>
