@@ -56,7 +56,7 @@
 
 		</script> 		 	
 
-	<% if controller_name == "network" && action_name == "restaurant" %>
+
 		<style type="text/css">
 			<%= raw(Rails.application.assets.find_asset('network_loading').to_s) %>
 		</style>		
@@ -79,21 +79,20 @@
 				</div>
 			</div>
 		</div>
-	<% end %>
 
-	<%= render 'top_five_sign_in' %>      	
 
-	<% if controller_name == "network" && action_name == "restaurant" %>
-		<%= render 'restaurant_network_header' %>
-	<% else %>
+		<%= render 'top_five_sign_in' %>      	
+
 		<%= render 'network/network_header' %>
-	<% end %>   
+
 
 		<!-- ko loggedInChecker: loggedIn -->
-			<%= yield %>
+			<div data-bind="visible: true" style="display:none">
+				<%= yield %>
+			</div>
 		<!-- /ko -->
     		
-		<footer>
+		<footer data-bind="visible: true" style="display:none">
 		    <div class="container">
 		        <div class="row">
 		            <div class="col-sm-20">
