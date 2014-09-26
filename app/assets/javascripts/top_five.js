@@ -87,7 +87,11 @@ function TopFive(data) {
         } else {
             return true;
         }
-    });    
+    });
+
+    self.threeRated = ko.computed(function(){
+        return 3 <= _.filter(self.dishes(), function(dish){ return dish.ratingObject().id() != "" }).length;
+    });  
 
     self.top_five_saving = ko.observable(false);
     self.save = function(){

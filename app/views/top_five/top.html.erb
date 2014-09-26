@@ -126,6 +126,7 @@
                     <!-- toss in a few coupons from the prize page -->
                     <h3 class="instructions-xs hidden-xs" data-bind="click: function(){ $root.instructions(true) }">How to win <i class="fa fa-question-circle"></i></h3>
                     <h3 class="pierrich" data-bind="with: $root.user">You have <span style="color:#cf2f28;" data-bind="text: top_five_dishcoins"></span> contest entries.</h3>
+                    <p data-bind="visible: $root.threeRated">You've reached the limit of entries you can receive by rating. To obtain more, click here.</p>
                 </div>
                 <div class="col-xs-12" data-bind="with: current_top_five" style="border-bottom:1px solid #DCDCDC; padding-bottom:15px;">
                     <h2>Up For Grabs</h2>
@@ -188,11 +189,11 @@
                 <div class="col-xs-12 text-center">
                     <div class="hidden-xs">
                         <h3 style="margin-top: 0px" data-bind="localize">Help us find out whos king!</h3>
-                        <p data-bind="localize" style="font-size:16px;">Rate each of the 5 dishes by selecting the number of stars. Everytime you submit a rating you'll receive a contest entry to win one of the prizes up for grabs. The more you share it, the more chances you have of winning!</p>
+                        <p data-bind="localize" style="font-size:16px;">Rate your favorite dishes by selecting the number of stars. You can earn up to three entries for your contribution. To earn more entries refer your friends to this page. Every new person will earn you an additional entry!</p>
                     </div>
                     <div class="visible-xs">
                         <h3 style="margin-top: 0px" data-bind="localize">Help us find out whos king!</h3>
-                        <p style="font-size:16px;" data-bind="localize">Flip through the dishes using the arrows. Rate each of the 5 dishes by selecting the number of stars &amp leave some comments. Everytime you submit a rating you'll receive a contest entry to win one of the prizes up for grabs. The more you share it, the more chances you have of winning!</p>
+                        <p style="font-size:16px;" data-bind="localize">Flip through the dishes using the arrows. Rate your favorite dishes by selecting the number of stars. You can earn up to three entries for your contribution. To earn more entries refer your friends to this page. Every new person will earn you an additional entry!</p>
                     </div>
                 </div>
                 <div class="col-xs-12" style="border-bottom:1px solid #DCDCDC; padding-bottom:15px;">
@@ -202,6 +203,7 @@
                         </div>
                         <div class="col-xs-12">
                             <input class="copybox" data-bind="value: 'https://dishgo.io/top_five/' + $root.current_top_five().beautiful_url() + '/' + $root.user().id()">
+                            <p class="text-center">Or share this link</p>
                         </div>
                     </div>
                 </div>                

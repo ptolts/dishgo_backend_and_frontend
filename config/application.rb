@@ -92,6 +92,7 @@ module Foodcloud
                                     'top_five_create_javascript.js',
                                     'top_five_javascript.js',
                                     'network_index_javascript.js',
+                                    'network_location_javascript.js',
                                     'loading_widget.css',
                                     'network_odometer.js',
                                     'social_share.js',

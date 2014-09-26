@@ -1,0 +1,101 @@
+<script src='https://api.tiles.mapbox.com/mapbox.js/v2.1.2/mapbox.js'></script>
+<link href='https://api.tiles.mapbox.com/mapbox.js/v2.1.2/mapbox.css' rel='stylesheet' />
+<script src='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-locatecontrol/v0.24.0/L.Control.Locate.js'></script>
+<link href='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-locatecontrol/v0.24.0/L.Control.Locate.css' rel='stylesheet' />
+<!--[if lt IE 9]>
+  <link href='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-locatecontrol/v0.21.0/L.Control.Locate.ie.css' rel='stylesheet' />
+<![endif]-->
+
+<style>
+#pretty_map {
+    height: 300px;
+}
+</style>
+
+<div id="menu_background">
+
+	<div id='pretty_map'></div>
+	<script>
+		L.mapbox.accessToken = 'pk.eyJ1IjoicHRvbHRzIiwiYSI6IjhfYm9sZGsifQ.u_FVkndl-pBuf85k_kIGrA';
+		var map = L.mapbox.map('pretty_map', 'examples.map-i86nkdio').setView(<%= @coords %>, 12);
+		L.control.locate().addTo(map);
+		map.addControl(L.mapbox.geocoderControl('mapbox.places-v1',{autocomplete: true}));
+	</script>
+
+	<div class="container">	
+		<div class="row">
+			<div class="col-xs-12" data-bind="foreach: categories">
+				<span class="label label-info" data-bind="text: name, click: function(){ $data.push(); }, css:{'label-danger':active}"></span>
+			</div>
+		</div>
+	</div>
+
+	<!-- SEARCH RESULTS WILL APPEAR HERE -->
+	<%= render 'restaurant_search_results' %>
+	<%= render 'dish_search_results' %>
+
+</div>
+
+
+<script>
+
+	var categories = <%= raw(@categories.to_json) %>;
+
+	[
+		"<%= stylesheet_path 'network'%>",
+	].forEach(function(src) {
+		var l = document.createElement('link'); 
+		l.rel = 'stylesheet';
+		l.href = src;
+		document.head.appendChild(l);
+	});
+
+	var scripts = [
+		"<%= javascript_path 'application' %>",
+    	"<%= javascript_path 'menu_editor' %>",
+    	"<%= javascript_path 'network_location_javascript' %>",
+    	"<%= javascript_path 'social_share' %>",
+	];
+	var src;
+	var script;
+	var pendingScripts = [];
+	var firstScript = document.scripts[0];
+
+	// Watch scripts load in IE
+	function stateChange() {
+	  // Execute as many scripts in order as we can
+	  var pendingScript;
+	  while (pendingScripts[0] && pendingScripts[0].readyState == 'loaded') {
+	    pendingScript = pendingScripts.shift();
+	    // avoid future loading events from this script (eg, if src changes)
+	    pendingScript.onreadystatechange = null;
+	    // can't just appendChild, old IE bug if element isn't closed
+	    firstScript.parentNode.insertBefore(pendingScript, firstScript);
+	  }
+	}
+
+	// loop through our script urls
+	while (src = scripts.shift()) {
+	  if ('async' in firstScript) { // modern browsers
+	    script = document.createElement('script');
+	    script.async = false;
+	    script.src = src;
+	    document.head.appendChild(script);
+	  }
+	  else if (firstScript.readyState) { // IE<10
+	    // create a script and add it to our todo pile
+	    script = document.createElement('script');
+	    pendingScripts.push(script);
+	    // listen for state changes
+	    script.onreadystatechange = stateChange;
+	    // must set src AFTER adding onreadystatechange listener
+	    // else we’ll miss the loaded event for cached scripts
+	    script.src = src;
+	  }
+	  else { // fall back to defer
+	    document.write('<script src="' + src + '" defer></'+'script>');
+	  }
+	}			
+
+</script>	
+

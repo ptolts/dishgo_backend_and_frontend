@@ -12,6 +12,16 @@ class NetworkController < ApplicationController
     render 'index'
   end
 
+  def location
+    if result = request.location    
+      @coords = [result.coordinates[0],result.coordinates[1]]
+    else
+      @coords = [45.458972,-74.155815]
+    end
+    @categories = (Categories.first || Categories.new).categories
+    render 'location'
+  end  
+
   def restaurant
     restaurant = Restaurant.where(beautiful_url:params[:id]).first || Restaurant.find(params[:id])
     @restaurant = restaurant

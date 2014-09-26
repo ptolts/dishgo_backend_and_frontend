@@ -146,6 +146,8 @@ function TopFiveModel(){
 	self.top_five_restaurant_search_term = ko.observable();
 	self.current_top_five = ko.observable(new TopFive(top_five)); 
 
+    self.threeRated = self.current_top_five().threeRated;
+
     self.updateUserMonitor.dispose();
     self.updateUserMonitor = ko.computed({
         read: function(){

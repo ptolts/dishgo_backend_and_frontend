@@ -108,6 +108,7 @@ Foodcloud::Application.routes.draw do
   resources :network, only: []  do
     collection do
       get '/', to: "network#index"
+      get '/location', to: "network#location"
       get '/restaurant/:id', to: "network#restaurant"
       get '/restaurant/:id/:direct_dish_id', to: "network#restaurant"      
       get '/prize/:id', to: "network#prize"
