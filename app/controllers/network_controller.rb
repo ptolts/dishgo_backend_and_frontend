@@ -122,6 +122,7 @@ class NetworkController < ApplicationController
     end
     if !current_user
       render json: {}
+      return
     end
     render json: current_user.serializable_hash({:restaurant => true}) || {}.as_json
   end
