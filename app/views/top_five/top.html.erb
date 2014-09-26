@@ -123,6 +123,7 @@
                     <button class="btn btn-search" data-bind="click: function(){ instructions(true) }">Instructions</button>
                 </div>   -->                                   
                 <div class="col-xs-12">
+                    <h3 class="instructions" data-bind="click: function(){ $root.instructions(true) }">How to win <i class="fa fa-question-circle"></i></h3>                                        
                     <!-- toss in a few coupons from the prize page -->
                     <h3 class="pierrich" data-bind="with: $root.user">You have <span style="color:#cf2f28;" data-bind="text: top_five_dishcoins"></span> contest entries. <span class="hidden-xs" data-bind="click: function(){ $root.instructions(true) }" style="font-size:16px; color:#cf2f28;cursor:pointer;">why <i class="fa fa-question-circle"></i></span></h3>                                     
                 </div>
