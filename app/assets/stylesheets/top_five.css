@@ -33,9 +33,10 @@
     outline: none;
 }
 .instructions-xs {
-    text-align: center;
+    text-align: left;
     color: #cf2f28;
-    margin: 10px 0 -10px 0;
+    margin: 10px 0;
+    cursor: pointer;
 }
 .form-control:focus {
     border: 1px solid #ccc;
@@ -210,6 +211,7 @@
 
 .btn-fb-network-share {
     border-radius: 0px !important;
+    border: 1px solid #3B5998 !important;
 }
 
 .list-prizes {
@@ -566,6 +568,12 @@
         color: #fff;
         border: 0;
 	}
+    .instructions-xs {
+    text-align: center;
+    padding: 6px 12px;
+    border: 1px solid #cf2f28;
+    border-radius: 0;
+}
 
 }
 @media only screen and (max-width: 767px) {
@@ -615,7 +623,7 @@
         float: left;
     }
     .top_five_tool {
-        padding-top: 40px;
+        padding-top: 30px;
     }
     .pierrich {
         margin-top: 0px;
