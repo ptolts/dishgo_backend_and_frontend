@@ -5,11 +5,12 @@
 	         	<div id="sign_in">
 		            <div class="row">
 		                <div class="col-xs-12 text-center">
-		                	<h3 style="margin-top: 0px" data-bind="visible: !loggedIn(), localize">Social Media Sign In</h3>
+		                	<h3 style="margin-top: 0px" data-bind="visible: !loggedIn(), localize">Sign in with FB or Twitter</h3>
 		                	<h3 style="margin-top: 0px" data-bind="visible: loggedIn, localize">Connected Accounts</h3>
 		                	<!-- ko foreach: social_networks -->
 		                		<span class="btn btn-none social_network_button" data-bind="click: function(){ login(); }, css: {online:online}"><i class="fa" data-bind="css:'fa-'+name"></i></span>
 		                	<!-- /ko -->
+		                	<p style="margin-top:5px;">We'll never post without your permisson</p> 
 		                </div>                
 		            </div>
 
@@ -42,7 +43,7 @@
 
 							<div class="row" style="margin-top:25px;">
 								<div class="col-sm-10 col-sm-offset-1">
-									<p class="" style="color:#cf2f28; cursor: pointer" data-bind="click: function(){ register(!register()) }"><span data-bind="visible: !register(), localize">Register Now</span><span data-bind="visible: register, localize">Sign In</span></p>
+									<p class="" style="color:#cf2f28; cursor: pointer" data-bind="click: function(){ register(!register()) }"><span data-bind="visible: !register(), localize">Create Your Account</span><span data-bind="visible: register, localize">Sign In</span></p>
 								</div>
 							</div>	
 
