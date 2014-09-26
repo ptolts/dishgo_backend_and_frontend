@@ -40,8 +40,11 @@
 <div class="top_five_header" data-bind="with: current_top_five, mobileVisible: 'header'">
     <div class="container">
         <div class="top_five_title" data-bind="click: function(){ $root.instructions(true) }">
-            <span><h1 style="display:inline" data-bind="lText: name"><%= first_non_empty(@top_five.name_translations) %></h1>
+            <span class="underline_dat"><h1 style="display:inline" data-bind="lText: name"><%= first_non_empty(@top_five.name_translations) %></h1>
             <span class="hidden-xs"><button class="instructions">How to win</button> <i class="fa fa-question-circle"></i></span></span>
+            <div class="hidden-xs">
+                <p style="margin:10px 0;font-size:18px;" data-bind="lText: description"><%= first_non_empty(@top_five.description_translations) %></p>
+            </div>         
         </div>
         <h4 class="countdown" data-bind="with: $root.current_top_five"><span data-bind="countdown: end_date"></span> until draw.</h4>
     </div>
@@ -60,10 +63,7 @@
 </div>
 <div class="container top_five_tool">
     <div class="row">
-    	<div class="col-custom-70 main-bar" data-bind="with: current_top_five">
-            <div class="hidden-xs">
-            	<p class="top_five_description" style="margin-top:20px;" data-bind="lText: description"><%= first_non_empty(@top_five.description_translations) %></p>
-            </div>                
+        <div class="col-custom-70 main-bar" data-bind="with: current_top_five">               
             <% @top_five.ordered_dishes.each do |dish| %>
                 <div class="top_dish_container" data-bind="with_dish: '<%= dish.id %>', mobileVisible: '<%= dish.id %>'">
                     <div class="visible-xs">
@@ -106,7 +106,7 @@
                             </div>
                         </div>
                     </div>
-                	<div class="col-sm-8 hidden-xs">
+                    <div class="col-sm-8 hidden-xs">
                         <div class="dish-picture imageCroppedFull" style="background-image: url(<%= dish.img_src_orig %>); border-radius: 0; height: 400px"></div>
                     </div>
                 </div>
@@ -116,18 +116,19 @@
         <div class="col-custom-30 sidebar" data-bind="mobileVisible: 'header'">
             <div class="visible-xs" data-bind="with: $root.current_top_five">
                 <p class="top_five_description" style="margin-top:20px;" data-bind="lText: description"><%= first_non_empty(@top_five.description_translations) %></p>
+                <h3 class="instructions-xs" data-bind="click: function(){ $root.instructions(true) }">How to win <i class="fa fa-question-circle"></i></h3>
             </div>             
             <div class="row">
                 <!-- <div class="col-xs-12">
                     <button class="btn btn-search" data-bind="click: function(){ instructions(true) }">Instructions</button>
                 </div>   -->                                   
                 <div class="col-xs-12">
-                    <h3 class="instructions-xs" data-bind="click: function(){ $root.instructions(true) }">How to win <i class="fa fa-question-circle"></i></h3>                    
                     <!-- toss in a few coupons from the prize page -->
-                    <h3 data-bind="with: $root.user">You have <span style="color:#cf2f28;" data-bind="text: top_five_dishcoins"></span> contest entries. <span class="hidden-xs" data-bind="click: function(){ $root.instructions(true) }" style="font-size:16px; color:#cf2f28;cursor:pointer;">why <i class="fa fa-question-circle"></i></span></h3>                                     
+                    <h3 class="pierrich" data-bind="with: $root.user">You have <span style="color:#cf2f28;" data-bind="text: top_five_dishcoins"></span> contest entries. <span class="hidden-xs" data-bind="click: function(){ $root.instructions(true) }" style="font-size:16px; color:#cf2f28;cursor:pointer;">why <i class="fa fa-question-circle"></i></span></h3>                                     
                 </div>
                 <div class="col-xs-12" data-bind="with: current_top_five" style="border-bottom:1px solid #DCDCDC; padding-bottom:15px;">
                     <h2>Up For Grabs</h2>
+                    <p>These gift certificates will be awarded to those with the highest number of contest entries</p>
                     <ul class="list-prizes" data-bind="foreach: prizes">
                         <li class="list-prizes-item">
                             <a target="_blank" class="prize_full_div_link" data-bind="attr:{href:'/app/network/restaurant/' + restaurant_id()}"></a>
@@ -173,20 +174,8 @@
                 </div>
             </div>
         </div> 
-    </div>
-    <div id="disqus_thread"></div>
-    <script type="text/javascript">
-        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-        var disqus_shortname = 'dishgotopfive'; // required: replace example with your forum shortname
 
-        /* * * DON'T EDIT BELOW THIS LINE * * */
-        (function() {
-            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-        })();
-    </script>
-    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>    
+    </div>
 </div>
 
 <div data-bind="visible: instructions" style="display:none">
@@ -198,13 +187,15 @@
                 <div class="col-xs-12 text-center">
                     <div class="hidden-xs">
                         <h3 style="margin-top: 0px" data-bind="localize">Help us find out whos king!</h3>
-                        <p data-bind="localize">Rate each of the 5 dishes by selecting the number of stars &amp leave some comments. Everytime you submit a rating you'll receive a contest entry to win one of the prizes up for grabs. The more you share it, the more chances you have of winning!</p>
+                        <p style="font-size:16px;" data-bind="localize">Rate each of the 5 dishes by selecting the number of stars &amp leave some comments. Everytime you submit a rating you'll receive a contest entry to win one of the prizes up for grabs. The more you share it, the more chances you have of winning!</p>
+                        <div class="btn btn-rewards" data-bind="click: function(){ instructions(false) }">Get Started</div>
                     </div>
                     <div class="visible-xs">
                         <h3 style="margin-top: 0px" data-bind="localize">Help us find out whos king!</h3>
-                        <p data-bind="localize">Flip through the dishes using the arrows. Rate each of the 5 dishes by selecting the number of stars &amp leave some comments. Everytime you submit a rating you'll receive a contest entry to win one of the prizes up for grabs. The more you share it, the more chances you have of winning!</p>
+                        <p style="font-size:16px;" data-bind="localize">Flip through the dishes using the arrows. Rate each of the 5 dishes by selecting the number of stars &amp leave some comments. Everytime you submit a rating you'll receive a contest entry to win one of the prizes up for grabs. The more you share it, the more chances you have of winning!</p>
+                        <div class="btn btn-rewards" data-bind="click: function(){ instructions(false) }">Get Started</div>
                     </div>
-                </div> 
+                </div>
                 <div class="col-xs-12" style="border-bottom:1px solid #DCDCDC; padding-bottom:15px;">
                     <p class="top_five_description" style="margin-bottom:20px;">For every rating you submit, you'll receive one contest entry. Share this page with your friends and earn another entry for every one that visits.</p>
                     <div class="row">
@@ -215,14 +206,14 @@
                             <input class="copybox" data-bind="value: 'https://dishgo.io/top_five/' + $root.current_top_five().beautiful_url() + '/' + $root.user().id()">
                         </div>
                     </div>
-                </div>                               
-            </div>                                
+                </div>                
+            </div>                                           
         </div>
     </div>
 </div>   
 
 <script>
-	var top_five = <%= raw(@top_five.serializable_hash({export_localized:true,include_reviews:current_user}).to_json) %>;
+    var top_five = <%= raw(@top_five.serializable_hash({export_localized:true,include_reviews:current_user}).to_json) %>;
     var top_five_id = "<%= @top_five.id %>";
     [
         "<%= stylesheet_path 'network'%>",
