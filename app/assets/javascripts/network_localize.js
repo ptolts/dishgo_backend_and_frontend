@@ -106,19 +106,21 @@ ko.bindingHandlers.localize = {
 ko.bindingHandlers.localizePlaceholder = {
     update: function (element, valueAccessor, allBindingsAccessor) {
         var language = lang() || 'en';
+        var el = $(element);        
+        if(!el.data("language_key")){
+            el.data("language_key",$(element).attr('placeholder'));
+        }        
         if(valueAccessor()){
             var text = valueAccessor()();
         } else {
             var text = $(element).attr('placeholder');
-        }
-        if(language == 'en'){
-            $(element).attr("placeholder", text);
-            return;
-        }        
+        }      
         if(network_localize[language] && network_localize[language][text]){
             text = network_localize[language][text];
         } else {
             console.log(language + " translation for " + text + " not found.");
+            el.attr('placeholder',el.data("language_key"));
+            return;
         }
         // ko.applyBindingsToNode(element, { text: text });
         $(element).attr("placeholder", text);
