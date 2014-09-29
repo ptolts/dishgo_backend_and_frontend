@@ -334,6 +334,7 @@ class Restaurant
   def print_reviews
     puts name
     ratings.each do |review|
+      next if !review.created_at
       puts review.dish.name
       puts "Time: #{review.created_at.in_time_zone("Eastern Time (US & Canada)")} Rating: #{review.rating} Review: '#{review.review}'"
       puts "------------------------"
