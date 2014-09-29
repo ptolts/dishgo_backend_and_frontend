@@ -26,6 +26,7 @@ class User
 
   ## Database authenticatable
   field :email,               :type => String
+  field :contact_email,               :type => String
   field :phone,               :type => String
   field :encrypted_password,  :type => String
   field :setup_link,  :type => String
@@ -201,7 +202,7 @@ class User
       user.facebook_user_id = uid
       user.facebook_auth_token = auth.credentials.token       
       user.name ||= auth.info.name
-      user.email ||= auth.info.email
+      user.contact_email ||= auth.info.email
     end
 
     if !user.persisted?
