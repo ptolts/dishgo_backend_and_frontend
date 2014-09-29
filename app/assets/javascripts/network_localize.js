@@ -68,6 +68,9 @@ var network_localize = {
         "Or share this link":"ou partager ce lien",
         "Join our next top 5 list":"Joignez-vous à notre prochain liste de cinq",
         "MTL Rib Challenge":"Meilleures côtes levées a MTL",
+        "We'll never post without your permisson":"Nous ne l'afficherons jamais sans votre permisson",
+        "Restaurant Sign In":"Restaurant Connexion",
+        "Restaurant Dashboard":"Votre dashboard",
     },        
 }
 
