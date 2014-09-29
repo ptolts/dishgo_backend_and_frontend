@@ -126,7 +126,11 @@ ko.bindingHandlers.localizePlaceholder = {
             text = network_localize[language][text];
         } else {
             console.log(language + " translation for " + text + " not found.");
-            el.attr('placeholder',el.data("language_key"));
+            if(valueAccessor()){
+                el.attr('placeholder',valueAccessor()());                 
+            } else {
+                el.attr('placeholder',el.data("language_key"));
+            }              
             return;
         }
         // ko.applyBindingsToNode(element, { text: text });
