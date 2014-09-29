@@ -16,7 +16,7 @@ class Api::V1::DishController < ApplicationController
       rating.restaurant = dish.restaurant
       user.ratings << rating
     end
-    if top_five_id = params[:top_five_id] and !top_five_id.blank? and Dishcoin.where(top_five_id:top_five_id).count < 3 and top_five = TopFive.where(id:top_five_id).first
+    if top_five_id = params[:top_five_id] and !top_five_id.blank? and Dishcoin.where(top_five_id:top_five_id, user_id: user.id).count < 3 and top_five = TopFive.where(id:top_five_id).first
       dishcoin = rating.dishcoin
       top_five.dishcoins << dishcoin
     end

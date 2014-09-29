@@ -312,6 +312,7 @@ class AdministrationController < ApplicationController
   end
 
   def upload_image
+
     file = params[:files]
 
     resto = current_user.owns_restaurants

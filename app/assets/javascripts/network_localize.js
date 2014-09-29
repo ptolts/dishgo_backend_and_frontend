@@ -21,6 +21,37 @@ var network_localize = {
         "Rate This Dish":"Évaluer ce plat",
         "Add Photo":"Ajouter une photo",
         "Opening Hours":"Heurs d'ouverture",
+        "How to win":"Comment gagner",
+        " Share for more entries":" Partager pour plusieurs entrées",
+        "You've reached the limit of entries you can receive by rating. To obtain more, click here.":"Vous avez atteint le maximum nombre d'entrées pour évaluer les plats . Pour obtenir plus, partager ce concours avec vos amis.",
+        "Up For Grabs":"À GAGNER",
+        "Once the timer runs out we'll raffle off these prizes.":"Dès que le concours est terminé, nours tirons ces prix.",
+        "Your rating:":"Votre évaluation:",
+        "Rate this dish to win":"Évaluer ce plat pour gagner",
+        "View Full Menu":"Voir le menu complet",
+        "Write your review here.":"Écrivez votre évaluation ici.",
+        "Submit your rating":"Soumettre votre évaluation",
+        "help us find out who's king":"Aidez-nous à savoir qui est roi",
+        "Rate your favorite dishes by selecting the number of stars. You can earn up to three entries for your contribution. To earn more entries refer your friends to this page. Every new person will earn you an additional entry!":"Évaluez vos plats préférés en sélectionnant le nombre d'étoiles. Vous pouvez gagner jusqu'à trois entrées pour votre contribution. Pour gagner plus d'entrées partager cette page avec vos amis. Chaque nouvelle personne qui visite vous gagne une entrée supplémentaire!",
+        "Or share this link":"Ou partager ce lien",
+        "flip through the dishes using the arrows":"parcourir les plats en utilisant les flèches",
+        "until draw.":"jusqu'au tirage",
+        "Log In":"Inscription",  
+        "You have":"Vous avez",
+        "contest entries.":"entrée dans ce concours.",
+        "Thanks for using DishGo":"Merci pour utiliser DishGo",
+        "We are a small Montreal based startup. We're working very hard to bring you Montreal's best menus, but we cant do it alone. Help us out by sharing this page on Facebook!":"Nous sommes une petite start-up basée à Montréal. Nous travaillons très dur pour vous apporter les meilleurs menus de Montréal, mais nous ne pouvons pas le faire seuls. Aidez-nous à en partageant cette page sur Facebook!",
+        "Add you restaurant on DishGo":"Ajouter votre restaurant sur DishGo",
+        "It's easy and it's free":"C'est facile et gratuit",
+        "here are some reasons why":"Voici quelques raisons pour lesquelles",
+        "Get Found":"soit trouvé",
+        "Put your menu to work! Benefit from a free listing which lets hungry consumers find your food like never before.":"Mettez votre menu a travailler! Bénéficiez d'une inscription gratuite qui permet aux consommateurs de trouver votre nourriture comme jamais auparavant.",
+        "Menu analytics":"des analytique de votre menu",
+        "Find out what customers really think about your food. We track everything so you can apply optimization techniques to improve your product.":"Découvrez ce que les clients pensent de votre nourriture. Nous suivons tout les interaction avec votre menu digital donc vous pouvez appliquer des techniques d'optimisation pour améliorer votre produit.",
+        "Dish Ratings & Images":"Les image et les évaluation",
+        "Customers can upload photos and submit ratings for each of your dishes. You can then leverage positive feedback as markting content.":"Les clients peuvent télécharger des photos et faire des évaluations pour chacun de vos plats. Vous pouvez utiliser se contenu pour votre de marketing.",
+        "Now enter your contact details so that we can verify the listing":"Maintenant, entrez vos coordonnées afin que nous puissions vérifier le listing.",
+        "Submit":"Soumettre",
     },        
 }
 
@@ -62,7 +93,7 @@ ko.bindingHandlers.localizePlaceholder = {
         if(valueAccessor()){
             var text = valueAccessor()();
         } else {
-            var text = $(element).text();
+            var text = $(element).attr('placeholder');
         }
         if(language == 'en'){
             $(element).attr("placeholder", text);
