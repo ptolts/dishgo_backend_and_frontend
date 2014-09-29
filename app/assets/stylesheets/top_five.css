@@ -167,7 +167,9 @@
 	line-height: 24px;
 	background-color: rgba(0,0,0,0.8);
 }
-
+.join_list:hover {
+    text-decoration: none;
+}
 .top_five_border {
 	border: 2px dashed #dcdcdc;
 }
