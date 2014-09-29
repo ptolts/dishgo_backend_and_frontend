@@ -13,6 +13,19 @@
     left: 15px;
     right: 15px;
 }*/
+
+.menu_link {
+    position: absolute;
+    bottom: 5px;
+    width: 100%;
+    text-align: center;
+    color: #cf2f28;
+    text-transform: none;
+}
+.menu_link:hover,
+.menu_link i:hover {
+    color: #cf2f28;
+}
 .top_dish_container {
     border-bottom: 0 !important;
 }
@@ -573,6 +586,11 @@
     padding: 6px 12px;
     border: 1px solid #cf2f28;
     border-radius: 0;
+}
+.menu_link {
+    position: relative;
+    margin-top: 10px;
+    bottom: 0;
 }
 
 }

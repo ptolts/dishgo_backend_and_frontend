@@ -84,7 +84,7 @@
                     <div class="col-sm-4" style="height: 100%">
                         <div class="top_dish_rating_container">
                             <!-- <span class="rank">#1</span> -->
-                             <a href="/app/network/restaurant/<%= dish.restaurant_id %>" target="_blank"><span class="restaurant_name"><%= dish.restaurant_name %> <i class="fa fa-info-circle"></i></span></a>
+                             <a href="/app/network/restaurant/<%= dish.restaurant_id %>" target="_blank"><span class="restaurant_name"><%= dish.restaurant_name %></span></a>
                             <span class="dish_title"><%= first_non_empty(dish.name_translations) %></span>
                             <!-- <p><%= first_non_empty_truncated(dish.description_translations) %></p> -->
                             <div class="rating-bottom">
@@ -94,14 +94,15 @@
                                         <p>Rate this dish to win</p>
                                         <div class="pop_up_menu_dish_rating" data-bind="writableStarRatingTopFive: rating"></div>
                                         <textarea rows="6" class="description form-control" placeholder="Write your review here." data-bind="value: review, valueUpdate: 'afterkeydown'"></textarea>
-                                        <button class="btn btn-rewards btn-block" data-bind="loginClick: function(){ $data.rate($parent.id()); }">Submit your rating</button>
+                                        <button style="margin-bottom: 10px;" class="btn btn-rewards btn-block" data-bind="loginClick: function(){ $data.rate($parent.id()); }">Submit your rating</button>
                                     <!-- /ko -->
                                     <!-- IF THE REVIEW HAS BEEN SUBMITTED, WE MAKE IT LOOK DIFFERENT -->
                                     <!-- ko if: id() -->
                                         <p>Your rating:</p>
                                         <div class="pop_up_menu_dish_rating" data-bind="starRating: rating"></div>
                                         <p>"<!-- ko text: review --><!-- /ko -->"</p>
-                                    <!-- /ko -->                                
+                                    <!-- /ko -->
+                                     <a class="menu_link" href="/app/network/restaurant/<%= dish.restaurant_id %>" target="_blank">View Full Menu <i class="fa fa-info-circle"></i></a>                              
                                 <!-- /ko -->
                             </div>
                         </div>
@@ -132,7 +133,7 @@
                 </div>
                 <div class="col-xs-12" data-bind="with: current_top_five" style="border-bottom:1px solid #DCDCDC; padding-bottom:15px;">
                     <h2>Up For Grabs</h2>
-                    <p>These gift certificates will be awarded to those with the highest number of contest entries</p>
+                    <p>Once the timer runs out we'll raffle off these prizes.</p>
                     <ul class="list-prizes" data-bind="foreach: prizes">
                         <li class="list-prizes-item">
                             <a target="_blank" class="prize_full_div_link" data-bind="attr:{href:'/app/network/restaurant/' + restaurant_id()}"></a>
