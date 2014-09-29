@@ -111,7 +111,11 @@ ko.bindingHandlers.localizePlaceholder = {
         var language = lang() || 'en';
         var el = $(element);        
         if(!el.data("language_key")){
-            el.data("language_key",$(element).attr('placeholder'));
+            if(valueAccessor()){
+                 el.data("language_key",valueAccessor()());
+            } else {
+                el.data("language_key",$(element).attr('placeholder'));
+            }               
         }        
         if(valueAccessor()){
             var text = valueAccessor()();
