@@ -332,8 +332,11 @@ class Restaurant
   end  
 
   def print_reviews
+    puts name
     ratings.each do |review|
-      puts "Time: #{review.created_at} Rating: #{review.rating} Review: #{review.review}"
+      puts review.dish.name
+      puts "Time: #{review.created_at} Rating: #{review.rating} Review: '#{review.review}'"
+      puts "------------------------"
     end
   end
 
