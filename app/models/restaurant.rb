@@ -331,6 +331,12 @@ class Restaurant
     return Oj.dump(menu)
   end  
 
+  def print_reviews
+    ratings.each do |review|
+      puts "Time: #{review.created_at} Rating: #{review.rating} Review: #{review.review}"
+    end
+  end
+
   def enough_info?
     enough = true
     enough = false if self.address_line_1.blank?
