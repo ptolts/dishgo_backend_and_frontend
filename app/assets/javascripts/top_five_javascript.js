@@ -173,7 +173,7 @@ function TopFiveModel(){
     self.shareTopFiveFB = function(){
         FB.ui({
           method: 'share',
-          href: 'https://dishgo.io/top_five/' + top_five_id + "/" + user_id,
+          href: 'https://dishgo.io/top_five/' + top_five_id + "/" + self.user().id(),
         }, function(response){});     
     }
 
