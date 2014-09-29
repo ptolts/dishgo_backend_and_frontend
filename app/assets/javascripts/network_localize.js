@@ -67,6 +67,7 @@ var network_localize = {
         "Flip through the dishes using the arrows. Rate your favorite dishes by selecting the number of stars. You can earn up to three entries for your contribution. To earn more entries refer your friends to this page. Every new person will earn you an additional entry! not found. ":"Parcourir les plats en utilisant les flèches. Évaluez vos plats préférés en sélectionnant le nombre d'étoiles. Vous pouvez gagner jusqu'à trois entrées pour votre contribution. Pour gagner plus d'entrées partager cette page avec vos amis. Chaque nouvelle personne qui visite vous gagne une entrée supplémentaire!",        
         "Or share this link":"ou partager ce lien",
         "Join our next top 5 list":"Joignez-vous à notre prochain liste de cinq",
+        "MTL Rib Challenge":"Meilleures côtes levées a MTL",
     },        
 }
 
