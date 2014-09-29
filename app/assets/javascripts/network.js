@@ -432,6 +432,15 @@ function NetworkModel() {
         }
     });
 
+    // Switch Languages
+    self.mobile_language = ko.computed(function(){
+        if(self.lang() == 'en'){
+            return "FR";
+        } else {
+            return "EN";
+        }
+    });    
+
     self.flip_language = function(){
         if(self.lang() == "en"){
             self.lang("fr");
