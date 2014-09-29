@@ -335,7 +335,7 @@ class Restaurant
     puts name
     ratings.each do |review|
       puts review.dish.name
-      puts "Time: #{review.created_at} Rating: #{review.rating} Review: '#{review.review}'"
+      puts "Time: #{review.created_at.in_time_zone("Eastern Time (US & Canada)")} Rating: #{review.rating} Review: '#{review.review}'"
       puts "------------------------"
     end
   end
