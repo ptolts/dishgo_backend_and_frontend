@@ -26,13 +26,13 @@
 .menu_link i:hover {
     color: #cf2f28;
 }
-.top_dish_container:nth-child(1),
-.top_dish_container:nth-child(2),
-.top_dish_container:nth-child(3),
-.top_dish_container:nth-child(4) {
+.top_five_tool .top_dish_container:nth-child(1),
+.top_five_tool .top_dish_container:nth-child(2),
+.top_five_tool .top_dish_container:nth-child(3),
+.top_five_tool .top_dish_container:nth-child(4) {
     border-bottom: 0 !important;
 }
-.top_dish_container:nth-last-child(1) {
+.top_five_tool .top_dish_container:nth-last-child(1) {
     border-bottom: solid 1px #e9e9e9;
     margin-bottom: 25px;
 }
@@ -540,11 +540,11 @@
         /*z-index: -1; */
         position: relative;   
     }
-    .top_dish_container {
+    .top_five_tool .top_dish_container {
         height: auto !important;
         border: 0 !important;
     }
-    .top_dish_container .dish-picture{
+    .top_five_tool .top_dish_container .dish-picture{
     	height: 250px;
         background-position: 50% 0 !important;
         background-repeat: no-repeat !important;
@@ -560,7 +560,7 @@
     .top_dish_rating_container {
     	text-align: center;
     }
-    .top_dish_container .col-sm-8 {
+    .top_five_tool .top_dish_container .col-sm-8 {
 		padding: 0;
 	}
 	.top_five_header .countdown {
@@ -601,7 +601,7 @@
 
 }
 @media only screen and (max-width: 767px) {
-	.top_dish_container {
+	.top_five_tool .top_dish_container {
         height: auto !important;
     }
     .top_dish_rating_container {
@@ -621,13 +621,13 @@
  	.top_dish_rating_container {
     	text-align: left;
     }
-    .top_dish_container {
+    .top_five_tool .top_dish_container {
         height: 450px !important;
     }
     .dish-picture {
         height: 450px !important;
     }
-    .top_dish_container .col-sm-8 {
+    .top_five_tool .top_dish_container .col-sm-8 {
 		padding: 0 0 0 15px;
 	}
     .col-custom-70 {
@@ -660,13 +660,13 @@
 	.pop_up_menu_dish_rating .left_over {
 		font-size: 34px;
 	}
-    .top_dish_container {
+    .top_five_tool .top_dish_container {
         height: 350px !important;
     }
     .dish-picture {
         height: 350px !important;
     }
-	.top_dish_container .col-sm-4 {
+	.top_five_tool .top_dish_container .col-sm-4 {
 		padding: 0 0 0 15px;
 	}
     .col-custom-30 {
