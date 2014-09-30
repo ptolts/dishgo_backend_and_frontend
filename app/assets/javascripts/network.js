@@ -322,7 +322,7 @@ function NetworkModel() {
     var self = this;
     self.loading = ko.observable(true);
     self.network_sign_in = ko.observable(false);
-    self.register = ko.observable(false);
+    self.register = ko.observable(true);
     self.social_share = social_share;
     self.preview = ko.observable(true);
     self.selected_dish = ko.observable();
