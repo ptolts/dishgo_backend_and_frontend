@@ -208,6 +208,7 @@ class User
     if !user.persisted?
       user.skip_confirmation!
       user.skip_confirmation_notification!
+      Email.delay.notify_admins(user, "New Network User")
     end
     
     user.save!
