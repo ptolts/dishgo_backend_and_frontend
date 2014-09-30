@@ -204,17 +204,20 @@ class User
       user.name ||= auth.info.name
       user.contact_email ||= auth.info.email
     end
-
+    notify = false
     if !user.persisted?
       user.skip_confirmation!
       user.skip_confirmation_notification!
-      Email.delay.notify_admins(user, "New Network User")
+      notify = true
     end
     
     user.save!
 
-    return user
+    if notify
+      Email.delay.notify_admins(user, "New Network User")
+    end
 
+    return user
   end  
 
   def create_x_dishcoins x
