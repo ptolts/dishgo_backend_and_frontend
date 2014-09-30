@@ -219,14 +219,14 @@
                         <p style="font-size:16px;" data-bind="localize">Flip through the dishes using the arrows. Rate your favorite dishes by selecting the number of stars. You can earn up to three entries for your contribution. To earn more entries refer your friends to this page. Every new person will earn you an additional entry!</p>
                     </div>
                 </div>
-                <div class="col-xs-12" style="border-bottom:1px solid #DCDCDC; padding-bottom:15px;">
+                <div class="col-xs-12" style="padding-bottom:15px;">
                     <div class="row">
                         <div class="col-xs-12">
                             <button data-bind="click: function(){ $root.shareTopFiveFB() }" class="btn btn-fb-network-share" style="width: 100%;font-size: 16px;box-shadow:none;"><i class="fa fa-facebook-square" data-bind="localize"> Share for more entries</i></button>
                         </div>
                         <div class="col-xs-12">
+                            <p class="text-center" style="margin-top:10px;" data-bind="localize">Or share this link</p>
                             <input class="copybox" data-bind="value: 'https://dishgo.io/top_five/' + $root.current_top_five().beautiful_url() + '/' + $root.user().id()">
-                            <p class="text-center" data-bind="localize">Or share this link</p>
                         </div>
                     </div>
                 </div>                

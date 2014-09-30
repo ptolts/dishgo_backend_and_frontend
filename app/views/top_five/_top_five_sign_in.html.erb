@@ -5,8 +5,9 @@
 	         	<div id="sign_in">
 		            <div class="row">
 		                <div class="col-xs-12 text-center">
-		                	<h3 style="margin-top: 0px" data-bind="visible: !loggedIn(), localize">Sign in with FB or Twitter</h3>
-		                	<h3 style="margin-top: 0px" data-bind="visible: loggedIn, localize">Connected Accounts</h3>
+		                	<h2 style="margin-top:5px;" data-bind="visible: !loggedIn(), localize">Sign in to win</h2> 
+		                	<h3 style="margin-top: 0px" data-bind="visible: loggedIn, localize">Thanks for signing in</h3>
+		                	<p style="margin-top: 0px" data-bind="visible: loggedIn, localize">Connected accounts</p>
 		                	<!-- ko foreach: social_networks -->
 		                		<span class="btn btn-none social_network_button" data-bind="click: function(){ login(); }, css: {online:online}"><i class="fa" data-bind="css:'fa-'+name"></i></span>
 		                	<!-- /ko -->
@@ -17,6 +18,7 @@
 		            <!-- if the user is not logged in, show them this -->
 		            <div class="row" data-bind="visible: !loggedIn()">
 		                <div class="col-xs-12 text-center">
+		                	<p>or</p>
 		                	<h3 data-bind="click: function(){ register(!register()) }" ><span data-bind="visible: !register(), localize">DishGo Sign In</span><span data-bind="visible: register, localize">Create Your Account</span></h3>
 							<div class="row">
 								<div class="col-sm-10 col-sm-offset-1">
@@ -43,16 +45,9 @@
 
 							<div class="row" style="margin-top:25px;">
 								<div class="col-sm-10 col-sm-offset-1">
-									<p style="color:#cf2f28; cursor: pointer" data-bind="click: function(){ register(!register()) }"><span data-bind="visible: !register(), localize">Create An Account</span><span data-bind="visible: register, localize">Sign In</span></p>
+									<p style="color:#cf2f28; cursor: pointer" data-bind="click: function(){ register(!register()) }"><span data-bind="visible: !register(), localize">Create an Account</span><span style="color:#cf2f28;" data-bind="visible: register, localize">Sign In</span></p>
 								</div>
 							</div>	
-
-							<div class="row" style="margin-top:25px;">
-								<div class="col-sm-10 col-sm-offset-1">
-		                			<p style="margin-top:5px;" data-bind="localize">We can't keep track of your contest entries without an account!</p> 
-								</div>
-							</div>							
-
 		                </div>                
 		            </div>
 
@@ -61,7 +56,7 @@
 		                <div class="col-xs-12 text-center">
 							<div class="row" style="margin-top:5px;">
 								<div class="col-sm-10 col-sm-offset-1">
-									<a data-method="delete" class="btn btn-none" style="width: 100%; background-color:#fff; color:#000;" href="/app/users/sign_out" data-bind="localize">Log Out</a>
+									<a data-method="delete" class="btn btn-none" style="width: 100%; background-color:#fff; color:#cf2f28;border:1px solid #ccc;" href="/app/users/sign_out" data-bind="localize">Log Out</a>
 								</div>
 							</div>														
 		                </div>                

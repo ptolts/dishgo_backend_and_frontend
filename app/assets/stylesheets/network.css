@@ -1176,10 +1176,21 @@ footer a:hover, footer a:focus {
     filter: aplpha(opacity=100);
 }
 #sign_in {
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: #f5f6f5;
     padding: 25px 15px;
 }
-
+#sign_in h2 {
+    margin-bottom: 20px;
+}
+#sign_in h2,
+#sign_in h3,
+#sign_in h4 {
+    color: #565a5c;
+}
+#sign_in p {
+    color: #82898d;
+    font-size: 16px;
+}
 .social_network_button {
     width: 75px;
     margin-left: 10px;
@@ -1187,6 +1198,7 @@ footer a:hover, footer a:focus {
     line-height: 24px;
     font-size: 28px;
     color: #1a1a1a;
+    border: 1px solid #ccc;
 }
 
 .social_network_button.online {

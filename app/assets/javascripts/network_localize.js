@@ -53,10 +53,10 @@ var network_localize = {
         "Now enter your contact details so that we can verify the listing":"Maintenant, entrez vos coordonnées afin que nous puissions vérifier le listing.",
         "Submit":"Soumettre",
         "Sign in with FB or Twitter":"Inscrivez-vous avec FB ou Twitter",
-        "Connected Accounts":"Vos comptes connectés ",
+        "Connected accounts":"Vos comptes connectés ",
         "DishGo Sign In":"Inscription ",
         "Register":"Inscrivez-vous",
-        "Create Your Account":"Créez votre compte",
+        "Create an Account":"Créez votre compte",
         "Sign In":"Inscription",
         "Log Out":"Déconnecter",
         "Thanks for using DishGo!":"Merci pour utiliser DishGo!",
@@ -71,6 +71,10 @@ var network_localize = {
         "We'll never post without your permisson":"Nous ne l'afficherons jamais sans votre permisson",
         "Restaurant Sign In":"Restaurant Connexion",
         "Restaurant Dashboard":"Votre dashboard",
+        "If you haven't tried any of these dishes, you can still enter! Just share this page. Every person that you bring will earn you one entry!":"Si vous n'avez pas essayé l'un de ces plats, vous pouvez toujours joigner le concours! Il suffit de partager cette page. Chaque personne que vous apportez vous fera gagner une entrée supplémentaire!",  
+        "Write your review here":"Écrivez votre évaluation ici",
+        "Sign in to win":"Inscrivez-vous pour gagner",
+        "Thanks for signing in":"Merci de vous inscrire",        
     },        
 }
 
