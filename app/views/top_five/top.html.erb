@@ -165,7 +165,7 @@
                 <div class="col-xs-12 trending hidden-xs">
                     <h2>What's Trending in MTL</h2>
                     <% @click_bait_dishes.each do |dish| %>
-                        <div class="row" style="margin-bottom: 5px">
+                        <div class="row" style="margin-bottom: 5px; position: relative">
                             <a href="/app/network/restaurant/<%= dish.restaurant.id %>" class="sidebar_dish_link"></a>                            
                             <div class="col-xs-6">
                                 <div class="image-cropped" style="background-image: url(<%= dish.img_src %>); border-radius: 0;"></div>
