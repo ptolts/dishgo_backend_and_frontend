@@ -90,7 +90,9 @@ function TopFive(data) {
     });
 
     self.threeRated = ko.computed(function(){
-        return 3 <= _.filter(self.dishes(), function(dish){ return dish.ratingObject().id() != "" }).length;
+        return 3 <= _.filter(self.dishes(), function(dish){ 
+                                                return dish.ratingObject().id() != "" && dish.ratingObject().id() != null;
+                                            }).length;
     });  
 
     self.top_five_saving = ko.observable(false);
