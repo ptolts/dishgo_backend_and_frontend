@@ -10,7 +10,7 @@
 		                	<!-- ko foreach: social_networks -->
 		                		<span class="btn btn-none social_network_button" data-bind="click: function(){ login(); }, css: {online:online}"><i class="fa" data-bind="css:'fa-'+name"></i></span>
 		                	<!-- /ko -->
-		                	<p style="margin-top:5px;">We'll never post without your permisson</p> 
+		                	<p style="margin-top:5px;" data-bind="localize">We'll never post without your permisson</p> 
 		                </div>                
 		            </div>
 
@@ -43,9 +43,15 @@
 
 							<div class="row" style="margin-top:25px;">
 								<div class="col-sm-10 col-sm-offset-1">
-									<p class="" style="color:#cf2f28; cursor: pointer" data-bind="click: function(){ register(!register()) }"><span data-bind="visible: !register(), localize">Create Your Account</span><span data-bind="visible: register, localize">Sign In</span></p>
+									<p style="color:#cf2f28; cursor: pointer" data-bind="click: function(){ register(!register()) }"><span data-bind="visible: !register(), localize">Create An Account</span><span data-bind="visible: register, localize">Sign In</span></p>
 								</div>
 							</div>	
+
+							<div class="row" style="margin-top:25px;">
+								<div class="col-sm-10 col-sm-offset-1">
+		                			<p style="margin-top:5px;" data-bind="localize">We can't keep track of your contest entries without an account!</p> 
+								</div>
+							</div>							
 
 		                </div>                
 		            </div>
