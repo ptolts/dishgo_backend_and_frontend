@@ -100,7 +100,9 @@ Foodcloud::Application.routes.draw do
     resources :business, only: []  do
       collection do
         get '/', to: "business#index"
+        get '/advertise', to: "business#advertise"
         post '/submit', to: "business#submit"
+        post '/submit_advertising', to: "business#submit_advertising"
       end
     end
   end

@@ -1,0 +1,164 @@
+<div class="bg-dark">
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-12 text-center">
+				<h1>Add your restaurant on DishGo</h1>
+				<p>It's easy and it's free!</p>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="bg-grey">
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-12 text-center" style="margin-bottom:40px;">
+				<h1>Here's some reasons why</h1>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-4 text-center">
+				<div class="icon-head">
+					<i class="fa fa-map-marker"></i>
+				</div>
+				<h2>Get Found</h2>
+				<p>Put your menu to work! Benefit from a free listing which lets hungry consumers find your food like never before.</p>
+			</div>
+			<div class="col-sm-4 text-center">
+				<div class="icon-head">
+					<i class="fa fa-bar-chart-o"></i>
+				</div>
+				<h2>Menu Analytics</h2>
+				<p>Find out what customers really think about your food. We track everything so you can apply optimization techniques to improve your product.</p>
+			</div>
+			<div class="col-sm-4 text-center">
+				<div class="icon-head">
+					<i class="fa fa-star-half-o"></i>
+				</div>
+				<h2>Dish Ratings & Images</h2>
+				<p>Customers can upload photos and submit ratings for each of your dishes. You can then leverage positive feedback as markting content. </p>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="bg-dark-1" data-bind="visible: !sent()">
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-12 text-center">
+				<h1 style="margin-bottom:35px;">Enter your Restaurant Name</h1>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-4 col-sm-offset-4">
+				<div class="form-group col-xs-12">
+                    <div class="controls">
+                    	<div class="input-group input-group-lg">
+		                	<div class="input-group-addon"><i class="fa fa-building-o"></i></div>
+                        	<input id="resturant_name" name="resturant_name" type="text" placeholder="Restaurant Name" data-bind="value: restaurant_name" class="form-control">
+                        </div>
+                    </div>
+                </div>
+        	</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-12 text-center">
+				<h1 style="margin-bottom:35px; padding-top:0;">Now enter your contact details so that we can verify the listing</h1>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-4">
+				<div class="form-group col-xs-12">
+                    <div class="controls">
+                    	<div class="input-group input-group-lg">
+		                	<div class="input-group-addon"><i class="fa fa-user"></i></div>
+                        	<input id="" name="" type="text" placeholder="Full Name" data-bind="value: name" class="form-control">
+                        </div>
+                    </div>
+                </div>
+			</div>
+			<div class="col-sm-4">
+				<div class="form-group col-xs-12">
+                    <div class="controls">
+                    	<div class="input-group input-group-lg">
+		                	<div class="input-group-addon"><i class="fa fa-envelope"></i></div>
+                        	<input id="" name="" type="text" placeholder="Email Address" data-bind="value: email" class="form-control">
+                        </div>
+                    </div>
+                </div>
+			</div>
+			<div class="col-sm-4">
+				<div class="form-group col-xs-12">
+                    <div class="controls">
+                    	<div class="input-group input-group-lg">
+		                	<div class="input-group-addon"><i class="fa fa-phone"></i></div>
+                        	<input id="" name="" type="text" placeholder="555-555-5555" data-bind="value: phone" class="form-control">
+                        </div>
+                    </div>
+                </div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-12">
+				<button class="btn btn-rewards center-block" data-bind="click: function(){ $root.submitAdvertising() }">Submit</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+	[
+		"<%= stylesheet_path 'network'%>",
+		"<%= stylesheet_path 'business'%>",
+	].forEach(function(src) {
+		var l = document.createElement('link'); 
+		l.rel = 'stylesheet';
+		l.href = src;
+		document.head.appendChild(l);
+	});
+
+	var scripts = [
+		"<%= javascript_path 'application' %>",
+    	"<%= javascript_path 'menu_editor' %>",
+    	"<%= javascript_path 'bidness_javascript' %>",
+	];
+	var src;
+	var script;
+	var pendingScripts = [];
+	var firstScript = document.scripts[0];
+
+	// Watch scripts load in IE
+	function stateChange() {
+	  // Execute as many scripts in order as we can
+	  var pendingScript;
+	  while (pendingScripts[0] && pendingScripts[0].readyState == 'loaded') {
+	    pendingScript = pendingScripts.shift();
+	    // avoid future loading events from this script (eg, if src changes)
+	    pendingScript.onreadystatechange = null;
+	    // can't just appendChild, old IE bug if element isn't closed
+	    firstScript.parentNode.insertBefore(pendingScript, firstScript);
+	  }
+	}
+
+	// loop through our script urls
+	while (src = scripts.shift()) {
+	  if ('async' in firstScript) { // modern browsers
+	    script = document.createElement('script');
+	    script.async = false;
+	    script.src = src;
+	    document.head.appendChild(script);
+	  }
+	  else if (firstScript.readyState) { // IE<10
+	    // create a script and add it to our todo pile
+	    script = document.createElement('script');
+	    pendingScripts.push(script);
+	    // listen for state changes
+	    script.onreadystatechange = stateChange;
+	    // must set src AFTER adding onreadystatechange listener
+	    // else we’ll miss the loaded event for cached scripts
+	    script.src = src;
+	  }
+	  else { // fall back to defer
+	    document.write('<script src="' + src + '" defer></'+'script>');
+	  }
+	}			
+
+</script>

@@ -27,6 +27,27 @@ function BidnessModel(){
             dataType: "json"
         });
     }
+
+    self.submitAdvertising = function(){
+        $.ajax({
+            type: "POST",
+            url: "/app/dishgo/business/advertising",
+            data: {
+                restaurant_name: self.restaurant_name(),
+                email: self.email(),
+                name: self.name(),
+                phone: self.phone(),
+            },
+            success: function(data, textStatus, jqXHR){
+                alert("Thanks, we will contact you soon.");
+                self.sent(true);
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) { 
+                alert("We couldn't deliver your message at this time.");
+            },
+            dataType: "json"
+        });
+    }    
 }
 
 editing_mode = false;   

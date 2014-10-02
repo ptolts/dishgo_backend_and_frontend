@@ -20,6 +20,12 @@ class Email < ActionMailer::Base
     mail(:to => "tim@dishgo.io", :subject => "New Restaurant", template_name: 'send_tim_an_email').deliver
   end  
 
+  def send_tim_an_advertising_email text
+    @text = text
+    mail(:to => "phil@dishgo.io", :subject => "I Want To Advertise", template_name: 'send_tim_an_advertising_email').deliver
+    mail(:to => "tim@dishgo.io", :subject => "I Want To Advertise", template_name: 'send_tim_an_advertising_email').deliver
+  end    
+
   def welcome user
     mail(:to => user.email, :subject => "Welcome to DishGo!").deliver  
     notify_admins user
