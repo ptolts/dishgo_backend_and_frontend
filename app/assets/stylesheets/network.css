@@ -8,6 +8,7 @@
 *= require top_five
 *= require top_five_paginate
 *= require jquery.ui.datepicker
+*= require flaticon
 *= require_self
 */
 

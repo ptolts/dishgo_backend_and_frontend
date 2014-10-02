@@ -11,6 +11,7 @@
                         <span class="dish_close_icon glyphicon glyphicon-remove" data-bind="click: function(){ topmodel.remove($data) }"></span>                        
                     </div>                        
                     <div class="dish">
+
                         <div class="col-xs-12 push_down">
                             <div class="col-xs-7 ">
                                 <input data-bind="lValue: name, valueUpdate: 'afterkeydown'" class="form-control col-xs-12 dish_name tooltipclass" data-toggle="tooltip" data-placement="top" title="Type the dish name into this box." placeholder="Add Dish Title"> 
@@ -22,9 +23,16 @@
                                 </div>                                      
                             </div>
                         </div>
+
                         <div class="col-xs-12 push_down">
                             <textarea rows="6" data-bind="lValue: description, valueUpdate: 'afterkeydown'" class="description form-control tooltipclass" data-toggle="tooltip" data-placement="top" title="Type the dish description into this box." placeholder="Add Dish Description"></textarea>
                         </div>
+
+                        <div class="col-xs-12 push_down">
+                            <span><i class="ingredient flaticon-nuts" data-bind="toggleIngredients: nuts"></i></span>
+                            <span><i class="ingredient flaticon-spicey" data-bind="toggleIngredients: spicey"></i></span>
+                            <span><i class="ingredient flaticon-vegetarian" data-bind="toggleIngredients: vegetarian"></i></span>
+                        </div>                                                
 
                         <div data-bind="template: { name: 'image', foreach: images}"></div>  
 

@@ -21,6 +21,21 @@
 *= require network_localize.js
 */
 
+ko.bindingHandlers.toggleIngredients = {
+    'init': function (element, valueAccessor, allBindingsAccessor, viewModel, bindingContext) {
+        var value = valueAccessor();
+        $(element).click(function() {
+            if(value()){
+                $(element).removeClass("active");
+                value(false);
+            } else {
+                $(element).addClass("active");
+                value(true);
+            }
+        });
+    }
+}
+
 var internet_connection_error = ko.observable(false);
 function retryAjax(ret){
     if(ret.retry_count == undefined){

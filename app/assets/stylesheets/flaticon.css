@@ -1,0 +1,44 @@
+/* FUCK YOU */
+@font-face {
+	font-family: "Flaticon";
+	src: url("/app/public/flaticon.eot");
+	src: url("/app/public/flaticon.eot#iefix") format("embedded-opentype"),
+	url("/app/public/flaticon.woff") format("woff"),
+	url("/app/public/flaticon.ttf") format("truetype"),
+	url("/app/public/flaticon.svg") format("svg");
+	font-weight: normal;
+	font-style: normal;
+}
+[class^="flaticon-"]:before, [class*=" flaticon-"]:before,
+[class^="flaticon-"]:after, [class*=" flaticon-"]:after {   
+	font-family: Flaticon;
+	font-size: 20px;
+	font-style: normal;
+	margin-left: 20px;
+}.flaticon-vegetarian:before {
+	content: "\e000";
+}
+.flaticon-spicey:before {
+	content: "\e001";
+}
+.flaticon-chilis:before {
+	content: "\e002";
+}
+.flaticon-cocktail7:before {
+	content: "\e003";
+}
+.flaticon-coffee26:before {
+	content: "\e004";
+}
+.flaticon-drink24:before {
+	content: "\e005";
+}
+.flaticon-fish52:before {
+	content: "\e006";
+}
+.flaticon-glass4:before {
+	content: "\e007";
+}
+.flaticon-nuts:before {
+	content: "\e008";
+}

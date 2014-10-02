@@ -7,6 +7,7 @@ if ENV['RAILS_ENV'].to_s.eql?('development')
 	require 'rack/rewrite'
 
 	use Rack::Rewrite do
+	  rewrite   %r{/app/public(.*)},  	'/app/$1'
 	  rewrite   %r{/assets/(.*)},  	'/app/assets/$1'
 	  rewrite   %r{/fonts/(.*)},  	'/app/fonts/$1'  
 	  rewrite   %r{/public/(.*)},  	'/app/assets/$1'  

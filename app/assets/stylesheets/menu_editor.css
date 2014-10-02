@@ -3,8 +3,17 @@
 *= require menu_builder_sortable
 *= require language_selector_menu
 *= require menu_help_stuff
+*= require flaticon
 */
 @import url(https://fonts.googleapis.com/css?family=Lato|Oswald:400,700);
+
+.ingredient {
+
+}
+
+.ingredient.active {
+    color: #cf2f28;
+}
 
 body {
     font-family: 'Lato', sans-serif;
