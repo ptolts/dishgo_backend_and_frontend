@@ -408,25 +408,10 @@ body {
 }
 
 #login_buttons .dropdown-menu {
-    margin-top: -5px;
+    margin-top: -2px;
     margin-left: -2px;
     border-radius: 0px;
-    border: none;
-    background-color: transparent;
-    box-shadow: none;
-    width: 100%;
-}
-#login_buttons .dropdown-menu li {
-    background-color: #fff;
-    width: 100%;
-}
-#login_buttons .dropdown-menu a {
-    color: #cf2f28;
-}
-#login_buttons .dropdown-menu li a:hover,
-#login_buttons .dropdown-menu li a:focus {
-    background-color: #cf2f28;
-    color: #fff;
+    border-top: 0px;
 }
 
 footer {
