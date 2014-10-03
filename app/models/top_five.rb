@@ -10,6 +10,7 @@ class TopFive
 	field :description, localize: true
 	field :beautiful_url, type: String
 	field :end_date, type: DateTime
+	field :active, type: Boolean, default: false
 
 	has_and_belongs_to_many :dish, class_name: "Dish", inverse_of: nil
 	has_many :dishcoins, class_name: "Dishcoin", inverse_of: :top_five
@@ -18,6 +19,8 @@ class TopFive
 	belongs_to :user
 
 	before_save :beautify_url
+
+	scope :is_active, -> { where(active: true) }	
 
 	def number_of_dishes
 		return 4

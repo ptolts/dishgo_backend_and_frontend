@@ -398,14 +398,22 @@ body {
     height: 80px;
 }
 #login_buttons ul li {
-    display: inline;
+    display: inline-block;
 }
-#login_buttons .btn {
+#login_buttons .btn, #login_buttons a {
     padding: 34px 15px 20px 15px;
     line-height: 24px;
     border-radius: 0;
     text-transform: uppercase;
 }
+
+#login_buttons .dropdown-menu {
+    margin-top: -2px;
+    margin-left: -2px;
+    border-radius: 0px;
+    border-top: 0px;
+}
+
 footer {
     padding: 25px;
     /*background-color: #373737;*/
@@ -965,7 +973,22 @@ footer a:hover, footer a:focus {
     }
     .fullWidth .expand {
 
-    }    
+    }
+
+    .dropdown-menu {
+        position: fixed;
+        top: 52px;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+        height: initial !important;
+        background-clip: padding-box;
+    }
+
+    .dropdown-menu li {
+        width: 100%;
+        text-align: center;
+    }       
 
 }
 .network_menu_header {
@@ -1212,6 +1235,8 @@ footer a:hover, footer a:focus {
     color: #cf2f28;
 }
 .caret {
+    margin-bottom: 3px;    
+    margin-left: 2px !important;
     border-top: 8px solid;
     border-right: 8px solid transparent;
     border-left: 8px solid transparent;

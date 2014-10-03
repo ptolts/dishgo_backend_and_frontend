@@ -4,17 +4,20 @@ class TopFiveController < ApplicationController
   
   def index
     @top_fives = TopFive.where(user_id:current_user.id).collect{|e| e.serializable_hash({export_localized:true})}
+    @top_fives_for_header = TopFive.is_active          
     render 'index'
   end
 
   def create
     @top_five = TopFive.where(id:params[:id]).first || nil
+    @top_fives_for_header = TopFive.is_active      
     render 'create'
   end
 
   def top
     # @top_five = TopFive.where(beautiful_url:params[:id]).first || TopFive.find(params[:id])
     @top_five = TopFive.or({beautiful_url:params[:id]},{id:params[:id]}).first
+    @top_fives_for_header = TopFive.is_active          
     #create dishcoin for the referral
     if user_id = params[:user_id] and (!current_user or (current_user.id.to_s != user_id.to_s)) and Dishcoin.where(top_five_id:@top_five.id,ip:request.ip).count == 0
       # Rails.logger.warn "#{user_id} != #{current_user.id} -> #{current_user.id != user_id}"
@@ -47,7 +50,7 @@ class TopFiveController < ApplicationController
 
     format = "%Y-%m-%dT%H:%M:%S.%L%z";
     top_five.end_date = Date.strptime(data["end_date"], format).to_time.utc
-
+    top_five.active = data["active"].to_bool
     top_five.user = current_user
     top_five.save!
 

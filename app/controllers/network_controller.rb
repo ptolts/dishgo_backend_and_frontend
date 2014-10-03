@@ -9,6 +9,7 @@ class NetworkController < ApplicationController
       restaurant = Restaurant.where(name:/cunningham/i).first
       @dishes = restaurant.dishes.to_a.reject{|e| e.image.count == 0}[0..2]
     end
+    @top_fives_for_header = TopFive.is_active  
     render 'index'
   end
 
@@ -59,6 +60,8 @@ class NetworkController < ApplicationController
       @owner = true
     end
 
+    @top_fives_for_header = TopFive.is_active
+
     @direct_dish_id = params[:direct_dish_id]
     if !@direct_dish_id.blank? and direct_dish = Dish.find(@direct_dish_id)
       @section_id = direct_dish.section_id
@@ -75,9 +78,17 @@ class NetworkController < ApplicationController
     #   restaurants = restaurants.where(:locs => { "$near" => { "$geometry" => { "type" => "Point", :coordinates => coords }, "$maxDistance" => 100000}})
     # end
     search_term = params[:restaurant_search_term].gsub(/[^[:alnum:]]/,'.').gsub(/s\b/,'.?s').gsub(/[áéíóúâçûêôaeèiou]/i,'[áéíóúâçûêôaeèiou]')
+    
+    # Category Search
     if cats = params[:categories] and !cats.empty?
       restaurants = restaurants.any_in(category:cats)
     end
+
+    # Location Search
+    if coords = params[:about_loc]    
+      restaurants = restaurants.where(:locs => { "$near" => { "$geometry" => { "type" => "Point", :coordinates => coords }, "$maxDistance" => 3000}})
+    end
+
     regex = /#{search_term}/i
     restaurants = restaurants.where(name:regex)
     count = restaurants.count

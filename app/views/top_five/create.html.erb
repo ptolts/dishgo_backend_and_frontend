@@ -15,10 +15,13 @@
 			</div>
 		</div>
 		<div class="row" style="margin-top: 10px">
-            <div class="col-sm-6 form-inline">
+            <div class="col-sm-4 form-inline">
                 <p>End Date: <input type="text" class="form-control" data-bind="datepicker: end_date"></p>
-            </div>            
-			<div class="col-xs-6">
+            </div>
+            <div class="col-sm-4 form-inline">
+                <p>Active:  <input type="checkbox" data-bind="checked: active" /></p>
+            </div>                                    
+			<div class="col-xs-4">
 				<button class="btn btn-search pull-right" data-bind="click: save">Save</button>
 			</div>
 		</div>		

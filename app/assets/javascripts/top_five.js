@@ -39,6 +39,7 @@ function TopFive(data) {
     data = data || {};
     var self = this;
     self.id = ko.observable(data.id);
+    self.active = ko.observable(data.active);
     self.name = ko.observable(data.name ? data.name : copyDefaultHash(default_language_hash));
     self.beautiful_url = ko.observable(data.beautiful_url ? data.beautiful_url : data.id);
     self.description = ko.observable(data.description ? data.description : copyDefaultHash(default_language_hash));

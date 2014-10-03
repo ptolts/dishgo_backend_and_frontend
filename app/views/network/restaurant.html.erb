@@ -65,7 +65,7 @@
                     </div>
                     <div class="menu_sections">
                         <ul class="section-tab-menu tab-menu" data-bind="foreach: menus">
-                            <li data-bind="css:{active: $data==$root.selected_menu()}"><span class="clicker" data-bind="click: function(){ $root.selected_menu($data); console.log('hi') }"></span><span data-bind="lText:name"></span></li>
+                            <li data-bind="css:{active: $data==$root.selected_menu()}"><span class="clicker" data-bind="click: function(){ $root.selected_menu($data) }"></span><span class="section-selector" data-bind="lText:name"></span></li>
                         </ul>                       
                     </div>
                 </div>           
