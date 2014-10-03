@@ -10,8 +10,15 @@
 					</div>
 					<div id="login_buttons">
 						<ul>
+							<li class="dropdown">
+								<a href="#" class="dropdown-toggle btn btn-none" data-toggle="dropdown"><span data-bind="localize">Top 5</span> <b class="caret"></b></a>
+								<ul class="dropdown-menu">
+									<% @top_fives_for_header.each do |top_five| %>
+										<li><a href="/app/top_five/<%= top_five.beautiful_url %>"><%= first_non_empty(top_five.name_translations) %></a></li>
+									<% end %>
+								</ul>
+							</li>  							
 							<li><span class="btn btn-none" style="margin-right:-3px;" data-bind="click: function(){ $root.network_sign_in(true); }, localize: login_text">Log In</span></li>
-			            	<!-- <li><a href="/app/letsdishgo" class="sign_up_button btn btn-search" data-bind="localize">Get Listed</a></li> -->
 			            	<li><span class="btn btn-none" data-bind="text: language, click: flip_language">Français</span></li>
 						</ul>
 					</div>
@@ -44,6 +51,14 @@
 					<div id="login_buttons">
 						<ul>
 							<li><span class="btn btn-none" style="margin-right:-3px;" data-bind="click: function(){ $root.network_sign_in(true); }, localize: login_text">Log In</span></li>
+							<li class="dropdown">
+								<a href="#" class="dropdown-toggle btn btn-none" data-toggle="dropdown"><span data-bind="localize">Top 5 Challenges</span> <b class="caret"></b></a>
+								<ul class="dropdown-menu">
+									<% @top_fives_for_header.each do |top_five| %>
+										<li><a href="/app/top_five/<%= top_five.beautiful_url %>"><%= first_non_empty(top_five.name_translations) %></a></li>
+									<% end %>
+								</ul>
+							</li>  							
 			            	<li><a href="/app/dishgo/business" class="sign_up_button btn btn-search" data-bind="localize">Get Listed</a></li>
 			            	<li><span class="btn btn-none" data-bind="text: language, click: flip_language">Français</span></li>
 						</ul>

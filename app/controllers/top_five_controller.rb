@@ -3,7 +3,8 @@ class TopFiveController < ApplicationController
   layout 'network'
   
   def index
-    @top_fives = TopFive.where(user_id:current_user.id).collect{|e| e.serializable_hash({export_localized:true})}
+    # @top_fives = TopFive.where(user_id:current_user.id).collect{|e| e.serializable_hash({export_localized:true})}
+    @top_fives = TopFive.all.collect{|e| e.serializable_hash({export_localized:true})}
     @top_fives_for_header = TopFive.is_active          
     render 'index'
   end
