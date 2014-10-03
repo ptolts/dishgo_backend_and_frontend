@@ -418,7 +418,6 @@ body {
 }
 #login_buttons .dropdown-menu li {
     background-color: #fff;
-    width: 100%;
 }
 #login_buttons .dropdown-menu a {
     color: #cf2f28;
@@ -991,6 +990,7 @@ footer a:hover, footer a:focus {
     }
 
     .dropdown-menu {
+        margin-left: 0px !important;
         position: fixed;
         top: 52px;
         left: 0;
@@ -1003,7 +1003,7 @@ footer a:hover, footer a:focus {
     .dropdown-menu li {
         width: 100%;
         text-align: center;
-    }       
+    }     
 
 }
 .network_menu_header {
