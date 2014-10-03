@@ -330,6 +330,7 @@ function NetworkModel() {
     self.restaurants = ko.observableArray([]);
     self.dishes = ko.observableArray([]);
     self.restaurant_search_term = ko.observable("");
+    self.restaurant_categories = ko.observableArray([]);
     self.isMobile = isMobile.any();
     self.email = ko.observable();
     self.password = ko.observable();
@@ -486,7 +487,7 @@ function NetworkModel() {
   
     self.top_search = ko.computed({
         read: function(){
-            if(self.restaurant_search_term().length == 0){
+            if(self.restaurant_search_term().length == 0 && self.restaurant_categories().length == 0){
                 return false;
             } else {
                 return true;
@@ -582,6 +583,7 @@ function NetworkModel() {
             url: "/app/network/search",
             data: {
                 restaurant_search_term: self.restaurant_search_term(),
+                categories: self.restaurant_categories(),
             },
             beforeSend: function(){
                 self.searchArray.push(this);
@@ -633,6 +635,15 @@ function NetworkModel() {
             }
         }
     }).extend({rateLimit: 500});
+
+    self.search_restaurants_by_category = ko.computed({
+        read: function(){
+            if(self.restaurant_categories().length > 0){
+                self.dishes([]);
+                self.restaurant_search_request();
+            }
+        }
+    }).extend({rateLimit: 500});    
 
     var keep_scrolling_updates = true;
     self.atTop = ko.observable(false);
