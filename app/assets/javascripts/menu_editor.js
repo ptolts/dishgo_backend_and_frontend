@@ -24,6 +24,11 @@
 ko.bindingHandlers.toggleIngredients = {
     'init': function (element, valueAccessor, allBindingsAccessor, viewModel, bindingContext) {
         var value = valueAccessor();
+
+        if(value()){
+            $(element).addClass("active");
+        } 
+        
         $(element).click(function() {
             if(value()){
                 $(element).removeClass("active");

@@ -44,23 +44,22 @@
                         </address>
                     </div>
                     <div class="col-xs-12 col-sm-6 col-md-4 padme" style="border-right: 1px solid #f4f4f2; border-right: 1px solid rgba(0,0,0,.03);">
-                        <div class="row">
-                            <div class="col-xs-12">
-                                <div class="bot-links">
-                                    <div id="opened_or_closed_footer" data-bind="with: restaurant">
-                                        <p style="margin-top:10px;" data-bind="visible: showHourSign">
-                                        <span data-bind="localize">Opening Hours</span>
-                                        <span class="currently_open" data-bind="css:{'hours_opened':areWeOpened(),'hours_closed':!areWeOpened()}, lStaticText: areWeOpenedText"></span></p>
-                                    </div>                       
-                                </div>
+                        <div class="row" style="margin-top:10px;">
+                            <div class="col-xs-1">
+                                <i class="fa fa-clock-o"></i>
                             </div>
+                            <div class="col-xs-10" data-bind="with: restaurant">
+                                <span class="currently_open" data-bind="css:{'hours_opened':areWeOpened(),'hours_closed':!areWeOpened()}, lStaticText: areWeOpenedText"></span>
+                            </div>                            
                         </div>
-                        <div class="row">
+                        <div class="row" style="margin-top:10px;">
                             <div class="col-xs-1">
                                 <i class="fa fa-cutlery"></i>
                             </div>
                             <div class="col-xs-10">
-                                <span>Categories</span>
+                                <ul class="network-tags tags" data-bind="foreach: $root.restaurant().categories">
+                                    <li><span data-bind="text: $data"></span></li>
+                                </ul>
                             </div>
                         </div>
                     </div>

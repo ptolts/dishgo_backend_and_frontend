@@ -98,6 +98,10 @@ class MenuUpdateController < ApplicationController
       img = Image.find(image["id"])
       dish.draft_image << img
     end
+
+    dish.spicey = data["spicey"].to_bool
+    dish.vegetarian = data["vegetarian"].to_bool
+    dish.nuts = data["nuts"].to_bool
     
     dish.draft_section_id = params["section_id"] 
 

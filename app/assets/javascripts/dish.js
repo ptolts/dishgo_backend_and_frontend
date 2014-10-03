@@ -515,6 +515,9 @@ function Dish(data, topmodel) {
         self.description();
         self.price();
         self.sizes();
+        self.vegetarian();
+        self.nuts();
+        self.spicey();
         self.position();
         _.each(self.images(),function(image){            
             image.id();

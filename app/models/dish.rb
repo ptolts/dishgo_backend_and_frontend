@@ -13,6 +13,11 @@ class Dish
   field :has_multiple_sizes, type: Boolean
   field :draft, type: Hash
 
+  field :vegetarian, type: Boolean
+  field :spicey, type: Boolean
+  field :nuts, type: Boolean
+
+
   # For dish search, lets totally denormalize stuff
   field :search_terms, type: String
   field :top_image, type: String

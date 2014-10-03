@@ -3,8 +3,9 @@
 *= require font-awesome
 *= require network_dish_modal
 *= require network_menu_base
-*= require network_odometer
 *= require network_restaurant
+*= require network_odometer
+*= require network_tags
 *= require top_five
 *= require top_five_paginate
 *= require jquery.ui.datepicker
