@@ -1,4 +1,9 @@
 var network_localize = {
+
+    "en" : {
+        "Contest Is Over":"The contest portion of this challenge has ended, but that doesn't mean this page won't change! As people review these delicious dishes their order may change.",
+    },
+
     "fr" : {
         "Profile":"Profil",
         "Dish":"Plat",
@@ -93,17 +98,16 @@ ko.bindingHandlers.localize = {
         if(network_localize[language] && network_localize[language][text]){
             text = network_localize[language][text];
         } else {
-            if(language != 'en')
-                console.log(language + " translation for " + text + " not found.");
-                // if this is computed text, refer to it instead of the bound data
-                if(valueAccessor()){
-                    text = valueAccessor()();
-                    el.text(text);
-                    return;
-                } else {
-                    el.text(el.data("language_key"));
-                    return;
-                }            
+            if(language != 'en'){ console.log(language + " translation for " + text + " not found."); }
+            // if this is computed text, refer to it instead of the bound data
+            if(valueAccessor()){
+                text = valueAccessor()();
+                el.text(text);
+                return;
+            } else {
+                el.text(el.data("language_key"));
+                return;
+            }            
             return;
         }
         $(element).text(text);

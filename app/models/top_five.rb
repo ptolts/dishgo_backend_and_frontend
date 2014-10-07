@@ -38,10 +38,11 @@ class TopFive
 	def serializable_hash options = {}
 		hash = super()
 		hash[:id] = self.id
+		hash[:finished] = self.end_date < DateTime.now
 		if options[:export_localized]
 			hash[:name] = self.name_translations
 			hash[:description] = self.description_translations
-			hash[:dishes] = self.ordered_dishes.collect{|e| e.serializable_hash({export_localized:true, include_reviews:options[:include_reviews]})}
+			hash[:dishes] = self.ordered_dishes.collect{|e| e.serializable_hash({export_localized:true, include_reviews:options[:include_reviews], include_quality_reviews: hash[:finished]})}
 			hash[:prizes] = self.prizes.top_five.collect{|e| e.serializable_hash({export_localized:true})}
 		end    
 		return hash

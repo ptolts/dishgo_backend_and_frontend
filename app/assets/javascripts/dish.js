@@ -57,7 +57,7 @@ function Dish(data, topmodel) {
     self.modalVisible = ko.observable(false);
     self.fullWidth = ko.observable(false); 
     self.ratingObject = ko.observable(data.ratingObject ? new Rating(data.ratingObject) : new Rating());
-
+    self.ratingObjects = ko.observableArray(data.ratingObjects ? _.map(data.ratingObjects,function(r){ return new Rating(r) }) : []);
 
     self.vegetarian = ko.observable(data.vegetarian ? data.vegetarian : false);
     self.nuts = ko.observable(data.nuts ? data.nuts : false);

@@ -325,6 +325,9 @@ class Dish
     if user = options[:include_reviews] 
       hash[:ratingObject] = Rating.where(dish_id:self.id,user_id:user.id).first
     end
+    if options[:include_quality_reviews] 
+      hash[:ratingObjects] = Rating.where(dish_id: self.id,rating: 5).ne(review:"").limit(3)
+    end    
     return hash
   end  
 
