@@ -13,6 +13,7 @@ class TopFive
 	field :active, type: Boolean, default: false
 
 	has_and_belongs_to_many :dish, class_name: "Dish", inverse_of: nil
+	has_and_belongs_to_many :users, class_name: "User", inverse_of: nil
 	has_many :dishcoins, class_name: "Dishcoin", inverse_of: :top_five
 	has_many :prizes, class_name: "Prize", inverse_of: :top_five
 	has_many :individual_prizes, class_name: "IndividualPrize", inverse_of: :top_five
@@ -35,6 +36,29 @@ class TopFive
 		end
 	end
 
+	def reward_prizes
+		prizes.each do |prize|
+			skip_these_users = []
+			dishcoins.each do |dishcoin|
+				next if !dishcoin.rating
+				if dishcoin.rating.restaurant == prize.restaurant
+					skip_these_users << dishcoin.user.id.to_s
+				end
+			end
+			prize.individual_prizes.remaining.each do |ind_pri|
+				dcs = dishcoins.not_in(user_id:skip_these_users).ne(user_id:nil)
+				if dcs.length > 0
+					dc = dcs[SecureRandom.random_number(dcs.length)-1]
+					ind_pri.user = dc.user
+					users << dc.user
+					ind_pri.save
+					skip_these_users << dc.user.id.to_s
+				end
+			end
+		end
+		save
+	end
+
 	def serializable_hash options = {}
 		hash = super()
 		hash[:id] = self.id
@@ -44,6 +68,9 @@ class TopFive
 			hash[:description] = self.description_translations
 			hash[:dishes] = self.ordered_dishes.collect{|e| e.serializable_hash({export_localized:true, include_reviews:options[:include_reviews], include_quality_reviews: hash[:finished]})}
 			hash[:prizes] = self.prizes.top_five.collect{|e| e.serializable_hash({export_localized:true})}
+			if hash[:finished]
+				hash[:winners] = self.users.collect{|e| e.nickname}
+			end
 		end    
 		return hash
 	end

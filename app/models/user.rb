@@ -184,7 +184,19 @@ class User
   def confirm!
     welcome_message
     super
-  end 
+  end
+
+  def nickname
+    if twitter_user_id
+      return "@#{name}"
+    elsif facebook_user_id
+      return name
+    elsif email
+      return email.to_s.gsub(/@.*/,'')
+    else
+      return "Anonymous"
+    end
+  end
 
   def self.find_for_oauth auth, current_user = nil
 
