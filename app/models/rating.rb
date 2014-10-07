@@ -12,6 +12,8 @@ class Rating
   has_one :dishcoin, class_name: "Dishcoin", inverse_of: :rating, validate: false
   after_save :cache_job
 
+  # default_scope -> {ne(rating:0)}
+
   def cache_job
   	self.dish.recalculate_rating
   	self.restaurant.cache_job

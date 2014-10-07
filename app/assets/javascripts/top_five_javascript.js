@@ -42,11 +42,16 @@ ko.bindingHandlers.countdown = {
         var countdown = element;
          
         // update the tag with id "countdown" every 1 second
-        setInterval(function () {
+        var intervalId = setInterval(function () {
          
             // find the amount of "seconds" between now and target
             var current_date = new Date().getTime();
             var seconds_left = (target_date - current_date) / 1000;
+
+            if(seconds_left < 0){
+                clearInterval(intervalId);
+                value(false);
+            }
          
             // do some time calculations
             days = parseInt(seconds_left / 86400);

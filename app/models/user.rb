@@ -162,6 +162,17 @@ class User
     return self.owns_restaurants.preview_token
   end
 
+  def self.dump_contest_users
+    csv_string = CSV.generate do |csv|
+      csv << ['email','share_link']   
+      User.not.where(email:/dishgo/i).each do |t|
+        next if t.owns_restaurants
+        next if t.contact_email.blank? && t.email.blank?
+        csv << [(t.contact_email || t.email),"https://dishgo.io/top_five/mtl_rib_challenge/#{t.id}"]
+      end
+    end
+    puts csv_string
+  end
 
   def ensure_authentication_token
     if authentication_token.blank?
