@@ -44,6 +44,9 @@
             <span class="hidden-xs" data-bind="visible: !finished()"><button class="instructions" data-bind="localize">How to win</button> <i class="fa fa-question-circle"></i></span></span>
             <div class="hidden-xs">
                 <p style="margin:10px 0;font-size:18px;" data-bind="lText: description"><%= first_non_empty(@top_five.description_translations) %></p>
+                <div data-bind="visible: finished" style="display: none">                                   
+                    <p style="font-size:18px;" data-bind="localize">Contest Is Over</p>
+                </div> 
             </div>         
         </div>
         <h4 class="countdown" data-bind="with: $root.current_top_five">
@@ -108,9 +111,9 @@
                                      <a class="menu_link" href="/app/network/restaurant/<%= dish.restaurant_id %>" target="_blank" data-bind="localize">View Full Menu<i class="fa fa-info-circle"></i></a>                              
                                 <!-- /ko -->
                             </div>
-                            <div class="rating-bottom"  data-bind="visible: $root.finished" style="display: none">
+                            <div class="rating-bottom"  data-bind="visible: $root.finished" style="display: none; margin-top:10px;">
                                 <!-- ko foreach: ratingObjects -->
-                                    <p><span data-bind="starRating: rating"></span> <span data-bind="text: review"></span></p>
+                                    <p><span style="color:#cf2f28;" data-bind="starRating: rating"></span> <span data-bind="text: review"></span></p>
                                 <!-- /ko -->
                                  <a class="menu_link" href="/app/network/restaurant/<%= dish.restaurant_id %>" target="_blank" data-bind="localize">View Full Menu<i class="fa fa-info-circle"></i></a>                                                              
                             </div>                            
@@ -126,6 +129,9 @@
         <div class="col-custom-30 sidebar" data-bind="mobileVisible: 'header'">
             <div class="visible-xs" data-bind="with: $root.current_top_five, visible: !finished()">
                 <p class="top_five_description" style="margin-top:20px;" data-bind="lText: description"><%= first_non_empty(@top_five.description_translations) %></p>
+                <span data-bind="visible: finished" style="display: none">                                   
+                    <p class="top_five_description" data-bind="localize">Contest Is Over</p>
+                </span> 
                 <h3 class="instructions-xs" data-bind="click: function(){ $root.instructions(true) }"><span data-bind="localize">How to win</span> <i class="fa fa-question-circle"></i></h3>
             </div>             
             <div class="row">
@@ -140,10 +146,7 @@
                     <p data-bind="visible: !$root.threeRated(), localize">If you haven't tried any of these dishes, you can still enter! Just share this page. Every person that you bring will earn you one entry!</p>
                     <button data-bind="loginClick: function(){ $root.shareTopFiveFB() }" class="btn btn-fb-network-share" style="width: 100%;font-size: 16px;box-shadow:none;"><i class="fa fa-facebook-square" data-bind="localize"> Share for more entries</i></button>
                     <input class="copybox" data-bind="visible: $root.loggedIn, value: 'https://dishgo.io/top_five/' + $root.current_top_five().beautiful_url() + '/' + $root.user().id()">
-                </div>
-                <div class="col-xs-12" data-bind="visible: finished" style="display: none">                                   
-                    <p data-bind="localize">Contest Is Over</p>
-                </div>                
+                </div>               
                 <div class="col-xs-12" data-bind="with: current_top_five, visible: !finished()" style="border-bottom:1px solid #DCDCDC; padding-bottom:15px;">
                     <h2 data-bind="localize">Up For Grabs</h2>
                     <p data-bind="localize">Once the timer runs out we'll raffle off these prizes.</p>
