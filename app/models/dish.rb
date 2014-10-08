@@ -24,7 +24,7 @@ class Dish
   field :restaurant_name, type: String
 
   field :rating, type: Integer, default: 0
-  field :contest_rating, type: Integer, default: 0
+  field :contest_rating, type: Float, default: 0.0
   # belongs_to :subsection, index: true
   belongs_to :restaurant, index: true
   belongs_to :odesk, index: true
@@ -159,8 +159,8 @@ class Dish
     self.ratings.each do |rating|
       total += rating.rating.to_f
     end
-    self.contest_rating = total
     total = total / self.ratings.size
+    self.contest_rating = total
     self.rating = total.round
     self.save
   end
@@ -326,7 +326,16 @@ class Dish
       hash[:ratingObject] = Rating.where(dish_id:self.id,user_id:user.id).first
     end
     if options[:include_quality_reviews] 
-      hash[:ratingObjects] = Rating.where(dish_id: self.id,rating: 5).ne(review:"").limit(3)
+      # Load up ratings to display. Make sure they arent blank.
+      ratings_hash = Rating.where(dish_id: self.id,rating: 5).ne(review:"").limit(3)
+      if ratings_hash.size < 3
+        ratings_hash += Rating.where(dish_id: self.id,rating: 5).ne(review:"").limit(3-ratings_hash.length)
+      end
+      ratings_hash.each do |e| 
+        next unless ["Type your review here!","","Tapez votre commentaire ici!"].include?(e.review.to_s.strip)
+        e.review = "No comment."
+      end
+      hash[:ratingObjects] = ratings_hash
     end    
     return hash
   end  

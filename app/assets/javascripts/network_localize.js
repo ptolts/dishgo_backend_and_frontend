@@ -1,7 +1,7 @@
 var network_localize = {
 
     "en" : {
-        "Contest Is Over":"The contest portion of this challenge has ended, but that doesn't mean this page won't change! As people review these delicious dishes their order may change.",
+        "Contest Is Over":"The contest portion of this challenge has ended, but that doesn't mean this page won't change! As people review these delicious dishes their order may change. All winners will be notified by email shortly!",
     },
 
     "fr" : {

@@ -59,6 +59,32 @@ class TopFive
 		save
 	end
 
+	def only_best_rating
+		user_hash = {}
+		dishcoins.ne(rating_id:nil).each do |d|
+			user_hash[d.user_id] ||= []
+			next unless d.rating
+			user_hash[d.user_id] << d.rating
+		end
+		user_hash.each do |k,v|
+			puts "[#{k.to_s}]"
+			v.sort_by{|r| -r.rating }.each do |r|
+				puts "\t#{r.rating}"
+				if r.rating <= 3
+					r.invalid_rating = true
+					r.save
+				end	
+			end
+		end
+		dish.each do |d|
+			d.recalculate_rating
+		end
+		dish.each do |d|
+			puts "#{d.name} => #{d.contest_rating} / #{d.rating} / total rating: #{d.ratings.count}"
+		end		
+		nil
+	end
+
 	def serializable_hash options = {}
 		hash = super()
 		hash[:id] = self.id

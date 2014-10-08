@@ -6,13 +6,14 @@ class Rating
   
   field :rating, type: Integer, default: 0
   field :review, type: String
+  field :invalid_rating, type: Boolean, default: false
   belongs_to :user, class_name: "User", index: true
   belongs_to :dish, class_name: "Dish", index: true
   belongs_to :restaurant, class_name: "Restaurant", index: true
   has_one :dishcoin, class_name: "Dishcoin", inverse_of: :rating, validate: false
   after_save :cache_job
 
-  # default_scope -> {ne(rating:0)}
+  default_scope -> {ne(invalid_rating:true)}
 
   def cache_job
   	self.dish.recalculate_rating
