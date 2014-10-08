@@ -88,7 +88,7 @@ class TopFive
 	def serializable_hash options = {}
 		hash = super()
 		hash[:id] = self.id
-		hash[:finished] = self.end_date < DateTime.now
+		hash[:finished] = self.end_date < DateTime.now if self.end_date
 		if options[:export_localized]
 			hash[:name] = self.name_translations
 			hash[:description] = self.description_translations
