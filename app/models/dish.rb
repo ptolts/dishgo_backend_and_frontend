@@ -329,7 +329,7 @@ class Dish
       # Load up ratings to display. Make sure they arent blank.
       ratings_hash = Rating.where(dish_id: self.id,rating: 5).ne(review:"").limit(3)
       if ratings_hash.size < 3
-        ratings_hash += Rating.where(dish_id: self.id,rating: 5).ne(review:"").limit(3-ratings_hash.length)
+        ratings_hash += Rating.where(dish_id: self.id,:rating.gte => 4).ne(review:"").not_in(id:ratings_hash.collect{|e| e.id}).limit(3-ratings_hash.length)
       end
       ratings_hash.each do |e| 
         next unless ["Type your review here!","","Tapez votre commentaire ici!"].include?(e.review.to_s.strip)
