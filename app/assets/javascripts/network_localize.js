@@ -2,6 +2,8 @@ var network_localize = {
 
     "en" : {
         "Contest Is Over":"The contest portion of this challenge has ended, but that doesn't mean this page won't change! As people review these delicious dishes their order may change. All winners will be notified by email shortly!",
+        "contest instructions":"Rate your favorite dish by selecting the number of stars. After rating you'll have one contest entry. To earn more entries refer your friends to this page. Every new person will earn you an additional entry!",
+        "mobile contest instructions":"Flip through the dishes using the arrows. Rate your favorite dish by selecting the number of stars. After rating you'll have one contest entry. To earn more entries refer your friends to this page. Every new person will earn you an additional entry!",
     },
 
     "fr" : {
@@ -37,7 +39,7 @@ var network_localize = {
         "Write your review here.":"Écrivez votre évaluation ici.",
         "Submit your rating":"Soumettre votre évaluation",
         "help us find out who's king":"Aidez-nous à savoir qui est roi",
-        "Rate your favorite dishes by selecting the number of stars. You can earn up to three entries for your contribution. To earn more entries refer your friends to this page. Every new person will earn you an additional entry!":"Évaluez vos plats préférés en sélectionnant le nombre d'étoiles. Vous pouvez gagner jusqu'à trois entrées pour votre contribution. Pour gagner plus d'entrées partager cette page avec vos amis. Chaque nouvelle personne qui visite vous gagne une entrée supplémentaire!",
+        "contest instructions":"Évaluez vos plats préférés en sélectionnant le nombre d'étoiles. Vous pouvez gagner jusqu'à une entrée pour votre contribution. Pour gagner plus d'entrées partager cette page avec vos amis. Chaque nouvelle personne qui visite vous gagne une entrée supplémentaire!",
         "Or share this link":"Ou partager ce lien",
         "flip through the dishes using the arrows":"parcourir les plats en utilisant les flèches",
         "until draw.":"jusqu'au tirage",
@@ -69,7 +71,7 @@ var network_localize = {
         "Restaurant Name":"Nom du restaurant",
         "You've reached the limit of entries you can receive by rating. To obtain more, share this page with friends. Every person you send will earn you another entry!":"Vous avez atteint le maximum nombre d'entrées pour évaluer les plats . Pour obtenir plus, partager ce concours avec vos amis.",
         "Help us find out whos king!":"Aidez-nous à savoir qui est roi",
-        "Flip through the dishes using the arrows. Rate your favorite dishes by selecting the number of stars. You can earn up to three entries for your contribution. To earn more entries refer your friends to this page. Every new person will earn you an additional entry!":"Parcourir les plats en utilisant les flèches. Évaluez vos plats préférés en sélectionnant le nombre d'étoiles. Vous pouvez gagner jusqu'à trois entrées pour votre contribution. Pour gagner plus d'entrées partager cette page avec vos amis. Chaque nouvelle personne qui visite vous gagne une entrée supplémentaire!",        
+        "mobile contest instructions":"Parcourir les plats en utilisant les flèches. Évaluez vos plats préférés en sélectionnant le nombre d'étoiles. Vous pouvez gagner jusqu'à une entrée pour votre contribution. Pour gagner plus d'entrées partager cette page avec vos amis. Chaque nouvelle personne qui visite vous gagne une entrée supplémentaire!",        
         "Or share this link":"ou partager ce lien",
         "Join our next top 5 list":"Joignez-vous à notre prochain liste de cinq",
         "MTL Rib Challenge":"Meilleures côtes levées a MTL",
