@@ -51,7 +51,7 @@ function TopFive(data) {
     self.end_date = ko.observable(data.end_date ? jdate.strptime(data.end_date,format) : new Date());
 
     self.allow_more_dishes = ko.computed(function(){
-        if(self.dishes().length < 5){
+        if(self.dishes().length < 6){
             return true;
         } else {
             return false;
@@ -59,7 +59,7 @@ function TopFive(data) {
     });
 
     Dish.prototype.push = function(){
-        if(self.dishes().length < 5 && !!self.dishes().indexOf(this)){
+        if(self.dishes().length < 6 && !!self.dishes().indexOf(this)){
             self.dishes.unshift(this);
             return;
         } else {
@@ -68,7 +68,7 @@ function TopFive(data) {
     }
 
     Prize.prototype.push = function(){
-        if(self.prizes().length < 5 && !!self.prizes().indexOf(this)){
+        if(self.prizes().length < 6 && !!self.prizes().indexOf(this)){
             self.prizes.unshift(this);
             return;
         } else {
