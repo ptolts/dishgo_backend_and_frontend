@@ -212,6 +212,17 @@
                 </div>
             </div>
 
+            <div class="col-xs-12">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <h3>Profile Images:</h3>
+                    </div>  
+                    <div class="col-xs-12" data-bind="foreach: categories">
+                        <span class="h3"><span class="label label-info" data-bind="text: name, click: function(){ $data.toggle(); }, css:{'label-danger':active}"></span></span>
+                    </div>            
+                </div>
+            </div>            
+
             <div class="row base_bar">
                 <div class="col-xs-12">
                     <button class="btn btn-dish pull-right btn-lg col-xs-12" data-bind="click: $root.save">Save</button>

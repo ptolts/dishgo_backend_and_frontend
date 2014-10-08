@@ -65,6 +65,7 @@ class AdministrationController < ApplicationController
 
   def restaurants
     @designs = Design.all.as_json
+    @categories = (Categories.first || Categories.new).categories    
   	render 'restaurants'
   end
 
@@ -436,6 +437,7 @@ class AdministrationController < ApplicationController
     restaurant.locs = [settings["lon"],settings["lat"]] unless settings["lat"].blank?
     restaurant.email = settings["email"]
     restaurant.phone = settings["phone"]
+    restaurant.category = settings["categories"]
     restaurant.facebook = settings["facebook"]
     restaurant.twitter = settings["twitter"]
     restaurant.foursquare = settings["foursquare"]

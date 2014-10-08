@@ -121,7 +121,33 @@
                 self.legit_data = true;
             }
 
-        }        
+        }
+
+        function Category(data,active){
+            var self = this;
+            self.name = data;
+            self.active = ko.observable(active);
+        }
+
+        var base_categories = <%= raw(@categories.to_json) %>;
+
+        function EditableRestaurant(data){
+            var self = this;
+            Restaurant.apply(self,[data]);
+            self.categories = ko.observableArray(_.map(base_categories,function(c){return new Category(c,self.categories().indexOf(c)>=0)}));
+            Category.prototype.toggle = function(){
+                this.active(!this.active());
+            }  
+        }
+
+        EditableRestaurant.prototype.toJSON = function() {
+            var copy = ko.toJS(this); //easy way to get a clean copy
+            delete copy.areWeOpened;
+            delete copy.areWeOpenedText;
+            delete copy.socialVisible;
+            copy.categories = _.pluck(_.filter(copy.categories,function(c){ return c.active }),'name');
+            return copy; //return the copy to be serialized
+        };                          
 
         function viewModel() {
             var self = this;
@@ -132,7 +158,6 @@
             self.current_user = ko.observable();
             self.with_menu = ko.observable(false);
             self.is_listed = ko.observable(false);
-
             self.address = ko.observable("");
             self.spin = ko.observable(false);
             self.mapObject = ko.observable(new mapObject({}));
@@ -206,7 +231,7 @@
                         is_listed: self.is_listed(),
                     },
                     success: function(data){
-                        self.restaurants($.map(data, function(item) { console.log(item); return new Restaurant(item) }));
+                        self.restaurants($.map(data, function(item) { console.log(item); return new EditableRestaurant(item) }));
                     },
                     dataType: 'json'
                 });
@@ -259,7 +284,7 @@
             }            
 
             self.new_restaurant = function(){
-                self.current_restaurant(new Restaurant({
+                self.current_restaurant(new EditableRestaurant({
                                                         name:"New Restaurant",
                                                         lat:0.0,
                                                         lon:0.0,
