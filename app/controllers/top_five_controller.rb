@@ -19,7 +19,7 @@ class TopFiveController < ApplicationController
       csv << ["email","restaurant","address","code"]
       IndividualPrize.any_in(prize_id:@top_five.prizes.collect{|e| e.id}).each do |ind_prize|
         next unless ind_prize.user
-        csv << [(ind_prize.user.email || ind_prize.user.contact_email || ind_prize.user.facebook_user_id ? "FACEBOOK #{ind_prize.user.facebook_user_id}" : nil || ind_prize.user.twitter_user_id ? "Twitter: @#{ind_prize.user.name}" : nil),ind_prize.restaurant.name,ind_prize.restaurant.address_line_1,ind_prize.prize_token]
+        csv << [(ind_prize.user.email || ind_prize.user.contact_email || (ind_prize.user.facebook_user_id ? "FACEBOOK #{ind_prize.user.facebook_user_id}" : nil) || (ind_prize.user.twitter_user_id ? "Twitter: @#{ind_prize.user.name}" : nil)),ind_prize.restaurant.name,ind_prize.restaurant.address_line_1,ind_prize.prize_token]
       end
     end
     response.headers['Content-Type'] = 'text/csv'
