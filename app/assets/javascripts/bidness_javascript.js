@@ -31,7 +31,7 @@ function BidnessModel(){
     self.submitAdvertising = function(){
         $.ajax({
             type: "POST",
-            url: "/app/dishgo/business/advertising",
+            url: "/app/dishgo/business/submit_advertising",
             data: {
                 restaurant_name: self.restaurant_name(),
                 email: self.email(),
