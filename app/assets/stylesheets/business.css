@@ -2,6 +2,22 @@
 *= require_self
 */
 
+#advertise_background {
+	background: url(https://58900edd332817a2d530-6caa6fe89e7dac3eaf12230f0985b957.ssl.cf5.rackcdn.com/old_cash_register.jpg) repeat;
+    background-attachment: fixed;
+    background-position: top left;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: -10;
+}
+
 .bg-dark {
 	background:rgb(0,0,0);
 	background: transparent\9;
@@ -50,7 +66,8 @@
 .bg-dark-1:nth-child(n) {
 	filter: none;
 }
-.bg-dark-1 h1 {
+.bg-dark-1 h1,
+.bg-dark-1 h2 {
 	color: #fff;
 	padding-top: 40px;
 }
@@ -90,4 +107,16 @@
 }
 .buiz_pics a:hover {
 	color: #cf2f28;
+}
+@media only screen and (max-width: 600px) {
+    #advertise_background {
+        background-position: 50% 0;
+        background-repeat: no-repeat;
+        -webkit-background-size: initial;
+        -moz-background-size: initial;
+        -o-background-size: initial;
+        background-size: initial; 
+        background-attachment: initial; 
+        z-index: -1;    
+    }
 }
