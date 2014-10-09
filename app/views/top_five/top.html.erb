@@ -38,7 +38,7 @@
 </style>
 
 <div class="top_five_header" data-bind="with: current_top_five, mobileVisible: 'header'">
-    <div class="container">
+    <div class="container" data-bind="visible: is_this_a_contest" style="display: none">
         <div class="top_five_title" data-bind="click: function(){ $root.instructions(true) }">
             <span class="underline_dat"><h1 style="display:inline" data-bind="lText: name"><%= first_non_empty(@top_five.name_translations) %></h1>
             <span class="hidden-xs" data-bind="visible: !finished()"><button class="instructions" data-bind="localize">How to win</button> <i class="fa fa-question-circle"></i></span></span>
@@ -53,6 +53,15 @@
             <span data-bind="visible: !finished()"><span data-bind="countdown: end_date"></span> <span data-bind="localize">until draw.</span></span>
             <span data-bind="visible: finished"></span>
         </h4>
+    </div>
+    <!-- NOT A CONTEST -->
+    <div class="container" data-bind="visible: !is_this_a_contest" style="display: none">
+        <div class="top_five_title">
+            <span class="underline_dat"><h1 style="display:inline" data-bind="lText: name"><%= first_non_empty(@top_five.name_translations) %></h1>
+            <div class="hidden-xs">
+                <p style="margin:10px 0;font-size:18px;" data-bind="lText: description"><%= first_non_empty(@top_five.description_translations) %></p>
+            </div>         
+        </div>
     </div>
     <div class="top-five-paginate-controls" data-bind="visible: $root.isMobile, with: $root" style="display: none">
         <div class="top-five-paginate-controls-container">
@@ -126,18 +135,21 @@
             <% end %>       
         </div>   
 
-        <div class="col-custom-30 sidebar" data-bind="mobileVisible: 'header'">
-            <div class="visible-xs" data-bind="with: $root.current_top_five, visible: !finished()">
+        <div class="col-custom-30 sidebar" data-bind="mobileVisible: 'header'"> 
+
+            <div class="visible-xs" data-bind="with: $root.current_top_five">
                 <p class="top_five_description" style="margin-top:20px;" data-bind="lText: description"><%= first_non_empty(@top_five.description_translations) %></p>
-                <span data-bind="visible: finished" style="display: none">                                   
-                    <p class="top_five_description" data-bind="localize">Contest Is Over</p>
-                </span> 
-                <h3 class="instructions-xs" data-bind="click: function(){ $root.instructions(true) }"><span data-bind="localize">How to win</span> <i class="fa fa-question-circle"></i></h3>
-            </div>             
-            <div class="row">
-                <!-- <div class="col-xs-12">
-                    <button class="btn btn-search" data-bind="click: function(){ instructions(true) }">Instructions</button>
-                </div>   -->                                   
+            </div>              
+
+            <div class="row" data-bind="visible: is_this_a_contest" style="display: none">
+
+                <div class="visible-xs col-xs-12" data-bind="with: $root.current_top_five">
+                    <span data-bind="visible: finished" style="display: none">                                   
+                        <p class="top_five_description" data-bind="localize">Contest Is Over</p>
+                    </span> 
+                    <h3 class="instructions-xs" data-bind="click: function(){ $root.instructions(true) }, visible: !finished()"><span data-bind="localize">How to win</span> <i class="fa fa-question-circle"></i></h3>
+                </div>             
+                               
                 <div class="col-xs-12" data-bind="visible: !finished()">                                   
                     <!-- toss in a few coupons from the prize page -->
                     <h3 class="instructions-xs hidden-xs" data-bind="click: function(){ $root.instructions(true) }"><span data-bind="localize">How to win</span> <i class="fa fa-question-circle"></i></h3>
@@ -146,7 +158,8 @@
                     <p data-bind="visible: !$root.threeRated(), localize">If you haven't tried any of these dishes, you can still enter! Just share this page. Every person that you bring will earn you one entry!</p>
                     <button data-bind="loginClick: function(){ $root.shareTopFiveFB() }" class="btn btn-fb-network-share" style="width: 100%;font-size: 16px;box-shadow:none;"><i class="fa fa-facebook-square" data-bind="localize"> Share for more entries</i></button>
                     <input class="copybox" data-bind="visible: $root.loggedIn, value: 'https://dishgo.io/top_five/' + $root.current_top_five().beautiful_url() + '/' + $root.user().id()">
-                </div>               
+                </div>
+
                 <div class="col-xs-12" data-bind="with: current_top_five, visible: !finished()" style="border-bottom:1px solid #DCDCDC; padding-bottom:15px;">
                     <h2 data-bind="localize">Up For Grabs</h2>
                     <p data-bind="localize">Once the timer runs out we'll raffle off these prizes.</p>
@@ -177,7 +190,12 @@
                         </li>
                     </ul>
                 </div>
+            </div>
+
+            <div class="row">
+
                 <div class="col-xs-12" style="border-bottom: 1px solid #DCDCDC;padding-bottom: 15px;"><a class="join_list" href="/app/dishgo/business" target="_blank"><h2 data-bind="localize">Join our next top 5 list</h2></a></div>
+
                 <div class="col-xs-12 trending hidden-xs">
                     <h2>What's Trending in MTL</h2>
                     <% @click_bait_dishes.each do |dish| %>
@@ -195,6 +213,7 @@
                     <% end %>                  
                 </div>
             </div>
+
         </div> 
     </div>
 </div>

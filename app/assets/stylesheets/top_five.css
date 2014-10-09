@@ -599,6 +599,11 @@
     bottom: 0;
 }
 
+.join_list h2 {
+    font-size: 22px;
+    text-align: center;
+}
+
 }
 @media only screen and (max-width: 767px) {
 	.top_five_tool .top_dish_container {

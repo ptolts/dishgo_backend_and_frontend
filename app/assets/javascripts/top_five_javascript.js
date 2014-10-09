@@ -32,9 +32,9 @@ ko.bindingHandlers.mobileVisible = {
 ko.bindingHandlers.countdown = {
     update: function (element, valueAccessor, allBindings, viewModel, bindingContext) {
         var value = valueAccessor();
-        // if(value() == false){
-        //     return;
-        // }
+        if(value() == false){
+            return;
+        }
         // set the date we're counting down to
         var target_date = value().getTime();
          
@@ -155,6 +155,8 @@ function TopFiveModel(){
 	self.current_top_five = ko.observable(new TopFive(top_five));
     self.finished = self.current_top_five().finished;
     self.threeRated = self.current_top_five().threeRated;
+
+    self.is_this_a_contest = self.current_top_five().is_this_a_contest;
 
     self.updateUserMonitor.dispose();
     self.updateUserMonitor = ko.computed({

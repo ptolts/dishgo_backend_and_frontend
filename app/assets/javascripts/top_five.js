@@ -50,6 +50,14 @@ function TopFive(data) {
     var format = "%Y-%m-%dT%H:%M:%S.%L%z";
     self.end_date = ko.observable(data.end_date ? jdate.strptime(data.end_date,format) : new Date());
 
+    self.is_this_a_contest = (function(){
+                if(self.prizes().length == 0){
+                    self.end_date(false);
+                    return false;
+                }
+                return true;
+            })(); 
+
     self.allow_more_dishes = ko.computed(function(){
         if(self.dishes().length < 6){
             return true;

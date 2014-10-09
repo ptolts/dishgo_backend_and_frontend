@@ -94,6 +94,10 @@ class TopFive
 			hash[:description] = self.description_translations
 			hash[:dishes] = self.ordered_dishes.collect{|e| e.serializable_hash({export_localized:true, include_reviews:options[:include_reviews], include_quality_reviews: hash[:finished]})}
 			hash[:prizes] = self.prizes.top_five.collect{|e| e.serializable_hash({export_localized:true})}
+			# # If there are no prizes, then this isnt a contest, so it never has to be "finished"
+			# if hash[:prizes].empty?
+			# 	hash[:finished] = false
+			# end
 			if hash[:finished]
 				hash[:winners] = self.users.collect{|e| e.nickname}
 			end
