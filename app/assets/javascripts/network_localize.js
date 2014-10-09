@@ -81,7 +81,9 @@ var network_localize = {
         "If you haven't tried any of these dishes, you can still enter! Just share this page. Every person that you bring will earn you one entry!":"Si vous n'avez pas essayé l'un de ces plats, vous pouvez toujours joigner le concours! Il suffit de partager cette page. Chaque personne que vous apportez vous fera gagner une entrée supplémentaire!",  
         "Write your review here":"Écrivez votre évaluation ici",
         "Sign in to win":"Inscrivez-vous pour gagner",
-        "Thanks for signing in":"Merci de vous inscrire",        
+        "Thanks for signing in":"Merci de vous inscrire",
+        "Advertise":"Faire de la publicité",
+        "Advertise here":"Publicité ici",       
     },        
 }
 
