@@ -16,7 +16,7 @@ class BusinessController < ApplicationController
 	end
 	def submit_advertising
 		@text = params.to_s
-    	Email.delay.send_tim_advertising_an_email(@text)
+    	Email.delay.send_tim_an_advertising_email(@text)
     	render json: {}.as_json
 	end	
 end
