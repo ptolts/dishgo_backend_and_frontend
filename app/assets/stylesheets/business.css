@@ -25,7 +25,7 @@
 .bg-grey {
 	background-color: #f5f6f5;
 	min-height: 400px;
-	padding-top: 20px;
+	padding: 20px 0;
 }
 .bg-grey h1,
 .bg-grey h2 {
@@ -70,4 +70,24 @@
 .bg-dark-1 .btn-rewards:hover,
 .bg-dark-1 .btn-rewards:focus {
 	opacity: .8;
+}
+.bg-dark-grey {
+	background-color: #DCDCDC;
+	min-height: 400px;
+	padding: 20px 0;
+}
+.bg-dark-grey h1,
+.bg-dark-grey h2 {
+	color: #1a1a1a;
+}
+.bg-dark-grey p {
+	color: #565a5c;
+	font-size: 16px;
+}
+.buiz_pics a {
+	color: #cf2f28;
+	text-decoration: none;
+}
+.buiz_pics a:hover {
+	color: #cf2f28;
 }

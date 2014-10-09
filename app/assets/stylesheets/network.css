@@ -18,6 +18,33 @@
 html, body {
     height: 100%;
 }
+.advertise_here {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    text-align: center;
+    display: inline-block;
+    vertical-align: middle;
+    background: rgb(0, 0, 0);
+    background: transparent;
+    background: rgba(0, 0, 0, 0.7);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#b2000000, endColorstr=#b2000000);
+    zoom: 1;
+    padding: 6px 12px;
+}
+.advertise_here:nth-child(n) {
+    filter: none;
+}
+.advertise_here a {
+    color: #fff;
+    font-family: 'lato' sans-serif;
+    text-transform: uppercase;
+}
+.advertise_here a:hover,
+.advertise_here a:focus {
+    color: #cf2f28;
+    text-decoration: none;
+}
 .wrapper_to_fix_footer {
     min-height: 100%;
     height: auto !important; /* This line and the next line are not necessary unless you need IE6 support */
