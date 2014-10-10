@@ -16,10 +16,10 @@ class TopFiveController < ApplicationController
       @top_five.reward_prizes
     end
     csv_string = CSV.generate do |csv|
-      csv << ["email","restaurant","address","code","menu_link"]
+      csv << ["email","restaurant","address","code","menu_link","gift_certificate_value"]
       IndividualPrize.any_in(prize_id:@top_five.prizes.collect{|e| e.id}).each do |ind_prize|
         next unless ind_prize.user
-        csv << [(ind_prize.user.email || ind_prize.user.contact_email || (ind_prize.user.facebook_user_id ? "FACEBOOK #{ind_prize.user.facebook_user_id}" : nil) || (ind_prize.user.twitter_user_id ? "Twitter: @#{ind_prize.user.name}" : nil)),ind_prize.restaurant.name,ind_prize.restaurant.address_line_1,ind_prize.prize_token,"https://dishgo.io/app/network/restaurant/#{ind_prize.restaurant.id}"]
+        csv << [(ind_prize.user.email || ind_prize.user.contact_email || (ind_prize.user.facebook_user_id ? "FACEBOOK #{ind_prize.user.facebook_user_id}" : nil) || (ind_prize.user.twitter_user_id ? "Twitter: @#{ind_prize.user.name}" : nil)),ind_prize.restaurant.name,ind_prize.restaurant.address_line_1,ind_prize.prize_token,"https://dishgo.io/app/network/restaurant/#{ind_prize.restaurant.id}",ind_prize.prize.amount]
       end
     end
     response.headers['Content-Type'] = 'text/csv'
