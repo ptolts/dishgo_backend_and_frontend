@@ -337,6 +337,18 @@ function NetworkModel() {
     self.search_type = ko.observable("restaurant");
     self.coverPhotoHover = ko.observable(false);
 
+    self.too_short = ko.computed({
+        read: function(){
+            if(self.password() == null){
+                return false;
+            } else if(self.password().length < 8){
+                return true;
+            }
+            return false;
+        },
+        deferEvaluation: true,
+    });
+
     self.searchPlaceholder = ko.computed({
         read: function(){
             if(self.search_type() == "dish"){

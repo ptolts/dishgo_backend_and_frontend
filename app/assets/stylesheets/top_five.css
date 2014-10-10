@@ -14,6 +14,10 @@
     right: 15px;
 }*/
 
+.too_short {
+    border: 1px solid red;
+}
+
 .menu_link {
     position: absolute;
     bottom: 5px;
