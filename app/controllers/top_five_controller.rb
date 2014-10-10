@@ -4,8 +4,7 @@ class TopFiveController < ApplicationController
   
   def index
     # @top_fives = TopFive.where(user_id:current_user.id).collect{|e| e.serializable_hash({export_localized:true})}
-    @top_fives = TopFive.all.collect{|e| e.serializable_hash({export_localized:true})}
-    @top_fives_for_header = TopFive.is_active          
+    @top_fives = TopFive.all.collect{|e| e.serializable_hash({export_localized:true})}          
     render 'index'
   end
 
@@ -29,14 +28,12 @@ class TopFiveController < ApplicationController
 
   def create
     @top_five = TopFive.where(id:params[:id]).first || nil
-    @top_fives_for_header = TopFive.is_active      
     render 'create'
   end
 
   def top
     # @top_five = TopFive.where(beautiful_url:params[:id]).first || TopFive.find(params[:id])
-    @top_five = TopFive.or({beautiful_url:params[:id]},{id:params[:id]}).first
-    @top_fives_for_header = TopFive.is_active          
+    @top_five = TopFive.or({beautiful_url:params[:id]},{id:params[:id]}).first         
     #create dishcoin for the referral
     if user_id = params[:user_id] and (!current_user or (current_user.id.to_s != user_id.to_s)) and Dishcoin.where(top_five_id:@top_five.id,ip:request.ip).count == 0
       # Rails.logger.warn "#{user_id} != #{current_user.id} -> #{current_user.id != user_id}"

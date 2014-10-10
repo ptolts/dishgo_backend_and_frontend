@@ -1,12 +1,10 @@
 class BusinessController < ApplicationController
   	skip_before_filter :verify_authenticity_token, only: [:submit, :submit_advertising]
 	layout 'business'
-	def index
-	    @top_fives_for_header = TopFive.is_active      
+	def index     
 		render 'index'
 	end
-	def advertise
-    	@top_fives_for_header = TopFive.is_active      		
+	def advertise     		
 		render 'advertise'
 	end	
 	def submit

@@ -8,6 +8,7 @@ class DishView
 
   field :ip, type: String
   field :user_agent, type: String
+  field :session_id, type: String
   field :end_point, type: String
   field :referrer, type: String
   field :had_description, type: Boolean

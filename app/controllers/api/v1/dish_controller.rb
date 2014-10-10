@@ -74,6 +74,9 @@ class Api::V1::DishController < ApplicationController
     if current_user
       dish_view.user = current_user
     end
+    if session and session[:session_id]
+      dish_view.session_id = session[:session_id]
+    end
     dish_view.had_position = dish.position   
     dish_view.ip = request.ip
     dish_view.user_agent = request.user_agent

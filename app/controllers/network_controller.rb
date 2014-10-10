@@ -4,12 +4,15 @@ class NetworkController < ApplicationController
   
   def index
     if top_dish = TopDish.first
-      @dishes = Dish.find(top_dish.dish_ids).to_a
+      dish_ids = top_dish.dish_ids
+      if session and s_id = session[:session_id] and last_clicked_dish = DishView.where(session_id:s_id,had_image: true).last
+        dish_ids[2] = last_clicked_dish.dish_id
+      end
+      @dishes = Dish.find(dish_ids).to_a
     else
       restaurant = Restaurant.where(name:/cunningham/i).first
       @dishes = restaurant.dishes.to_a.reject{|e| e.image.count == 0}[0..2]
-    end
-    @top_fives_for_header = TopFive.is_active  
+    end 
     render 'index'
   end
 
@@ -59,8 +62,6 @@ class NetworkController < ApplicationController
     if current_user and current_user.is_admin
       @owner = true
     end
-
-    @top_fives_for_header = TopFive.is_active
 
     @direct_dish_id = params[:direct_dish_id]
     if !@direct_dish_id.blank? and direct_dish = Dish.find(@direct_dish_id)
