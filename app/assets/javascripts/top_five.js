@@ -52,7 +52,7 @@ function TopFive(data) {
 
     self.is_this_a_contest = (function(){
                 if(self.prizes().length == 0){
-                    self.end_date(false);
+                    // self.end_date(false);
                     return false;
                 }
                 return true;

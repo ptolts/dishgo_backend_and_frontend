@@ -32,7 +32,7 @@ ko.bindingHandlers.mobileVisible = {
 ko.bindingHandlers.countdown = {
     update: function (element, valueAccessor, allBindings, viewModel, bindingContext) {
         var value = valueAccessor();
-        if(value() == false){
+        if(viewModel.is_this_a_contest == false){
             return;
         }
         // set the date we're counting down to
