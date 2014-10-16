@@ -103,6 +103,7 @@ class WebsiteController < ApplicationController
 			p.name_translations = page["name"]
 			p.html_translations = page["html"]
 			p.position = page["position"].to_i
+			p.external_link = page["external_link"]
 			p.save
 			next p
 		end

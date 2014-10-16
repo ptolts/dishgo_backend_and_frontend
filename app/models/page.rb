@@ -8,6 +8,7 @@ class Page
 
   field :html, localize: true
   field :name, localize: true
+  field :external_link, type: String
   field :position, type: Integer
 
   belongs_to :restaurant, class_name: "Restaurant", index: true

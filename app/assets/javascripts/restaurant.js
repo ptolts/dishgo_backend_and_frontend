@@ -40,6 +40,19 @@
             return copy; //return the copy to be serialized
         };  
 
+    ko.bindingHandlers.pageClick = {
+        'init': function (element, valueAccessor, allBindingsAccessor, viewModel, bindingContext) {
+            var originalFunction = valueAccessor();
+            $(element).click(function() {
+                if (viewModel.external_link() == null){
+                    originalFunction();
+                } else {
+                    window.location.href = viewModel.external_link();
+                }
+            });
+        }
+    }        
+
         function Page(data){
             data ? null : data = {}
             var self = this;
@@ -47,6 +60,7 @@
             self.html = ko.observable(data.html ? data.html : copyDefaultHash(default_web_language_hash));
             self.name = ko.observable(data.name ? data.name : copyDefaultHash(default_page_language_hash));
             self.position = ko.observable(data.position ? data.position : 0);
+            self.external_link = ko.observable(data.external_link ? data.external_link : null);
 
             self.page_link = ko.computed(function(){
                 var possible_names = self.name();
@@ -651,7 +665,7 @@
             }  
 
             self.createNewPageText = ko.computed(function(){
-                if(self.pages().length < 5){
+                if(self.pages().length < 6){
                     return "Create New Page";
                 } else {
                     return "Max Pages Reached";
