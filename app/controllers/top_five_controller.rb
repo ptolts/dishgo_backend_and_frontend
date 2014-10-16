@@ -26,6 +26,26 @@ class TopFiveController < ApplicationController
     render :text => csv_string   
   end
 
+  def all_users
+    @top_five = TopFive.or({beautiful_url:params[:id]},{id:params[:id]}).first
+    csv_string = CSV.generate do |csv|
+      csv << ["email"]
+      emails = []
+      @top_five.dishcoins.each do |dc|
+        next unless dc.user
+        next unless (dc.user.email || dc.user.contact_email)
+        emails << [(dc.user.email || dc.user.contact_email)]
+      end
+      emails.uniq!
+      emails.each do |email|
+        csv << email
+      end
+    end
+    response.headers['Content-Type'] = 'text/csv'
+    response.headers['Content-Disposition'] = 'attachment; filename=users.csv'    
+    render :text => csv_string   
+  end  
+
   def create
     @top_five = TopFive.where(id:params[:id]).first || nil
     render 'create'

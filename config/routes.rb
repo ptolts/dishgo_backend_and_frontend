@@ -74,6 +74,7 @@ Foodcloud::Application.routes.draw do
     collection do
       get '/', to: "top_five#index"
       get '/create/:id/winners', to: "top_five#winners"      
+      get '/create/:id/all_users', to: "top_five#all_users"      
       get '/create/:id', to: "top_five#create"      
       get '/create', to: "top_five#create"
       post '/save', to: "top_five#save"      
