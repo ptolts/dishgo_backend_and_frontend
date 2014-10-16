@@ -82,8 +82,7 @@
 				<nav id="navigation" class="nav">
 					<ul>
 						<!-- ko foreach: restaurant().pages -->
-							<!-- <li><a data-bind="page-href: $data.page_link(), lText: name"></a></li> -->
-							<li><a data-bind="pageClick: function() { $parent.goto_and_kill_menu($data.page_link()) }, lText: name"></a></li>							
+							<li style="cursor: pointer"><a data-bind="pageClick: function() { $parent.goto_and_kill_menu($data.page_link()) }, lText: name"></a></li>							
 						<!-- /ko -->
 						<!-- ko if: restaurant().show_gallery() -->
 							<li><a data-bind="page-href: 'gallery', lText: gallery_tr"></a></li>
