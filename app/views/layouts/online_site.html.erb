@@ -95,11 +95,11 @@
 					<a data-bind="visible: socialVisible('instagram'), attr:{href: instagram}"><i class="fa fa-instagram"></i></a>
 				</div>
 				<div class="tim_widget hidden-xs">
-						<% if @restaurant.reservation_widget_active %>
-						<div class="reservation_widget_div">
-							<iframe class="reservation_widget" data-bind="restaurant_widget" src="about:blank"></iframe>
-						</div>
-						<% end %>
+					<% if @restaurant.reservation_widget_active %>
+					<div class="reservation_widget_div">
+						<iframe class="reservation_widget" data-bind="restaurant_widget" src="about:blank"></iframe>
+					</div>
+					<% end %>
 				</div>
 				<div class="main_page_language_selector">
 					<ul class="language_select">
@@ -224,7 +224,7 @@
 			}
 
 			<% if @restaurant.reservation_widget_active %>
-			var restaurant_widget_code = '<html><head><base target="_parent" /><title></title></head><body style="padding: 0; margin: 0; width: 100%"><%= raw(@restaurant.reservation_widget.to_s.gsub(/script/,'noscript')) %></body></html>'.replace(/noscript/g,"script");
+			var restaurant_widget_code = '<html><head><base target="_blank" /><title></title></head><body style="padding: 0; margin: 0; width: 100%"><%= raw(@restaurant.reservation_widget.to_s.gsub(/script/,'noscript')) %></body></html>'.replace(/noscript/g,"script");
 			<% end %>						
 
 	    </script>	
