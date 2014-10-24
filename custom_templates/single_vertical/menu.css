@@ -23,6 +23,10 @@
 	}
 }
 @media screen and (max-width: 995px) {
+	.reservation_menu_widget_div {
+		display: none;
+	}
+
 	.container.menu_container {
 		margin-left: auto;
 		margin-right: auto;

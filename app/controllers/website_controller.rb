@@ -113,6 +113,10 @@ class WebsiteController < ApplicationController
 			section.save
 		end
 		restaurant.pages = pages
+
+		restaurant.reservation_widget = restaurant_data["reservation_widget"].to_s
+		restaurant.reservation_widget_active = restaurant_data["reservation_widget_active"].to_bool
+
 		restaurant.email_addresses = restaurant_data["email_addresses"]
 		restaurant.preview_token = loop do
 			token = SecureRandom.urlsafe_base64

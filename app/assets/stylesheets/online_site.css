@@ -14,6 +14,28 @@
 *= require_self
 */
 
+.reservation_menu_widget_div {
+  z-index: 1;
+  text-align: right;
+  top: 10px;
+  bottom: 0;
+  right: 40px;
+  left: 0;
+  position: absolute;
+}
+
+.reservation_widget_div {
+  width: 100%;
+  text-align: center;
+}
+
+.reservation_widget {
+  display: inline-block;
+  border: none;
+  width: 0;
+  height: 0;
+}
+
 .static_background {
   -webkit-background-size: cover;
   -moz-background-size: cover;

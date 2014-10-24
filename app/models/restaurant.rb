@@ -42,6 +42,9 @@ class Restaurant
   field :show_gallery, type: Boolean, default: false
   field :show_app_install, type: Boolean, default: false
 
+  field :reservation_widget, type: String
+  field :reservation_widget_active, type: Boolean, default: false
+
   field :does_delivery, type: Boolean, default: false
 
   field :rating, type: Float

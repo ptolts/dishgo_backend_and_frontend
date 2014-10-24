@@ -6,6 +6,21 @@
 *= require menu
 */  
 
+    ko.bindingHandlers.restaurant_widget = {
+        init: function(element, valueAccessor, allBindingsAccessor, viewModel, bindingContext) {
+            var self = this;
+            if("restaurant_widget_code" in window){
+                var doc = element.contentWindow.document;
+                doc.open();
+                doc.write(restaurant_widget_code);
+                doc.close();
+                $(element).load(function() {
+                    this.style.height = this.contentWindow.document.body.scrollHeight + 'px';                    
+                    this.style.width = this.contentWindow.document.body.scrollWidth + 'px';                    
+                });                
+            }
+        }
+    };
 
     ko.bindingHandlers.profile_file_upload = {
         update: function(element, valueAccessor, allBindingsAccessor, viewModel, bindingContext) {
@@ -311,6 +326,10 @@
             self.beautiful_url = data.beautiful_url ? data.beautiful_url : data._id;
 
             self.does_delivery = ko.observable(data.does_delivery ? data.does_delivery : false);
+
+            self.reservation_widget = ko.observable(data.reservation_widget ? data.reservation_widget : "");
+            self.reservation_widget_active = ko.observable(data.reservation_widget_active ? data.reservation_widget_active : false);
+
 
             self.lang = ko.observable(self.default_language());
             lang = self.lang;
