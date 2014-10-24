@@ -1,11 +1,6 @@
 			<div class="container menu_container">
 			        <div class="menu_row" style="position: relative">
-			            <div class="menu_header">
-							<% if @restaurant.reservation_widget_active %>
-							<div class="reservation_menu_widget_div">
-								<iframe class="reservation_widget" data-bind="restaurant_widget" src="about:blank"></iframe>
-							</div>
-							<% end %>			            	
+			            <div class="menu_header">			            	
 			                <img data-bind="attr:{src:$root.design.imgs.simple_header_1}" class="img-responsive">
 			            </div>
 		                <div class="resto_logo" style="display: none">

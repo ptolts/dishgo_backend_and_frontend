@@ -23,6 +23,14 @@
 			</div>
 		</div>
 
+		<div class="col-xs-12 mini_content_wrapper hidden-lg hidden-sm">
+			<% if @restaurant.reservation_widget_active %>
+			<div class="reservation_widget_div">
+				<iframe class="reservation_widget" data-bind="restaurant_widget" src="about:blank"></iframe>
+			</div>
+			<% end %>
+		</div>
+
 		<!-- ko if: restaurant().show_hours -->
 			<div class="col-xs-12 col-md-4 col-md-offset-1 mini_content_wrapper">
 				<div class="hours_wrapper"  data-bind="with: restaurant">

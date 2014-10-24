@@ -28,6 +28,13 @@
   width: 100%;
   text-align: center;
 }
+.tim_widget {
+  position: absolute;
+  bottom: 75px;
+  width: 100%;
+  display: block;
+  left: 0;
+}
 
 .reservation_widget {
   display: inline-block;
