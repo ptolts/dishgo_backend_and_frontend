@@ -202,7 +202,7 @@ function Dish(data, topmodel) {
         read: function(){
             var final_cost = parseFloat(self.price()).toFixed(2);
             if(final_cost == "0.00"){
-                if(self.show_ask){
+                if(self.show_ask && !self.sizes()){
                     return "-";
                 }
                 if(translations['ask'][lang()]){
