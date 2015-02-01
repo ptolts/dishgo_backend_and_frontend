@@ -8,5 +8,5 @@
 if ENV['RAILS_ENV'].to_s.eql?('development')
 	User.create(email:"mrtolton@gmail.com",password:"planting",is_admin:true,confirmed_at:DateTime.now)
 	r = Restaurant.create(name:"Phils Place of Horror")
-	User.create(email:"phil@dishgo.io",password:"planting",is_admin:false,confirmed_at:DateTime.now,owns_restaurants:r)
+	User.create(email:"phil@dishgo.ca",password:"planting",is_admin:false,confirmed_at:DateTime.now,owns_restaurants:r)
 end

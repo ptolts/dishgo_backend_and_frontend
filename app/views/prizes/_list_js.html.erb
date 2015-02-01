@@ -75,9 +75,9 @@
             // FB.ui({
             //     method: 'share',
             //     display: 'async',
-            //     href: 'https://dishgo.io/app/network/prize/' + self.last_won_id,
+            //     href: 'https://dishgo.ca/app/network/prize/' + self.last_won_id,
             // }, function(response){});
-            global_bridge.send({sharePromoCode:"https://www.facebook.com/sharer/sharer.php?u=https://dishgo.io/app/network/prize/" + self.selected_prize().id()});
+            global_bridge.send({sharePromoCode:"https://www.facebook.com/sharer/sharer.php?u=https://dishgo.ca/app/network/prize/" + self.selected_prize().id()});
 
         }  
 
@@ -85,9 +85,9 @@
             // FB.ui({
             //     method: 'share',
             //     display: 'async',
-            //     href: 'https://dishgo.io/app/network/promo_code/' + self.user().id(),
+            //     href: 'https://dishgo.ca/app/network/promo_code/' + self.user().id(),
             // }, function(response){});
-            global_bridge.send({sharePromoCode:"https://www.facebook.com/sharer/sharer.php?u=https://dishgo.io/app/network/promo_code/" + self.user().id()});            
+            global_bridge.send({sharePromoCode:"https://www.facebook.com/sharer/sharer.php?u=https://dishgo.ca/app/network/promo_code/" + self.user().id()});            
         }
 
         self.fetch_prizes = function(){

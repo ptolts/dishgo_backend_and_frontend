@@ -157,7 +157,7 @@
                     <p data-bind="visible: $root.threeRated, localize">You've reached the limit of entries you can receive by rating. To obtain more, share this page with friends. Every person you send will earn you another entry!</p>
                     <p data-bind="visible: !$root.threeRated(), localize">If you haven't tried any of these dishes, you can still enter! Just share this page. Every person that you bring will earn you one entry!</p>
                     <button data-bind="loginClick: function(){ $root.shareTopFiveFB() }" class="btn btn-fb-network-share" style="width: 100%;font-size: 16px;box-shadow:none;"><i class="fa fa-facebook-square" data-bind="localize"> Share for more entries</i></button>
-                    <input class="copybox" data-bind="visible: $root.loggedIn, value: 'https://dishgo.io/top_five/' + $root.current_top_five().beautiful_url() + '/' + $root.user().id()">
+                    <input class="copybox" data-bind="visible: $root.loggedIn, value: 'https://dishgo.ca/top_five/' + $root.current_top_five().beautiful_url() + '/' + $root.user().id()">
                 </div>
 
                 <div class="col-xs-12" data-bind="with: current_top_five, visible: !finished()" style="border-bottom:1px solid #DCDCDC; padding-bottom:15px;">
@@ -260,7 +260,7 @@
                         </div>
                         <div class="col-xs-12">
                             <p class="text-center" style="margin-top:10px;" data-bind="localize">Or share this link</p>
-                            <input class="copybox" data-bind="value: 'https://dishgo.io/top_five/' + $root.current_top_five().beautiful_url() + '/' + $root.user().id()">
+                            <input class="copybox" data-bind="value: 'https://dishgo.ca/top_five/' + $root.current_top_five().beautiful_url() + '/' + $root.user().id()">
                         </div>
                     </div>
                 </div>                

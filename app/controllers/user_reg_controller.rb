@@ -34,7 +34,7 @@ class UserRegController < ApplicationController
       user.api_confirmation = true
       user.save
     end
-    redirect_to "https://dishgo.io", status: 301
+    redirect_to "https://dishgo.ca", status: 301
   end  
 
 end

@@ -168,7 +168,7 @@ class User
       User.not.where(email:/dishgo/i).each do |t|
         next if t.owns_restaurants
         next if t.contact_email.blank? && t.email.blank?
-        csv << [(t.contact_email || t.email),"https://dishgo.io/top_five/mtl_rib_challenge/#{t.id}"]
+        csv << [(t.contact_email || t.email),"https://dishgo.ca/top_five/mtl_rib_challenge/#{t.id}"]
       end
     end
     puts csv_string

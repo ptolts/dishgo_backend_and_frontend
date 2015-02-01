@@ -4,7 +4,7 @@ class LetsdishgoController < ApplicationController
 
 	def index
 	    if request.host.to_s.downcase == 'letsdishgo.com' || request.host.to_s.downcase == 'www.letsdishgo.com'
-	      redirect_to "https://dishgo.io/app/letsdishgo"
+	      redirect_to "https://dishgo.ca/app/letsdishgo"
 	      return
 	    end		
 		if current_user and current_user.owns_restaurants

@@ -5,18 +5,18 @@ class RobotsController < ApplicationController
       restaurant = Restaurant.where(:subdomain => resto_name).first
     end
 
-    if !restaurant and request.host.to_s != 'dishgo.io'
+    if !restaurant and request.host.to_s != 'dishgo.ca'
       restaurant = Restaurant.where(:host => request.host.to_s.downcase.gsub(/www\./,'')).first
     end
 
     if !restaurant
-      redirect_to 'https://dishgo.io'
+      redirect_to 'https://dishgo.ca'
       return
     end
     if host = restaurant.host
   		robots = "Sitemap: http://www.#{host}/sitemap.xml"
   	else
-  		robots = "Sitemap: http://#{restaurant.subdomain}.dishgo.io/sitemap.xml"
+  		robots = "Sitemap: http://#{restaurant.subdomain}.dishgo.ca/sitemap.xml"
   	end
   	render text: robots
   end
@@ -26,7 +26,7 @@ class RobotsController < ApplicationController
     sitemap = []
     Restaurant.only_with_menu.each do |restaurant|
       sitemap_url = %@\t<url>
-        \t\t<loc>https://dishgo.io/app/network/restaurant/#{restaurant.id}</loc>
+        \t\t<loc>https://dishgo.ca/app/network/restaurant/#{restaurant.id}</loc>
         \t\t<changefreq>weekly</changefreq>
         \t\t<priority>1.0</priority>
         \t</url>@
@@ -47,19 +47,19 @@ class RobotsController < ApplicationController
       restaurant = Restaurant.where(:subdomain => resto_name).first
     end
 
-    if !restaurant and request.host.to_s != 'dishgo.io'
+    if !restaurant and request.host.to_s != 'dishgo.ca'
       restaurant = Restaurant.where(:host => request.host.to_s.downcase.gsub(/www\./,'')).first
     end
 
     if !restaurant
-      redirect_to 'https://dishgo.io'
+      redirect_to 'https://dishgo.ca'
       return
     end
 
     if host = restaurant.host
   		url = "http://www.#{host}/"
   	else
-  		url = "http://#{restaurant.subdomain}.dishgo.io/"
+  		url = "http://#{restaurant.subdomain}.dishgo.ca/"
   	end
 
     sitemapxml = %@<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\nCONTENTS_HERE_SITEMAP\n</urlset>@

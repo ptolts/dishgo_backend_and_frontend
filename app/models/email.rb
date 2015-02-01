@@ -1,5 +1,5 @@
 class Email < ActionMailer::Base
-  default :from => "help@dishgo.io"
+  default :from => "help@dishgo.ca"
   def help params, current_user
     @message = params[:user_message]
     @from = current_user.email
@@ -10,20 +10,20 @@ class Email < ActionMailer::Base
     @user_agent = params[:user_agent]
     attachments["viewmodel.json"] = viewmodel
     attachments["console.txt"] = console
-    mail(:to => "phil@dishgo.io", :from => @from, :subject => "Dishgo Help").deliver
-    mail(:to => "tim@dishgo.io", :from => @from, :subject => "Dishgo Help").deliver
+    mail(:to => "phil@dishgo.ca", :from => @from, :subject => "Dishgo Help").deliver
+    mail(:to => "tim@dishgo.ca", :from => @from, :subject => "Dishgo Help").deliver
   end
 
   def send_tim_an_email text
     @text = text
-    mail(:to => "phil@dishgo.io", :subject => "New Restaurant", template_name: 'send_tim_an_email').deliver
-    mail(:to => "tim@dishgo.io", :subject => "New Restaurant", template_name: 'send_tim_an_email').deliver
+    mail(:to => "phil@dishgo.ca", :subject => "New Restaurant", template_name: 'send_tim_an_email').deliver
+    mail(:to => "tim@dishgo.ca", :subject => "New Restaurant", template_name: 'send_tim_an_email').deliver
   end  
 
   def send_tim_an_advertising_email text
     @text = text
-    mail(:to => "phil@dishgo.io", :subject => "I Want To Advertise", template_name: 'send_tim_an_advertising_email').deliver
-    mail(:to => "tim@dishgo.io", :subject => "I Want To Advertise", template_name: 'send_tim_an_advertising_email').deliver
+    mail(:to => "phil@dishgo.ca", :subject => "I Want To Advertise", template_name: 'send_tim_an_advertising_email').deliver
+    mail(:to => "tim@dishgo.ca", :subject => "I Want To Advertise", template_name: 'send_tim_an_advertising_email').deliver
   end    
 
   def welcome user
@@ -50,7 +50,7 @@ class Email < ActionMailer::Base
 
   def notify_admins user, message = "New App User"
     @user = user
-    mail(:to => "phil@dishgo.io", :subject => message, template_name: 'notify_admins').deliver
-    mail(:to => "tim@dishgo.io", :subject => message, template_name: 'notify_admins').deliver
+    mail(:to => "phil@dishgo.ca", :subject => message, template_name: 'notify_admins').deliver
+    mail(:to => "tim@dishgo.ca", :subject => message, template_name: 'notify_admins').deliver
   end
 end

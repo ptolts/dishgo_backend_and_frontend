@@ -215,11 +215,11 @@ class PrizesController < ApplicationController
 
   def admin_or_prize_owner
     if !current_user
-      redirect_to 'https://dishgo.io/app/users/sign_in'
+      redirect_to 'https://dishgo.ca/app/users/sign_in'
     end
     @prize = Prize.find(params[:prize_id])
     if !current_user.is_admin and current_user.owns_restaurants != @prize.restaurant
-      redirect_to 'https://dishgo.io/app/users/sign_in'
+      redirect_to 'https://dishgo.ca/app/users/sign_in'
     end
   end
 end

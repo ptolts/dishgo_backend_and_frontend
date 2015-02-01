@@ -134,7 +134,7 @@
                     success: function(data, textStatus, jqXHR){
                         self.spin(false);
                         if(data.result == "User Exists!"){
-                            alert("That email address already exists in our database. Check your email for the link to sign in, or contact us for support at info@dishgo.io.\nWe apologize for the inconvenience.");
+                            alert("That email address already exists in our database. Check your email for the link to sign in, or contact us for support at info@dishgo.ca.\nWe apologize for the inconvenience.");
                             return;
                         }                        
                         var restaurant = data.restaurant;

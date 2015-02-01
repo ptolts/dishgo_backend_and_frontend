@@ -363,7 +363,7 @@ function NetworkModel() {
     self.shareNetworkFB = function(){
         FB.ui({
           method: 'share',
-          href: 'https://dishgo.io/app/network/',
+          href: 'https://dishgo.ca/app/network/',
         }, function(response){});     
     }    
 
@@ -379,7 +379,7 @@ function NetworkModel() {
         self.shareFB = function(){
             FB.ui({
               method: 'share',
-              href: 'https://dishgo.io/app/network/restaurant/' + global_restaurant_id,
+              href: 'https://dishgo.ca/app/network/restaurant/' + global_restaurant_id,
             }, function(response){});     
         }
 

@@ -183,7 +183,7 @@ function TopFiveModel(){
     self.shareTopFiveFB = function(){
         FB.ui({
           method: 'share',
-          href: 'https://dishgo.io/top_five/' + top_five_id + "/" + self.user().id(),
+          href: 'https://dishgo.ca/top_five/' + top_five_id + "/" + self.user().id(),
         }, function(response){});     
     }
 

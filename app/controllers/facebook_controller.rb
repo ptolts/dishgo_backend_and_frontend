@@ -26,7 +26,7 @@ class FacebookController < ApplicationController
     end
 
     if !restaurant
-      redirect_to "https://dishgo.io"
+      redirect_to "https://dishgo.ca"
       return
     end
 

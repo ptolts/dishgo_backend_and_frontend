@@ -40,7 +40,7 @@ class ApplicationController < ActionController::Base
     if id = params[:id] and !id.blank? and user = User.where(setup_link:id) and user = user.first
       sign_in user
     else
-      redirect_to "https://dishgo.io"
+      redirect_to "https://dishgo.ca"
     end
   end
 
