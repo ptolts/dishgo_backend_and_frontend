@@ -1,3 +1,8 @@
 public/assets/*
 log/*
 tmp/*
+
+config/initializers/stripe.rb
+config/initializers/omniauth.rb
+config/initializers/secret_token.rb
+config/initializers/devise.rb

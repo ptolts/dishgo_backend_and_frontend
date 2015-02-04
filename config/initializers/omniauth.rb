@@ -6,3 +6,5 @@ Rails.application.config.middleware.use OmniAuth::Builder do
   	provider :facebook, "886479778048507", "7595a0c846885173a20a83aefd5def0a", display: 'popup'
   end
 end
+
+RACKSPACE_KEY = "e9ba2a6e93591ce985a47ffada9d02d5"
