@@ -2,6 +2,7 @@ public/assets/*
 log/*
 tmp/*
 
+set-temp-key.rb
 config/initializers/stripe.rb
 config/initializers/omniauth.rb
 config/initializers/secret_token.rb
